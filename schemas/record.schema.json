@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kz99/binary-gv-concrete/schemas/record.schema.json",
+  "title": "Binary GV Concrete leaderboard record",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "blockLength",
+    "dimension",
+    "minimumDistance",
+    "rate",
+    "rateType",
+    "status",
+    "verification",
+    "proofPath"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string", "minLength": 1 },
+    "blockLength": { "const": 1073741824 },
+    "dimension": { "type": "integer", "minimum": 1 },
+    "minimumDistance": { "type": "integer", "minimum": 469762048 },
+    "rate": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+    "rateType": { "enum": ["exact", "certified_lower_bound"] },
+    "status": { "enum": ["draft", "under-review", "verified", "rejected"] },
+    "proofPath": { "type": "string", "pattern": "^proofs/.+\\.md$" },
+    "verification": {
+      "type": "object",
+      "required": ["arithmetic", "proof", "reviewers", "agents", "writing", "summary", "reviews"],
+      "properties": {
+        "arithmetic": { "enum": ["pending", "passed", "failed"] },
+        "proof": { "enum": ["pending", "passed", "failed"] },
+        "reviewers": { "type": "integer", "minimum": 0 },
+        "agents": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "writing": { "enum": ["pending", "passed", "needs-revision"] },
+        "reviews": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["agent", "decision", "correctness", "writing", "summary"],
+            "properties": {
+              "agent": { "type": "string", "minLength": 1 },
+              "decision": { "enum": ["accepted", "rejected"] },
+              "correctness": { "enum": ["passed", "failed"] },
+              "writing": { "enum": ["passed", "needs-revision"] },
+              "summary": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "summary": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "updatedAt": "2026-09-14T00:00:00Z",
+  "target": {
+    "alphabet": "binary",
+    "linear": true,
+    "blockLength": 1073741824,
+    "relativeDistanceNumerator": 7,
+    "relativeDistanceDenominator": 16,
+    "minimumDistance": 469762048,
+    "objective": "maximize_dimension"
+  },
+  "benchmark": {
+    "id": "gv",
+    "name": "Gilbert–Varshamov",
+    "rate": 0.01130059171150255,
+    "equivalentDimension": 12133918,
+    "kind": "existential_reference",
+    "rankable": false
+  },
+  "literatureBaseline": {
+    "id": "instantiated-gs-rm-baseline",
+    "name": "Instantiated Garcia–Stichtenoth + RM baseline",
+    "rate": 0.0034351348876953125,
+    "dimension": 3688448,
+    "proofPath": "proofs/gs-rm-baseline.md",
+    "fixed": true
+  },
+  "records": [
+    {
+      "rank": 1,
+      "id": "gs-densified-rm-1-7",
+      "name": "Densified GS tower + RM(1,7)",
+      "shortName": "GS + RM",
+      "authors": "Initial benchmark",
+      "date": "2026-09-14",
+      "blockLength": 1073741824,
+      "dimension": 3688448,
+      "minimumDistance": 469762048,
+      "rate": 0.0034351348876953125,
+      "rateType": "certified_lower_bound",
+      "relativeDistance": 0.4375,
+      "status": "verified",
+      "verification": {
+        "arithmetic": "passed",
+        "proof": "passed",
+        "reviewers": 2,
+        "agents": ["code-verifier-a", "code-verifier-b"],
+        "writing": "passed",
+        "summary": "Both independent agents accepted the arithmetic, tower bounds, concatenation argument, and pragmatic proof readability.",
+        "reviews": [
+          {
+            "agent": "code-verifier-a",
+            "decision": "accepted",
+            "correctness": "passed",
+            "writing": "passed",
+            "summary": "Recomputed the tower, AG-code, concatenation, and padding parameters; found no obstruction."
+          },
+          {
+            "agent": "code-verifier-b",
+            "decision": "accepted",
+            "correctness": "passed",
+            "writing": "passed",
+            "summary": "Independently reproduced every numerical identity and accepted the proof at ordinary academic standards."
+          }
+        ]
+      },
+      "construction": "A densified Garcia–Stichtenoth AG code over F_256, concatenated with the binary [128,8,64] RM(1,7) code and padded by zero coordinates.",
+      "proofPath": "proofs/gs-rm-baseline.md",
+      "tags": ["algebraic-geometry", "concatenation", "reed-muller", "symbolic"]
+    },
+    {
+      "rank": 2,
+      "id": "rs-rm-1-15",
+      "name": "Reed–Solomon + RM(1,15)",
+      "shortName": "RS + RM",
+      "authors": "Elementary benchmark",
+      "date": "2026-09-14",
+      "blockLength": 1073741824,
+      "dimension": 65552,
+      "minimumDistance": 469762048,
+      "rate": 0.00006105005741119385,
+      "rateType": "exact",
+      "relativeDistance": 0.4375,
+      "status": "verified",
+      "verification": {
+        "arithmetic": "passed",
+        "proof": "passed",
+        "reviewers": 2,
+        "agents": ["code-verifier-a", "code-verifier-b"],
+        "writing": "passed",
+        "summary": "Both independent agents recomputed the Reed–Solomon and Reed–Muller parameters and accepted the proof.",
+        "reviews": [
+          {
+            "agent": "code-verifier-a",
+            "decision": "accepted",
+            "correctness": "passed",
+            "writing": "passed",
+            "summary": "Checked Reed–Solomon feasibility, the MDS distance, the inner code, and every parameter product."
+          },
+          {
+            "agent": "code-verifier-b",
+            "decision": "accepted",
+            "correctness": "passed",
+            "writing": "passed",
+            "summary": "Independently reproduced the length, dimension, distance, and rate and found no obstruction."
+          }
+        ]
+      },
+      "construction": "A [32768,4097,28672] Reed–Solomon code over F_(2^16), concatenated with the binary [32768,16,16384] RM(1,15) code.",
+      "proofPath": "proofs/rs-rm-baseline.md",
+      "tags": ["reed-solomon", "concatenation", "reed-muller", "symbolic"]
+    }
+  ],
+  "research": {
+    "lemmas": [
+      {
+        "id": "concatenation-product",
+        "title": "Concatenation product bound",
+        "statement": "If an outer code has parameters [L,K,D] over F_{2^m} and an injective F_2-linear inner encoding has binary parameters [n_0,m,d_0], then their concatenation has parameters [Ln_0,mK,\\ge Dd_0]_2.",
+        "status": "proved",
+        "usedBy": ["gs-densified-rm-1-7", "rs-rm-1-15"]
+      },
+      {
+        "id": "zero-padding",
+        "title": "Zero-padding invariance",
+        "statement": "Appending z zero coordinates to a linear [n,k,d]_2 code gives a linear [n+z,k,d]_2 code.",
+        "status": "proved",
+        "usedBy": ["gs-densified-rm-1-7"]
+      },
+      {
+        "id": "ag-evaluation-dimension",
+        "title": "AG evaluation dimension",
+        "statement": "Let P_1,\\ldots,P_L be distinct rational places and let G be disjoint from them with \\deg G<L. Then C_L(D,G) has dimension at least \\deg G+1-g and minimum distance at least L-\\deg G.",
+        "status": "proved",
+        "usedBy": ["gs-densified-rm-1-7"]
+      }
+    ],
+    "directions": [
+      {
+        "id": "optimize-inner-code",
+        "title": "Optimize the binary inner code",
+        "summary": "Search symbolically for explicit binary inner codes whose rate-distance tradeoff improves the RM(1,7) concatenation at the fixed final distance.",
+        "priority": "high",
+        "state": "open"
+      },
+      {
+        "id": "tower-parameter-sweep",
+        "title": "Prove a better tower parameter choice",
+        "summary": "Vary the exact densified tower level and divisor degree, retaining exact-size padding, to improve the outer dimension without weakening the certified distance.",
+        "priority": "high",
+        "state": "open"
+      },
+      {
+        "id": "algebraic-concatenation",
+        "title": "Beyond one-level concatenation",
+        "summary": "Investigate algebraic concatenation and expander-based distance amplification with parameter identities that remain fully human-auditable at n=2^30.",
+        "priority": "medium",
+        "state": "open"
+      }
+    ],
+    "reviewPolicy": {
+      "requiredCorrectnessAgents": 2,
+      "readabilityStandard": "Clear and complete at the level of an ordinary mathematical proof; do not require low-level formalization or reject for minor style.",
+      "mainPageRule": "Only submissions passed by both correctness agents appear on the leaderboard."
+    }
+  }
+}

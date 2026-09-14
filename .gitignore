@@ -1,0 +1,7 @@
+dashboard/node_modules/
+dashboard/dist/
+dashboard/.vite/
+dashboard/*.tsbuildinfo
+dashboard/vite.config.js
+dashboard/vite.config.d.ts
+.DS_Store
