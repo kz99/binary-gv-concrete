@@ -127,7 +127,7 @@ function ParameterBar() {
       </div>
       <div>
         <span>Required distance</span>
-        <strong><MathInline>{'d_{\\mathrm{min}}\\geq \\frac{7n}{16}'}</MathInline></strong>
+        <strong><MathInline>{'d_{\\mathrm{min}}\\geq 7n/16'}</MathInline></strong>
         <small>{formatInteger(D)}</small>
       </div>
       <div>

@@ -3,7 +3,7 @@ import katex from 'katex';
 const formulas = [
   String.raw`\mathbb{F}_{2}`,
   String.raw`n=2^{30}`,
-  String.raw`d_{\mathrm{min}}\geq \frac{7n}{16}`,
+  String.raw`d_{\mathrm{min}}\geq 7n/16`,
   String.raw`R=k/n`,
   String.raw`R>0.0034351348876953125`,
   String.raw`k\geq 3{,}688{,}449`,
