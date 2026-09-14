@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { BlockMath, InlineMath } from 'react-katex';
+import katex from 'katex';
 import {
   ArrowUpRight,
   BookOpen,
@@ -52,11 +52,21 @@ function getRoute() {
 }
 
 function MathBlock({ children }: { children: string }) {
-  return <BlockMath math={children} errorColor="#9c2e22" renderError={() => <code>{children}</code>} />;
+  const html = katex.renderToString(children, {
+    displayMode: true,
+    throwOnError: false,
+    errorColor: '#9c2e22',
+  });
+  return <div className="math-block" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 function MathInline({ children }: { children: string }) {
-  return <InlineMath math={children} errorColor="#9c2e22" renderError={() => <code>{children}</code>} />;
+  const html = katex.renderToString(children, {
+    displayMode: false,
+    throwOnError: false,
+    errorColor: '#9c2e22',
+  });
+  return <span className="math-inline" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 function BrandMark() {
