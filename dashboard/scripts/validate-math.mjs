@@ -6,8 +6,8 @@ const formulas = [
   String.raw`d_{\mathrm{min}}\geq \frac{7n}{16}`,
   String.raw`R=k/n`,
   String.raw`R>0.0034351348876953125`,
-  String.raw`k\ge 3{,}688{,}449`,
-  String.raw`d_{\min}\ge469{,}762{,}048`,
+  String.raw`k\geq 3{,}688{,}449`,
+  String.raw`d_{\mathrm{min}}\geq 469{,}762{,}048`,
 ];
 
 for (const formula of formulas) {

@@ -116,7 +116,7 @@
       {
         "id": "concatenation-product",
         "title": "Concatenation product bound",
-        "statement": "If an outer code has parameters [L,K,D] over F_{2^m} and an injective F_2-linear inner encoding has binary parameters [n_0,m,d_0], then their concatenation has parameters [Ln_0,mK,\\ge Dd_0]_2.",
+        "statement": "If an outer code has parameters [L,K,D] over F_{2^m} and an injective F_2-linear inner encoding has binary parameters [n_0,m,d_0], then their concatenation has parameters [Ln_0,mK,\\geq Dd_0]_2.",
         "status": "proved",
         "usedBy": ["gs-densified-rm-1-7", "rs-rm-1-15"]
       },

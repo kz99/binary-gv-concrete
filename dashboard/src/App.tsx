@@ -224,7 +224,7 @@ function RecordCard({ entry, isLeader }: { entry: RecordEntry; isLeader: boolean
             {isGs ? (
               <p>
                 Outer: densified GS level <MathInline>{'(q,k,s)=(16,4,3)'}</MathInline> over <MathInline>{'\\mathbb F_{256}'}</MathInline>,
-                <MathInline>{'[8{,}355{,}840,\\ge461{,}056,\\ge7{,}340{,}032]_{256}'}</MathInline>.
+                <MathInline>{'[8{,}355{,}840,\\geq461{,}056,\\geq7{,}340{,}032]_{256}'}</MathInline>.
                 Inner: <MathInline>{'\\operatorname{RM}(1,7)=[128,8,64]_2'}</MathInline>. Append 4,194,304 zero coordinates.
               </p>
             ) : (
@@ -345,7 +345,7 @@ function ProofNotes() {
             </div>
             <p>{entry.construction}</p>
             <div className="proof-parameter-line">
-              <MathInline>{`[2^{30},${entry.dimension.toLocaleString('en-US').replaceAll(',', '{,}')},\\ge ${entry.minimumDistance.toLocaleString('en-US').replaceAll(',', '{,}')}]_2`}</MathInline>
+              <MathInline>{`[2^{30},${entry.dimension.toLocaleString('en-US').replaceAll(',', '{,}')},\\geq ${entry.minimumDistance.toLocaleString('en-US').replaceAll(',', '{,}')}]_2`}</MathInline>
               <span>rate {formatScore(entry)}</span>
             </div>
             <a className="text-link" href={`${repoUrl}/blob/main/${entry.proofPath}`} target="_blank" rel="noreferrer">
@@ -521,8 +521,8 @@ function ContributePage() {
           <div className="contribute-target">
             <span>Strict improvement target</span>
             <strong><MathInline>{'R>0.0034351348876953125'}</MathInline></strong>
-            <small><MathInline>{'k\\ge 3{,}688{,}449'}</MathInline></small>
-            <i>with <MathInline>{'n=2^{30}'}</MathInline> and <MathInline>{'d_{\\min}\\ge469{,}762{,}048'}</MathInline></i>
+            <small><MathInline>{'k\\geq 3{,}688{,}449'}</MathInline></small>
+            <i>with <MathInline>{'n=2^{30}'}</MathInline> and <MathInline>{'d_{\\mathrm{min}}\\geq 469{,}762{,}048'}</MathInline></i>
           </div>
         </div>
       </section>
