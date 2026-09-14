@@ -4,7 +4,10 @@ import {
   ArrowUpRight,
   BookOpen,
   Check,
+  CheckCircle2,
   ChevronRight,
+  Copy,
+  FileText,
   FlaskConical,
   GitBranch,
   Menu,
@@ -13,6 +16,7 @@ import {
   X,
 } from 'lucide-react';
 import snapshot from '../../data/records.json';
+import contributorInstructions from '../../how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md?raw';
 
 type RecordEntry = (typeof snapshot.records)[number];
 type NotebookTab = 'lemmas' | 'directions' | 'proofs' | 'review';
@@ -38,6 +42,7 @@ function formatScore(entry: RecordEntry) {
 function getRoute() {
   const route = window.location.hash.replace(/^#\/?/, '');
   if (!route || route === 'record') return { page: 'record' as const, tab: 'lemmas' as NotebookTab };
+  if (route === 'contribute') return { page: 'contribute' as const, tab: 'lemmas' as NotebookTab };
   const [, tab] = route.split('/');
   const allowed: NotebookTab[] = ['lemmas', 'directions', 'proofs', 'review'];
   return {
@@ -64,7 +69,7 @@ function BrandMark() {
   );
 }
 
-function Header({ page }: { page: 'record' | 'research' }) {
+function Header({ page }: { page: 'record' | 'research' | 'contribute' }) {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header">
@@ -86,6 +91,9 @@ function Header({ page }: { page: 'record' | 'research' }) {
           <a className={page === 'research' ? 'active' : ''} href="#/research/lemmas" onClick={() => setOpen(false)}>
             Research notebook
           </a>
+          <a className={page === 'contribute' ? 'active' : ''} href="#/contribute" onClick={() => setOpen(false)}>
+            Contribute
+          </a>
           <a className="github-link" href={repoUrl} target="_blank" rel="noreferrer">
             GitHub <ArrowUpRight size={13} />
           </a>
@@ -100,7 +108,7 @@ function ParameterBar() {
     <section className="parameter-bar" aria-label="Fixed problem parameters">
       <div>
         <span>Alphabet</span>
-        <strong><MathInline>{'\\mathbb F_2'}</MathInline></strong>
+        <strong><MathInline>{'\\mathbb{F}_{2}'}</MathInline></strong>
       </div>
       <div>
         <span>Block length</span>
@@ -109,7 +117,7 @@ function ParameterBar() {
       </div>
       <div>
         <span>Required distance</span>
-        <strong><MathInline>{'d_{\\min}\\ge 7n/16'}</MathInline></strong>
+        <strong><MathInline>{'d_{\\mathrm{min}}\\geq \\frac{7n}{16}'}</MathInline></strong>
         <small>{formatInteger(D)}</small>
       </div>
       <div>
@@ -432,6 +440,159 @@ function ResearchPage({ tab }: { tab: NotebookTab }) {
   );
 }
 
+const literature = [
+  {
+    tag: 'Start here',
+    title: 'Binary Codes with Distance Close to Half',
+    authors: 'Dean Doron · 2024 survey',
+    note: 'A focused map of explicit constructions in the high-distance regime.',
+    href: 'https://eccc.weizmann.ac.il/report/2024/159/',
+  },
+  {
+    tag: 'Near-GV',
+    title: 'Explicit, Almost Optimal, Epsilon-Balanced Codes',
+    authors: 'Amnon Ta-Shma · STOC 2017',
+    note: 'The foundational explicit rate Ω(ε^{2+o(1)}) construction.',
+    href: 'https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf',
+  },
+  {
+    tag: 'Amplification',
+    title: 'Wide Replacement Products Meet Gray Codes',
+    authors: 'Gil Cohen and Itay Cohen · 2025',
+    note: 'The latest improvement within the wide-replacement framework.',
+    href: 'https://eccc.weizmann.ac.il/report/2025/179/',
+  },
+  {
+    tag: 'Concatenation',
+    title: 'When Do Low-Rate Concatenated Codes Approach GV?',
+    authors: 'Doron, Mosheiff, and Wootters · 2024',
+    note: 'Structural conditions that suggest concrete derandomization targets.',
+    href: 'https://arxiv.org/abs/2405.08584',
+  },
+  {
+    tag: 'AG codes',
+    title: 'A Tower of Artin–Schreier Extensions',
+    authors: 'Garcia and Stichtenoth · 1995',
+    note: 'The optimal function-field tower behind the current baseline.',
+    href: 'https://doi.org/10.1007/BF01884295',
+  },
+  {
+    tag: 'New direction',
+    title: 'Tracing AG Codes: Toward Meeting GV',
+    authors: 'Cohen, Doron, Goldgraber, and Manket · 2025',
+    note: 'Algebraic field trace as an alternative to ordinary concatenation.',
+    href: 'https://arxiv.org/abs/2511.08788',
+  },
+];
+
+function CopyInstructionsButton() {
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
+
+  async function copyInstructions() {
+    try {
+      await navigator.clipboard.writeText(contributorInstructions);
+      setCopyState('copied');
+      window.setTimeout(() => setCopyState('idle'), 2200);
+    } catch {
+      setCopyState('error');
+    }
+  }
+
+  return (
+    <button className={`copy-button ${copyState}`} onClick={copyInstructions} type="button">
+      {copyState === 'copied' ? <CheckCircle2 size={16} /> : <Copy size={16} />}
+      {copyState === 'copied' ? 'Copied to clipboard' : copyState === 'error' ? 'Select the text below' : 'Copy complete instructions'}
+    </button>
+  );
+}
+
+function ContributePage() {
+  return (
+    <main className="contribute-page">
+      <section className="contribute-intro">
+        <div className="page-shell contribute-intro-grid">
+          <div>
+            <span className="eyebrow">Open research problem</span>
+            <h1>Improve the verified rate.</h1>
+            <p>
+              Contribute a deterministic, symbolic binary code at the exact target. Every submission carries a mathematical proof and is independently audited by two AI verifier agents before it can enter the record table.
+            </p>
+          </div>
+          <div className="contribute-target">
+            <span>Strict improvement target</span>
+            <strong><MathInline>{'R>0.0034351348876953125'}</MathInline></strong>
+            <small><MathInline>{'k\\ge 3{,}688{,}449'}</MathInline></small>
+            <i>with <MathInline>{'n=2^{30}'}</MathInline> and <MathInline>{'d_{\\min}\\ge469{,}762{,}048'}</MathInline></i>
+          </div>
+        </div>
+      </section>
+
+      <div className="page-shell contribute-content">
+        <section className="contribution-flow" aria-label="Submission workflow">
+          {[
+            ['01', 'Construct', 'Specify every field, constituent code, map, and exact-size transformation deterministically.'],
+            ['02', 'Prove', 'Write a concise academic note proving binary linearity, length, dimension, distance, and explicitness.'],
+            ['03', 'Submit', 'Open a pull request with an under-review JSON record and the proof certificate.'],
+            ['04', 'Verify', 'Two separate AI agents recompute and audit the claim before it becomes rankable.'],
+          ].map(([number, title, copy]) => (
+            <article key={number}>
+              <span>{number}</span>
+              <h2>{title}</h2>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="copy-instructions-section">
+          <div className="copy-intro">
+            <div>
+              <span className="eyebrow">One-click research brief</span>
+              <h2>Give the complete setup to a person or agent.</h2>
+              <p>The copied Markdown is the canonical file in the repository: problem statement, exact record to beat, admissibility, proof requirements, research directions, data schema, pull-request workflow, verifier protocol, literature, and checklist.</p>
+            </div>
+            <div className="copy-actions">
+              <CopyInstructionsButton />
+              <a href={`${repoUrl}/blob/main/how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md`} target="_blank" rel="noreferrer">
+                <FileText size={15} /> Open file <ArrowUpRight size={12} />
+              </a>
+            </div>
+          </div>
+          <div className="instruction-preview">
+            <div className="instruction-preview-bar">
+              <span>how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md</span>
+              <span>{contributorInstructions.split(/\s+/).length.toLocaleString()} words</span>
+            </div>
+            <pre>{contributorInstructions}</pre>
+          </div>
+        </section>
+
+        <section className="literature-section">
+          <div className="section-heading-row">
+            <div>
+              <span className="eyebrow">Literature map</span>
+              <h2>Where to start</h2>
+            </div>
+            <a href={`${repoUrl}/blob/main/how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md#8-literature-map`} target="_blank" rel="noreferrer">
+              Full reading list <ArrowUpRight size={13} />
+            </a>
+          </div>
+          <div className="literature-grid">
+            {literature.map((paper) => (
+              <a href={paper.href} target="_blank" rel="noreferrer" className="literature-card" key={paper.title}>
+                <span>{paper.tag}</span>
+                <h3>{paper.title}</h3>
+                <small>{paper.authors}</small>
+                <p>{paper.note}</p>
+                <ArrowUpRight size={15} />
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
+
 function Footer() {
   return (
     <footer>
@@ -456,7 +617,7 @@ export function App() {
   return (
     <div className="app-shell">
       <Header page={route.page} />
-      {route.page === 'record' ? <RecordPage /> : <ResearchPage tab={route.tab} />}
+      {route.page === 'record' ? <RecordPage /> : route.page === 'research' ? <ResearchPage tab={route.tab} /> : <ContributePage />}
       <Footer />
     </div>
   );

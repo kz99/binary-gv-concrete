@@ -1,0 +1,28 @@
+{
+  "rank": null,
+  "id": "your-short-id",
+  "name": "Descriptive construction name",
+  "shortName": "Short name",
+  "authors": "Contributor names",
+  "date": "YYYY-MM-DD",
+  "blockLength": 1073741824,
+  "dimension": 3688449,
+  "minimumDistance": 469762048,
+  "rate": 0.003435135819017887,
+  "rateType": "certified_lower_bound",
+  "relativeDistance": 0.4375,
+  "status": "under-review",
+  "verification": {
+    "arithmetic": "pending",
+    "proof": "pending",
+    "reviewers": 0,
+    "agents": [],
+    "writing": "pending",
+    "summary": "Awaiting two independent reviews.",
+    "reviews": []
+  },
+  "construction": "One-paragraph concrete description.",
+  "proofPath": "proofs/your-short-id.md",
+  "tags": ["symbolic"]
+}
+

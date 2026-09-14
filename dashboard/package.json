@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "validate:data": "node ../scripts/validate-data.mjs",
-    "build": "pnpm validate:data && tsc -b && vite build",
-    "build:pages": "pnpm validate:data && tsc -b && vite build --mode pages",
+    "validate:math": "node scripts/validate-math.mjs",
+    "build": "pnpm validate:data && pnpm validate:math && tsc -b && vite build",
+    "build:pages": "pnpm validate:data && pnpm validate:math && tsc -b && vite build --mode pages",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

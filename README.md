@@ -32,12 +32,19 @@ This is \(30.3978\%\) of the Gilbert–Varshamov benchmark rate
 
 ## Repository layout
 
+- `how_to_contribute/` — complete public research and submission instructions
 - `data/records.json` — canonical leaderboard data
 - `schemas/record.schema.json` — machine-checkable submission schema
 - `proofs/` — human-readable proof certificates
 - `dashboard/` — the static observatory UI: a verified-results leaderboard and a tabbed research notebook
 - `scripts/validate-data.mjs` — leaderboard consistency checks
 - `scripts/publish_pages.sh` — GitHub Pages publication
+
+## Contributing a construction
+
+Read [`how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md`](how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md). It contains the exact target, record to beat, admissibility rules, proof requirements, suggested research directions, literature map, submission data format, pull-request workflow, and independent verification protocol.
+
+The same packet can be copied in one click from the **Contribute** page of the [public observatory](https://kz99.github.io/binary-gv-concrete-observatory/#/contribute).
 
 ## Local development
 

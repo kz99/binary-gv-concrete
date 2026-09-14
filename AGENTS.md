@@ -8,6 +8,8 @@ n=2^{30},\qquad d_{\min}\ge 469,762,048=\frac{7}{16}n.
 
 The score is the rigorously proved rate \(R=k/n\). Do not optimize or rank by a different quantity.
 
+Read `how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md` before proposing or reviewing a submission. It is the canonical public specification for this project.
+
 ## Research agents
 
 1. Work with deterministic, symbolically specified constructions. Do not use random sampling as a construction method.
@@ -37,4 +39,3 @@ Any unresolved mathematical obstruction blocks publication. A verifier should su
 ## Publication invariant
 
 Run `node scripts/validate-data.mjs` and build the dashboard before publishing. The validator enforces exact length, minimum distance, rate arithmetic, proof presence, two distinct verifier identities, and the writing pass.
-

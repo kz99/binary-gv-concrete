@@ -34,14 +34,14 @@
         "reviewers": { "type": "integer", "minimum": 0 },
         "agents": {
           "type": "array",
-          "minItems": 2,
+          "minItems": 0,
           "uniqueItems": true,
           "items": { "type": "string", "minLength": 1 }
         },
         "writing": { "enum": ["pending", "passed", "needs-revision"] },
         "reviews": {
           "type": "array",
-          "minItems": 2,
+          "minItems": 0,
           "items": {
             "type": "object",
             "required": ["agent", "decision", "correctness", "writing", "summary"],
