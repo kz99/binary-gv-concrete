@@ -14,6 +14,7 @@ def main(argv: list[str] | None = None) -> int:
         ("run", "run or resume the campaign in the foreground"),
         ("launch", "launch the campaign in the background"),
         ("status", "show durable campaign progress"),
+        ("genius-checkpoint", "run one requested GENIUS integration checkpoint"),
     ):
         item = sub.add_parser(name, help=help_text)
         item.add_argument("config")
@@ -36,6 +37,8 @@ def main(argv: list[str] | None = None) -> int:
             payload = campaign.add_researchers(args.count)
         elif args.command == "add-team":
             payload = campaign.add_team(args.team)
+        elif args.command == "genius-checkpoint":
+            payload = campaign.run_genius_checkpoint()
         else:
             payload = campaign.status()
     print(json.dumps(payload, indent=2, sort_keys=True))

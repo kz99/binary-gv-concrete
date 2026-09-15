@@ -439,6 +439,39 @@ class Campaign:
         self._write_jobs(jobs)
         return self.status()
 
+    def defer_genius(self) -> dict[str, Any]:
+        """Park queued synthesis jobs until an explicit checkpoint is requested."""
+        self.initialize()
+        jobs = self._read_jobs()
+        changed = False
+        for job in jobs:
+            if job["role"] == "genius" and job["status"] in {"queued", "failed"}:
+                job["status"] = "deferred"
+                job["updated_at"] = utc_timestamp()
+                changed = True
+        if changed:
+            self._write_jobs(jobs)
+        return self.status()
+
+    def run_genius_checkpoint(self) -> dict[str, Any]:
+        """Run one requested global synthesis pass without enabling a standing seat."""
+        self.defer_genius()
+        jobs = self._read_jobs()
+        ordinal = 1
+        existing = {job["id"] for job in jobs}
+        while f"GENIUS-checkpoint-{ordinal:03d}" in existing:
+            ordinal += 1
+        job_id = f"GENIUS-checkpoint-{ordinal:03d}"
+        jobs.append(self._job(
+            job_id, "genius",
+            "Perform the requested global integration checkpoint from all durable campaign evidence.",
+            phase="checkpoint", team="shared",
+            round_number=max((int(job.get("round", 1)) for job in jobs), default=1),
+        ))
+        self._write_jobs(jobs)
+        self._run_phase({"genius"})
+        return self.status()
+
     def _job(self, job_id: str, role: str, direction: str, phase: str = "research",
              dependency: str | None = None, team: str = "shared", round_number: int = 1) -> dict[str, Any]:
         return {
@@ -617,7 +650,7 @@ you have examined every durable response and review path.
             return self.root / "lemma_book" / "lemma-book.json"
         if job["role"] == "roadmap":
             return self.root / "roadmaps" / f"{job['id']}.json"
-        return self.root / "genius" / "GENIUS.json"
+        return self.root / "genius" / f"{job['id']}.json"
 
     def _run_job(self, job: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         prompt, schema = self._prompt(job)
@@ -818,10 +851,11 @@ you have examined every durable response and review path.
             f"lemma-writer-r{next_round:03d}", "lemma_writer",
             "Merge the newest reusable proof steps into the shared lemma book.", phase="synthesis",
             team="shared", round_number=next_round))
-        jobs.append(self._job(
-            f"GENIUS-r{next_round:03d}", "genius",
-            "Synthesize the highest-dimension exact candidate from all shared evidence.", phase="genius",
-            team="shared", round_number=next_round))
+        if self.cfg.get("genius_enabled", False):
+            jobs.append(self._job(
+                f"GENIUS-r{next_round:03d}", "genius",
+                "Synthesize the highest-dimension exact candidate from all shared evidence.", phase="genius",
+                team="shared", round_number=next_round))
         self._write_jobs(jobs)
 
     def export_snapshot(self) -> dict[str, Any]:

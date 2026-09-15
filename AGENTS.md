@@ -29,7 +29,8 @@ ultra researchers, four max researchers, and three xhigh researchers. The
 GENIUS synthesizer remains ultra. Verifiers, literature analysts, lemma
 editors, and roadmap authors use xhigh. Share lemmas and proof tools across
 roadmaps, while giving each researcher modest preference for its assigned
-roadmap.
+roadmap. GENIUS is checkpoint-only: do not queue it automatically. Run it only
+after a request for a global integration pass.
 
 ## Submission standard
 

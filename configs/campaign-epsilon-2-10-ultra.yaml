@@ -8,7 +8,7 @@ campaign:
   roadmap_count: 3
   literature_agent_enabled: true
   lemma_writer_enabled: true
-  genius_enabled: true
+  genius_enabled: false
   executable: codex
   model: gpt-5.6-sol
   reasoning_effort: ultra

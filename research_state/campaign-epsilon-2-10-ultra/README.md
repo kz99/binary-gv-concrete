@@ -16,6 +16,13 @@ superpolynomial conditional-expectation selectors are archived as
 non-admissible evidence, never leaderboard entries.
 Every ten-seat research team mixes three ultra, four max, and three xhigh
 researchers. GENIUS remains ultra; verifiers and synthesis roles run at xhigh.
+GENIUS is deferred by default and runs only as an explicit integration
+checkpoint:
+
+```bash
+PYTHONPATH=src python3 -m binary_gv_research genius-checkpoint configs/campaign-epsilon-2-10-ultra.yaml
+```
+
 Every substantive output is committed to the shared repository; researchers
 read it and the message board before their next attempt. The loop continues
 with fresh rounds until a candidate with \(k>31\) receives its independent

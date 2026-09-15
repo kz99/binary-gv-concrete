@@ -16,6 +16,7 @@ class CampaignTests(unittest.TestCase):
         self.assertEqual(config["campaign"]["verifier_reasoning_effort"], "xhigh")
         self.assertEqual(tuple(config["campaign"]["researcher_reasoning_efforts"]), RESEARCHER_EFFORTS)
         self.assertEqual(config["campaign"]["synthesis_reasoning_effort"], "xhigh")
+        self.assertFalse(config["campaign"]["genius_enabled"])
         self.assertTrue(config["campaign"]["require_polynomial_generator_matrix"])
         self.assertEqual(config["campaign"]["researcher_count"], 40)
         self.assertEqual(config["campaign"]["block_length"], 2**30)
