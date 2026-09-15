@@ -1,0 +1,233 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard code is submitted. I investigated the natural degree-65 deformation of the Reed\u2013Solomon\u2013affine construction.\n\nUse the campaign field `F = F_2[Z]/(Z^16+Z^5+Z^3+Z^2+1)`, its 15-dimensional additive subspace `A = span_F2{1,alpha,...,alpha^14}`, and the affine truth-table inner map `H(z)_y = z_0 + sum_{i=1}^{15} z_i y_i`. For a binary subspace `W <= F^2`, define\n\n`M_W = {sum_{j=0}^{65} c_j X^j : c_0,...,c_63 in F and (c_65,c_64) in W}`\n\nand concatenate evaluation on `A` with `H`. Its dimension is `1024 + dim_F2(W)`. The proved obstruction says that `dim(W) >= 17`, and hence every attempted dimension at least 1041 in this family, necessarily introduces a word of weight 535,805,952, which is 16,384 below the target. Thus this entire top-two-coefficient swap mechanism cannot improve the 1040-dimensional degree-at-most-64 boundary.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Reusable lemma for the combinatorial architecture and proof positions: for every `c in F_{2^16}^*` and every additive subgroup `A` of size 32768, there is a 65-subset `S <= A` such that `sum S = 0` and `c product_{s in S}(x-s) != 1` for all `x in A\\S`. The proof is the fixed-scale incidence bound followed by the impossible Steiner system `S(64,65,32767)`; translation enforces zero root sum without changing the avoided-value property.",
+      "kind": "idea",
+      "references": [
+        "proof-step:fixed-scale-root-avoidance",
+        "proof-step:zero-sum-translation",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json"
+      ],
+      "subject": "Fixed-scale 65-root avoidance with zero root sum"
+    },
+    {
+      "body_markdown": "Obstruction for the construction architect and finite-parameter optimizer: retaining all coefficients through degree 63 and replacing the two degree-64/65 coefficient spaces by any binary `W <= F^2` cannot exceed dimension 1040 at the required distance. If `dim W >= 17`, dimension intersection forces `(c,0) in W`, and the avoidance lemma supplies a codeword of weight exactly 535,805,952.",
+      "kind": "objection",
+      "references": [
+        "proof-step:top-pair-intersection",
+        "proof-step:violating-word",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Top-two coefficient swaps cannot reach dimension 1041"
+    },
+    {
+      "body_markdown": "Question for the next construction-component investigator or bottleneck breaker: if degrees 0 through 62 remain free and `W <= F^3` controls `(c_65,c_64,c_63)`, dimension 1041 requires `dim W >= 33`, forcing a nonzero `(c,0,0) in W`. Can one prove a fixed-scale avoidance lemma with both `e_1(S)=0` and `e_2(S)=0`? Translation kills `e_1` and leaves `e_2` invariant because 64 and `binom(65,2)=2080` are even. Such a lemma would close the top-three coefficient frontier; an explicit counterexample could instead identify a viable escape.",
+      "kind": "question",
+      "references": [
+        "proof-step:fixed-scale-root-avoidance",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "subject": "Top-three coefficient frontier"
+    }
+  ],
+  "distance_audit": [
+    "The concatenated length is `|A| times 2^15 = 32768^2 = 1,073,741,824`.",
+    "The affine inner word has weight 0 at symbol 0, weight 32768 at symbol 1, and weight 16384 at every other nonzero field symbol.",
+    "The constructed obstruction polynomial has exactly 65 roots in `A` and takes neither value 0 nor value 1 at the other 32703 evaluation points.",
+    "Its concatenated weight is therefore `32703 times 16384 = 535,805,952`.",
+    "The required distance is 535,822,336, so the word is short by exactly 16,384. A single such nonzero word proves that the family member fails the distance requirement.",
+    "The argument works for every binary subspace `W` of dimension at least 17; it does not rely on sampling or an average-distance assertion."
+  ],
+  "explicitness_audit": [
+    "For every symbolically specified `W`, the family has a deterministic full-generator-matrix algorithm using a reduced-row-echelon binary basis of `W`.",
+    "Coordinates are ordered lexicographically by the 15-bit descriptions of `a in A` and `y in F_2^15`; field arithmetic uses the fixed degree-16 modulus.",
+    "The generator algorithm performs polynomially many fixed-degree field and bit operations and emits all matrix entries.",
+    "The incidence argument is existential only in order to exhibit a forbidden low-weight codeword. It is used as a negative distance proof, not as a hidden construction or selector.",
+    "No qualifying code with dimension above 1040 is claimed, so this handoff is not a leaderboard submission and does not trigger publication or records validation."
+  ],
+  "generator_matrix": {
+    "algorithm": "Given an explicit binary basis `(u_r,v_r)` of `W`, first put it in deterministic reduced row-echelon order. Emit rows indexed by `(j,i)` for `0 <= j <= 63`, `0 <= i <= 15`, corresponding to `alpha^i X^j`, followed by one row for each basis pair, corresponding to `u_r X^65 + v_r X^64`. For every lexicographically ordered coordinate `(a,y) in A times F_2^15`, evaluate the row polynomial at `a`, expand the value in the fixed basis `(1,alpha,...,alpha^15)`, and output its affine truth-table bit at `y`. This generates the investigated family; it is not asserted to meet the target when `dim W >= 17`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "At most `O(65 k n poly(16))` bit operations and `k n` output bits, where `k = 1024 + dim(W) <= 1056`; hence `O(n)` for the fixed field and degree, and in particular `n^{O(1)}`.",
+    "runtime_proof": "There are exactly `k n` entries. Each entry requires evaluation of a degree-at-most-65 polynomial over the fixed 16-bit field and one 15-variable affine-form evaluation. Gaussian elimination on the at-most-32-dimensional input basis costs only `O(32^3)` bit operations. Thus the stated bound includes every emitted entry and is polynomial in `n`."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The displayed degree-16 polynomial defines the campaign's explicit copy of `F_{2^16}`, and the indicated powers form its binary basis.",
+      "result": "A deterministic degree-16 field model and additive subspace `A` of size 32768.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json, lemma explicit-degree-16-field-models",
+      "used_for": "Exact symbolic field, coordinate ordering, and generator algorithm."
+    },
+    {
+      "hypotheses": "Field symbols are expanded in the fixed binary basis and mapped to affine truth tables on 15 variables.",
+      "result": "Inner weights are 0 for symbol 0, 32768 for symbol 1, and 16384 otherwise.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json, lemma affine-truth-table-spectrum; also submission composition-10.json",
+      "used_for": "Exact weight of the forbidden codeword."
+    },
+    {
+      "hypotheses": "Fixed-scale root-product incidences are counted over an additive subspace.",
+      "result": "An incidence-equality case would create an impossible high-strength Steiner design.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+      "used_for": "Antecedent for the counting method; the specialized argument is reproduced completely here."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Have an independent verifier audit the equality case in the incidence count and the `S(64,65,32767)` divisibility contradiction.",
+    "Investigate the top-three-coefficient family by proving or refuting fixed-scale avoidance under the additional constraint `e_2(S)=0`.",
+    "Search for epsilon-balanced constructions that do not retain all 64 low-degree coefficient spaces, since those are the hypothesis enabling the present dimension-intersection obstruction.",
+    "After independent acceptance, add the fixed-scale zero-sum avoidance lemma and the 1040-dimensional ceiling to `data/records.json`, then run the validator and dashboard build."
+  ],
+  "obstructions": [
+    "Every top-two-coefficient deformation with 64 unrestricted low coefficients and total dimension at least 1041 fails the exact target by an explicitly calculated 16,384-weight margin.",
+    "The theorem does not cover top-three or wider coefficient trades, outer spaces that sacrifice some lower coefficients, different additive evaluation sets, or non-affine inner codes.",
+    "The conditional 1649-dimensional route requiring an explicit non-antipodal `[16384,17,8188]` inner code is unaffected and remains unresolved.",
+    "No new target-qualified code is produced in this foundation handoff."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target",
+      "quantity": "block length",
+      "value": "n = 2^30 = 1,073,741,824"
+    },
+    {
+      "derivation": "`(1/2-2^-10)n`",
+      "quantity": "required minimum distance",
+      "value": "D = 535,822,336"
+    },
+    {
+      "derivation": "15-dimensional binary additive subspace",
+      "quantity": "outer evaluation-set size",
+      "value": "|A| = 2^15 = 32,768"
+    },
+    {
+      "derivation": "Affine truth tables on 15 variables",
+      "quantity": "inner length and balanced nonconstant weight",
+      "value": "32,768 and 16,384"
+    },
+    {
+      "derivation": "64 unrestricted field coefficients plus `W <= F^2`",
+      "quantity": "family dimension",
+      "value": "k = 64\u00b716 + dim_F2(W) = 1024 + dim_F2(W)"
+    },
+    {
+      "derivation": "`dim(W)+dim(F\u00d7{0})-dim(F^2)`",
+      "quantity": "axis-intersection threshold",
+      "value": "dim(W) >= 17 forces a nonzero `(c,0) in W`"
+    },
+    {
+      "derivation": "Fixed 62-subset count in hypothetical `S(64,65,32767)`",
+      "quantity": "divisibility obstruction",
+      "value": "binom(32705,2) = 534,792,160 \u2261 1 mod 3"
+    },
+    {
+      "derivation": "65 roots and 32703 balanced nonroot symbols",
+      "quantity": "forbidden word weight",
+      "value": "32703\u00b716384 = 535,805,952"
+    },
+    {
+      "derivation": "`D - 535,805,952`",
+      "quantity": "distance shortfall",
+      "value": "16,384"
+    },
+    {
+      "derivation": "Contrapositive of the forbidden-word theorem",
+      "quantity": "dimension ceiling in the investigated family",
+      "value": "dim(W) <= 16 and k <= 1040"
+    }
+  ],
+  "proof_markdown": "### Proposition\n\nLet `F`, `A`, and `H` be as above. For a binary subspace `W <= F^2`, let `C_W` be the concatenated evaluation code generated by polynomials whose coefficients through degree 63 are unrestricted and whose pair `(c_65,c_64)` lies in `W`. If `C_W` has minimum distance at least 535,822,336, then `dim_F2(W) <= 16` and `dim_F2(C_W) <= 1040`.\n\n### Dimension\n\nThe polynomial space has binary dimension `64\u00b716 + dim(W)`. A nonzero polynomial of degree at most 65 cannot vanish at every point of the 32768-element set `A`, so outer evaluation is injective. The affine truth-table map is also injective. Hence `dim(C_W)=1024+dim(W)`.\n\nSuppose `dim(W)>=17`. Inside the 32-dimensional binary space `F^2`, the subspace `F\u00d7{0}` has dimension 16. Therefore\n\n`dim(W intersect (F\u00d7{0})) >= dim(W)+16-32 >= 1`.\n\nChoose `(c,0)` in this intersection with `c != 0`.\n\n### Fixed-scale avoidance lemma\n\nFor every such `c`, there is a 65-subset `S` of `A` satisfying\n\n`c product_{s in S}(x-s) != 1` for every `x in A\\S`.\n\nFor a fixed `x`, translation sends a 65-subset `S` avoiding `x` to a 65-subset `T=S+x` of `A\\{0}`, and the displayed equality becomes `product_{t in T}t=c^-1`. Let `M_c` be the number of such `T`. Count pairs `(T,R)` with `R` a 64-subset of `T`. There are `65M_c` pairs. Conversely, a given 64-subset `R` has at most one extension because its missing element would have to be\n\n`z = c^-1 / product_{r in R} r`.\n\nThus `65M_c <= binom(32767,64)`. If every 65-subset `S` had at least one covering point `x`, the number of incidences would satisfy\n\n`binom(32768,65) <= 32768 M_c <= (32768/65) binom(32767,64) = binom(32768,65)`.\n\nAll inequalities would be equalities. In particular, every 64-subset of `A\\{0}` would occur in exactly one qualifying 65-subset, producing a Steiner system `S(64,65,32767)`. Counting its blocks through a fixed 62-subset would require\n\n`binom(32705,2) / binom(3,2)`\n\nto be an integer. But `binom(32705,2)=534,792,160` is congruent to 1 modulo 3. This contradiction proves the lemma.\n\n### Zero-sum normalization\n\nLet `t=sum_{s in S}s` and replace `S` by `S+t`. Since 65 is odd and the characteristic is two, the translated root sum is `t+65t=0`. Translation permutes `A`, and\n\n`product_{r in S+t}(x-r) = product_{s in S}((x+t)-s)`,\n\nso the avoided-value property is unchanged. Write `G(X)=product_{s in S+t}(X-s)`. It is monic of degree 65 and its degree-64 coefficient is zero. Consequently `f=cG` has top pair `(c,0) in W`, and all its lower coefficients are permitted; hence `f` is a message in `M_W`.\n\n### Forbidden weight\n\nThe polynomial `f` has exactly its 65 selected roots in `A`, and at every other point its value is nonzero and not equal to 1. All 32703 nonroot inner blocks therefore have weight 16384. The resulting nonzero codeword has weight\n\n`(32768-65)\u00b716384 = 535,805,952 < 535,822,336`.\n\nThus every `W` of dimension at least 17 fails the target. Contrapositively, a target-qualified member has `dim(W)<=16` and dimension at most 1040.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "family-dimension",
+      "proof": "There are 64 unrestricted coefficients in the 16-dimensional field and `dim(W)` binary degrees of freedom in the top pair. Degree-at-most-65 evaluation on 32768 distinct points and the affine inner map are injective.",
+      "statement": "`dim_F2(C_W)=1024+dim_F2(W)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "family-dimension"
+      ],
+      "id": "top-pair-intersection",
+      "proof": "The ambient binary dimension of `F^2` is 32, while `F\u00d7{0}` has dimension 16. The subspace-dimension inequality gives intersection dimension at least `dim(W)-16`.",
+      "statement": "If `dim(W)>=17`, then `W` contains some `(c,0)` with `c!=0`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "fixed-scale-root-avoidance",
+      "proof": "The incidence count gives at most `binom(32768,65)` covered-set incidences. Universal coverage would force equality and hence a Steiner system `S(64,65,32767)`. Its blocks through a fixed 62-subset would number `binom(32705,2)/3`, impossible because the numerator is 1 modulo 3.",
+      "statement": "For every nonzero `c`, some 65-subset `S` of `A` has `c product(x-s)!=1` at every unselected point.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "fixed-scale-root-avoidance"
+      ],
+      "id": "zero-sum-translation",
+      "proof": "Translation by the root sum makes the new sum zero because 65 is odd in characteristic two. It permutes `A` and translates the argument of the root polynomial, preserving fixed-scale avoidance.",
+      "statement": "The avoiding 65-set may additionally be chosen with root sum zero.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "top-pair-intersection",
+        "zero-sum-translation"
+      ],
+      "id": "violating-word",
+      "proof": "Multiplying the normalized monic root polynomial by `c` gives top pair `(c,0) in W`. It has 65 zero symbols, no symbol 1, and 32703 nonzero non-one symbols, each producing inner weight 16384.",
+      "statement": "Every `C_W` with `dim(W)>=17` contains a word of weight 535,805,952.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "family-dimension",
+        "violating-word"
+      ],
+      "id": "family-ceiling",
+      "proof": "The violating weight is 16,384 below the required distance. Therefore a qualifying member must have `dim(W)<=16`, and the dimension formula gives `k<=1040`.",
+      "statement": "The investigated top-two-coefficient family cannot improve dimension 1040.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Epsilon-balanced code instantiations via affine inner truth tables and degree-65 outer coefficient trades",
+  "result_status": "proved",
+  "source_paths_read": [
+    "/Users/kaizheng/.agents/skills/yukon-cli/SKILL.md",
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 35 current files individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 32 current durable submissions individually audited)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "In the exact `F_{2^16}` Reed\u2013Solomon\u2013affine setup, let all coefficients through degree 63 be unrestricted and constrain `(c_65,c_64)` to a binary subspace `W <= F^2`. If the resulting length-`2^30` binary code meets distance 535,822,336, then `dim_F2(W) <= 16` and its dimension is at most 1040. Indeed, every `W` of dimension at least 17 produces a codeword of weight exactly 535,805,952.",
+  "title": "A 1040-dimensional ceiling for degree-65 top-two coefficient swaps"
+}

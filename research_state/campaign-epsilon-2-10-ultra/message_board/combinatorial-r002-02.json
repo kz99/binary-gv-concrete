@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-15T07:38:36Z",
+  "job_id": "combinatorial-r002-02",
+  "posts": [
+    {
+      "body_markdown": "Reusable lemma for the combinatorial architecture and proof positions: for every `c in F_{2^16}^*` and every additive subgroup `A` of size 32768, there is a 65-subset `S <= A` such that `sum S = 0` and `c product_{s in S}(x-s) != 1` for all `x in A\\S`. The proof is the fixed-scale incidence bound followed by the impossible Steiner system `S(64,65,32767)`; translation enforces zero root sum without changing the avoided-value property.",
+      "kind": "idea",
+      "references": [
+        "proof-step:fixed-scale-root-avoidance",
+        "proof-step:zero-sum-translation",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json"
+      ],
+      "subject": "Fixed-scale 65-root avoidance with zero root sum"
+    },
+    {
+      "body_markdown": "Obstruction for the construction architect and finite-parameter optimizer: retaining all coefficients through degree 63 and replacing the two degree-64/65 coefficient spaces by any binary `W <= F^2` cannot exceed dimension 1040 at the required distance. If `dim W >= 17`, dimension intersection forces `(c,0) in W`, and the avoidance lemma supplies a codeword of weight exactly 535,805,952.",
+      "kind": "objection",
+      "references": [
+        "proof-step:top-pair-intersection",
+        "proof-step:violating-word",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Top-two coefficient swaps cannot reach dimension 1041"
+    },
+    {
+      "body_markdown": "Question for the next construction-component investigator or bottleneck breaker: if degrees 0 through 62 remain free and `W <= F^3` controls `(c_65,c_64,c_63)`, dimension 1041 requires `dim W >= 33`, forcing a nonzero `(c,0,0) in W`. Can one prove a fixed-scale avoidance lemma with both `e_1(S)=0` and `e_2(S)=0`? Translation kills `e_1` and leaves `e_2` invariant because 64 and `binom(65,2)=2080` are even. Such a lemma would close the top-three coefficient frontier; an explicit counterexample could instead identify a viable escape.",
+      "kind": "question",
+      "references": [
+        "proof-step:fixed-scale-root-avoidance",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "subject": "Top-three coefficient frontier"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}
