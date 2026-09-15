@@ -3,7 +3,7 @@ campaign_dir: ../research_state/campaign-epsilon-2-10-ultra
 
 campaign:
   operating_objective: maximize_verified_dimension
-  researcher_count: 30
+  researcher_count: 40
   verifier_count: 1
   roadmap_count: 3
   literature_agent_enabled: true

@@ -243,6 +243,18 @@ TEAM_DIRECTIONS = {
         "Cayley graph and character constructions.", "Spectral amplification.",
         "Limited-independence constructions.", "Finite constant optimization of combinatorial routes.",
     ],
+    "combinatorial-expander": [
+        "Ta-Shma-style epsilon-balanced codes and their exact finite instantiation.",
+        "Ta-Shma bias amplification with every constant exposed.",
+        "Wide replacement products and Gray-code constructions.",
+        "Expander-walk and free-walk balanced codes.",
+        "Replacement-product parameter optimization at epsilon=2^-10.",
+        "Lossless-expander and sampler-based constructions.",
+        "Spectral graph products and explicit bias reduction.",
+        "Extractor-based balanced codes with concrete length accounting.",
+        "Derandomized low-bias code constructions and finite losses.",
+        "Synthesize the strongest combinatorial-expander record candidate.",
+    ],
     "composition": [
         "Multilevel concatenation.", "Structured inner-code search with proofs.",
         "Outer-code and alphabet-reduction tradeoffs.", "Direct sums and interleavings.",
@@ -295,8 +307,8 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
     cfg = value["campaign"]
     if cfg.get("reasoning_effort") != "ultra":
         raise ValueError("campaign.reasoning_effort must be ultra")
-    if int(cfg.get("researcher_count", 0)) != 30:
-        raise ValueError("the campaign must have three groups of ten researchers")
+    if int(cfg.get("researcher_count", 0)) != 40:
+        raise ValueError("the campaign must have four groups of ten researchers")
     if int(cfg.get("verifier_count", 0)) != 1:
         raise ValueError("every submission must receive exactly one independent review")
     if int(cfg.get("roadmap_count", 0)) < 3:
@@ -375,6 +387,23 @@ class Campaign:
             jobs.append(self._job(job_id, "researcher", direction, team=team, round_number=2))
             existing.add(job_id)
             ordinal += 1
+        self._write_jobs(jobs)
+        return self.status()
+
+    def add_team(self, team: str) -> dict[str, Any]:
+        """Append one named ten-agent research team without restarting the campaign."""
+        if team not in TEAM_DIRECTIONS:
+            raise ValueError(f"unknown team: {team}")
+        self.initialize()
+        jobs = self._read_jobs()
+        prefix = f"{team}-"
+        if any(job["id"].startswith(prefix) for job in jobs):
+            raise ValueError(f"team already exists: {team}")
+        round_number = max((int(job.get("round", 1)) for job in jobs), default=1)
+        for index, direction in enumerate(TEAM_DIRECTIONS[team], start=1):
+            jobs.append(self._job(
+                f"{team}-{index:02d}", "researcher", direction,
+                team=team, round_number=round_number))
         self._write_jobs(jobs)
         return self.status()
 

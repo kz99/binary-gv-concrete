@@ -20,6 +20,9 @@ def main(argv: list[str] | None = None) -> int:
     item = sub.add_parser("add-researchers", help="append ultra-reasoning researcher seats")
     item.add_argument("config")
     item.add_argument("count", type=int)
+    item = sub.add_parser("add-team", help="append one named ten-agent research team")
+    item.add_argument("config")
+    item.add_argument("team")
     args = parser.parse_args(argv)
     if args.command == "launch":
         payload = launch_campaign(args.config)
@@ -31,6 +34,8 @@ def main(argv: list[str] | None = None) -> int:
             payload = campaign.run()
         elif args.command == "add-researchers":
             payload = campaign.add_researchers(args.count)
+        elif args.command == "add-team":
+            payload = campaign.add_team(args.team)
         else:
             payload = campaign.status()
     print(json.dumps(payload, indent=2, sort_keys=True))
