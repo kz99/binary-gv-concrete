@@ -1,0 +1,242 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new code is claimed. I audit the following ordinary one-edge parity-lift template. Let `z_1,\u2026,z_m` be binary vertex labels and let `G` be an undirected `D`-regular rotation multigraph, allowing integral loop and parallel-edge multiplicities. Every directed port from `u` to `v` is labeled `z_u+z_v`; the raw length is `M=mD`.\n\nLet `H` be the span of these edge labels, with `h=dim(H)`. For each nonzero character `a\u2208H*`, put `W_a=\u03a3_i(-1)^{a(z_i+z_1)}` and let `\u03b5=max_{a\u22600}|W_a|/m`. If `\u03bb` bounds every nontrivial absolute eigenvalue of the normalized adjacency matrix, the standard mixing certificate is\n\n`\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`.\n\nThe theorem below proves that this certificate, followed by generic zero padding or arbitrary fixed puncturing to length `2^30`, forces `h\u2264945`. Even adjoining one independent all-one row gives dimension at most 946.\n\nI also audit uniformly repeated complete Cartesian XOR clouds: enumerate every ordered `t`-tuple of `m` seeds, label it by their XOR, and repeat every tuple equally often to obtain length `2^30`. For `t=2` the dimension is at most 785 after all-one augmentation; for `t\u22653` it is at most 1025.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For the construction architect and proof-lemma builder: a complete directed-edge parity lift certified only by `\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`, followed by generic padding or puncturing to `2^30`, has homogeneous rank at most 945 and rank at most 946 after one all-one augmentation. The proof combines the port-trace inequality with a 210th Fourier-moment count; thus this ordinary one-edge certificate cannot approach the proved `k=1040` endpoint.",
+      "kind": "objection",
+      "references": [
+        "EDGE-SPAN",
+        "TRACE-LENGTH",
+        "MOMENT-210",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json"
+      ],
+      "subject": "One-edge mixing certificate capped at 946"
+    },
+    {
+      "body_markdown": "For the architecture and parameter positions: every uniformly repeated complete Cartesian `t`-fold XOR cloud at length `2^30` is closed. For `t=2`, repetition reduces exactly to the proved 32,768-seed square lemma, giving augmented dimension at most 785. For `t\u22653`, `m^t\u22642^30` gives `m\u22641024`, so even an independent constant direction gives dimension at most 1025.",
+      "kind": "objection",
+      "references": [
+        "CARTESIAN",
+        "complete-xor-square-ceiling",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json"
+      ],
+      "subject": "All complete Cartesian XOR powers are subrecord"
+    },
+    {
+      "body_markdown": "For the targeted bottleneck breaker: can one give an explicit sparse/non-Cartesian path family whose actual one-sided character sums are at most `2^21`, although the absolute base-bias/eigenvalue certificate fails? It must specify every path and multiplicity symbolically and emit the complete matrix in `n^{O(1)}` time; thinning justified only by the inherited norm bound is now ruled out.",
+      "kind": "question",
+      "references": [
+        "MOMENT-210",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json"
+      ],
+      "subject": "Code-specific sparse-path cancellation needed"
+    }
+  ],
+  "distance_audit": [
+    "The target signed-sum cap is `T=n\u22122D=2^21=2,097,152`.",
+    "If the raw absolute signed-sum certificate is `\u03b2M`, generic padding or puncturing gives the unified upper bound `\u03b2M+|n\u2212M|`; hence certification requires `\u03b2M+|n\u2212M|\u2264T`.",
+    "Consequently `M\u2208[n\u2212T,n+T]=[1,071,644,672,1,075,838,976]` and `\u03b2\u2264T/(n\u2212T)=1/511`.",
+    "Because `\u03b2\u2265\u03b5\u00b2` and `\u03b2\u2265\u03bb`, every relevant base character satisfies `|W_a|\u00b2\u2264m\u00b2/511`, while `\u03bb\u22641/511`.",
+    "The 210th-moment argument applies simultaneously to every nonzero character of the entire raw edge-label span. Puncturing cannot increase dimension.",
+    "No minimum distance is asserted for a new code."
+  ],
+  "explicitness_audit": [
+    "This is a deterministic obstruction; no graph, seed set, or generator matrix is selected by search.",
+    "The port-trace argument permits loops and parallel edges with integral rotation-map multiplicities.",
+    "All numerical cutoffs use exact integer inequalities; no asymptotic constants or numerical optimization are invoked.",
+    "The one-edge result covers only the standard absolute base-bias/eigenvalue certificate and generic padding or puncturing. It does not exclude a direct code-specific one-sided correlation proof.",
+    "The Cartesian corollary covers complete tuple enumeration with uniform repetition. Sparse, unequal, or non-Cartesian path families remain outside its scope.",
+    "No leaderboard construction is submitted."
+  ],
+  "generator_matrix": {
+    "algorithm": "No new candidate matrix is claimed. For the unchanged verified fallback, enumerate `x\u2208F_2^30` lexicographically and emit the rows `1,x_1,\u2026,x_30` of `RM(1,30)`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "O(n log n) bit operations for the unchanged 31-row fallback.",
+    "runtime_proof": "The fallback emits `31n` bits. Lexicographic incrementation costs `O(log n)` per column, so the complete matrix is output in `O(n log n)` time. This is not a new submission."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "An ordered multiset of 32,768 binary vectors, followed by enumeration of all ordered XOR pairs.",
+      "result": "If the resulting length-`2^30` character code meets the target, its homogeneous dimension is at most 784; adjoining all-one gives at most 785.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+      "used_for": "The `t=2` uniformly repeated Cartesian-power corollary."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Have the proof-lemma position independently verify the 210th-moment count and add the resulting one-edge certificate ceiling to the lemma book.",
+    "Extend the moment method to sparse multi-step path distributions using explicit cycle or collision counts rather than a complete Cartesian factorization.",
+    "Require any surviving expander architecture to provide a direct one-sided all-character estimate; optimizing the standard absolute mixing bound cannot beat `k=1040`.",
+    "Correct the expander roadmap\u2019s ordinary one-edge node to record the broader generic-adjustment ceiling and the balanced-core improvement threshold `h=1040`."
+  ],
+  "obstructions": [
+    "Standard complete directed-edge mixing certification yields homogeneous dimension at most 945 and at most 946 after one independent all-one direction.",
+    "The conclusion remains valid for generic zero padding and arbitrary fixed puncturing within the only possible raw-length window.",
+    "Uniformly repeated complete Cartesian XOR powers of every arity `t\u22652` have dimension at most 1025, and the square case has the sharper ceiling 785.",
+    "These are certificate and complete-cloud obstructions, not universal upper bounds for sparse or directly analyzed one-sided expander codes."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target",
+      "quantity": "length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)n`",
+      "quantity": "required distance",
+      "value": "`D=535,822,336`"
+    },
+    {
+      "derivation": "`n\u22122D`",
+      "quantity": "signed-sum allowance",
+      "value": "`T=2^21=2,097,152`"
+    },
+    {
+      "derivation": "`\u03b2M+|n\u2212M|\u2264T`",
+      "quantity": "raw-length window",
+      "value": "`1,071,644,672\u2264M\u22641,075,838,976`"
+    },
+    {
+      "derivation": "`T/(n\u2212T)`",
+      "quantity": "necessary raw absolute-bias bound",
+      "value": "`\u03b2\u22641/511`"
+    },
+    {
+      "derivation": "`511\u00b2`",
+      "quantity": "trace denominator",
+      "value": "`q=261,121`"
+    },
+    {
+      "derivation": "`qm\u00b2\u2264(n+T)(q+m\u22121)` and evaluation at `m=35,000`",
+      "quantity": "vertex-count ceiling",
+      "value": "`m\u226434,999`"
+    },
+    {
+      "derivation": "210th moment, `r=105`",
+      "quantity": "paired-index factor",
+      "value": "`P=(209)!!>70^105`"
+    },
+    {
+      "derivation": "`100\u00b770\u00b7511\u00b734895=124,819,415,000>101\u00b734999\u00b2=123,717,930,101`",
+      "quantity": "moment-denominator certificate",
+      "value": "`Z>2(m\u00b2/511)^105`"
+    },
+    {
+      "derivation": "`34999\u00b2=1,224,930,001<512\u00b770\u00b734895=1,250,636,800`",
+      "quantity": "moment-ratio certificate",
+      "value": "`2^h<2^946`"
+    },
+    {
+      "derivation": "integrality of `h`",
+      "quantity": "homogeneous one-edge dimension ceiling",
+      "value": "`h\u2264945`"
+    },
+    {
+      "derivation": "at most one independent all-one direction",
+      "quantity": "augmented one-edge dimension ceiling",
+      "value": "`\u2264946`"
+    },
+    {
+      "derivation": "`m^t\u22642^30`, `t\u22653`",
+      "quantity": "Cartesian seed/rank ceiling",
+      "value": "`m\u22641024`, augmented dimension `\u22641025`"
+    },
+    {
+      "derivation": "reduction to the 32,768-seed square lemma",
+      "quantity": "Cartesian square ceiling",
+      "value": "homogeneous `\u2264784`, augmented `\u2264785`"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nLet `z_1,\u2026,z_m` label the vertices of an undirected `D`-regular rotation multigraph. Form the raw binary character code from all `M=mD` directed ports, labeling a port from `u` to `v` by `z_u+z_v`. Suppose its distance after generic padding or puncturing to `n=2^30` is certified only through\n\n`\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`,\n\nwhere `\u03b5` is the maximum absolute bias of the translated vertex-label character code and `\u03bb` is an absolute bound on every nontrivial eigenvalue of the normalized adjacency matrix. Then the raw homogeneous edge-label span has dimension at most 945. Puncturing cannot increase this dimension, and adjoining a single independent all-one row gives dimension at most 946.\n\n### 1. Span and the standard edge certificate\n\nLet `P` be normalized adjacency. A certificate capable of reaching the target has `\u03bb<1`, so the graph is connected. Put `e_i=z_i+z_1`. Every edge label is `e_u+e_v`, while summing edge labels along a path from vertex 1 to vertex `i` gives `e_i`. Thus the edge-label span is exactly\n\n`H=span{e_1,\u2026,e_m}`.\n\nWrite `h=dim(H)`. For `a\u2208H*`, let `x_i=(-1)^{a(e_i)}`, `\u03bc_a=m^{-1}\u03a3_i x_i`, and `\u03b5=max_{a\u22600}|\u03bc_a|`. Decomposing `x=\u03bc_a 1+y` with `y\u22a51` gives\n\n`|(1/m)x^T P x|\u2264\u03bc_a\u00b2+\u03bb(1\u2212\u03bc_a\u00b2)\u2264\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)=\u03b2`.\n\nThis is the standard complete directed-edge mixing certificate.\n\n### 2. Length adjustment and trace force `m\u226434,999`\n\nLet `T=n\u22122D_target=2^21`. Padding a raw word with zeros adds `n\u2212M` to its signed sum. Deleting `M\u2212n` uncontrolled coordinates can increase its signed sum by at most `M\u2212n`. Hence generic adjustment can certify the target only if\n\n`\u03b2M+|n\u2212M|\u2264T`.  (1)\n\nIt follows that `M\u2208[n\u2212T,n+T]` and\n\n`\u03b2\u2264T/(n\u2212T)=1/511`.  (2)\n\nIn particular `\u03bb\u22641/511` and `\u03b5\u00b2\u22641/511`.\n\nWrite the integral adjacency multiplicities as `a_uv`. Symmetry and `a_uv\u00b2\u2265a_uv` give\n\n`tr(P\u00b2)=\u03a3_{u,v}a_uv\u00b2/D\u00b2\u2265m/D`.\n\nOn the other hand, spectral decomposition and (2) give\n\n`tr(P\u00b2)\u22641+(m\u22121)/511\u00b2`.\n\nWith `q=511\u00b2=261121`, this yields\n\n`qm\u2264D(q+m\u22121)`.\n\nSince `mD=M\u2264n+T`,\n\n`qm\u00b2\u2264(n+T)(q+m\u22121)`.  (3)\n\nAt `m=35000`, the left and right sides of (3) are respectively\n\n`319,873,225,000,000` and `318,577,437,573,120`.\n\nThe difference function has positive derivative from this point onward because\n\n`2q\u00b735000\u2212(n+T)=17,202,631,024>0`.\n\nTherefore (3) forces `m\u226434999`.\n\n### 3. A 210th-moment rank bound\n\nIf `m<105`, then `h\u2264m\u22121\u2264103`. Assume `105\u2264m\u226434999`. For every `a\u2208H*`, put\n\n`W_a=\u03a3_i(-1)^{a(e_i)}`.\n\nBy (2), every nonprincipal character satisfies\n\n`W_a^210\u2264(m\u00b2/511)^105=:A`.\n\nLet `Z` count ordered 210-tuples of indices whose corresponding `e_i` values XOR to zero. Fourier orthogonality gives\n\n`2^h Z=\u03a3_{a\u2208H*}W_a^210\u2264m^210+(2^h\u22121)A`,\n\nand therefore\n\n`2^h(Z\u2212A)<m^210`.  (4)\n\nCount only tuples obtained by selecting 105 distinct indices and using each twice. With `P=(209)!!`,\n\n`Z\u2265(m)_105 P\u2265(m\u2212104)^105P`.  (5)\n\nWe need only the elementary estimate `P>70^105`. Indeed,\n\n`P=105!\u00b7binom(210,105)/2^105`.\n\nThe largest binomial coefficient is at least the average, so `binom(210,105)\u22652^210/211`. Also integration of `log x` gives `105!\u2265e(105/e)^105`. The series for `e` gives `e<11/4`, hence\n\n`P>(840/11)^105/211`.\n\nSince `(12/11)^8>2`, one has `(12/11)^105>211`, proving `P>70^105`.\n\nFor `105\u2264m\u226434999`, elementary differentiation reduces the extrema of `(m\u2212104)/m\u00b2` to the endpoints. At the larger endpoint,\n\n`100\u00b770\u00b7511\u00b734895=124819415000>123717930101=101\u00b734999\u00b2`.\n\nThus (5) implies\n\n`Z/A>[101/100]^105>2`,\n\nwhere the last inequality already follows from the first three terms of the binomial expansion. Consequently `Z\u2212A>Z/2`. Substituting in (4) gives\n\n`2^h<2[m\u00b2/(70(m\u2212104))]^105`.\n\nThe function `m\u00b2/(m\u2212104)` again has its maximum at an endpoint. The endpoint checks are\n\n`105\u00b2<512\u00b770` and\n\n`34999\u00b2=1224930001<1250636800=512\u00b770\u00b734895`.\n\nTherefore\n\n`2^h<2\u00b7512^105=2^946`,\n\nso `h\u2264945`. An additional all-one direction raises dimension by at most one, proving the ceiling 946.\n\n### 4. Complete Cartesian parity powers\n\nLet `m` seeds generate every ordered `t`-tuple XOR, and repeat every tuple exactly `R` times, with `Rm^t=2^30`. If `t\u22653`, then `m^t\u22642^30`, so `m\u22641024`. The tuple labels lie in the span of the seeds, giving homogeneous dimension at most 1024 and dimension at most 1025 after one constant direction.\n\nFor `t=2`, integrality of `R=2^30/m\u00b2` makes `m` a power of two with `m\u226432768`. Repeat each seed `32768/m` times. The complete square of this enlarged 32,768-seed multiset repeats every original ordered pair exactly `R` times. It is therefore the same code up to coordinate order. The proved complete-square moment lemma gives homogeneous dimension at most 784 and all-one-augmented dimension at most 785.\n\nBoth audited complete-cloud templates are thus strictly below the current dimension-1040 endpoint. The proof does not address sparse path sets or direct one-sided cancellations.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "TARGET-ADJUST",
+      "proof": "For raw length `M`, padding contributes `n\u2212M` positive signs and arbitrary puncturing can increase the signed sum by at most `M\u2212n`. Thus generic certification requires `\u03b2M+|n\u2212M|\u22642^21`, forcing `M\u2208[n\u22122^21,n+2^21]` and `\u03b2\u22641/511`.",
+      "statement": "Generic adjustment of an absolute raw-bias certificate forces `\u03b2\u22641/511`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET-ADJUST"
+      ],
+      "id": "EDGE-SPAN",
+      "proof": "A useful absolute spectral certificate has `\u03bb<1`, hence the graph is connected. Every edge label is a sum of translated vertex labels, while a path from the root to vertex `i` expresses its translated label as a sum of edge labels. The two spans coincide. Orthogonal decomposition of each sign vector gives the stated mixing bound.",
+      "statement": "The raw edge-code dimension equals the translated vertex-label span, and its standard certificate is `\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET-ADJUST"
+      ],
+      "id": "TRACE-LENGTH",
+      "proof": "Integral port multiplicities give `tr(P\u00b2)\u2265m/D`; the spectral bound gives `tr(P\u00b2)\u22641+(m\u22121)/511\u00b2`. Combining with `mD\u2264n+2^21` yields `511\u00b2m\u00b2\u2264(n+2^21)(m\u22121+511\u00b2)`. Exact evaluation at `m=35000` and monotonicity exclude every larger `m`.",
+      "statement": "Every target-certifiable template in scope has at most 34,999 vertices.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "EDGE-SPAN",
+        "TRACE-LENGTH"
+      ],
+      "id": "MOMENT-210",
+      "proof": "Fourier orthogonality counts zero-XOR 210-tuples. Restricting to 105 distinct indices used twice gives `Z\u2265(m\u2212104)^105(209)!!`, and elementary factorial/binomial estimates give `(209)!!>70^105`. The exact endpoint inequalities in the proof yield `Z>2(m\u00b2/511)^105` and finally `2^h<2^946`.",
+      "statement": "The homogeneous edge-label span has dimension at most 945.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "MOMENT-210"
+      ],
+      "id": "EDGE-CONCLUDE",
+      "proof": "Padding preserves raw rank, puncturing cannot increase it, and one all-one row adds at most one dimension.",
+      "statement": "The final adjusted one-edge code has dimension at most 946 after optional all-one augmentation.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json"
+      ],
+      "id": "CARTESIAN",
+      "proof": "For `t\u22653`, rank is at most the number `m\u22641024` of seeds. For `t=2`, uniform repetition to length `2^30` is exactly the square of a 32,768-entry repeated seed multiset, so the proved square-convolution ceiling applies.",
+      "statement": "Uniformly repeated complete Cartesian XOR powers have dimension at most 1025, sharpened to 785 for `t=2`.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Expander-walk codes: exact obstruction for ordinary one-edge mixing certificates and complete Cartesian parity clouds.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (all 45 entries)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 33 current durable files individually audited)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 36 current files individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-03/verifier-1-combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/literature-sota-0001/verifier-1-literature-sota-0001.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Every complete directed-edge XOR lift of an undirected regular rotation multigraph whose target distance is certified only by the standard absolute base-bias/eigenvalue bound `\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`, followed by generic padding or puncturing to length `2^30`, has homogeneous dimension at most 945 and dimension at most 946 after one all-one augmentation. Separately, every uniformly repeated complete Cartesian XOR power of arity at least two has dimension at most 1025, with the square case bounded by 785. Hence neither template can improve the proved dimension-1040 endpoint.",
+  "title": "A 210th-moment ceiling for ordinary one-edge expander certificates"
+}

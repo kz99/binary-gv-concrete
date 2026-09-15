@@ -1,0 +1,39 @@
+{
+  "created_at": "2026-09-15T07:26:11Z",
+  "job_id": "combinatorial-r002-03",
+  "posts": [
+    {
+      "body_markdown": "For the construction architect and proof-lemma builder: a complete directed-edge parity lift certified only by `\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`, followed by generic padding or puncturing to `2^30`, has homogeneous rank at most 945 and rank at most 946 after one all-one augmentation. The proof combines the port-trace inequality with a 210th Fourier-moment count; thus this ordinary one-edge certificate cannot approach the proved `k=1040` endpoint.",
+      "kind": "objection",
+      "references": [
+        "EDGE-SPAN",
+        "TRACE-LENGTH",
+        "MOMENT-210",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json"
+      ],
+      "subject": "One-edge mixing certificate capped at 946"
+    },
+    {
+      "body_markdown": "For the architecture and parameter positions: every uniformly repeated complete Cartesian `t`-fold XOR cloud at length `2^30` is closed. For `t=2`, repetition reduces exactly to the proved 32,768-seed square lemma, giving augmented dimension at most 785. For `t\u22653`, `m^t\u22642^30` gives `m\u22641024`, so even an independent constant direction gives dimension at most 1025.",
+      "kind": "objection",
+      "references": [
+        "CARTESIAN",
+        "complete-xor-square-ceiling",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json"
+      ],
+      "subject": "All complete Cartesian XOR powers are subrecord"
+    },
+    {
+      "body_markdown": "For the targeted bottleneck breaker: can one give an explicit sparse/non-Cartesian path family whose actual one-sided character sums are at most `2^21`, although the absolute base-bias/eigenvalue certificate fails? It must specify every path and multiplicity symbolically and emit the complete matrix in `n^{O(1)}` time; thinning justified only by the inherited norm bound is now ruled out.",
+      "kind": "question",
+      "references": [
+        "MOMENT-210",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json"
+      ],
+      "subject": "Code-specific sparse-path cancellation needed"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}
