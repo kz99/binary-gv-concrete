@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T09:04:53Z",
+  "job_id": "algebraic-r002-07",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: algebraic integrator and lemma editor. The canonical RS\u2013affine rows `C(\u03b1^iX^j)` are Boolean ANFs of degree at most `popcount(j)+1\u22647`. With fixed bitmask field multiplication, their complete `1040\u00d72^30` matrix can be streamed in fewer than `65kn+10500` elementary bit operations, hence output-optimal `\u0398(kn)` time at the fixed target.",
+      "kind": "idea",
+      "references": [
+        "canonical-rs-affine-code",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Reusable Boolean-ANF full-matrix compiler"
+    },
+    {
+      "body_markdown": "Intended recipient: degree-69 bottleneck breaker. The full `k=1051` trace matrix is already symbolically and polynomial-time generable, with exact dimension and Boolean degree at most six. Its sole missing gate is the universal improvement from `68\u00b72^15` to `64\u00b72^15`; a coefficient selector obtained by canonical search would not repair this and would violate explicitness.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "subject": "Degree-69 obstruction is distance, not explicitness"
+    },
+    {
+      "body_markdown": "Intended recipient: Reed\u2013Muller extension architect. The `RM(2,30)` graph ceiling of 1145 is not an existence result. Any proposed augmentation must give a symbolic basis for the coupled graph and a uniform Walsh bound for every anchor coset; defining the graph by exhaustive finite optimization is ineligible even though its rows could subsequently be evaluated efficiently.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-05.json",
+        "fixed-inner-additive-maximality"
+      ],
+      "subject": "Supply a symbolic coupled quadratic graph, not a selector"
+    }
+  ],
+  "round": 2,
+  "team": "algebraic"
+}

@@ -1,0 +1,243 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "### Certified Boolean-polynomial anchor\n\nLet\n\n\\[\np(Z)=Z^{16}+Z^5+Z^3+Z^2+1,\n\\quad F=\\mathbb F_2[Z]/(p),\n\\quad \\alpha=Z\\bmod p.\n\\]\n\nWrite every `z\u2208F` uniquely as `z=\u03a3_{r=0}^{15}z_r \u03b1^r`. Define\n\n\\[\nA=\\operatorname{span}_{\\mathbb F_2}\\{1,\\alpha,\\ldots,\\alpha^{14}\\},\n\\qquad Y=\\mathbb F_2^{15},\n\\]\n\nand\n\n\\[\nH(z)_y=z_0+\\sum_{r=1}^{15}z_r y_r.\n\\]\n\nFor `f\u2208F[X]` of degree at most 64, set\n\n\\[\nC(f)_{(a,y)}=H(f(a))_y,\n\\qquad (a,y)\\in A\\times Y.\n\\]\n\nThe certified code is\n\n\\[\nC_0=\\{C(f):\\deg f\\le64\\}.\n\\]\n\nRows are indexed by `(j,i)\u2208{0,\u2026,64}\u00d7{0,\u2026,15}` and equal `C(\u03b1^iX^j)`. Columns are indexed by `(a,y)` in increasing 15-bit coefficient order. Equivalently, column integer `c` has `a=c>>15` and `y=c mod 2^15`.\n\nEach row is a Boolean polynomial in the 30 coordinate bits `(a_0,\u2026,a_14,y_1,\u2026,y_15)` of degree at most `popcount(j)+1\u22647`; hence `C_0\u2286RM(7,30)`.\n\n### Explicit conditional frontier\n\nThe full trace family\n\n\\[\nC_{69}=\\left\\{\\left(b+\\operatorname{Tr}\\sum_{\\substack{1\\le j\\le69\\\\j\\text{ odd}}}a_jx^j\\right)_{x\\in\\mathbb F_{2^{30}}}\\right\\}\n\\]\n\nhas a completely deterministic `1051\u00d72^30` generator and exact dimension 1051. Its rows have Boolean degree at most six. It is not a leaderboard candidate because only distance `535756800` is currently proved, 65536 below the target.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: algebraic integrator and lemma editor. The canonical RS\u2013affine rows `C(\u03b1^iX^j)` are Boolean ANFs of degree at most `popcount(j)+1\u22647`. With fixed bitmask field multiplication, their complete `1040\u00d72^30` matrix can be streamed in fewer than `65kn+10500` elementary bit operations, hence output-optimal `\u0398(kn)` time at the fixed target.",
+      "kind": "idea",
+      "references": [
+        "canonical-rs-affine-code",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Reusable Boolean-ANF full-matrix compiler"
+    },
+    {
+      "body_markdown": "Intended recipient: degree-69 bottleneck breaker. The full `k=1051` trace matrix is already symbolically and polynomial-time generable, with exact dimension and Boolean degree at most six. Its sole missing gate is the universal improvement from `68\u00b72^15` to `64\u00b72^15`; a coefficient selector obtained by canonical search would not repair this and would violate explicitness.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "subject": "Degree-69 obstruction is distance, not explicitness"
+    },
+    {
+      "body_markdown": "Intended recipient: Reed\u2013Muller extension architect. The `RM(2,30)` graph ceiling of 1145 is not an existence result. Any proposed augmentation must give a symbolic basis for the coupled graph and a uniform Walsh bound for every anchor coset; defining the graph by exhaustive finite optimization is ineligible even though its rows could subsequently be evaluated efficiently.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-05.json",
+        "fixed-inner-additive-maximality"
+      ],
+      "subject": "Supply a symbolic coupled quadratic graph, not a selector"
+    }
+  ],
+  "distance_audit": [
+    "The required distance is `D=2^29\u22122^20=535822336`.",
+    "The inner block weights are `wt(H(0))=0`, `wt(H(1))=32768`, and `wt(H(z))=16384` for every `z\u2209{0,1}`.",
+    "Every nonzero degree-at-most-64 polynomial has at most 64 zeros among the 32768 points of `A`. Thus every nonzero anchor word has weight at least `(32768\u221264)16384=D`. This covers nonconstant polynomials and all nonzero constants.",
+    "For exact attainment, the displayed subspace polynomial `L_U` has precisely 64 roots in `A`, and the functional mask `0x007b` proves `1\u2209L_U(A)`. Its other 32704 blocks are therefore balanced, giving weight exactly `D`.",
+    "For `C_69`, ordinary Artin\u2013Schreier/Hasse\u2013Weil gives `|S|\u226468\u00b72^15=2228224`, hence only `d\u22652^29\u221234\u00b72^15=535756800`. The required cap is `64\u00b72^15=2097152`.",
+    "Because `C_69` contains the external constant row, target distance requires the absolute character-sum bound for every nonconstant phase; a one-sided sign choice cannot close the gap."
+  ],
+  "explicitness_audit": [
+    "Both finite fields use fixed quotient polynomials and polynomial bases; no field search or unspecified isomorphism remains.",
+    "For `C_0`, every row, column, and entry is fixed by integer-indexed bit operations. The convention `0^0=1` is used in the `j=0` rows.",
+    "The Boolean-ANF degree bound follows constructively from linear Frobenius maps and the bilinearity of field multiplication. ANF coefficients could also be compiled symbolically from the fixed multiplication tensor.",
+    "The full anchor matrix contains exactly `1040\u00b72^30=1116691496960` output bits and is streamed without storing the matrix.",
+    "A conservative straight-line implementation uses fewer than `65kn+10500` elementary bit operations and `O(log n)` working bits beyond the output stream.",
+    "The analogous trace-row evaluator gives every entry of the conditional `C_69` matrix by fixed degree-30 field exponentiation and 30-term absolute trace in polynomial time. Its explicitness is proved independently of its unresolved distance.",
+    "No random sampling, finite lookup, canonical exhaustive selector, conditional-expectation recursion, puncturing, shortening, or padding occurs in the certified anchor.",
+    "The workspace is read-only, so no proof or record was persisted and publication validation was not attempted."
+  ],
+  "generator_matrix": {
+    "algorithm": "Precompute the 16 bitmasks `\u03b1^i`. For rows `(j,i)` in lexicographic order, with `0\u2264j\u226464` and `0\u2264i\u226415`, loop over `a=0,\u2026,32767`. Interpret `a` as `\u03a3_{r=0}^{14}a_r\u03b1^r`, compute `u=a^j` by binary exponentiation (`a^0=1`), and compute `z=\u03b1^iu` modulo `p`. Then loop over `y=0,\u2026,32767`, write `y=\u03a3_{r=1}^{15}y_r2^{r-1}`, and emit `G[(j,i),(a,y)]=z_0+\u03a3_{r=1}^{15}z_ry_r`. This emits all rows `C(\u03b1^iX^j)` and every one of the `1040\u00b72^30` entries in the prescribed order.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Fewer than `65kn+10500` elementary bit operations for `k=1040`, `n=2^30`; therefore `\u0398(kn)=\u0398(n)` for this fixed construction, and in particular `n^{O(1)}`.",
+    "runtime_proof": "A naive `F_{2^16}` multiplication uses at most 256 coefficient ANDs, 256 convolution XORs, and fewer than 188 tests/reduction XORs, so bound it by 700 bit operations. Binary exponentiation for `j\u226464`, followed by multiplication by `\u03b1^i`, uses at most 14 field multiplications per `(row,a)`. Computing the affine bit, updating fixed-width counters, and writing it costs fewer than 64 bit operations per `y`. Thus `T\u226415\u00b7700+k\u00b72^15(14\u00b7700+64\u00b72^15)<10500+65kn`. The algorithm stores only fixed 16-bit registers and `O(log n)`-bit counters. Since any full emitter must write `kn` bits, this is output-optimal up to a fixed factor."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "For a degree-16 polynomial over `F_2`, `X^(2^16)\u2261X mod p` and `gcd(p,X^(2^8)\u2212X)=1`.",
+      "result": "Rabin's irreducibility criterion implies that `p` is irreducible.",
+      "source": "M. O. Rabin, Probabilistic Algorithms in Finite Fields, SIAM J. Comput. 9 (1980), 273\u2013280.",
+      "used_for": "Certifying the fixed `F_{2^16}` arithmetic model; the required residues and Euclidean divisions are reproduced in the proof."
+    },
+    {
+      "hypotheses": "A nonzero odd-degree polynomial `P` over `F_{2^30}` defines the Artin\u2013Schreier curve `Y^2+Y=P(X)` of genus `(deg P\u22121)/2`.",
+      "result": "Hasse\u2013Weil gives `|\u03a3_x(\u22121)^Tr(P(x))|\u2264(deg P\u22121)2^15`.",
+      "source": "J. F. Voloch, On the duals of binary BCH codes, IEEE Trans. Inf. Theory 47 (2001), 2050\u20132051.",
+      "used_for": "Auditing the proved distance of the explicit degree-69 trace frontier; it is not needed for the anchor's root-bound proof."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "The algebraic integrator should reuse this explicitness certificate when persisting the accepted dimension-1040 proof and record, then run the data validator and dashboard build in a writable environment.",
+    "The degree-69 bottleneck position should prove `|S(P)|\u226464\u00b72^15` for every reduced odd polynomial of degree at most 69, or give one explicit violating phase. No further generator engineering is needed for that family.",
+    "Any Reed\u2013Muller augmentation attempt should provide a symbolic basis for a genuinely coupled quadratic graph and prove the Walsh bound for all 1040-dimensional anchor cosets."
+  ],
+  "obstructions": [
+    "No proved Boolean-polynomial code of dimension above 1040 survives both the universal-distance and explicitness gates.",
+    "The explicit dimension-1051 degree-69 trace family misses the target by 65536 under the strongest currently established uniform bound.",
+    "The weighted-orbit dichotomy rules out treating a searched 50-dimensional degree-67/69 selector as an independent escape: an anchored improvement exists in that architecture exactly when the full 60-dimensional top layer is safe.",
+    "The fixed affine-inner RS anchor has no strict additive outer supercode meeting the target; its durable reciprocal-sum witness is `0x0990\u22600`.",
+    "Natural affine outer rows and uncoupled pure `y`-quadratic rows explicitly destroy the anchor distance. The remaining quadratic graph ceiling is not constructive.",
+    "This audit is not a global upper bound on binary codes and does not exclude unrelated Boolean-polynomial architectures."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`2^30`",
+      "quantity": "exact block length",
+      "value": "`1073741824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^\u221210)2^30=2^29\u22122^20`",
+      "quantity": "required distance",
+      "value": "`535822336`"
+    },
+    {
+      "derivation": "Rabin certificate for `Z^16+Z^5+Z^3+Z^2+1`",
+      "quantity": "anchor field size",
+      "value": "`65536`"
+    },
+    {
+      "derivation": "`dim_F2 A=dim_F2 Y=15`",
+      "quantity": "outer and inner coordinate counts",
+      "value": "`32768` each"
+    },
+    {
+      "derivation": "`65` field coefficients, each of binary dimension `16`",
+      "quantity": "certified dimension",
+      "value": "`1040`"
+    },
+    {
+      "derivation": "`32768\u00b732768`",
+      "quantity": "certified length",
+      "value": "`1073741824`"
+    },
+    {
+      "derivation": "`32704\u00b716384`",
+      "quantity": "exact anchor minimum distance",
+      "value": "`535822336`"
+    },
+    {
+      "derivation": "`1040/2^30`",
+      "quantity": "exact rate",
+      "value": "`65/67108864 \u2248 9.685754776000977e-7`"
+    },
+    {
+      "derivation": "`max_{0\u2264j\u226464} popcount(j)+1`",
+      "quantity": "maximum anchor-row Boolean degree",
+      "value": "`7`"
+    },
+    {
+      "derivation": "`1040\u00b72^30`",
+      "quantity": "full anchor matrix output size",
+      "value": "`1116691496960` bits"
+    },
+    {
+      "derivation": "`1+35\u00b730`",
+      "quantity": "exact dimension of conditional `C_69`",
+      "value": "`1051`"
+    },
+    {
+      "derivation": "`2^29\u221234\u00b72^15`",
+      "quantity": "generic certified distance of `C_69`",
+      "value": "`535756800`, short by `65536`"
+    }
+  ],
+  "proof_markdown": "## Explicitness and parameter theorem\n\nThe code `C_0` defined above is a deterministic binary linear code with exact parameters\n\n\\[\n[2^{30},1040,535822336]_2,\n\\]\n\nand its complete generator matrix is emitted in output-optimal polynomial time. The explicit degree-69 trace family has exact dimension 1051, but its target distance remains conditional.\n\n### Field certificate\n\nUse little-endian bitmasks, so `Z=0x0002` and `p=0x1002d`. Repeated squaring modulo `p` gives\n\n`0004,0010,0100,002d,0451,13d1,7c98,018a,4069,c41b,92d0,3dab,d4f8,ebd5,7f8d,0002`.\n\nThus `Z^(2^16)\u2261Z` and `Z^(2^8)\u2212Z\u2261h=Z^8+Z^7+Z^3`. Euclidean division gives\n\n\\[\np=(Z^8+Z^7+Z^6+Z^5+Z^4+Z^2+1)h+(Z^2+1),\n\\]\n\n\\[\nh=(Z^6+Z^5+Z^4+Z^3+Z^2+1)(Z^2+1)+1.\n\\]\n\nHence `gcd(p,Z^(2^8)\u2212Z)=1`; Rabin's degree-16 criterion proves irreducibility.\n\n### Linearity, length, and dimension\n\nEvaluation and `H` are binary-linear. Evaluation of `H(z)` at zero and the fifteen unit vectors recovers all coefficients of `z`, so `H` is injective. The coordinate set has size\n\n\\[\n|A||Y|=2^{15}2^{15}=2^{30}.\n\\]\n\nThe message space has binary dimension `65\u00b716=1040`. If `C(f)=0`, injectivity of `H` makes `f` vanish at all 32768 elements of `A`. Since `deg f\u226464`, this forces `f=0`; hence the encoder is injective and the code dimension is exactly 1040.\n\n### Distance\n\nThe affine truth table `H(z)` has weight zero for `z=0`, weight 32768 for `z=1`, and weight 16384 otherwise. A nonzero polynomial of degree at most 64 has at most 64 zeros on `A`. Therefore every nonzero codeword has weight at least\n\n\\[\n(32768-64)16384=535822336.\n\\]\n\nFor equality, put `U=span{1,\u03b1,\u2026,\u03b1^5}`. Direct subspace-polynomial recursion gives\n\n\\[\nL_U(X)=X^{64}+\\mathtt{2e0c}X^{32}+\\mathtt{71ee}X^{16}+\\mathtt{d9a4}X^8+\\mathtt{2198}X^4+\\mathtt{c6ca}X^2+\\mathtt{6115}X.\n\\]\n\nIts values on `\u03b1^6,\u2026,\u03b1^14` are\n\n`e9f1,d1b4,e1cf,9bc6,ea9c,7d5e,f733,26c1,770d`.\n\nThe binary functional with mask `0x007b` vanishes on all nine values and is one on the field element 1. Since `L_U` is additive, these values span `L_U(A)`, so `1\u2209L_U(A)`. Thus `L_U` has exactly 64 zero blocks and 32704 balanced blocks, proving exact minimum distance `D`.\n\n### Boolean-polynomial form\n\nFor `j=\u03a3_t j_t2^t`,\n\n\\[\na^j=\\prod_{t:j_t=1}a^{2^t}.\n\\]\n\nEach Frobenius map is binary-linear, and field multiplication is bilinear. Hence every coordinate of `\u03b1^ia^j` has Boolean degree at most `popcount(j)`. Applying `H` multiplies such coordinates by at most one `y` variable. Since `popcount(j)\u22646` for `0\u2264j\u226464`, every generator row has degree at most seven. This also gives a deterministic symbolic ANF compiler from the fixed field multiplication tensor.\n\n### Full-matrix algorithm\n\nThe algorithm in `generator_matrix` emits exactly the evaluations of the message basis `{\u03b1^iX^j}`. The explicit operation count there proves deterministic runtime below `65kn+10500`, with no construction search and no omitted preprocessing. Thus the complete matrix meets the hard `n^{O(1)}` requirement.\n\n### Degree-69 separation\n\nOver the fixed accepted model `F_2[T]/(T^30+T+1)`, the constant row and rows `Tr(\u03b8^ix^j)` for odd `j\u226469` and `0\u2264i<30` give exactly `1+35\u00b730=1051` rows. Hasse\u2013Weil bounds every nonzero phase by `68\u00b72^15<2^30`, which proves row independence and hence exact dimension. The same bound gives only distance `535756800`. Therefore the matrix and its explicitness are unconditional, but the target-distance statement is not. No `k>1040` leaderboard submission is made in this turn.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "FIELD-16",
+      "proof": "The displayed Frobenius residues and Euclidean remainder chain satisfy Rabin's degree-16 criterion.",
+      "statement": "The fixed quotient is an explicitly ordered field of size `2^16`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-16"
+      ],
+      "id": "BOOLEAN-ANF",
+      "proof": "Frobenius maps are linear, multiplication is bilinear, and each affine-inner evaluation introduces at most one additional variable.",
+      "statement": "Every canonical anchor generator row has Boolean degree at most seven and can be compiled symbolically.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-16"
+      ],
+      "id": "ANCHOR-PARAMETERS",
+      "proof": "Root counting proves evaluation injective; the coordinate and message sets have sizes `2^30` and `2^1040`.",
+      "statement": "The anchor is binary linear of exact length `2^30` and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ANCHOR-PARAMETERS"
+      ],
+      "id": "ANCHOR-DISTANCE",
+      "proof": "At most 64 zero blocks and inner minimum weight `2^14` give the lower bound. The explicit subspace polynomial and separating functional attain equality.",
+      "statement": "The anchor minimum distance is exactly 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "BOOLEAN-ANF",
+        "ANCHOR-PARAMETERS"
+      ],
+      "id": "FULL-MATRIX",
+      "proof": "The indexed straight-line field evaluator emits every entry, and the explicit bit-operation accounting gives runtime below `65kn+10500`.",
+      "statement": "The complete `1040\u00d72^30` generator matrix is emitted deterministically in polynomial time.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "odd-polynomial-weil-bound",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-04.json"
+      ],
+      "id": "TRACE-69-EXPLICIT",
+      "proof": "The fixed trace rows are directly evaluable; the strict generic character bound below `2^30` proves their independence.",
+      "statement": "The degree-69 trace family has an explicit complete generator matrix and exact dimension 1051.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TRACE-69-EXPLICIT"
+      ],
+      "id": "TRACE-69-TARGET",
+      "proof": "The available uniform bound is `68\u00b72^15`, whereas the target requires `64\u00b72^15`.",
+      "statement": "The degree-69 trace family has minimum distance at least 535822336.",
+      "status": "conditional"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Boolean polynomial constructions: ANF compilation and explicitness separation for the RS\u2013affine anchor and degree-69 trace frontier",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-04/verifier-1-algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-08/verifier-1-algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 55 files present)"
+  ],
+  "submission_class": "proof_tool",
+  "theorem_statement": "The certified RS\u2013affine Boolean-polynomial code has exact parameters `[1073741824,1040,535822336]_2`, lies in `RM(7,30)`, and its complete generator matrix is emitted deterministically in fewer than `65kn+10500` elementary bit operations. The explicit degree-69 trace family has exact dimension 1051 and a polynomial-time full-matrix generator, but its required distance remains unproved; consequently this turn supplies an explicitness integration rather than a new leaderboard submission.",
+  "title": "Output-optimal Boolean-ANF generator certificate and the explicit degree-69 frontier"
+}
