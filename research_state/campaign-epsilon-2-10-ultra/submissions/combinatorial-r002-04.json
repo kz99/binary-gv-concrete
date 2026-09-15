@@ -1,0 +1,280 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new code is claimed. Start with the verifier-accepted RS\u2013affine `[2^30,1040,535822336]_2` handoff. Write its generator columns as `z_v\u2208V=F_2^1040`. Because this code contains the all-one word, there is a nonzero functional `x_0\u2208V*` satisfying `x_0(z_v)=1` for every base coordinate `v`.\n\nA replacement-product or parity-walk lift selects exactly `n=2^30` finite sequences `p` of base coordinates and outputs the columns `g_p=\u2295_{v\u2208p}z_v`. The proposed route would use these columns as a 1040-dimensional balanced core and append an independent all-one row, producing dimension 1041.\n\nThis turn proves an exact criterion for that route. Choose one base column `z_*` and put `H=ker(x_0)`. Separate paths according to the parity of their number of summands. For `\u03c8\u2208H*`, define\n\n`E_\u03c8=\u03a3_{p even}(-1)^{\u03c8(g_p)}` and `O_\u03c8=\u03a3_{p odd}(-1)^{\u03c8(g_p+z_*)}`.\n\nThe all-one augmentation meets the target exactly when the two parity classes differ in size by at most `2^21` and `|E_\u03c8|+|O_\u03c8|\u22642^21` for every nonzero `\u03c8`. Thus opposite-parity cancellation cannot supply the missing estimate: the paired characters `\u03c8` and `\u03c8+x_0` force the sum of the two absolute correlations.\n\nThe criterion leaves a sharply defined but unresolved gateway: construct two deterministic, non-paired path families of near-equal size satisfying the simultaneous quotient-character bound. Fixed-parity lifts, naive parity toggles of one quotient multiset, and mixtures certified only by published complete-cloud absolute bounds do not pass this gateway.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: positions 7, 8, and the team integrator. Let base columns lie in `x_0(z)=1`, set `H=ker x_0`, and split any XOR-path output into even and odd classes. With `E_\u03c8` and `O_\u03c8` the normalized quotient Fourier sums, the all-one-augmented output is target-safe iff `|Q_0\u2212Q_1|\u22642^21` and `|E_\u03c8|+|O_\u03c8|\u22642^21` for every nonzero `\u03c8\u2208H*`. This follows from `max(|E+O|,|E\u2212O|)=|E|+|O|`.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:parity-split-replacement-lift",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Exact parity-split Fourier criterion for XOR lifts"
+    },
+    {
+      "body_markdown": "Intended recipient: cross-team liaison. Mixing opposite-parity complete clouds does not repair the fixed-parity problem when their published absolute bounds are combined by triangle inequality. Such a certificate needs some full-rank component with bound below one; the Ta-Shma outer-span obstruction then makes that component longer than `2^30`, while the analogous Gray-register component has length at least `16,706,427,843,136`. Sparse families or a joint signed analysis remain outside this objection.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json"
+      ],
+      "subject": "Componentwise complete-cloud parity mixing cannot certify the target"
+    },
+    {
+      "body_markdown": "Intended recipient: position 10, targeted bottleneck breaker. Can one give a 30-bit-indexed symbolic pair `(Q_0,Q_1)` with each size in `[2^29\u22122^20,2^29+2^20]` and `|E_\u03c8|+|O_\u03c8|\u22642^21` for all `0\u2260\u03c8\u2208F_2^1039`? The two quotient multisets must not be identical: identical parity toggling already requires a length-`2^29`, rank-1039, `1/512`-balanced multiset, while the ordinary RS\u2013affine specialization reaches only rank 974 there.",
+      "kind": "question",
+      "references": [
+        "proposed-lemma:parity-split-replacement-lift",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json"
+      ],
+      "subject": "Construct a genuinely non-paired sparse mixed-parity family"
+    }
+  ],
+  "distance_audit": [
+    "`D=(1/2\u22122^-10)2^30=2^29\u22122^20=535822336` and the two-sided signed-sum allowance is `T=n\u22122D=2^21=2097152`.",
+    "For generator columns `g_p`, the word indexed by `\u03c7` has weight `(n\u2212\u03a3_p(-1)^{\u03c7(g_p)})/2`. Requiring both it and its complement to have weight at least `D` is exactly the absolute bound `|\u03a3_p(-1)^{\u03c7(g_p)}|\u2264T`.",
+    "The parity-split proof checks every nonzero character: `x_0` gives the parity-class-size constraint, and the two extensions of each nonzero quotient character give `E_\u03c8+O_\u03c8` and `E_\u03c8\u2212O_\u03c8`.",
+    "The criterion with `T<n` forces the columns to span all 1040 core dimensions and excludes the all-one word from the core. Appending all-one would therefore add one dimension, and every nonzero augmented word would have weight at least `D`.",
+    "No path family satisfying the criterion was produced, so no minimum-distance or dimension claim is entered."
+  ],
+  "explicitness_audit": [
+    "The accepted RS\u2013affine base columns are symbolically computable over `F_2[Z]/(Z^16+Z^5+Z^3+Z^2+1)`.",
+    "A generic full-matrix emitter is proved polynomial-time for any supplied deterministic path indexer with polynomially bounded path length.",
+    "No qualifying path indexer is presently supplied; the emitter is therefore a conditional transformation, not a construction.",
+    "No random sampling, exhaustive selector, conditional-expectation selector, or finite lookup is used.",
+    "The complete-cloud corollary is only a scoped certificate obstruction. It does not exclude sparse paths, support-aware puncturing, or a direct joint Fourier proof.",
+    "The workspace is read-only; the proposed durable posts and lemma are returned inline rather than written to campaign files."
+  ],
+  "generator_matrix": {
+    "algorithm": "Conditional transformation only. Fix the accepted RS\u2013affine base matrix with rows indexed by `(i,j)\u2208{0,\u2026,15}\u00d7{0,\u2026,64}` and base entry at `v=(a,y)` equal to `H(\u03b1^i a^j)_y`, where `\u03b1=Z` in `F_2[Z]/(Z^16+Z^5+Z^3+Z^2+1)`. Given a deterministic indexer `Path:{0,1}^30\u2192` finite lists of base coordinates, emit `G[(i,j),q]=\u2295_{v\u2208Path(q)}H(\u03b1^i a_v^j)_{y_v}` for all 1040 rows and all `q`, followed by one all-one row. No concrete qualifying `Path` is asserted here.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "If every path has at most `L(n)\u2264n^c` entries and the indexer takes at most `n^c` bit operations per output for a fixed integer `c`, the full matrix is emitted in `O(1040\u00b7n^(c+1)+1040n)` bit operations, hence `n^{O(1)}`.",
+    "runtime_proof": "The base matrix can be precomputed in `O(1040n)` fixed-degree field operations. There are exactly `1040n` lifted core entries, and each is an XOR of at most `n^c` precomputed bits. The path descriptions take at most `n\u00b7n^c` additional work. Finally, exactly `n` constant-row bits are emitted."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The fixed degree-16 field, 15-dimensional evaluation subspace, degree-64 polynomial space, and affine truth-table inner map.",
+      "result": "An explicit `[1073741824,1040,535822336]_2` code containing all-one and a 1039-dimensional balanced core.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json and research_state/campaign-epsilon-2-10-ultra/reviews/composition-10/verifier-1-composition-10.json",
+      "used_for": "The affine-hyperplane base whose replacement-product lifts are analyzed."
+    },
+    {
+      "hypotheses": "A complete Ta-Shma Theorem 4.1 cloud with outer-label span at least 65 and displayed absolute-bias bound below one.",
+      "result": "Its raw output length is at least `2^30+2^24=1090519040`.",
+      "source": "Amnon Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes, STOC 2017; finite audit in research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+      "used_for": "Ruling out full-rank complete Ta-Shma components in a componentwise triangle certificate."
+    },
+    {
+      "hypotheses": "The complete Cohen\u2013Cohen Gray-register construction with published norm bound below one and quotient-base rank 1039.",
+      "result": "The trace and compatibility inequalities force `d\u2265631`, register width at least 3, inner degree at least 4, and raw length at least `1039\u00b7631^3\u00b74^3`.",
+      "source": "Cohen\u2013Cohen, Wide Replacement Products Meet Gray Codes; campaign audit in research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+      "used_for": "Ruling out full-rank complete Gray components in the same certificate model."
+    },
+    {
+      "hypotheses": "A complete directed-edge XOR lift certified by the ordinary scalar-mixing estimate and generic length adjustment.",
+      "result": "The homogeneous rank is at most 837, hence at most 838 after adjoining all-one.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json",
+      "used_for": "Closing the ordinary one-edge special case identified by the upstream architecture audit."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Position 10 should attack the exact two-distribution problem rather than another fixed-parity walk: construct symbolic `Q_0,Q_1` and prove the combined quotient Fourier bound character by character.",
+    "The finite-parameter optimizer should test moment or linear-programming obstructions for two multisets of sizes near `2^29`, retaining the stronger budget `|E_\u03c8|+|O_\u03c8|\u22642^21` rather than separate `2^21` bounds.",
+    "The explicitness engineer should accept only path indexers with a direct 30-bit enumeration and a proved polynomial path-length bound; the conditional emitter above can then be instantiated verbatim.",
+    "The liaison and integrator should persist the parity-split lemma after independent checking and keep the submission off the leaderboard until an actual mixed-parity family is supplied."
+  ],
+  "obstructions": [
+    "Fixed parity cannot improve the accepted 1040-dimensional handoff: even paths lie in the 1039-dimensional quotient hyperplane, while odd paths retain the all-one character inside the core.",
+    "A mixed family must be nearly parity-balanced and must control both parity classes simultaneously; cancellation between their Fourier coefficients is eliminated by the paired character.",
+    "The naive paired-toggle repair is equivalent to constructing a length-`2^29`, rank-1039, `1/512`-balanced quotient multiset. In the ordinary RS\u2013affine family, its best final augmented dimension is only 976.",
+    "A disjoint union of unmodified full-rank complete Ta-Shma or Gray clouds cannot establish the criterion by combining their published absolute bounds with triangle inequality.",
+    "The ordinary complete directed-edge scalar-mixing branch is quantitatively capped at augmented dimension 838 by the newer order-186 moment handoff, superseding the earlier 946 ceiling.",
+    "No obstruction here covers a non-Cartesian sparse mixed-parity family with a direct, joint character-sum proof. That is the surviving replacement-product route."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1073741824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)n`.",
+      "quantity": "Required distance",
+      "value": "`D=2^29\u22122^20=535822336`"
+    },
+    {
+      "derivation": "`n\u22122D`.",
+      "quantity": "Absolute signed-sum allowance",
+      "value": "`T=2^21=2097152`"
+    },
+    {
+      "derivation": "Verifier-accepted RS\u2013affine handoff.",
+      "quantity": "Base rank and quotient rank",
+      "value": "`dim V=1040`; `dim H=1039`"
+    },
+    {
+      "derivation": "`|Q_0|+|Q_1|=n` and `||Q_0|\u2212|Q_1||\u2264T`.",
+      "quantity": "Necessary parity-class interval",
+      "value": "`535822336\u2264|Q_i|\u2264537919488`"
+    },
+    {
+      "derivation": "`T/min_i|Q_i|`.",
+      "quantity": "Necessary individual normalized quotient bias",
+      "value": "`\u22642/511`"
+    },
+    {
+      "derivation": "Identical even/odd quotient multisets make `E_\u03c8=O_\u03c8`.",
+      "quantity": "Paired-toggle half problem",
+      "value": "`m=2^29`, allowance `T/2=2^20`, normalized bias `1/512`"
+    },
+    {
+      "derivation": "Half-length RS\u2013affine specialization: field degree `a\u226515`, evaluation size `2^(30\u2212a)`, and degree `t\u2264floor(2^(21\u2212a))`.",
+      "quantity": "Best half-family full dimension",
+      "value": "`max_a a(t+1)=15\u00b765=975`"
+    },
+    {
+      "derivation": "Remove its all-one direction, parity-toggle, then append all-one.",
+      "quantity": "Best paired-toggle RS\u2013affine target dimension",
+      "value": "`974+1+1=976`"
+    },
+    {
+      "derivation": "Published outer-span trace obstruction.",
+      "quantity": "Minimum contracting full-rank Ta-Shma component length",
+      "value": "`1090519040>n`"
+    },
+    {
+      "derivation": "`1039\u00b7631^3\u00b74^3`.",
+      "quantity": "Minimum contracting full-rank Gray component length",
+      "value": "`16706427843136>n`"
+    },
+    {
+      "derivation": "Order-186 Fourier-moment handoff.",
+      "quantity": "Ordinary directed-edge augmented ceiling",
+      "value": "`838`"
+    }
+  ],
+  "proof_markdown": "### 1. Fourier formulation\n\nLet `V=F_2^1040`, and let `z_v\u2208V` be the columns of the accepted RS\u2013affine generator matrix. Its all-one message is a nonzero `x_0\u2208V*` with `x_0(z_v)=1` for every `v`. For a path descriptor `p`, put `g_p=\u2295_{v\u2208p}z_v`. Hence\n\n`x_0(g_p)=|p| mod 2`.\n\nFor any `\u03c7\u2208V*`, the corresponding lifted word has signed sum\n\n`S_\u03c7=\u03a3_p(-1)^{\u03c7(g_p)}`\n\nand weight `(n\u2212S_\u03c7)/2`. After adjoining an all-one row, both this word and its complement occur. They both have weight at least `D` exactly when `|S_\u03c7|\u2264n\u22122D=T`.\n\n### 2. Exact parity split\n\nFix a base column `z_*`; then `x_0(z_*)=1`. Put `H=ker x_0`, and partition the path multiset into `Q_0,Q_1` by even and odd parity. Thus `g_p\u2208H` on `Q_0`, while `g_p+z_*\u2208H` on `Q_1`.\n\nGiven `\u03c8\u2208H*`, take its unique extension `\u03c7` to `V` satisfying `\u03c7(z_*)=0`. Its other extension is `\u03c7+x_0`. Define\n\n`E_\u03c8=\u03a3_{p\u2208Q_0}(-1)^{\u03c8(g_p)}`,\n`O_\u03c8=\u03a3_{p\u2208Q_1}(-1)^{\u03c8(g_p+z_*)}`.\n\nThe two extension sums are respectively `E_\u03c8+O_\u03c8` and `E_\u03c8\u2212O_\u03c8`. For real numbers `E,O`,\n\n`max{|E+O|,|E\u2212O|}=|E|+|O|`.\n\nFor `\u03c8=0`, the zero extension is irrelevant and the nonzero extension `x_0` gives `|Q_0|\u2212|Q_1|`. For every nonzero `\u03c8`, both extensions are nonzero. Consequently all nonzero characters satisfy `|S_\u03c7|\u2264T` if and only if\n\n`||Q_0|\u2212|Q_1||\u2264T`\n\nand\n\n`|E_\u03c8|+|O_\u03c8|\u2264T` for every `0\u2260\u03c8\u2208H*`.\n\nThis proves the criterion and shows why opposite-parity cancellation cannot help: switching from `\u03c7` to `\u03c7+x_0` reverses only the odd contribution.\n\n### 3. Dimension, distance, and parity sizes\n\nBecause `T<n`, the criterion forces `{g_p}` to span `V`; otherwise a nonzero annihilating character would have signed sum `n`. It also excludes all-one from the lifted core, since such a core word would have signed sum `\u2212n`. The core therefore has dimension 1040 and adjoining all-one adds an independent dimension. Every nonzero augmented word is either a core word, its complement, or all-one, so its weight is at least `(n\u2212T)/2=D`.\n\nThe parity-size inequality and `|Q_0|+|Q_1|=n` give\n\n`2^29\u22122^20\u2264|Q_i|\u22642^29+2^20`.\n\nAlso `|E_\u03c8|,|O_\u03c8|\u2264T`, so each parity class individually must have normalized quotient bias at most `T/(2^29\u22122^20)=2/511`.\n\nAll-even paths have columns in `H` and rank at most 1039. All-odd paths make `x_0` the all-one core word. Thus neither fixed parity can yield the required balanced rank-1040 core.\n\n### 4. Paired-toggle reduction\n\nConsider the symmetric repair formed from a multiset `{h_q:q=1,\u2026,2^29}\u2282H`: output one even column `h_q` and one odd column `h_q+z_*` for every `q`. Then the parity classes have equal size and\n\n`E_\u03c8=O_\u03c8=W_\u03c8:=\u03a3_q(-1)^{\u03c8(h_q)}`.\n\nThe exact criterion becomes `|W_\u03c8|\u22642^20` for every nonzero `\u03c8`. Therefore the repair already requires a rank-1039, length-`2^29`, `1/512`-balanced multiset. It does not amplify bias.\n\nWithin the ordinary RS\u2013affine family at this half length, let the field degree be `a`. The inner affine table has length `2^(a\u22121)`, so the evaluation set must have size `N=2^(30\u2212a)`. Alphabet feasibility gives `a\u226515`. A degree-`t` polynomial has at most `t` roots, and the distance condition is\n\n`(N\u2212t)2^(a\u22122)\u22652^28\u22122^19`,\n\nhence `t\u2264floor(2^(21\u2212a))`. The full dimensions for `a=15,\u2026,21` are `975,528,289,162,95,60,42`; for `a\u226522` they are at most 30. The maximum is 975. Removing the all-one direction gives balanced rank 974; parity toggling restores one direction and final all-one augmentation adds one more, for only 976 dimensions.\n\n### 5. Complete-cloud stitching obstruction\n\nSuppose each parity distribution is a disjoint union of complete clouds, each using a quotient base-label set spanning all 1039 dimensions, and suppose the proof combines published component bounds by triangle inequality. If component `i` has length `M_i` and certified normalized bound `b_i`, the resulting certificate is at least `\u03a3_i b_iM_i`. Since `\u03a3_iM_i=n>T`, such a proof requires some `b_i<1`.\n\nFor a complete Ta-Shma component with full quotient span, the published finite trace audit says `b_i<1` forces `M_i\u22652^30+2^24>n`, impossible inside the disjoint union.\n\nFor a complete Gray-register component, `b_i<1` forces register length at least 3 and inner normalized eigenvalue below `1/2`. Compatibility gives outer eigenvalue below `1/40`. The trace inequality on 1039 outer vertices then gives degree `d\u2265631`; double-conflict-freeness gives width at least 3, and the inner trace inequality gives degree at least 4. Thus\n\n`M_i\u22651039\u00b7631^3\u00b74^3=16706427843136>n`.\n\nHence componentwise stitching of these complete clouds cannot prove the parity criterion. This conclusion deliberately does not cover cancellations analyzed jointly across components or sparse, non-Cartesian path sets.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "PARITY-SETUP",
+      "proof": "The accepted base contains all-one, so every base column lies in the affine hyperplane `x_0(z)=1`; XOR makes path parity equal `x_0(g_p)`.",
+      "statement": "Every XOR-path output has a canonical even/odd decomposition over `H=ker x_0`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-SETUP"
+      ],
+      "id": "PARITY-FOURIER",
+      "proof": "The two extensions of each quotient character have sums `E_\u03c8+O_\u03c8` and `E_\u03c8\u2212O_\u03c8`; use `max(|E+O|,|E\u2212O|)=|E|+|O|`.",
+      "statement": "The exact target conditions are the parity-size inequality and `|E_\u03c8|+|O_\u03c8|\u22642^21` for all nonzero quotient characters.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-FOURIER"
+      ],
+      "id": "PARITY-AUGMENT",
+      "proof": "The strict bound `T<n` excludes both a nonzero annihilator and an all-one core character. Fourier-to-weight conversion then checks every core word and complement.",
+      "statement": "Any family satisfying the criterion yields a binary `[2^30,1041,\u2265535822336]` code after all-one augmentation.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "PARITY-FOURIER"
+      ],
+      "id": "PARITY-SIZE",
+      "proof": "Solve the sum and difference inequalities for the two parity-class cardinalities.",
+      "statement": "Each parity class has between `535822336` and `537919488` coordinates.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-FOURIER"
+      ],
+      "id": "PARITY-FIXED",
+      "proof": "Even sums lie in `H`; odd sums are all evaluated to one by `x_0`.",
+      "statement": "A fixed-parity XOR lift cannot furnish a rank-1040 balanced core.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-FOURIER"
+      ],
+      "id": "PARITY-PAIRED",
+      "proof": "For paired columns `h_q,h_q+z_*`, both quotient sums equal `W_\u03c8`, so the bound is exactly `2|W_\u03c8|\u22642^21`.",
+      "statement": "Naive parity toggling reduces to a length-`2^29`, rank-1039, `1/512`-balanced quotient problem.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-PAIRED"
+      ],
+      "id": "PARITY-HALF-RS",
+      "proof": "Alphabet feasibility gives `a\u226515`; the root-distance inequality gives `t\u2264floor(2^(21\u2212a))`; direct evaluation of `a(t+1)` has maximum 975.",
+      "statement": "The ordinary half-length RS\u2013affine paired-toggle specialization has final dimension at most 976.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json"
+      ],
+      "id": "PARITY-CLOUD-MIX",
+      "proof": "A triangle certificate below `T<n` needs a component bound below one. Published trace inequalities make every such full-rank complete component longer than the entire target.",
+      "statement": "Full-rank complete Ta-Shma or Gray clouds cannot be stitched componentwise to certify the parity criterion.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-AUGMENT"
+      ],
+      "id": "PARITY-EMITTER",
+      "proof": "Precompute the explicit base matrix and XOR at most polynomially many base entries for every requested output entry.",
+      "statement": "A supplied polynomial-time, polynomial-length path indexer would give a deterministic polynomial-time full generator emitter.",
+      "status": "conditional"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Replacement-product constructions: exact mixed-parity architecture and complete-cloud stitching obstructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 48 files present at final synchronization)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 45 files audited; relevant and upstream submissions read fully)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/composition-10/verifier-1-composition-10.json"
+  ],
+  "submission_class": "proof_tool",
+  "theorem_statement": "For the accepted 1040-dimensional affine-hyperplane base, a length-`2^30` XOR-path lift becomes a target-qualified dimension-1041 code after adjoining all-one if and only if its even and odd path classes satisfy `||Q_0|\u2212|Q_1||\u22642^21` and `|E_\u03c8|+|O_\u03c8|\u22642^21` for every nonzero character of the 1039-dimensional quotient hyperplane. Consequently fixed parity fails, identical parity toggling merely reduces to a length-`2^29` rank-1039 `1/512`-bias problem, and published absolute bounds for unmodified full-rank complete Ta-Shma or Gray clouds cannot be combined componentwise to prove the criterion. No qualifying mixed-parity family is currently supplied.",
+  "title": "Parity-split architecture theorem for mixed replacement-product lifts"
+}

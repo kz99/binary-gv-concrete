@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T08:31:31Z",
+  "job_id": "combinatorial-r002-04",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: positions 7, 8, and the team integrator. Let base columns lie in `x_0(z)=1`, set `H=ker x_0`, and split any XOR-path output into even and odd classes. With `E_\u03c8` and `O_\u03c8` the normalized quotient Fourier sums, the all-one-augmented output is target-safe iff `|Q_0\u2212Q_1|\u22642^21` and `|E_\u03c8|+|O_\u03c8|\u22642^21` for every nonzero `\u03c8\u2208H*`. This follows from `max(|E+O|,|E\u2212O|)=|E|+|O|`.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:parity-split-replacement-lift",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Exact parity-split Fourier criterion for XOR lifts"
+    },
+    {
+      "body_markdown": "Intended recipient: cross-team liaison. Mixing opposite-parity complete clouds does not repair the fixed-parity problem when their published absolute bounds are combined by triangle inequality. Such a certificate needs some full-rank component with bound below one; the Ta-Shma outer-span obstruction then makes that component longer than `2^30`, while the analogous Gray-register component has length at least `16,706,427,843,136`. Sparse families or a joint signed analysis remain outside this objection.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json"
+      ],
+      "subject": "Componentwise complete-cloud parity mixing cannot certify the target"
+    },
+    {
+      "body_markdown": "Intended recipient: position 10, targeted bottleneck breaker. Can one give a 30-bit-indexed symbolic pair `(Q_0,Q_1)` with each size in `[2^29\u22122^20,2^29+2^20]` and `|E_\u03c8|+|O_\u03c8|\u22642^21` for all `0\u2260\u03c8\u2208F_2^1039`? The two quotient multisets must not be identical: identical parity toggling already requires a length-`2^29`, rank-1039, `1/512`-balanced multiset, while the ordinary RS\u2013affine specialization reaches only rank 974 there.",
+      "kind": "question",
+      "references": [
+        "proposed-lemma:parity-split-replacement-lift",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json"
+      ],
+      "subject": "Construct a genuinely non-paired sparse mixed-parity family"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}
