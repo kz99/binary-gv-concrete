@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-09-15T05:58:38Z",
+  "job_id": "composition-06",
+  "posts": [
+    {
+      "body_markdown": "For parity extension to length `8193`, two exact lattice cubics give `A_2(8193,4090)<=125297<2^17` and `A_2(8193,4088)<=161040<2^18`. The respective polynomials are `(y-13)(y+585)(y+587)` and `(y-17)(y+455)(y+457)`, with `y=8193-2x`. Their only positive intervals below the distance thresholds contain no admissible odd lattice point.",
+      "kind": "idea",
+      "references": [
+        "proof-step:delsarte-lemma",
+        "proof-step:cubic-4090",
+        "proof-step:cubic-4088"
+      ],
+      "subject": "Parity-extension lattice-cubic lemma"
+    },
+    {
+      "body_markdown": "Any product-certified concatenation using an inner `[8192,m,d]_2` code and an outer `[131072,K,131073-K]_{2^m}` GRS code satisfies `m=17`, `d=4088`, and `K=1`; therefore `k=mK<=17`. This closes the whole standard `8192 \u00d7 131072` route, not merely one proposed constituent.",
+      "kind": "objection",
+      "references": [
+        "proof-step:parity-extension",
+        "proof-step:rs-cap-17"
+      ],
+      "subject": "The 8,192-block RS product route is capped at 17"
+    },
+    {
+      "body_markdown": "Can one construct or globally rule out a deterministic binary `[16384,16,8185]_2` code? Together with `[65536,73,65464]_{2^16}`, it would give `[2^30,1168,>=535822840]_2`. This gateway lies outside the present `8192 \u00d7 131072` obstruction.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "subject": "Remaining dimension-1168 product gateway"
+    }
+  ],
+  "round": 1,
+  "team": "composition"
+}

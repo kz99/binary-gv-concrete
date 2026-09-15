@@ -1,0 +1,237 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard construction is submitted. I analyze the standard product-distance concatenation with a binary linear inner code `[8192,m,d]_2` and a fixed-length generalized Reed\u2013Solomon outer code `[131072,K,131073-K]_{2^m}`. Two exact parity-extension Delsarte cubics force every target-feasible instance to have `m=17`, `d=4088`, and `K=1`. Hence this entire architecture has binary dimension at most `17`, below the verified `RM(1,30)` baseline `31` and the shared dimension-1040 candidate.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For parity extension to length `8193`, two exact lattice cubics give `A_2(8193,4090)<=125297<2^17` and `A_2(8193,4088)<=161040<2^18`. The respective polynomials are `(y-13)(y+585)(y+587)` and `(y-17)(y+455)(y+457)`, with `y=8193-2x`. Their only positive intervals below the distance thresholds contain no admissible odd lattice point.",
+      "kind": "idea",
+      "references": [
+        "proof-step:delsarte-lemma",
+        "proof-step:cubic-4090",
+        "proof-step:cubic-4088"
+      ],
+      "subject": "Parity-extension lattice-cubic lemma"
+    },
+    {
+      "body_markdown": "Any product-certified concatenation using an inner `[8192,m,d]_2` code and an outer `[131072,K,131073-K]_{2^m}` GRS code satisfies `m=17`, `d=4088`, and `K=1`; therefore `k=mK<=17`. This closes the whole standard `8192 \u00d7 131072` route, not merely one proposed constituent.",
+      "kind": "objection",
+      "references": [
+        "proof-step:parity-extension",
+        "proof-step:rs-cap-17"
+      ],
+      "subject": "The 8,192-block RS product route is capped at 17"
+    },
+    {
+      "body_markdown": "Can one construct or globally rule out a deterministic binary `[16384,16,8185]_2` code? Together with `[65536,73,65464]_{2^16}`, it would give `[2^30,1168,>=535822840]_2`. This gateway lies outside the present `8192 \u00d7 131072` obstruction.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "subject": "Remaining dimension-1168 product gateway"
+    }
+  ],
+  "distance_audit": [
+    "The immutable target factors exactly as `535822336=4088*131072`.",
+    "Parity extension maps every pair originally at distance `x` to distance `x+(x mod 2)`; hence distance `>=4089` becomes `>=4090`, while distance `>=4088` remains `>=4088`.",
+    "Both cubic certificates apply to every pairwise distance through the Delsarte character-square identity, rather than only to generator rows or selected words.",
+    "A nonzero outer RS word has at least `131073-K` nonzero symbols, and every such symbol contributes an inner block of weight at least `d`; therefore every nonzero concatenated word has weight at least `d(131073-K)`.",
+    "Once `d<=4088`, any `K>=2` gives product distance at most `4088*131071=535818248`, which is `4088` below target.",
+    "For an ordinary tensor product with both factor dimensions at least two, relative distance is at most `(2/3)^2=4/9<511/1024`; thus it cannot meet the target."
+  ],
+  "explicitness_audit": [
+    "Both Delsarte polynomials, all Krawtchouk coefficients, evaluations, quotients, and remainders are displayed as exact integers.",
+    "Parity extension is the symbolic map `c -> (c,wt(c) mod 2)`; no finite choice is hidden.",
+    "The RS obstruction explicitly assumes a binary-linear inner alphabet embedding, `131072` distinct outer evaluation positions, and the ordinary product-distance certificate.",
+    "No random sampling, numerical construction search, unavailable constituent, padding, or hidden asymptotic constant is used.",
+    "All 24 durable submissions and all 24 message-board files present at the final enumeration were individually read. The shared lemma-book and roadmap directories were empty.",
+    "The workspace was read-only, so the proof and reusable lemmas could not be persisted under `proofs/` or `data/records.json`; consequently the validator and dashboard build were not run."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The standard RS concatenation parameterization and the proposed inner-code gateways.",
+      "result": "The prior cubic excludes `(8192,2^17,4090)`, while `[16384,16,8185]_2` remains the principal conditional product gateway.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json`",
+      "used_for": "Context and comparison; both new length-8193 cubics are proved independently here."
+    },
+    {
+      "hypotheses": "The explicit degree-64 RS\u2013affine construction.",
+      "result": "A deterministic target code of dimension 1040 is supplied as the current shared candidate.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json`",
+      "used_for": "Comparing the product architecture ceiling with the strongest durable construction."
+    },
+    {
+      "hypotheses": "First-order Reed\u2013Muller evaluation on `F_2^30`.",
+      "result": "`RM(1,30)` has parameters `[2^30,31,2^29]_2`.",
+      "source": "`proofs/rm-1-30-baseline.md` and `data/records.json`",
+      "used_for": "Verified-baseline comparison."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Apply parity-extension lattice LP, MacWilliams integrality, and residual structure to the unresolved `[16384,16,8185]_2` gateway.",
+    "Audit other exact power-of-two RS factorizations and symbol-sensitive concatenations whose distance proof is stronger than the ordinary product bound.",
+    "When the workspace is writable, add the two cubic lemmas to `data/records.json`, write the obstruction note under `proofs/`, obtain independent verification, and run the validator and dashboard build."
+  ],
+  "obstructions": [
+    "The standard product-certified inner-8192/outer-131072 RS architecture has binary dimension at most 17 and therefore cannot beat the verified dimension-31 baseline.",
+    "No binary code of length 8193, distance at least 4090, and cardinality `2^17` exists.",
+    "No binary code of length 8193, distance at least 4088, and cardinality `2^18` exists.",
+    "A nontrivial tensor product of two binary codes cannot attain relative distance `511/1024`.",
+    "A Plotkin transform `(u,u+v)` at this length can add at most one binary dimension through its `v` constituent.",
+    "These conclusions do not bound arbitrary binary linear codes, symbol-sensitive concatenations, or other inner/outer length factorizations."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Final length and distance",
+      "value": "`N=1073741824=2^30`, `T=535822336=2^29-2^20`"
+    },
+    {
+      "derivation": "Exact factorization.",
+      "quantity": "Product threshold",
+      "value": "`T=4088*131072`"
+    },
+    {
+      "derivation": "`8192*131072=2^30`.",
+      "quantity": "Audited architecture",
+      "value": "inner `[8192,m,d]_2`; outer `[131072,K,131073-K]_{2^m}`"
+    },
+    {
+      "derivation": "The outer evaluation points must be distinct.",
+      "quantity": "Alphabet feasibility",
+      "value": "`2^m>=131072`, hence `m>=17`"
+    },
+    {
+      "derivation": "First parity-extension cubic.",
+      "quantity": "Length-8193 high-distance bound",
+      "value": "`A_2(8193,4090)<=125297<2^17`"
+    },
+    {
+      "derivation": "Second parity-extension cubic.",
+      "quantity": "Length-8193 threshold bound",
+      "value": "`A_2(8193,4088)<=161040<2^18`"
+    },
+    {
+      "derivation": "Second bound plus alphabet feasibility.",
+      "quantity": "Forced inner dimension",
+      "value": "`m=17`"
+    },
+    {
+      "derivation": "First bound and `m=17`.",
+      "quantity": "Forced inner distance ceiling",
+      "value": "`d<=4088`"
+    },
+    {
+      "derivation": "`d(131073-K)>=4088*131072`.",
+      "quantity": "Forced product parameters",
+      "value": "`d=4088`, `K=1`"
+    },
+    {
+      "derivation": "Binary dimension of concatenation is `mK`.",
+      "quantity": "Architecture ceiling",
+      "value": "`k<=17`"
+    },
+    {
+      "derivation": "Shared conditional product arithmetic.",
+      "quantity": "Open alternative gateway",
+      "value": "`[16384,16,8185]_2` with `[65536,73,65464]_{2^16}` would give `k=1168`, distance `535822840=T+504`"
+    }
+  ],
+  "proof_markdown": "# Parity-extension obstruction for the `8192 \u00d7 131072` RS product route\n\nSet `T=535822336`.\n\n## 1. Finite Delsarte lemma\n\nFor a binary code `X` of length `n` and size `M`, define its normalized distance distribution\n\n`A_i=M^(-1)|{(u,v) in X^2 : d(u,v)=i}|`.\n\nThus `A_0=1` and `sum_i A_i=M`. For the binary Krawtchouk polynomial `K_j`, character orthogonality gives\n\n`sum_i A_i K_j(i)=M^(-1) sum_{|S|=j} |sum_{u in X} (-1)^(sum_{r in S}u_r)|^2 >=0`.\n\nConsequently, if `F=sum_j f_jK_j` has `f_0>0`, all `f_j>=0`, and `F(i)<=0` at every possible nonzero distance `i>=d`, then\n\n`f_0M <= sum_i A_iF(i) <=F(0)`.\n\nHence `M<=F(0)/f_0`. This argument applies even to nonlinear codes.\n\n## 2. Two odd-lattice cubic certificates\n\nTake `n=8193` and put `y=n-2x`. Then every integral distance gives an odd integer `y`. The first three Krawtchouk polynomials satisfy\n\n`K_1=y`, `K_2=(y^2-8193)/2`, and `K_3=(y^3-24577y)/6`.\n\nFor distance `4090`, define\n\n`F_1(x)=(y-13)(y+585)(y+587)`.\n\nFor `x>=4090`, one has odd `y<=13`. The only interval below 13 on which this cubic is positive is `(-587,-585)`, which contains no odd integer. Thus `F_1(x)<=0` at every allowed distance. Direct expansion gives\n\n`F_1=5031552K_0+352736K_1+2318K_2+6K_3`.\n\nAll coefficients are positive, and\n\n`F_1(0)=8180*8778*8780=630439471200`\n\n`=5031552*125297+1100256`.\n\nTherefore\n\n`A_2(8193,4090)<=125297<131072=2^17`.  (1)\n\nFor distance `4088`, define\n\n`F_2(x)=(y-17)(y+455)(y+457)`.\n\nHere the only positive interval below 17 is `(-457,-455)`, again containing no odd integer. Its exact expansion is\n\n`F_2=3797840K_0+217008K_1+1790K_2+6K_3`,\n\nand\n\n`F_2(0)=8176*8648*8650=611607315200`\n\n`=3797840*161040+3161600`.\n\nThus\n\n`A_2(8193,4088)<=161040<262144=2^18`.  (2)\n\n## 3. Parity extension\n\nFor a binary word `c`, set\n\n`E(c)=(c, wt(c) mod 2)`.\n\nThis map is binary linear on a linear code and preserves dimension. A pair originally at distance `x` becomes a pair at distance `x+(x mod 2)`. Therefore:\n\n- a code of distance at least `4089` extends to distance at least `4090`;\n- a code of distance at least `4088` extends to distance at least `4088`.\n\nBy (1), any binary linear `[8192,m,>=4089]` code has `2^m<=125297`, hence `m<=16`. By (2), any `[8192,m,>=4088]` code has `2^m<=161040`, hence `m<=17`.\n\n## 4. Concatenation consequence\n\nLet `B` be a binary linear `[8192,m,d]_2` inner code, identify `F_{2^m}` binary-linearly with `B`, and let the outer code be a generalized Reed\u2013Solomon code\n\n`R=[131072,K,131073-K]_{2^m}`.\n\nHaving 131072 distinct evaluation points requires `m>=17`. Coordinatewise inner encoding is binary linear and injective, so the concatenation has exact length\n\n`8192*131072=2^30`\n\nand binary dimension `mK`. Every nonzero outer word has at least `131073-K` nonzero symbols, so every nonzero concatenated word has weight at least\n\n`d(131073-K)`.\n\nSuppose this product certificate reaches `T`. Since `131073-K<=131072`,\n\n`d>=ceil(T/131072)=4088`.\n\nThe second parity-extension bound gives `m<=17`; field feasibility therefore forces `m=17`. The first bound rules out `d>=4089` at dimension 17, so `d<=4088`. Hence `d=4088`. Because\n\n`T=4088*131072`,\n\nthe product inequality now forces `131073-K=131072`, namely `K=1`. Thus every feasible code in this architecture has\n\n`dim=17*1=17`.\n\nThis is strictly below the verified RM dimension 31.\n\n## 5. Other elementary product transformations\n\nFor every binary linear `[L,k,d]` code,\n\n`(2^k-1)d <= L*2^(k-1)`,\n\nbecause each active coordinate is one on exactly half the codewords. If `k>=2`, then `d/L<=2/3`. The tensor product of two nontrivial binary linear codes has relative distance equal to the product of the factor relative distances, hence at most `4/9<511/1024`; it cannot reach the campaign target.\n\nFor the Plotkin transform `{(u,u+v):u in U,v in V}` of two length-`2^29` codes, the distance is exactly `min(2d(U),d(V))`. Meeting the target requires `d(V)/2^29>=511/512>2/3`, so the same average-weight lemma forces `dim(V)<=1`. Thus this transformation can add at most one dimension.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "delsarte-lemma",
+      "proof": "The Krawtchouk transform of the normalized distance distribution is an explicit sum of squared binary character sums. Nonnegative Krawtchouk coefficients and nonpositive off-diagonal values give `M<=F(0)/f_0`.",
+      "statement": "The finite Delsarte polynomial bound holds for every binary code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "delsarte-lemma"
+      ],
+      "id": "cubic-4090",
+      "proof": "The displayed cubic is nonpositive on every admissible odd `y<=13`, has Krawtchouk coefficients `(5031552,352736,2318,6)`, and has exact quotient `125297+1100256/5031552`.",
+      "statement": "`A_2(8193,4090)<=125297<2^17`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "delsarte-lemma"
+      ],
+      "id": "cubic-4088",
+      "proof": "The displayed cubic is nonpositive on every admissible odd `y<=17`, has coefficients `(3797840,217008,1790,6)`, and has exact quotient `161040+3161600/3797840`.",
+      "statement": "`A_2(8193,4088)<=161040<2^18`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "cubic-4090",
+        "cubic-4088"
+      ],
+      "id": "parity-extension",
+      "proof": "The map `c -> (c,wt(c) mod 2)` preserves cardinality and linear dimension and changes every pair distance `x` to `x+(x mod 2)`.",
+      "statement": "An `[8192,m,>=4089]` code has `m<=16`, while an `[8192,m,>=4088]` code has `m<=17`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "concat-linearity-product",
+      "proof": "The outer-to-inner map is binary linear and injective. Lengths multiply, binary dimension is `mK`, and each nonzero outer symbol contributes an inner block of weight at least `d`.",
+      "statement": "The audited concatenation has parameters `[2^30,mK,>=d(131073-K)]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "parity-extension",
+        "concat-linearity-product"
+      ],
+      "id": "rs-cap-17",
+      "proof": "Field size gives `m>=17`; the second cubic gives `m<=17`. Product distance gives `d>=4088`; the first cubic gives `d<=4088`. Exact factorization of the target then forces outer distance 131072 and `K=1`.",
+      "statement": "Every target-feasible code in the standard `8192 \u00d7 131072` RS product-distance class has dimension at most 17.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "tensor-obstruction",
+      "proof": "Average weight gives relative distance at most `2/3` for each factor of dimension at least two, while tensor relative distances multiply.",
+      "statement": "A tensor product of two nontrivial binary linear factors cannot attain relative distance `511/1024`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "plotkin-obstruction",
+      "proof": "The transform distance is `min(2d(U),d(V))`; its second constituent would need relative distance `511/512`, forcing dimension at most one by average weight.",
+      "statement": "A standard Plotkin lift can add at most one dimension at the target.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Code product transformations",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 24 files present at final enumeration, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 24 files present at final enumeration, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final enumeration)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final enumeration)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `B` be a binary linear `[8192,m,d]_2` code and let `R` be a generalized Reed\u2013Solomon `[131072,K,131073-K]_{2^m}` code on distinct evaluation points. If the ordinary concatenation product certificate satisfies `d(131073-K)>=535822336`, then necessarily `m=17`, `d=4088`, and `K=1`; consequently the binary concatenation has dimension `mK=17`. Thus this entire product-distance architecture cannot beat the verified dimension-31 baseline.",
+  "title": "Parity-extension cubics cap the 8,192 \u00d7 131,072 RS product route at dimension 17"
+}

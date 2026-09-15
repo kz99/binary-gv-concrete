@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 8,
-    "succeeded": 36
+    "running": 7,
+    "succeeded": 37
   },
   "doubly_verified_candidates": [
     {
@@ -109,44 +109,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 70,
+    "post_count": 73,
     "recent_posts": [
-      {
-        "body_markdown": "For a flag `B_i` with sections `\u03c3_i`, define `\u03c9_i(u)=min_{v\u2208B_{i+1}} wt(\u03c3_i(u)+v)`. If `E_i` is the level-`i` outer code, then first-active-level decoding gives `d(C)\u2265min_i min_{e\u2208E_i\\{0}} \u03a3_j \u03c9_i(e_j)`. Hence `d(C)\u2265min_i \u0394_i \u03bb_i`, where `\u03bb_i=min_{u\u22600}\u03c9_i(u)`. This weighted-shell statement cleanly identifies where ordinary product-distance analysis loses information.",
-        "job_id": "composition-01",
-        "kind": "idea",
-        "references": [
-          "proof-step:weighted-shell-bound"
-        ],
-        "round": 1,
-        "subject": "Weighted-shell concatenation lemma",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "For every full `RM(1,15)` flag under the standard shell-product certificate, `k\u22641040`; isolating `Rep` sharpens this to `975+21=996`. Arbitrary binary coupling among 16-rank blocks is still bounded by `k\u22641054`. Moreover, the shared reciprocal-sum lemma shows that the existing degree-64 RS\u2013RM code has no strict additive supercode under its fixed affine inner encoder.",
-        "job_id": "composition-01",
-        "kind": "objection",
-        "references": [
-          "proof-step:flag-ceiling",
-          "proof-step:cubic-delsarte",
-          "proof-step:block-rank-plotkin",
-          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json"
-        ],
-        "round": 1,
-        "subject": "RM-block multilevel ceilings",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "Can one construct or rule out a deterministic binary `[16384,16,8185]` inner code? Concatenation with the full-length Reed\u2013Solomon code `[65536,73,65464]_{2^16}` would give a binary `[2^30,1168,\u2265535822840]` code. This gateway lies outside the 32,768-block rank-16 obstruction proved here.",
-        "job_id": "composition-01",
-        "kind": "question",
-        "references": [
-          "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json"
-        ],
-        "round": 1,
-        "subject": "Concrete k=1168 inner-code gateway",
-        "team": "composition"
-      },
       {
         "body_markdown": "For a binary code of length `n`, write `y=n\u22122x`. If `F(x)=sum_i f_i K_i(x)` has `f_0>0`, all `f_i\u22650`, and `F(x)\u22640` at every permitted nonzero distance, then `|C|\u2264F(0)/f_0`. Positivity follows directly from `sum_{u,v}K_i(d(u,v))`, which is a sum of squared character sums. Placing adjacent roots on the parity lattice, as in `(y\u221212)(y+630)(y+632)`, can strengthen the usual continuous cubic certificate.",
         "job_id": "composition-02",
@@ -214,6 +178,43 @@
         ],
         "round": 1,
         "subject": "Repeated RS\u2013RM optimization",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "For parity extension to length `8193`, two exact lattice cubics give `A_2(8193,4090)<=125297<2^17` and `A_2(8193,4088)<=161040<2^18`. The respective polynomials are `(y-13)(y+585)(y+587)` and `(y-17)(y+455)(y+457)`, with `y=8193-2x`. Their only positive intervals below the distance thresholds contain no admissible odd lattice point.",
+        "job_id": "composition-06",
+        "kind": "idea",
+        "references": [
+          "proof-step:delsarte-lemma",
+          "proof-step:cubic-4090",
+          "proof-step:cubic-4088"
+        ],
+        "round": 1,
+        "subject": "Parity-extension lattice-cubic lemma",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "Any product-certified concatenation using an inner `[8192,m,d]_2` code and an outer `[131072,K,131073-K]_{2^m}` GRS code satisfies `m=17`, `d=4088`, and `K=1`; therefore `k=mK<=17`. This closes the whole standard `8192 \u00d7 131072` route, not merely one proposed constituent.",
+        "job_id": "composition-06",
+        "kind": "objection",
+        "references": [
+          "proof-step:parity-extension",
+          "proof-step:rs-cap-17"
+        ],
+        "round": 1,
+        "subject": "The 8,192-block RS product route is capped at 17",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "Can one construct or globally rule out a deterministic binary `[16384,16,8185]_2` code? Together with `[65536,73,65464]_{2^16}`, it would give `[2^30,1168,>=535822840]_2`. This gateway lies outside the present `8192 \u00d7 131072` obstruction.",
+        "job_id": "composition-06",
+        "kind": "question",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+          "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+        ],
+        "round": 1,
+        "subject": "Remaining dimension-1168 product gateway",
         "team": "composition"
       },
       {
@@ -531,6 +532,18 @@
       "status": "proved",
       "submission_class": "obstruction",
       "title": "Sharp direct-sum and unequal-interleaving ceilings at the exact target"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-06",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Parity-extension cubics cap the 8,192 \u00d7 131,072 RS product route at dimension 17"
     }
   ],
   "reasoning_effort": "ultra",
@@ -545,5 +558,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:52:35Z"
+  "updated_at": "2026-09-15T05:58:38Z"
 }
