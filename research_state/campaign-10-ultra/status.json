@@ -1,0 +1,18 @@
+{
+  "counts": {
+    "queued": 16
+  },
+  "doubly_verified_candidates": [],
+  "gs_hadamard_template_ceiling": 0.0036458333333333334,
+  "model": "gpt-5.6-sol",
+  "promising_candidates": [],
+  "reasoning_effort": "ultra",
+  "researcher_count": 10,
+  "schema": "binary-gv-campaign-snapshot-v1",
+  "target": {
+    "block_length": 1073741824,
+    "current_dimension": 3688448,
+    "minimum_distance": 469762048
+  },
+  "updated_at": "2026-09-15T00:02:59Z"
+}

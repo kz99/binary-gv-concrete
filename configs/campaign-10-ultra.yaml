@@ -1,0 +1,22 @@
+workspace: ..
+campaign_dir: ../research_state/campaign-10-ultra
+
+campaign:
+  researcher_count: 10
+  verifier_count: 2
+  roadmap_count: 3
+  literature_agent_enabled: true
+  lemma_writer_enabled: true
+  genius_enabled: true
+  executable: codex
+  model: gpt-5.6-sol
+  reasoning_effort: ultra
+  disable_nested_agents: true
+  max_workers: 3
+  timeout_seconds: 5400
+  max_attempts: 3
+  retry_seconds: 120
+  block_length: 1073741824
+  minimum_distance: 469762048
+  current_record_dimension: 3688448
+  gs_hadamard_ceiling_rate: 0.0036458333333333335

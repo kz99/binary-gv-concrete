@@ -10,6 +10,34 @@ The score is the rigorously proved rate \(R=k/n\). Do not optimize or rank by a 
 
 Read `how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md` before proposing or reviewing a submission. It is the canonical public specification for this project.
 
+## Campaign runtime
+
+Every autonomous role in the official campaign---researcher, literature analyst,
+verifier, lemma editor, roadmap author, and GENIUS synthesizer---must run with
+`model_reasoning_effort="ultra"`.  The campaign launcher rejects any other
+reasoning setting.
+
+The standard Garcia--Stichtenoth plus binary Hadamard/RM(1,7) template has a
+known rate envelope at relative distance \(7/16\).  With an outer alphabet
+\(\mathbb F_{2^m}\), even \(m\), the usual optimal-tower/Riemann--Roch
+accounting and the inner code
+\(\operatorname{RM}(1,m-1)=[2^{m-1},m,2^{m-2}]_2\) give
+
+\[
+R_{\mathrm{template}}(m)
+=\frac{m}{2^{m-1}}
+\left(\frac18-\frac{1}{2^{m/2}-1}\right)_+.
+\]
+
+This expression is maximized at \(m=8\), where it equals
+\(7/1920\approx0.0036458333333\).  This is a ceiling for the standard
+certified template and its parameter-optimization argument, not a universal
+impossibility theorem for every code extracted from a GS tower.  Agents may
+close the finite-size gap up to this value, but the primary objective is to
+cross \(7/1920\) using a genuinely stronger inner code, alphabet-reduction
+method, multilevel construction, expander amplification, trace/subfield
+argument, or another rigorously explicit mechanism.
+
 ## Research agents
 
 1. Work with deterministic, symbolically specified constructions. Do not use random sampling as a construction method.

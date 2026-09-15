@@ -108,6 +108,41 @@ Use [`proofs/SUBMISSION_TEMPLATE.md`](../proofs/SUBMISSION_TEMPLATE.md).
 
 These are suggestions, not restrictions.
 
+### The GS--Hadamard ceiling to push beyond
+
+The current construction belongs to the standard one-level
+Garcia--Stichtenoth plus binary Hadamard/Reed--Muller template.  For an outer
+alphabet \(\mathbb F_{2^m}\) with even \(m\), concatenate the usual
+optimal-tower AG bound with
+
+\[
+\operatorname{RM}(1,m-1)=[2^{m-1},m,2^{m-2}]_2.
+\]
+
+At final relative distance \(7/16\), the usual designed-distance and
+Riemann--Roch calculation has rate envelope
+
+\[
+R_{\mathrm{template}}(m)
+=\frac{m}{2^{m-1}}
+\left(\frac18-\frac{1}{2^{m/2}-1}\right)_+.
+\]
+
+Among even \(m\), the maximum occurs at \(m=8\) and is
+
+\[
+R_{\mathrm{GS+Had}}^{\mathrm{template}}=\frac{7}{1920}
+=0.003645833333333\ldots.
+\]
+
+The present record \(0.0034351348876953125\) is about \(94.22\%\) of this
+envelope.  Optimizing exact tower levels, divisors, and padding up to this
+ceiling is useful, but the main research target is a proved rate strictly
+larger than \(7/1920\).  Crossing it requires an idea outside the standard
+one-level GS--Hadamard parameter template.  Treat this as a construction-class
+ceiling, not as a universal upper bound on every special code obtainable from
+a GS tower.
+
 ### Improve the inner binary code
 
 The current record concatenates an algebraic-geometry outer code over \(\mathbb F_{256}\) with
@@ -117,6 +152,10 @@ The current record concatenates an algebraic-geometry outer code over \(\mathbb 
 \]
 
 A structurally explicit inner code with a better rate–distance tradeoff, together with a compatible outer alphabet and exact proof, may improve the final score.
+
+When evaluating an inner-code proposal, determine whether it merely approaches
+the \(7/1920\) template envelope or actually changes the concatenation tradeoff
+enough to cross it.
 
 ### Improve the outer code or its finite instantiation
 
@@ -266,4 +305,3 @@ Read these for repository conventions, but do not assume their claims without ch
 - [ ] New JSON record begins `under-review`.
 - [ ] Validator and dashboard build pass.
 - [ ] Pull request explains the new mathematical idea.
-

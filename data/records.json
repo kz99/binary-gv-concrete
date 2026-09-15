@@ -153,8 +153,15 @@
       {
         "id": "algebraic-concatenation",
         "title": "Beyond one-level concatenation",
-        "summary": "Investigate algebraic concatenation and expander-based distance amplification with parameter identities that remain fully human-auditable at n=2^30.",
-        "priority": "medium",
+        "summary": "Cross the standard GS + Hadamard template ceiling R = 7/1920 by using algebraic alphabet reduction, multilevel concatenation, trace/subfield methods, or expander-based distance amplification, with fully human-auditable parameters at n=2^30.",
+        "priority": "high",
+        "state": "open"
+      },
+      {
+        "id": "gs-hadamard-ceiling",
+        "title": "Certify and surpass the GS + Hadamard ceiling",
+        "summary": "The usual optimal-tower/Riemann--Roch analysis concatenated with RM(1,m-1) has envelope (m/2^(m-1))(1/8 - 1/(2^(m/2)-1))_+, maximized for even m at m=8 with rate 7/1920. Close the finite-size gap, then seek a construction outside this template with certified rate greater than 7/1920.",
+        "priority": "high",
         "state": "open"
       }
     ],
