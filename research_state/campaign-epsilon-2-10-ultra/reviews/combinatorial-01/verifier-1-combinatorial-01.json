@@ -1,0 +1,181 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical SHA-256 as SHA-256 of json.dumps(parsed JSON, sort_keys=True); it exactly matches the supplied immutable digest. The raw-file digest differs only because of formatting.",
+    "Checked the off-by-one thresholds: avoiding wt<=R and wt>=n-R gives exactly D<=wt<=n-D, where R=D-1.",
+    "Tested the binomial-tail certificate at every tight rational inequality, including the logarithm remainder, exponential Taylor bound, and final margin 1083-1900544/1755=121/1755.",
+    "Tested the endpoint-ratio product bound where its right-hand side changes sign and after extending t_j=0 beyond j=R; no invalid positive lower bound occurs.",
+    "Checked the parity-coset moment calculation separately for even and odd numbers of complemented circuit words; the omitted sign is harmless because both cases are bounded by cosh(t)^s+sinh(t)^s.",
+    "Checked the small-circuit boundary sizes s=3, 253, and 255 and the handoff to s=257; there is no omitted odd size.",
+    "Tested the Fourier-convolution identity for negative nontrivial coefficients. Replacing each odd power by its absolute-value bound remains a valid upper bound.",
+    "Tried an odd zero-sum subset that is not initially a circuit. Taking a minimum-cardinality odd zero-sum subset, or extracting and deleting a contained zero-sum relation, produces the required odd circuit.",
+    "Tested the B(G_*)=empty edge case. The separately prescribed functional ell(u)=u_1 is nonzero and still gives a 2970-dimensional kernel.",
+    "Tried to create a kernel word uG_*=0 for nonzero u in U; this would put u in the lower bad tail and contradict U intersect B(G_*)=empty.",
+    "Tried to place the all-one vector J in UG_*; every nonzero word there has weight at most n-D<n, so this is impossible.",
+    "Tested the extremal safe weights D and n-D. Their complements also have weights n-D and D respectively, so neither creates a low-weight final codeword.",
+    "Recomputed the claimed K=2972 method obstruction: its doubled lambda bound is below 2166, but 2^-2972 exp(2166)>1, so the stated limitation of that estimator is accurate."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission has the supplied immutable campaign identity.",
+      "justification": "Canonical sorted-key JSON serialization has SHA-256 1ca7f208df2d960f1df411d76671dfc5ec4c8772f58bc982404afd3fc421fda7.",
+      "reference": "combinatorial-01.json:1-241",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The headline fields assert an exact-length dimension-2971 baseline improvement.",
+      "justification": "The audited proof establishes length 1073741824, dimension 2971, and certified distance at least 535822336. Since 2971>31, baseline_beaten and leaderboard_submission are honest.",
+      "reference": "combinatorial-01.json:2-6,53-55",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction parameters n,N,h,R,D,K and J are consistent.",
+      "justification": "N=536870912, h=1048577, R=N-h=535822335, and D=R+1=N-2^20=535822336. The vector J has exactly n coordinates.",
+      "reference": "combinatorial-01.json:5, construction lines 1-5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The bad-message definition has the correct two thresholds.",
+      "justification": "For integer weights, u outside B(G) satisfies R+1<=wt(uG)<=n-R-1, which is exactly D<=wt(uG)<=n-D.",
+      "reference": "combinatorial-01.json:5, construction lines 7-15",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The potential includes every circuit size needed for expurgation.",
+      "justification": "Psi<1 implies |B|<=1083. Any circuit contained in B then has size at most 1083, while nonzero distinct binary vectors admit no circuit of size 1 or 2; hence odd sizes 3 through 1083 suffice.",
+      "reference": "combinatorial-01.json:5, construction lines 11-19",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The matrix G_* is deterministic and symbolically recoverable.",
+      "justification": "The row-major order, exact conditional averages, smaller-child rule, and tie choice are fixed. Psi takes rational values, so every comparison is a finite exact computation; no random choice remains.",
+      "reference": "combinatorial-01.json:5, construction lines 17-25",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The functional, kernel basis, and final code contain no unspecified finite choice.",
+      "justification": "A coefficient-vector lexicographic minimum fixes ell when B is nonempty; the empty-set case fixes ell(u)=u_1. The first pivot and displayed ordered basis then determine U and C.",
+      "reference": "combinatorial-01.json:5, construction lines 19-23",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Absence of odd circuits implies a hyperplane avoiding B.",
+      "justification": "The system ell(b)=1 is inconsistent exactly when an odd subset of B sums to zero. A minimum-cardinality such subset is an odd circuit, contradicting the constructed circuit counts.",
+      "reference": "combinatorial-01.json:9-14 and 124, proof section 6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The discussion of the K=2972 limitation is numerically honest.",
+      "justification": "Increasing K by one doubles lambda to below 2166, while 2166>2972 log 2, so the displayed zero-frequency exponential upper bound exceeds one. The text correctly limits this obstruction to the present estimator.",
+      "reference": "combinatorial-01.json:16-32,62-64",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The distance and explicitness audit lists accurately summarize the construction.",
+      "justification": "Avoidance of B proves both-sided weight control, injectivity, exclusion of J, and complement safety. Every construction choice is fixed and the matrix has exactly n columns without padding or puncturing.",
+      "reference": "combinatorial-01.json:35-51",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The parameter ledger arithmetic is correct.",
+      "justification": "The recomputed values are n=1073741824, N=536870912, h=1048577, R=535822335, D=535822336, lambda<1900544/1755<1083, balanced-subcode dimension 2970, and final dimension 2971.",
+      "reference": "combinatorial-01.json:67-117",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The exact rate and bias ledger entries are correct.",
+      "justification": "Because 2971 is odd, 2971/2^30 is reduced and equals 0.000002766959369182586669921875. The interval [D,n-D]/n=[511/1024,513/1024] gives normalized absolute bias at most 1/512.",
+      "reference": "combinatorial-01.json:113-121",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The exact binomial-tail certificate proves 2^2972 p<1083.",
+      "justification": "The geometric tail factor, central-binomial induction, shifted-coefficient product, and rational logarithm/exponential estimates all check. In particular E>2048 and the final bound is 1900544/1755=1082.931054... .",
+      "reference": "combinatorial-01.json:124, proof section 1",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Fourier endpoint estimate gives every nontrivial coefficient magnitude below q/256.",
+      "justification": "Coordinate pairing leaves only the radius-R sphere and gives |fhat(S)|<=2^-n binom(n-1,R). The exact lower bound p/p_R=18921810959967451087/73787292954639991 exceeds 256, and translation by J supplies the required factor for g.",
+      "reference": "combinatorial-01.json:124, proof section 2",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The expected bad-set bound is correct.",
+      "justification": "For each nonzero u, uG is uniform, the two tails are disjoint, and q=2p. Thus E|B|=(2^K-1)q<2^2972p<1083.",
+      "reference": "combinatorial-01.json:124, proof lines 77-81",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The small odd-circuit expectation is below 2^-27.",
+      "justification": "A circuit's column values are uniform on a parity coset. The orientation moment bound, the s! circuit representation count, monotonicity through s=255, 255!>=2^1504, and exp(-522231)<2^-753419 jointly give the stated sum.",
+      "reference": "combinatorial-01.json:124, proof section 3",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The large odd-circuit expectation is below 2^-742.",
+      "justification": "Fourier convolution gives sum_S ghat(S)^s with no missing normalization. Parseval and the nontrivial coefficient bound yield q^s+(q/256)^(s-2)q; the exponential and factorial estimates for all s>=257 recompute correctly.",
+      "reference": "combinatorial-01.json:124, proof section 4",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Conditional averaging produces Psi(G_*)<1.",
+      "justification": "Each prefix average is the arithmetic mean of its two child averages, so the prescribed child never increases it. The initial estimate 1083/1084+2^-26 is strictly below one.",
+      "reference": "combinatorial-01.json:124, proof section 5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Psi(G_*)<1 gives both the bad-set bound and vanishing circuit counts.",
+      "justification": "Every T_s is a nonnegative integer, so any positive circuit count would make Psi at least one. Also |B|/1084<1 implies the integer bound |B|<=1083.",
+      "reference": "combinatorial-01.json:124, proof lines 157-163",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The odd-circuit expurgation gives dim U=2970 and U intersect B=empty.",
+      "justification": "The consistency criterion for ell(b)=1 is the absence of odd zero-sum subsets. The selected ell is nonzero, including when B is empty, so its kernel has codimension one and cannot contain a bad message.",
+      "reference": "combinatorial-01.json:124, proof section 6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The final encoder is injective and has dimension 2971.",
+      "justification": "A nonzero u in U cannot map to zero because it would be bad. Every nonzero image word has weight at most n-D<n, excluding J from UG_*. Therefore C=UG_* direct-sum span{J} has dimension 2970+1.",
+      "reference": "combinatorial-01.json:124, proof lines 171-181",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero final codeword has weight at least D.",
+      "justification": "The exhaustive cases are J, uG_* for nonzero u, and J+uG_*. Their respective weights are n, at least D, and n-wt(uG_*)>=D.",
+      "reference": "combinatorial-01.json:124, proof lines 183-185",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof-step dependency graph accurately summarizes the full proof.",
+      "justification": "The tail certificate feeds the small-circuit and Fourier bounds, those feed conditional averaging, and expurgation then supplies the final parameters. No proof step assumes the desired code in advance.",
+      "reference": "combinatorial-01.json:125-187",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The status, provenance, classification, theorem statement, and title are consistent with the audited result.",
+      "justification": "The listed source paths exist and conceal no mathematical dependency. The submission appropriately remains a candidate pending this review, while its theorem and title state the verified lower-bound parameters without claiming an exact unknown distance.",
+      "reference": "combinatorial-01.json:189-240",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "combinatorial-01",
+  "source_sha256": "1ca7f208df2d960f1df411d76671dfc5ec4c8772f58bc982404afd3fc421fda7",
+  "summary": "ACCEPT. The submission gives a deterministic, symbolically recoverable binary linear code of exact length 1073741824, dimension 2971, and certified minimum distance at least 535822336. The binomial-tail, small- and large-circuit, conditional-averaging, odd-circuit expurgation, dimension, rate, and distance arguments all pass independent recomputation. The recursion is computationally prohibitive, but the stated target imposes no efficiency or local-explicitness requirement.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 2971,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 2.7669593691825867e-06
+}

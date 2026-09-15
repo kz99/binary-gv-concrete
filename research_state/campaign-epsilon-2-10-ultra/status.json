@@ -1,10 +1,22 @@
 {
   "counts": {
     "queued": 15,
-    "running": 21,
-    "succeeded": 21
+    "running": 22,
+    "succeeded": 22
   },
   "doubly_verified_candidates": [
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 2971,
+      "id": "combinatorial-01",
+      "minimum_distance": 535822336,
+      "rate": 2.7669593691825867e-06,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Canonical conditional-average [2^30,2971,\u2265535822336] code"
+    },
     {
       "accepted_reviews": 1,
       "baseline_beaten": true,
@@ -239,7 +251,7 @@
   "model": "gpt-5.6-sol",
   "promising_candidates": [
     {
-      "accepted_reviews": 0,
+      "accepted_reviews": 1,
       "baseline_beaten": true,
       "dimension": 2971,
       "id": "combinatorial-01",
@@ -443,5 +455,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:18:55Z"
+  "updated_at": "2026-09-15T05:26:29Z"
 }
