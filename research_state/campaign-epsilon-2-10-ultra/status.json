@@ -1,6 +1,6 @@
 {
   "counts": {
-    "queued": 16
+    "queued": 36
   },
   "doubly_verified_candidates": [],
   "leaderboard_objective": {
@@ -9,10 +9,14 @@
     "maximize": "certified_dimension",
     "minimum_distance": 535822336
   },
+  "message_board": {
+    "post_count": 0,
+    "recent_posts": []
+  },
   "model": "gpt-5.6-sol",
   "promising_candidates": [],
   "reasoning_effort": "ultra",
-  "researcher_count": 10,
+  "researcher_count": 30,
   "schema": "binary-gv-campaign-snapshot-v1",
   "target": {
     "block_length": 1073741824,
@@ -23,5 +27,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T04:13:22Z"
+  "updated_at": "2026-09-15T04:18:04Z"
 }

@@ -53,7 +53,7 @@ RESEARCH_SCHEMA = {
         "minimum_distance", "rate", "construction_markdown", "theorem_statement",
         "proof_markdown", "proof_steps", "literature_dependencies", "parameter_ledger",
         "explicitness_audit", "distance_audit", "obstructions", "next_tasks",
-        "source_paths_read", "confidence",
+        "source_paths_read", "discussion_posts", "confidence",
     ],
     "properties": {
         "title": {"type": "string"},
@@ -93,6 +93,15 @@ RESEARCH_SCHEMA = {
         "obstructions": {"type": "array", "items": {"type": "string"}},
         "next_tasks": {"type": "array", "items": {"type": "string"}},
         "source_paths_read": {"type": "array", "items": {"type": "string"}},
+        "discussion_posts": {"type": "array", "maxItems": 3, "items": {
+            "type": "object", "additionalProperties": False,
+            "required": ["kind", "subject", "body_markdown", "references"],
+            "properties": {
+                "kind": {"type": "string", "enum": ["idea", "question", "objection", "request", "reply"]},
+                "subject": {"type": "string"}, "body_markdown": {"type": "string"},
+                "references": {"type": "array", "items": {"type": "string"}},
+            },
+        }},
         "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
     },
 }
@@ -219,18 +228,29 @@ GENIUS_SCHEMA = {
 }
 
 
-DIRECTIONS = [
-    "Audit the exact RM(1,30) baseline and identify deterministic extensions that preserve bias at most 2^-10 while adding dimensions.",
-    "Instantiate explicit small-bias or epsilon-balanced code families at epsilon=2^-10 and length 2^30, exposing every constant, floor, and padding step.",
-    "Study explicit expander-walk and replacement-product constructions, optimizing their exact certified dimension at bias 2^-10.",
-    "Develop algebraic trace, character-sum, or subfield constructions whose every nonzero word has bias at most 2^-10.",
-    "Find structured concatenation or multilevel constructions with a rigorous near-half-distance proof, not a sampling argument.",
-    "Search for the largest concrete dimension attainable at the exact target, including finite parameter optimization of known symbolic constructions.",
-    "Audit known explicit epsilon-balanced-code results for constants strong enough to give a concrete symbolic certificate at this checkpoint.",
-    "Explore Reed--Muller, BCH, algebraic-geometric, and tensor constructions that beat the 31-dimensional affine baseline at the exact target.",
-    "Develop deterministic derandomizations of low-bias linear codes and prove their finite-length parameter losses.",
-    "Synthesize reusable proved lemmas into the highest-dimension concrete code possible and isolate the narrowest missing lemma when no improvement survives.",
-]
+TEAM_DIRECTIONS = {
+    "algebraic": [
+        "Trace and character-sum codes.", "Subfield subcodes and concatenation.",
+        "Algebraic-geometric evaluation codes.", "BCH and cyclic-code bias bounds.",
+        "Reed--Muller extensions.", "Tensor and product constructions.",
+        "Boolean polynomial constructions.", "Explicit Fourier-bias calculations.",
+        "Finite-field lifting and descent.", "Exact parameter optimization of algebraic routes.",
+    ],
+    "combinatorial": [
+        "Explicit small-bias generators.", "Epsilon-balanced code instantiations.",
+        "Expander-walk codes.", "Replacement-product constructions.",
+        "Extractor-based linear codes.", "Derandomized sampler constructions.",
+        "Cayley graph and character constructions.", "Spectral amplification.",
+        "Limited-independence constructions.", "Finite constant optimization of combinatorial routes.",
+    ],
+    "composition": [
+        "Multilevel concatenation.", "Structured inner-code search with proofs.",
+        "Outer-code and alphabet-reduction tradeoffs.", "Direct sums and interleavings.",
+        "Puncturing, shortening, and padding arithmetic.", "Code product transformations.",
+        "Hybrid algebraic-combinatorial constructions.", "Exact finite-length rounding optimization.",
+        "Audit of known explicit constructions at the checkpoint.", "Synthesis of reusable lemmas into a higher-k candidate.",
+    ],
+}
 
 
 ROADMAPS = {
@@ -275,8 +295,8 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
     cfg = value["campaign"]
     if cfg.get("reasoning_effort") != "ultra":
         raise ValueError("campaign.reasoning_effort must be ultra")
-    if int(cfg.get("researcher_count", 0)) < 10:
-        raise ValueError("the campaign must have at least 10 researchers")
+    if int(cfg.get("researcher_count", 0)) != 30:
+        raise ValueError("the campaign must have three groups of ten researchers")
     if int(cfg.get("verifier_count", 0)) != 2:
         raise ValueError("every submission must receive exactly two independent reviews")
     if int(cfg.get("roadmap_count", 0)) < 3:
@@ -312,23 +332,26 @@ class Campaign:
         temp.replace(self.jobs_path)
 
     def initialize(self) -> dict[str, Any]:
-        for name in ("submissions", "reviews", "lemma_book", "roadmaps", "genius", "metadata"):
+        for name in ("submissions", "reviews", "lemma_book", "roadmaps", "genius", "metadata", "message_board"):
             (self.root / name).mkdir(parents=True, exist_ok=True)
         if self.jobs_path.exists():
             return self.status()
         jobs: list[dict[str, Any]] = []
-        for index in range(int(self.cfg["researcher_count"])):
-            jobs.append(self._job(f"researcher-{index + 1:04d}", "researcher", DIRECTIONS[index]))
+        for team, directions in TEAM_DIRECTIONS.items():
+            for index, direction in enumerate(directions, start=1):
+                jobs.append(self._job(
+                    f"{team}-{index:02d}", "researcher", direction, team=team, round_number=1))
         if self.cfg.get("literature_agent_enabled", True):
             jobs.append(self._job(
                 "literature-sota-0001", "literature",
-                "Audit explicit epsilon-balanced-code literature and extract the strongest finite constants and parameter choices for a larger dimension at epsilon=2^-10."))
+                "Audit explicit epsilon-balanced-code literature and extract the strongest finite constants and parameter choices for a larger dimension at epsilon=2^-10.",
+                team="shared", round_number=1))
         for job_id, focus in ROADMAPS.items():
-            jobs.append(self._job(job_id, "roadmap", focus, phase="synthesis"))
+            jobs.append(self._job(job_id, "roadmap", focus, phase="synthesis", team="shared", round_number=1))
         if self.cfg.get("lemma_writer_enabled", True):
-            jobs.append(self._job("lemma-writer-0001", "lemma_writer", "Edit all reusable proof steps into the shared lemma book.", phase="synthesis"))
+            jobs.append(self._job("lemma-writer-0001", "lemma_writer", "Edit all reusable proof steps into the shared lemma book.", phase="synthesis", team="shared", round_number=1))
         if self.cfg.get("genius_enabled", True):
-            jobs.append(self._job("GENIUS", "genius", "Construct the highest-dimension exact leaderboard candidate from all campaign evidence.", phase="genius"))
+            jobs.append(self._job("GENIUS", "genius", "Construct the highest-dimension exact leaderboard candidate from all campaign evidence.", phase="genius", team="shared", round_number=1))
         self._write_jobs(jobs)
         return self.status()
 
@@ -346,17 +369,21 @@ class Campaign:
             while f"researcher-{ordinal:04d}" in existing:
                 ordinal += 1
             job_id = f"researcher-{ordinal:04d}"
-            jobs.append(self._job(job_id, "researcher", DIRECTIONS[(ordinal - 1) % len(DIRECTIONS)]))
+            team_names = tuple(TEAM_DIRECTIONS)
+            team = team_names[(ordinal - 1) % len(team_names)]
+            direction = TEAM_DIRECTIONS[team][(ordinal - 1) % len(TEAM_DIRECTIONS[team])]
+            jobs.append(self._job(job_id, "researcher", direction, team=team, round_number=2))
             existing.add(job_id)
             ordinal += 1
         self._write_jobs(jobs)
         return self.status()
 
     def _job(self, job_id: str, role: str, direction: str, phase: str = "research",
-             dependency: str | None = None) -> dict[str, Any]:
+             dependency: str | None = None, team: str = "shared", round_number: int = 1) -> dict[str, Any]:
         return {
             "id": job_id, "role": role, "direction": direction, "phase": phase,
             "dependency": dependency, "status": "queued", "attempts": 0,
+            "team": team, "round": round_number,
             "model": self.cfg.get("model", "gpt-5.6-sol"),
             "reasoning_effort": "ultra", "error": None,
             "created_at": utc_timestamp(), "updated_at": utc_timestamp(),
@@ -380,6 +407,13 @@ the RM baseline proof, and data/records.json before reasoning.
 
 YOUR FOCUSED DIRECTION:
 {job['direction']}
+
+TEAM: {job.get('team', 'shared')}; ROUND: {job.get('round', 1)}.
+Before reasoning, read the durable submissions, lemma book, roadmaps, and every
+file in the shared message_board directory. Use another team's proved lemma
+when it helps. At the end, put up to three concise, substantive posts in
+discussion_posts: a reusable lemma, a precise obstacle, or a concrete question
+for other teams. Do not post social updates or unsupported claims.
 
 Produce genuine mathematical work.  A leaderboard_submission=true response must
 contain a complete deterministic construction and an academic proof that checks
@@ -484,6 +518,16 @@ you have examined every durable response and review path.
         response, metadata = self.provider.run(job["id"], prompt, schema)
         output = self._output_path(job)
         output.write_text(json.dumps(response, indent=2, sort_keys=True) + "\n")
+        posts = response.get("discussion_posts")
+        if not isinstance(posts, list) and job["role"] == "roadmap":
+            posts = response.get("messages")
+        if isinstance(posts, list) and posts:
+            payload = {
+                "job_id": job["id"], "team": job.get("team", "shared"),
+                "round": job.get("round", 1), "created_at": utc_timestamp(), "posts": posts,
+            }
+            board_path = self.root / "message_board" / f"{job['id']}.json"
+            board_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
         metadata["durable_output"] = str(output)
         (self.root / "metadata" / f"{job['id']}.json").write_text(
             json.dumps(metadata, indent=2, sort_keys=True) + "\n")
@@ -554,6 +598,7 @@ you have examined every durable response and review path.
                 *sorted((self.root / "lemma_book").glob("*.json")),
                 *sorted((self.root / "roadmaps").glob("*.json")),
                 *sorted((self.root / "genius").glob("*.json")),
+                *sorted((self.root / "message_board").glob("*.json")),
             ]
             existing = [path for path in durable if path.exists()]
             if not existing:
@@ -596,7 +641,7 @@ you have examined every durable response and review path.
     def _queue_verifiers(self) -> None:
         jobs = self._read_jobs()
         existing = {job["id"] for job in jobs}
-        for source_path in sorted((self.root / "submissions").glob("researcher-*.json")):
+        for source_path in sorted((self.root / "submissions").glob("*.json")):
             source = json.loads(source_path.read_text())
             if not source.get("leaderboard_submission"):
                 continue
@@ -608,13 +653,55 @@ you have examined every durable response and review path.
                     existing.add(job_id)
         self._write_jobs(jobs)
 
+    def _has_verified_improvement(self) -> bool:
+        for source_path in (self.root / "submissions").glob("*.json"):
+            source = json.loads(source_path.read_text())
+            if (
+                not source.get("leaderboard_submission")
+                or not isinstance(source.get("dimension"), int)
+                or source["dimension"] <= CURRENT_K
+                or source.get("block_length") != N
+                or source.get("minimum_distance", 0) < D
+            ):
+                continue
+            reviews = self.root / "reviews" / source_path.stem
+            accepted = 0 if not reviews.exists() else sum(
+                json.loads(path.read_text()).get("verdict") == "accept"
+                for path in reviews.glob("*.json")
+            )
+            if accepted >= 2:
+                return True
+        return False
+
+    def _queue_next_research_round(self) -> None:
+        jobs = self._read_jobs()
+        next_round = max((int(job.get("round", 1)) for job in jobs), default=0) + 1
+        for team, directions in TEAM_DIRECTIONS.items():
+            for index, direction in enumerate(directions, start=1):
+                jobs.append(self._job(
+                    f"{team}-r{next_round:03d}-{index:02d}", "researcher", direction,
+                    team=team, round_number=next_round))
+        for roadmap_id, focus in ROADMAPS.items():
+            jobs.append(self._job(
+                f"{roadmap_id}-r{next_round:03d}", "roadmap", focus, phase="synthesis",
+                team="shared", round_number=next_round))
+        jobs.append(self._job(
+            f"lemma-writer-r{next_round:03d}", "lemma_writer",
+            "Merge the newest reusable proof steps into the shared lemma book.", phase="synthesis",
+            team="shared", round_number=next_round))
+        jobs.append(self._job(
+            f"GENIUS-r{next_round:03d}", "genius",
+            "Synthesize the highest-dimension exact candidate from all shared evidence.", phase="genius",
+            team="shared", round_number=next_round))
+        self._write_jobs(jobs)
+
     def export_snapshot(self) -> dict[str, Any]:
         if not self.jobs_path.exists():
             return self.initialize()
         jobs = self._read_jobs()
         candidates = []
         verified = []
-        for source_path in sorted((self.root / "submissions").glob("researcher-*.json")):
+        for source_path in sorted((self.root / "submissions").glob("*.json")):
             source = json.loads(source_path.read_text())
             source_id = source_path.stem
             if not source.get("leaderboard_submission") and source.get("result_status") not in {"proved", "conditional"}:
@@ -663,11 +750,27 @@ you have examined every durable response and review path.
                 "gv_dimension_reference": 2_955,
                 "minimum_distance": D,
             },
+            "message_board": self._message_board_snapshot(),
             "promising_candidates": candidates, "doubly_verified_candidates": verified,
         }
         (self.root / "snapshot.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
         (self.root / "status.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
         return payload
+
+    def _message_board_snapshot(self) -> dict[str, Any]:
+        posts: list[dict[str, Any]] = []
+        for path in sorted((self.root / "message_board").glob("*.json")):
+            try:
+                entry = json.loads(path.read_text())
+            except json.JSONDecodeError:
+                continue
+            for post in entry.get("posts", []):
+                if isinstance(post, dict):
+                    posts.append({
+                        "job_id": entry.get("job_id"), "team": entry.get("team"),
+                        "round": entry.get("round"), **post,
+                    })
+        return {"post_count": len(posts), "recent_posts": posts[-12:]}
 
     def status(self) -> dict[str, Any]:
         if not self.jobs_path.exists():
@@ -676,11 +779,20 @@ you have examined every durable response and review path.
 
     def run(self) -> dict[str, Any]:
         self.initialize()
-        self._run_phase({"researcher", "literature"})
-        self._queue_verifiers()
-        self._run_phase({"verifier"})
-        self._run_phase({"lemma_writer", "roadmap"})
-        self._run_phase({"genius"})
+        completed_rounds = 0
+        round_limit = int(self.cfg.get("max_improvement_rounds", 0))
+        while not self._has_verified_improvement():
+            self._run_phase({"researcher", "literature"})
+            self._queue_verifiers()
+            self._run_phase({"verifier"})
+            self._run_phase({"lemma_writer", "roadmap"})
+            self._run_phase({"genius"})
+            if self._has_verified_improvement():
+                break
+            completed_rounds += 1
+            if round_limit and completed_rounds >= round_limit:
+                break
+            self._queue_next_research_round()
         return self.export_snapshot()
 
 

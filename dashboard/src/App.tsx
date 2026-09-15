@@ -20,7 +20,7 @@ import campaignSnapshotSeed from '../../research_state/campaign-epsilon-2-10-ult
 import contributorInstructions from '../../how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md?raw';
 
 type RecordEntry = (typeof snapshot.records)[number];
-type NotebookTab = 'lemmas' | 'directions' | 'proofs' | 'review';
+type NotebookTab = 'lemmas' | 'directions' | 'proofs' | 'discussion' | 'review';
 type CampaignCandidate = {
   id: string;
   title: string;
@@ -39,6 +39,18 @@ type CampaignSnapshot = {
   counts: Record<string, number>;
   promising_candidates: CampaignCandidate[];
   doubly_verified_candidates: CampaignCandidate[];
+  message_board?: {
+    post_count: number;
+    recent_posts: Array<{
+      job_id: string;
+      team: string;
+      round: number;
+      kind: string;
+      subject: string;
+      body_markdown: string;
+      references: string[];
+    }>;
+  };
 };
 
 const N = snapshot.target.blockLength;
@@ -97,7 +109,7 @@ function getRoute() {
   if (!route || route === 'record') return { page: 'record' as const, tab: 'lemmas' as NotebookTab };
   if (route === 'contribute') return { page: 'contribute' as const, tab: 'lemmas' as NotebookTab };
   const [, tab] = route.split('/');
-  const allowed: NotebookTab[] = ['lemmas', 'directions', 'proofs', 'review'];
+  const allowed: NotebookTab[] = ['lemmas', 'directions', 'proofs', 'discussion', 'review'];
   return {
     page: 'research' as const,
     tab: allowed.includes(tab as NotebookTab) ? (tab as NotebookTab) : 'lemmas',
@@ -424,6 +436,7 @@ const notebookTabs: { id: NotebookTab; label: string; icon: typeof BookOpen }[] 
   { id: 'lemmas', label: 'Lemma book', icon: BookOpen },
   { id: 'directions', label: 'Directions', icon: GitBranch },
   { id: 'proofs', label: 'Proof notes', icon: FlaskConical },
+  { id: 'discussion', label: 'Message board', icon: FileText },
   { id: 'review', label: 'Review log', icon: ShieldCheck },
 ];
 
@@ -491,6 +504,34 @@ function ProofNotes() {
   );
 }
 
+function DiscussionBoard({ board }: { board?: CampaignSnapshot['message_board'] }) {
+  const posts = board?.recent_posts ?? [];
+  if (!posts.length) {
+    return (
+      <section className="notebook-list">
+        <article className="notebook-card">
+          <div className="notebook-index">—</div>
+          <div><h2>Message board is ready</h2><p>Teams will post proved lemmas, precise obstacles, and concrete questions here as their work is written into the repository.</p></div>
+        </article>
+      </section>
+    );
+  }
+  return (
+    <section className="notebook-list">
+      {posts.map((post, index) => (
+        <article className="notebook-card" key={post.job_id + '-' + index}>
+          <div className="notebook-index">{post.team}</div>
+          <div>
+            <div className="notebook-title-line"><h2>{post.subject}</h2><span className="status proved">{post.kind}</span></div>
+            <p>{post.body_markdown}</p>
+            <p className="used-by">{post.job_id} · round {post.round}{post.references.length ? ' · ' + post.references.join(', ') : ''}</p>
+          </div>
+        </article>
+      ))}
+    </section>
+  );
+}
+
 function ReviewPolicy() {
   return (
     <div className="review-page">
@@ -545,6 +586,7 @@ function ReviewPolicy() {
 }
 
 function ResearchPage({ tab }: { tab: NotebookTab }) {
+  const { campaign } = useCampaignSnapshot();
   return (
     <main>
       <div className="notebook-header">
@@ -567,6 +609,7 @@ function ResearchPage({ tab }: { tab: NotebookTab }) {
         {tab === 'lemmas' && <LemmaBook />}
         {tab === 'directions' && <Directions />}
         {tab === 'proofs' && <ProofNotes />}
+        {tab === 'discussion' && <DiscussionBoard board={campaign.message_board} />}
         {tab === 'review' && <ReviewPolicy />}
       </div>
     </main>

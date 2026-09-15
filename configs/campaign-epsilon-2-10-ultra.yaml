@@ -3,7 +3,7 @@ campaign_dir: ../research_state/campaign-epsilon-2-10-ultra
 
 campaign:
   operating_objective: maximize_verified_dimension
-  researcher_count: 10
+  researcher_count: 30
   verifier_count: 2
   roadmap_count: 3
   literature_agent_enabled: true
@@ -13,9 +13,10 @@ campaign:
   model: gpt-5.6-sol
   reasoning_effort: ultra
   disable_nested_agents: true
-  max_workers: 3
+  max_workers: 10
   timeout_seconds: 5400
   max_attempts: 3
+  max_improvement_rounds: 0
   retry_seconds: 120
   auto_sync_git: true
   git_remote: origin

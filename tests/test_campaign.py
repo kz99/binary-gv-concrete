@@ -13,7 +13,7 @@ class CampaignTests(unittest.TestCase):
     def test_campaign_is_ultra_and_fixed_target(self):
         config, _ = load_config(ROOT / "configs" / "campaign-epsilon-2-10-ultra.yaml")
         self.assertEqual(config["campaign"]["reasoning_effort"], "ultra")
-        self.assertEqual(config["campaign"]["researcher_count"], 10)
+        self.assertEqual(config["campaign"]["researcher_count"], 30)
         self.assertEqual(config["campaign"]["block_length"], 2**30)
         self.assertEqual(config["campaign"]["minimum_distance"], 2**29 - 2**20)
         self.assertEqual(D, 2**29 - 2**20)
