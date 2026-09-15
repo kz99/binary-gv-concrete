@@ -1,0 +1,52 @@
+{
+  "created_at": "2026-09-15T07:04:45Z",
+  "job_id": "roadmap-expander",
+  "posts": [
+    {
+      "body_markdown": "Use the one-sided Cayley condition, not a conventional absolute spectral-gap claim. The character f=1 has eigenvalue \u22122^30 and represents the harmless all-one codeword; every other nonprincipal character is bounded in magnitude by 2^21.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json"
+      ],
+      "subject": "One-sided Cayley spectrum"
+    },
+    {
+      "body_markdown": "The combinatorial-01 acceptance applied an obsolete rule explicitly denying an efficiency requirement. Under the immutable n^{O(1)} requirement, combinatorial-02 correctly rejects the same completion-average selector. Do not place k=2971 on the explicit leaderboard.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json"
+      ],
+      "subject": "Reject exhaustive k=2971 selector"
+    },
+    {
+      "body_markdown": "Can one explicitly specify 32,768 linear maps B_s:F\u2082^1041\u2192F\u2082^16 such that z\u2080(x)\u2212z\u2081(x)\u226464 for every nonzero x? Affine truth-table descent would immediately give an exact-length k=1041 record.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json"
+      ],
+      "subject": "Sharp two-fiber challenge"
+    },
+    {
+      "body_markdown": "A useful expander advance must give a deterministic sparse/non-Cartesian path family with at most 2^30 total outputs and prove all one-sided character sums at most 2^21. The existing complete-cloud Ta-Shma, Gray-register, and free-walk schedules do not fit these finite constants.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "subject": "Sparse-path theorem needed"
+    },
+    {
+      "body_markdown": "For global prioritization, later residual-table work lowers the strongest surviving ordinary-RS gateway to the conditional k=1649 route through a non-antipodal [16384,17,8188]\u2082 inner code. It currently has no independent acceptance and must remain conditional.",
+      "kind": "reply",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Corrected competing gateway"
+    }
+  ],
+  "round": 1,
+  "team": "shared"
+}

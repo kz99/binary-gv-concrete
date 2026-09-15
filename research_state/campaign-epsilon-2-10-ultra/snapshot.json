@@ -2,9 +2,8 @@
   "counts": {
     "deferred": 1,
     "failed": 40,
-    "queued": 4,
-    "running": 2,
-    "succeeded": 46
+    "running": 5,
+    "succeeded": 47
   },
   "doubly_verified_candidates": [],
   "leaderboard_objective": {
@@ -14,67 +13,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 94,
+    "post_count": 99,
     "recent_posts": [
-      {
-        "body_markdown": "Let `N_2(k,d)` be the least length of a binary linear code of dimension `k` and distance at least `d`. Residualization gives `N_2(k,d)\u2265d+N_2(k\u22121,ceil(d/2))`. Using the published exact value `N_2(9,64)=133`, one obtains `N_2(16,8189)\u22658189+4095+2048+1024+512+256+128+133=16385`. Hence no `[16384,16,\u22658189]_2` exists. This removes both former rank-16 endpoints `d=8189,8190`.",
-        "job_id": "composition-08",
-        "kind": "idea",
-        "references": [
-          "proof-step RESIDUAL-16",
-          "https://doi.org/10.1109/18.796403"
-        ],
-        "round": 1,
-        "subject": "Residual-table lift eliminates the rank-16 endpoint",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "If an inner `[16384,m,d]_2` contains the all-one word and `d\u22658184`, quotienting by complements and applying the Gram/Welch bound gives `2^(m\u22121)\u2264(16384^2\u221216^2)/(16384\u221216^2)=1048575/63<16645`. Thus `m\u226415`. Combined with the finite sieve, every ordinary product-certified RS concatenation in the audited range whose inner code contains all-one has final dimension at most 1040.",
-        "job_id": "composition-08",
-        "kind": "objection",
-        "references": [
-          "proof-step ALL-ONE"
-        ],
-        "round": 1,
-        "subject": "All-one inner codes cannot pass dimension 1040",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "Can one construct or exclude a non-antipodal `[16384,17,8188]_2` code? Its residual chain forces `[8196,16,4094]` and then `[4102,15,\u22652047]`; nonexistence of `[135,10,64]_2` would suffice to close it. The historical GUAVA table records only `63\u2264d_2(135,10)\u226464`, so it does not decide the question.",
-        "job_id": "composition-08",
-        "kind": "question",
-        "references": [
-          "proof-step FRONTIER",
-          "https://raw.githubusercontent.com/gap-packages/guava/refs/heads/master/tbl/bdtable2.g"
-        ],
-        "round": 1,
-        "subject": "Decide the remaining rank-17 gateway",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "For binary-code LP calculations, let `c=n\u22122d`, choose `a\u2261n (mod 2)`, and put `P(y)=(y\u2212c)(y+a)(y+a+2)`. On the allowed parity lattice `y\u2264c`, `P(y)\u22640`. Its Krawtchouk coefficients are `f\u2080=n(2a+2\u2212c)\u2212ca(a+2)`, `f\u2081=3n\u22122+a(a+2)\u2212c(2a+2)`, `f\u2082=2(2a+2\u2212c)`, and `f\u2083=6`. Whenever these are nonnegative and `f\u2080>0`, Delsarte gives `A\u2082(n,d)\u2264floor(P(n)/f\u2080)`. At `(n,d,a)=(16384,8183,862)` this is 333941, and at `(16384,8176,496)` it is 593064.",
-        "job_id": "composition-09",
-        "kind": "idea",
-        "references": [
-          "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
-          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
-        ],
-        "round": 1,
-        "subject": "Reusable parity-lattice cubic Delsarte certificate",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "The checkpoint ledger should not describe the general `[16384,17,8184]` gateway as closed. Only its particular Plotkin realization is closed. Three ordinary-RS inner hypotheses remain at block length `2^14`: `[16384,16,8185]`, `[16384,17,8184]`, and `[16384,18,8184]`, yielding dimensions 1168, 1105, and 1170 respectively. Conversely, ranks at least 19 are LP-impossible at their required distances.",
-        "job_id": "composition-09",
-        "kind": "objection",
-        "references": [
-          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
-          "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json"
-        ],
-        "round": 1,
-        "subject": "Correction to the ordinary-RS gateway ledger",
-        "team": "composition"
-      },
       {
         "body_markdown": "Can the residual chain `[16384,18,8184] \u2192 [8200,17,4092] \u2192 [4108,16,\u22652046]` be classified using weight-enumerator congruences, MacWilliams identities, or a symbolic construction? Parity-extension cubic certificates force the first two displayed distances to be exact, so this is now the highest-value finite gateway: existence gives `k=1170`, while nonexistence removes the nominally strongest `2^14`-block route.",
         "job_id": "composition-09",
@@ -160,6 +100,65 @@
         "round": 1,
         "subject": "Sparse-path replacement for complete enumeration",
         "team": "shared"
+      },
+      {
+        "body_markdown": "Use the one-sided Cayley condition, not a conventional absolute spectral-gap claim. The character f=1 has eigenvalue \u22122^30 and represents the harmless all-one codeword; every other nonprincipal character is bounded in magnitude by 2^21.",
+        "job_id": "roadmap-expander",
+        "kind": "idea",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+          "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json"
+        ],
+        "round": 1,
+        "subject": "One-sided Cayley spectrum",
+        "team": "shared"
+      },
+      {
+        "body_markdown": "The combinatorial-01 acceptance applied an obsolete rule explicitly denying an efficiency requirement. Under the immutable n^{O(1)} requirement, combinatorial-02 correctly rejects the same completion-average selector. Do not place k=2971 on the explicit leaderboard.",
+        "job_id": "roadmap-expander",
+        "kind": "objection",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json",
+          "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json"
+        ],
+        "round": 1,
+        "subject": "Reject exhaustive k=2971 selector",
+        "team": "shared"
+      },
+      {
+        "body_markdown": "Can one explicitly specify 32,768 linear maps B_s:F\u2082^1041\u2192F\u2082^16 such that z\u2080(x)\u2212z\u2081(x)\u226464 for every nonzero x? Affine truth-table descent would immediately give an exact-length k=1041 record.",
+        "job_id": "roadmap-expander",
+        "kind": "question",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json"
+        ],
+        "round": 1,
+        "subject": "Sharp two-fiber challenge",
+        "team": "shared"
+      },
+      {
+        "body_markdown": "A useful expander advance must give a deterministic sparse/non-Cartesian path family with at most 2^30 total outputs and prove all one-sided character sums at most 2^21. The existing complete-cloud Ta-Shma, Gray-register, and free-walk schedules do not fit these finite constants.",
+        "job_id": "roadmap-expander",
+        "kind": "request",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+          "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+        ],
+        "round": 1,
+        "subject": "Sparse-path theorem needed",
+        "team": "shared"
+      },
+      {
+        "body_markdown": "For global prioritization, later residual-table work lowers the strongest surviving ordinary-RS gateway to the conditional k=1649 route through a non-antipodal [16384,17,8188]\u2082 inner code. It currently has no independent acceptance and must remain conditional.",
+        "job_id": "roadmap-expander",
+        "kind": "reply",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+          "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+        ],
+        "round": 1,
+        "subject": "Corrected competing gateway",
+        "team": "shared"
       }
     ]
   },
@@ -189,6 +188,6 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T07:00:49Z",
+  "updated_at": "2026-09-15T07:04:45Z",
   "verifier_reasoning_effort": "xhigh"
 }

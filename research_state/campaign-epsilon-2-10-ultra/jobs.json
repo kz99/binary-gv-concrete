@@ -496,7 +496,7 @@
     "updated_at": "2026-09-15T05:52:35Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Trace, character-sum, subfield-subcode, and algebraic routes maximizing concrete dimension at bias 2^-10.",
@@ -507,12 +507,12 @@
     "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "shared",
-    "updated_at": "2026-09-15T06:50:34Z"
+    "updated_at": "2026-09-15T07:00:51Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Explicit epsilon-balanced and expander-walk routes with finite constants optimized at epsilon=2^-10.",
@@ -523,12 +523,12 @@
     "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 1,
-    "status": "queued",
+    "status": "succeeded",
     "team": "shared",
-    "updated_at": "2026-09-15T06:50:34Z"
+    "updated_at": "2026-09-15T07:04:45Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Structured concatenation, multilevel, and finite parameter-search routes maximizing the certified dimension at the exact target.",
@@ -539,12 +539,12 @@
     "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "shared",
-    "updated_at": "2026-09-15T06:50:34Z"
+    "updated_at": "2026-09-15T07:00:51Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Edit all reusable proof steps into the shared lemma book.",
@@ -555,9 +555,9 @@
     "reasoning_effort": "xhigh",
     "role": "lemma_writer",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "shared",
-    "updated_at": "2026-09-15T06:50:34Z"
+    "updated_at": "2026-09-15T07:00:51Z"
   },
   {
     "attempts": 0,

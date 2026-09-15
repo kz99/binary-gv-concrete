@@ -1,0 +1,429 @@
+{
+  "critical_path": [
+    "explicitness-policy",
+    "bias-criterion",
+    "field-model",
+    "coordinate-model",
+    "inner-affine",
+    "outer-rs",
+    "generator-algorithm",
+    "linear-parameters",
+    "fiber-character-identity",
+    "distance-bound",
+    "exact-distance",
+    "cayley-realization",
+    "terminal-k1040"
+  ],
+  "messages": [
+    {
+      "body_markdown": "Use the one-sided Cayley condition, not a conventional absolute spectral-gap claim. The character f=1 has eigenvalue \u22122^30 and represents the harmless all-one codeword; every other nonprincipal character is bounded in magnitude by 2^21.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json"
+      ],
+      "subject": "One-sided Cayley spectrum"
+    },
+    {
+      "body_markdown": "The combinatorial-01 acceptance applied an obsolete rule explicitly denying an efficiency requirement. Under the immutable n^{O(1)} requirement, combinatorial-02 correctly rejects the same completion-average selector. Do not place k=2971 on the explicit leaderboard.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json"
+      ],
+      "subject": "Reject exhaustive k=2971 selector"
+    },
+    {
+      "body_markdown": "Can one explicitly specify 32,768 linear maps B_s:F\u2082^1041\u2192F\u2082^16 such that z\u2080(x)\u2212z\u2081(x)\u226464 for every nonzero x? Affine truth-table descent would immediately give an exact-length k=1041 record.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json"
+      ],
+      "subject": "Sharp two-fiber challenge"
+    },
+    {
+      "body_markdown": "A useful expander advance must give a deterministic sparse/non-Cartesian path family with at most 2^30 total outputs and prove all one-sided character sums at most 2^21. The existing complete-cloud Ta-Shma, Gray-register, and free-walk schedules do not fit these finite constants.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "subject": "Sparse-path theorem needed"
+    },
+    {
+      "body_markdown": "For global prioritization, later residual-table work lowers the strongest surviving ordinary-RS gateway to the conditional k=1649 route through a non-antipodal [16384,17,8188]\u2082 inner code. It currently has no independent acceptance and must remain conditional.",
+      "kind": "reply",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Corrected competing gateway"
+    }
+  ],
+  "nodes": [
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "AGENTS.md",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json"
+      ],
+      "id": "explicitness-policy",
+      "notes": "Canonical exhaustive search or completion averaging is insufficient without a polynomial-time evaluator and runtime proof.",
+      "statement_markdown": "A qualifying construction must output the complete k\u00d72^30 generator matrix deterministically in n^{O(1)} time.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json"
+      ],
+      "id": "bias-criterion",
+      "notes": "Absolute bias 1/512 is sufficient, but only the upper signed-sum bound is necessary.",
+      "statement_markdown": "For a binary word c of length n=2^30, wt(c)\u2265535,822,336 iff S(c)=\u03a3_j(\u22121)^{c_j}\u22642^21.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json"
+      ],
+      "id": "field-model",
+      "notes": "The submitted Frobenius and Euclidean certificates satisfy Rabin\u2019s criterion.",
+      "statement_markdown": "p(Z)=Z^16+Z^5+Z^3+Z^2+1 is irreducible, so F=F\u2082[Z]/(p) is an explicit copy of F\u2082\u00b9\u2076.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "coordinate-model",
+      "notes": "Order both sets by binary coefficient index.",
+      "statement_markdown": "With \u03b1=Z mod p, set A=span_F\u2082{1,\u03b1,\u2026,\u03b1^14} and Y=F\u2082^15. Then |A\u00d7Y|=2^30 exactly.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "inner-affine",
+      "notes": "For z=\u03a3z_i\u03b1^i, define H(z)_y=z\u2080+\u03a3_{i=1}^{15}z_i y_i.",
+      "statement_markdown": "H:F\u2192F\u2082^Y is a binary-linear injection with image RM(1,15)=[32768,16,16384]\u2082; H(1) is all-one and every other nonzero symbol is balanced.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "coordinate-model"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json"
+      ],
+      "id": "outer-rs",
+      "notes": "Evaluation is injective because 64<|A|.",
+      "statement_markdown": "Evaluation of F[X]_{\u226464} on A is an explicit [32768,65,32704]_{2^16} Reed\u2013Solomon code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-affine",
+        "outer-rs"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "generator-algorithm",
+      "notes": "Rows are indexed by (j,i)\u2208{0,\u2026,64}\u00d7{0,\u2026,15}; row (j,i), column (a,y) equals H(\u03b1^i a^j)_y. Streaming all 1040\u00b7n entries uses a bounded number of 16-bit field operations per entry, hence O(n) time for the fixed parameters, and matches the unavoidable output size \u0398(1040n).",
+      "statement_markdown": "The complete 1040\u00d72^30 generator matrix is deterministically output in n^{O(1)} time.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "coordinate-model",
+        "inner-affine",
+        "outer-rs"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json"
+      ],
+      "id": "linear-parameters",
+      "notes": "Define C(f)_{(a,y)}=H(f(a))_y. Both component encoders are binary-linear and injective.",
+      "statement_markdown": "C={C(f):f\u2208F[X]_{\u226464}} is binary linear of exact length 32768\u00b2=2^30 and dimension 65\u00b716=1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-affine"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json"
+      ],
+      "id": "fiber-character-identity",
+      "notes": "Let N_t(f)=|{a\u2208A:f(a)=t}|.",
+      "statement_markdown": "The signed sum of C(f) is 2^15(N\u2080(f)\u2212N\u2081(f)), and wt(C(f))=2^14(32768\u2212N\u2080(f)+N\u2081(f)).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "bias-criterion",
+        "outer-rs",
+        "fiber-character-identity",
+        "linear-parameters"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json"
+      ],
+      "id": "distance-bound",
+      "notes": "For nonconstant f, both f and f\u22121 have at most 64 roots. Nonzero constants are either all-one or balanced.",
+      "statement_markdown": "Every nonzero f gives S(C(f))\u226464\u00b72^15=2^21, hence every nonzero codeword has weight at least 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "distance-bound"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json"
+      ],
+      "id": "exact-distance",
+      "notes": "Take a polynomial with 64 prescribed roots in A and choose the first nonzero scale avoiding value 1 on all remaining points; fewer than 65,535 scales are forbidden.",
+      "statement_markdown": "A codeword of weight exactly 32704\u00b716384=535,822,336 exists, so d_min(C)=535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "fiber-character-identity",
+        "outer-rs",
+        "linear-parameters"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "id": "balanced-core",
+      "notes": "Impose one binary equation: the \u03b1\u2070 coefficient of the constant polynomial coefficient is zero.",
+      "statement_markdown": "C contains a 1039-dimensional subcode B whose nonzero weights lie in [535,822,336,537,919,488], and C=B\u2295\u27e81^n\u27e9.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "generator-algorithm",
+        "linear-parameters",
+        "fiber-character-identity"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json"
+      ],
+      "id": "cayley-realization",
+      "notes": "Let M=F[X]_{\u226464} as a 1040-dimensional binary space and D={\u2113_{a,y}:\u2113_{a,y}(f)=H(f(a))_y}\u2282M*. The functionals are distinct, nonzero, and span M*. The eigenvalues are n for f=0, \u2212n for f=1, and have magnitude at most 2^21 otherwise.",
+      "statement_markdown": "C is the character code of an explicit connected bipartite Cayley graph of degree 2^30; its nontrivial spectrum gives precisely the required one-sided distance certificate.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "explicitness-policy",
+        "generator-algorithm",
+        "linear-parameters",
+        "distance-bound",
+        "exact-distance",
+        "cayley-realization"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json"
+      ],
+      "id": "terminal-k1040",
+      "notes": "This improves the k=31 baseline by 1009 dimensions. The exact rate is 1040/2^30=65/67,108,864.",
+      "statement_markdown": "There is an explicit, polynomial-time generable binary [1,073,741,824,1040,535,822,336]\u2082 code, equivalently a certified rate 65/2^26.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "bias-criterion"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-03/verifier-1-combinatorial-03.json"
+      ],
+      "id": "complete-bipartite-walk-k91",
+      "notes": "Factorized endpoint Weil sums give correlation at most 1448\u00b2 and distance 535,822,560. It is valid but dominated by k=1040.",
+      "statement_markdown": "The complete-bipartite trace-walk route gives an accepted explicit [2^30,91,\u2265535,822,560]\u2082 code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "complete-bipartite-walk-k91"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json"
+      ],
+      "id": "sparse-one-edge-barrier",
+      "notes": "For ordinary simple regular one-edge lifts at the available power-of-two parameters, the Frobenius trace bound forces normalized \u03bb>1/512. This obstructs the standard scalar spectral certificate, not code-specific cancellation.",
+      "statement_markdown": "A conventional sparse one-edge expander certificate cannot reach the target bias at exact length 2^30.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "bias-criterion"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "id": "wide-replacement-barrier",
+      "notes": "At rank at least 1041, the Ta-Shma complete-output estimate does not contract in the feasible range; the Cohen\u2013Cohen certificate forces at least 1041\u00b7631\u00b3=261,540,414,231 outputs.",
+      "statement_markdown": "The audited complete-output wide-replacement constructions cannot produce k\u22651041 within 2^30 coordinates.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "bias-criterion"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/literature-sota-0001/verifier-1-literature-sota-0001.json"
+      ],
+      "id": "free-walk-no-fit",
+      "notes": "The reviewer found repairable edge-case and hypothesis omissions in the submitted HMZ argument. Only the narrowed claim about the cited complete-output certificate is intended.",
+      "statement_markdown": "Hsieh\u2013Mohanty\u2013Zhang Lemma 2.12 appears to supply no fitting complete-output specialization at bias 1/512, pending the requested finite edge-case repair.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json"
+      ],
+      "id": "odd-circuit-expurgation",
+      "notes": "This algebraic lemma survives independently of the inadmissible matrix selector.",
+      "statement_markdown": "If B\u2282F\u2082^K\\{0} has no odd zero-sum subset, there is a linear functional \u2113 with \u2113(b)=1 for all b\u2208B; ker \u2113 avoids B at a loss of one dimension.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "explicitness-policy",
+        "odd-circuit-expurgation"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json"
+      ],
+      "id": "conditional-average-k2971",
+      "notes": "The finite averaging and distance proof may establish existence, but the entry selector evaluates unrestricted averages over completions and has no n^{O(1)} implementation.",
+      "statement_markdown": "The submitted completion-average construction does not prove an admissible explicit k=2971 code.",
+      "status": "refuted"
+    },
+    {
+      "dependencies": [
+        "bias-criterion",
+        "explicitness-policy"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json"
+      ],
+      "id": "moment-k2955",
+      "notes": "A 4096-wise moment calculation proves that some seed works, but no structural seed or polynomial-time selector is known.",
+      "statement_markdown": "A fixed, compactly certified seed for the stated 4096-wise family would yield an explicit k=2955 target code.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "fiber-character-identity"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "id": "fixed-inner-maximality",
+      "notes": "An explicit 64-set has nonzero reciprocal sum, contradicting the interpolation-pencil identity required by any strict additive supercode containing the degree-64 outer space.",
+      "statement_markdown": "The k=1040 RS outer space has no strict F\u2082-additive extension using the same coordinatewise affine inner encoder.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "bias-criterion"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json"
+      ],
+      "id": "square-convolution-ceiling",
+      "notes": "The 174th-moment argument gives homogeneous dimension at most 784, or 785 after adjoining all-one.",
+      "statement_markdown": "Complete ordered XOR-square convolution cannot improve the k=1040 record.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "bias-criterion"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json"
+      ],
+      "id": "two-fiber-conversion",
+      "notes": "For maps B_s and affine truth-table descent, the signed sum is controlled exactly by the number of seeds mapping x to 0 minus those mapping it to the all-one symbol.",
+      "statement_markdown": "If 32,768 explicit linear maps B_s:F\u2082^K\u2192F\u2082^16 satisfy z\u2080(x)\u2212z\u2081(x)\u226464 for every nonzero x, they produce an explicit [2^30,K,\u2265535,822,336]\u2082 code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "two-fiber-conversion",
+        "fixed-inner-maximality"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json"
+      ],
+      "id": "two-fiber-k1041",
+      "notes": "The maps may not arise as a strict additive extension of the existing RS outer space with its fixed inner encoder.",
+      "statement_markdown": "Construct such a two-fiber family at K=1041, or prove it impossible beyond the already-closed fixed-inner extension class.",
+      "status": "open"
+    },
+    {
+      "dependencies": [
+        "wide-replacement-barrier",
+        "free-walk-no-fit",
+        "sparse-one-edge-barrier"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "id": "sparse-path-frontier",
+      "notes": "Path thinning cannot inherit the complete-cloud norm bound automatically; it needs a new simultaneous all-character argument and an explicit \u226430-bit output index.",
+      "statement_markdown": "Construct a deterministic sparse/non-Cartesian path family of total size 2^30 with every nonzero one-sided character sum at most 2^21.",
+      "status": "open"
+    },
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "competing-rs-k1649",
+      "notes": "This is outside the assigned expander focus but presently has the largest later claimed finite payoff. No inner generator or independent acceptance exists.",
+      "statement_markdown": "A deterministic non-antipodal [16384,17,8188]\u2082 inner code would concatenate to an exact-length target code with k=1649 and distance at least 535,822,720.",
+      "status": "conditional"
+    }
+  ],
+  "progress": 1,
+  "roadmap_id": "roadmap-expander",
+  "summary": "All 32 submissions and 16 reviews were audited. The strongest admissible proved endpoint is the independently accepted RS\u2013affine/Cayley-character code with exact parameters [2^30,1040,535,822,336]\u2082 and rate 65/2^26; its 1039-dimensional core is genuinely 1/512-balanced. No audited expander-walk construction beats it. Complete-cloud schedules fail finite length/rank constraints, the k=2971 conditional-average selector violates polynomial-time explicitness, and the main open expander frontier is an explicitly indexed sparse path family with a fresh all-character proof.",
+  "target_statement": "Construct deterministically an explicit binary linear code C\u2282F\u2082^(2^30) whose complete generator matrix is output in n^{O(1)} time, with d_min(C)\u2265535,822,336, maximizing k and in particular proving k\u226532.",
+  "title": "Explicit \u03b5-balanced and expander-walk roadmap at \u03b5=2^-10"
+}
