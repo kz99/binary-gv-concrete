@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 24,
-    "succeeded": 18
+    "running": 23,
+    "succeeded": 19
   },
   "doubly_verified_candidates": [
     {
@@ -40,6 +40,18 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "An exact [2^30,1040,535822336] RS\u2013RM finite-field descent code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "combinatorial-07",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Cayley-character certificate for an exact [2^30,1040,535822336] code"
     },
     {
       "accepted_reviews": 1,
@@ -335,7 +347,7 @@
       "title": "Exact [2^30,1040,535822336] RS\u2013Reed\u2013Muller concatenation"
     },
     {
-      "accepted_reviews": 0,
+      "accepted_reviews": 1,
       "baseline_beaten": true,
       "dimension": 1040,
       "id": "combinatorial-07",
@@ -431,5 +443,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:15:44Z"
+  "updated_at": "2026-09-15T05:17:46Z"
 }

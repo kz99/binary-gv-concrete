@@ -1,0 +1,252 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical SHA-256 from sorted-key JSON serialization; it equals the supplied immutable digest. The raw-file digest differs only because of formatting.",
+    "Reimplemented polynomial arithmetic over F_2. The two Frobenius congruences and Euclidean remainder chain recompute exactly; gcd tests through degree 8 found no possible proper factor.",
+    "Tried to collide two coordinate functionals. Constants force y=y', after which the polynomials zX force a=a'.",
+    "Tried to find an encoder kernel. The inner truth-table map is injective, and a degree-at-most-64 polynomial cannot vanish at all 32768 distinct evaluation points.",
+    "Checked every inner-symbol type: 0 gives a zero block, 1 gives an all-one block, and every other field value gives a balanced block.",
+    "Derived the exact weight formula wt(c_P)=2^14(32768-N_0(P)+N_1(P)); repeated roots cannot increase N_0 beyond 64, while occurrences of 1 only increase weight.",
+    "Checked all constant edge cases. P=0 is the zero word, P=1 is all-one, and every other nonzero constant has weight 2^29.",
+    "Checked the bipartition character with eigenvalue -2^30; it corresponds to the all-one word and therefore cannot violate the one-sided distance requirement.",
+    "Evaluated the prescribed 64-root witness independently in the explicit field. It has N_0=64 and N_1=0; under natural coefficient-integer order, the first permissible scale is already mu=1.",
+    "Tested the neighboring degree-65 extension. A scaled 65-root polynomial has weight 535805952, below the target, confirming that degree 64 is the sharp safe cutoff for this architecture.",
+    "Recomputed the relative-difference-set valuation argument, including the cases s=0 and possible even lambda; it forces a=30 and s<=30.",
+    "Recomputed the full residual-code chain to [9,5,4], checked the translated sum-free-set contradiction, and independently verified the product threshold ceil(535822336/16382)=32708 and dimension ceiling 1037."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The source has the supplied immutable campaign identity.",
+      "justification": "SHA-256 of the parsed JSON serialized with sorted keys is 3784a06822c136fdd997f0d0cf81f2fe14b5a371b7acb1c89ede222ebdc50b2b.",
+      "reference": "combinatorial-07.json:1-263",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The headline fields assert a dimension-1040 exact-length baseline improvement with high confidence.",
+      "justification": "The audited proof establishes n=1073741824, k=1040, and exact minimum distance 535822336; thus 1040 exceeds the immutable verified baseline 31 by 1009.",
+      "reference": "combinatorial-07.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed polynomial defines F_(2^16).",
+      "justification": "Independent arithmetic gives Z^(2^8)=Z^8+Z^7+Z^3+Z and Z^(2^16)=Z modulo p. The gcd calculation has successive nonzero remainders Z^2+1 and 1, satisfying Rabin's degree-16 test.",
+      "reference": "combinatorial-07.json:5, field definition",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A, Y, and M have the claimed sizes and dimensions.",
+      "justification": "Irreducibility makes 1,alpha,...,alpha^15 a basis. Hence A and Y each have 2^15 elements, while M has 65 field coefficients and binary dimension 65*16=1040.",
+      "reference": "combinatorial-07.json:5, evaluation and message spaces",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Each h_y and ell_(a,y) is binary linear.",
+      "justification": "Coefficient extraction, evaluation at fixed a, and the displayed dot product are all F_2-linear in the polynomial message.",
+      "reference": "combinatorial-07.json:5, functional definitions",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The 2^30 connection elements are distinct and nonzero.",
+      "justification": "Equality on all constants identifies y. Equality on zX then gives h_y(z(a-a'))=0 for every z; if a differs from a', multiplication is bijective and contradicts h_y(1)=1. Also every functional evaluates to 1 on the constant polynomial 1.",
+      "reference": "combinatorial-07.json:5, definition of D",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Cayley graph is deterministic, simple, undirected, and has degree 2^30.",
+      "justification": "D is a genuine set of |A||Y|=2^30 nonzero elements. Every element of the elementary abelian group is self-inverse, so D=-D.",
+      "reference": "combinatorial-07.json:5, Cayley graph claim",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed character code is deterministic and uses no length adjustment or sampling.",
+      "justification": "Its coordinates are symbolically indexed by the explicitly ordered pair set A x Y, and its entries are fixed algebraic evaluations. No puncturing, shortening, padding, repetition, or random object occurs.",
+      "reference": "combinatorial-07.json:5, final construction",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The one-sided Cayley-spectrum criterion in the first discussion post is correct.",
+      "justification": "For a character word, summing (-1) over its coordinates gives n-2wt. Therefore wt>=2^29-2^20 is equivalent to the signed sum being at most 2^21. A value -n produces the all-one word and is harmless.",
+      "reference": "combinatorial-07.json:7-16",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The relative-difference-set discussion post gives the correct ambient-dimension ceiling.",
+      "justification": "Coset injectivity gives a>=30. Valuations give v_2(lambda)+s=30, and cancellation gives 2^a-1 dividing 2^30-1, hence a divides 30. Thus a=30 and a+s<=60.",
+      "reference": "combinatorial-07.json:17-25",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The dimension-17 inner/product-distance discussion post is correct in its stated scope.",
+      "justification": "Griesmer excludes distance 16384; residualization excludes 16383 through the impossible [9,5,4] code. With inner distance at most 16382, a length-32768 outer product-distance certificate requires distance at least 32708, so Singleton limits its dimension to 61 and the final binary dimension to 1037.",
+      "reference": "combinatorial-07.json:26-35",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every statement in the distance audit is correct.",
+      "justification": "Affine balance gives the three inner sums, hence lambda_P=2^15(N_0-N_1). Nonconstant P and P-1 each have at most 64 roots; constants are handled separately. The resulting lower bound is attained by the scaled 64-root polynomial.",
+      "reference": "combinatorial-07.json:37-43",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The explicitness audit correctly describes the construction.",
+      "justification": "The modulus, bases, evaluation set, messages, functionals, and coordinate labels are fixed. The permissible scale is a minimum in a fixed basis order; independently, mu=1 works under the natural coefficient-integer convention. Any fastest-varying coordinate convention is merely a fixed permutation and conceals no mathematical choice.",
+      "reference": "combinatorial-07.json:45-50",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The leaderboard and minimum-distance fields are accurate.",
+      "justification": "The independently verified code has exact parameters [1073741824,1040,535822336]_2, so it is a legitimate baseline-beating leaderboard candidate.",
+      "reference": "combinatorial-07.json:52 and 79",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Rabin dependency is cited and applied with the required hypotheses.",
+      "justification": "The modulus is monic of degree 16, the 2^16 Frobenius congruence holds, and the sole prime divisor of 16 requires exactly the verified 2^8 gcd test. The bibliographic data match the [Rabin paper](https://epubs.siam.org/doi/10.1137/0209024).",
+      "reference": "combinatorial-07.json:53-59",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The affine-balance dependency is correct and applicable.",
+      "justification": "For z outside {0,1}, at least one of z_1,...,z_15 is nonzero, so y maps to h_y(z) as a nonconstant affine Boolean function and has zero signed sum. The local proof establishes the stated lemma.",
+      "reference": "combinatorial-07.json:60-65",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The relative-difference-set group-ring identity and counting formula are correctly cited.",
+      "justification": "The standard definition gives RR^(-1)=K*1+lambda(G-N), and coefficient summation gives K(K-1)=lambda(|G|-|N|). Normality of N is automatic in an elementary abelian group. This agrees with [Dukes-Ling, Section 1](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v24i3p64/pdf/).",
+      "reference": "combinatorial-07.json:66-70",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Griesmer and Singleton dependencies have the required linearity hypotheses.",
+      "justification": "The inner code is binary linear and the stated outer code is finite-field linear. The invoked bounds agree with the original [Griesmer](https://doi.org/10.1147/RD.45.0532) and [Singleton](https://doi.org/10.1109/TIT.1964.1053661) results. The residual lemma used between them is also valid: puncturing outside a word of weight w<2d has kernel exactly its span and residual distance at least d-floor(w/2).",
+      "reference": "combinatorial-07.json:72-77",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed next tasks are workflow or future-research items, not unresolved proof dependencies.",
+      "justification": "The complete symbolic construction and proof certificate are already present. Persistence and dashboard validation do not affect mathematical correctness.",
+      "reference": "combinatorial-07.json:80-84",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The difference-set and relative-difference-set obstruction summaries are accurate.",
+      "justification": "The ordinary case s=0 forces the degenerate whole-group set in ambient dimension 30; the relative case has ambient dimension at most 60. Neither approaches dimension 1040.",
+      "reference": "combinatorial-07.json:86-89",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The dimension-17 product obstruction summary is accurate.",
+      "justification": "It is explicitly about a length-32768 inner code and a product-distance route. Within that scope, distance 16383 is impossible and the final dimension is at most 1037.",
+      "reference": "combinatorial-07.json:90",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The bipartite-spectrum caveat is necessary and correct.",
+      "justification": "Every connection element takes value 1 on the constant polynomial 1, so the associated character has eigenvalue -2^30. Its codeword is all-one; excluding it from the nontrivial absolute bound is correct.",
+      "reference": "combinatorial-07.json:91",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The core parameter-ledger entries are arithmetically correct.",
+      "justification": "2^16=65536, |A|=|Y|=32768, their product is 1073741824, 65*16=1040, 64*2^15=2097152, and (2^30-2^21)/2=535822336. The exact rate reduces to 65/67108864.",
+      "reference": "combinatorial-07.json:93-128",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The ancillary parameter-ledger entries are arithmetically correct.",
+      "justification": "The RDS equation yields a=30 and s<=30. Also 535822336=16382*32707+16262, so the required outer distance is 32708; Singleton gives 61 and 17*61=1037.",
+      "reference": "combinatorial-07.json:129-138",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The theorem and field-certificate sections establish the advertised fixed field.",
+      "justification": "The displayed Rabin conditions were independently recomputed, and no omitted prime-divisor test remains for degree 16.",
+      "reference": "combinatorial-07.json:140, Theorem and Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Cayley-set, length, connectedness, and dimension proof is sound.",
+      "justification": "Distinctness and nonzeroness establish the degree. The inner map is injective, and the polynomial root bound makes the encoder injective. Thus C has dimension 1040 and D spans M*, making the graph connected.",
+      "reference": "combinatorial-07.json:140, Cayley set, length, and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The character-spectrum calculation proves the distance lower bound for every nonzero word.",
+      "justification": "The exact eigenvalue formula covers all symbols. Constants 1 and z outside {0,1} have weights n and n/2 respectively; every nonconstant has lambda_P<=2^21 and therefore weight at least 535822336.",
+      "reference": "combinatorial-07.json:140, Character spectrum and distance",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submitted lower bound is the exact minimum distance.",
+      "justification": "For 64 prescribed roots, g is nonzero elsewhere on A. At most 32704 of 65535 nonzero scales create a value 1, so a permissible scale gives N_0=64 and N_1=0. Its word has weight exactly 535822336.",
+      "reference": "combinatorial-07.json:140, exact-distance witness",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The full relative-difference-set proof is correct.",
+      "justification": "Coset injectivity, coefficient counting, 2-adic valuation, and Mersenne divisibility are all applied correctly and yield ambient binary dimension at most 60.",
+      "reference": "combinatorial-07.json:140, Relative-difference-set obstruction",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The full dimension-17 obstruction proof is correct.",
+      "justification": "The repeated residual parameters are forced by Griesmer equality. A [9,5,4] parity-check matrix would give a 9-element set S in F_2^4 disjoint from x+S for x in S, contradicting 18<=16. The subsequent Singleton calculation is exact.",
+      "reference": "combinatorial-07.json:140, Dimension-17 product obstruction",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The field-model, Cayley-set, and encoder-injective proof steps have justified proved status.",
+      "justification": "Their abbreviated proofs accurately summarize the complete arguments, and their dependency order is noncircular.",
+      "reference": "combinatorial-07.json:141-166",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The block-character, spectrum, minimum-distance, and distance-exact proof steps have justified proved status.",
+      "justification": "Affine balance, root bounds, the weight/eigenvalue identity, and the deterministic scaling witness jointly establish both the universal lower bound and equality.",
+      "reference": "combinatorial-07.json:167-205",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The two ancillary obstruction proof steps have justified proved status.",
+      "justification": "The RDS valuation proof and the residual/Griesmer/Singleton proof are correct. The phrase inner/product-distance architecture supplies the necessary scope for the latter.",
+      "reference": "combinatorial-07.json:206-219",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The numerical rate and proved-status metadata are accurate.",
+      "justification": "1040/2^30=65/67108864=9.685754776000977e-7, exactly the parsed binary64 value. No conditional premise remains in the headline theorem.",
+      "reference": "combinatorial-07.json:221-223",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is provenance metadata and contains no hidden construction dependency.",
+      "justification": "The listed local paths are present, the two directories marked empty are empty, and the external paper is accessible. The proof itself identifies its actual dependencies.",
+      "reference": "combinatorial-07.json:224-258",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class, theorem statement, and title report the result honestly.",
+      "justification": "The fixed connection set has cardinality 2^30, its code has exact parameters [2^30,1040,535822336]_2, and 1040 exceeds the immutable baseline dimension 31. It ties the separately submitted 1040-dimensional candidate rather than claiming to exceed it.",
+      "reference": "combinatorial-07.json:260-262",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "combinatorial-07",
+  "source_sha256": "3784a06822c136fdd997f0d0cf81f2fe14b5a371b7acb1c89ede222ebdc50b2b",
+  "summary": "ACCEPT. The submission gives a deterministic binary linear code with exact parameters [1073741824,1040,535822336]_2. The field certificate, exact length, injectivity and dimension, character-spectrum argument, equality witness, rate, cited hypotheses, ancillary obstruction calculations, and baseline classification all pass independent verification. Minor ordering and scope wording could be polished but conceal no mathematical dependency and require no repair.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}
