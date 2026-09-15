@@ -1,0 +1,217 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Reimplemented polynomial arithmetic over GF(2). The four displayed Frobenius residues, the three Rabin gcds, and X^(2^30) \u2261 X all recompute correctly.",
+    "Tested whether a nonzero allowed P could be an Artin\u2013Schreier coboundary or give a constant trace word. Its odd-order pole at infinity precludes this, and the character bound is strictly below q.",
+    "Checked the endpoint degrees: d=1 gives genus 0 and S(P)=0; d=65 gives genus 32 and the worst certified correlation 2^21.",
+    "Checked both b values and the exceptional cases P=0,b=0 and P=0,b=1. They give respectively the zero and all-one words.",
+    "Tried the worst sign of S(P) in the weight identity. Both signs still give weight at least (2^30\u22122^21)/2=535822336.",
+    "Recomputed the ancillary degree-67 layer: its generic guarantee is 535789568, exactly 32768 short, while its parameter dimension would be 1021.",
+    "Independently counted the narrow-sense BCH designed-distance complement as 1+30+195+10=236 and checked the repeated-root cyclic obstruction."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The headline construction has block length 2^30, claimed dimension 991, and beats the dimension-31 baseline.",
+      "justification": "The quotient field and evaluation set are explicitly fixed. The later irreducibility, injectivity, and distance arguments validate these headline parameters; 991>31.",
+      "reference": "algebraic-04.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The reusable odd-trace lemma gives dimension m(D+1)/2+1 and distance q/2\u2212(D\u22121)sqrt(q)/2 under (D\u22121)sqrt(q)<q.",
+      "justification": "Every nonzero reduced polynomial has odd degree at most D, so Hasse\u2013Weil gives correlation at most (D\u22121)sqrt(q). The strict inequality rules out a kernel, proving the stated dimension.",
+      "reference": "algebraic-04.json:8-16",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Exact-length cyclic codes have k\u22643, and the stated primitive BCH designed-distance route has dimension at most 236.",
+      "justification": "For N=2^30, X^N\u22121=(X+1)^N. If k\u22654, the code contains (X+1)^(N\u22124), of weight 2^wt2(N\u22124)=2^28. For the BCH claim, counting binary cyclotomic rotations outside the required defining set gives 1+30+195+10=236.",
+      "reference": "algebraic-04.json:17-25",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Adding the exponent-67 layer gives dimension 1021 but the generic genus-33 estimate misses the target by 2^15; a fixed coefficient could add one bit under the proposed stronger bound.",
+      "justification": "The 67 cyclotomic coset has size 30 and is disjoint from the earlier exponents. Moreover, 66\u00b72^15=2162688 gives weight 2^29\u221233\u00b72^15=535789568, whose shortfall is 32768. A binary switch on one fixed coefficient would raise 991 to 992.",
+      "reference": "algebraic-04.json:26-34",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero coefficient polynomial has an odd degree d\u226465 and defines a nontrivial Artin\u2013Schreier cover.",
+      "justification": "Distinct permitted monomials have odd exponents. A function h^2+h has even pole order at each pole, so it cannot represent a polynomial having one odd-order pole at infinity.",
+      "reference": "algebraic-04.json:36-37",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The smooth Artin\u2013Schreier model has genus (d\u22121)/2\u226432 and one rational point above infinity.",
+      "justification": "Infinity is totally ramified in the separable degree-two cover. Riemann\u2013Hurwitz with different exponent d+1 gives genus (d\u22121)/2, and total ramification over the rational infinity place leaves residue degree one.",
+      "reference": "algebraic-04.json:38",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Hasse\u2013Weil gives |S(P)|\u2264(d\u22121)sqrt(q)\u22642^21.",
+      "justification": "For the smooth geometrically connected curve, the affine fibers contribute q+S(P) points and the unique infinity point gives q+1+S(P). Thus |S(P)|\u22642g sqrt(q)\u226464\u00b72^15=2097152.",
+      "reference": "algebraic-04.json:39",
+      "verdict": "valid"
+    },
+    {
+      "claim": "For either constant b, the weight is at least 535822336.",
+      "justification": "Summing (\u22121)^c gives q\u22122wt(c)=(\u22121)^bS(P), hence wt=(q\u2212(\u22121)^bS(P))/2\u2265(2^30\u22122^21)/2=535822336.",
+      "reference": "algebraic-04.json:40",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The P=0 cases complete the nonzero-word audit.",
+      "justification": "The b=0 word is zero and the b=1 word is all-one of weight 2^30. Together with P\u22600, these cases exhaust the parameter space.",
+      "reference": "algebraic-04.json:41",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction is deterministic and symbolically recoverable.",
+      "justification": "The irreducible modulus, polynomial basis, coordinate ordering, 33 exponents, coefficient fields, and binary constant are all fixed. The final code uses no sampling, padding, shortening, or puncturing.",
+      "reference": "algebraic-04.json:43-48",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The object is a leaderboard submission.",
+      "justification": "It meets the immutable length and distance and has certified dimension 991, strictly exceeding 31.",
+      "reference": "algebraic-04.json:50",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Voloch supports the odd trace representation and Carlitz\u2013Uchiyama bound for the stated BCH parameters.",
+      "justification": "For m=30, t=33, \u03b4=67 and 2t\u22121=65<2^15+1. The paper records odd trace-polynomial representatives of degree at most 2t\u22121, the deviation bound (t\u22121)2^(m/2), and dimension mt in this range. See [Voloch (2001)](https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf). The submitted finite proof is also independent of this citation.",
+      "reference": "algebraic-04.json:51-57",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The certified minimum-distance field is 535822336.",
+      "justification": "This is exactly 2^29\u22122^20=(1/2\u22122^\u221210)2^30 and follows from the audited character-sum bound.",
+      "reference": "algebraic-04.json:59",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed next tasks correctly distinguish verification, publication, and the unresolved degree-67 question.",
+      "justification": "These are workflow statements and make no additional mathematical assumption in the submitted theorem.",
+      "reference": "algebraic-04.json:60-64",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The generic degree-67 bound is 535789568, short by 32768, and Serre's refinement gives no gain.",
+      "justification": "The arithmetic recomputes exactly. Since q=2^30 is a square, floor(2sqrt(q))=2sqrt(q), so the Serre form equals the ordinary Hasse\u2013Weil bound.",
+      "reference": "algebraic-04.json:65-66",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The one-pole Hasse\u2013Weil proof route caps the present reduced polynomial space at k=991.",
+      "justification": "The target forces g\u226432, hence reduced odd pole order at most 65. Modulo h^2+h, the positive-degree directions are the 33 odd monomials, each with a 30-bit coefficient, plus one constant bit.",
+      "reference": "algebraic-04.json:67",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Any target-meeting cyclic code of exact length 2^30 has dimension at most 3.",
+      "justification": "The repeated-root argument and the explicit weight-2^28 word for every k\u22654 are correct.",
+      "reference": "algebraic-04.json:68",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The parity-extended primitive narrow-sense BCH designed-distance route has maximum dimension 236.",
+      "justification": "The required odd designed distance is 535822335. An exact cyclotomic-rotation count leaves 236 exponent positions outside the defining set; larger designed distance cannot increase dimension.",
+      "reference": "algebraic-04.json:69",
+      "verdict": "valid"
+    },
+    {
+      "claim": "All parameter-ledger values are correct.",
+      "justification": "The recomputed values are q=1073741824, 33 monomials, k=991, g\u226432, |S|\u22642097152, d\u2265535822336, and exact rate 991/2^30=9.22940671443939208984375e\u22127.",
+      "reference": "algebraic-04.json:71-106",
+      "verdict": "valid"
+    },
+    {
+      "claim": "X^30+X+1 is irreducible over GF(2).",
+      "justification": "Independent GF(2) arithmetic reproduced the residues at exponents 2^6, 2^10, 2^15 and 2^30. The first three residues plus X have gcd 1 with p, while the final residue is X, satisfying Rabin's criterion for prime divisors 2,3,5 of 30.",
+      "reference": "algebraic-04.json:108, Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The evaluation image is a binary linear code of exact length 2^30.",
+      "justification": "The field has exactly 2^30 elements, every field element occurs once as a coordinate, and evaluation followed by absolute trace is GF(2)-linear in all parameters.",
+      "reference": "algebraic-04.json:108, Construction and linearity",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The character-sum proof applies to every nonzero permitted polynomial.",
+      "justification": "Odd degree ensures a geometrically nontrivial one-pole Artin\u2013Schreier cover. Its genus and rational-point formula meet all Hasse\u2013Weil hypotheses, including the d=1 endpoint.",
+      "reference": "algebraic-04.json:108, Character-sum bound",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The parameter map is injective and the dimension is 991.",
+      "justification": "A nonzero P producing a constant trace word would force |S(P)|=q, contradicting |S(P)|\u22642^21<q. Distinct monomial degrees make P=0 equivalent to all a_i=0, and b supplies one independent bit.",
+      "reference": "algebraic-04.json:108, Dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero codeword satisfies the claimed distance.",
+      "justification": "The exact weight identity handles both signs and both b values for P\u22600; P=0,b=1 is all-one. Linearity converts this nonzero-weight bound into minimum distance.",
+      "reference": "algebraic-04.json:108, Minimum distance",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Puncturing the x=0 coordinate of the b=0 subcode yields the standard dual-BCH trace code of designed distance 67.",
+      "justification": "Evaluation on F* with odd exponents 1 through 65 is the standard trace representation for \u03b4=2\u00b733+1. Voloch's dimension formula gives 30\u00b733=990, matching the independently proved trace-subcode dimension.",
+      "reference": "algebraic-04.json:108, final paragraph",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The five structured proof steps accurately summarize the proof and its dependencies.",
+      "justification": "Each status is supported by the detailed proof: field, linearity/length, Artin\u2013Schreier bound, injectivity/dimension, then minimum distance. No circular dependency occurs.",
+      "reference": "algebraic-04.json:109-154",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The JSON rate is the correctly rounded value of 991/2^30.",
+      "justification": "Exact division gives 0.000000922940671443939208984375, which rounds to 9.229406714439392e\u22127.",
+      "reference": "algebraic-04.json:156",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The research direction and proved status accurately describe the result.",
+      "justification": "The proof is an augmented dual-BCH trace construction certified directly by Artin\u2013Schreier character sums, and no conditional lemma remains in the claimed [n,k,d] result.",
+      "reference": "algebraic-04.json:157-158",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is provenance metadata rather than a hidden proof dependency.",
+      "justification": "The mathematical proof is contained in the submission. The listed repository paths exist, and contemporaneous timestamps are consistent with the noted directories being empty during the researcher's audit.",
+      "reference": "algebraic-04.json:159-177",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class, theorem statement, and title correctly report the certified code.",
+      "justification": "The audited parameters are [1073741824,991,\u2265535822336]_2, so leaderboard_candidate and baseline_beaten are honest classifications.",
+      "reference": "algebraic-04.json:179-181",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited JSON.",
+      "justification": "Applying the campaign's canonical hash\u2014SHA-256 of JSON serialized with sorted keys\u2014recomputes exactly to 9475c22c34114c44f8d9f2634ad03ba9e89a536450108efa7404ab473bd88a67.",
+      "reference": "algebraic-04.json:1-182",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "algebraic-04",
+  "source_sha256": "9475c22c34114c44f8d9f2634ad03ba9e89a536450108efa7404ab473bd88a67",
+  "summary": "ACCEPT. The submission gives a deterministic binary linear [1073741824,991,\u2265535822336]_2 code. The field certificate, exact length, injectivity, Artin\u2013Schreier/Hasse\u2013Weil hypotheses, every nonzero parameter case, rate, ancillary arithmetic, and baseline classification all pass independently. No unresolved mathematical gap remains.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 991,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.229406714439392e-07
+}

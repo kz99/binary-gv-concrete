@@ -1,0 +1,229 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let `p(U)=U^16+U^5+U^3+U^2+1`, let `F=F_2[U]/(p)`, and write `\u03b8=U mod p`. Every `z\u2208F` has unique coordinates `z=\u03a3_{i=0}^{15} z_i \u03b8^i`.\n\nUse the 32,768-point evaluation set\n\n`A={\u03a3_{i=0}^{14} a_i \u03b8^i : a_i\u2208F_2}`.\n\nFor `z\u2208F`, define its binary affine encoding\n\n`H(z)=(z_15+\u03a3_{i=0}^{14} z_i y_i)_{y\u2208F_2^15}`.\n\nThus `H` is an explicit linear bijection from `F` to `RM(1,15)`, with parameters `[32768,16,16384]_2`.\n\nFor each polynomial `f\u2208F[X]` of degree at most 64, define\n\n`c_f=(H(f(a)))_{a\u2208A}`.\n\nOrder field coefficients, points of `A`, and inner positions by their increasing binary indices. Set `C={c_f:deg(f)\u226464}`. This is the concatenation of a shortened Reed\u2013Solomon code `[32768,65,32704]_{2^16}` with `RM(1,15)`. No padding, shortening after concatenation, or random choice occurs.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "An independent audit confirms the algebraic-03 candidate. The field polynomial `U^16+U^5+U^3+U^2+1` passes the displayed Frobenius/gcd certificate, and a degree-64 root polynomial can be scaled deterministically to avoid the unique all-one inner symbol. Hence the binary minimum distance is exactly, rather than merely at least, 535,822,336.",
+      "kind": "reply",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "field",
+        "distance-exact"
+      ],
+      "subject": "Independent certificate for k=1040"
+    },
+    {
+      "body_markdown": "For 32,768 equal blocks with alphabet size `2^16`, any argument using only inner minimum weight 16,384 requires outer block distance at least 32,704. Singleton then gives `|C_out|\u2264(2^16)^65`, hence binary dimension at most 1,040. The submitted RS outer code attains this scoped ceiling.",
+      "kind": "objection",
+      "references": [
+        "outer-rs",
+        "inner-rm",
+        "singleton-bound"
+      ],
+      "subject": "Block-distance concatenation ceiling"
+    },
+    {
+      "body_markdown": "Can a binary-linear, non-`F_{2^16}`-linear outer subcode of dimension above 1,040 force every block-support-32,703 word to use enough copies of the unique full-weight inner symbol? Such a weighted-symbol construction is the precise route not excluded by the block-Singleton ceiling.",
+      "kind": "question",
+      "references": [
+        "block-distance-concatenation-ceiling",
+        "degree-65-obstruction"
+      ],
+      "subject": "Weighted-symbol extension beyond 1040?"
+    }
+  ],
+  "distance_audit": [
+    "A nonzero polynomial of degree at most 64 has at most 64 roots among the 32,768 distinct points of A, so at least 32,704 outer symbols are nonzero.",
+    "For nonzero z\u2208F, H(z) has weight 16,384 unless z=\u03b8^15, in which case it is the all-one word of weight 32,768.",
+    "Thus every nonzero concatenated word has weight at least 32,704\u00b716,384=(2^15-2^6)2^14=2^29-2^20=535,822,336.",
+    "Equality is attained by the deterministic scaled root polynomial constructed in the proof, so the stated minimum distance is exact."
+  ],
+  "explicitness_audit": [
+    "The degree-16 field polynomial is explicit and accompanied by a finite repeated-squaring and Euclidean-algorithm irreducibility certificate.",
+    "The polynomial basis, 32,768 evaluation points, 32,768 inner positions, and both coordinate orderings are specified by binary indices.",
+    "The message space is exactly the 65 unrestricted coefficients of a degree-at-most-64 polynomial over F.",
+    "The minimum-weight witness uses an explicitly specified 64-point subspace and the lexicographically first admissible nonzero scalar.",
+    "There are no floors, padding coordinates, sampled objects, or hidden constituent-code choices."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A nonconstant affine Boolean function on F_2^15.",
+      "result": "Its truth table has weight 2^14.",
+      "source": "data/records.json, lemma rm-affine-balance",
+      "used_for": "The exact inner-code minimum weight."
+    },
+    {
+      "hypotheses": "An `[N,K,D]_{2^m}` outer code concatenated through the affine truth-table realization of its alphabet.",
+      "result": "The binary concatenation has parameters `[N2^(m-1),mK,\u2265D2^(m-2)]_2`.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+      "used_for": "Cross-checking the concatenation calculation; all required details are reproved here."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Send the candidate for an independent verifier to recompute the field certificate, dimension, and exact-distance witness.",
+    "Persist the proof as an under-review note and add the reusable concatenation lemma and record when a write-capable campaign step is available.",
+    "After persistence, run `node scripts/validate-data.mjs` and the dashboard build.",
+    "Investigate weighted or generalized concatenations that escape the proved equal-block Singleton ceiling."
+  ],
+  "obstructions": [
+    "Simply enlarging the outer polynomial space to degree at most 65 fails. A degree-65 polynomial with 65 prescribed roots can be scaled so its other 32,703 values avoid \u03b8^15, producing binary weight 32,703\u00b716,384=535,805,952, which misses the target by 16,384.",
+    "Any 32,768-block concatenation certified solely through inner minimum weight 16,384 needs outer distance 32,704; the general Singleton bound then caps its binary dimension at 1,040.",
+    "The degree-at-most-65 odd trace-polynomial construction in the shared algebraic submissions has dimension 991, so it does not improve this candidate."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "deg p=16",
+      "quantity": "outer alphabet",
+      "value": "|F|=2^16=65,536"
+    },
+    {
+      "derivation": "15-dimensional F_2 coefficient hyperplane",
+      "quantity": "outer length",
+      "value": "N=2^15=32,768"
+    },
+    {
+      "derivation": "65 polynomial coefficients",
+      "quantity": "outer dimension",
+      "value": "K=65 over F"
+    },
+    {
+      "derivation": "N-64",
+      "quantity": "outer minimum distance",
+      "value": "D=32,704"
+    },
+    {
+      "derivation": "affine truth tables on F_2^15",
+      "quantity": "inner parameters",
+      "value": "[32,768,16,16,384]_2"
+    },
+    {
+      "derivation": "32,768\u00b732,768",
+      "quantity": "binary block length",
+      "value": "2^30=1,073,741,824"
+    },
+    {
+      "derivation": "65\u00b716",
+      "quantity": "binary dimension",
+      "value": "1,040"
+    },
+    {
+      "derivation": "32,704\u00b716,384",
+      "quantity": "binary minimum distance",
+      "value": "535,822,336"
+    },
+    {
+      "derivation": "1040/2^30",
+      "quantity": "exact rate",
+      "value": "65/67,108,864 = 0.00000096857547760009765625"
+    },
+    {
+      "derivation": "(2^29-2^20)/2^30",
+      "quantity": "relative distance",
+      "value": "511/1024"
+    }
+  ],
+  "proof_markdown": "# Shortened Reed\u2013Solomon code with affine binary inner code\n\n## Theorem\n\nThere is a symbolically deterministic binary linear code with exact parameters\n\n`[1,073,741,824, 1,040, 535,822,336]_2`.\n\nIts rate is `1040/2^30=65/2^26`.\n\n## Field certificate\n\nLet `p(U)=U^16+U^5+U^3+U^2+1`. Repeated squaring modulo `p` gives\n\n`U^256 \u2261 U^8+U^7+U^3+U` and `U^65536 \u2261 U`.\n\nPut `h=U^8+U^7+U^3`, the residue of `U^256+U`. Direct Euclidean division gives\n\n`p=(U^8+U^7+U^6+U^5+U^4+U^2+1)h+(U^2+1)`,\n\n`h=(U^6+U^5+U^4+U^3+U^2+1)(U^2+1)+1`.\n\nThus `gcd(p,U^256+U)=1`, while `p` divides `U^65536+U`. Every irreducible factor of `p` consequently has degree dividing 16, but none has degree dividing 8. Since the only divisor of 16 not dividing 8 is 16 and `deg p=16`, the polynomial `p` is irreducible. Hence `F=F_2[U]/(p)` is the stated field.\n\n## Construction and binary linearity\n\nWrite `\u03b8=U mod p` and represent every `z\u2208F` uniquely as `z=\u03a3_{i=0}^{15}z_i\u03b8^i`. Let\n\n`A=span_{F_2}{1,\u03b8,\u2026,\u03b8^14}`.\n\nFor `z\u2208F`, define\n\n`H(z)_y=z_15+\u03a3_{i=0}^{14}z_i y_i`, for `y\u2208F_2^15`.\n\nCoefficient extraction and affine evaluation are binary linear. Moreover, `H(z)=0` implies first `z_15=0` by taking `y=0`, and then every `z_i=0` by taking the unit vectors. Thus `H` is injective.\n\nFor `f\u2208F[X]` with `deg f\u226464`, concatenate the blocks `H(f(a))`, one for every `a\u2208A`. Evaluation, coefficient extraction, and `H` are binary linear, so their image `C` is binary linear.\n\n## Exact length and dimension\n\nThere are `|A|=2^15` outer blocks and each block has `2^15` coordinates. Therefore\n\n`n=2^15\u00b72^15=2^30=1,073,741,824`.\n\nThe polynomial message space has dimension 65 over `F`, hence binary dimension `65\u00b716=1040`. Its encoder is injective: if every binary block vanishes, injectivity of `H` gives `f(a)=0` for every `a\u2208A`. A nonzero polynomial of degree at most 64 cannot have 32,768 distinct roots, so `f=0`. Therefore `dim_F2(C)=1040`.\n\n## Minimum-distance lower bound\n\nLet `f` be nonzero. It has at most 64 roots in `A`; hence at least `32768-64=32704` blocks contain nonzero symbols.\n\nIf `z\u2208F` is nonzero and some coefficient among `z_0,\u2026,z_14` is nonzero, `H(z)` is a nonconstant affine truth table and has exactly `2^14` ones. If all those coefficients vanish, then `z=\u03b8^15` and `H(z)` is the all-one word of weight `2^15`. Every nonzero block therefore has weight at least `2^14`, and\n\n`wt(c_f)\u226532704\u00b72^14=(2^15-2^6)2^14=2^29-2^20=535,822,336`.\n\nThis covers every nonzero codeword.\n\n## Attainment\n\nLet `B=span_{F_2}{1,\u03b8,\u2026,\u03b8^5}\u2282A`, so `|B|=64`, and put\n\n`f_0(X)=\u220f_{b\u2208B}(X-b)`.\n\nFor `a\u2208A\\B`, `f_0(a)\u22600`. The forbidden set\n\n`S={\u03b8^15/f_0(a):a\u2208A\\B}`\n\nhas at most 32,704 elements, strictly fewer than the 65,535 elements of `F*`. Choose the nonzero scalar `\u03bb` of least binary index outside `S`. Then `\u03bbf_0` vanishes exactly on `B`, while every other value is nonzero and different from `\u03b8^15`. Its 64 zero blocks have weight zero and its remaining 32,704 blocks each have weight exactly `2^14`. Consequently\n\n`wt(c_{\u03bbf_0})=32704\u00b72^14=535,822,336`.\n\nThe lower bound is attained, so this is the exact minimum distance. Every choice is finite and deterministic. The candidate should remain under review until independently accepted.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field",
+      "proof": "The displayed Frobenius congruences and Euclidean identities force every irreducible factor of p to have degree 16; since p itself has degree 16, it is irreducible.",
+      "statement": "The specified quotient is the field F_(2^16).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field"
+      ],
+      "id": "inner-rm",
+      "proof": "Coefficient extraction followed by affine truth-table evaluation is injective and binary linear; nonconstant affine words are balanced and \u03b8^15 gives the all-one word.",
+      "statement": "H(F) has exact parameters [32768,16,16384]_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field"
+      ],
+      "id": "outer-rs",
+      "proof": "Evaluation of degree-at-most-64 polynomials at 32,768 distinct points is injective; the root bound gives distance at least 32,704, and a polynomial with 64 prescribed roots shows equality.",
+      "statement": "The outer code has exact parameters [32768,65,32704] over F_(2^16).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-rm",
+        "outer-rs"
+      ],
+      "id": "length-dimension",
+      "proof": "Concatenation gives 32,768 blocks of length 32,768, and injectivity gives binary dimension 16\u00b765.",
+      "statement": "C is binary linear of length 2^30 and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-rm",
+        "outer-rs",
+        "length-dimension"
+      ],
+      "id": "distance-lower",
+      "proof": "At least 32,704 blocks are nonzero and every such block weighs at least 16,384.",
+      "statement": "Every nonzero word has weight at least 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field",
+        "distance-lower"
+      ],
+      "id": "distance-exact",
+      "proof": "The deterministic scaled polynomial with root set B has 32,704 nonzero values, all avoiding the unique full-weight inner symbol, so every surviving block has weight exactly 16,384.",
+      "statement": "The minimum distance equals 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-rm",
+        "distance-lower"
+      ],
+      "id": "template-ceiling",
+      "proof": "The target requires outer block distance 32,704 when only inner minimum weight is used; Singleton gives at most (2^16)^65 outer words.",
+      "statement": "The equal-block, minimum-inner-weight concatenation template has binary dimension at most 1040.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Subfield subcodes and concatenation: shortened Reed\u2013Solomon outer code with affine Reed\u2013Muller inner code",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "schemas/record.schema.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (no files at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (no files at final audit)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There exists a symbolically deterministic binary linear code with exact parameters [2^30,1040,535822336]_2.",
+  "title": "Exact [2^30,1040,535822336] Reed\u2013Solomon\u2013affine concatenation"
+}

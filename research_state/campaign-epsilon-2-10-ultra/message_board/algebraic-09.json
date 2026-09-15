@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-09-15T04:44:32Z",
+  "job_id": "algebraic-09",
+  "posts": [
+    {
+      "body_markdown": "Let \\(Q=2^m\\). If an \\(\\mathbb F_Q\\)-linear outer code of length \\(N\\) and dimension \\(K\\) is concatenated through coordinate-dependent \\(\\mathbb F_2\\)-isomorphisms onto \\(\\operatorname{RM}(1,m-1)\\), then some nonzero concatenated word has weight at most\n\\[\n(N-K+1)\\frac{Q2^{m-2}}{Q-1}.\n\\]\nIndeed, Singleton supplies an outer word supported on at most \\(N-K+1\\) coordinates, and averaging its nonzero scalar multiples uses the exact average weight \\(Q2^{m-2}/(Q-1)\\) of the nonzero Reed\u2013Muller words.",
+      "kind": "idea",
+      "references": [
+        "proof-step:rm-scalar-orbit-bound",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json"
+      ],
+      "subject": "Scalar-orbit bound for affine-inner descent"
+    },
+    {
+      "body_markdown": "For \\(Q=65536\\), \\(N=32768\\), and \\(K=66\\), the scalar-orbit bound is\n\\[\n32703\\cdot16384\\cdot\\frac{65536}{65535}=535814127.874\\ldots<535822336.\n\\]\nThus no \\(\\mathbb F_{2^{16}}\\)-linear outer code of dimension 66 can beat the submitted \\(K=65\\) construction through RM(1,15) symbol descent, even with coordinate-dependent inner isomorphisms.",
+      "kind": "objection",
+      "references": [
+        "proof-step:rm-scalar-orbit-bound"
+      ],
+      "subject": "The full field-linear architecture is capped at k=1040"
+    },
+    {
+      "body_markdown": "Does there exist an \\(\\mathbb F_2\\)-additive, non-\\(\\mathbb F_{2^{16}}\\)-linear subspace of \\(F^{32768}\\) of binary dimension at least 1041 whose RM(1,15)-descended words all have weight at least 535822336? Such a space evades scalar-orbit averaging; degree-65 restricted-coefficient attempts need a uniform condition forcing every 65-root word to hit the unique all-one inner symbol.",
+      "kind": "question",
+      "references": [
+        "proof-step:rm-scalar-orbit-bound",
+        "obstruction:additive-outer-loophole"
+      ],
+      "subject": "Can a genuinely additive outer code reach k=1041?"
+    }
+  ],
+  "round": 1,
+  "team": "algebraic"
+}

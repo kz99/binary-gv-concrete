@@ -1,0 +1,198 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let $p(T)=T^{30}+T+1$ and $K=\\mathbb F_2[T]/(p)$, with $\\alpha=T\\bmod p$. Define the absolute trace $\\operatorname{Tr}(z)=\\sum_{r=0}^{29}z^{2^r}$ and $J=\\{1,3,5,\\ldots,65\\}$. For $c\\in\\mathbb F_2$ and coefficients $a_j\\in K$, set\n\n$$w_{c,a}(x)=c+\\operatorname{Tr}\\!\\left(\\sum_{j\\in J}a_jx^j\\right),\\qquad x\\in K.$$\n\nThe code $C$ consists of all vectors $(w_{c,a}(x))_{x\\in K}$. Order coordinates by writing $x=\\sum_{i=0}^{29}u_i\\alpha^i$ and sorting the integer $\\sum_i u_i2^i$ increasingly. Thus every field, exponent, coefficient space, evaluation point, and coordinate order is deterministic. No puncturing, shortening, padding, or sampling is used.",
+  "dimension": 991,
+  "discussion_posts": [
+    {
+      "body_markdown": "For $K=\\mathbb F_{2^m}$ and odd $D<2^m$, evaluation of $c+\\operatorname{Tr}(\\sum_{1\\le j\\le D,\\ j\\text{ odd}}a_jx^j)$ gives a binary linear code of dimension $1+m(D+1)/2$ and certified distance at least $2^{m-1}-(D-1)2^{m/2-1}$. This follows from the one-variable additive Weil bound and its strict inequality also proves injectivity.",
+      "kind": "idea",
+      "references": [
+        "proof step weil",
+        "proof step dimension"
+      ],
+      "subject": "Reusable trace-polynomial code lemma"
+    },
+    {
+      "body_markdown": "The generic Artin\u2013Schreier conductor method stops exactly at 991 dimensions here. Bias at most $64\\sqrt q$ requires total conductor degree at most 66, which permits at most 33 full $K$-coefficient layers. Degree 67 gives only $d\\ge q/2-33\\sqrt q=535,789,568$, falling short by 32,768. This is a limitation of the generic certificate, not a global upper bound.",
+      "kind": "objection",
+      "references": [
+        "candidate rm-trace-weil-65",
+        "Artin\u2013Schreier conductor calculation"
+      ],
+      "subject": "Exact generic-Weil barrier beyond degree 65"
+    },
+    {
+      "body_markdown": "Can one identify a nonzero coefficient subspace for the $x^{67}$ layer such that every degree-67 coset over the full odd-degree-at-most-65 space has Walsh magnitude at most $64\\sqrt q$? Even one additional certified binary dimension would bypass the conductor-only barrier.",
+      "kind": "question",
+      "references": [
+        "candidate rm-trace-weil-65"
+      ],
+      "subject": "Uniform saving for a degree-67 extension"
+    }
+  ],
+  "distance_audit": [
+    "For every nonzero polynomial part, its largest exponent is an odd integer $d\\le65$, so the additive-character Weil bound applies without an Artin\u2013Schreier exceptional case.",
+    "The maximum Walsh magnitude is $(65-1)\\sqrt{2^{30}}=64\\cdot2^{15}=2^{21}$.",
+    "Weight is $(2^{30}-W)/2$, hence at least $2^{29}-2^{20}=535,822,336$.",
+    "The case with zero polynomial part is separate: $c=1$ gives the all-one word of weight $2^{30}$.",
+    "The proof certifies a lower bound on $d_{\\min}$; it does not claim that a word attaining the bound exists."
+  ],
+  "explicitness_audit": [
+    "The field is concretely $\\mathbb F_2[T]/(T^{30}+T+1)$; a Rabin irreducibility certificate is included in the proof.",
+    "The 33 exponents are exactly the odd integers from 1 through 65.",
+    "Every coefficient ranges over the full explicitly represented field; the constant $c$ ranges over $\\mathbb F_2$.",
+    "The binary constant is deliberately outside the trace because $\\operatorname{Tr}_{K/\\mathbb F_2}(1)=0$ for extension degree 30.",
+    "Coordinates are all $2^{30}$ field elements in a specified polynomial-basis order.",
+    "No random choice, search-dependent object, padding, floor, puncturing, or hidden parameter occurs.",
+    "The current durable submissions, lemma book, roadmaps, and message board contained no files when audited."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A nontrivial additive character of $\\mathbb F_q$ and a polynomial of degree $d<q$ with $\\gcd(d,\\operatorname{char}\\mathbb F_q)=1$.",
+      "result": "The character sum has absolute value at most $(d-1)\\sqrt q$.",
+      "source": "E. Kowalski, [The Riemann Hypothesis for sums in one variable over finite fields, Theorem 3.2](https://people.math.ethz.ch/~kowalski/exponential-sums-elementary.pdf).",
+      "used_for": "Uniform Walsh bound, minimum distance, and injectivity of evaluation."
+    },
+    {
+      "hypotheses": "A monic degree-$n$ polynomial over a finite field, with the Frobenius congruence at $n$ and gcd checks for every prime divisor of $n$.",
+      "result": "Rabin's criterion certifies irreducibility.",
+      "source": "M. O. Rabin, [Probabilistic Algorithms in Finite Fields](https://doi.org/10.1137/0209024), SIAM Journal on Computing 9 (1980), 273\u2013280.",
+      "used_for": "Certifying that $T^{30}+T+1$ defines $\\mathbb F_{2^{30}}$."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Persist this note as `proofs/rm-trace-weil-65.md` and add an under-review record to `data/records.json` in a write-capable campaign step.",
+    "Have an independent campaign verifier recompute the Rabin residues, dimension, and Artin\u2013Schreier point-count argument.",
+    "Run `node scripts/validate-data.mjs` and the dashboard build after the record and proof are written.",
+    "Investigate nongeneric degree-67 subspaces capable of a uniform $2\\sqrt q$ improvement over Hasse\u2013Weil."
+  ],
+  "obstructions": [
+    "Generic degree 67 yields Walsh bound $66\\sqrt q=2,162,688$, exceeding the allowed $64\\sqrt q=2,097,152$. Its resulting distance certificate misses the target by 32,768.",
+    "More generally, for a full 2-reduced rational-function family on $\\mathbb P^1$, conductor-only Hasse\u2013Weil accounting permits at most 33 field-coefficient layers under this bias budget, hence at most 991 binary dimensions including the constant. This is only a method obstruction.",
+    "The full quadratic Reed\u2013Muller layer cannot be added: it contains low-rank quadratic forms with bias far above $2^{-10}$. A six-layer Delsarte\u2013Goethals subspace is valid but has only dimension 211 and is already contained in this 991-dimensional construction."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "$|K|=2^{30}$",
+      "quantity": "block length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "$J=\\{1,3,\\ldots,65\\}$",
+      "quantity": "number of field coefficients",
+      "value": "33"
+    },
+    {
+      "derivation": "$1+33\\cdot30$",
+      "quantity": "binary dimension",
+      "value": "991"
+    },
+    {
+      "derivation": "$991/2^{30}$",
+      "quantity": "rate",
+      "value": "0.000000922940671443939208984375"
+    },
+    {
+      "derivation": "$(65-1)\\sqrt{2^{30}}=64\\cdot2^{15}$",
+      "quantity": "maximum certified Walsh magnitude",
+      "value": "2,097,152"
+    },
+    {
+      "derivation": "$(2^{30}-2^{21})/2$",
+      "quantity": "certified minimum distance",
+      "value": "535,822,336"
+    },
+    {
+      "derivation": "$535,822,336/2^{30}$",
+      "quantity": "certified relative distance",
+      "value": "511/1024"
+    },
+    {
+      "derivation": "$\\max_{1\\le j\\le65}\\operatorname{wt}_2(j)=\\operatorname{wt}_2(63)$",
+      "quantity": "containing Reed\u2013Muller order",
+      "value": "6"
+    }
+  ],
+  "proof_markdown": "# Degree-65 trace-polynomial Reed\u2013Muller subcode\n\n## Theorem\n\nThere is a deterministic binary linear code with parameters\n\n$$[2^{30},991,\\ge 535{,}822{,}336]_2.$$\n\nIts rate is $991/2^{30}=0.000000922940671443939208984375$.\n\n## Field certificate\n\nSet $p(T)=T^{30}+T+1$. To certify irreducibility, let $r_j=T^{2^j}\\bmod p$, computed by $r_0=T$ and repeated squaring. Direct reduction gives\n\n$$r_6=T^6+T^4,$$\n$$r_{10}=T^9+T^8+T^7+T^4,$$\n$$r_{15}=T^{27}+T^{26}+T^{24}+T^{21}+T^{20}+T^{17}+T^{15}+T^{14}+T^{12}+T^8,$$\n$$r_{30}=T.$$\n\nWriting $h_j=r_j+T$, the following B\u00e9zout congruences are directly checkable:\n\n$$(T^4+T+1)p\\equiv1\\pmod {h_6},$$\n$$(T^8+T^6+T^5+T^2+1)p\\equiv1\\pmod {h_{10}},$$\n$$Ah_{15}\\equiv1\\pmod p,$$\n\nwhere\n\n$$A=T^{28}+T^{25}+T^{24}+T^{20}+T^{18}+T^{16}+T^{12}+T^9+T^2+T.$$\n\nThus $p$ is coprime to $T^{2^j}-T$ for $j=6,10,15$. Together with $r_{30}=T$, these are exactly Rabin's checks for the prime divisors $5,3,2$ of 30. Hence $p$ is irreducible and $K=\\mathbb F_2[T]/(p)$ has exactly $2^{30}$ elements.\n\n## Construction and linearity\n\nLet $\\alpha=T\\bmod p$, let $\\operatorname{Tr}(z)=\\sum_{r=0}^{29}z^{2^r}$, and put $J=\\{1,3,\\ldots,65\\}$. For $c\\in\\mathbb F_2$ and $a_j\\in K$, define\n\n$$P_a(X)=\\sum_{j\\in J}a_jX^j,\n\\qquad w_{c,a}=(c+\\operatorname{Tr}(P_a(x)))_{x\\in K}.$$\n\nThe coordinate order is the increasing binary-integer order of the coefficient vectors of $x$ in the basis $1,\\alpha,\\ldots,\\alpha^{29}$. Let $C$ be the set of all $w_{c,a}$. Trace, polynomial evaluation, and coefficient addition are $\\mathbb F_2$-linear, so $C$ is binary linear. There is one coordinate for every $x\\in K$, giving exact length $2^{30}$.\n\n## Character-sum lemma\n\nIf $P\\in K[X]$ has positive odd degree $d$, then\n\n$$\\left|\\sum_{x\\in K}(-1)^{\\operatorname{Tr}(P(x))}\\right|\\le(d-1)\\sqrt{|K|}.$$\n\nFor completeness, consider the smooth projective normalization of $y^2+y=P(x)$. Odd degree rules out $P=R^2+R$ over an algebraic closure: a finite pole of $R$ would survive with even order, while a polynomial $R$ would make $R^2+R$ have even degree. The affine curve is smooth because its derivative with respect to $y$ is 1. At infinity the degree-two Artin\u2013Schreier extension is totally ramified. If $t=x^{-1}$ and $w(t)=2$, then $w(y)=-d$; the local uniformizer $t^{(d+1)/2}y$ shows that the different exponent is $d+1$. Riemann\u2013Hurwitz therefore gives genus $g=(d-1)/2$, and there is one rational point above infinity.\n\nFor each $u\\in K$, the equation $y^2+y=u$ has two solutions precisely when $\\operatorname{Tr}(u)=0$, and none otherwise. Hence, with $S(P)=\\sum_x(-1)^{\\operatorname{Tr}(P(x))}$,\n\n$$\\#C(K)=|K|+1+S(P).$$\n\nHasse\u2013Weil gives $|S(P)|\\le2g\\sqrt{|K|}=(d-1)\\sqrt{|K|}$. This is also the standard one-variable additive Weil bound cited below.\n\n## Exact dimension\n\nThe parameter space $\\mathbb F_2\\oplus K^{33}$ has binary dimension $1+33\\cdot30=991$. It remains to prove injectivity. Suppose $w_{c,a}=0$. Evaluation at $x=0$ gives $c=0$. If some $a_j$ were nonzero, let $d$ be the largest such odd exponent. Then $1\\le d\\le65$, and the zero word would imply $S(P_a)=2^{30}$. The character-sum lemma instead gives\n\n$$|S(P_a)|\\le(d-1)2^{15}\\le64\\cdot2^{15}=2^{21}<2^{30},$$\n\na contradiction. Thus every $a_j=0$, proving injectivity and $\\dim C=991$.\n\n## Minimum distance\n\nFor any parameter tuple,\n\n$$\\operatorname{wt}(w_{c,a})=\n\\frac{2^{30}-(-1)^cS(P_a)}2.$$\n\nIf $P_a\\ne0$, the lemma yields\n\n$$\\operatorname{wt}(w_{c,a})\\ge\n\\frac{2^{30}-2^{21}}2\n=2^{29}-2^{20}\n=535{,}822{,}336.$$\n\nIf $P_a=0$, the only nonzero word has $c=1$ and weight $2^{30}$. Hence every nonzero word meets the target and\n\n$$d_{\\min}(C)\\ge535{,}822{,}336\n=\\left(\\frac12-2^{-10}\\right)2^{30}.$$\n\n## Reed\u2013Muller relation\n\nThe $j=1$ coefficient and $c$ give every affine Boolean function, so $\\operatorname{RM}(1,30)\\subset C$. If $j=\\sum_r2^r$, the map $x\\mapsto x^j$ is a product of $\\operatorname{wt}_2(j)$ Frobenius-linear maps. Therefore $\\operatorname{Tr}(a_jx^j)$ has algebraic degree at most $\\operatorname{wt}_2(j)$. The largest binary weight among $1\\le j\\le65$ is six, attained at $j=63$. Consequently\n\n$$\\operatorname{RM}(1,30)\\subset C\\subseteq\\operatorname{RM}(6,30),$$\n\nso this is a genuine Reed\u2013Muller extension of the verified baseline.\n\n## References\n\nThe character-sum theorem appears as Theorem 3.2 in E. Kowalski, [The Riemann Hypothesis for sums in one variable over finite fields](https://people.math.ethz.ch/~kowalski/exponential-sums-elementary.pdf). The irreducibility criterion is from M. O. Rabin, [Probabilistic Algorithms in Finite Fields](https://doi.org/10.1137/0209024), SIAM Journal on Computing 9 (1980), 273\u2013280.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field",
+      "proof": "The repeated-squaring residues and three displayed B\u00e9zout congruences satisfy Rabin's degree-30 criterion.",
+      "statement": "$T^{30}+T+1$ is irreducible over $\\mathbb F_2$, so the chosen quotient is $\\mathbb F_{2^{30}}$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field"
+      ],
+      "id": "construction",
+      "proof": "Absolute trace and evaluation are $\\mathbb F_2$-linear, and coordinates range once over every field element in an explicit order.",
+      "statement": "The construction is a deterministic binary linear code of exact length $2^{30}$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field"
+      ],
+      "id": "weil",
+      "proof": "The normalization of $y^2+y=P(x)$ has genus $(d-1)/2$, one rational point at infinity, and point count $q+1+S(P)$; Hasse\u2013Weil gives the stated bound.",
+      "statement": "Every nonzero odd-degree polynomial $P$ of degree $d$ satisfies $|S(P)|\\le(d-1)\\sqrt q$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "construction",
+        "weil"
+      ],
+      "id": "dimension",
+      "proof": "The parameter space has dimension 991. A nonzero tuple in the evaluation kernel would produce $|S(P)|=2^{30}$, contradicting $|S(P)|\\le2^{21}$.",
+      "statement": "The evaluation map is injective and $\\dim C=991$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "weil",
+        "dimension"
+      ],
+      "id": "distance",
+      "proof": "The weight/character-sum identity and $|S(P)|\\le2^{21}$ give weight at least $(2^{30}-2^{21})/2$; the constant-only case has full weight.",
+      "statement": "$d_{\\min}(C)\\ge535,822,336$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "construction"
+      ],
+      "id": "rm-containment",
+      "proof": "Each Frobenius power is linear and every chosen exponent has binary weight at most six; the exponent-one layer plus the external constant supplies all affine functions.",
+      "statement": "$\\operatorname{RM}(1,30)\\subset C\\subseteq\\operatorname{RM}(6,30)$.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.229406714439392e-07,
+  "research_direction": "Reed--Muller extensions via degree-65 trace-polynomial and dual-BCH subcodes",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ (empty)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "The explicitly ordered evaluations of $c+\\operatorname{Tr}(\\sum_{j=1,3,\\ldots,65}a_jx^j)$ over $\\mathbb F_{2^{30}}$ form a deterministic binary linear code with parameters $[2^{30},991,\\ge535,822,336]_2$.",
+  "title": "Degree-65 trace-polynomial Reed\u2013Muller subcode"
+}

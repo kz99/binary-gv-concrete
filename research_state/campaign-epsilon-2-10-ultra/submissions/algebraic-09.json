@@ -1,0 +1,202 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let\n\\[\np(T)=T^{16}+T^5+T^3+T^2+1,\\qquad F=\\mathbb F_2[T]/(p),\n\\]\nand let \\(\\theta=T\\bmod p\\). Define the deterministic evaluation set\n\\[\nV=\\left\\{\\sum_{i=0}^{14}u_i\\theta^i:u_i\\in\\mathbb F_2\\right\\},\n\\qquad |V|=2^{15},\n\\]\nordered by the binary integer \\(\\sum_i u_i2^i\\).\n\nThe outer code is the shortened Reed\u2013Solomon code\n\\[\nA=\\{(P(v))_{v\\in V}:P\\in F[Z],\\ \\deg P\\le64\\}.\n\\]\nFor \\(a=\\sum_{i=0}^{15}a_i\\theta^i\\in F\\), define\n\\[\n\\phi(a)=\\left(a_0+\\sum_{i=1}^{15}a_ix_i\\right)_{x\\in\\mathbb F_2^{15}},\n\\]\nwith \\(x\\) in binary-integer order. This is an explicit \\(\\mathbb F_2\\)-linear isomorphism from \\(F\\) onto \\(\\operatorname{RM}(1,15)\\).\n\nApply the shared affine-inner concatenation lemma from `algebraic-03`:\n\\[\nC=\\{(\\phi(P(v)))_{v\\in V}:\\deg P\\le64\\}.\n\\]\nThere is no padding, puncturing, shortening, or random choice in the final binary construction.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "Let \\(Q=2^m\\). If an \\(\\mathbb F_Q\\)-linear outer code of length \\(N\\) and dimension \\(K\\) is concatenated through coordinate-dependent \\(\\mathbb F_2\\)-isomorphisms onto \\(\\operatorname{RM}(1,m-1)\\), then some nonzero concatenated word has weight at most\n\\[\n(N-K+1)\\frac{Q2^{m-2}}{Q-1}.\n\\]\nIndeed, Singleton supplies an outer word supported on at most \\(N-K+1\\) coordinates, and averaging its nonzero scalar multiples uses the exact average weight \\(Q2^{m-2}/(Q-1)\\) of the nonzero Reed\u2013Muller words.",
+      "kind": "idea",
+      "references": [
+        "proof-step:rm-scalar-orbit-bound",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json"
+      ],
+      "subject": "Scalar-orbit bound for affine-inner descent"
+    },
+    {
+      "body_markdown": "For \\(Q=65536\\), \\(N=32768\\), and \\(K=66\\), the scalar-orbit bound is\n\\[\n32703\\cdot16384\\cdot\\frac{65536}{65535}=535814127.874\\ldots<535822336.\n\\]\nThus no \\(\\mathbb F_{2^{16}}\\)-linear outer code of dimension 66 can beat the submitted \\(K=65\\) construction through RM(1,15) symbol descent, even with coordinate-dependent inner isomorphisms.",
+      "kind": "objection",
+      "references": [
+        "proof-step:rm-scalar-orbit-bound"
+      ],
+      "subject": "The full field-linear architecture is capped at k=1040"
+    },
+    {
+      "body_markdown": "Does there exist an \\(\\mathbb F_2\\)-additive, non-\\(\\mathbb F_{2^{16}}\\)-linear subspace of \\(F^{32768}\\) of binary dimension at least 1041 whose RM(1,15)-descended words all have weight at least 535822336? Such a space evades scalar-orbit averaging; degree-65 restricted-coefficient attempts need a uniform condition forcing every 65-root word to hit the unique all-one inner symbol.",
+      "kind": "question",
+      "references": [
+        "proof-step:rm-scalar-orbit-bound",
+        "obstruction:additive-outer-loophole"
+      ],
+      "subject": "Can a genuinely additive outer code reach k=1041?"
+    }
+  ],
+  "distance_audit": [
+    "Every nonzero outer polynomial of degree at most 64 has at most 64 roots among the 32768 distinct evaluation points.",
+    "Every nonzero inner word has weight 16384, except the field element 1, which maps to the all-one word of weight 32768.",
+    "Thus every nonzero concatenated word has weight at least (32768-64)\u00b716384=535822336.",
+    "Equality is attained by a degree-64 polynomial with 64 prescribed evaluation roots, scaled so that none of its remaining values equals 1."
+  ],
+  "explicitness_audit": [
+    "The field polynomial p(T)=T^16+T^5+T^3+T^2+1 is explicit and has an independently checked Rabin certificate.",
+    "The evaluation set V, field basis, outer-point order, inner-coordinate order, degree cutoff, and flattening order are all specified symbolically.",
+    "There are exactly 65 unrestricted F_{2^16} message coefficients.",
+    "No floors, padding, puncturing, random sampling, or unspecified constituent code occurs."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "An [N,K,D] code over F_{2^m} and an F_2-linear identification of its alphabet with RM(1,m-1).",
+      "result": "Coordinatewise concatenation produces a binary [N\u00b72^{m-1},mK,\u2265D\u00b72^{m-2}] code.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json, proof steps `inner-rm` and `concatenation`",
+      "used_for": "Specialized with m=16 and outer parameters [32768,65,32704]. The complete specialization is reproved here."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Send the k=1040 candidate for independent verifier acceptance and merge it with the equivalent durable `algebraic-03` submission.",
+    "Add the scalar-orbit obstruction as a reusable lemma in `data/records.json`.",
+    "Investigate the remaining non-field-linear additive-outer loophole; after persistence, run the data validator and dashboard build."
+  ],
+  "obstructions": [
+    "Any F_{2^16}-linear outer code concatenated coordinatewise into RM(1,15) and meeting the target has outer dimension at most 65, hence binary dimension at most 1040.",
+    "The direct odd trace-polynomial/dual-BCH route is generically capped at dimension 991 by the 64\u221aq character-sum budget.",
+    "The fixed F_256 quotient-coupled AG port in `ag-quotient-port-01` is arithmetically incompatible with the target; changing only its divisor parameters cannot repair it.",
+    "A genuinely F_2-additive outer code is not excluded by the field-scalar obstruction."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "deg p=16",
+      "quantity": "outer alphabet",
+      "value": "|F|=2^16=65536"
+    },
+    {
+      "derivation": "dim_F2 V=15",
+      "quantity": "outer length",
+      "value": "N=2^15=32768"
+    },
+    {
+      "derivation": "polynomials of degree at most 64",
+      "quantity": "outer dimension",
+      "value": "K=65 over F"
+    },
+    {
+      "derivation": "nonzero degree-64 polynomial has at most 64 roots",
+      "quantity": "outer distance",
+      "value": "D=32768-64=32704"
+    },
+    {
+      "derivation": "affine truth-table code on F_2^15",
+      "quantity": "inner parameters",
+      "value": "[32768,16,16384]_2"
+    },
+    {
+      "derivation": "32768\u00b732768",
+      "quantity": "final length",
+      "value": "2^30=1073741824"
+    },
+    {
+      "derivation": "65\u00b716",
+      "quantity": "final dimension",
+      "value": "1040"
+    },
+    {
+      "derivation": "32704\u00b716384=(2^15-2^6)2^14",
+      "quantity": "final minimum distance",
+      "value": "2^29-2^20=535822336"
+    },
+    {
+      "derivation": "1040/2^30",
+      "quantity": "exact rate",
+      "value": "65/2^26=0.00000096857547760009765625"
+    }
+  ],
+  "proof_markdown": "# Reed\u2013Solomon code with affine binary descent\n\n## Theorem\n\nThere is a deterministic binary linear code with exact parameters\n\\[\n[2^{30},1040,535{,}822{,}336]_2.\n\\]\nIts exact rate is \\(1040/2^{30}=65/2^{26}\\).\n\n## Explicit field\n\nPut\n\\[\np(T)=T^{16}+T^5+T^3+T^2+1.\n\\]\nRepeated squaring modulo \\(p\\) gives\n\\[\nT^{2^8}\\equiv T^8+T^7+T^3+T,\n\\qquad T^{2^{16}}\\equiv T.\n\\]\nLet \\(h=T^8+T^7+T^3\\), and set\n\\[\nA=T^6+T^5+T^4+T^3+T^2+1,\n\\]\n\\[\nB=T^{14}+T^{12}+T^{10}+T^8+T^5+T^4+T^3.\n\\]\nDirect multiplication over \\(\\mathbb F_2[T]\\) gives \\(Ap+Bh=1\\). Hence\n\\(\\gcd(p,T^{2^8}+T)=1\\), while \\(p\\mid T^{2^{16}}+T\\). Every proper divisor of 16 divides 8, so the standard Frobenius factorization criterion proves that \\(p\\) is irreducible. Thus\n\\[\nF=\\mathbb F_2[T]/(p)\n\\]\nis the specified field of order \\(2^{16}\\), with basis \\(1,\\theta,\\ldots,\\theta^{15}\\).\n\n## Outer and inner codes\n\nLet\n\\[\nV=\\left\\{\\sum_{i=0}^{14}u_i\\theta^i:u_i\\in\\mathbb F_2\\right\\}.\n\\]\nThe basis property gives \\(|V|=2^{15}\\). Evaluate every polynomial \\(P\\in F[Z]\\) of degree at most 64 on the points of \\(V\\). Evaluation is injective because a nonzero polynomial of degree at most 64 cannot vanish at all 32768 points. The outer code therefore has dimension 65 over \\(F\\), and every nonzero outer word has at least\n\\[\n32768-64=32704\n\\]\nnonzero symbols.\n\nFor \\(a=\\sum_{i=0}^{15}a_i\\theta^i\\), define\n\\[\n\\phi(a)=\\left(a_0+\\sum_{i=1}^{15}a_ix_i\\right)_{x\\in\\mathbb F_2^{15}}.\n\\]\nThis is an injective binary-linear map onto \\(\\operatorname{RM}(1,15)\\). If some \\(a_i\\), \\(i\\ge1\\), is nonzero, the corresponding affine function is balanced and has weight \\(2^{14}\\). If all those coefficients vanish, the only nonzero possibility is \\(a=1\\), whose image has weight \\(2^{15}\\). Hence every nonzero inner word has weight at least \\(2^{14}\\).\n\n## Binary linearity, length, and dimension\n\nDefine\n\\[\nC=\\{(\\phi(P(v)))_{v\\in V}:P\\in F[Z],\\deg P\\le64\\}.\n\\]\nBoth evaluation and \\(\\phi\\) are \\(\\mathbb F_2\\)-linear. Their composite is injective, so\n\\[\n\\dim_{\\mathbb F_2}C=16\\cdot65=1040.\n\\]\nThere are \\(2^{15}\\) blocks of length \\(2^{15}\\), giving\n\\[\nn=2^{15}2^{15}=2^{30}=1{,}073{,}741{,}824.\n\\]\n\n## Minimum distance\n\nFor nonzero \\(P\\), at least 32704 blocks are nonzero, and each contributes at least \\(2^{14}\\) ones. Therefore\n\\[\n\\operatorname{wt}(C(P))\\ge32704\\cdot2^{14}\n=(2^{15}-2^6)2^{14}\n=2^{29}-2^{20}\n=535{,}822{,}336.\n\\]\n\nThe bound is attained. Fix 64 points \\(R\\subset V\\) and let\n\\[\ng(Z)=\\prod_{r\\in R}(Z-r).\n\\]\nThe set \\(g(V\\setminus R)\\) has at most 32704 elements, fewer than \\(|F^*|=65535\\). Choose \\(z\\in F^*\\setminus g(V\\setminus R)\\), for example the first such element in polynomial-basis order, and put \\(P=z^{-1}g\\). Then \\(P\\) has exactly the 64 roots in \\(R\\), and \\(P(v)\\ne1\\) elsewhere. Every remaining symbol lies in \\(F\\setminus\\{0,1\\}\\), so all 32704 nonzero blocks have weight exactly \\(2^{14}\\). Thus the displayed lower bound is the exact minimum distance.\n\n## Optimality inside the field-linear descent architecture\n\nMore generally, suppose an \\(F\\)-linear outer code of length 32768 and dimension \\(K\\) is concatenated through arbitrary coordinate-dependent binary-linear isomorphisms onto \\(\\operatorname{RM}(1,15)\\). Singleton supplies a nonzero outer word supported on at most \\(32768-K+1\\) positions. As a nonzero scalar \\(\\lambda\\in F^*\\) varies, each supported inner block ranges once over all 65535 nonzero RM(1,15) words. Their average weight is\n\\[\n\\frac{32768+65534\\cdot16384}{65535}\n=16384\\frac{65536}{65535}.\n\\]\nIf \\(K\\ge66\\), some scalar multiple consequently has weight at most\n\\[\n32703\\cdot16384\\frac{65536}{65535}\n=535814127.874\\ldots<535822336.\n\\]\nIt violates the target. Hence \\(K\\le65\\), and the submitted \\(k=1040\\) construction is optimal within this entire field-linear outer/RM-inner architecture.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-certificate",
+      "proof": "The displayed Frobenius congruences and B\u00e9zout identity satisfy the degree-16 irreducibility criterion.",
+      "statement": "The chosen quotient is the explicit field F_{2^16}.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "outer-rs",
+      "proof": "Degree-at-most-64 evaluation on 32768 distinct points is injective, and a nonzero polynomial has at most 64 evaluation roots.",
+      "statement": "The outer code has parameters [32768,65,32704] over F_{2^16}.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "inner-rm",
+      "proof": "Coefficient extraction gives every affine Boolean function on 15 variables; nonconstant affine functions are balanced.",
+      "statement": "The inner code has parameters [32768,16,16384]_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "outer-rs",
+        "inner-rm"
+      ],
+      "id": "binary-parameters",
+      "proof": "Coordinatewise binary-linear concatenation multiplies lengths, dimensions, and the certified constituent distances.",
+      "statement": "The concatenated code is binary linear with length 2^30, dimension 1040, and distance at least 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "binary-parameters"
+      ],
+      "id": "distance-exact",
+      "proof": "A 64-root polynomial can be scaled so that all remaining values avoid the unique all-one inner symbol.",
+      "statement": "The minimum distance equals 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-rm"
+      ],
+      "id": "rm-scalar-orbit-bound",
+      "proof": "Singleton gives a short-support outer word; averaging its nonzero scalar orbit uses the exact average nonzero RM(1,15) weight and falls below the target when K\u226566.",
+      "statement": "Every field-linear outer/RM-inner target construction has outer dimension at most 65.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Finite-field lifting and descent via Reed\u2013Solomon evaluation and affine Reed\u2013Muller alphabet reduction",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "schemas/record.schema.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty when enumerated)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty when enumerated)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "The explicitly defined RS\u2013RM finite-field descent code has exact binary parameters [2^30,1040,535822336]_2.",
+  "title": "An exact [2^30,1040,535822336] RS\u2013RM finite-field descent code"
+}

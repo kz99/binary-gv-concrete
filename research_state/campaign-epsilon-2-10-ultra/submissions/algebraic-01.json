@@ -1,0 +1,206 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let `p(T)=T^16+T^5+T^3+T+1`. It is irreducible over `F_2`: a Rabin certificate is `T^(2^16) \u2261 T (mod p)` and `gcd(p,T^(2^8)-T)=1`. Put `E=F_2[T]/(p)` and `\u03b8=T mod p`.\n\nLet `A=span_{F_2}{1,\u03b8,\u2026,\u03b8^14}\u2282E`, so `|A|=2^15`. Order `A` by polynomial-basis coefficient vectors. Every `z\u2208E` is uniquely `z=z_0+z_1\u03b8+\u22ef+z_15\u03b8^15`. Define its binary inner block, indexed lexicographically by `y=(y_1,\u2026,y_15)\u2208F_2^15`, by\n\n`\u03a6(z)_y = z_0 + \u03a3_{i=1}^{15} z_i y_i`.\n\nThus `\u03a6:E\u2192RM(1,15)` is an `F_2`-linear bijection.\n\nFor every polynomial `P(X)=\u03a3_{j=0}^{64} a_jX^j\u2208E[X]`, define\n\n`c_P = ( \u03a6(P(\u03b1))_y )_{(\u03b1,y)\u2208A\u00d7F_2^15}`,\n\nwith lexicographic block and within-block ordering. Let `C={c_P:deg P\u226464}`. Every field, basis, evaluation point, message coefficient, and coordinate order is fixed symbolically; there is no shortening, puncturing, padding, sampling, or random choice.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "For integers `s\u22651`, `L\u22642^(s+1)`, and `0\u2264t<L`, evaluate degree-at-most-`t` polynomials over `F_{2^(s+1)}` at `L` fixed distinct points and concatenate each symbol through `RM(1,s)`. This deterministically gives a binary linear code with parameters `[L\u00b72^s,(s+1)(t+1),\u2265(L\u2212t)2^(s\u22121)]_2`.",
+      "kind": "idea",
+      "references": [
+        "proof-step-P2",
+        "proof-step-P3",
+        "data/records.json#rm-affine-balance"
+      ],
+      "subject": "RS\u2013Hadamard concatenation lemma"
+    },
+    {
+      "body_markdown": "The candidate is optimal among concatenations certified solely by inner distance `2^14` and outer symbol distance `32704`. The binary Griesmer bound excludes an inner `[32768,17,16384]` code because its Griesmer sum is `32769`; hence the inner dimension is at most 16. Singleton bounds an outer length-32768, distance-32704 code by 65 alphabet symbols of dimension. Therefore the binary dimension is at most `16\u00b765=1040`.",
+      "kind": "objection",
+      "references": [
+        "proof-step-P5"
+      ],
+      "subject": "Sharp ceiling for the product-distance architecture"
+    },
+    {
+      "body_markdown": "Even one binary degree-65 direction cannot be added to the full degree-at-most-64 outer space. For each 65-set `S\u2282A`, its coset contains `a\u220f_{s\u2208S}(X\u2212s)`. Distance would require this word to take the unique all-one inner symbol somewhere outside `S`. Counting such incidences gives at most `N/65\u00b7C(N\u22121,64)=C(N,65)`, where `N=32768`. Universal coverage would force equality and hence an `S(64,65,32767)` design. Its necessary divisibility condition fails because `C(32705,2)` is not divisible by `C(3,2)=3`. Thus some 65-root word has only `N\u221265` balanced blocks and violates the target.",
+      "kind": "objection",
+      "references": [
+        "proof-step-P5"
+      ],
+      "subject": "Degree-65 additive extension obstruction"
+    }
+  ],
+  "distance_audit": [
+    "Because `C` is binary linear, pairwise distances reduce to weights of nonzero codewords.",
+    "A nonzero outer polynomial of degree at most 64 has at most 64 roots, hence at least 32704 nonzero blocks.",
+    "For `z\u22600`, `\u03a6(z)` has weight `2^14`, except `\u03a6(1)`, which has weight `2^15`; therefore every nonzero block has weight at least `2^14`.",
+    "The certified weight is `(32768\u221264)\u00b716384=2^29\u22122^20=535,822,336`.",
+    "A deterministic scaled 64-root polynomial avoids the exceptional symbol 1 on every nonroot block, proving that the lower bound is attained exactly."
+  ],
+  "explicitness_audit": [
+    "The sole outer field is the explicit quotient by `T^16+T^5+T^3+T+1`, with a Rabin irreducibility certificate.",
+    "The evaluation set is the explicitly specified 15-dimensional coefficient hyperplane in the polynomial basis.",
+    "The inner symbol map is the displayed coefficient-to-affine-function bijection.",
+    "Both coordinate orders use binary polynomial-basis vectors lexicographically.",
+    "The equality witness chooses the first 64 evaluation points and the lexicographically first admissible nonzero scale; at most 32704 of 65535 scales are forbidden.",
+    "There are no inherited parameters, floors, padding coordinates, punctures, or probabilistic choices."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "For a monic degree-16 polynomial over `F_2`, check `X^(2^16)=X mod p` and the gcd condition associated with the sole prime divisor 2 of 16.",
+      "result": "Rabin's criterion certifies that the displayed degree-16 polynomial is irreducible.",
+      "source": "Rabin irreducibility criterion for finite-field polynomials",
+      "used_for": "The explicit model of `F_{2^16}`."
+    },
+    {
+      "hypotheses": "Apply the lemma with `m=15` to every nonconstant affine inner word.",
+      "result": "Every nonconstant affine Boolean function on `F_2^15` has weight `2^14`.",
+      "source": "data/records.json, lemma `rm-affine-balance`",
+      "used_for": "The inner-code distance calculation."
+    },
+    {
+      "hypotheses": "Binary inner length 32768 and distance at least 16384; outer length 32768 and symbol distance at least 32704.",
+      "result": "Griesmer gives inner dimension at most 16, and Singleton gives outer dimension at most 65 symbols.",
+      "source": "Standard Griesmer and Singleton bounds",
+      "used_for": "The architecture-level obstruction, not the construction proof."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Submit the certificate for an independent verifier to recompute the irreducibility, injectivity, and exact-weight witness.",
+    "When the workspace is writable, place the note under `proofs/`, add an under-review record and reusable lemma to `data/records.json`, then run the data validator and dashboard build.",
+    "Search beyond dimension 1040 using architectures not limited by product distance; the immediate degree-65 outer augmentation is obstructed."
+  ],
+  "obstructions": [
+    "The full degree-at-most-65 Reed\u2013Solomon extension fails: a polynomial with 65 prescribed evaluation roots can be scaled to avoid the unique all-one inner symbol elsewhere, producing weight `(32768\u221265)2^14`, one block below target.",
+    "More strongly, the incidence/design argument in the discussion posts rules out adding even one fixed-leading-coefficient degree-65 binary direction to the full degree-at-most-64 outer space.",
+    "Griesmer plus Singleton caps at 1040 every symbolwise concatenation using a length-32768 inner code of distance at least 16384 and the ordinary product-distance proof."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Explicit field quotient",
+      "quantity": "outer alphabet",
+      "value": "|E|=2^16=65,536"
+    },
+    {
+      "derivation": "15-dimensional binary subspace of E",
+      "quantity": "outer length",
+      "value": "|A|=2^15=32,768"
+    },
+    {
+      "derivation": "Degree at most 64",
+      "quantity": "outer parameters",
+      "value": "[32,768,65,32,704] over E"
+    },
+    {
+      "derivation": "All affine functions on 15 bits",
+      "quantity": "inner parameters",
+      "value": "[32,768,16,16,384]_2"
+    },
+    {
+      "derivation": "32,768\u00b732,768",
+      "quantity": "binary block length",
+      "value": "2^30=1,073,741,824"
+    },
+    {
+      "derivation": "65 E-symbol coefficients, each of binary dimension 16",
+      "quantity": "binary dimension",
+      "value": "65\u00b716=1,040"
+    },
+    {
+      "derivation": "32,704 nonzero blocks, each of weight at least 16,384",
+      "quantity": "minimum distance",
+      "value": "32,704\u00b716,384=535,822,336"
+    },
+    {
+      "derivation": "1040/2^30, reduced by 16",
+      "quantity": "rate",
+      "value": "65/67,108,864 = 9.685754776000977e-7"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nThe construction above is a deterministic binary linear code with exact parameters\n\n`[1,073,741,824, 1,040, 535,822,336]_2`.\n\n### Proof\n\nThe displayed Rabin congruence and gcd certify that `p` is irreducible, so `E` is the explicitly represented field with `2^16` elements. The vectors `1,\u03b8,\u2026,\u03b8^15` form its polynomial basis; consequently `A` contains exactly `2^15` distinct elements.\n\nThe map `\u03a6` is `F_2`-linear. If `\u03a6(z)=0`, evaluation at `y=0` gives `z_0=0`, and the linear form `\u03a3_{i=1}^{15}z_i y_i` vanishes for every `y`; hence all `z_i=0`. Thus `\u03a6` is injective, and by equal dimensions it is a bijection onto `RM(1,15)`. If `(z_1,\u2026,z_15)\u22600`, its affine function is balanced and has weight `2^14`. The only other nonzero possibility is `z=1`, whose image is the all-one block of weight `2^15`.\n\nThe message space contains 65 freely chosen coefficients in `E`, so it has binary dimension `65\u00b716=1040`. Its evaluation map is injective: a polynomial of degree at most 64 that vanished on all `|A|=32768` points would have more roots than its degree and hence would be zero. Composing this evaluation map with the injective block map `\u03a6` proves both binary linearity and dimension 1040. The coordinate set has size `|A|\u00b72^15=2^30`.\n\nLet `P` be nonzero. It has at most 64 roots in `A`, so at least `32768\u221264=32704` outer symbols are nonzero. Every corresponding inner block has weight at least `2^14`. Therefore\n\n`wt(c_P) \u2265 32704\u00b72^14 = (2^15\u22122^6)2^14 = 2^29\u22122^20 = 535,822,336`.\n\nIt remains to show equality. Let `R` be the first 64 elements of `A` and put `P_0(X)=\u220f_{r\u2208R}(X\u2212r)`. For each `\u03b1\u2208A\\R`, exactly one nonzero scalar `\u03bb=P_0(\u03b1)^(\u22121)` would make `\u03bbP_0(\u03b1)=1`. Thus at most 32704 of the 65535 nonzero scalars are forbidden. Choose the lexicographically first un-forbidden `\u03bb`. Then `P_*=\u03bbP_0` is zero exactly on the 64 points of `R`, while every other evaluated symbol is neither 0 nor 1. Its 64 root blocks have weight zero and all remaining 32704 blocks have weight exactly `2^14`. Hence\n\n`wt(c_{P_*})=32704\u00b72^14=535,822,336`.\n\nThe lower bound is therefore attained, proving the exact minimum distance.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "The displayed Rabin congruence and gcd satisfy the irreducibility criterion for degree 16.",
+      "statement": "The quotient defining E is the explicit field `F_{2^16}`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "data/records.json#rm-affine-balance"
+      ],
+      "id": "P2",
+      "proof": "Coefficient splitting is an `F_2`-linear bijection, and every nonconstant affine function on 15 variables is balanced.",
+      "statement": "`\u03a6` is a binary `[32768,16,16384]` inner encoder.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P3",
+      "proof": "A nonzero degree-at-most-64 polynomial has at most 64 roots among the 32768 distinct evaluation points.",
+      "statement": "The outer evaluation code has parameters `[32768,65,32704]` over E.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3"
+      ],
+      "id": "P4",
+      "proof": "Both component maps are binary linear and injective; lengths multiply and the 65 E-coefficients contribute `65\u00b716` binary dimensions.",
+      "statement": "C is binary linear of length `2^30` and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "Every nonzero outer word has at least 32704 nonzero symbols, each producing at least `2^14` ones.",
+      "statement": "Every nonzero codeword has weight at least `2^29\u22122^20`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "A scaled polynomial with 64 prescribed roots can avoid the sole exceptional nonzero inner symbol on every other evaluation point, giving exactly 32704 balanced blocks.",
+      "statement": "The minimum distance is exactly `535,822,336`.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Reed\u2013Solomon evaluation with affine additive-character inner blocks",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ (empty at audit time)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at audit time)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at audit time)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ (empty at audit time)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There exists a deterministic binary linear code with exact parameters `[2^30,1040,535822336]_2`, obtained by concatenating a length-`2^15`, dimension-65 Reed\u2013Solomon evaluation code over `F_{2^16}` with `RM(1,15)`.",
+  "title": "Exact [2^30, 1040, 535822336] RS\u2013additive-character code"
+}

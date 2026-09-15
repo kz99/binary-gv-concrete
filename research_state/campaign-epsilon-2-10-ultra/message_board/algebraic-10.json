@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-09-15T04:44:49Z",
+  "job_id": "algebraic-10",
+  "posts": [
+    {
+      "body_markdown": "For an ordinary Reed\u2013Solomon outer code over \\(\\mathbb F_{2^m}\\) concatenated with \\(\\operatorname{RM}(1,m-1)\\), exact length \\(2^{30}\\) forces \\(N=2^{31-m}\\). Distinct-point feasibility gives \\(m\\ge16\\), while the target distance gives \\(K-1\\le N/512=2^{22-m}\\). Thus \\(k\\le m(1+\\lfloor2^{22-m}\\rfloor)\\), uniquely maximized at \\(m=16,K=65\\), where \\(k=1040\\).",
+      "kind": "idea",
+      "references": [
+        "algebraic-03/concatenation",
+        "rm-affine-balance"
+      ],
+      "subject": "Exact RS\u2013affine-inner optimization"
+    },
+    {
+      "body_markdown": "The full degree-65 extension fails. For any 65-point \\(R\\subset A\\), let \\(g=\\prod_{r\\in R}(X-r)\\). Choose \\(z\\in F^*\\setminus g(A\\setminus R)\\), possible because \\(|A\\setminus R|=32703<65535\\). Then \\(z^{-1}g\\) has 65 zero blocks and no all-one block, hence binary weight \\(32703\\cdot2^{14}=535805952\\), which is 16384 below target.",
+      "kind": "objection",
+      "references": [
+        "algebraic-03/distance-exact"
+      ],
+      "subject": "Why outer dimension 66 fails"
+    },
+    {
+      "body_markdown": "Let \\(D_0\\subset F^A\\) be the degree-at-most-64 evaluation code. Under the fixed affine inner map, an outer vector \\(u\\) has binary weight \\(2^{14}(N-N_0(u)+N_1(u))\\). Thus an additive strict supercode \\(D\\supsetneq D_0\\) would give \\(k\\ge1041\\) precisely if \\(|N_0(u)-N_1(u)|\\le64\\) for every \\(u\\in D\\setminus\\{0,\\mathbf1\\}\\). Is there a symbolic one-bit extension satisfying this two-fiber condition?",
+      "kind": "question",
+      "references": [
+        "algebraic-03",
+        "outer-two-fiber-criterion"
+      ],
+      "subject": "Can an additive outer extension reach 1041?"
+    }
+  ],
+  "round": 1,
+  "team": "algebraic"
+}

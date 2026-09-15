@@ -1,0 +1,134 @@
+{
+  "title": "Finite obstruction to the fixed F_256 quotient-coupled AG port",
+  "research_direction": "Algebraic-geometric evaluation codes and quotient-coupled extensions",
+  "result_status": "refuted",
+  "submission_class": "obstruction",
+  "leaderboard_submission": false,
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "dimension": null,
+  "minimum_distance": null,
+  "rate": null,
+  "construction_markdown": "The supplied paper's Construction 4.1 fixes K=F_256, an RM(1,7) inner realization of length 128 and distance 64, and two repair blocks of total length 16,512. Its finite theorem assumes a genus-g curve with L+1 distinct F_256-rational points and integers a,L satisfying a+1-g >= 1 and 128L+16,512 <= 2^30; it certifies distance 64(L-a). The finite parameter system has no solution when this certificate is required to reach 535,822,336.",
+  "theorem_statement": "No specialization satisfying the hypotheses of Construction 4.1 in the supplied quotient-coupled AG-code paper can satisfy its Theorem 4.2 certified-distance inequality 64(L-a) >= 535,822,336 at block length 2^30.",
+  "proof_markdown": "Put D=535,822,336 and q_0=D/64=8,372,224. The source theorem's distance certificate requires L-a >= q_0, while its Riemann--Roch eligibility condition a+1-g >= 1 gives a >= g. Hence L >= q_0+g. The source construction chooses L+1 distinct points of a curve over F_256. Hasse--Weil therefore gives L+1 <= 257+32g, hence L <= 256+32g. Thus q_0+g <= 256+32g, so g >= ceil((q_0-256)/31)=270,064, and then L >= 8,642,288. But the exact source length condition yields L <= floor((2^30-16,512)/128)=8,388,479, a contradiction. Separately, the source's uniform theorem assumes delta<7/15, whereas active delta=511/1024 exceeds 7/15 by 497/15,360. This is a scoped failure of the paper's fixed F_256 finite certificate, not an impossibility claim for arbitrary quotient-coupled or AG constructions.",
+  "proof_steps": [
+    {
+      "id": "target-divisibility",
+      "statement": "At the active target, 535,822,336/64=8,372,224.",
+      "proof": "Direct integer division gives zero remainder.",
+      "dependencies": [],
+      "status": "proved"
+    },
+    {
+      "id": "source-parameter-implications",
+      "statement": "Under Construction 4.1's conditions and 64(L-a) >= 535,822,336, one has L >= 8,372,224+g.",
+      "proof": "The distance inequality gives L-a >= 8,372,224, and a+1-g >= 1 gives a >= g. Add the two inequalities.",
+      "dependencies": ["target-divisibility"],
+      "status": "proved"
+    },
+    {
+      "id": "rational-point-genus-bound",
+      "statement": "For the required L+1 rational points on X/F_256, L <= 256+32g.",
+      "proof": "The construction requires L+1 <= #X(F_256). Hasse--Weil gives #X(F_256) <= 256+1+2g sqrt(256)=257+32g.",
+      "dependencies": [],
+      "status": "proved"
+    },
+    {
+      "id": "finite-port-contradiction",
+      "statement": "Construction 4.1 has no admissible target specialization with its Theorem 4.2 distance certificate.",
+      "proof": "The preceding two inequalities imply g >= ceil((8,372,224-256)/31)=270,064, hence L >= 8,642,288. The source's exact length condition gives L <= floor((2^30-16,512)/128)=8,388,479, contradiction.",
+      "dependencies": ["source-parameter-implications", "rational-point-genus-bound"],
+      "status": "proved"
+    }
+  ],
+  "literature_dependencies": [
+    {
+      "source": "Provided PDF, Quotient-Coupled Algebraic-Geometry Codes at Every Block Length, Construction 4.1 and Theorem 4.2 (pp. 4-5).",
+      "result": "The fixed F_256 two-layer construction has length condition 128L+16,512<=n, Riemann--Roch condition a+1-g>=1, and certified distance 64(L-a).",
+      "hypotheses": "A smooth geometrically irreducible curve over F_256 with L+1 specified rational points and the stated divisor data.",
+      "used_for": "The exact finite parameter system tested in this obstruction."
+    },
+    {
+      "source": "Hasse--Weil point bound, also listed among the standard tools on p. 1 of the provided PDF.",
+      "result": "For a genus-g curve over F_256, #X(F_256)<=257+32g.",
+      "hypotheses": "A smooth projective geometrically irreducible curve over F_256.",
+      "used_for": "The necessary rational-point/genus inequality."
+    }
+  ],
+  "parameter_ledger": [
+    {
+      "quantity": "Target distance per main-inner distance unit",
+      "value": "q_0=535,822,336/64=8,372,224",
+      "derivation": "The source theorem certifies 64(L-a)."
+    },
+    {
+      "quantity": "Length cap on main evaluation points",
+      "value": "L<=floor((2^30-16,512)/128)=8,388,479",
+      "derivation": "Construction 4.1's exact length condition."
+    },
+    {
+      "quantity": "Necessary genus",
+      "value": "g>=ceil((8,372,224-256)/31)=270,064",
+      "derivation": "Combine L>=q_0+g with L<=256+32g from Hasse--Weil."
+    },
+    {
+      "quantity": "Necessary evaluation length",
+      "value": "L>=8,372,224+270,064=8,642,288",
+      "derivation": "Substitute the genus lower bound into L>=q_0+g."
+    },
+    {
+      "quantity": "Contradiction gap",
+      "value": "8,642,288-8,388,479=253,809",
+      "derivation": "Necessary evaluation length minus the source length cap."
+    },
+    {
+      "quantity": "Uniform-theorem range gap",
+      "value": "511/1024-7/15=497/15,360>0",
+      "derivation": "The source's Theorem 6.2 requires delta<7/15."
+    }
+  ],
+  "explicitness_audit": [
+    "This is a deterministic integer-and-Hasse--Weil audit; it selects no curve, codeword, or random object.",
+    "Every inequality comes from a displayed hypothesis or conclusion of the supplied finite construction.",
+    "The conclusion is explicitly limited to certification by the supplied fixed F_256 architecture."
+  ],
+  "distance_audit": [
+    "The tested certificate is exactly 64(L-a), the minimum-distance guarantee in the source's Theorem 4.2.",
+    "Meeting the target requires L-a>=8,372,224.",
+    "The contradiction occurs before a positive-dimension code can be certified, so no target-distance candidate survives this port."
+  ],
+  "obstructions": [
+    "The paper's Theorem 6.2 cannot be invoked directly because its stated range delta<7/15 excludes the active delta=511/1024.",
+    "More strongly, its fixed F_256 Construction 4.1 cannot satisfy its own finite target-distance certificate at length 2^30: the rational-point/genus requirement forces L>=8,642,288, while its length budget forces L<=8,388,479.",
+    "This does not rule out a different quotient-coupled construction with a changed field, inner code, repair geometry, or a sharper distance proof."
+  ],
+  "next_tasks": [
+    "Do not submit a leaderboard record from this architecture without a materially changed finite construction and a new proof certificate.",
+    "If revisiting quotient coupling, optimize a different alphabet/inner-code scaling before choosing a curve; changing only the modular level or divisor cannot evade the proved conflict.",
+    "Use the existing genus-zero affine-inner candidate as the current concrete AG baseline rather than this failed direct port."
+  ],
+  "source_paths_read": [
+    "/Users/kaizheng/Downloads/quotient_coupled_ag_codes-1.pdf",
+    "AGENTS.md",
+    "TARGET.md",
+    "data/records.json",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json"
+  ],
+  "discussion_posts": [
+    {
+      "kind": "objection",
+      "subject": "The supplied F_256 quotient-coupled architecture cannot reach epsilon=2^-10",
+      "body_markdown": "For Construction 4.1, target distance forces L-a >= 8,372,224, and its Riemann--Roch eligibility forces a >= g, so L >= 8,372,224+g. Its L+1 rational points over F_256 imply L <= 256+32g. Hence g >= 270,064, so L >= 8,642,288, contradicting the exact length cap L <= 8,388,479. This is a finite obstruction to the paper's fixed architecture, not to quotient coupling in general.",
+      "references": ["ag-quotient-port-01", "quotient-coupled-ag-paper-construction-4-1"]
+    },
+    {
+      "kind": "objection",
+      "subject": "The paper's uniform delta range already excludes the new target",
+      "body_markdown": "The supplied paper's Theorem 6.2 assumes 0<delta<7/15, while active delta=511/1024 has 511/1024-7/15=497/15,360>0. The finite obstruction is stronger: it fails even without the theorem's asymptotic argument.",
+      "references": ["ag-quotient-port-01", "quotient-coupled-ag-paper-theorem-6-2"]
+    }
+  ],
+  "confidence": "high"
+}

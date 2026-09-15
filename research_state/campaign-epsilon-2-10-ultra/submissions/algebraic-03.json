@@ -1,0 +1,192 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let\n\\[\np(Z)=Z^{16}+Z^5+Z^3+Z^2+1,\n\\qquad F=\\mathbb F_2[Z]/(p),\n\\]\nand write \\(\\alpha=Z\\bmod p\\). Identify \\(a=\\sum_{i=0}^{15}a_i\\alpha^i\\in F\\) with \\((a_0,\\ldots,a_{15})\\in\\mathbb F_2^{16}\\).\n\nDefine the outer evaluation set\n\\[\nA=\\left\\{\\sum_{i=0}^{14}u_i\\alpha^i:u_i\\in\\mathbb F_2\\right\\},\n\\qquad |A|=2^{15}.\n\\]\nOrder it by the integer \\(\\sum_i u_i2^i\\). The genus-zero AG outer code is\n\\[\nC_{\\rm out}=\\{(f(x))_{x\\in A}:f\\in F[X],\\ \\deg f\\le64\\},\n\\]\nequivalently \\(C_L(D,64P_\\infty)\\) on \\(\\mathbb P^1/F\\).\n\nFor \\(a=\\sum_{i=0}^{15}a_i\\alpha^i\\), define\n\\[\nH(a)=\\bigl(a_0+\\sum_{i=1}^{15}a_i y_i\\bigr)_{y\\in\\mathbb F_2^{15}},\n\\]\nwith \\(y\\) in binary-integer order. Thus \\(H:F\\to\\mathbb F_2^{2^{15}}\\) is an explicit linear realization of \\(\\operatorname{RM}(1,15)\\).\n\nFinally set\n\\[\nC=\\{(H(f(x)))_{x\\in A}:f\\in F[X],\\deg f\\le64\\},\n\\]\nflattening the outer blocks in the stated order. No shortening, padding, or random choice occurs.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "If \\(Q\\) is an \\([N,K,D]_{2^m}\\) linear code, identify \\(\\mathbb F_{2^m}\\) with the affine truth-table code \\(\\operatorname{RM}(1,m-1)=[2^{m-1},m,2^{m-2}]_2\\). Coordinatewise concatenation gives a deterministic binary \\([N2^{m-1},mK,\\ge D2^{m-2}]_2\\) code.",
+      "kind": "idea",
+      "references": [
+        "inner-rm",
+        "concatenation"
+      ],
+      "subject": "Reusable affine-inner concatenation lemma"
+    },
+    {
+      "body_markdown": "Take the genus-zero outer code \\([32768,65,32704]_{2^{16}}\\) and the affine inner code \\([32768,16,16384]_2\\). Their concatenation has exact parameters \\([2^{30},1040,535822336]_2\\), improving the verified dimension by 1009.",
+      "kind": "idea",
+      "references": [
+        "outer-ag",
+        "distance-exact"
+      ],
+      "subject": "Concrete k=1040 leaderboard candidate"
+    },
+    {
+      "body_markdown": "Simply allowing outer degree 65 fails. For any 65-point set \\(R\\subset A\\), let \\(g=\\prod_{r\\in R}(X-r)\\). Since \\(|g(A\\setminus R)|\\le32703<|F^*|\\), choose \\(z\\notin g(A\\setminus R)\\). Then \\(z^{-1}g\\) has 65 zero blocks and never produces the all-one inner symbol, so its binary weight is only \\(32703\\cdot2^{14}=535805952\\), below target.",
+      "kind": "objection",
+      "references": [
+        "distance-exact"
+      ],
+      "subject": "Full degree-65 RS extension is ruled out"
+    }
+  ],
+  "distance_audit": [
+    "Every nonzero outer polynomial of degree at most 64 has at most 64 zeros among the 32768 distinct evaluation points.",
+    "Every nonzero inner affine truth table has weight at least 2^14; the sole nonzero constant word has weight 2^15.",
+    "Therefore every nonzero concatenated word has weight at least (32768-64)\u00b72^14=32704\u00b716384=535822336.",
+    "The lower bound is attained: choose 64 fixed evaluation roots, then scale their monic root polynomial so that its remaining values avoid the field element 1, which is the all-one inner symbol."
+  ],
+  "explicitness_audit": [
+    "The field polynomial is explicit. Repeated squaring gives Z^256\u2261Z^8+Z^7+Z^3+Z and Z^65536\u2261Z modulo p; Euclidean remainders for gcd(p,Z^256+Z) are Z^2+1 and 1, certifying irreducibility.",
+    "All field elements, evaluation points, inner coordinates, outer blocks, and flattened coordinates have specified binary-integer orderings.",
+    "There are exactly 65 unrestricted F_{2^16} message coefficients and no hidden subcode selection.",
+    "There are no floors, punctures, shortenings, repetitions, padding coordinates, searches, or random choices in the encoder."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Persist this note as proofs/rs-rm-1040.md and add an under-review record when write access is available.",
+    "Run node scripts/validate-data.mjs and the dashboard build after adding the record.",
+    "Investigate special-divisor AG outer codes over F_{2^14} and structured binary subcodes beyond the full degree-64 RS space for dimensions above 1040."
+  ],
+  "obstructions": [
+    "Within the full Reed\u2013Solomon polynomial family with this inner map, degree 65 creates a word of weight 535805952, so outer dimension 66 is inadmissible.",
+    "For the genus-zero family using RM(1,m-1) as inner code, m\u226516 gives k_m=m(2^{22-m}+1) for 16\u2264m\u226422, maximized uniquely at m=16 with k=1040.",
+    "The direct trace-RS space over F_{2^30}, restricted to odd degrees at most 65 and certified by the classical degree-Weil bound, has dimension only 1+33\u00b730=991."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "p has degree 16",
+      "quantity": "outer alphabet",
+      "value": "|F|=2^16=65,536"
+    },
+    {
+      "derivation": "15-dimensional F_2-span",
+      "quantity": "outer length",
+      "value": "N=2^15=32,768"
+    },
+    {
+      "derivation": "dim_F F[X]_{\u226464}",
+      "quantity": "outer dimension",
+      "value": "K=65"
+    },
+    {
+      "derivation": "root bound",
+      "quantity": "outer distance",
+      "value": "D=32,768-64=32,704"
+    },
+    {
+      "derivation": "RM(1,15)",
+      "quantity": "inner parameters",
+      "value": "[32,768,16,16,384]_2"
+    },
+    {
+      "derivation": "2^15\u00b72^15",
+      "quantity": "final length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "65\u00b716",
+      "quantity": "final dimension",
+      "value": "1,040"
+    },
+    {
+      "derivation": "32,704\u00b716,384",
+      "quantity": "final minimum distance",
+      "value": "535,822,336"
+    },
+    {
+      "derivation": "1040/2^30=65/2^26",
+      "quantity": "exact rate",
+      "value": "0.00000096857547760009765625"
+    },
+    {
+      "derivation": "(2^29-2^20)/2^30",
+      "quantity": "relative distance",
+      "value": "511/1024"
+    }
+  ],
+  "proof_markdown": "# Genus-zero AG code with affine binary inner code\n\n## Theorem\n\nThere is a deterministic binary linear code with exact parameters\n\\[\n[1,073,741,824,1040,535,822,336]_2.\n\\]\nIts rate is \\(1040/2^{30}=65/2^{26}\\).\n\n## Field certificate\n\nLet \\(p(Z)=Z^{16}+Z^5+Z^3+Z^2+1\\). Direct repeated squaring modulo \\(p\\) gives\n\\[\nZ^{2^8}\\equiv Z^8+Z^7+Z^3+Z,\n\\qquad Z^{2^{16}}\\equiv Z.\n\\]\nMoreover,\n\\[\n\\gcd(p,Z^{2^8}+Z)=1,\n\\]\nas Euclidean division gives successive nonzero remainders \\(Z^2+1\\) and \\(1\\). Since 2 is the only prime divisor of 16, the standard finite-field irreducibility criterion proves that \\(p\\) is irreducible. Hence \\(F=\\mathbb F_2[Z]/(p)\\) is the explicitly specified field of order \\(2^{16}\\).\n\n## Linearity, length, and dimension\n\nThe outer message space consists of the 65 coefficients of a polynomial \\(f\\in F[X]\\) of degree at most 64. Evaluation on \\(A\\) is \\(F\\)-linear. If such an \\(f\\) vanishes at every point of \\(A\\), it has at least 32768 roots; the polynomial root bound forces \\(f=0\\). Thus the outer evaluation map is injective and has dimension 65 over \\(F\\).\n\nThe map \\(H\\) is \\(\\mathbb F_2\\)-linear and injective: the value at \\(y=0\\) recovers \\(a_0\\), and comparison with the values at the 15 unit vectors recovers \\(a_1,\\ldots,a_{15}\\). Consequently the composite encoder is binary linear and injective. Its dimension is therefore\n\\[\n16\\cdot65=1040.\n\\]\nThere are \\(|A|=2^{15}\\) outer blocks, each of length \\(2^{15}\\), so\n\\[\nn=2^{15}2^{15}=2^{30}=1,073,741,824.\n\\]\n\n## Minimum distance\n\nLet \\(f\\ne0\\) have degree at most 64. At most 64 of its 32768 evaluations vanish, so at least 32704 outer symbols are nonzero. If \\(a\\in F\\setminus\\{0,1\\}\\), at least one of \\(a_1,\\ldots,a_{15}\\) is nonzero, and the associated nonconstant affine function is balanced; hence \\(\\operatorname{wt}(H(a))=2^{14}\\). Also \\(H(1)\\) is the all-one word of weight \\(2^{15}\\). Every nonzero block therefore has weight at least \\(2^{14}\\), giving\n\\[\n\\operatorname{wt}(C(f))\\ge32704\\cdot2^{14}\n=(2^{15}-2^6)2^{14}=2^{29}-2^{20}=535,822,336.\n\\]\n\nThis bound is attained. Fix the first 64 points \\(R\\subset A\\) and put \\(g(X)=\\prod_{r\\in R}(X-r)\\). The set \\(g(A\\setminus R)\\subset F^*\\) has at most 32704 elements, strictly fewer than \\(|F^*|=65535\\). Let \\(z\\) be the first nonzero field element, in the specified polynomial-basis order, outside this image, and take \\(f=z^{-1}g\\). Then \\(f\\) vanishes exactly on \\(R\\) and never takes the value 1 on \\(A\\setminus R\\). Its 64 zero blocks have weight zero and all remaining 32704 blocks have weight exactly \\(2^{14}\\). Thus the displayed lower bound is the exact minimum distance.\n\nAll choices are symbolic and deterministic, completing the proof.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field",
+      "proof": "The displayed Frobenius congruences and Euclidean remainder sequence satisfy the degree-16 irreducibility criterion.",
+      "statement": "p(Z)=Z^16+Z^5+Z^3+Z^2+1 is irreducible over F_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field"
+      ],
+      "id": "outer-ag",
+      "proof": "L(64P_infinity) is the 65-dimensional F-space of polynomials of degree at most 64; evaluation at 32768 distinct finite rational points is injective, and every nonzero word has at least 32704 nonzero symbols.",
+      "statement": "The outer genus-zero AG code has exact parameters [32768,65,32704] over F_{2^16}.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field"
+      ],
+      "id": "inner-rm",
+      "proof": "Coefficient extraction followed by affine truth-table evaluation is injective and F_2-linear. Nonconstant affine functions are balanced, while the nonzero constant has full weight.",
+      "statement": "The inner code has exact parameters [32768,16,16384]_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "outer-ag",
+        "inner-rm"
+      ],
+      "id": "concatenation",
+      "proof": "Coordinatewise application of the injective inner map preserves binary linearity and multiplies length and dimension as 32768^2 and 65\u00b716.",
+      "statement": "The concatenated code is binary linear of length 2^30 and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "outer-ag",
+        "inner-rm",
+        "concatenation"
+      ],
+      "id": "distance-lower",
+      "proof": "Every nonzero outer word has at least 32704 nonzero symbols, each contributing at least 16384 binary ones.",
+      "statement": "Every nonzero codeword has weight at least 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field",
+        "distance-lower"
+      ],
+      "id": "distance-exact",
+      "proof": "A degree-64 polynomial with 64 prescribed evaluation roots can be deterministically scaled so its remaining values avoid 1; all its remaining inner blocks then have weight exactly 2^14.",
+      "statement": "The minimum distance equals 535822336.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Algebraic-geometric evaluation codes: genus-zero AG outer code with affine Reed\u2013Muller alphabet reduction",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ (empty)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There exists a symbolically deterministic binary linear code with exact parameters [2^30,1040,535822336]_2.",
+  "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
+}

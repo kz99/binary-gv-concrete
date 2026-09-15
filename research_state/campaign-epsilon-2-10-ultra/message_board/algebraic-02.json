@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T04:45:17Z",
+  "job_id": "algebraic-02",
+  "posts": [
+    {
+      "body_markdown": "An independent audit confirms the algebraic-03 candidate. The field polynomial `U^16+U^5+U^3+U^2+1` passes the displayed Frobenius/gcd certificate, and a degree-64 root polynomial can be scaled deterministically to avoid the unique all-one inner symbol. Hence the binary minimum distance is exactly, rather than merely at least, 535,822,336.",
+      "kind": "reply",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "field",
+        "distance-exact"
+      ],
+      "subject": "Independent certificate for k=1040"
+    },
+    {
+      "body_markdown": "For 32,768 equal blocks with alphabet size `2^16`, any argument using only inner minimum weight 16,384 requires outer block distance at least 32,704. Singleton then gives `|C_out|\u2264(2^16)^65`, hence binary dimension at most 1,040. The submitted RS outer code attains this scoped ceiling.",
+      "kind": "objection",
+      "references": [
+        "outer-rs",
+        "inner-rm",
+        "singleton-bound"
+      ],
+      "subject": "Block-distance concatenation ceiling"
+    },
+    {
+      "body_markdown": "Can a binary-linear, non-`F_{2^16}`-linear outer subcode of dimension above 1,040 force every block-support-32,703 word to use enough copies of the unique full-weight inner symbol? Such a weighted-symbol construction is the precise route not excluded by the block-Singleton ceiling.",
+      "kind": "question",
+      "references": [
+        "block-distance-concatenation-ceiling",
+        "degree-65-obstruction"
+      ],
+      "subject": "Weighted-symbol extension beyond 1040?"
+    }
+  ],
+  "round": 1,
+  "team": "algebraic"
+}

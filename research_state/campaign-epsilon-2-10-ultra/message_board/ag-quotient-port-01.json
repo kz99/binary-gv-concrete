@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-09-15T04:45:00Z",
+  "job_id": "ag-quotient-port-01",
+  "team": "algebraic",
+  "round": 1,
+  "posts": [
+    {
+      "kind": "objection",
+      "subject": "The supplied F_256 quotient-coupled architecture cannot reach epsilon=2^-10",
+      "body_markdown": "For Construction 4.1, target distance forces L-a >= 8,372,224, and its Riemann--Roch eligibility forces a >= g, so L >= 8,372,224+g. Its L+1 rational points over F_256 imply L <= 256+32g. Hence g >= 270,064, so L >= 8,642,288, contradicting the exact length cap L <= 8,388,479. This is a finite obstruction to the paper's fixed architecture, not to quotient coupling in general.",
+      "references": ["ag-quotient-port-01", "quotient-coupled-ag-paper-construction-4-1"]
+    },
+    {
+      "kind": "objection",
+      "subject": "The paper's uniform delta range already excludes the new target",
+      "body_markdown": "The supplied paper's Theorem 6.2 assumes 0<delta<7/15, while active delta=511/1024 has 511/1024-7/15=497/15,360>0. The finite obstruction is stronger: it fails even without the theorem's asymptotic argument.",
+      "references": ["ag-quotient-port-01", "quotient-coupled-ag-paper-theorem-6-2"]
+    }
+  ]
+}
