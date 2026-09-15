@@ -14,6 +14,7 @@ def main(argv: list[str] | None = None) -> int:
         ("run", "run or resume the campaign in the foreground"),
         ("launch", "launch the campaign in the background"),
         ("status", "show durable campaign progress"),
+        ("recover-schema-failures", "requeue jobs rejected before execution by a fixed schema defect"),
         ("genius-checkpoint", "run one requested GENIUS integration checkpoint"),
     ):
         item = sub.add_parser(name, help=help_text)
@@ -42,6 +43,8 @@ def main(argv: list[str] | None = None) -> int:
             payload = campaign.add_team(args.team)
         elif args.command == "queue-research-wave":
             payload = campaign.queue_research_wave(tuple(args.teams))
+        elif args.command == "recover-schema-failures":
+            payload = campaign.recover_invalid_schema_failures()
         elif args.command == "genius-checkpoint":
             payload = campaign.run_genius_checkpoint()
         else:

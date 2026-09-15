@@ -4,7 +4,7 @@ from pathlib import Path
 
 from binary_gv_research.agents import CommandAgentProvider
 from binary_gv_research.campaign import (
-    Campaign, D, GV_RATE, RESEARCHER_EFFORTS, TEAM_RESEARCH_GRAPH, load_config,
+    Campaign, D, GENERATOR_MATRIX, GV_RATE, RESEARCHER_EFFORTS, TEAM_RESEARCH_GRAPH, load_config,
 )
 
 
@@ -57,6 +57,10 @@ class CampaignTests(unittest.TestCase):
         }
         self.assertTrue(Campaign._has_polynomial_generator(valid))
         self.assertFalse(Campaign._has_polynomial_generator({}))
+        self.assertEqual(
+            GENERATOR_MATRIX["properties"]["outputs_full_matrix_in_polynomial_time"]["type"],
+            "boolean",
+        )
 
     def test_research_team_mixes_three_reasoning_levels(self):
         campaign = Campaign(ROOT / "configs" / "campaign-epsilon-2-10-ultra.yaml")
@@ -79,6 +83,14 @@ class CampaignTests(unittest.TestCase):
         self.assertEqual(TEAM_RESEARCH_GRAPH[3][1], (1, 2, 3))
         self.assertEqual(TEAM_RESEARCH_GRAPH[8][1], (6, 7, 8, 10))
         self.assertEqual(TEAM_RESEARCH_GRAPH[-1][1], (4, 5, 6))
+
+    def test_existing_research_job_can_receive_the_team_graph(self):
+        job = {"id": "algebraic-r002-09", "role": "researcher", "team": "algebraic"}
+        self.assertTrue(Campaign._apply_team_graph(job))
+        self.assertEqual(job["collaboration_role"], "team integrator and submission author")
+        self.assertEqual(job["depends_on"], [
+            "algebraic-r002-06", "algebraic-r002-07", "algebraic-r002-08", "algebraic-r002-10",
+        ])
 
 
 if __name__ == "__main__":

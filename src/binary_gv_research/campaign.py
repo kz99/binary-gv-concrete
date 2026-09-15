@@ -52,7 +52,7 @@ GENERATOR_MATRIX = {
         "runtime_bound", "runtime_proof",
     ],
     "properties": {
-        "outputs_full_matrix_in_polynomial_time": {"const": True},
+        "outputs_full_matrix_in_polynomial_time": {"type": "boolean", "const": True},
         "algorithm": {"type": "string", "minLength": 1},
         "runtime_bound": {"type": "string", "minLength": 1},
         "runtime_proof": {"type": "string", "minLength": 1},
@@ -408,6 +408,28 @@ class Campaign:
                 depends_on=dependencies, collaboration_role=collaboration_role,
             ))
 
+    @staticmethod
+    def _apply_team_graph(job: dict[str, Any]) -> bool:
+        """Attach the current ten-seat dependency graph to a durable research job."""
+        if job.get("role") != "researcher" or job.get("team") not in TEAM_DIRECTIONS:
+            return False
+        try:
+            index = int(str(job["id"]).rsplit("-", 1)[-1])
+        except (KeyError, ValueError):
+            return False
+        if not 1 <= index <= len(TEAM_RESEARCH_GRAPH):
+            return False
+        collaboration_role, dependency_indexes = TEAM_RESEARCH_GRAPH[index - 1]
+        prefix = str(job["id"]).rsplit("-", 1)[0]
+        dependencies = [f"{prefix}-{dependency:02d}" for dependency in dependency_indexes]
+        changed = (
+            job.get("depends_on") != dependencies
+            or job.get("collaboration_role") != collaboration_role
+        )
+        job["depends_on"] = dependencies
+        job["collaboration_role"] = collaboration_role
+        return changed
+
     def initialize(self) -> dict[str, Any]:
         for name in ("submissions", "reviews", "lemma_book", "roadmaps", "genius", "metadata", "message_board"):
             (self.root / name).mkdir(parents=True, exist_ok=True)
@@ -561,6 +583,37 @@ class Campaign:
                 changed = True
         if changed:
             self._write_jobs(jobs)
+
+    def recover_invalid_schema_failures(self) -> dict[str, Any]:
+        """Requeue only jobs rejected before execution by a known schema defect."""
+        self.initialize()
+        jobs = self._read_jobs()
+        recovered = 0
+        changed = False
+        for job in jobs:
+            changed = self._apply_team_graph(job) or changed
+            if job.get("status") != "failed":
+                continue
+            location = str(job.get("error") or "").partition("see ")[2]
+            if not location:
+                continue
+            log_path = Path(location)
+            try:
+                invalid_schema = "invalid_json_schema" in log_path.read_text()
+            except OSError:
+                invalid_schema = False
+            if invalid_schema:
+                job["status"] = "queued"
+                job["attempts"] = 0
+                job["error"] = None
+                job["updated_at"] = utc_timestamp()
+                recovered += 1
+                changed = True
+        if changed:
+            self._write_jobs(jobs)
+        payload = self.export_snapshot()
+        payload["recovered_schema_failures"] = recovered
+        return payload
 
     def _submission_paths(self) -> list[str]:
         return [str(path.relative_to(self.paths.workspace)) for path in sorted((self.root / "submissions").glob("*.json"))]

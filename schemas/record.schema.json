@@ -19,7 +19,7 @@
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
     "name": { "type": "string", "minLength": 1 },
-    "blockLength": { "const": 1073741824 },
+    "blockLength": { "type": "integer", "const": 1073741824 },
     "dimension": { "type": "integer", "minimum": 1 },
     "minimumDistance": { "type": "integer", "minimum": 535822336 },
     "rate": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
@@ -30,7 +30,7 @@
       "type": "object",
       "required": ["outputsFullMatrixInPolynomialTime", "algorithm", "runtimeBound", "runtimeProof"],
       "properties": {
-        "outputsFullMatrixInPolynomialTime": { "const": true },
+        "outputsFullMatrixInPolynomialTime": { "type": "boolean", "const": true },
         "algorithm": { "type": "string", "minLength": 1 },
         "runtimeBound": { "type": "string", "minLength": 1 },
         "runtimeProof": { "type": "string", "minLength": 1 }
