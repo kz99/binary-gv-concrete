@@ -1,0 +1,288 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Fix `F=F_2[T]/(T^30+T+1)`, with `theta=T mod (T^30+T+1)`, and enumerate `F` by its 30 polynomial-basis bits. Let `L_65` contain all odd polynomials `P(X)=sum_{1<=j<=65, j odd} a_j X^j` over `F`. For an explicitly based binary subspace `V<=F^2`, define\n\n`C(V)={ (c+Tr(P(x)+a x^67+b x^69))_{x in F} : c in F_2, P in L_65, (a,b) in V }`.\n\nThe evaluation map is injective, so `dim C(V)=991+dim_F2(V)`. The proved anchor is `C(0)`, the existing explicit `[2^30,991,>=535822336]_2` degree-65 trace code. A candidate exceeding the proved campaign construction of dimension 1040 would require `dim(V)>=50`. This report proves that such a safe `V` exists if and only if the full choice `V=F^2` is safe. The latter would give the completely explicit dimension-1051 code using every odd exponent through 69, but its required character-sum bound remains unproved.",
+  "dimension": 991,
+  "discussion_posts": [
+    {
+      "body_markdown": "For algebraic positions 4 and 6: let `C(V)=C_65 + {Tr(a x^67+b x^69):(a,b) in V}`. A Chevalley\u2013Warning argument, plus a checked codimension-10 parity lemma, proves that every `V<=F_(2^30)^2` of binary dimension at least 50 meets every weighted orbit `{(a u^67,b u^69):u!=0}`. Hence a target-safe `V` of dimension at least 50 exists iff the full degree-69 trace code is target-safe. The only outcomes in this architecture are therefore no improvement beyond 1040, or the full explicit `k=1051` code; searching for a special 50-dimensional selector is unnecessary.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:degree-69-weighted-orbit-dichotomy",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+        "D. R. Heath-Brown, https://arxiv.org/abs/1009.3764"
+      ],
+      "subject": "To trace architecture/proof: degree-69 all-or-nothing reduction"
+    },
+    {
+      "body_markdown": "For algebraic position 5: if `Q<=RM(2,30)` and `C_65+Q` meets the target, then `dim(C_65+Q)<=1014`. Target-safe quadratic spaces containing all affine phases have polar rank distance at least 18 and hence dimension at most 234 by the Delsarte\u2013Goethals alternating-rank bound. `C_65` already contains an exact 211-dimensional quadratic Gold subcode, leaving at most 23 new quadratic dimensions. Thus quadratic, Gold, Kasami, Kerdock, and Delsarte\u2013Goethals additions cannot beat the existing `k=1040` construction.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:quadratic-augmentation-ceiling-1014",
+        "A. Abiad, G. N. Alfarano, A. Ravagnani, https://arxiv.org/abs/2405.09254",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json"
+      ],
+      "subject": "To RM-extension optimizer: quadratic additions stop at k=1014"
+    },
+    {
+      "body_markdown": "For the BCH/character-sum architect: determine whether every odd polynomial `f` of degree at most 69 over `F_(2^30)` satisfies `|sum_x (-1)^Tr(f(x))|<=2^21`. A uniform proof immediately gives an explicit `[2^30,1051,>=535822336]_2` code. One explicit counterexample rules out every dimension-at-least-1041 extension using only the degree-67 and degree-69 coefficient layers. Ordinary Hasse\u2013Weil gives only `68*2^15`, so a saving of `4*2^15` is exactly required.",
+      "kind": "request",
+      "references": [
+        "proposed-lemma:degree-69-weighted-orbit-dichotomy",
+        "J. F. Voloch, https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf",
+        "F. Scholten and H. J. Zhu, https://arxiv.org/abs/math/0012178"
+      ],
+      "subject": "Exact remaining task: certify or refute the full degree-69 code"
+    }
+  ],
+  "distance_audit": [
+    "The target is `D=2^29-2^20=535822336`; its equivalent two-sided signed-sum cap is `2^30-2D=2^21=2097152`.",
+    "For `C(0)`, every nonzero reduced polynomial has odd degree at most 65. The Artin\u2013Schreier bound gives `|S(P)|<=(65-1)2^15=2^21`, so every nonzero word and its complement have weight at least `D`.",
+    "The degree-67 full layer has dimension 1021, but generic Hasse\u2013Weil proves only `d>=2^29-33*2^15=535789568`, missing the target by 32768.",
+    "The degree-69 full code has dimension 1051, but generic Hasse\u2013Weil proves only `d>=2^29-34*2^15=535756800`, missing the target by 65536. The unresolved requirement is the sharper uniform cap `64*2^15` instead of `68*2^15`.",
+    "For every `V`, target distance is equivalent to `|sum_x (-1)^Tr(P(x)+a x^67+b x^69)|<=2^21` for every nonzero balanced phase, because the external constant supplies the complement of each word.",
+    "Pure monomials are not the bottleneck: `S(a x^67)=0` for `a!=0`, while `S(b x^69)` is 65536 for cube `b` and -32768 for either noncube class. These values do not control the required maxima after arbitrary `P in L_65`.",
+    "For quadratic phases, the Walsh spectrum and the target cap force every nonzero polar form to have rank at least 18; this is the input to the proved dimension ceilings 234 and 1014."
+  ],
+  "explicitness_audit": [
+    "The field is the fixed quotient by `T^30+T+1`; the durable degree-30 Rabin certificate checks Frobenius exponents 6, 10, 15, and 30.",
+    "Coordinates are all `2^30` polynomial-basis field elements in lexicographic bit order. No puncturing, padding, sampling, or hidden ordering is used for `C(0)` or the full degree-69 code.",
+    "The 991 anchor rows are the all-one row and `Tr(theta^i x^j)` for the 33 odd exponents `j<=65` and `0<=i<30`. The full conditional degree-69 matrix adds the analogous 60 rows for exponents 67 and 69.",
+    "The generator algorithm streams every one of the `k*n` bits in deterministic polynomial time; it does not invoke search for a code or a distance witness.",
+    "The 5,995,866-case enumeration used in the codimension-10 obstruction is a fully specified finite proof check, independently recomputed from the displayed 30-bit mask. It selects no generator matrix and is smaller than `n`, so it is not an inadmissible exhaustive construction.",
+    "No conditional-expectation selector, random sampling, canonical exhaustive code search, or unavailable lookup table is used."
+  ],
+  "generator_matrix": {
+    "algorithm": "Represent `F` in the polynomial basis `1,theta,...,theta^29`. Enumerate columns by integers `x=0,...,2^30-1`, interpreted as coefficient bitmasks. Output row 0 as all ones. For each odd `j` from 1 through 65 and each `i=0,...,29`, output the row whose `x` entry is `Tr(theta^i x^j)`. This is the complete `991 by 2^30` matrix of the proved anchor. For any explicitly supplied binary basis `(a_t,b_t)` of `V`, append the row `Tr(a_t x^67+b_t x^69)`; for `V=F^2`, use `(theta^i,0)` and `(0,theta^i)` for `0<=i<30`, producing the full conditional `1051 by 2^30` matrix.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "`O(k*n*(log n)^3)` bit operations and `O(log n)` auxiliary bits beyond the streamed output; in particular this is `n^{O(1)}`.",
+    "runtime_proof": "With `m=log_2 n=30`, naive multiplication modulo the fixed degree-30 polynomial costs `O(m^2)` bit operations. Binary powering to exponents at most 69 and the absolute trace, computed by 29 repeated squarings and additions, cost `O(m^3)` per entry under a conservative bound. There are exactly `k*n` entries, so the stated bound follows. Since `k<=1051<=n`, it is at most `O(n^2(log n)^3)` and hence polynomial in `n`; the output itself contains `Theta(k*n)` bits."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Binary trace polynomials over `F_(2^m)` of odd degree at most `2t-1`, or equivalently the dual primitive BCH trace representation in the stated range.",
+      "result": "Carlitz\u2013Uchiyama/Weil gives weight deviation at most `(t-1)2^(m/2)` and supplies the standard trace representation.",
+      "source": "[J. F. Voloch, On the duals of binary BCH codes](https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf)",
+      "used_for": "Independent support for the degree-65 anchor and the generic degree-67/69 bounds; the finite anchor proof is also reproduced directly."
+    },
+    {
+      "hypotheses": "An arbitrary subset of alternating `n by n` matrices over `F_q` with pairwise rank distance at least `2d`; no linearity assumption is required.",
+      "result": "The Delsarte\u2013Goethals Singleton-like bound is `|A|<=q^[n(n-1)/(2 floor(n/2)) * (floor(n/2)-d+1)]`.",
+      "source": "[A. Abiad, G. N. Alfarano, A. Ravagnani, Eigenvalue bounds and alternating rank-metric codes, Theorem 2.2](https://arxiv.org/abs/2405.09254)",
+      "used_for": "At `q=2,n=30,2d=18`, bounds the polar image by `2^203` and a target-safe quadratic phase space by dimension 234."
+    },
+    {
+      "hypotheses": "Polynomials over a finite field whose sum of total degrees is less than the number of variables.",
+      "result": "The number of common zeros is divisible by the characteristic.",
+      "source": "[D. R. Heath-Brown, A Note on the Chevalley--Warning Theorems](https://arxiv.org/abs/1009.3764)",
+      "used_for": "Ensures a nonzero weighted-orbit intersection for coefficient subspaces of codimension at most 9; the codimension-10 boundary is handled by the new parity certificate."
+    },
+    {
+      "hypotheses": "The two generalized-Niho cyclic-code families with the paper's exponent, coprimality, and `t<=(q+1)/(2e)` hypotheses.",
+      "result": "Exact dimensions `(2t+1)m` and `2tm`, and weights determined by a unit-circle root count.",
+      "source": "[M. Xiong, N. Li, Z. Zhou, C. Ding, Weight distribution of cyclic codes with arbitrary number of generalized Niho type zeroes with corrigendum](https://arxiv.org/abs/1806.07579)",
+      "used_for": "With `q=2^15,e=1` and one zero coordinate appended, gives a dimension ceiling 991 after adjoining the all-one word in the natural root-evaluation architecture."
+    },
+    {
+      "hypotheses": "Extended norm-trace evaluation codes followed by homogeneous Walsh\u2013Hadamard concatenation.",
+      "result": "Exact point count, genus, Riemann\u2013Roch dimension formula, and bias bound for the norm-trace family.",
+      "source": "[G. L. Matthews and J. D. Peachey, Small-bias sets from extended norm-trace codes](https://personal.math.vt.edu/gmatthews/sbs.pdf)",
+      "used_for": "The exact-length scan gives at most dimension 976, and at most 445 for genuinely nontrivial `u>1` specializations."
+    },
+    {
+      "hypotheses": "Trace codes of AG/Hermitian evaluation codes under the authors' stated degree and irreducibility conditions.",
+      "result": "Current bounds are asymptotic or contain unspecified constants; the 2025 analysis explicitly reports no improved construction.",
+      "source": "[Cohen\u2013Doron\u2013Goldgraber\u2013Manket, Tracing AG Codes: Toward Meeting GV](https://eccc.weizmann.ac.il/report/2025/174/download/); [Kopparty\u2013Ta-Shma\u2013Yakirevitch, Trace Hermitian codes have vanishing bias](https://eccc.weizmann.ac.il/report/2024/069/revision/1/download)",
+      "used_for": "Landscape exclusion only: the Hermitian curve with parameter `2^10` has exactly `2^30` affine points, but the published hidden-constant bounds do not certify the absolute cap `2^21`."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Algebraic positions 4 and 6 should independently rerun the 30-bit exact-cover certificate and persist the weighted-orbit dichotomy as a reusable lemma.",
+    "The BCH/character-sum architect should now analyze only the full degree-69 code. A uniform `64*2^15` bound produces an immediate explicit `k=1051` submission; one explicit violating phase closes the entire degree-67/69 extension architecture above 1040.",
+    "Algebraic position 5 should persist the quadratic-augmentation ceiling `dim(C_65+Q)<=1014` and avoid further Gold/Kasami/Kerdock extension searches.",
+    "If the full degree-69 code fails, investigate genuinely higher-degree structured phase spaces not expressible as `L_65` plus the 67/69 layers; the present dichotomy is intentionally scoped and does not exclude them."
+  ],
+  "obstructions": [
+    "No new code above the existing proved campaign candidate of dimension 1040 is certified here; the full dimension-1051 code lacks the required uniform character-sum theorem.",
+    "Generic one-pole or fixed-conductor Artin\u2013Schreier/Hasse\u2013Weil certification stops at dimension 991 at this target.",
+    "Within the degree-67/69 extension architecture, selective coefficient-subspace design cannot help: every dimension-at-least-50 subspace is safe only when the entire 60-dimensional top layer is safe.",
+    "Any target-safe extension of `C_65` by arbitrary quadratic Boolean phases has dimension at most 1014.",
+    "Natural generalized-Niho root-evaluation families stop at dimension 991 after complement augmentation; exact-length norm-trace specializations stop at 976.",
+    "The current Hermitian/TAG literature does not provide the explicit finite constant needed for `n=2^30`; asymptotic vanishing bias is not an admissible concrete certificate.",
+    "High even moments show that bad lower perturbations, if any, are sparse, but an averaging or random-selection conclusion would violate the construction rules and cannot prove a universal distance bound."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target",
+      "quantity": "Block length `n`",
+      "value": "`2^30 = 1,073,741,824`"
+    },
+    {
+      "derivation": "`epsilon=2^-10`",
+      "quantity": "Required distance `D`",
+      "value": "`(1/2-2^-10)n = 2^29-2^20 = 535,822,336`"
+    },
+    {
+      "derivation": "`sqrt(2^30)`",
+      "quantity": "Square-root scale `Q`",
+      "value": "`2^15 = 32,768`"
+    },
+    {
+      "derivation": "`n-2D`",
+      "quantity": "Required signed-sum cap",
+      "value": "`2^21 = 64Q = 2,097,152`"
+    },
+    {
+      "derivation": "33 full field-coefficient layers plus one binary constant",
+      "quantity": "Degree-65 anchor dimension",
+      "value": "`33*30+1 = 991`"
+    },
+    {
+      "derivation": "34 full field-coefficient layers plus one binary constant",
+      "quantity": "Full degree-67 dimension",
+      "value": "`34*30+1 = 1021`"
+    },
+    {
+      "derivation": "35 full field-coefficient layers plus one binary constant",
+      "quantity": "Full degree-69 dimension",
+      "value": "`35*30+1 = 1051`"
+    },
+    {
+      "derivation": "`991+dim(V)>1040`",
+      "quantity": "Two-layer leaderboard gateway",
+      "value": "`dim_F2(V)>=50`, giving at least `k=1041`"
+    },
+    {
+      "derivation": "Generic Artin\u2013Schreier genus 33",
+      "quantity": "Degree-67 generic distance",
+      "value": "`2^29-33Q = 535,789,568`, deficit `32,768`"
+    },
+    {
+      "derivation": "Generic Artin\u2013Schreier genus 34",
+      "quantity": "Degree-69 generic distance",
+      "value": "`2^29-34Q = 535,756,800`, deficit `65,536`"
+    },
+    {
+      "derivation": "Delsarte\u2013Goethals exponent `29*(15-9+1)` plus the 31-dimensional affine kernel",
+      "quantity": "Maximum target-safe quadratic phase-space dimension",
+      "value": "`203+31 = 234`"
+    },
+    {
+      "derivation": "`C_65` contains a 211-dimensional quadratic subcode",
+      "quantity": "Maximum target-safe quadratic augmentation of `C_65`",
+      "value": "`991+(234-211) = 1014`"
+    }
+  ],
+  "proof_markdown": "## 1. Anchor and target cap\n\nFor a Boolean phase `f:F->F_2`, write `S(f)=sum_x (-1)^f(x)`. Its truth-table weight is `(q-S(f))/2`. Since the construction contains the external constant 1, it contains both `f` and `f+1`; hence the target is equivalent, apart from the zero and all-one phases, to `|S(f)|<=q-2D=2^21`.\n\nFor nonzero `P in L_65`, the smooth model of `y^2+y=P(x)` has genus `(deg(P)-1)/2<=32`. Hasse\u2013Weil therefore gives `|S(P)|<=64*2^15=2^21`. It also prevents a nonzero parameter tuple from evaluating to an affine constant, proving injectivity and `dim C(0)=1+33*30=991`. This reproduces the durable degree-65 trace lemma.\n\n## 2. Weighted scaling\n\nDefine\n\n`M(a,b)=max_{P in L_65} |sum_x (-1)^Tr(P(x)+a x^67+b x^69)|`.\n\nFor `u!=0`, substitution `x=u y` permutes `F` and maps `L_65` bijectively to itself. Consequently\n\n`M(a,b)=M(a u^67,b u^69)`.\n\nCall `V` safe when `M(a,b)<=2^21` for every `(a,b) in V`, with the already-safe zero-pair interpreted through `C_65`.\n\n## 3. Orbit hitting below codimension 10\n\nIf `V<=F^2` has codimension `c`, write it as the common kernel of trace-linear forms `ell_1,...,ell_c`. For a fixed pair `(a,b)`, put\n\n`F_i(u)=ell_i(a u^67,b u^69)`.\n\nThe binary expansions `67=2^6+2+1` and `69=2^6+4+1` show that every `F_i`, in 30 binary coordinates for `u`, has algebraic degree at most 3. If `c<=9`, then `sum_i deg(F_i)<=27<30`. Chevalley\u2013Warning makes the number of common zeros even. Since `u=0` is a common zero, another zero has `u!=0`; hence every weighted scaling orbit meets `V`.\n\n## 4. The codimension-10 boundary\n\nFor completeness, the equality case is settled by a finite parity certificate. After scalar extension, the Moore coordinates `Y_r=u^(2^r)`, `r in Z/30`, are an invertible linear coordinate system. The cubic parts of the check equations lie in the span of\n\n`Y_r Y_(r+1) Y_(r+6)` and `Y_r Y_(r+2) Y_(r+6)`.\n\nFor ten checks, the common-zero count modulo 2 equals\n\n`sum_u product_i(1+F_i(u))`.\n\nAll terms of total degree below 30 sum to zero over `F_2^30`. A degree-30 contribution requires ten allowed triples to partition `Z/30`. The assertion is coordinate-independent: the coefficient of a product of all 30 independent linear coordinates changes by the Moore determinant, while any repeated coordinate gives a determinant with repeated rows and contributes zero in characteristic two.\n\nIt remains to exclude the exact cover. In `R=F_2[x]/(x^30-1)`, set\n\n`A=1+x+x^6`, `B=1+x^2+x^6`, and `J=1+x+...+x^29`.\n\nDirect cyclic multiplication gives an inverse of `A` with support\n\n`{0,2,3,4,6,7,9,12,15,16,17,21,23,24,25,26,29}`\n\nand gives `D=A^(-1)B=0x11c96ecc`, of support\n\n`{2,3,6,7,9,10,11,13,14,16,19,22,23,24,28}`.\n\nIf `a_r,b_r` mark selected triples of the two types, an exact cover implies `Aa+Bb=J` over `F_2`, hence `a=J+Db`. It also implies `wt(a)+wt(b)=10`, so `wt(Db)=20+wt(b)`. Summing covered vertex labels modulo 3 gives `wt(b)=2,5`, or `8`.\n\nThe exhaustive verifier is fully specified: for each `k in {2,5,8}` and each lexicographic `k`-subset `I` of `{0,...,29}`, compute `z=XOR_{i in I} rot30(0x11c96ecc,i)` and record `popcount(z)`. The independently recomputed totals and maxima are\n\n| `k` | subsets | maximum `popcount(z)` | required |\n|---:|---:|---:|---:|\n| 2 | 435 | 20 | 22 |\n| 5 | 142506 | 23 | 25 |\n| 8 | 5852925 | 26 | 28 |\n\nThus no exact cover exists. The common-zero count is even also at codimension 10, and the zero solution again forces a nonzero solution.\n\n## 5. All-or-nothing degree-69 frontier\n\nEvery `V` with `dim(V)>=50` has codimension at most 10 and therefore meets every weighted orbit. If such a `V` is safe, scaling invariance makes every pair in `F^2` safe. Hence `C(F^2)`, the full odd-degree-through-69 trace code, is safe and has dimension 1051. Conversely, if the full code is safe then every subspace is safe. Therefore\n\n`there exists a safe V with dim(V)>=50` if and only if `the full k=1051 code is safe`.\n\nThis is a reduction, not a proof that the full code is safe.\n\n## 6. Quadratic phase ceiling\n\nLet `U<=RM(2,30)` contain `RM(1,30)`. For a quadratic phase `Q` with polar form of rank `r`, a standard squaring calculation gives Walsh values either zero or of magnitude `2^(30-r/2)` after affine shifts; some shift attains the nonzero magnitude. The target cap forces `r>=18` for every nonzero polar form.\n\nPolarization maps `U` to an alternating rank-metric code, with kernel exactly `RM(1,30)` of dimension 31. The Delsarte\u2013Goethals bound at `n=30`, field size 2, and rank distance 18 gives image size at most\n\n`2^[30*29/(2*15) * (15-9+1)] = 2^203`.\n\nThus `dim(U)<=31+203=234`.\n\nInside `C_65`, the phases\n\n`c+Tr(bx+sum_{i=1}^6 a_i x^(2^i+1))`\n\nform an exact 211-dimensional quadratic subcode. Indeed, if `s<=6` is the largest active index, the radical is the kernel of\n\n`L(x)=sum_{i=1}^s (a_i x^(2^i)+a_i^(2^(30-i)) x^(2^(30-i)))`.\n\nRaising to `2^s` produces a nonzero linearized polynomial of ordinary degree `2^(2s)`, so the radical has dimension at most `2s<=12` and the polar rank is at least 18. This also proves coefficient injectivity; including affine phases gives dimension `1+30+6*30=211`.\n\nNow suppose `C_65+Q` is target-safe for some quadratic subspace `Q`, and put `R=(C_65+Q) intersect RM(2,30)`. Then `dim R<=234` and `dim(R intersect C_65)>=211`. The natural quotient injection\n\n`Q/(Q intersect C_65) -> R/(R intersect C_65)`\n\nshows that at most 23 new dimensions are possible. Therefore `dim(C_65+Q)<=991+23=1014`.\n\n## 7. Landscape conclusion\n\nThe generic fixed-conductor Artin\u2013Schreier route, generalized-Niho root-evaluation families, exact-length norm-trace specializations, and arbitrary quadratic augmentations all stop below 1041. The sole surviving trace-polynomial gateway identified here is the universal degree-69 character-sum statement. Current Hasse\u2013Weil gives `68*2^15`; the target requires `64*2^15`.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "For a truth table, `wt(f)=(q-S(f))/2` and `S(f+1)=-S(f)`. The external constant therefore converts the one-sided distance requirement into the absolute cap `q-2D=2^21`.",
+      "statement": "The immutable distance target is equivalent to a `2^21` signed-sum cap on every nonconstant phase.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "degree-65-trace-code"
+      ],
+      "id": "P2",
+      "proof": "The one-pole Artin\u2013Schreier genus is at most 32, so Hasse\u2013Weil gives `|S|<=64*2^15`. The same strict inequality against `q` proves injectivity of the 991-dimensional parameter space.",
+      "statement": "`C_65=C(0)` is an explicit `[2^30,991,>=535822336]_2` code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P3",
+      "proof": "Substitute `x=u y`. The lower polynomial becomes `P(uY)`, which still ranges bijectively over `L_65`, and the high coefficients become `(a u^67,b u^69)`.",
+      "statement": "The coset maximum `M(a,b)` is constant on weighted scaling orbits.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "Chevalley-Warning"
+      ],
+      "id": "P4",
+      "proof": "A codimension-at-most-9 subspace has at most nine trace-linear checks. Composing them with `u -> (a u^67,b u^69)` gives equations of degree at most 3, whose total degree is at most 27<30. Their zero count is even and includes zero, so it contains a nonzero point.",
+      "statement": "Every coefficient subspace of dimension at least 51 meets every weighted scaling orbit.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3"
+      ],
+      "id": "P5",
+      "proof": "At codimension 10, zero-count parity can fail only through a square-free degree-30 monomial. Frobenius coordinates reduce this to an exact cover by triples `{r,r+1,r+6}` and `{r,r+2,r+6}`. The displayed cyclic inverse reduces a cover to `wt(Db)=20+wt(b)` with `wt(b) in {2,5,8}`. Exhausting respectively 435, 142506, and 5852925 explicitly specified masks gives maxima 20, 23, and 26 rather than the required 22, 25, and 28.",
+      "statement": "Every coefficient subspace of dimension exactly 50 also meets every weighted scaling orbit.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "A safe subspace of dimension at least 50 contains a safe representative from every weighted orbit. Scaling invariance transfers safety to every coefficient pair, so the full 60-dimensional top layer is safe. The reverse implication is immediate.",
+      "statement": "A degree-67/69 extension beats dimension 1040 if and only if the full degree-69 code is target-safe; in that event its dimension is 1051.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "Delsarte-Goethals alternating-rank bound"
+      ],
+      "id": "P7",
+      "proof": "Every polar rank `r` has an affine shift with Walsh magnitude `2^(30-r/2)`, forcing `r>=18`. The polarization image is an alternating code of rank distance 18 and size at most `2^203`; adjoining its exact 31-dimensional affine kernel gives dimension at most 234.",
+      "statement": "Every target-safe quadratic phase space containing all affine phases has dimension at most 234.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P7"
+      ],
+      "id": "P8",
+      "proof": "The six Gold layers of exponents `3,5,9,17,33,65`, together with affine phases, form an injective 211-dimensional subcode of `C_65`. Quotienting any quadratic augmentation through the at-most-234-dimensional quadratic intersection leaves at most 23 new directions.",
+      "statement": "Every target-safe quadratic augmentation `C_65+Q` has dimension at most 1014.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P6"
+      ],
+      "id": "P9",
+      "proof": "The full degree-69 family has generic signed-sum bound `68*2^15`, while P1 requires `64*2^15`. No cited theorem supplies the missing uniform saving, and no counterexample was proved.",
+      "statement": "The full degree-69 code satisfies the target cap.",
+      "status": "conditional"
+    }
+  ],
+  "rate": 9.229406714439392e-07,
+  "research_direction": "Trace and character-sum codes: exact degree-67/69 gateway, quadratic-family obstruction, and finite explicitness audit.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 43 files present, including all three roadmaps)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 40 durable submissions)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json"
+  ],
+  "submission_class": "proof_tool",
+  "theorem_statement": "Let `F=F_(2^30)`, let `L_65` be the 990-dimensional coefficient space of odd polynomials of degree at most 65, and let `C(V)` augment its trace evaluations by coefficients `(a,b)` from a binary subspace `V<=F^2` on `x^67,x^69`, together with the external constant. Then `dim C(V)=991+dim(V)`. A target-safe `V` with `dim(V)>=50` exists if and only if the full `V=F^2` is target-safe; thus this architecture either gives the full explicit `k=1051` degree-69 code or gives no improvement over the existing `k=1040` campaign construction. Separately, every target-safe quadratic phase space containing all affine phases has dimension at most 234, and every quadratic augmentation of the degree-65 trace code has dimension at most 1014. The full degree-69 distance statement remains unresolved, so this is a proof-tool handoff, not a leaderboard submission.",
+  "title": "Trace degree-69 frontier: all-or-nothing orbit reduction and quadratic ceiling"
+}

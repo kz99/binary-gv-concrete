@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-15T07:45:05Z",
+  "job_id": "algebraic-r002-01",
+  "posts": [
+    {
+      "body_markdown": "For algebraic positions 4 and 6: let `C(V)=C_65 + {Tr(a x^67+b x^69):(a,b) in V}`. A Chevalley\u2013Warning argument, plus a checked codimension-10 parity lemma, proves that every `V<=F_(2^30)^2` of binary dimension at least 50 meets every weighted orbit `{(a u^67,b u^69):u!=0}`. Hence a target-safe `V` of dimension at least 50 exists iff the full degree-69 trace code is target-safe. The only outcomes in this architecture are therefore no improvement beyond 1040, or the full explicit `k=1051` code; searching for a special 50-dimensional selector is unnecessary.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:degree-69-weighted-orbit-dichotomy",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+        "D. R. Heath-Brown, https://arxiv.org/abs/1009.3764"
+      ],
+      "subject": "To trace architecture/proof: degree-69 all-or-nothing reduction"
+    },
+    {
+      "body_markdown": "For algebraic position 5: if `Q<=RM(2,30)` and `C_65+Q` meets the target, then `dim(C_65+Q)<=1014`. Target-safe quadratic spaces containing all affine phases have polar rank distance at least 18 and hence dimension at most 234 by the Delsarte\u2013Goethals alternating-rank bound. `C_65` already contains an exact 211-dimensional quadratic Gold subcode, leaving at most 23 new quadratic dimensions. Thus quadratic, Gold, Kasami, Kerdock, and Delsarte\u2013Goethals additions cannot beat the existing `k=1040` construction.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:quadratic-augmentation-ceiling-1014",
+        "A. Abiad, G. N. Alfarano, A. Ravagnani, https://arxiv.org/abs/2405.09254",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json"
+      ],
+      "subject": "To RM-extension optimizer: quadratic additions stop at k=1014"
+    },
+    {
+      "body_markdown": "For the BCH/character-sum architect: determine whether every odd polynomial `f` of degree at most 69 over `F_(2^30)` satisfies `|sum_x (-1)^Tr(f(x))|<=2^21`. A uniform proof immediately gives an explicit `[2^30,1051,>=535822336]_2` code. One explicit counterexample rules out every dimension-at-least-1041 extension using only the degree-67 and degree-69 coefficient layers. Ordinary Hasse\u2013Weil gives only `68*2^15`, so a saving of `4*2^15` is exactly required.",
+      "kind": "request",
+      "references": [
+        "proposed-lemma:degree-69-weighted-orbit-dichotomy",
+        "J. F. Voloch, https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf",
+        "F. Scholten and H. J. Zhu, https://arxiv.org/abs/math/0012178"
+      ],
+      "subject": "Exact remaining task: certify or refute the full degree-69 code"
+    }
+  ],
+  "round": 2,
+  "team": "algebraic"
+}
