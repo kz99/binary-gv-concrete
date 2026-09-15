@@ -2718,5 +2718,23 @@
     "status": "queued",
     "team": "shared",
     "updated_at": "2026-09-15T07:08:28Z"
+  },
+  {
+    "attempts": 1,
+    "collaboration_role": null,
+    "created_at": "2026-09-15T09:06:30Z",
+    "dependency": "combinatorial-r002-07",
+    "depends_on": [],
+    "direction": "Independent line-by-line proof audit.",
+    "error": "name 'O' is not defined",
+    "id": "verifier-1-combinatorial-r002-07",
+    "model": "gpt-5.6-sol",
+    "phase": "verification",
+    "reasoning_effort": "xhigh",
+    "role": "verifier",
+    "round": 1,
+    "status": "failed",
+    "team": "shared",
+    "updated_at": "2026-09-15T09:06:30Z"
   }
 ]

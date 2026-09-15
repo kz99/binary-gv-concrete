@@ -1,6 +1,7 @@
 {
   "counts": {
     "deferred": 1,
+    "failed": 1,
     "queued": 54,
     "running": 8,
     "succeeded": 74
@@ -203,6 +204,6 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T09:06:29Z",
+  "updated_at": "2026-09-15T09:06:30Z",
   "verifier_reasoning_effort": "xhigh"
 }
