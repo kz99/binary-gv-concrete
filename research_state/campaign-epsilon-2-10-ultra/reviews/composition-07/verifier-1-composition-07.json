@@ -1,0 +1,266 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical SHA-256 from sorted-key JSON; it matches the immutable digest exactly.",
+    "Reimplemented GF(2) polynomial arithmetic and reproduced both Frobenius congruences and the complete gcd chain for the degree-16 modulus.",
+    "Tried to produce collisions in the evaluation set or a nonzero encoder-kernel message; the polynomial basis and degree-64 root bound exclude both.",
+    "Checked every inner-symbol case: H(0) has weight 0, H(1) has weight 32768, and every other nonzero symbol has weight 16384.",
+    "Derived the exact formula wt(C(f))=2^14(32768-r+s), where r and s count evaluations equal to 0 and 1; no possible value distribution under r<=64 falls below the target.",
+    "Checked the equality witness both by counting and exact finite-field evaluation. For the first 64 roots, the nonroot image has size 511 and omits 1, so the target weight is attained.",
+    "Tested the neighboring degree-65 extension; it contains a word of weight 32703*16384=535805952, below the target.",
+    "Recomputed the parity-extension Delsarte polynomial, its Krawtchouk coefficients, sign on the permitted lattice, and the bound 229528<2^18.",
+    "Recomputed the two parity-LP bounds forcing the residual chain [16384,18,8184] -> [8200,17,4092] -> [4108,16,>=2046].",
+    "Audited the Artin-Schreier, PDS, and Solomon-Stiffler arithmetic under their stated scoped hypotheses; their numerical conclusions check out.",
+    "Searched for a stated full-generator-matrix algorithm and runtime proof. The required generator_matrix object and proof are absent.",
+    "Challenged the claimed strongest unresolved gateway using the submission's own read source composition-03.json. The surviving rank-16 and rank-17 endpoints conditionally yield dimensions 1808 and 1649, both exceeding 1170."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": false,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The immutable source identity is the audited composition-07 submission.",
+      "justification": "SHA-256 of json.dumps(parsed_json, sort_keys=True) is b305d0665c9b12dee3a9a001f7f2ffe8b2bf5f2f8923b7c8d7ad3eb3a4463c40. The formatting-dependent raw-file digest is different but is not the campaign identity.",
+      "reference": "composition-07.json:1-301; src/binary_gv_research/campaign.py:31-33",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The headline length, dimension, and baseline-beaten fields describe a dimension-1040 improvement over k=31.",
+      "justification": "The core construction verifies n=1073741824, k=1040, and the required distance, so 1040>31.",
+      "reference": "composition-07.json:2-6,52,73",
+      "verdict": "valid"
+    },
+    {
+      "claim": "p(Z)=Z^16+Z^5+Z^3+Z^2+1 defines F_(2^16).",
+      "justification": "Independent arithmetic gives Z^(2^8)=Z^8+Z^7+Z^3+Z and Z^(2^16)=Z modulo p. The gcd remainder chain for p and Z^(2^8)+Z is Z^2+1,1. These are exactly the degree-16 Rabin conditions.",
+      "reference": "composition-07.json:5,45,168,170-175",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A is an explicitly ordered set of 32768 distinct field elements.",
+      "justification": "Irreducibility makes 1,alpha,...,alpha^15 a polynomial basis. Their first 15 elements span a 15-dimensional binary subspace, and the coefficient-integer rule fixes its order.",
+      "reference": "composition-07.json:5,46,108-110",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer evaluation code has exact parameters [32768,65,32704] over F_(2^16).",
+      "justification": "Evaluation is injective because a nonzero degree-at-most-64 polynomial cannot vanish at 32768 points. The root bound gives distance at least 32704, and a product over 64 evaluation points attains outer weight 32704.",
+      "reference": "composition-07.json:5,37,112-115,177-184",
+      "verdict": "valid"
+    },
+    {
+      "claim": "H(F) is a binary [32768,16,16384] affine Reed-Muller code.",
+      "justification": "H is binary-linear and injective: H(a)(0) and H(a)(e_i) recover every coefficient. Its nonzero weights are 32768 for a=1 and 16384 otherwise.",
+      "reference": "composition-07.json:5,38,117-120,186-193",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The composite code is binary-linear and injective with dimension 1040.",
+      "justification": "Outer evaluation and coordinatewise H are binary-linear and injective. The message space has 65 field coordinates, each of binary dimension 16, so its binary dimension is 65*16=1040.",
+      "reference": "composition-07.json:5-6,127-130,168,195-203",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction has exact length 2^30 without shortening, puncturing, or padding.",
+      "justification": "There are 2^15 outer blocks, each containing 2^15 coordinates, hence 32768^2=1073741824.",
+      "reference": "composition-07.json:3,5,47,122-125,168",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero codeword has weight at least 535822336.",
+      "justification": "For r=#{x:f(x)=0} and s=#{x:f(x)=1}, the exact weight is 2^14(32768-r+s). The root bound gives r<=64 and s>=0, yielding the claimed lower bound for every nonzero polynomial.",
+      "reference": "composition-07.json:36-39,168,205-214",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The claimed minimum distance is attained.",
+      "justification": "For a 64-root product g, g(A\\R) is a subset of F* of size at most 32704<65535. Scaling by an omitted value gives r=64 and s=0, hence weight exactly 32704*16384.",
+      "reference": "composition-07.json:40,168,216-224",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The target and rate arithmetic are exact.",
+      "justification": "535822336=2^29-2^20=511*2^20, n-2D=2^21, and 1040/2^30=65/2^26=9.685754776000977e-7.",
+      "reference": "composition-07.json:41,91-145,262",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission supplies the mandatory deterministic full-generator-matrix algorithm and n^{O(1)} runtime proof.",
+      "justification": "It does not. The JSON has no generator_matrix object, row basis, entry-generation algorithm, output-size accounting, runtime bound, or runtime proof. A repair is immediate using rows alpha^j X^ell and columns (x,y), but that repair is not present in the source.",
+      "reference": "composition-07.json:1-301, especially 5 and 44-50; src/binary_gv_research/campaign.py:37-54,457-464",
+      "verdict": "gap"
+    },
+    {
+      "claim": "All encoder-defining field, basis, message, evaluation, and coordinate choices are deterministic.",
+      "justification": "The core code itself uses fixed symbolic objects and orders and involves no sampling or exhaustive search.",
+      "reference": "composition-07.json:5,44-49",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The phrase 'first z in F*' uses a stated total order.",
+      "justification": "Only the 15-coefficient order on A is explicitly stated, not a 16-coefficient order on F*. This does not affect the code or the existential exact-distance proof, but the claimed stated order should be defined or 'first' removed.",
+      "reference": "composition-07.json:5,40,48,168",
+      "verdict": "unclear"
+    },
+    {
+      "claim": "The conditional-average k=2971 proposal is correctly excluded by the campaign's explicitness rule.",
+      "justification": "Its entry-by-entry choice requires exact averaging over all completions and has no polynomial-time structural evaluator. The campaign expressly excludes such superpolynomial conditional-expectation recursion.",
+      "reference": "composition-07.json:49",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The artifact currently qualifies as a leaderboard submission under the current schema.",
+      "justification": "Although the mathematical code is explicit in substance, the hard-gate generator_matrix certificate is missing, and no proof or record has been persisted. leaderboard_submission=true is premature until those local repairs are made.",
+      "reference": "composition-07.json:50,52,74-78; data/records.json; src/binary_gv_research/campaign.py:486-494",
+      "verdict": "false"
+    },
+    {
+      "claim": "The standard h-copy simplex-deletion formulas are correct.",
+      "justification": "Deleting the nonzero points of U_i gives n=h(2^m-1)-sum(2^u_i-1) and the uniform lower certificate d_0=h2^(m-1)-sum 2^(u_i-1), hence n-2d_0=t-h.",
+      "reference": "composition-07.json:9,168,247-252",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Solomon-Stiffler proof as written establishes its full stated exclusion clearly enough for an ordinary reader.",
+      "justification": "Independent capacity enumeration confirms the four exceptional pairs and their power-of-two contradictions, but the source merely asserts that 'exact capacity bounds' eliminate every other h. It omits the inequalities and case table. Moreover, failure of the generic d_0 certificate should not be phrased as nonexistence of every whole-subspace deletion code unless exactness of d_0 is proved.",
+      "reference": "composition-07.json:9,76,86,168,247-252",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The scoped fixed-conductor Artin-Schreier ceiling is numerically and mathematically valid.",
+      "justification": "For reduced odd pole caps, principal-part counting gives dimension at most 1+15R, the genus bound gives 2g<=R-2, and Hasse-Weil gives |S|<=(R-2)2^15. The generic certificate therefore works only for R<=66, giving k<=991.",
+      "reference": "composition-07.json:18-24,67-70,87,162-165,168,233-238",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Artin-Schreier dependency precisely locates support for every imported multiple-pole assertion.",
+      "justification": "The source links a paper but gives no theorem locator for the general multiple-pole genus and principal-part count. The argument is standard and correct under the stated hypotheses, but its academic sourcing should be made precise.",
+      "reference": "composition-07.json:66-70",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The PDS/strongly-regular Cayley ceiling K<=60 is valid within its stated architecture.",
+      "justification": "For mu>=1, the SRG identity gives v<=k_0^2+1=2^60+1, so power-of-two v forces K<=60. For mu=0, components are cliques of order k_0+1=2^30+1, impossible for a subgroup of an elementary abelian 2-group.",
+      "reference": "composition-07.json:88,168,240-245",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The LP-32768 proof step excludes a binary code of length 32768, size 2^18, and distance at least 16381.",
+      "justification": "Parity extension gives an even-weight length-32769 code with y=32769-2x congruent to 1 mod 4 and y<=5. The displayed cubic is nonpositive on this lattice, its Krawtchouk coefficients recompute exactly, and Delsarte gives floor(P(0)/f_0)=229528<2^18.",
+      "reference": "composition-07.json:84,226-231",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The forced rank-18 residual chain is correct.",
+      "justification": "The parity-LP bounds force actual distances 8184 and then 4092. Two residualizations therefore give lengths 8200 and 4108, dimensions 17 and 16, and final distance at least 2046.",
+      "reference": "composition-07.json:27,42,75,254-259",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The [16384,18,8184] gateway yielding k=1170 is the strongest unresolved ordinary-RS gateway.",
+      "justification": "This is false. The already-read composition-03 ledger leaves [16384,16,8190] and [16384,17,8188] unresolved. They yield respectively k=16*113=1808 with distance 8190*65424=D+224, and k=17*97=1649 with distance 8188*65440=D+384.",
+      "reference": "composition-07.json:27-33,42,74-77,85,299; composition-03.json:5,9,28,83,130-147",
+      "verdict": "false"
+    },
+    {
+      "claim": "Exactly three coarse rank-threshold hypotheses survive at inner length 2^14.",
+      "justification": "As coarse lower-threshold rank classes, ranks 16, 17, and 18 are the surviving cases. However, collapsing their surviving distance ranges to 8185, 8184, and 8184 cannot support the claimed highest-payoff conclusion; the ranges extend through 8190 and 8188 for ranks 16 and 17.",
+      "reference": "composition-07.json:60-64; composition-03.json:130-147,160",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The conditional ledger entries k=1168,1105,1170 and their displayed product distances are arithmetically correct.",
+      "justification": "The products are 8185*65464=D+504 and 8184*65472=D+512; the dimensions are 16*73=1168, 17*65=1105, and 18*65=1170.",
+      "reference": "composition-07.json:147-160",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer [65536,65,65472] code over F_(2^18) is an explicitly specified full-length Reed-Solomon code.",
+      "justification": "Its parameters are valid because 65536<=2^18, but it is not full-length over F_(2^18), and no degree-18 modulus, basis, or ordered 65536-point evaluation set is specified. The same full-length terminology is inappropriate for the rank-17 case.",
+      "reference": "composition-07.json:27,61-64,256-258",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The degree-65 extension obstruction is correct.",
+      "justification": "A scaled polynomial with 65 prescribed roots can avoid the all-one inner symbol elsewhere, producing weight 32703*16384=535805952<D.",
+      "reference": "composition-07.json:81",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The reciprocal-sum obstruction is mathematically valid and properly sourced here.",
+      "justification": "The interpolation argument and nonzero witness are valid in combinatorial-09, but composition-07 provides neither a proof step nor a literature-dependency entry for this claim. Its provenance should be stated directly.",
+      "reference": "composition-07.json:82; submissions/combinatorial-09.json",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The length-8192 nonlinear-code obstruction is correct.",
+      "justification": "The parity-lattice cubic gives A_2(8192,4090)<=116581<2^17, so no binary code of the claimed size and distance exists.",
+      "reference": "composition-07.json:83",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The length-32768 nonlinear-code obstruction is correct.",
+      "justification": "The independently checked parity-extension cubic gives A_2(32768,16381)<=229528<2^18.",
+      "reference": "composition-07.json:84,226-231",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The obstruction list is appropriately architecture-scoped rather than presented as a universal upper bound.",
+      "justification": "The final obstruction explicitly limits the conclusions to the named architectures and disclaims a universal binary-code bound.",
+      "reference": "composition-07.json:80-89",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The degree-at-most-69 trace roadmap arithmetic is correct.",
+      "justification": "There are 35 positive odd degrees through 69, so the unrestricted phase dimension is 1+35*30=1051. The generic Weil coefficient 68 exceeds the allowed 64 by 4.",
+      "reference": "composition-07.json:77",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The FIELD, OUTER, INNER, ENCODER, DISTANCE-LOWER, and DISTANCE-EXACT proof steps have justified proved status.",
+      "justification": "Their dependencies are noncircular, and independent calculation verifies irreducibility, both constituent codes, composite injectivity, the universal distance bound, and attainment.",
+      "reference": "composition-07.json:169-224",
+      "verdict": "valid"
+    },
+    {
+      "claim": "GATEWAY-1170 is correctly marked conditional as an implication.",
+      "justification": "If the inner code and a fully specified length-65536 RS outer code are supplied, the stated dimension and product distance follow. The implication is true, but it is not the strongest unresolved implication and its outer explicitness needs repair.",
+      "reference": "composition-07.json:254-259",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The overall proved status and theorem statement are accurate as written.",
+      "justification": "The central k=1040 theorem is proved, but the theorem statement's strongest-gateway conjunct is false and the explicit-generator certificate is absent. The source should be revised or the ancillary audit removed before the complete artifact is labeled proved and leaderboard-eligible.",
+      "reference": "composition-07.json:264,298-300",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The source-path inventory is provenance metadata rather than a hidden dependency for the core code.",
+      "justification": "The named core files exist, and the displayed construction and its elementary proof independently establish the code without relying on the prior verifier's conclusion.",
+      "reference": "composition-07.json:265-296",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": false,
+  "required_changes": [
+    "Add the required generator_matrix object and a proof section giving the complete 1040-row basis, an entry-generation algorithm, output-size accounting for all 1040*n bits, and an n^{O(1)} runtime proof. For example, use rows alpha^j X^ell and emit H(alpha^j x^ell)_y in the fixed column order.",
+    "Correct every claim that k=1170 is the strongest unresolved RS gateway. State the surviving ranges d=8185..8190 for rank 16, d=8184..8188 for rank 17, and d=8184 for rank 18; the highest conditional payoffs are respectively 1808, 1649, and 1170, so the k=1808 endpoint has first priority.",
+    "For the conditional rank-17 and rank-18 RS codes, remove the false 'full-length' description and specify explicit field moduli, bases, and ordered 65536-point evaluation sets if those conditional constructions are retained.",
+    "Supply the omitted Solomon-Stiffler capacity inequalities and four-case table, and consistently scope the conclusion to failure of the standard d_0 certificate unless exact minimum distance is proved.",
+    "Add precise proof-step or literature provenance for the reciprocal-sum, Delsarte, general Artin-Schreier, and PDS assertions, or remove those ancillary claims from this leaderboard submission.",
+    "Define the total order on F* used by 'first z', or state the equality witness existentially.",
+    "Persist the repaired proof under proofs/, add the under-review candidate and reusable lemmas to data/records.json, then run the validator and dashboard build in a writable environment."
+  ],
+  "source_job_id": "composition-07",
+  "source_sha256": "b305d0665c9b12dee3a9a001f7f2ffe8b2bf5f2f8923b7c8d7ad3eb3a4463c40",
+  "summary": "REVISE. The core construction is independently verified as a binary linear code with exact parameters [1073741824,1040,535822336]_2 and rate 65/2^26, so its length, dimension, distance, arithmetic, and baseline improvement are sound. Acceptance is blocked by a locally repairable explicitness failure: the mandatory full-generator-matrix algorithm and polynomial-runtime proof are absent. The ancillary hybrid audit also falsely calls k=1170 the strongest unresolved RS gateway; the surviving rank-16 and rank-17 endpoints conditionally yield k=1808 and k=1649. No fatal obstruction affects the core code.",
+  "verdict": "revise",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}
