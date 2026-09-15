@@ -1,0 +1,175 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed Rabin's certificate: T^(2^8) mod p=T^14+T^12+T^7+T^6+T^5+T^4, gcd(p,T^(2^8)-T)=1, and T^(2^16) mod p=T.",
+    "Cross-checked irreducibility by testing all 255 possible monic constant-one divisors of degrees 1 through 8; none divides p.",
+    "Tested the inner encoder for a kernel and low-weight exceptional symbols. It is injective; z=1 gives the heavier all-one block, while every other nonzero symbol gives weight 2^14.",
+    "Tried to obtain an evaluation-kernel word. A nonzero degree-at-most-64 polynomial cannot vanish at all 32,768 evaluation points.",
+    "Checked the extremal 64-root case. At most 32,704 of 65,535 nonzero scales are forbidden, leaving at least 32,831 scales that make every nonroot block balanced.",
+    "Checked constant and lower-degree outer polynomials separately; none evades the root bound or produces a lighter inner block.",
+    "Recomputed the Griesmer sum 32,769 for a hypothetical binary [32768,17,16384] inner code and the Singleton value 65 for outer distance 32,704.",
+    "Reconstructed the degree-65 incidence argument and verified that C(32705,2)=534,792,160 is 1 modulo 3, contradicting the required Steiner-system divisibility condition.",
+    "Tested the broader claim on line 80 with a repetition inner code of dimension 1 and distance 32,768. Product distance then requires outer distance only 16,352, and Singleton gives 16,417 rather than 65; thus the stated two-bound argument does not establish a universal 1,040 ceiling without the omitted outer-distance hypothesis.",
+    "Recomputed the campaign's canonical sorted-key JSON hash and obtained the supplied immutable SHA-256 exactly."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission claims a baseline-beating deterministic code of length 2^30 and dimension 1,040.",
+      "justification": "The construction below verifies these parameters, and 1,040>31. The high-confidence leaderboard classification is honest.",
+      "reference": "algebraic-01.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "p(T)=T^16+T^5+T^3+T+1 is irreducible and defines E=F_(2^16).",
+      "justification": "The complete degree-16 Rabin criterion applies because 2 is the sole prime divisor of 16. Both the Frobenius congruence and required gcd test recompute correctly.",
+      "reference": "algebraic-01.json:5,43,53-56,124,127-131",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A is an explicit 15-dimensional binary subspace with 32,768 distinct evaluation points.",
+      "justification": "The residue classes 1,theta,...,theta^15 form the polynomial basis of E, so the span through theta^14 has binary dimension 15.",
+      "reference": "algebraic-01.json:5,44,89-96,124",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Phi is a binary-linear bijection from E to RM(1,15), with nonzero block weight at least 2^14.",
+      "justification": "Evaluating at y=0 and the standard basis vectors proves injectivity. A nonzero linear part is balanced; the sole remaining nonzero case z=1 is all-one and heavier.",
+      "reference": "algebraic-01.json:5,38,45,59-62,99-101,124,133-141",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed evaluation-concatenation construction is binary linear, has exact length 2^30, and has dimension 1,040.",
+      "justification": "The coordinate count is 2^15\u00b72^15. Evaluation is injective because degree 64 is below the number of distinct points, and 65 field coefficients contribute 65\u00b716 binary dimensions.",
+      "reference": "algebraic-01.json:5-6,104-111,124,143-160",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The general RS\u2013RM concatenation lemma has the stated parameters.",
+      "justification": "Degree-at-most-t evaluation has dimension t+1 and symbol distance at least L-t; concatenation with RM(1,s) multiplies length and the certified distances. The concrete specialization fixes every representation and ordering.",
+      "reference": "algebraic-01.json:8-17",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Within the fixed constituent-distance regime d_inner>=16384 and d_outer>=32704, Griesmer and Singleton cap the binary dimension at 1,040.",
+      "justification": "Griesmer excludes inner dimension 17 because its sum is 32,769>32,768. Singleton gives at most 65 outer information symbols, hence at most 16\u00b765=1,040 binary dimensions.",
+      "reference": "algebraic-01.json:18-25,64-68",
+      "verdict": "valid"
+    },
+    {
+      "claim": "No single binary degree-65 direction can be added to the entire degree-at-most-64 outer space while preserving the target distance.",
+      "justification": "For each leading coefficient, target distance would require coverage of every 65-set by an all-one incidence. Deletion counting bounds the incidences by C(N,65); equality would force an S(64,65,32767), whose i=62 divisibility condition fails modulo 3.",
+      "reference": "algebraic-01.json:26-33,79",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The discussion-post references support the two ancillary obstruction arguments.",
+      "justification": "P5 proves only the construction's product-distance lower bound. It does not contain either the Griesmer\u2013Singleton argument or the incidence/Steiner proof; those arguments should receive their own proof step or lemma reference.",
+      "reference": "algebraic-01.json:21-23,29-31,162-171",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The distance audit proves the lower bound and exact attainment.",
+      "justification": "Every nonzero polynomial has at least 32,704 nonzero evaluations, each contributing at least 16,384. The scale-avoidance witness makes all those blocks balanced, so equality holds.",
+      "reference": "algebraic-01.json:35-40",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction is deterministic and symbolically recoverable.",
+      "justification": "The field modulus, basis, evaluation subspace, symbol map, and both coordinate orders are fixed. No sampling, shortening, puncturing, or padding occurs. The scale used only for an equality witness can also be selected deterministically.",
+      "reference": "algebraic-01.json:42-48",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The literature dependencies have their required hypotheses satisfied.",
+      "justification": "Rabin's criterion is correctly specialized; affine balance applies with m=15; and the Griesmer and Singleton hypotheses match the fixed-distance ancillary claim.",
+      "reference": "algebraic-01.json:51-69",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance field and the first two obstruction statements are correct.",
+      "justification": "The full degree-65 space contains a scaled 65-root word of weight 32,703\u00b716,384=535,805,952, below target. The stronger one-bit-extension obstruction is also valid.",
+      "reference": "algebraic-01.json:71-79",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Griesmer plus Singleton universally cap every listed product-distance concatenation at dimension 1,040.",
+      "justification": "The outer-distance hypothesis is missing. If inner distance exceeds 16,384, product distance permits outer distance below 32,704, so Singleton need not give 65. For example, a repetition inner code makes the corresponding Singleton upper bound 16,417. The sentence is valid only after restoring the fixed outer-distance condition or supplying a stronger tradeoff proof.",
+      "reference": "algebraic-01.json:80",
+      "verdict": "gap"
+    },
+    {
+      "claim": "Every parameter-ledger value is correct.",
+      "justification": "The recomputed values are |E|=65,536, |A|=32,768, outer parameters [32768,65,32704], inner parameters [32768,16,16384], n=2^30, k=1,040, d=535,822,336, and rate 65/67,108,864.",
+      "reference": "algebraic-01.json:82-122",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof correctly establishes the field model and inner encoder.",
+      "justification": "The basis, injectivity argument, affine-balance dichotomy, and exceptional all-one symbol are complete.",
+      "reference": "algebraic-01.json:124, field and inner-map paragraphs",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof correctly establishes binary linearity, exact length, and dimension.",
+      "justification": "Both component maps are binary linear and injective, and the root bound proves injectivity of outer evaluation.",
+      "reference": "algebraic-01.json:124, dimension-and-length paragraph",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof gives the required lower bound for every nonzero codeword.",
+      "justification": "A nonzero degree-at-most-64 polynomial has at most 64 roots, and every nonzero inner block has weight at least 2^14.",
+      "reference": "algebraic-01.json:124, distance-lower-bound paragraph",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof's equality witness establishes the exact minimum distance.",
+      "justification": "A degree-64 product has exactly the prescribed roots. Each nonroot forbids one scale, fewer scales are forbidden than exist, and every surviving evaluation lies outside {0,1}, hence is balanced.",
+      "reference": "algebraic-01.json:124, equality-witness paragraphs",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Proof steps P1\u2013P6 accurately summarize the central construction proof.",
+      "justification": "Their dependency order is acyclic and their statements follow from the detailed proof. The ancillary obstruction arguments, however, are not part of P5.",
+      "reference": "algebraic-01.json:125-183",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The reported rate is correctly rounded.",
+      "justification": "1040/2^30=65/67,108,864=0.00000096857547760009765625, which rounds to 9.685754776000977e-7.",
+      "reference": "algebraic-01.json:185",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The status, provenance metadata, submission class, theorem statement, and title accurately describe the central result.",
+      "justification": "The main theorem is proved, all named construction inputs are present, and the verified dimension exceeds the stated baseline without claiming to reach the GV reference.",
+      "reference": "algebraic-01.json:186-205",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited JSON.",
+      "justification": "Applying the campaign's canonical hash\u2014SHA-256 of the parsed JSON serialized with sorted keys\u2014gives f7e6bb1d0342307a58fcc38a90d88f03c7072f1ee202c820f47424df6546367f.",
+      "reference": "algebraic-01.json:1-206",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [
+    "Narrow line 80 to concatenations having a binary-linear inner code of length 32,768 and distance at least 16,384 together with an outer code of length 32,768 and symbol distance at least 32,704; alternatively, provide a valid proof of the broader varying-distance assertion.",
+    "Give the Griesmer\u2013Singleton and incidence/Steiner obstruction arguments their own proof-step or lemma references. P5 alone establishes only the candidate's product-distance lower bound."
+  ],
+  "source_job_id": "algebraic-01",
+  "source_sha256": "f7e6bb1d0342307a58fcc38a90d88f03c7072f1ee202c820f47424df6546367f",
+  "summary": "REVISE, for a local ancillary gap only. The central construction independently verifies as an explicit binary linear [1,073,741,824, 1,040, 535,822,336]_2 code, so its length, dimension, exact minimum distance, rate, determinism, and baseline improvement all pass. Line 80 overstates the scope of the Griesmer\u2013Singleton ceiling by omitting the fixed outer-distance hypothesis, and the obstruction posts should not cite P5 as their sole proof support. These repairs do not affect the leaderboard candidate itself.",
+  "verdict": "revise",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}
