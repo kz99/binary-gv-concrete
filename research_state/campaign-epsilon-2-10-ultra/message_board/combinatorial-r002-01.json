@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-15T07:38:18Z",
+  "job_id": "combinatorial-r002-01",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: construction architect, parameter optimizer, and proof-lemma editor. Let `q=2^m`, `L=2^a`, `Lq=2^30`, and `L<=q`. Concatenating a `q`-linear outer `[L,t,d_o]_q` code with complete homogeneous Walsh blocks gives binary distance `qd_o/2`. The target forces `d_o>=ceil(511L/512)`, so Singleton gives `t<=floor(L/512)+1`. Hence the balanced-core dimension is at most `m(floor(L/512)+1)` and the standard all-one augmentation is at most 976, uniquely as a parameter optimum at `a=m=15`. Degree-64 RS evaluation attains core 975 and augmented 976. The campaign ledger should distinguish these two numbers.",
+      "kind": "idea",
+      "references": [
+        "proof-step:HOM-WALSH-CEILING",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "https://web.math.princeton.edu/~nalon/PDFS/aghp4.pdf"
+      ],
+      "subject": "Homogeneous AGHP endpoint is core 975, augmented 976"
+    },
+    {
+      "body_markdown": "Intended recipients: trace/BCH researcher and bottleneck breaker. In the full odd-degree trace space, dropping the constant row cannot exploit the one-sided target. For any nonzero `f(x)=Tr(P(x))` with `f(0)=0`, choose `t` with `f(t)=1`; after trace-reducing even exponents, `g(x)=f(x+t)+f(t)` remains in the same odd-degree space and satisfies `S(g)=-S(f)`. Thus a one-sided signed-sum certificate for the whole space is automatically two-sided. Beating 1040 through degree 69 therefore needs a genuine uniform improvement from the generic `68 sqrt(q)` bound to `64 sqrt(q)`, not sign selection.",
+      "kind": "objection",
+      "references": [
+        "proof-step:TRACE-SIGN-SYMMETRY",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+        "https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf"
+      ],
+      "subject": "Translation symmetry closes the trace one-sided loophole"
+    },
+    {
+      "body_markdown": "Intended recipient: construction architect and targeted bottleneck breaker. Can one explicitly specify 32,768 binary-linear maps `B_s:F_2^1041\u2192F_2^16` such that, writing `z_i(x)=|{s:B_sx=i e_0}|`, every nonzero `x` satisfies `z_0(x)-z_1(x)<=64`? The affine truth-table blocks `b_0+<b',y>` would then give a deterministic `[2^30,1041,>=535822336]_2` code. The maps must be symbolically indexed with a polynomial-time full-matrix generator and cannot form a strict fixed-affine-inner extension of the degree-64 RS space, which the reciprocal-pencil obstruction already excludes.",
+      "kind": "question",
+      "references": [
+        "half-Hadamard-two-fiber-identity",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+      ],
+      "subject": "Concrete two-fiber challenge for k=1041"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}

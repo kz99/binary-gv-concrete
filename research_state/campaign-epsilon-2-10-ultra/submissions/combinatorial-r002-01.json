@@ -1,0 +1,300 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "This is a foundation handoff, not a duplicate leaderboard submission. The strongest independently accepted construction in the durable corpus is as follows.\n\nFix `p(Z)=Z^16+Z^5+Z^3+Z^2+1`, `E=F_2[Z]/(p)`, and `alpha=Z mod p`. Let `A=span_{F_2}{1,alpha,...,alpha^14}` and `Y=F_2^15`, both in binary coefficient order. For `z=sum_{i=0}^{15} z_i alpha^i`, define `H(z)_y=z_0+sum_{i=1}^{15}z_i y_i`. For every `f in E[X]` of degree at most 64, set `C(f)_(a,y)=H(f(a))_y` for `(a,y) in A\u00d7Y`.\n\nThis gives the exact `[2^30,1040,535822336]_2` RS\u2013affine code. The message hyperplane on which the coefficient of `1` in the constant coefficient of `f` vanishes gives a 1039-dimensional two-sided `1/512`-biased core, and the full code is that core direct-summed with the all-one word.\n\nThe new reusable landscape result is an exact correction and ceiling for homogeneous AGHP/Walsh descent. Over `F=F_{2^15}`, the words `c_P(x,y)=Tr(yP(x))`, `deg P<=64`, form an exact `[2^30,975,535822336]_2` balanced core. Since every such word vanishes at `y=0` and has weight at most `n/2`, adjoining the all-one word safely gives `[2^30,976,535822336]_2`. Moreover, 976 is the maximum after this single augmentation throughout the exact complete homogeneous-Walsh architecture with a `q`-linear outer code of length `L<=q` and `Lq=2^30`.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: construction architect, parameter optimizer, and proof-lemma editor. Let `q=2^m`, `L=2^a`, `Lq=2^30`, and `L<=q`. Concatenating a `q`-linear outer `[L,t,d_o]_q` code with complete homogeneous Walsh blocks gives binary distance `qd_o/2`. The target forces `d_o>=ceil(511L/512)`, so Singleton gives `t<=floor(L/512)+1`. Hence the balanced-core dimension is at most `m(floor(L/512)+1)` and the standard all-one augmentation is at most 976, uniquely as a parameter optimum at `a=m=15`. Degree-64 RS evaluation attains core 975 and augmented 976. The campaign ledger should distinguish these two numbers.",
+      "kind": "idea",
+      "references": [
+        "proof-step:HOM-WALSH-CEILING",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "https://web.math.princeton.edu/~nalon/PDFS/aghp4.pdf"
+      ],
+      "subject": "Homogeneous AGHP endpoint is core 975, augmented 976"
+    },
+    {
+      "body_markdown": "Intended recipients: trace/BCH researcher and bottleneck breaker. In the full odd-degree trace space, dropping the constant row cannot exploit the one-sided target. For any nonzero `f(x)=Tr(P(x))` with `f(0)=0`, choose `t` with `f(t)=1`; after trace-reducing even exponents, `g(x)=f(x+t)+f(t)` remains in the same odd-degree space and satisfies `S(g)=-S(f)`. Thus a one-sided signed-sum certificate for the whole space is automatically two-sided. Beating 1040 through degree 69 therefore needs a genuine uniform improvement from the generic `68 sqrt(q)` bound to `64 sqrt(q)`, not sign selection.",
+      "kind": "objection",
+      "references": [
+        "proof-step:TRACE-SIGN-SYMMETRY",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+        "https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf"
+      ],
+      "subject": "Translation symmetry closes the trace one-sided loophole"
+    },
+    {
+      "body_markdown": "Intended recipient: construction architect and targeted bottleneck breaker. Can one explicitly specify 32,768 binary-linear maps `B_s:F_2^1041\u2192F_2^16` such that, writing `z_i(x)=|{s:B_sx=i e_0}|`, every nonzero `x` satisfies `z_0(x)-z_1(x)<=64`? The affine truth-table blocks `b_0+<b',y>` would then give a deterministic `[2^30,1041,>=535822336]_2` code. The maps must be symbolically indexed with a polynomial-time full-matrix generator and cannot form a strict fixed-affine-inner extension of the degree-64 RS space, which the reciprocal-pencil obstruction already excludes.",
+      "kind": "question",
+      "references": [
+        "half-Hadamard-two-fiber-identity",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+      ],
+      "subject": "Concrete two-fiber challenge for k=1041"
+    }
+  ],
+  "distance_audit": [
+    "`D=(1/2-2^-10)2^30=2^29-2^20=535822336`; equivalently the permitted one-sided signed sum is `n-2D=2^21`, while two-sided small-bias parameter is `tau=2^-9=1/512`.",
+    "For the RS\u2013affine code, `wt(C(f))=2^14(32768-N_0(f)+N_1(f))`. If `f` is nonconstant, both `N_0(f)` and `N_1(f)` are at most 64.",
+    "The constant cases are exhaustive: `f=0` is zero, `f=1` is all-one, and every other nonzero constant gives weight `2^29`. Thus every nonzero word has weight at least `D`.",
+    "Exact distance is witnessed by a degree-64 polynomial with 64 prescribed roots, scaled by the least nonzero field element that avoids value `1` on every nonroot. At most 32,704 of 65,535 scales are forbidden, and the resulting weight is `32704*16384=D`.",
+    "The 1039-dimensional RS\u2013affine hyperplane has all nonzero weights in `[D,n-D]`; complementation therefore preserves its distance when the all-one word is adjoined.",
+    "For homogeneous AGHP, a polynomial with `r` roots has exact weight `(32768-r)16384`. The root bound gives `r<=64`, and a product of 64 distinct linear factors attains `D`.",
+    "No conditional inner code, sampled object, or asymptotic estimate contributes to the reported dimension or distance."
+  ],
+  "explicitness_audit": [
+    "The degree-16 field polynomial and polynomial basis are fixed; its Rabin irreducibility certificate is reproduced in the accepted durable construction.",
+    "Rows are indexed by `(j,i)` with `0<=j<=64` and `0<=i<=15`; columns are the explicitly ordered pairs `(a,y) in A\u00d7F_2^15`.",
+    "Every generator entry is obtained directly from bounded degree-16 field arithmetic and a 15-bit affine dot product. No matrix search, lookup table, randomness, puncturing, or padding is used.",
+    "The full matrix has exactly `1040n` output bits. The stated nested loops run in fixed-parameter `O(n)` time, with all dependence on 1040 rows, degree 64, and field degree 16 displayed in the runtime bound.",
+    "The least-scale choice used only for the exact-distance witness can be found by scanning 65,535 explicitly ordered field elements, which is polynomial in `n`; it is not part of the generator definition.",
+    "The homogeneous 976-dimensional comparator and the 991-dimensional trace comparator likewise have direct monomial/trace row enumerators running in fixed-parameter output-linear time.",
+    "This landscape-scout turn made no publication claim or file edits. Consequently the data validator and dashboard build were not run; those belong to a writable integrator step."
+  ],
+  "generator_matrix": {
+    "algorithm": "Use `E=F_2[Z]/(Z^16+Z^5+Z^3+Z^2+1)` and `alpha=Z mod p`. Enumerate rows lexicographically as `(j,i) in {0,...,64}\u00d7{0,...,15}` and columns as `(a,y) in A\u00d7F_2^15`, where `A=span{1,alpha,...,alpha^14}` and both factors use binary-integer order. For each entry compute `z=alpha^i a^j mod p`, extract `z=sum_{r=0}^{15}z_r alpha^r`, and output `z_0+sum_{r=1}^{15}z_r y_r`. The resulting row is exactly `C(alpha^i X^j)`, so all 1040 rows and all `n` columns are emitted.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "At most `1040*n*(64*O(16^2)+O(15))` bit operations and `O(log n)` counter space; hence fixed-parameter `O(n)` time, with output size `1040n`.",
+    "runtime_proof": "Computing one entry from scratch uses at most 64 multiplications of degree-16 binary field elements, one bounded reduction modulo the fixed polynomial per multiplication, coefficient extraction, and a 15-bit dot product. There are exactly `1040n` entries. Schoolbook field multiplication costs `O(16^2)` bit operations, so the displayed bound follows and is `n^{O(1)}`. The algorithm streams entries and does not invoke any search or oracle."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The fixed degree-16 field, 32,768-point additive evaluation set, degree-64 outer space, and affine truth-table inner map.",
+      "result": "A deterministic exact `[1073741824,1040,535822336]_2` code, including an explicit field certificate, equality witness, generator algorithm, and independent acceptance.",
+      "source": "[composition-10 submission](/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json) and [independent verifier report](/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json)",
+      "used_for": "Strongest proved endpoint and generator-matrix handoff; not resubmitted here."
+    },
+    {
+      "hypotheses": "Complete finite-field polynomial powering with all evaluation and character coordinates enumerated.",
+      "result": "The signed bias is exactly the fraction of evaluation roots; the local Singleton optimization sharpens this to the exact 975-core/976-augmented endpoint.",
+      "source": "[Alon\u2013Goldreich\u2013H\u00e5stad\u2013Peralta, Simple Constructions of Almost k-wise Independent Random Variables](https://web.math.princeton.edu/~nalon/PDFS/aghp4.pdf)",
+      "used_for": "Identification and exact finite optimization of homogeneous AGHP/Walsh descent."
+    },
+    {
+      "hypotheses": "Odd trace polynomials over `F_{2^30}` of degree at most 65.",
+      "result": "The additive-character/Hasse\u2013Weil estimate is at most `64*2^15=2^21`; the extended dual-BCH specialization has balanced dimension 990 and augmented dimension 991.",
+      "source": "[Voloch, On the Duals of Binary BCH Codes](https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf)",
+      "used_for": "Strongest classical trace comparator and the generic one-pole certificate ceiling."
+    },
+    {
+      "hypotheses": "The published independent-sample amplification, expander walk, and fresh uniform coefficient-bit stages are enumerated literally.",
+      "result": "The fresh-seed complete-Cartesian implementation has the scoped support lower bounds used to derive `K<=812`; compressed or redesigned samplers are not covered.",
+      "source": "[Naor\u2013Naor, Small-bias probability spaces](https://www.wisdom.weizmann.ac.il/~naor/PAPERS/bias.pdf)",
+      "used_for": "Finite obstruction to the literal classical amplification recipe."
+    },
+    {
+      "hypotheses": "Ta-Shma Theorem 4.1 complete output and its displayed compatibility and norm conditions.",
+      "result": "The campaign's round-2 finite audit proves that a target-fitting complete output has balanced rank at most 64 and augmented dimension at most 65.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes](https://eccc.weizmann.ac.il/report/2017/041/) and `research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json`",
+      "used_for": "Closing the unmodified complete-output wide-replacement route."
+    },
+    {
+      "hypotheses": "Complete Gray-register or free-expander path clouds with their published finite norm certificates.",
+      "result": "Their certified complete clouds exceed the exact coordinate budget before reaching a record-improving balanced core.",
+      "source": "[Cohen\u2013Cohen, Wide Replacement Products Meet Gray Codes](https://doi.org/10.4230/LIPIcs.CCC.2026.21); [Hsieh\u2013Mohanty\u2013Zhang, Explicit Almost-Optimal Epsilon-Balanced Codes via Free Expander Walks](https://arxiv.org/abs/2601.12606)",
+      "used_for": "Recent-literature screen; sparse path families remain outside these obstructions."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Proof-lemma editor: persist the exact homogeneous-Walsh ceiling with separate core `975` and augmented `976` accounting, plus the trace translation-symmetry lemma, after independent acceptance.",
+    "Construction architect: attack the explicit 32,768-map two-fiber condition in `F_2^1041`; any solution must use nonlinear fibers or a genuinely different outer architecture because fixed affine-inner additive extensions are closed.",
+    "Trace bottleneck researcher: seek a structured coefficient subspace involving exponents 67 and 69 with dimension at least 50 beyond the 991 code and a uniform `64 sqrt(2^30)` character-sum bound.",
+    "Expander architect: replace complete path clouds by a deterministically indexed sparse path family and prove the one-sided character bound directly; inherited operator-norm bounds do not survive arbitrary thinning.",
+    "Cross-team liaison: compare these routes with the new algebraic `m<=13` AG\u2013affine window and the conditional `[16384,17,8188]_2` inner gateway, while keeping every unavailable constituent explicitly conditional."
+  ],
+  "obstructions": [
+    "The exact complete homogeneous-Walsh architecture with `L<=q`, `Lq=2^30`, and one global all-one augmentation is capped at dimension 976.",
+    "The full odd-degree one-pole trace/Hasse\u2013Weil method is capped at dimension 991. Degree 69 reaches nominal dimension 1051 but its generic bound is `68 sqrt(q)`, four square-root units above budget.",
+    "Translation closure shows that the full odd trace space cannot exploit the one-sided target by merely deleting the constant direction: every signed sum occurs with its negative.",
+    "The published fresh-seed complete-Cartesian Naor\u2013Naor implementation is scoped at `K<=812`; this does not exclude compressed equivalent distributions or redesigned samplers.",
+    "The round-2 complete-output Ta-Shma audit gives augmented dimension at most 65; ordinary one-edge mixing certificates are capped at 946, and uniformly repeated complete Cartesian XOR powers at 1025, all below 1040.",
+    "The fixed affine-inner degree-64 RS construction admits no strict additive outer supercode containing it; the durable reciprocal-pencil witness is nonzero (`0x0990`).",
+    "Random selection and the dimension-2971 completion-average recursion remain ineligible because no structural polynomial-time generator or compact pessimistic estimator is supplied.",
+    "These are architecture and certificate obstructions, not a global upper bound. Nonlinear fibers, sparse code-specific paths, restricted high-degree trace spaces, and the low-alphabet AG window remain open."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)n`.",
+      "quantity": "Required distance",
+      "value": "`D=2^29-2^20=535,822,336`"
+    },
+    {
+      "derivation": "`n-2D`.",
+      "quantity": "One-sided signed-sum allowance",
+      "value": "`2^21=2,097,152`"
+    },
+    {
+      "derivation": "`(n-2D)/n`.",
+      "quantity": "Small-bias literature parameter",
+      "value": "`tau=2^-9=1/512`"
+    },
+    {
+      "derivation": "`65*16`; exact fiber formula.",
+      "quantity": "Strongest durable proved construction",
+      "value": "`[2^30,1040,535822336]_2`, with balanced core dimension 1039"
+    },
+    {
+      "derivation": "`1040/2^30`, reduced by 16.",
+      "quantity": "Reported rate",
+      "value": "`65/67,108,864=9.6857547760009765625e-7`"
+    },
+    {
+      "derivation": "Homogeneous Walsh plus Singleton; attained by degree-64 RS.",
+      "quantity": "Exact homogeneous endpoint",
+      "value": "`975` balanced-core dimensions; `976` after all-one augmentation"
+    },
+    {
+      "derivation": "Odd degrees `1,3,...,65` over `F_{2^30}`.",
+      "quantity": "Generic one-pole trace endpoint",
+      "value": "`990` balanced-core dimensions; `991` after all-one augmentation"
+    },
+    {
+      "derivation": "Fresh uniform coefficient bit and at least three independent base samples.",
+      "quantity": "Literal Naor\u2013Naor code-based support bound",
+      "value": "`2K^3<=2^30`, hence `K<=812`"
+    },
+    {
+      "derivation": "Current round-2 complete-cloud proofs.",
+      "quantity": "Expander-template ceilings after augmentation",
+      "value": "Ta-Shma `<=65`; ordinary one-edge `<=946`; uniform Cartesian XOR `<=1025`"
+    },
+    {
+      "derivation": "A balanced core of dimension 1040 plus all-one.",
+      "quantity": "Small-bias improvement threshold",
+      "value": "A new record would have target dimension at least `1041`"
+    },
+    {
+      "derivation": "Reference only, not a construction.",
+      "quantity": "GV dimension reference",
+      "value": "Approximately `2955`"
+    }
+  ],
+  "proof_markdown": "### 1. Target normalization\n\nFor a binary word `c`, put `S(c)=sum_j (-1)^{c_j}=n-2 wt(c)`. Thus `wt(c)>=D` is exactly the one-sided condition `S(c)<=2^21`. A two-sided small-bias proof uses the stronger condition `|S(c)|<=2^21`, or normalized bias `tau=2^-9`; the campaign distance gap itself is `2^-10`.\n\n### 2. Strongest durable endpoint\n\nUse the accepted Rabin certificate for `p(Z)=Z^16+Z^5+Z^3+Z^2+1`. Evaluation and `H` are binary-linear. If `C(f)=0`, injectivity of `H` makes `f` vanish on all 32,768 points of `A`; since `deg f<=64`, this forces `f=0`. Therefore `dim C=65*16=1040`, while `|A\u00d7Y|=2^30`.\n\nFor `N_i(f)=|{a in A:f(a)=i}|`, the inner weights are zero for symbol 0, 32,768 for symbol 1, and 16,384 for every other nonzero symbol. Hence\n\n`wt(C(f))=2^14(32768-N_0(f)+N_1(f))`.\n\nIf `f` is nonconstant, both `f` and `f-1` have at most 64 roots, so `N_0,N_1<=64` and the weight lies in `[D,n-D]`. Nonzero constants other than 1 are balanced, while `f=1` is all-one. This proves the distance lower bound for every nonzero word. To attain it, take a polynomial `g` with 64 fixed distinct roots in `A`. For a nonroot `a`, at most one nonzero scalar `mu` makes `mu g(a)=1`; fewer than 65,535 scales are therefore forbidden. The first allowed scale gives `N_0=64,N_1=0` and weight exactly `D`.\n\nImposing one binary equation on the constant coefficient and choosing it to exclude `f=1` produces a 1039-dimensional core whose nonzero weights all lie in `[D,n-D]`. Adding the all-one direction complements those words, proving the stated decomposition.\n\n### 3. Exact homogeneous-Walsh ceiling\n\nLet `q=2^m`, let the outer length be `L=2^a`, and assume `Lq=2^30` and `L<=q`. Concatenate a `q`-linear `[L,t,d_o]_q` outer code with the complete homogeneous Walsh map, under which zero has weight zero and every nonzero symbol has weight `q/2`. The binary dimension is `mt` and distance is `qd_o/2`. Meeting the target requires\n\n`d_o>=ceil(511L/512)`.\n\nSingleton gives\n\n`t<=L-d_o+1<=floor(L/512)+1`.\n\nSince `m=30-a` and `a<=m`, one has `a<=15`. For `a<9`, the outer distance must equal `L`, so the augmented dimension is at most 31. For `a=9,...,15`, the augmented bounds are respectively `43,61,96,163,290,529,976`. Thus 976 is the unique parameter maximum, at `a=m=15`; this is not a uniqueness claim for the code and does not cover affine or punctured inner maps.\n\nAt `a=m=15`, take the degree-at-most-64 Reed\u2013Solomon evaluation code. For `P!=0` with `r(P)` roots, homogeneous character orthogonality gives\n\n`S(c_P)=2^15 r(P)` and `wt(c_P)=(32768-r(P))16384`.\n\nThe root bound gives exact core parameters `[2^30,975,D]_2`, with equality from 64 linear factors. Every core word has weight at most `n/2` and vanishes at every `y=0` coordinate, so the all-one word is independent and its coset consists of complements of weight at least `n/2`. This proves the exact augmented `[2^30,976,D]_2` endpoint. The safety of this augmentation uses the homogeneous nonnegative-bias property; it is not valid for an arbitrary merely one-sided code.\n\n### 4. Trace comparator and sign symmetry\n\nOver `F_{2^30}`, the functions\n\n`b+Tr(sum_{j=1,3,...,65} a_j x^j)`\n\nform a 991-dimensional code. For a nonzero polynomial of odd degree `d<=65`, the Artin\u2013Schreier/Hasse\u2013Weil estimate gives `|S|<=(d-1)2^15<=2^21`. The strict inequality `2^21<2^30` also rules out a nonzero evaluation kernel, so the balanced core has dimension `33*30=990`, and the constant direction yields 991.\n\nThis generic certificate is sharp in scope: odd degrees through `2t-1` give dimension `30t+1` and allowance `2(t-1)2^15`, hence `t<=33`. Moreover, the one-sided condition gives no extra room for the full odd-degree space. If a nonzero trace function `f` satisfies `f(0)=0`, choose `u` with `f(u)=1`. Translation followed by repeated use of `Tr(a x^(2r))=Tr(a^(2^29)x^r)` puts `g(x)=f(x+u)+f(u)` back in the same odd-exponent function space, and `S(g)=-S(f)`. Thus every allowed signed sum is paired with its negative.\n\n### 5. Complete-output classical amplification\n\nFor the literal fresh-seed implementation in Naor\u2013Naor, the first base family has distinguishing probability `1/8`. Useful expander contraction makes the paper's threshold `alpha_G<1/4`, so the independent-product stage needs at least 11 samples; rank at least 32 already forces at least `32^11>2^30` starting seeds. In the alternative code-based branch, any fitting case with `K>=813` must have base relative distance at most one half by Plotkin. The independent stage then needs at least three base samples, and the fresh coefficient stage contributes at least two choices. Hence the literal enumerated support has at least `2K^3`; because `2*813^3=1,074,735,594>2^30`, this scoped implementation has `K<=812`. Compressed equivalent distributions and redesigned correlated samplers are not excluded.\n\nThe newer durable finite audits similarly close only their stated complete-cloud certificates: direct Ta-Shma output is capped at augmented dimension 65, ordinary one-edge mixing at 946, and uniformly repeated complete Cartesian XOR powers at 1025. Sparse, nonuniform, or directly one-sided path families need new proofs.\n\n### 6. Handoff conclusion\n\nThe strongest complete explicit small-bias object in the current corpus is therefore the 1039-dimensional RS\u2013affine balanced core, whose all-one augmentation gives the exact target code of dimension 1040. The new homogeneous ceiling fixes the AGHP accounting at `975+1=976`, while translation symmetry closes the apparent one-sided loophole in the full odd trace family. None of these scoped results is a global upper bound on binary linear codes.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "TARGET-NORMALIZATION",
+      "proof": "`S(c)=n-2wt(c)`. Substitution of `n=2^30` and `D=2^29-2^20` gives the one-sided cap `S(c)<=2^21` and sufficient absolute bias `2^-9`.",
+      "statement": "Normalize the target in signed-bias convention.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET-NORMALIZATION",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "RS-AFFINE-ENDPOINT",
+      "proof": "Field evaluation is injective, the affine inner map is injective, and the exact fiber formula with `N_0,N_1<=64` proves all distance cases. A scaled 64-root polynomial attains the lower bound.",
+      "statement": "The durable RS\u2013affine construction has exact parameters `[2^30,1040,535822336]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RS-AFFINE-ENDPOINT"
+      ],
+      "id": "BALANCED-CORE",
+      "proof": "A single message-bit equation excludes the constant-one polynomial. The zero and one fiber bounds put every other nonzero word in `[D,n-D]`; the missing bit is exactly the all-one direction.",
+      "statement": "The RS\u2013affine code contains a 1039-dimensional two-sided balanced core and is its direct sum with all-one.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET-NORMALIZATION"
+      ],
+      "id": "HOM-WALSH-CEILING",
+      "proof": "Complete homogeneous Walsh descent converts outer symbol distance `d_o` to binary distance `qd_o/2`. The target and Singleton give `t<=floor(L/512)+1`; exact length and `L<=q` reduce the finite optimization to `a<=15`, whose unique parameter maximum after one all-one augmentation is 976.",
+      "statement": "Exact complete homogeneous-Walsh concatenations in the stated scope have balanced-core dimension at most 975 and augmented dimension at most 976.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "HOM-WALSH-CEILING"
+      ],
+      "id": "AGHP-ATTAINMENT",
+      "proof": "At `q=L=2^15`, degree-at-most-64 evaluation has dimension 65 and at most 64 roots. Character orthogonality gives exact weight `(q-r)q/2`; 64 roots attain `D`, and all-one augmentation preserves it.",
+      "statement": "The homogeneous bounds 975 and 976 are attained explicitly.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET-NORMALIZATION",
+        "https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf"
+      ],
+      "id": "TRACE-991",
+      "proof": "The odd-degree Artin\u2013Schreier estimate gives `|S|<=(d-1)2^15<=2^21` through degree 65. It also proves injectivity of the 33 field-coefficient layers; adding the constant direction gives dimension 991.",
+      "statement": "The full one-pole odd trace construction gives an explicit 990-dimensional balanced core and 991-dimensional target code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TRACE-991"
+      ],
+      "id": "TRACE-SIGN-SYMMETRY",
+      "proof": "Translate a nonzero trace function by a point where it equals one, add that constant, and trace-reduce every even exponent. The result stays in the same odd-degree space and negates the signed sum.",
+      "statement": "For the full odd-degree trace space, every signed sum occurs together with its negative.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET-NORMALIZATION",
+        "https://www.wisdom.weizmann.ac.il/~naor/PAPERS/bias.pdf"
+      ],
+      "id": "NAOR-FRESH-SEED",
+      "proof": "The literal independent-product and fresh-coefficient stages use at least `K^11` seeds for the first base family, and at least `2K^3` in the code-based branch relevant to `K>=813`. Both exact length comparisons give the stated scoped ceilings.",
+      "statement": "The published fresh-seed complete-Cartesian Naor\u2013Naor implementation cannot exceed dimension 812 at this length.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "BALANCED-CORE",
+        "HOM-WALSH-CEILING",
+        "TRACE-991",
+        "TRACE-SIGN-SYMMETRY",
+        "NAOR-FRESH-SEED",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-03.json"
+      ],
+      "id": "SCOPED-LANDSCAPE",
+      "proof": "The exact finite construction and ceiling calculations leave the accepted 1039-core/1040-target RS\u2013affine code above every enumerated classical and complete-cloud small-bias specialization. Each exclusion retains its stated architectural scope.",
+      "statement": "No audited standard explicit small-bias route in the current corpus supplies a complete target code of dimension greater than 1040.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Explicit small-bias generators: exact finite homogeneous-Walsh, trace, and complete-output landscape",
+  "result_status": "proved",
+  "source_paths_read": [
+    "/Users/kaizheng/.agents/skills/yukon-cli/SKILL.md",
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (all 45 current lemmas read)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/*.json (all 3 current roadmaps read)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 37 current durable submissions substantively read, including round-2 arrivals)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 40 current files read, including roadmap and round-2 posts)",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-07/verifier-1-combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-08/verifier-1-algebraic-08.json"
+  ],
+  "submission_class": "proof_tool",
+  "theorem_statement": "At the exact target, the strongest complete construction in the current durable corpus is the independently accepted RS\u2013affine `[1073741824,1040,535822336]_2` code, comprising a 1039-dimensional two-sided `1/512`-biased core plus the all-one direction. Within exact complete homogeneous-Walsh concatenation with a `q`-linear outer code, `Lq=2^30`, and `L<=q`, the balanced-core dimension is at most 975 and the standard all-one augmentation at most 976; both bounds are attained by degree-64 AGHP/RS evaluation over `F_{2^15}`. The full odd one-pole trace family reaches 991 and gains nothing from the one-sided target because translation pairs every signed sum with its negative. This is a scoped landscape theorem, not a global dimension upper bound.",
+  "title": "Finite small-bias handoff: affine k=1040, homogeneous-Walsh ceiling 976"
+}
