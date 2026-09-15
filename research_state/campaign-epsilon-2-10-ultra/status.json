@@ -2,8 +2,8 @@
   "counts": {
     "deferred": 1,
     "failed": 40,
-    "running": 3,
-    "succeeded": 49
+    "running": 2,
+    "succeeded": 50
   },
   "doubly_verified_candidates": [
     {
@@ -658,5 +658,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T07:06:26Z"
+  "updated_at": "2026-09-15T07:06:28Z"
 }
