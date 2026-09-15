@@ -1,0 +1,237 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Independently recomputed the two Frobenius residues and the displayed Bezout identity over GF(2); all three identities hold.",
+    "Checked for collisions in V. Irreducibility of p makes 1,theta,...,theta^15 a basis, so the 2^15 specified evaluation points are distinct.",
+    "Tried to produce a nonzero message polynomial in the encoder kernel. A degree-at-most-64 polynomial cannot vanish at all 32768 evaluation points.",
+    "Checked P=0, P=1, nonzero constants outside {1}, degrees below 64, and degree exactly 64. No endpoint produces a word below the claimed bound.",
+    "Derived the exact weight formula wt(C(P))=2^14(32768-N_0(P)+N_1(P)). Thus values equal to 1 only increase weight, while N_0(P)<=64.",
+    "Checked the equality witness: the 64-root polynomial has no additional roots, and a scaling value outside its remaining image exists because 32704<65535.",
+    "Checked cancellations between codewords. Binary sums correspond to another degree-at-most-64 polynomial, while disjoint inner blocks prevent cross-block cancellation.",
+    "Recomputed the K=66 scalar-orbit average as 535814127.87475395, strictly below the target, validating the architecture obstruction.",
+    "Recomputed the canonical JSON hash, exact length, dimension, distance, rate, trace-route arithmetic, and cited fixed-F_256 obstruction arithmetic."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission beats the baseline and claims block length 1073741824 and dimension 1040.",
+      "justification": "The detailed construction verifies these parameters, and 1040>31. The stated high confidence is warranted.",
+      "reference": "algebraic-09.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The polynomial p defines F_{2^16}, and V is an explicitly ordered set of 2^15 distinct elements.",
+      "justification": "The independently verified irreducibility certificate makes the polynomial residues a basis. The coefficient-vector description and integer ordering are deterministic.",
+      "reference": "algebraic-09.json:5, field and evaluation-set definitions",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer evaluation code, affine inner map, and final concatenated code are deterministic.",
+      "justification": "Every message polynomial, outer point, affine truth-table coordinate, and block order is specified. The term \u201cshortened Reed\u2013Solomon\u201d is slightly imprecise, but the displayed evaluation-code formula is unambiguous.",
+      "reference": "algebraic-09.json:5, outer/inner construction",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The scalar-orbit lemma gives a word of weight at most (N-K+1)Q2^(m-2)/(Q-1).",
+      "justification": "Singleton supplies an outer word with support at most N-K+1. On each supported coordinate, nonzero scalar multiples traverse all nonzero affine-inner words, whose exact average weight is Q2^(m-2)/(Q-1).",
+      "reference": "algebraic-09.json:7-16",
+      "verdict": "valid"
+    },
+    {
+      "claim": "For Q=65536, N=32768, and K=66, the scalar-orbit upper bound is below 535822336.",
+      "justification": "The value is 535814127.87475395, so an integral word has weight at most 535814127. This is strictly below the target.",
+      "reference": "algebraic-09.json:17-24",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A genuinely additive outer code is not excluded by field-scalar averaging.",
+      "justification": "An F_2-additive subspace need not contain all F^*-scalar multiples of a word, so the averaging proof does not apply. The passage asks a question rather than asserting existence.",
+      "reference": "algebraic-09.json:25-33",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The four-item distance audit proves the lower bound and its attainment.",
+      "justification": "A nonzero outer polynomial has at most 64 zeros. Every other block has weight at least 16384, and the scaling argument constructs a polynomial with exactly 64 zero blocks and no all-one blocks.",
+      "reference": "algebraic-09.json:35-40",
+      "verdict": "valid"
+    },
+    {
+      "claim": "All construction choices are explicit and no length adjustment or random choice occurs.",
+      "justification": "The field, basis, evaluation set, degree cutoff, coefficient space, point orders, inner map, and flattening are recoverable symbolically. No padding, puncturing, or sampling enters the definition.",
+      "reference": "algebraic-09.json:41-45",
+      "verdict": "valid"
+    },
+    {
+      "claim": "This is a leaderboard submission.",
+      "justification": "It meets the exact immutable length, meets the required distance, and raises the certified dimension from 31 to 1040.",
+      "reference": "algebraic-09.json:47",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The imported affine-inner concatenation result applies with m=16 and outer parameters [32768,65,32704].",
+      "justification": "The outer code is F_{2^16}-linear, and phi is an F_2-linear isomorphism onto RM(1,15). The specialization is also reproved completely in this submission, so no external gap remains.",
+      "reference": "algebraic-09.json:48-54",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The certified minimum distance is 535822336.",
+      "justification": "32704\u00b716384=(2^15-2^6)2^14=2^29-2^20=535822336.",
+      "reference": "algebraic-09.json:56",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed next tasks concern verification, lemma persistence, further research, and publication checks.",
+      "justification": "They introduce no additional hypothesis into the submitted theorem and correctly distinguish subsequent workflow from the proved construction.",
+      "reference": "algebraic-09.json:57-60",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed architectural obstructions are correctly scoped.",
+      "justification": "The field-linear/RM-inner cap is proved here. Under the stated 64sqrt(q) odd-polynomial method, the trace route yields 1+33\u00b730=991. The fixed-F_256 port arithmetic gives incompatible bounds L>=8642288 and L<=8388479. Additive outer codes remain unexcluded.",
+      "reference": "algebraic-09.json:62-66",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer alphabet, length, dimension, and distance ledger entries are correct.",
+      "justification": "|F|=2^16=65536, |V|=2^15=32768, K=65, and D=32768-64=32704.",
+      "reference": "algebraic-09.json:68-88",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The inner and final parameter ledger entries are correct.",
+      "justification": "RM(1,15) has parameters [32768,16,16384]_2; hence n=32768^2=2^30, k=65\u00b716=1040, and d=32704\u00b716384=535822336.",
+      "reference": "algebraic-09.json:89-108",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The exact-rate ledger entry is correct.",
+      "justification": "1040/2^30=65/2^26=0.00000096857547760009765625.",
+      "reference": "algebraic-09.json:109-113",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The theorem states exact parameters [2^30,1040,535822336]_2.",
+      "justification": "The subsequent injectivity and minimum-weight witness prove exact dimension and exact minimum distance, not merely lower bounds.",
+      "reference": "algebraic-09.json:115, Theorem",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed field certificate proves p irreducible.",
+      "justification": "Exact GF(2) arithmetic gives T^(2^8)=T^8+T^7+T^3+T and T^(2^16)=T modulo p, while Ap+Bh=1 for h=T^8+T^7+T^3. Thus p divides T^(2^16)+T and is coprime to T^(2^8)+T, satisfying the degree-16 Frobenius criterion.",
+      "reference": "algebraic-09.json:115, Explicit field",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer code has exact parameters [32768,65,32704] over F.",
+      "justification": "Evaluation is injective because 64<32768. The root bound gives distance at least 32704, and a product of 64 distinct evaluation-point factors attains it.",
+      "reference": "algebraic-09.json:115, Outer and inner codes",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The inner map is an isomorphism onto RM(1,15) with minimum weight 2^14.",
+      "justification": "Its coefficients are precisely those of all affine Boolean functions. Nonconstant affine functions are balanced, 1 maps to the all-one word, and 0 maps to zero.",
+      "reference": "algebraic-09.json:115, Outer and inner codes",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The final encoder is binary linear, injective, and has exact length and dimension.",
+      "justification": "Evaluation and phi are F_2-linear and injective in composition. The message space has binary dimension 65\u00b716, and there are 2^15 blocks of length 2^15.",
+      "reference": "algebraic-09.json:115, Binary linearity, length, and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero final codeword has weight at least the target.",
+      "justification": "For nonzero P, at least 32704 blocks are nonzero, and every such block contributes at least 2^14 ones. This exhausts all nonzero codewords because the encoder is injective.",
+      "reference": "algebraic-09.json:115, Minimum distance lower bound",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance lower bound is attained.",
+      "justification": "For g with 64 prescribed roots, g(V\\R) has at most 32704 nonzero values. Choosing z outside that image makes z^(-1)g avoid 1 off R, so precisely 32704 blocks have weight 2^14.",
+      "reference": "algebraic-09.json:115, Minimum distance attainment",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Outer dimension 65 is optimal within the stated field-linear/RM-inner architecture.",
+      "justification": "Singleton and scalar-orbit averaging apply even to coordinate-dependent binary-linear inner isomorphisms. K>=66 forces a nonzero word below the target.",
+      "reference": "algebraic-09.json:115, Optimality inside the field-linear descent architecture",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The field-certificate proof step is proved.",
+      "justification": "Both Frobenius congruences and the Bezout identity were independently recomputed, and all irreducibility-criterion hypotheses hold.",
+      "reference": "algebraic-09.json:116-123",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer-rs proof step is proved.",
+      "justification": "The evaluation map has no kernel, and the polynomial root bound gives the claimed MDS distance.",
+      "reference": "algebraic-09.json:124-131",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The inner-rm proof step is proved.",
+      "justification": "Coefficient extraction produces all affine functions uniquely, and nonconstant affine functions are balanced.",
+      "reference": "algebraic-09.json:133-140",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The binary-parameters and exact-distance proof steps are proved.",
+      "justification": "Coordinatewise injective concatenation gives the asserted length and dimension and the constituent-distance product lower bound; the explicit scaling witness proves equality.",
+      "reference": "algebraic-09.json:142-159",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The rm-scalar-orbit-bound proof step is proved.",
+      "justification": "Its Singleton support bound, orbit bijections, average inner weight, and K=66 numerical comparison all check.",
+      "reference": "algebraic-09.json:161-169",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The JSON rate is correctly rounded.",
+      "justification": "The exact dyadic value 65/2^26 is represented by 9.685754776000977e-7.",
+      "reference": "algebraic-09.json:171",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The research direction and proved status accurately characterize the result.",
+      "justification": "The result is a self-contained finite-field Reed\u2013Solomon evaluation followed by affine Reed\u2013Muller alphabet descent, with no conditional step in the code theorem.",
+      "reference": "algebraic-09.json:172-173",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is provenance metadata, not a hidden dependency.",
+      "justification": "All concrete listed paths exist. The submitted proof contains the mathematical argument needed for acceptance; historical directory-emptiness annotations are not used.",
+      "reference": "algebraic-09.json:174-197",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class, theorem statement, and title honestly report the result.",
+      "justification": "The audited code has exact parameters [1073741824,1040,535822336]_2 and therefore is a genuine leaderboard candidate.",
+      "reference": "algebraic-09.json:199-201",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited JSON.",
+      "justification": "Using the campaign canonical hash\u2014SHA-256 of the parsed JSON serialized by json.dumps with sorted keys\u2014recomputes exactly to 6c9f511085c71daac2b41f9652ddf083728f8d99117aa740e00f84d12d616b59.",
+      "reference": "algebraic-09.json:1-202",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "algebraic-09",
+  "source_sha256": "6c9f511085c71daac2b41f9652ddf083728f8d99117aa740e00f84d12d616b59",
+  "summary": "ACCEPT. The submission gives a deterministic binary linear code with exact parameters [1073741824,1040,535822336]_2 and exact rate 65/2^26. The field certificate, all constituent parameters, injectivity, every nonzero-word case, exact-distance witness, scalar-orbit obstruction, source identity, and baseline classification pass independent review. No mathematical repair is required.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}

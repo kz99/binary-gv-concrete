@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 31,
-    "succeeded": 7
+    "running": 30,
+    "succeeded": 8
   },
   "doubly_verified_candidates": [
     {
@@ -28,6 +28,18 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-09",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "An exact [2^30,1040,535822336] RS\u2013RM finite-field descent code"
     },
     {
       "accepted_reviews": 1,
@@ -233,7 +245,7 @@
       "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
     },
     {
-      "accepted_reviews": 0,
+      "accepted_reviews": 1,
       "baseline_beaten": true,
       "dimension": 1040,
       "id": "algebraic-09",
@@ -293,5 +305,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T04:55:41Z"
+  "updated_at": "2026-09-15T04:56:19Z"
 }
