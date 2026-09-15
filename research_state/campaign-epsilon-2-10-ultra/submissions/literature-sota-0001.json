@@ -1,0 +1,317 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let `p(T)=T^16+T^5+T^3+T+1`. Rabin's criterion certifies that `p` is irreducible over `F_2`: `T^(2^16)\u2261T mod p` and `gcd(p,T^(2^8)+T)=1`. Put `E=F_2[T]/(p)` and `theta=T mod p`.\n\nLet `A=span_F2{1,theta,\u2026,theta^14}`, ordered by its 15 coefficient bits, so `|A|=32768`. Write every `z\u2208E` uniquely as `z=sum_{i=0}^{15} z_i theta^i`. Define the binary inner block\n\n`Phi(z)_y = z_0 + sum_{i=1}^{15} z_i y_i`, for `y\u2208F_2^15`,\n\nwith `y` in lexicographic order. This is a binary-linear bijection from `E` to `RM(1,15)`.\n\nFor `P(X)=sum_{j=0}^{64}a_jX^j\u2208E[X]`, define\n\n`c_P=(Phi(P(alpha))_y)_{(alpha,y)\u2208A\u00d7F_2^15}`,\n\nagain in lexicographic order, and set `C={c_P:deg P\u226464}`.\n\nFor the balanced-code interpretation, let `B\u2264C` be the hyperplane where the coefficient of `1` in the polynomial-basis expansion of `a_0` is zero. Then `dim(B)=1039`, every nonzero word of `B` has weight in `[535822336,537919488]`, and `C=B direct-sum <1^N>`. Thus the full `C` is the deterministic one-sided target code. No sampling, puncturing, shortening, padding, or unspecified finite choice occurs.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "In the degree-64 RS\u2013affine code, every nonconstant `P` satisfies `|wt(c_P)-2^29|\u22642^20`: the fibers `P^{-1}(0)` and `P^{-1}(1)` each have size at most 64. The only unbalanced nonzero word is `P=1`. Hence any message hyperplane avoiding `1` is an explicit two-sided `1/512`-biased `[2^30,1039]` code, and adjoining `1^N` gives the `[2^30,1040,535822336]` target code.",
+      "kind": "idea",
+      "references": [
+        "proof-step:BAL",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json"
+      ],
+      "subject": "A 1039-dimensional balanced core"
+    },
+    {
+      "body_markdown": "For the 2026 free-expander construction, `t=d^2`, `ell=kappa*t^kappa*r`, and the complete lift has factor `d^ell`. Lemma 2.12 cannot contract for `kappa=1`; for `kappa\u22652`, `d\u22652,r\u22651` imply `ell\u226532` and `d^ell\u22652^32>2^30`. Thus no complete-output instance certified by that lemma fits the target length.",
+      "kind": "objection",
+      "references": [
+        "proof-step:HMZ",
+        "https://arxiv.org/pdf/2601.12606"
+      ],
+      "subject": "Free-expander finite no-fit lemma"
+    },
+    {
+      "body_markdown": "Can one give a deterministic sparse subfamily of free-expander or wide-replacement paths, with at most `2^30/n_0` paths per base coordinate, whose signed average is bounded by `1/512` simultaneously for every nonzero message? The proof must specify the paths symbolically and cannot use random selection or conditional expectation; such a theorem is the clearest way around all three complete-enumeration barriers.",
+      "kind": "question",
+      "references": [
+        "proof-step:HMZ",
+        "proof-step:WRP"
+      ],
+      "subject": "Sparse-path replacement for complete enumeration"
+    }
+  ],
+  "distance_audit": [
+    "The campaign deficit `2^-10` corresponds to signed-bias threshold `tau=2^-9=1/512`, since `(1-tau)N/2=(1/2-2^-10)N`.",
+    "For nonconstant `P`, both `P` and `P-1` are nonzero polynomials of degree at most 64, so their fibers over zero contain at most 64 elements of `A`.",
+    "If `N_i=|{alpha\u2208A:P(alpha)=i}|`, the inner weight distribution gives `wt(c_P)=2^14(32768-N_0+N_1)`. Hence `|wt(c_P)-2^29|\u226464*2^14=2^20`.",
+    "A nonzero constant polynomial belonging to `B` cannot equal `1`; its inner affine function has a nonzero linear part and therefore total weight exactly `2^29`.",
+    "Adding the all-one direction complements words of `B`, so every nonzero word of `C` has weight at least `2^29-2^20=535822336`.",
+    "For exactness, a degree-64 polynomial with 64 prescribed roots can be scaled to avoid the value `1` on every nonroot. Its word has weight exactly `(32768-64)*16384=535822336`.",
+    "Because `C` is binary linear, this all-codeword weight audit proves the pairwise minimum distance."
+  ],
+  "explicitness_audit": [
+    "The field is the displayed quotient by an explicit irreducible polynomial. The Rabin computation was independently recomputed; with bit `i` denoting `T^i`, the Euclidean remainder chain begins `0x1002b,0x50f2` and continues `0x1311,0x0fa7,0x03f8,0x0047,0x0015,0x0006,0x0001`.",
+    "The evaluation set is the displayed 15-dimensional coefficient hyperplane, not an existential subset.",
+    "Field elements, evaluation points, messages, outer blocks, and inner coordinates all use fixed polynomial-basis lexicographic order.",
+    "The inner map is given coordinate-by-coordinate and is binary-linear and injective.",
+    "The message space has exactly 65 coefficients over the explicitly represented 16-dimensional binary field.",
+    "The equality witness uses the first 64 evaluation points and the lexicographically first admissible nonzero scale. At most 32704 of the 65535 scales are forbidden.",
+    "There are no hidden floors, inherited parameters, random choices, padding coordinates, punctures, or numerical searches in the submitted construction.",
+    "All 23 durable submissions and all 23 message-board files present at the final audit were individually read; the shared lemma-book and roadmap directories were empty. The read-only workspace prevented persistence and publication-build commands, so this remains a leaderboard candidate rather than a records update."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Complete finite-field powering construction over `F_{2^m}`, with all `(x,y)` pairs enumerated.",
+      "result": "The proof sharpens to bias at most `deg(P)/2^m`; at `m=15,deg\u226464` it gives balanced dimension 975, or 976 after adjoining the all-one word.",
+      "source": "[Alon\u2013Goldreich\u2013H\u00e5stad\u2013Peralta, Simple Constructions of Almost k-wise Independent Random Variables](https://www.cs.tau.ac.il/~nogaa/PDFS/aghp4.pdf)",
+      "used_for": "Exact classical comparator."
+    },
+    {
+      "hypotheses": "Odd trace polynomials of degree at most 65 over `F_{2^30}`.",
+      "result": "Carlitz\u2013Uchiyama/Hasse\u2013Weil gives deviation at most `64*2^15`; the exact extended dual-BCH specialization has balanced dimension 990 and augmented dimension 991.",
+      "source": "[Voloch, On the Duals of Binary BCH Codes](https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf)",
+      "used_for": "Exact trace-code comparator."
+    },
+    {
+      "hypotheses": "Hermitian and extended norm\u2013trace small-bias constructions with their displayed finite parameters.",
+      "result": "The exact target-length choices give dimension 36 for the elementary Hermitian construction and 444 for the optimized extended norm\u2013trace construction, both below 1039.",
+      "source": "[Ben-Aroya\u2013Ta-Shma](https://theoryofcomputing.org/articles/v009a005/v009a005.pdf); [Matthews\u2013Peachey](https://personal.math.vt.edu/gmatthews/sbs.pdf)",
+      "used_for": "Finite algebraic-geometry comparison."
+    },
+    {
+      "hypotheses": "Ta-Shma Theorem 4.1 complete-output wide-replacement construction and its graph compatibility inequality.",
+      "result": "No contracting complete-output specialization of rank at least 1041 fits in `2^30`; the near-optimal parameter branch also requires an inequality that fails at bias `1/512`.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "Finite obstruction to the 2017 asymptotic SOTA construction."
+    },
+    {
+      "hypotheses": "Double-conflict-free Gray-register schedule and `2 omega_G+epsilon_0\u2264(8/5)omega_H^5`.",
+      "result": "A target certificate with rank at least 1041 forces outer degree at least 631 and width at least 3, hence raw length at least `1041*631^3=261540414231`.",
+      "source": "[Cohen\u2013Cohen, Wide Replacement Products Meet Gray Codes](https://eccc.weizmann.ac.il/report/2025/179/download)",
+      "used_for": "Finite obstruction to the 2025 complete-output construction."
+    },
+    {
+      "hypotheses": "Free-expander schedule of Definitions 2.7\u20132.8 with `t=d^2`, and the bias certificate in Lemma 2.12.",
+      "result": "A potentially contracting schedule requires `kappa\u22652`, which already forces lift factor at least `2^32`; the displayed asymptotic choice has `kappa=0` at bias `1/512`.",
+      "source": "[Hsieh\u2013Mohanty\u2013Zhang, Explicit Almost-Optimal Epsilon-Balanced Codes via Free Expander Walks](https://arxiv.org/pdf/2601.12606)",
+      "used_for": "New finite no-fit lemma for the 2026 construction."
+    },
+    {
+      "hypotheses": "Low-rate concatenation theorems with equal constituent rate `eta`.",
+      "result": "The numerical proofs use constants at least `128*sqrt(e)` or `288 ln 2`; meeting this target forces final dimension below one. Other variants use a random constituent or an unknown outer-code condition.",
+      "source": "[Doron\u2013Mosheiff\u2013Wootters, When Do Low-Rate Concatenated Codes Approach the GV Bound?](https://eccc.weizmann.ac.il/report/2024/091/revision/1/download)",
+      "used_for": "Excluding a recent concatenation analysis as a deterministic finite candidate."
+    },
+    {
+      "hypotheses": "Trace Hermitian and trace-of-AG character-sum estimates.",
+      "result": "The Hermitian estimate retains a hidden `O(d/sqrt(p))` constant, while the later TAG work explicitly obtains no improved high-distance construction; neither supplies the required finite certificate.",
+      "source": "[Kopparty\u2013Ta-Shma\u2013Yakirevitch](https://eccc.weizmann.ac.il/report/2024/069/revision/1/download/); [Cohen\u2013Doron\u2013Goldgraber\u2013Manket](https://arxiv.org/abs/2511.08788)",
+      "used_for": "Audit of the newest trace-code direction."
+    },
+    {
+      "hypotheses": "Standard repeated, interleaved, and zero-padded RS\u2013affine family.",
+      "result": "Its unique finite maximum is dimension 1040 at `(m,r,L,K)=(16,1,32768,65)`.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+      "used_for": "Shared proved architecture optimization and choice of the surviving parameters."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Seek an explicit binary `[16384,16,8185]` inner code or a global nonexistence proof; the former would give the concrete `[2^30,1168,\u2265535822840]` RS concatenation gateway.",
+    "Develop a deterministic sparse-path theorem for free-expander or Gray-register walks that controls every nonzero message without enumerating the complete path cloud.",
+    "Look for a structured degree-67 trace subspace with a character-sum improvement beyond the generic Weil bound; the unrestricted degree-67 certificate misses the target.",
+    "In a writable session, add the balanced-core lemma and free-expander no-fit lemma to `data/records.json`, write the corresponding proof note, and run the validator and dashboard build."
+  ],
+  "obstructions": [
+    "No audited classical balanced-code family exceeds the 1039-dimensional balanced core or the 1040-dimensional one-sided augmentation.",
+    "Ta-Shma's exact complete-output wide-replacement theorem does not contract in the rank-and-length range needed to beat 1040.",
+    "The Cohen\u2013Cohen Gray-register theorem forces raw length `261540414231`, over 243 times the target length.",
+    "The Hsieh\u2013Mohanty\u2013Zhang complete free-walk schedule exceeds `2^30` coordinates before a contracting parameter choice is possible.",
+    "Recent trace-Hermitian and TAG results retain hidden finite constants or explicitly stop short of an improved construction.",
+    "Random-inner, random-outer, and conditional-expectation constructions are inadmissible; this excludes the recent probabilistic concatenation results and the shared conditional-average `k=2971` proposal.",
+    "The remaining `[16384,16,8185]` inner-code gateway is unresolved, so the conditional dimension 1168 cannot be submitted.",
+    "These are architecture and certificate obstructions, not a universal upper bound on arbitrary binary linear codes."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target",
+      "quantity": "block length",
+      "value": "`N=2^30=1073741824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)N`",
+      "quantity": "required distance",
+      "value": "`D=535822336=2^29-2^20`"
+    },
+    {
+      "derivation": "`1-2D/N`",
+      "quantity": "literature signed-bias threshold",
+      "value": "`tau=2^-9=1/512`"
+    },
+    {
+      "derivation": "Explicit quotient field",
+      "quantity": "outer alphabet",
+      "value": "`|E|=2^16=65536`"
+    },
+    {
+      "derivation": "`dim_F2(A)=15`",
+      "quantity": "outer evaluation length",
+      "value": "`L=2^15=32768`"
+    },
+    {
+      "derivation": "Degree at most 64",
+      "quantity": "outer RS parameters",
+      "value": "`[32768,65,32704]_E`"
+    },
+    {
+      "derivation": "Affine truth tables on 15 variables",
+      "quantity": "inner parameters",
+      "value": "`[32768,16,16384]_2`"
+    },
+    {
+      "derivation": "`32768*32768`",
+      "quantity": "binary length",
+      "value": "`2^30`"
+    },
+    {
+      "derivation": "One binary equation on 65 field coefficients",
+      "quantity": "two-sided balanced-core dimension",
+      "value": "`16*65-1=1039`"
+    },
+    {
+      "derivation": "Adjoin the all-one direction",
+      "quantity": "submitted dimension",
+      "value": "`1039+1=1040`"
+    },
+    {
+      "derivation": "`(32768-64)*16384`",
+      "quantity": "exact minimum distance",
+      "value": "`535822336`"
+    },
+    {
+      "derivation": "`1040/2^30`, reduced by 16",
+      "quantity": "rate",
+      "value": "`65/67108864=9.685754776000977e-7`"
+    },
+    {
+      "derivation": "`kappa\u22652,d\u22652,r\u22651`, `ell=kappa(d^2)^kappa r`",
+      "quantity": "2026 free-walk minimum lift",
+      "value": "`ell\u226532`, `d^ell\u22652^32`"
+    },
+    {
+      "derivation": "Shared trace/degree calculation",
+      "quantity": "2025 Gray-register minimum raw length for `k\u22651041`",
+      "value": "`1041*631^3=261540414231`"
+    }
+  ],
+  "proof_markdown": "### 1. Normalization\n\nFor a binary word `c` of length `N`, its signed bias is `1-2 wt(c)/N`. Thus absolute bias at most `tau=1/512` places its weight in\n\n`[(1-tau)N/2,(1+tau)N/2]=[2^29-2^20,2^29+2^20]`.\n\nThe lower endpoint is exactly `D=535822336`.\n\n### 2. Field, linearity, length, and dimension\n\nThe displayed Rabin certificate proves that `E` is `F_{2^16}`. The polynomial basis fixes every field operation and ordering. The subspace `A` has exactly `2^15` elements.\n\n`Phi` is binary-linear. If its truth table is zero, evaluation at `y=0` gives `z_0=0`, and evaluation at the fifteen unit vectors then gives every `z_i=0`; hence `Phi` is injective. Its nonzero words have weight `2^14`, except `Phi(1)`, which is all-one and has weight `2^15`.\n\nEvaluation of degree-at-most-64 polynomials on `A` is injective: a nonzero polynomial cannot have 32768 roots. Consequently `C` is binary linear, has length\n\n`|A|*2^15=2^15*2^15=2^30`,\n\nand dimension `65*16=1040`.\n\n### 3. The balanced hyperplane\n\nLet `B` be the message hyperplane `[a_0]_0=0`, where `[a_0]_0` is the coefficient of `1` in the polynomial basis. It has dimension 1039 and does not contain `P=1`.\n\nFor nonconstant `P`, set `N_i=|{alpha\u2208A:P(alpha)=i}|`. Both `P` and `P-1` are nonzero of degree at most 64, so `N_0,N_1\u226464`. Zero inner symbols contribute weight zero, the symbol `1` contributes `2^15`, and every other symbol contributes `2^14`. Therefore\n\n`wt(c_P)=2^15 N_1+2^14(32768-N_0-N_1)=2^14(32768-N_0+N_1)`.\n\nIt follows that `|wt(c_P)-2^29|\u22642^20`. If a nonzero `P\u2208B` is constant, then its constant basis bit is zero, so it is neither `0` nor `1`; its inner word is balanced and `wt(c_P)=2^29`. Hence every nonzero word of `B` lies in `[D,N-D]`.\n\nThe polynomial `P=1` encodes as `1^N` and is outside `B`, while every polynomial decomposes uniquely as an element of `B` plus either `0` or `1`. Thus `C=B direct-sum <1^N>`. Complementing a word in `[D,N-D]` preserves that interval, and `1^N` itself has weight `N`. Therefore every nonzero word of `C` has weight at least `D`.\n\n### 4. Exact minimum distance\n\nLet `R` be the first 64 elements of `A` and `P_0(X)=product_{r\u2208R}(X-r)`. For each of the 32704 nonroots, at most one nonzero scalar `lambda` makes `lambda P_0(alpha)=1`. Hence at most 32704 of the 65535 nonzero scalars are forbidden. Choose the first admissible scalar in polynomial-basis order.\n\nThe resulting `P_*=lambda P_0` is zero at exactly 64 evaluation points and takes neither `0` nor `1` elsewhere. Its codeword therefore has weight\n\n`32704*2^14=2^29-2^20=D`.\n\nTogether with the lower bound, this proves `d_min(C)=535822336`.\n\n### 5. Finite literature comparison\n\nThe classical complete constructions specialize as follows: AGHP powering gives balanced dimension 975; the extended dual-BCH trace code gives 990; the exact extended norm\u2013trace optimization gives 444. The balanced hyperplane above gives 1039, and its all-one augmentation gives 1040.\n\nThe near-optimal asymptotic papers do not improve this finite value. Ta-Shma's exact complete-output theorem has no contracting rank-at-least-1041 instance under the length budget. Cohen\u2013Cohen requires at least `261540414231` rows. For the 2026 free-expander schedule, `kappa=1` makes Lemma 2.12's exponent nonpositive and its upper bound greater than one; `kappa\u22652` forces at least `2^32` lift paths. Recent trace-AG theorems retain hidden constants or explicitly obtain no improvement, while the low-rate concatenation papers use random constituents and numerical constants that already force dimension below one here.\n\nThese conclusions rule out the published certificates and complete-output architectures, not arbitrary future binary codes.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "NORM",
+      "proof": "Substitute `tau=2^-9` into `(1-tau)N/2` and use `N=2^30`.",
+      "statement": "Literature bias `1/512` implies the immutable distance `535822336`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "FIELD",
+      "proof": "Rabin's degree-16 criterion is witnessed by `T^(2^16)\u2261T mod p` and `gcd(p,T^(2^8)+T)=1`; the recomputed Euclidean chain ends in 1.",
+      "statement": "`E=F_2[T]/(T^16+T^5+T^3+T+1)` is the explicitly represented field of size `2^16`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD"
+      ],
+      "id": "PARAM",
+      "proof": "Both evaluation and `Phi` are binary-linear and injective. There are 65 free field coefficients, `2^15` evaluation points, and `2^15` inner coordinates.",
+      "statement": "`C` is binary linear with exact length `2^30` and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARAM",
+        "NORM"
+      ],
+      "id": "BAL",
+      "proof": "For nonconstant `P`, the zero and one fibers each have size at most 64, yielding `wt=2^14(32768-N_0+N_1)`. Nonzero constants in the selected hyperplane are balanced affine functions.",
+      "statement": "The hyperplane `B` has dimension 1039 and every nonzero weight lies in `[535822336,537919488]`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "BAL"
+      ],
+      "id": "AUG",
+      "proof": "`P=1` is the all-one word and complements every word in the other coset; the balanced interval is closed under complementation.",
+      "statement": "`C=B direct-sum <1^N>` has minimum distance at least `535822336`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "AUG"
+      ],
+      "id": "EXACT",
+      "proof": "A scaled polynomial with 64 prescribed roots can avoid the unique exceptional nonzero inner symbol at every nonroot because 32704 forbidden scales are fewer than 65535 available scales.",
+      "statement": "The lower bound is attained, so `d_min(C)=535822336`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARAM"
+      ],
+      "id": "RS-OPT",
+      "proof": "The shared repeated-family optimization derives `t\u2264floor(2^(22-m)/r)` and performs the finite `m` case split; equality uniquely occurs at `(m,r,L,t)=(16,1,32768,64)`.",
+      "statement": "The standard repeated, padded RS\u2013affine architecture cannot exceed dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "NORM"
+      ],
+      "id": "HMZ",
+      "proof": "In Lemma 2.12, `kappa=1` gives exponent `-1/sqrt(d)` and hence no subunit certificate. For `kappa\u22652`, `ell=kappa(d^2)^kappa r\u226532`, so the output multiplier `d^ell\u22652^32`.",
+      "statement": "The complete-output 2026 free-expander construction has no fitting target instance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "NORM"
+      ],
+      "id": "WRP",
+      "proof": "The shared trace-of-`P^2` graph lemma and exact case split rule out Ta-Shma contraction. Cohen\u2013Cohen contraction forces `omega_G<1/40`, outer degree at least 631, and width at least 3, giving raw length `1041*631^3`.",
+      "statement": "Neither audited wide-replacement theorem yields dimension at least 1041 within `2^30` rows.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "BAL",
+        "HMZ",
+        "WRP",
+        "RS-OPT"
+      ],
+      "id": "AUDIT",
+      "proof": "All finite classical parameter substitutions are below 1040; the recent asymptotic constructions either fail their finite prerequisites, exceed the length, retain unavailable constants, or use prohibited randomness.",
+      "statement": "No audited explicit balanced-code literature route supplies a rigorously certified target dimension larger than 1040.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Finite-constant audit and exact specialization of explicit epsilon-balanced-code literature at signed bias 1/512",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 23 files present at final audit, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 23 files present at final audit, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There is a deterministic binary linear code with exact parameters `[1073741824,1040,535822336]_2`. It contains an explicit dimension-1039 subcode whose every nonzero weight lies in `[535822336,537919488]`; adjoining the all-one word gives the 1040-dimensional target code. No audited classical or 2017\u20132026 near-optimal balanced-code construction supplies a larger finite certified dimension at this target.",
+  "title": "Finite balanced-code SOTA audit: a 1039-dimensional balanced core and a 1040-dimensional target code"
+}

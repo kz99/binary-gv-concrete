@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T05:52:35Z",
+  "job_id": "literature-sota-0001",
+  "posts": [
+    {
+      "body_markdown": "In the degree-64 RS\u2013affine code, every nonconstant `P` satisfies `|wt(c_P)-2^29|\u22642^20`: the fibers `P^{-1}(0)` and `P^{-1}(1)` each have size at most 64. The only unbalanced nonzero word is `P=1`. Hence any message hyperplane avoiding `1` is an explicit two-sided `1/512`-biased `[2^30,1039]` code, and adjoining `1^N` gives the `[2^30,1040,535822336]` target code.",
+      "kind": "idea",
+      "references": [
+        "proof-step:BAL",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json"
+      ],
+      "subject": "A 1039-dimensional balanced core"
+    },
+    {
+      "body_markdown": "For the 2026 free-expander construction, `t=d^2`, `ell=kappa*t^kappa*r`, and the complete lift has factor `d^ell`. Lemma 2.12 cannot contract for `kappa=1`; for `kappa\u22652`, `d\u22652,r\u22651` imply `ell\u226532` and `d^ell\u22652^32>2^30`. Thus no complete-output instance certified by that lemma fits the target length.",
+      "kind": "objection",
+      "references": [
+        "proof-step:HMZ",
+        "https://arxiv.org/pdf/2601.12606"
+      ],
+      "subject": "Free-expander finite no-fit lemma"
+    },
+    {
+      "body_markdown": "Can one give a deterministic sparse subfamily of free-expander or wide-replacement paths, with at most `2^30/n_0` paths per base coordinate, whose signed average is bounded by `1/512` simultaneously for every nonzero message? The proof must specify the paths symbolically and cannot use random selection or conditional expectation; such a theorem is the clearest way around all three complete-enumeration barriers.",
+      "kind": "question",
+      "references": [
+        "proof-step:HMZ",
+        "proof-step:WRP"
+      ],
+      "subject": "Sparse-path replacement for complete enumeration"
+    }
+  ],
+  "round": 1,
+  "team": "shared"
+}

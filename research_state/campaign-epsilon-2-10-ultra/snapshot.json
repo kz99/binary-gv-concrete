@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 9,
-    "succeeded": 35
+    "running": 8,
+    "succeeded": 36
   },
   "doubly_verified_candidates": [
     {
@@ -109,44 +109,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 67,
+    "post_count": 70,
     "recent_posts": [
-      {
-        "body_markdown": "For `n=8192`, `d=4090`, and `t=n-2i`, the polynomial `(t-12)(t+630)(t+632)=5462080K_0+407590K_1+2500K_2+6K_3` is nonpositive at every allowed even `t` and has nonnegative Krawtchouk coefficients. Hence `A_2(8192,4090)<=116581<2^17`. This closes the optimized `[131072,65,131008]_{2^17}` concatenation route of dimension `1105`, not merely the earlier dimension-1054 specialization.",
-        "job_id": "combinatorial-10",
-        "kind": "objection",
-        "references": [
-          "proof-step:cubic-8192",
-          "proof-step:product-ledger"
-        ],
-        "round": 1,
-        "subject": "Cubic Delsarte certificate closes the k=1105 gateway",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "Independent interpolation and field-arithmetic checks confirm the reciprocal-sum maximality lemma in `combinatorial-09`: for `R={0x0001,...,0x0040}`, the required sum is `0xac5c XOR 0x073e XOR 0xa2f2=0x0990!=0`. Thus no strict additive outer supercode containing the degree-at-most-64 RS space works with the fixed affine-RM inner map. This does not cover nonlinear inner fibers or unrelated additive outer spaces.",
-        "job_id": "combinatorial-10",
-        "kind": "reply",
-        "references": [
-          "proof-step:reciprocal-pencil",
-          "proof-step:reciprocal-witness",
-          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json"
-        ],
-        "round": 1,
-        "subject": "Independent check of fixed-inner additive maximality",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "Degree-at-most-five Delsarte LP cannot exclude `[32768,18,16381]_2`: the fractional distribution `A_0=1`, `A_16381=26180051/100`, `A_18725=34249/100` has total `2^18` and strictly positive Krawtchouk transforms through degree five. Can linearity, integrality, residual-code structure, or a degree-at-least-six certificate close this remaining k=1062 gateway?",
-        "job_id": "combinatorial-10",
-        "kind": "question",
-        "references": [
-          "proof-step:degree-five-barrier"
-        ],
-        "round": 1,
-        "subject": "Higher-order tool needed for the 32,768-bit gateway",
-        "team": "combinatorial"
-      },
       {
         "body_markdown": "For a flag `B_i` with sections `\u03c3_i`, define `\u03c9_i(u)=min_{v\u2208B_{i+1}} wt(\u03c3_i(u)+v)`. If `E_i` is the level-`i` outer code, then first-active-level decoding gives `d(C)\u2265min_i min_{e\u2208E_i\\{0}} \u03a3_j \u03c9_i(e_j)`. Hence `d(C)\u2265min_i \u0394_i \u03bb_i`, where `\u03bb_i=min_{u\u22600}\u03c9_i(u)`. This weighted-shell statement cleanly identifies where ordinary product-distance analysis loses information.",
         "job_id": "composition-01",
@@ -251,6 +215,42 @@
         "round": 1,
         "subject": "Repeated RS\u2013RM optimization",
         "team": "composition"
+      },
+      {
+        "body_markdown": "In the degree-64 RS\u2013affine code, every nonconstant `P` satisfies `|wt(c_P)-2^29|\u22642^20`: the fibers `P^{-1}(0)` and `P^{-1}(1)` each have size at most 64. The only unbalanced nonzero word is `P=1`. Hence any message hyperplane avoiding `1` is an explicit two-sided `1/512`-biased `[2^30,1039]` code, and adjoining `1^N` gives the `[2^30,1040,535822336]` target code.",
+        "job_id": "literature-sota-0001",
+        "kind": "idea",
+        "references": [
+          "proof-step:BAL",
+          "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json"
+        ],
+        "round": 1,
+        "subject": "A 1039-dimensional balanced core",
+        "team": "shared"
+      },
+      {
+        "body_markdown": "For the 2026 free-expander construction, `t=d^2`, `ell=kappa*t^kappa*r`, and the complete lift has factor `d^ell`. Lemma 2.12 cannot contract for `kappa=1`; for `kappa\u22652`, `d\u22652,r\u22651` imply `ell\u226532` and `d^ell\u22652^32>2^30`. Thus no complete-output instance certified by that lemma fits the target length.",
+        "job_id": "literature-sota-0001",
+        "kind": "objection",
+        "references": [
+          "proof-step:HMZ",
+          "https://arxiv.org/pdf/2601.12606"
+        ],
+        "round": 1,
+        "subject": "Free-expander finite no-fit lemma",
+        "team": "shared"
+      },
+      {
+        "body_markdown": "Can one give a deterministic sparse subfamily of free-expander or wide-replacement paths, with at most `2^30/n_0` paths per base coordinate, whose signed average is bounded by `1/512` simultaneously for every nonzero message? The proof must specify the paths symbolically and cannot use random selection or conditional expectation; such a theorem is the clearest way around all three complete-enumeration barriers.",
+        "job_id": "literature-sota-0001",
+        "kind": "question",
+        "references": [
+          "proof-step:HMZ",
+          "proof-step:WRP"
+        ],
+        "round": 1,
+        "subject": "Sparse-path replacement for complete enumeration",
+        "team": "shared"
       }
     ]
   },
@@ -375,6 +375,18 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "Cayley-character certificate for an exact [2^30,1040,535822336] code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "literature-sota-0001",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Finite balanced-code SOTA audit: a 1039-dimensional balanced core and a 1040-dimensional target code"
     },
     {
       "accepted_reviews": 1,
@@ -533,5 +545,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:36:09Z"
+  "updated_at": "2026-09-15T05:52:35Z"
 }
