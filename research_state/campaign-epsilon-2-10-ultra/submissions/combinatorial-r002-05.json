@@ -1,0 +1,264 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is claimed. The optimized family is as follows. Let `F=F_2[\u03b1]/(\u03b1^16+\u03b1^5+\u03b1^3+\u03b1^2+1)`, let `A=span_F2{1,\u03b1,\u2026,\u03b1^14}`, and encode `z=\u03a3_{i=0}^{15}z_i\u03b1^i` by the affine truth table `H(z)_y=z_0+\u03a3_{i=1}^{15}z_i y_i`, indexed by `y\u2208F_2^15`. For `1\u2264h\u226464` and an arbitrary binary subspace `W\u2264F^(65-h)`, define `M_{h,W}` to contain every polynomial `\u03a3_{j=0}^{65}a_jX^j` with `a_0,\u2026,a_h` unrestricted and `(a_{h+1},\u2026,a_65)\u2208W`. Evaluation on `A`, followed blockwise by `H`, gives a deterministic binary linear code of length `|A|\u00b72^15=2^30` and dimension `16(h+1)+dim_F2(W)`. The theorem below proves that every target-qualified member has dimension at most 1040. This subsumes the upstream top-three family, obtained at `h=62`.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: lemma editor and combinatorial integrator. In the fixed field, put `U=span{1,\u2026,\u03b1^5}`, `L=L_U`, and `V=L(A)`. The displayed sixteen inverse words prove `span_F2(V^{-1})=F`. Consequently, for every scale `c\u22600`, some `v\u2208V*` makes `cX(L+v)` vanish at exactly 65 points of `A` while never taking value 1 elsewhere. This fixed-scale avoidance lemma is reusable independently of the coefficient-space application.",
+      "kind": "idea",
+      "references": [
+        "proof-step:INVERSE-SPAN",
+        "proof-step:FIXED-SCALE-AVOIDANCE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Fixed-scale 65-root avoidance lemma"
+    },
+    {
+      "body_markdown": "Intended recipient: polynomial-architecture integrator. Every degree-65 coefficient-trade family with coefficients `a_0,\u2026,a_h` unrestricted for some `1\u2264h\u226464`, and an arbitrary binary coupling among all higher coefficients, has target-qualified dimension at most 1040. A dimension-1041 family necessarily contains a 65-root/no-one word of weight 535,805,952. This closes and strictly subsumes the top-three frontier from `combinatorial-r002-02`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:COEFFICIENT-INTERSECTION",
+        "proof-step:BAD-WORD",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-02.json"
+      ],
+      "subject": "All prefix-free degree-65 trades stop at k=1040"
+    },
+    {
+      "body_markdown": "Intended recipient: two-fiber bottleneck breaker. For arbitrary maps `B_s:F_2^K\u2192F_2^16` meeting the one-sided target, every 65-set `T` satisfies `K\u226414+\u03a3_{s\u2208T}rank(B_s)`. Hence `K\u22641054`, and any putative `K\u22651041` family has total rank deficiency `\u03a3_s(16-rank B_s)\u226413`. Future searches may therefore restrict almost every seed map to be surjective without loss.",
+      "kind": "idea",
+      "references": [
+        "proof-step:TWO-FIBER-MOMENT",
+        "proof-step:RANK-RIGIDITY",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json"
+      ],
+      "subject": "Near-surjectivity forced above k=1040"
+    }
+  ],
+  "distance_audit": [
+    "The coordinate set is `A\u00d7F_2^15`, so its exact size is `2^15\u00b72^15=2^30=1,073,741,824`.",
+    "The inner weights are exactly 0 for symbol 0, 32,768 for symbol 1, and 16,384 for every other field symbol.",
+    "The obstruction polynomial `cG_v` has exactly 65 zero evaluations and, by fixed-scale avoidance, no evaluation equal to 1.",
+    "Its exact binary weight is `(32768-65)\u00b716384=32703\u00b716384=535,805,952`.",
+    "The required distance is `32704\u00b716384=535,822,336`; the witness is exactly 16,384 below it.",
+    "For arbitrary affine two-fiber maps, the binary weight identity is `wt(c_x)=2^14(32768-z_0(x)+z_1(x))`; hence the target is exactly `z_0(x)-z_1(x)\u226464` for every nonzero message."
+  ],
+  "explicitness_audit": [
+    "The field polynomial, polynomial-basis ordering, evaluation space, subspace `U`, subspace polynomial, image basis, inverse certificate, row ordering, and column ordering are all fixed symbolically.",
+    "The subspace polynomial is reproduced by six applications of `L_{V+<v>}=L_V^2+L_V(v)L_V`; no search is used.",
+    "Every inverse assertion and the rank-16 inverse-span certificate can be checked using fixed 16-bit multiplication and XOR elimination modulo `0x1002d`.",
+    "The fixed-scale lemma is a counting contradiction, not a random or exhaustive construction argument.",
+    "For every explicitly supplied basis of `W`, the full generator matrix of the investigated family is emitted by the deterministic algorithm stated below in output-polynomial time.",
+    "No new target-qualified code is produced, so this result is correctly classified as an obstruction rather than a leaderboard submission.",
+    "The workspace was read-only; persistence to `proofs/` and `data/records.json`, followed by validator and dashboard execution, remains for the integrator."
+  ],
+  "generator_matrix": {
+    "algorithm": "This is an emitter for any concretely specified member `C_{h,W}`, not a new candidate. Fix a binary row-echelon basis of `W`. Form row polynomials `\u03b1^iX^j` for `0\u2264j\u2264h`, `0\u2264i\u226415`, followed by the polynomials whose top-coefficient tuples are the basis vectors of `W` and whose lower coefficients are zero. Order `a\u2208A` by its 15 polynomial-basis bits and `y\u2208F_2^15` lexicographically. For every row polynomial `f` and column `(a,y)`, evaluate `f(a)` modulo `p=0x1002d`, write it as `\u03a3z_i\u03b1^i`, and output `z_0+\u03a3_{i=1}^{15}z_i y_i`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Fewer than `67,000\u00b7k\u00b7n+O(k)` elementary bit operations using naive fixed-width arithmetic; in particular `O(k n)=O(n)` at this fixed degree and `k\u22641056`. Exactly `k n` output bits are emitted.",
+    "runtime_proof": "Horner evaluation uses at most 65 additions and 65 multiplications in the fixed 16-bit field. A schoolbook multiplication and reduction modulo the fixed degree-16 polynomial uses fewer than 1,024 elementary bit operations, and the final affine evaluation uses 15 products/XORs. Thus 67,000 operations per output entry is a valid explicit upper bound. Row and coordinate counters require only logarithmic space; all field registers have constant size."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The fixed field `F`, spaces `A,U`, and affine truth-table inner map are used exactly as stated there.",
+      "result": "Certified irreducibility of `0x1002d`, the explicit polynomial `L_U`, its nine image generators, and the three-valued inner weight spectrum.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json and its independent verifier record",
+      "used_for": "Finite setup and arithmetic certificate; the inverse-span and fixed-scale consequences are new here."
+    },
+    {
+      "hypotheses": "Degree-65 messages with only their two leading coefficients coupled.",
+      "result": "The upstream axis-intersection and 65-root obstruction for the top-two family.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-02.json",
+      "used_for": "Upstream frontier. The present projection argument extends it to arbitrary coupled suffixes after any unrestricted prefix containing degrees 0 and 1."
+    },
+    {
+      "hypotheses": "Linear homogeneous or affine seed maps followed by complete character truth tables.",
+      "result": "Exact kernel-count and two-fiber conversion from extractor maps to binary code weights.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+      "used_for": "Extractor interpretation and the finite seed/output split audit."
+    },
+    {
+      "hypotheses": "Only elementary root bounds, binary linear algebra, Singleton, Plotkin double counting, and Griesmer are invoked.",
+      "result": "All remaining dimension and runtime bounds used in this note.",
+      "source": "Elementary results proved or specialized explicitly in the proof note",
+      "used_for": "No unavailable construction theorem, random existence theorem, or external finite lookup is required."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Attack the uncovered `h=0` coefficient family. The present witness varies through the coefficient `vX`, so a replacement must control that coefficient without assuming it is free.",
+    "Use the rank-rigidity lemma to study only `1041\u2264K\u22641054` standard-split two-fiber families, with total seed-map rank deficiency at most 13. A promising exact target is a covering contradiction on the nonzero common kernels of 65 surjective maps.",
+    "For alternative extractor splits, restrict homogeneous searches to `(d,m)=(16,14),(17,13),(18,12),(19,11),(20,10)` and affine lossless searches to those five plus `(21,9)`; require a symbolic polynomial-time map family rather than a seed search."
+  ],
+  "obstructions": [
+    "The entire prefix-free degree-65 affine-polynomial family with at least coefficients 0 and 1 unrestricted is tightly capped at dimension 1040.",
+    "At the standard `d=m=15` split, an entropy-one lossless-condenser certificate is capped at dimension 1040; any improvement must exploit cancellation from the symbol `e_0`, not merely bound zero fibers.",
+    "Arbitrary standard-split affine two-fiber maps are capped only at 1054, leaving the narrow unresolved interval 1041 through 1054.",
+    "The fixed-scale argument does not cover `h=0`, degree above 65, a different evaluation set, or a non-affine inner encoder."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Length and distance",
+      "value": "`n=2^30=1,073,741,824`; `D=(1/2-2^-10)n=535,822,336=32704\u00b72^14`."
+    },
+    {
+      "derivation": "Rabin certificate and polynomial-basis representation.",
+      "quantity": "Field",
+      "value": "`F=F_2[\u03b1]/(\u03b1^16+\u03b1^5+\u03b1^3+\u03b1^2+1)`; modulus bitmask `0x1002d`; `|F|=65536`."
+    },
+    {
+      "derivation": "Binary spans of field-basis elements.",
+      "quantity": "Evaluation spaces",
+      "value": "`A=span{1,\u2026,\u03b1^14}`, `dim A=15`, `|A|=32768`; `U=span{1,\u2026,\u03b1^5}`, `dim U=6`, `|U|=64`."
+    },
+    {
+      "derivation": "Six-step subspace-polynomial recursion.",
+      "quantity": "Subspace polynomial",
+      "value": "`L=X^64+2e0cX^32+71eeX^16+d9a4X^8+2198X^4+c6caX^2+6115X`."
+    },
+    {
+      "derivation": "`ker(L|A)=U`.",
+      "quantity": "Image space",
+      "value": "`V=L(A)` has dimension 9 and `|V*|=511`."
+    },
+    {
+      "derivation": "Evaluation and `H` are injective.",
+      "quantity": "Investigated-family dimension",
+      "value": "`k=16(h+1)+dim_F2 W`, with maximum ambient value 1056."
+    },
+    {
+      "derivation": "Grassmann intersection in `F^(65-h)`.",
+      "quantity": "Forced sparse direction",
+      "value": "`dim(W\u2229T_h)\u2265k-1040`; hence every `k\u22651041` family contains a nonzero `cG_v` direction."
+    },
+    {
+      "derivation": "65 zero blocks and 32,703 balanced blocks.",
+      "quantity": "Obstruction-word weight",
+      "value": "`535,805,952=D-16,384`."
+    },
+    {
+      "derivation": "Subspace moment on the common kernel of any 65 maps.",
+      "quantity": "General two-fiber ceiling",
+      "value": "`K\u22641054`; for `K\u22651041`, total rank deficiency is at most 13."
+    },
+    {
+      "derivation": "Singleton and q-ary Plotkin after exact entropy-one conversion.",
+      "quantity": "Homogeneous splits whose cap can exceed 1040",
+      "value": "`(d,m)=(16,14),(17,13),(18,12),(19,11),(20,10)` with core caps `1806,3341,6156,11275,20490`."
+    },
+    {
+      "derivation": "The same conversion with `(m+1)`-bit affine symbols.",
+      "quantity": "Affine-lossless splits whose cap can exceed 1040",
+      "value": "`(d,m)=(16,14),\u2026,(21,9)` with caps `1935,3598,6669,12300,22539,40970`; `(15,15)` is capped exactly at 1040."
+    }
+  ],
+  "proof_markdown": "# Prefix-free degree-65 extractor obstruction\n\n## 1. Fixed field and inner map\n\nLet `p(Z)=Z^16+Z^5+Z^3+Z^2+1`. Repeated squaring modulo `p` gives `Z^(2^8)=Z^8+Z^7+Z^3+Z` and `Z^(2^16)=Z`. Put `r=Z^8+Z^7+Z^3`. Exact Euclidean division gives\n\n`p=(Z^8+Z^7+Z^6+Z^5+Z^4+Z^2+1)r+(Z^2+1)`,\n\n`r=(Z^6+Z^5+Z^4+Z^3+Z^2+1)(Z^2+1)+1`.\n\nThus `gcd(p,Z^256-Z)=1`, while `p` divides `Z^65536-Z`. Rabin's degree-16 criterion proves that `p` is irreducible. Hence `F=F_2[\u03b1]/(p)` is the stated field.\n\nLet `A=span_F2{1,\u03b1,\u2026,\u03b1^14}`. For `z=\u03a3z_i\u03b1^i`, define `H(z)_y=z_0+\u03a3_{i=1}^{15}z_i y_i`, with `y\u2208F_2^15`. This is binary-linear and injective. Its weights are exactly `0` at `z=0`, `32768` at `z=1`, and `16384` otherwise: in the last case a nonzero linear part makes the truth table balanced.\n\n## 2. Subspace and inverse-span certificate\n\nPut `U=span_F2{1,\u03b1,\u2026,\u03b1^5}`. Starting with `L_0=X`, the recursion `\u03b2_i=L_i(\u03b1^i)`, `L_{i+1}=L_i^2+\u03b2_iL_i` has\n\n`(\u03b2_0,\u2026,\u03b2_5)=(0001,0006,0168,47be,b444,4c35)`\n\nand produces\n\n`L(X)=X^64+2e0cX^32+71eeX^16+d9a4X^8+2198X^4+c6caX^2+6115X`.\n\nIt is additive and has precisely the 64 elements of `U` as roots. Therefore `V=L(A)` has dimension `15-6=9`. A basis, obtained by evaluating at `\u03b1^6,\u2026,\u03b1^14`, is\n\n`e9f1,d1b4,e1cf,9bc6,ea9c,7d5e,f733,26c1,770d`.\n\nRelative to this basis, masks `001,002,\u2026,00f,012` give the sixteen elements\n\n`e9f1,d1b4,3845,e1cf,083e,307b,d98a,9bc6,7237,4a72,a383,7a09,93f8,abbd,424c,3b28`.\n\nTheir respective inverses are\n\n`073e,bd8c,866d,49ad,4923,6e3d,a335,aceb,84c4,2a71,0d54,e7eb,d1e4,f0b7,e05c,5852`.\n\nEach paired product reduces to `0001` modulo `0x1002d`. Exact high-bit XOR elimination on the inverse words gives pivot rows\n\n`0001,0003,0004,000b,0018,0023,0061,008e,0160,02c8,073e,0d16,1c71,3be1,49ad,bd8c`,\n\nwhose leading bits are respectively 0 through 15. They are independent, proving `span_F2(V^{-1})=F`.\n\n## 3. Fixed-scale avoidance\n\nFor `v\u2208V*`, define\n\n`S_v={0}\u222a{x\u2208A:L(x)=v}`,  `G_v(X)=X(L(X)+v)`.\n\nEvery nonzero fiber of `L:A\u2192V` has 64 points, so `|S_v|=65`; these are exactly the roots of the monic degree-65 polynomial\n\n`G_v=X^65+2e0cX^33+71eeX^17+d9a4X^9+2198X^5+c6caX^3+6115X^2+vX`.\n\nIn particular its `X^64` and `X^63` coefficients vanish, equivalently `e_1(S_v)=e_2(S_v)=0`.\n\nFix `c\u2208F*`. Suppose, contrary to the claim, that for every one of the 511 choices `v\u2208V*` there were an `x\u2208A` satisfying `cx(L(x)+v)=1`. Write `w=(cx)^(-1)`. Then `w\u2208V*` and `v=L(x)+w`. A fixed `x` determines at most one `v`, so covering all 511 values requires 511 distinct `x`; inversion then gives 511 distinct `w`, necessarily all of `V*`. Therefore `c^(-1)V^(-1)\u2286A`. Taking binary spans and using the inverse-span certificate gives `F\u2286A`, contradicting `dim A=15`. Thus some `v\u2208V*` satisfies `cG_v(x)\u22601` for every `x\u2208A\\S_v`.\n\n## 4. Coefficient-space intersection\n\nFor `1\u2264h\u226464` and binary `W\u2264F^(65-h)`, let\n\n`M_{h,W}={\u03a3_{j=0}^{65}a_jX^j : a_0,\u2026,a_h\u2208F, (a_{h+1},\u2026,a_65)\u2208W}`.\n\nThis is binary-linear. Evaluation is injective because a nonzero degree-at-most-65 polynomial cannot vanish on all 32,768 points of `A`; blockwise `H` is injective as well. Hence\n\n`k=dim C_{h,W}=16(h+1)+dim W`.\n\nLet `\u03c0_h` retain coefficients of degrees `h+1,\u2026,65` and set `T_h={\u03c0_h(cXL):c\u2208F}`. Its degree-65 coefficient is `c`, so `dim T_h=16`. Since the ambient suffix space has dimension `16(65-h)`, Grassmann's inequality gives\n\n`dim(W\u2229T_h)\u2265dim W+16-16(65-h)=k-1040`.\n\nIf `k\u22651041`, choose `c\u22600` with `\u03c0_h(cXL)\u2208W`. Choose `v` from the fixed-scale lemma. The polynomial `f=cX(L+v)` has the selected suffix, while its only `v`-dependent coefficient is the degree-one term `cvX`, which is unrestricted because `h\u22651`. Thus `f\u2208M_{h,W}`.\n\nThe word `C(f)` has 65 zero blocks, no all-one block, and 32,703 balanced blocks. Consequently\n\n`wt C(f)=32703\u00b716384=535,805,952<535,822,336`.\n\nThis contradicts the target. Therefore every target-qualified `C_{h,W}` has `k\u22641040`.\n\n## 5. Arbitrary standard-split two-fiber maps\n\nLet `B_s:F_2^K\u2192F_2^16`, `1\u2264s\u226432768`, be arbitrary binary-linear maps, and let `e_0=(1,0,\u2026,0)`. Define\n\n`\u0394(x)=\u03a3_s(1_{B_sx=0}-1_{B_sx=e_0})`.\n\nAffine truth-table descent meets the target exactly when `\u0394(x)\u226464` for every `x\u22600`.\n\nFor a subspace `Q\u2264F_2^K` of dimension `q`, put `r_s=rank(B_s|Q)`. The zero fiber of `B_s|Q` has size `2^(q-r_s)`. Its `e_0` fiber is either empty or a coset of the same size. Hence the exact identity\n\n`\u03a3_{x\u2208Q}\u0394(x)=\u03a3_{s:e_0\u2209B_s(Q)}2^(q-r_s)`.\n\nAll right-hand summands are nonnegative. Since `\u0394(0)=32768` and every other member contributes at most 64,\n\n`\u03a3_{x\u2208Q}\u0394(x)\u226432768+64(2^q-1)=64\u00b72^q+32704`.\n\nIf `t(Q)` maps kill all of `Q`, their contributions alone are `t(Q)2^q`; hence `(t(Q)-64)2^q\u226432704`.\n\nTake any 65-set `T` of seeds and `Q=\u2229_{s\u2208T}ker B_s`. Then `t(Q)\u226565`, so `2^q\u226432704<2^15` and `q\u226414`. Rank-nullity gives\n\n`q\u2265K-\u03a3_{s\u2208T}rank B_s`,\n\ntherefore `K\u226414+\u03a3_{s\u2208T}rank B_s\u22641054`.\n\nWriting `\u03b4_s=16-rank B_s`, every 65-set satisfies `\u03a3_{s\u2208T}\u03b4_s\u22641054-K`. If `K\u22651041`, the right side is at most 13. If total deficiency were at least 14, enough deficient seeds could be selected and the set padded to size 65, contradicting this inequality. Thus `\u03a3_s\u03b4_s\u226413`. At `K=1054`, every map is surjective and every 65-fold joint map has rank 1040 and common-kernel dimension 14.\n\n## 6. Exact condenser pruning\n\nFor homogeneous maps `A_s:F_2^K\u2192F_2^m` with `L=2^d` seeds, let `z(x)=|{s:A_sx=0}|`. Every min-entropy-one distribution is a convex combination of uniform two-point distributions. For a pair with difference `x`, exactly `z(x)` seeds merge its two atoms; each merger contributes `1/(2L)` statistical distance from the atom cap `1/(2L)`. Therefore the optimal strong entropy-one lossless-condenser error is exactly `max_{x\u22600}z(x)/(2L)`.\n\nThus error `2^-10` is equivalent to `z(x)\u2264L/512`, and the maps form an additive `q=2^m` code of block distance at least `L-L/512`. Singleton gives `K\u2264m(2^(d-9)+1)` when `d\u22659`. The elementary q-ary Plotkin double count closes the small-alphabet cases; at equality it gives size at most `qL`. Substituting `d+m=30` leaves only homogeneous splits `(16,14)` through `(20,10)` whose cap can exceed 1040, with the listed caps. At `(15,15)`, the homogeneous core cap is 975, or 976 after adjoining the all-one word.\n\nFor affine lossless maps with `m+1` output bits, the same argument replaces `m` by `m+1`. At `(15,15)` the cap is exactly `16\u00b765=1040`; the only larger-cap splits are `(16,14)` through `(21,9)`. Consequently a standard-split `K\u22651041` family must exploit the negative `z_1` term rather than merely satisfy a lossless-condenser zero-fiber bound.\n\nThese are finite obstructions and parameter reductions, not a new code construction.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "FIELD-INNER",
+      "proof": "The displayed Frobenius residues and Euclidean divisions prove irreducibility. Direct pairing of affine truth tables proves the exact weights 0, 32,768, and 16,384.",
+      "statement": "The fixed 16-bit field and affine truth-table encoder are deterministic and have the asserted spectrum.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-INNER"
+      ],
+      "id": "INVERSE-SPAN",
+      "proof": "The subspace-polynomial recursion gives `L` and the nine-dimensional image `V`. Sixteen explicitly listed elements of `V` have the listed inverses; exact XOR elimination has pivots in all sixteen bit positions.",
+      "statement": "`span_F2(V^{-1})=F`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "INVERSE-SPAN"
+      ],
+      "id": "FIXED-SCALE-AVOIDANCE",
+      "proof": "If all 511 nonzero fibers were covered at a fixed scale, uniqueness in `v=L(x)+(cx)^(-1)` would force `c^(-1)V^(-1)\u2286A`, contradicting the inverse-span certificate and `dim A=15`.",
+      "statement": "For every `c\u22600`, some 65-root polynomial `cX(L+v)` avoids the symbol 1 at every nonroot evaluation point.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-INNER"
+      ],
+      "id": "FAMILY-DIMENSION",
+      "proof": "The message space is the direct product of `h+1` unrestricted field coefficients and `W`. Degree 65 is below `|A|`, and both evaluation and `H` are injective.",
+      "statement": "`C_{h,W}` is binary-linear of length `2^30` and dimension `16(h+1)+dim W`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FAMILY-DIMENSION"
+      ],
+      "id": "COEFFICIENT-INTERSECTION",
+      "proof": "The projected sparse space `T_h` has dimension 16 because its leading coefficient is the scale `c`. Grassmann's inequality gives `dim(W\u2229T_h)\u2265k-1040`.",
+      "statement": "Every member with `k\u22651041` contains the high-degree portion of a nonzero scaled `XL`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIXED-SCALE-AVOIDANCE",
+        "COEFFICIENT-INTERSECTION"
+      ],
+      "id": "BAD-WORD",
+      "proof": "The varying term `cvX` lies in the unrestricted prefix. The resulting polynomial has exactly 65 roots and no value 1 elsewhere, producing 32,703 balanced blocks and exact weight 535,805,952.",
+      "statement": "Every `k\u22651041` prefix-free family violates the required distance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-INNER"
+      ],
+      "id": "TWO-FIBER-MOMENT",
+      "proof": "Summing zero-minus-`e_0` fiber counts over a subspace gives the exact nonnegative rank formula. Applying the one-sided target inequality bounds every common kernel of 65 maps by dimension 14.",
+      "statement": "Every 65-set `T` satisfies `K\u226414+\u03a3_{s\u2208T}rank B_s`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TWO-FIBER-MOMENT"
+      ],
+      "id": "RANK-RIGIDITY",
+      "proof": "Writing ranks as `16-\u03b4_s` gives a deficiency sum at most `1054-K` on every 65-set. Integrality and padding show the same upper bound globally when `K\u22651041`.",
+      "statement": "Arbitrary standard-split two-fiber families have `K\u22641054`; above 1040 their total rank deficiency is at most 13.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "CONDENSER-PRUNING",
+      "proof": "Extreme points of the min-entropy-one source polytope are uniform pairs, giving exact error `max z/(2L)`. Singleton and q-ary Plotkin then yield the enumerated finite split windows.",
+      "statement": "Ordinary entropy-one lossless-condensing cannot give `K\u22651041` at the standard split, and only the listed alternative splits remain numerically open.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Extractor-based linear codes: exact finite optimization of affine truth-table descent, restricted polynomial coefficient spaces, and arbitrary two-fiber seed maps.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 51 files present at completion)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (all entries)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 48 theorem ledgers audited; full proofs read for upstream and extractor-relevant records)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For every `1\u2264h\u226464` and every binary subspace `W\u2264F^(65-h)`, the fixed affine-inner evaluation code `C_{h,W}` formed from degree-at-most-65 polynomials with unrestricted coefficients in degrees `0,\u2026,h` satisfies: if `d_min(C_{h,W})\u2265535,822,336`, then `dim C_{h,W}\u22641040`. The bound is tight within this family. Independently, every arbitrary standard-split affine two-fiber family satisfying the target has dimension at most 1054, and a putative dimension at least 1041 forces total seed-map rank deficiency at most 13.",
+  "title": "Fixed-scale avoidance closes every prefix-free degree-65 extractor trade at k=1040"
+}

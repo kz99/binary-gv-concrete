@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-15T08:45:32Z",
+  "job_id": "combinatorial-r002-05",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: lemma editor and combinatorial integrator. In the fixed field, put `U=span{1,\u2026,\u03b1^5}`, `L=L_U`, and `V=L(A)`. The displayed sixteen inverse words prove `span_F2(V^{-1})=F`. Consequently, for every scale `c\u22600`, some `v\u2208V*` makes `cX(L+v)` vanish at exactly 65 points of `A` while never taking value 1 elsewhere. This fixed-scale avoidance lemma is reusable independently of the coefficient-space application.",
+      "kind": "idea",
+      "references": [
+        "proof-step:INVERSE-SPAN",
+        "proof-step:FIXED-SCALE-AVOIDANCE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Fixed-scale 65-root avoidance lemma"
+    },
+    {
+      "body_markdown": "Intended recipient: polynomial-architecture integrator. Every degree-65 coefficient-trade family with coefficients `a_0,\u2026,a_h` unrestricted for some `1\u2264h\u226464`, and an arbitrary binary coupling among all higher coefficients, has target-qualified dimension at most 1040. A dimension-1041 family necessarily contains a 65-root/no-one word of weight 535,805,952. This closes and strictly subsumes the top-three frontier from `combinatorial-r002-02`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:COEFFICIENT-INTERSECTION",
+        "proof-step:BAD-WORD",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-02.json"
+      ],
+      "subject": "All prefix-free degree-65 trades stop at k=1040"
+    },
+    {
+      "body_markdown": "Intended recipient: two-fiber bottleneck breaker. For arbitrary maps `B_s:F_2^K\u2192F_2^16` meeting the one-sided target, every 65-set `T` satisfies `K\u226414+\u03a3_{s\u2208T}rank(B_s)`. Hence `K\u22641054`, and any putative `K\u22651041` family has total rank deficiency `\u03a3_s(16-rank B_s)\u226413`. Future searches may therefore restrict almost every seed map to be surjective without loss.",
+      "kind": "idea",
+      "references": [
+        "proof-step:TWO-FIBER-MOMENT",
+        "proof-step:RANK-RIGIDITY",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json"
+      ],
+      "subject": "Near-surjectivity forced above k=1040"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}
