@@ -1,0 +1,208 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical sorted-key JSON SHA-256; it equals the supplied immutable digest.",
+    "Recomputed the GF(2) field certificate: T^(2^8) mod p=T^15+T^10+T^3, T^(2^16) mod p=T, gcd(p,T^(2^8)+T)=1, and the displayed B\u00e9zout left side is exactly 1.",
+    "Checked every inner-symbol type: Phi(0) has weight 0, Phi(1) has weight 32768, and each of the other 65534 symbols gives a balanced word of weight 16384; Phi has trivial kernel.",
+    "Tried constant, lower-degree, and maximal-root outer polynomials. Constants and fewer than 64 roots cannot lower the proved bound, and no nonzero degree-at-most-64 polynomial lies in the evaluation kernel.",
+    "Evaluated the prescribed first-64-roots polynomial using exact GF(2^16) arithmetic. It has exactly those 64 roots; its nonroot image has size 511 and omits 1, giving weight exactly 535822336.",
+    "Tested the degree-65 extension: a scaled 65-root word has weight 32703*16384=535805952, exactly 16384 below target.",
+    "Attacked the claimed product-architecture ceiling with the valid repetition inner code [32768,1,32768]_2. Product distance then requires outer distance only 16352, not 32704, so the displayed Griesmer-Singleton inference is not universal.",
+    "Reconstructed the inherited degree-65 incidence argument. Universal all-one coverage would force an S(64,65,32767), but C(32705,2)=534792160 is 1 modulo 3, violating its necessary divisibility condition.",
+    "Recomputed both hypothetical gateway products and Griesmer sums. The stated examples are correct, though the same hypothetical inner codes permit stronger RS choices yielding dimensions 1168 and 1105.",
+    "Reran the data and dashboard-math validators with Bun; they report one valid existing record and seven valid dashboard formulas. They do not yet validate the unpersisted candidate."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission declares a high-confidence baseline-beating candidate with n=1073741824 and k=1040.",
+      "justification": "The subsequent construction verifies both parameters, and 1040>31 by 1009 dimensions. The leaderboard classification is honest.",
+      "reference": "algebraic-07.json:2-6,40,222-224",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The quotient field, polynomial basis, evaluation set A, and its ordering are deterministic and symbolically recoverable.",
+      "justification": "The degree-16 modulus is certified irreducible; residue classes 1,alpha,...,alpha^15 form a basis, and restricting to coefficients through alpha^14 gives |A|=2^15 with the stated integer order.",
+      "reference": "algebraic-07.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Phi is an injective binary-linear affine truth-table map whose nonzero blocks have weight at least 16384.",
+      "justification": "The values at 0 and the fifteen unit vectors recover all sixteen coefficient bits. The unique nonzero constant is 1 and has weight 32768; every other nonzero symbol has a nonzero linear part and weight 2^14.",
+      "reference": "algebraic-07.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The polynomial-evaluation construction defines a deterministic binary linear code without shortening, puncturing, repetition, padding, or sampling.",
+      "justification": "Evaluation is linear in the 65 field coefficients, Phi is F_2-linear, and all coordinate orders are fixed.",
+      "reference": "algebraic-07.json:5-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed finite-field discussion post gives a complete Rabin certificate.",
+      "justification": "Independent polynomial arithmetic reproduces both Frobenius residues and the B\u00e9zout identity exactly.",
+      "reference": "algebraic-07.json:8-16",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The two hypothetical inner-code gateways give dimensions 1056 and 1054 and the stated distances and Griesmer sums.",
+      "justification": "The products are 65471*8185=535880135 and 131011*4090=535834990; the dimensions are 66*16=1056 and 62*17=1054; the Griesmer sums are 16374 and 8185. The claims are true, but the roadmap is suboptimal: outer parameters [65536,73,65464] and [131072,65,131008] would instead give k=1168 and k=1105.",
+      "reference": "algebraic-07.json:17-25",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The gateway post's reference labels resolve to durable proof or lemma identifiers.",
+      "justification": "`standard-concatenation` and `inner-code-gateway-audit` occur only here and in the duplicated message-board entry. The gateway arithmetic is self-contained, so this is a nonblocking traceability defect.",
+      "reference": "algebraic-07.json:20-23",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The distance audit proves both the universal lower bound and exact attainment.",
+      "justification": "Every nonzero polynomial leaves at least 32704 nonzero evaluations, each contributing at least 16384. The scaled 64-root witness avoids symbol 1 on all surviving coordinates, so all surviving blocks are balanced.",
+      "reference": "algebraic-07.json:27-32",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The explicitness audit accurately records all construction choices and validator status.",
+      "justification": "The field, basis, evaluation set, messages, coordinate orders, and witness convention are recoverable. Both named validators rerun successfully; persistence and the full build remain publication steps.",
+      "reference": "algebraic-07.json:33-39",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Rabin's irreducibility criterion is correctly cited and specialized.",
+      "justification": "The bibliographic metadata matches the [primary SIAM record](https://epubs.siam.org/doi/10.1137/0209024). For degree 16, 2 is the only prime divisor; the verified Frobenius congruence and degree-8 gcd test satisfy the criterion. Equivalently, every irreducible factor must have degree dividing 16 but not 8, forcing the single degree-16 factor.",
+      "reference": "algebraic-07.json:41-47",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The stated general concatenation parameters apply to the concrete outer and inner codes.",
+      "justification": "An F_(2^m)-linear [N,K,D] outer code has binary dimension mK, while the affine inner realization has length 2^(m-1) and minimum distance 2^(m-2). Coordinatewise injection gives the stated length and product-distance bound; the submission also reproves the specialization.",
+      "reference": "algebraic-07.json:48-53",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance field and listed workflow tasks accurately describe the candidate's state.",
+      "justification": "The exact distance is 535822336. The embedded proof is sufficient for campaign-stage review, while a proof note, record, lemma, and full build remain necessary before publication.",
+      "reference": "algebraic-07.json:55-61",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Griesmer and Singleton cap every 32768-by-32768 equal-block product-distance architecture at binary dimension 1040.",
+      "justification": "The calculations are correct only after separately imposing inner dimension at most 16 and outer distance at least 32704. If the inner distance exceeds 16384, the required outer distance may be smaller; for example, repetition inner distance 32768 requires only outer distance 16352. Thus the displayed bounds do not prove the broad statement.",
+      "reference": "algebraic-07.json:62-63",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The full degree-at-most-65 Reed-Solomon extension fails the target.",
+      "justification": "A polynomial with 65 prescribed roots can be scaled to avoid value 1 on its 32703 nonroots, producing weight 32703*16384=535805952<535822336.",
+      "reference": "algebraic-07.json:64",
+      "verdict": "valid"
+    },
+    {
+      "claim": "No single degree-65 polynomial direction can be added to the full degree-at-most-64 space while preserving the target.",
+      "justification": "For each leading coefficient and 65-set of roots, meeting the target requires an all-one incidence outside the roots. Deletion counting would make universal coverage force an S(64,65,32767); its i=62 divisibility condition fails because C(32705,2) is not divisible by C(3,2)=3.",
+      "reference": "algebraic-07.json:65-66",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every parameter-ledger value is correct.",
+      "justification": "The values recompute to |F|=65536, N=32768, outer [32768,65,32704], inner [32768,16,16384]_2, n=2^30, k=1040, d=2^29-2^20=535822336, rate 65/67108864, and relative distance 511/1024.",
+      "reference": "algebraic-07.json:68-113",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The theorem and field-certificate portions of the detailed proof establish the claimed explicit field.",
+      "justification": "Both residue computations, the B\u00e9zout identity, and every hypothesis of the degree-16 irreducibility test independently check.",
+      "reference": "algebraic-07.json:115, Theorem and Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The detailed proof establishes binary linearity, exact length, and dimension 1040.",
+      "justification": "The message space has binary dimension 65*16. Evaluation is injective because 32768>64, Phi is injective, and the coordinate set has size 2^15*2^15=2^30.",
+      "reference": "algebraic-07.json:115, Inner and outer maps",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed dimension formula is publication-ready LaTeX.",
+      "justification": "The decoded JSON contains U+0007 before `mathbb`, rather than a backslash. This is a nonmathematical typo; the surrounding formula unambiguously states dimension 1040.",
+      "reference": "algebraic-07.json:115, dimension display",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The minimum-distance lower bound covers every nonzero codeword.",
+      "justification": "Injectivity ensures a nonzero codeword comes from a nonzero polynomial. Such a polynomial has at most 64 roots, and every surviving inner block has weight at least 2^14, giving 32704*2^14=535822336.",
+      "reference": "algebraic-07.json:115, Minimum distance lower bound",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The scaled 64-root polynomial proves exact minimum distance.",
+      "justification": "Its roots are exactly the selected set R. Since at most 32704 of the 65535 nonzero field values occur on A minus R, an omitted value exists; scaling by its inverse prevents every surviving evaluation from being 1. Direct computation finds image size 511 and already omits 1.",
+      "reference": "algebraic-07.json:115, Minimum distance attainment",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The detailed scoped-ceiling argument proves a universal equal-block product ceiling.",
+      "justification": "It repeats the unsupported assertion that product certification always needs outer distance 32704. This is valid for the exact RM(1,15) inner code or a regime separately requiring that outer distance, but not for arbitrary varying inner distances.",
+      "reference": "algebraic-07.json:115, Scoped ceiling",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The field, inner, outer, binary-parameter, and distance proof steps are proved.",
+      "justification": "Their dependencies are acyclic and the detailed proof supplies each claimed conclusion. The outer-distance equality follows from the later 64-root polynomial, although the local outer-step summary states only the lower bound.",
+      "reference": "algebraic-07.json:116-172",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The product-template-ceiling proof step is proved as stated.",
+      "justification": "Griesmer and Singleton prove the fixed-constituent-distance ceiling, not the stated unrestricted equal-block architecture ceiling. The statement or proof must be narrowed.",
+      "reference": "algebraic-07.json:174-182",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The reported rate, research direction, and proved status accurately describe the principal construction.",
+      "justification": "1040/2^30=65/2^26=9.685754776000977e-7 exactly. The main finite construction is fully proved despite the ancillary ceiling gap.",
+      "reference": "algebraic-07.json:185-187",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is accurate provenance metadata.",
+      "justification": "All listed files exist, the two named directories are empty, and no listed source hides an essential unproved dependency for the code theorem.",
+      "reference": "algebraic-07.json:188-220",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class, theorem statement, and title accurately report a record candidate.",
+      "justification": "The independently verified parameters are exactly [1073741824,1040,535822336]_2 with rate 65/2^26, so this is a genuine baseline-beating leaderboard candidate.",
+      "reference": "algebraic-07.json:222-224",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited submission.",
+      "justification": "SHA-256 of the parsed JSON serialized with sorted keys recomputes exactly to 9be737ac22e4e2d9bd422db14a849b28ea5386842f8e659831822eda07781672.",
+      "reference": "algebraic-07.json:1-225",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [
+    "Narrow lines 63 and 115 and proof step `product-template-ceiling` to the exact RM(1,15) inner code, or to concatenations separately constrained by inner distance at least 16384 and outer distance at least 32704; otherwise supply a valid global distance-tradeoff proof.",
+    "Nonblocking polish: replace the U+0007 control character in the dimension display with a proper `\\mathbb F_2`, state the full-field coefficient-integer order explicitly for the witness, and mention outer-distance attainment in the `outer-evaluation` step.",
+    "Nonblocking traceability: replace the unresolved gateway references with concrete paths or proof-step identifiers.",
+    "Nonblocking roadmap correction: optimize the hypothetical gateways to [65536,73,65464] over F_(2^16), yielding k=1168, and [131072,65,131008] over F_(2^17), yielding k=1105.",
+    "Publication requirement, not a mathematical repair: persist the proof under `proofs/`, add the candidate and reusable lemma to `data/records.json`, and then rerun the validators and full dashboard build."
+  ],
+  "source_job_id": "algebraic-07",
+  "source_sha256": "9be737ac22e4e2d9bd422db14a849b28ea5386842f8e659831822eda07781672",
+  "summary": "REVISE for one local ancillary overclaim. The principal construction independently verifies as an explicit binary linear [1073741824,1040,535822336]_2 code with exact rate 65/2^26, so length, dimension, distance, arithmetic, explicitness, and baseline improvement all pass. The claimed universal 1040 ceiling for equal-block product architectures is not proved when the inner distance varies; narrowing its scope repairs the submission. There is no fatal obstruction to the k=1040 record.",
+  "verdict": "revise",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}
