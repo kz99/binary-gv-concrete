@@ -307,6 +307,8 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
     cfg = value["campaign"]
     if cfg.get("reasoning_effort") != "ultra":
         raise ValueError("campaign.reasoning_effort must be ultra")
+    if cfg.get("verifier_reasoning_effort") != "xhigh":
+        raise ValueError("campaign.verifier_reasoning_effort must be xhigh")
     if int(cfg.get("researcher_count", 0)) != 40:
         raise ValueError("the campaign must have four groups of ten researchers")
     if int(cfg.get("verifier_count", 0)) != 1:
@@ -414,7 +416,10 @@ class Campaign:
             "dependency": dependency, "status": "queued", "attempts": 0,
             "team": team, "round": round_number,
             "model": self.cfg.get("model", "gpt-5.6-sol"),
-            "reasoning_effort": "ultra", "error": None,
+            "reasoning_effort": (
+                self.cfg["verifier_reasoning_effort"] if role == "verifier" else "ultra"
+            ),
+            "error": None,
             "created_at": utc_timestamp(), "updated_at": utc_timestamp(),
         }
 
@@ -544,7 +549,8 @@ you have examined every durable response and review path.
 
     def _run_job(self, job: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         prompt, schema = self._prompt(job)
-        response, metadata = self.provider.run(job["id"], prompt, schema)
+        response, metadata = self.provider.run(
+            job["id"], prompt, schema, str(job.get("reasoning_effort", "ultra")))
         output = self._output_path(job)
         output.write_text(json.dumps(response, indent=2, sort_keys=True) + "\n")
         posts = response.get("discussion_posts")
@@ -787,6 +793,7 @@ you have examined every durable response and review path.
         payload = {
             "schema": "binary-gv-campaign-snapshot-v1", "updated_at": utc_timestamp(),
             "model": self.cfg.get("model"), "reasoning_effort": "ultra",
+            "verifier_reasoning_effort": self.cfg["verifier_reasoning_effort"],
             "researcher_count": sum(job["role"] == "researcher" for job in jobs), "counts": counts,
             "target": {
                 "block_length": N,

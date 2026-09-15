@@ -12,6 +12,7 @@ campaign:
   executable: codex
   model: gpt-5.6-sol
   reasoning_effort: ultra
+  verifier_reasoning_effort: xhigh
   disable_nested_agents: true
   max_workers: 10
   timeout_seconds: 5400

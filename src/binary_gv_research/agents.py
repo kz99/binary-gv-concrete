@@ -19,8 +19,8 @@ class CommandAgentProvider:
     def __init__(self, workspace: Path, log_dir: Path, executable: str,
                  model: str, reasoning_effort: str, timeout_seconds: int,
                  disable_nested_agents: bool = True):
-        if reasoning_effort != "ultra":
-            raise ValueError("official Binary-GV agents must use ultra reasoning")
+        if reasoning_effort not in {"minimal", "low", "medium", "high", "xhigh", "max", "ultra"}:
+            raise ValueError("unsupported Codex reasoning effort")
         self.workspace = workspace.resolve()
         self.log_dir = log_dir.resolve()
         self.log_dir.mkdir(parents=True, exist_ok=True)
@@ -30,10 +30,12 @@ class CommandAgentProvider:
         self.timeout_seconds = timeout_seconds
         self.disable_nested_agents = disable_nested_agents
 
-    def command(self, schema_path: Path, output_path: Path) -> list[str]:
+    def command(self, schema_path: Path, output_path: Path,
+                reasoning_effort: str | None = None) -> list[str]:
+        effort = reasoning_effort or self.reasoning_effort
         command = [
             self.executable, "exec", "--model", self.model,
-            "--config", 'model_reasoning_effort="ultra"',
+            "--config", f'model_reasoning_effort="{effort}"',
         ]
         if self.disable_nested_agents:
             command.extend(["--disable", "multi_agent"])
@@ -44,8 +46,8 @@ class CommandAgentProvider:
         ])
         return command
 
-    def run(self, role: str, prompt: str,
-            schema: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+    def run(self, role: str, prompt: str, schema: dict[str, Any],
+            reasoning_effort: str | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
         stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
         digest = hashlib.sha256((role + prompt).encode()).hexdigest()[:10]
         invocation_id = f"{stamp}-{digest}-{uuid.uuid4().hex[:10]}"
@@ -57,7 +59,8 @@ class CommandAgentProvider:
         stderr_path = root / "stderr.txt"
         prompt_path.write_text(prompt)
         schema_path.write_text(json.dumps(schema, indent=2, sort_keys=True) + "\n")
-        command = self.command(schema_path, output_path)
+        effort = reasoning_effort or self.reasoning_effort
+        command = self.command(schema_path, output_path, effort)
         try:
             completed = subprocess.run(
                 command, input=prompt, text=True, stdout=subprocess.DEVNULL,
@@ -75,7 +78,7 @@ class CommandAgentProvider:
         metadata = {
             "role": role,
             "model": self.model,
-            "reasoning_effort": "ultra",
+            "reasoning_effort": effort,
             "nested_agents_disabled": self.disable_nested_agents,
             "invocation_id": invocation_id,
             "command": command[:-1],
