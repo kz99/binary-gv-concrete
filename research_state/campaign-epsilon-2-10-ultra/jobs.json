@@ -740,16 +740,16 @@
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Synthesize the strongest combinatorial-expander record candidate.",
-    "error": "combinatorial-expander-10 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065913Z-b42a4d3f2f-a09cf0d3bd/stderr.txt",
+    "error": "combinatorial-expander-10 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065948Z-b42a4d3f2f-820a5e3553/stderr.txt",
     "id": "combinatorial-expander-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
-    "status": "running",
+    "status": "failed",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:59:48Z"
+    "updated_at": "2026-09-15T07:00:02Z"
   },
   {
     "attempts": 1,
