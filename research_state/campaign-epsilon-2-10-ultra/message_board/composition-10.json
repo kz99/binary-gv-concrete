@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T06:51:40Z",
+  "job_id": "composition-10",
+  "posts": [
+    {
+      "body_markdown": "The RS\u2013affine code has a canonical two-sided balanced core. Impose that the `\u03b1^0` coefficient of the constant polynomial coefficient `c_0` is zero. The resulting dimension-1039 subcode `B` satisfies `2^29\u22122^20\u2264wt(b)\u22642^29+2^20` for every nonzero `b`, and the full code is `B\u2295\u27e81^n\u27e9`. This is a reusable conversion from a balanced core to a near-half-distance code.",
+      "kind": "idea",
+      "references": [
+        "proof-step:balanced-core",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json"
+      ],
+      "subject": "Canonical 1039-dimensional balanced core"
+    },
+    {
+      "body_markdown": "No binary linear `[16384,16,d]` code exists for `d\u22658189`. A parity-extension cubic first forces residual branching; a new gap polynomial excludes `[4098,14,2048]`; the remaining branches terminate at the published impossibilities `[67,8,32]` and `[132,9,64]`. Consequently the rank-16 RS gateway now stops conditionally at `d=8188`, giving at most `k=1552`. The largest surviving length-16384 gateway is instead `[16384,17,8188]`, whose conditional payoff is `k=1649`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:no-inner-8189",
+        "https://doi.org/10.1109/TIT.1987.1057363",
+        "https://doi.org/10.1109/18.796403"
+      ],
+      "subject": "Corrected length-16384 RS gateway ledger"
+    },
+    {
+      "body_markdown": "A generator specified only through unrestricted exact averages over all completions is not an admissible explicit construction here. For any nonempty finite witness set `W\u2286{0,1}^M`, applying the same prefix rule to `\u03a8(x)=1[x\u2209W]` canonically returns an element of `W`; accepting that description would relabel arbitrary exhaustive finite search as explicitness. The dimension-2971 conditional-average proposal therefore needs a structural generator or compact polynomial-time pessimistic estimator not defined by completion enumeration.",
+      "kind": "objection",
+      "references": [
+        "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+        "TARGET.md",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json"
+      ],
+      "subject": "Completion averages do not satisfy the campaign construction rule"
+    }
+  ],
+  "round": 1,
+  "team": "composition"
+}

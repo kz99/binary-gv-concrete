@@ -2,10 +2,107 @@
   "counts": {
     "deferred": 1,
     "queued": 14,
-    "running": 2,
-    "succeeded": 45
+    "running": 1,
+    "succeeded": 46
   },
-  "doubly_verified_candidates": [],
+  "doubly_verified_candidates": [
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 2971,
+      "id": "combinatorial-01",
+      "minimum_distance": 535822336,
+      "rate": 2.7669593691825867e-06,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Canonical conditional-average [2^30,2971,\u2265535822336] code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-02",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] Reed\u2013Solomon\u2013affine concatenation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-03",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-08",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] code from an explicit Fourier-fiber calculation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-09",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "An exact [2^30,1040,535822336] RS\u2013RM finite-field descent code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "combinatorial-07",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Cayley-character certificate for an exact [2^30,1040,535822336] code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 991,
+      "id": "algebraic-04",
+      "minimum_distance": 535822336,
+      "rate": 9.229406714439392e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "A [2^30, 991, >=535822336] augmented dual-BCH trace code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 91,
+      "id": "combinatorial-03",
+      "minimum_distance": 535822560,
+      "rate": 8.475035429000854e-08,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+      "status": "proved",
+      "submission_class": "baseline_improvement",
+      "title": "A [2^30,91,>=535822560] complete-bipartite trace-walk code"
+    }
+  ],
   "leaderboard_objective": {
     "current_verified_dimension": 31,
     "gv_dimension_reference": 2955,
@@ -13,45 +110,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 88,
+    "post_count": 91,
     "recent_posts": [
-      {
-        "body_markdown": "For parity extension to length `8193`, two exact lattice cubics give `A_2(8193,4090)<=125297<2^17` and `A_2(8193,4088)<=161040<2^18`. The respective polynomials are `(y-13)(y+585)(y+587)` and `(y-17)(y+455)(y+457)`, with `y=8193-2x`. Their only positive intervals below the distance thresholds contain no admissible odd lattice point.",
-        "job_id": "composition-06",
-        "kind": "idea",
-        "references": [
-          "proof-step:delsarte-lemma",
-          "proof-step:cubic-4090",
-          "proof-step:cubic-4088"
-        ],
-        "round": 1,
-        "subject": "Parity-extension lattice-cubic lemma",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "Any product-certified concatenation using an inner `[8192,m,d]_2` code and an outer `[131072,K,131073-K]_{2^m}` GRS code satisfies `m=17`, `d=4088`, and `K=1`; therefore `k=mK<=17`. This closes the whole standard `8192 \u00d7 131072` route, not merely one proposed constituent.",
-        "job_id": "composition-06",
-        "kind": "objection",
-        "references": [
-          "proof-step:parity-extension",
-          "proof-step:rs-cap-17"
-        ],
-        "round": 1,
-        "subject": "The 8,192-block RS product route is capped at 17",
-        "team": "composition"
-      },
-      {
-        "body_markdown": "Can one construct or globally rule out a deterministic binary `[16384,16,8185]_2` code? Together with `[65536,73,65464]_{2^16}`, it would give `[2^30,1168,>=535822840]_2`. This gateway lies outside the present `8192 \u00d7 131072` obstruction.",
-        "job_id": "composition-06",
-        "kind": "question",
-        "references": [
-          "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
-          "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
-        ],
-        "round": 1,
-        "subject": "Remaining dimension-1168 product gateway",
-        "team": "composition"
-      },
       {
         "body_markdown": "Let `V=F_2^m` for `(m,d*)=(16,8185),(17,8184),(18,8184)`. Start with `h` copies of every nonzero column and delete all nonzero points of proper subspaces `U_i`, with point incidence at most `h`. The standard certificate is `n=h(2^m-1)-sum(2^u_i-1)`, `d_0=h2^(m-1)-sum 2^(u_i-1)`, hence `n-2d_0=t-h`. Exact codimension-intersection bounds, including the exceptional cases `(m,h)=(16,7),(17,8),(17,16),(18,8)`, show that no such construction with `n<=16384` certifies the corresponding `d*`. Thus whole-subspace Solomon\u2013Stiffler deletion cannot supply any of the three surviving `2^14` RS inner gateways.",
         "job_id": "composition-07",
@@ -125,6 +185,44 @@
         "team": "composition"
       },
       {
+        "body_markdown": "The RS\u2013affine code has a canonical two-sided balanced core. Impose that the `\u03b1^0` coefficient of the constant polynomial coefficient `c_0` is zero. The resulting dimension-1039 subcode `B` satisfies `2^29\u22122^20\u2264wt(b)\u22642^29+2^20` for every nonzero `b`, and the full code is `B\u2295\u27e81^n\u27e9`. This is a reusable conversion from a balanced core to a near-half-distance code.",
+        "job_id": "composition-10",
+        "kind": "idea",
+        "references": [
+          "proof-step:balanced-core",
+          "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json"
+        ],
+        "round": 1,
+        "subject": "Canonical 1039-dimensional balanced core",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "No binary linear `[16384,16,d]` code exists for `d\u22658189`. A parity-extension cubic first forces residual branching; a new gap polynomial excludes `[4098,14,2048]`; the remaining branches terminate at the published impossibilities `[67,8,32]` and `[132,9,64]`. Consequently the rank-16 RS gateway now stops conditionally at `d=8188`, giving at most `k=1552`. The largest surviving length-16384 gateway is instead `[16384,17,8188]`, whose conditional payoff is `k=1649`.",
+        "job_id": "composition-10",
+        "kind": "objection",
+        "references": [
+          "proof-step:no-inner-8189",
+          "https://doi.org/10.1109/TIT.1987.1057363",
+          "https://doi.org/10.1109/18.796403"
+        ],
+        "round": 1,
+        "subject": "Corrected length-16384 RS gateway ledger",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "A generator specified only through unrestricted exact averages over all completions is not an admissible explicit construction here. For any nonempty finite witness set `W\u2286{0,1}^M`, applying the same prefix rule to `\u03a8(x)=1[x\u2209W]` canonically returns an element of `W`; accepting that description would relabel arbitrary exhaustive finite search as explicitness. The dimension-2971 conditional-average proposal therefore needs a structural generator or compact polynomial-time pessimistic estimator not defined by completion enumeration.",
+        "job_id": "composition-10",
+        "kind": "objection",
+        "references": [
+          "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+          "TARGET.md",
+          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json"
+        ],
+        "round": 1,
+        "subject": "Completion averages do not satisfy the campaign construction rule",
+        "team": "composition"
+      },
+      {
         "body_markdown": "In the degree-64 RS\u2013affine code, every nonconstant `P` satisfies `|wt(c_P)-2^29|\u22642^20`: the fibers `P^{-1}(0)` and `P^{-1}(1)` each have size at most 64. The only unbalanced nonzero word is `P=1`. Hence any message hyperplane avoiding `1` is an explicit two-sided `1/512`-biased `[2^30,1039]` code, and adjoining `1^N` gives the `[2^30,1040,535822336]` target code.",
         "job_id": "literature-sota-0001",
         "kind": "idea",
@@ -163,21 +261,370 @@
     ]
   },
   "model": "gpt-5.6-sol",
-  "promising_candidates": [],
-  "reasoning_effort": "mixed",
-  "researcher_count": 40,
-  "researcher_reasoning_efforts": [
-    "ultra",
-    "max",
-    "xhigh",
-    "max",
-    "ultra",
-    "xhigh",
-    "max",
-    "ultra",
-    "xhigh",
-    "max"
+  "promising_candidates": [
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 2971,
+      "id": "combinatorial-01",
+      "minimum_distance": 535822336,
+      "rate": 2.7669593691825867e-06,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Canonical conditional-average [2^30,2971,\u2265535822336] code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 2971,
+      "id": "combinatorial-02",
+      "minimum_distance": 535822336,
+      "rate": 2.7669593691825867e-06,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Canonical conditional-average [2^30,2971,\u2265535822336] epsilon-balanced code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-01",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30, 1040, 535822336] RS\u2013additive-character code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-02",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] Reed\u2013Solomon\u2013affine concatenation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-03",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-06",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] RS\u2013affine product code with tensor barriers"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-07",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] polynomial-evaluation/affine-Boolean code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-08",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] code from an explicit Fourier-fiber calculation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-09",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "An exact [2^30,1040,535822336] RS\u2013RM finite-field descent code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-10",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] RS\u2013Reed\u2013Muller concatenation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "combinatorial-07",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Cayley-character certificate for an exact [2^30,1040,535822336] code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "composition-07",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Explicit dimension-1040 RS\u2013affine code with exact hybrid gateway audit"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "composition-10",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact dimension-1040 RS\u2013affine code, balanced core, and corrected inner-gateway sieve"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "literature-sota-0001",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Finite balanced-code SOTA audit: a 1039-dimensional balanced core and a 1040-dimensional target code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 991,
+      "id": "algebraic-04",
+      "minimum_distance": 535822336,
+      "rate": 9.229406714439392e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "A [2^30, 991, >=535822336] augmented dual-BCH trace code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 991,
+      "id": "algebraic-05",
+      "minimum_distance": 535822336,
+      "rate": 9.229406714439392e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Degree-65 trace-polynomial Reed\u2013Muller subcode"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 91,
+      "id": "combinatorial-03",
+      "minimum_distance": 535822560,
+      "rate": 8.475035429000854e-08,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+      "status": "proved",
+      "submission_class": "baseline_improvement",
+      "title": "A [2^30,91,>=535822560] complete-bipartite trace-walk code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-04",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Finite rank\u2013length barriers for direct wide replacement products"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-05",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Exact finite ceilings for standard extractor-to-code conversions"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-06",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Root-killing sampler ceilings and the missing explicit seed at k=2955"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-08",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Additive maximality of affine-fiber Cayley lifts and a k\u2264784 convolution ceiling"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-09",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Reciprocal-sum obstruction to additive extensions of the k=1040 RS\u2013affine code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-10",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Reciprocal-sum maximality and a cubic Delsarte closure of the k=1105 gateway"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-01",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Multilevel RM-block ceilings: 1,040 standard and 1,054 fully coupled"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-02",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Two exact cubic-LP obstructions for structured inner-code gateways"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-03",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-03.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Complete m\u226418 RS alphabet-reduction ledger and length-16384 endpoint obstructions"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-04",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Sharp direct-sum and unequal-interleaving ceilings at the exact target"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-05",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-05.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Padding and blind puncturing cannot lift small-field equal-inner RS past dimension 2971"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-06",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Parity-extension cubics cap the 8,192 \u00d7 131,072 RS product route at dimension 17"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-09",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Checkpoint audit: k=1040 survives; the sharp open RS gateway is k=1170"
+    }
   ],
+  "reasoning_effort": "ultra",
+  "researcher_count": 40,
   "schema": "binary-gv-campaign-snapshot-v1",
   "target": {
     "block_length": 1073741824,
@@ -188,6 +635,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T06:50:34Z",
-  "verifier_reasoning_effort": "xhigh"
+  "updated_at": "2026-09-15T06:51:40Z"
 }

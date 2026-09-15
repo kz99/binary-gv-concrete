@@ -1,0 +1,309 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let\n\n`p(Z)=Z^16+Z^5+Z^3+Z^2+1`, `F=F_2[Z]/(p)`, and `\u03b1=Z mod p`.\n\nRepresent `z\u2208F` uniquely as `z=\u03a3_{i=0}^{15}z_i\u03b1^i`, and order field elements by the integer `\u03a3z_i2^i`. Define\n\n`A=span_F2{1,\u03b1,\u2026,\u03b1^14}` and `Y=F_2^15`,\n\nboth in binary coefficient order. Thus `|A|=|Y|=32768`.\n\nFor `z=\u03a3z_i\u03b1^i`, define the affine truth-table encoder\n\n`H(z)_y=z_0+\u03a3_{i=1}^{15}z_i y_i`, for `y\u2208Y`.\n\nLet `P_64={f(X)=\u03a3_{j=0}^{64}c_jX^j : c_j\u2208F}`. The code is\n\n`C={C(f):f\u2208P_64}\u2286F_2^{A\u00d7Y}`,\n\nwhere\n\n`C(f)_(a,y)=H(f(a))_y`.\n\nCoordinates are ordered by the one-based index\n\n`1+2^15 \u03a3_{i=0}^{14}a_i2^i+\u03a3_{i=1}^{15}y_i2^{i-1}`.\n\nA generator matrix has rows indexed lexicographically by `(j,i)\u2208{0,\u2026,64}\u00d7{0,\u2026,15}`; row `(j,i)` is `C(\u03b1^iX^j)`. This completely specifies all `1040\u00b72^30` generator entries without puncturing, shortening, padding, or random choices.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "The RS\u2013affine code has a canonical two-sided balanced core. Impose that the `\u03b1^0` coefficient of the constant polynomial coefficient `c_0` is zero. The resulting dimension-1039 subcode `B` satisfies `2^29\u22122^20\u2264wt(b)\u22642^29+2^20` for every nonzero `b`, and the full code is `B\u2295\u27e81^n\u27e9`. This is a reusable conversion from a balanced core to a near-half-distance code.",
+      "kind": "idea",
+      "references": [
+        "proof-step:balanced-core",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json"
+      ],
+      "subject": "Canonical 1039-dimensional balanced core"
+    },
+    {
+      "body_markdown": "No binary linear `[16384,16,d]` code exists for `d\u22658189`. A parity-extension cubic first forces residual branching; a new gap polynomial excludes `[4098,14,2048]`; the remaining branches terminate at the published impossibilities `[67,8,32]` and `[132,9,64]`. Consequently the rank-16 RS gateway now stops conditionally at `d=8188`, giving at most `k=1552`. The largest surviving length-16384 gateway is instead `[16384,17,8188]`, whose conditional payoff is `k=1649`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:no-inner-8189",
+        "https://doi.org/10.1109/TIT.1987.1057363",
+        "https://doi.org/10.1109/18.796403"
+      ],
+      "subject": "Corrected length-16384 RS gateway ledger"
+    },
+    {
+      "body_markdown": "A generator specified only through unrestricted exact averages over all completions is not an admissible explicit construction here. For any nonempty finite witness set `W\u2286{0,1}^M`, applying the same prefix rule to `\u03a8(x)=1[x\u2209W]` canonically returns an element of `W`; accepting that description would relabel arbitrary exhaustive finite search as explicitness. The dimension-2971 conditional-average proposal therefore needs a structural generator or compact polynomial-time pessimistic estimator not defined by completion enumeration.",
+      "kind": "objection",
+      "references": [
+        "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+        "TARGET.md",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json"
+      ],
+      "subject": "Completion averages do not satisfy the campaign construction rule"
+    }
+  ],
+  "distance_audit": [
+    "`(1/2\u22122^-10)2^30=2^29\u22122^20=535,822,336`.",
+    "A nonzero polynomial of degree at most 64 has at most 64 roots in `A`, hence at least 32,704 nonzero outer symbols.",
+    "For the inner encoder, `wt(H(0))=0`, `wt(H(1))=32768`, and every other nonzero symbol gives a balanced affine function of weight 16,384.",
+    "Therefore every nonzero codeword has weight at least `32704\u00b716384=535,822,336`.",
+    "The explicitly certified polynomial `L_U(X)=\u220f_{u\u2208U}(X\u2212u)`, where `U=span{1,\u2026,\u03b1^5}`, has exactly 64 zeros on `A` and never assumes the value 1 on `A`. Thus its remaining 32,704 blocks all have weight 16,384, proving that the minimum distance is exactly the target.",
+    "The two-sided core formula is `wt(C(f))=2^14(32768\u2212N_0(f)+N_1(f))`; for nonconstant degree-at-most-64 `f`, both `N_0(f)` and `N_1(f)` are at most 64.",
+    "The field, length, dimension, and exact-distance computations were also independently accepted in the campaign reviews of `algebraic-03` and `algebraic-08`.",
+    "No probabilistic, sampled, conditional, or conjectural constituent is used in the leaderboard code."
+  ],
+  "explicitness_audit": [
+    "The field polynomial and polynomial basis are fixed; the irreducibility certificate is included in the proof.",
+    "Every field element, evaluation point, inner coordinate, outer monomial, generator row, and final coordinate has an explicit binary order.",
+    "For row `(j,i)` and column `(a,y)`, compute `\u03b1^ia^j mod p`, extract its 16 coefficient bits, and output the displayed affine dot product.",
+    "Naively using at most 64 degree-16 field multiplications and 15 bit operations per entry takes at most `1040\u00b764\u00b716^2\u00b7n+O(1040\u00b716n)` bit operations, hence `O(n)` for these fixed parameters. The output itself contains `1040n` bits.",
+    "The generator may be streamed using counters and 16-bit field registers; no matrix search, oracle, table lookup, or hidden seed is needed.",
+    "The exact-distance witness is also symbolic. Its subspace polynomial, nine image generators, and separating linear functional are displayed in the proof.",
+    "There is no puncturing, shortening, repetition, flooring, or padding.",
+    "The workspace is read-only, so the proof and record could not be persisted. The existing data validator was invoked but `node` is unavailable; dashboard publication remains pending."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A monic degree-16 polynomial satisfies `X^(2^16)=X mod p` and is coprime to `X^(2^8)\u2212X`.",
+      "result": "The degree-16 finite-field irreducibility criterion.",
+      "source": "[M. O. Rabin, Probabilistic Algorithms in Finite Fields, SIAM J. Comput. 9 (1980), 273\u2013280](https://doi.org/10.1137/0209024)",
+      "used_for": "Terminology for the field certificate; the degree-factor argument is reproduced in the proof."
+    },
+    {
+      "hypotheses": "A binary linear code has parameters `[n,k,d]`.",
+      "result": "`n\u2265\u03a3_{i=0}^{k\u22121}ceil(d/2^i)`.",
+      "source": "[J. H. Griesmer, A Bound for Error-Correcting Codes, IBM J. Res. Dev. 4(5) (1960), 532\u2013542](https://doi.org/10.1147/rd.45.0532)",
+      "used_for": "The ancillary residual-code endpoint obstruction."
+    },
+    {
+      "hypotheses": "A binary linear code has dimension 8 and distance 32.",
+      "result": "Its minimum possible length is 68; in particular `[67,8,32]` does not exist.",
+      "source": "[S. M. Dodunekov, T. Helleseth, N. Manev, and \u00d8. Ytrehus, New Bounds on Binary Linear Codes of Dimension Eight, IEEE Trans. Inf. Theory 33(6) (1987), 917\u2013919](https://doi.org/10.1109/TIT.1987.1057363)",
+      "used_for": "Closing one branch of the `[16384,16,8190]` obstruction."
+    },
+    {
+      "hypotheses": "A binary linear code has dimension 9 and distance 64.",
+      "result": "Its minimum possible length is 133; in particular `[132,9,64]` does not exist.",
+      "source": "[S. M. Dodunekov, S. Guritman, and J. Simonis, Some New Results on the Minimum Length of Binary Linear Codes of Dimension Nine, IEEE Trans. Inf. Theory 45(7) (1999), 2543\u20132546](https://doi.org/10.1109/18.796403)",
+      "used_for": "Closing the `[16384,16,8189]` obstruction."
+    },
+    {
+      "hypotheses": "A polynomial in the binary Hamming association scheme has nonnegative Krawtchouk coefficients and is nonpositive at every allowed nonzero distance.",
+      "result": "Its value at zero divided by its constant Krawtchouk coefficient bounds code cardinality.",
+      "source": "P. Delsarte, An Algebraic Approach to the Association Schemes of Coding Theory, Philips Research Reports Supplements 10 (1973).",
+      "used_for": "The ancillary cubic endpoint bounds; the required character-square identity is reproduced in the proof."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Persist this note under `proofs/`, add the balanced-core and endpoint-obstruction lemmas to `data/records.json` with status `under-review`, then run the validator and dashboard build in a writable environment with Node installed.",
+    "Prioritize `[16384,17,8188]_2`. Its forced residual chain begins `[8196,16,4094]\u2192[4102,15,{2047,2048}]`, and existence would give the largest surviving ordinary-RS payoff, dimension 1649.",
+    "Continue the `[16384,18,8184]_2` audit from its exact fork `[2062,15,1023]` or `[2062,15,1024]`; the first forces a four-dimensional constant-weight subcode, while the second has only four possible lift-excess patterns.",
+    "Seek a structural generator for the probabilistic dimension-2971 argument, or a genuinely different coupled rank-16 block construction in dimensions 1041\u20131054."
+  ],
+  "obstructions": [
+    "The proof establishes a record construction, not a global upper bound: dimensions above 1040 remain possible by other architectures.",
+    "The fixed affine-Hadamard encoder admits no strict additive outer supercode containing the degree-at-most-64 RS space; the durable reciprocal-sum witness is `0x0990\u22600`.",
+    "Standard first-active-level multilevel concatenation inside the same `RM(1,15)` blocks is capped at 1040. Arbitrary binary coupling with every block projection of rank at most 16 is only capped at 1054, leaving dimensions 1041\u20131054 unresolved.",
+    "No binary linear `[16384,16,d]` code exists for `d\u22658189`; the best surviving rank-16 endpoint is the unconstructed `[16384,16,8188]`.",
+    "The higher-payoff `[16384,17,8188]` and `[16384,18,8184]` inner codes remain conditional; neither is used in the submitted construction.",
+    "The dimension-2971 completion-average proposal has a sound averaging argument but violates the campaign's explicit-construction rule until its exhaustive selector is replaced.",
+    "Publication artifacts and validation could not be produced in the read-only workspace; this does not affect the inline mathematical proof."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`2^30`",
+      "quantity": "Target block length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)2^30=2^29\u22122^20`",
+      "quantity": "Required distance",
+      "value": "535,822,336"
+    },
+    {
+      "derivation": "`deg p=16` and the irreducibility certificate",
+      "quantity": "Field size",
+      "value": "`|F|=2^16=65,536`"
+    },
+    {
+      "derivation": "`dim_F2 A=15`",
+      "quantity": "Outer evaluation length",
+      "value": "32,768"
+    },
+    {
+      "derivation": "Evaluation of degrees `0,\u2026,64` on 32,768 distinct points",
+      "quantity": "Outer code",
+      "value": "`[32768,65,32704]_{2^16}`"
+    },
+    {
+      "derivation": "Affine functions on `F_2^15`",
+      "quantity": "Inner code",
+      "value": "`RM(1,15)=[32768,16,16384]_2`"
+    },
+    {
+      "derivation": "`32768\u00b732768`",
+      "quantity": "Final length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "`65\u00b716` and injectivity",
+      "quantity": "Final dimension",
+      "value": "1,040"
+    },
+    {
+      "derivation": "`32704\u00b716384` with an equality witness",
+      "quantity": "Exact minimum distance",
+      "value": "535,822,336"
+    },
+    {
+      "derivation": "`1040/2^30=65/2^26`",
+      "quantity": "Exact rate",
+      "value": "`65/67,108,864 = 9.6857547760009765625\u00d710^-7`"
+    },
+    {
+      "derivation": "One independent binary coefficient constraint",
+      "quantity": "Balanced-core dimension",
+      "value": "1,039"
+    },
+    {
+      "derivation": "`ceil(535822336/8188)=65440`, `K=65537\u221265440=97`",
+      "quantity": "Largest surviving length-16384 ordinary-RS gateway",
+      "value": "Conditional `[16384,17,8188]` payoff `17\u00b797=1649`, distance product 535,822,720"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nThe construction above is a deterministic binary linear code with exact parameters\n\n`[1,073,741,824,1040,535,822,336]_2`.\n\nIt therefore beats the verified dimension-31 baseline.\n\n### 1. The field\n\nUse little-endian polynomial bitmasks, so `Z=0x0002` and `p=0x1002d`. Repeated squaring modulo `p`, starting with `Z`, gives\n\n`0004, 0010, 0100, 002d, 0451, 13d1, 7c98, 018a, 4069, c41b, 92d0, 3dab, d4f8, ebd5, 7f8d, 0002`.\n\nThus\n\n`Z^(2^8)=Z^8+Z^7+Z^3+Z (mod p)` and `Z^(2^16)=Z (mod p)`.\n\nPut `h=Z^8+Z^7+Z^3`. Exact Euclidean division gives\n\n`p=(Z^8+Z^7+Z^6+Z^5+Z^4+Z^2+1)h+(Z^2+1)`,\n\n`h=(Z^6+Z^5+Z^4+Z^3+Z^2+1)(Z^2+1)+1`.\n\nHence `gcd(p,Z^256\u2212Z)=1`, while `p` divides `Z^65536\u2212Z`. Every irreducible factor of `p` therefore has degree dividing 16, but none has degree dividing 8. The only remaining possible factor degree is 16, and `deg p=16`; consequently `p` is irreducible. This is the relevant case of [Rabin's criterion](https://doi.org/10.1137/0209024).\n\n### 2. Inner map\n\nThe map `H:F\u2192F_2^Y` is binary-linear. If `H(z)=0`, evaluation at `y=0` gives `z_0=0`, and evaluation at the fifteen unit vectors then gives `z_i=0` for every `i\u22651`; hence `H` is injective.\n\nIf `z=1`, `H(z)` is the all-one word of weight 32768. If `z\u2209{0,1}`, its nonconstant linear part is nonzero, so the affine function is balanced and has weight 16384. Therefore the image of `H` is an explicitly ordered `RM(1,15)=[32768,16,16384]_2` code.\n\n### 3. Linearity, length, and dimension\n\nEvaluation on `A` and `H` are binary-linear, so `C` is binary-linear. Its coordinate set has size\n\n`|A\u00d7Y|=32768^2=2^30`.\n\nThe message space `P_64` has binary dimension `65\u00b716=1040`. If `C(f)=0`, injectivity of `H` gives `f(a)=0` for every `a\u2208A`. A nonzero polynomial of degree at most 64 cannot have 32768 distinct roots, so `f=0`. The encoder is injective and `dim C=1040`.\n\n### 4. Minimum distance\n\nLet `f\u22600`. It has at most 64 roots in `A`; therefore at least 32704 outer symbols are nonzero. Every corresponding inner block has weight at least 16384. Hence\n\n`wt(C(f))\u226532704\u00b716384=(2^15\u22122^6)2^14=2^29\u22122^20=535822336`.\n\nThe bound is attained explicitly. Let\n\n`U=span_F2{1,\u03b1,\u2026,\u03b1^5}` and `L_U(X)=\u220f_{u\u2208U}(X\u2212u)`.\n\nThe standard subspace-polynomial recursion `L_{V+\u27e8v\u27e9}=L_V^2+L_V(v)L_V` gives\n\n`L_U(X)=X^64+0x2e0cX^32+0x71eeX^16+0xd9a4X^8+0x2198X^4+0xc6caX^2+0x6115X`.\n\nIts values on the complementary basis vectors `\u03b1^6,\u2026,\u03b1^14` are\n\n`e9f1, d1b4, e1cf, 9bc6, ea9c, 7d5e, f733, 26c1, 770d`.\n\nThe binary functional with mask `0x007b`, namely\n\n`\u2113(z)=z_0+z_1+z_3+z_4+z_5+z_6`,\n\nvanishes on all nine displayed values but satisfies `\u2113(1)=1`. Since `L_U` is additive, `L_U(A)` is spanned by these values, so `1\u2209L_U(A)`. The degree-64 polynomial `L_U` has its 64 elements of `U` as roots and no others. Thus its 64 root blocks have weight zero and all other 32704 blocks are nonzero and not constant-one, hence have weight exactly 16384. Therefore\n\n`d_min(C)=535822336`.\n\n### 5. Full generator algorithm\n\nFor each `(j,i)` in lexicographic order, and each `(a,y)` in the fixed coordinate order:\n\n1. Multiply binary polynomials modulo `p` to compute `z=\u03b1^ia^j`.\n2. Extract `z_0,\u2026,z_15`.\n3. Output `z_0+\u03a3_{r=1}^{15}z_ry_r`.\n\nThese are exactly the entries of row `C(\u03b1^iX^j)`. At most 64 degree-16 multiplications and 15 binary operations per entry suffice. Thus a naive implementation uses at most `1040\u00b764\u00b716^2\u00b7n+O(1040\u00b716n)=O(n)` bit operations for the fixed parameters and emits exactly `1040n` bits. It can stream the output with logarithmic counters and constant-size field registers. This proves the required `n^{O(1)}` explicitness.\n\n### 6. Reusable balanced core\n\nFor `f`, let `N_b(f)=|{a\u2208A:f(a)=b}|`. The inner weight cases give the exact identity\n\n`wt(C(f))=2^14(32768\u2212N_0(f)+N_1(f))`.\n\nLet `B` be the image of messages for which the `\u03b1^0` coefficient of `c_0` is zero. This is a codimension-one subcode, so `dim B=1039`, and it excludes the constant polynomial 1. If `f` is nonconstant, both `f` and `f\u22121` are nonzero polynomials of degree at most 64, giving `N_0,N_1\u226464`. Thus\n\n`2^29\u22122^20\u2264wt(C(f))\u22642^29+2^20`.\n\nA nonzero constant message in `B` is neither 0 nor 1 and gives weight exactly `2^29`. Consequently every nonzero word of `B` lies in the displayed two-sided interval. The constant polynomial 1 encodes to `J=1^n`, and `C=B\u2295\u27e8J\u27e9`.\n\n### 7. New endpoint obstruction\n\nThe following ancillary result corrects the reusable length-16384 inner-code ledger.\n\nFor a binary `[N,K,d]` code and a word of weight `w<2d`, residualizing on its support preserves dimension `K\u22121` and gives distance at least `d\u2212floor(w/2)`. This follows because a lift with weights `a,b` on and off the support must satisfy both `a+b\u2265d` and `w\u2212a+b\u2265d`.\n\nSuppose first that `[16384,16,\u22658190]` exists. Distance at least 8191 would parity-extend to `[16385,16,\u22658192]`. For `z=16385\u22122x`,\n\n`F(x)=(8192\u2212x)(z+8193)^2`\n\nhas Krawtchouk coefficients\n\n`(f_0,f_1,f_2,f_3)=(100671488,33579008,16385,3)`\n\nand `F(0)=49156f_0`. Character orthogonality gives nonnegative Krawtchouk transforms, while `F(x)\u22640` for `x\u22658192`; hence the code would have at most 49156 words, below `2^16`. Thus its actual minimum would be 8190.\n\nResidualization gives `[8194,15,d_1]` with `d_1\u2208{4095,4096}` by the Griesmer sums `g_15(4095)=8192`, `g_15(4096)=8193`, and `g_15(4097)=8206`.\n\nIf `d_1=4096`, another residual is `[4098,14,2048]`. Such a code has no weights 2561 through 3071. Indeed, a word `w=2048+e`, `513\u2264e\u22641023`, would leave a dimension-13 residual of length `2050\u2212e` and distance at least `\u03b4=1024\u2212floor(e/2)`. Here\n\n`g_13(\u03b4)=2\u03b4+11\u2212s_2(\u03b4\u22121)`.\n\nFor even `e`, the residual length is `2\u03b4+2` and `s_2(\u03b4\u22121)\u22648`; for odd `e`, it is `2\u03b4+1` and `s_2(\u03b4\u22121)\u22649`. In both cases the Griesmer sum exceeds the residual length. Now\n\n`P(x)=\u22124(x\u22122048)(x\u22122560)(x\u22123072)`\n\nis nonpositive at every remaining possible nonzero weight and has positive Krawtchouk coefficients\n\n`(4191222,1048584,3066,3)`.\n\nSince `P(0)=64424509440`, Delsarte gives fewer than 15372 words, contradicting dimension 14.\n\nIf `d_1=4095`, residualization instead forces\n\n`[4099,14,2048]\u2192[2051,13,1024]\u2192[1027,12,512]\u2192[515,11,256]\u2192[259,10,128]\u2192[131,9,64]\u2192[67,8,32]`.\n\nThe next-distance Griesmer sums are respectively `4109,2060,1035,522,265,136,71`, so every displayed distance is forced. The terminal code is impossible because [the exact dimension-eight bound is `n_2(8,32)=68`](https://doi.org/10.1109/TIT.1987.1057363). Therefore `[16384,16,8190]` does not exist.\n\nNow suppose `[16384,16,8189]` exists. Its minimum is exact, and its first residual is `[8195,15,d_1]`, again with `d_1\u2208{4095,4096}`. The `4096` branch produces the already impossible `[4099,14,2048]`. The `4095` branch forces\n\n`[4100,14,2048]\u2192[2052,13,1024]\u2192[1028,12,512]\u2192[516,11,256]\u2192[260,10,128]\u2192[132,9,64]`,\n\nwhich is impossible because [the exact dimension-nine bound is `n_2(9,64)=133`](https://doi.org/10.1109/18.796403). Hence no binary linear `[16384,16,d]` exists for `d\u22658189`.\n\nAt `d=8188` the residual branches terminate at existing `[133,9,64]` codes or zero-padded versions, so this method correctly stops without claiming nonexistence. For an outer length-65536 RS code, `ceil(535822336/8188)=65440`, giving outer dimension 97. Thus hypothetical inner dimensions 16 and 17 yield conditional final dimensions 1552 and 1649, respectively; neither is a submitted construction.\n\n### 8. Explicitness-policy audit\n\nThe concurrent dimension-2971 averaging proof is mathematically coherent but does not define an admissible generator. More generally, for any nonempty finite `W\u2286{0,1}^M`, set `\u03a8(x)=1[x\u2209W]` and choose every next bit by the smaller exact average over all completions. The recursion returns an element of `W`. Therefore unrestricted completion averages can encode arbitrary exhaustive witness search. `TARGET.md` and the contribution guide explicitly exclude that construction device unless replaced by a structural polynomial-time generator or pessimistic estimator. It is not used here.\n\nThe main `[2^30,1040,535822336]` theorem is independent of every conditional gateway and of the ancillary small-code literature facts.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-certificate",
+      "proof": "The displayed Frobenius residues give `Z^(2^16)=Z mod p`; the Euclidean identities give `gcd(p,Z^(2^8)\u2212Z)=1`. Factor degrees must divide 16 but not 8, so the degree-16 polynomial is irreducible.",
+      "statement": "`p(Z)=Z^16+Z^5+Z^3+Z^2+1` is irreducible over `F_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "inner-code",
+      "proof": "Evaluation at zero and the unit vectors proves injectivity. A nonconstant affine Boolean function on 15 variables is balanced, while the constant-one function has full weight.",
+      "statement": "`H` is an explicit binary-linear injection with image `[32768,16,16384]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "outer-code",
+      "proof": "A degree-at-most-64 polynomial cannot vanish at all 32768 evaluation points; the root bound gives outer distance 32704.",
+      "statement": "Evaluation on `A` is an explicit `[32768,65,32704]_{2^16}` Reed\u2013Solomon code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-code",
+        "outer-code"
+      ],
+      "id": "linearity-length-dimension",
+      "proof": "Composition preserves binary linearity and injectivity. The coordinate count is `32768^2`, and the message dimension is `65\u00b716`.",
+      "statement": "`C` is binary linear of length `2^30` and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-code",
+        "outer-code"
+      ],
+      "id": "distance-lower-bound",
+      "proof": "Every nonzero outer word has at least 32704 nonzero symbols, and every nonzero inner block has weight at least 16384.",
+      "statement": "Every nonzero word of `C` has weight at least 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate",
+        "distance-lower-bound"
+      ],
+      "id": "exact-distance-witness",
+      "proof": "The displayed subspace polynomial has exactly the 64 roots in `U`. Its nine image generators lie in the kernel of mask `0x007b`, whereas 1 does not, so every nonroot value is nonzero and not 1. All nonzero blocks are therefore balanced.",
+      "statement": "The minimum distance is exactly 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate",
+        "inner-code",
+        "outer-code"
+      ],
+      "id": "generator-runtime",
+      "proof": "The explicit nested loops compute every generator entry using a bounded number of degree-16 field and bit operations, taking `O(n)` time for fixed `k=1040` and emitting the full matrix.",
+      "statement": "The entire generator matrix is deterministically output in `n^{O(1)}` time.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "exact-distance-witness"
+      ],
+      "id": "balanced-core",
+      "proof": "For nonconstant `f`, both fibers `f=0` and `f=1` have size at most 64. The exact block-weight identity then gives the two-sided interval; the coefficient constraint excludes the constant-one message.",
+      "statement": "`C` contains a dimension-1039 two-sided balanced core and equals that core direct-summed with the all-one word.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "delsarte-residual-tool",
+      "proof": "The residual inequality follows from the two lift weights. The Delsarte inequalities follow by writing each Krawtchouk transform as a sum of squared character sums.",
+      "statement": "The residual and cubic-Krawtchouk tools used in the endpoint audit apply to every binary linear code under consideration.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "delsarte-residual-tool"
+      ],
+      "id": "no-inner-8189",
+      "proof": "Parity extension, the two explicit cubic certificates, exact Griesmer residual chains, and the published values `n_2(8,32)=68` and `n_2(9,64)=133` eliminate distances 8190 and 8189.",
+      "statement": "No binary linear `[16384,16,d]` code exists for `d\u22658189`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "no-inner-8189"
+      ],
+      "id": "surviving-gateway",
+      "proof": "At `d=8188`, `ceil(D/d)=65440`, so a length-65536 outer RS code has dimension 97. The residual audit does not eliminate inner dimensions 16 or 17.",
+      "statement": "A hypothetical `[16384,17,8188]` inner code would produce dimension 1649, but its existence remains unresolved.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [],
+      "id": "selector-policy",
+      "proof": "Applying unrestricted completion-average minimization to the failure indicator of any finite nonempty witness set recovers a witness, showing that the specification subsumes canonical exhaustive search.",
+      "statement": "The completion-average dimension-2971 proposal is not an admissible explicit construction under the campaign rules.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Synthesis of reusable lemmas into a higher-k candidate",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json \u2014 all 30 files present at the final scan, individually read",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json \u2014 all 30 files present at the final scan, individually read",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ \u2014 empty at the final scan",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ \u2014 empty at the final scan",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-08/verifier-1-algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There is a symbolically specified, polynomial-time generable binary linear code with exact parameters `[1,073,741,824,1040,535,822,336]_2`. It contains a canonical dimension-1039 two-sided balanced core. Independently, no binary linear `[16384,16,d]` inner code exists for `d\u22658189`, correcting the strongest surviving length-16384 RS gateway to the conditional dimension-1649 rank-17 endpoint.",
+  "title": "Exact dimension-1040 RS\u2013affine code, balanced core, and corrected inner-gateway sieve"
+}
