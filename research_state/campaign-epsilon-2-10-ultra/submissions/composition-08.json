@@ -1,0 +1,278 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No unconditional leaderboard construction is submitted.\n\nThe unique dimension-1649 frontier inside the audited architecture would require an explicit binary inner code `B=[16384,17,8188]_2`. Given such a `B`, fix `F=GF(2^17)` by the lexicographically first irreducible monic degree-17 polynomial, fix an `F_2`-linear isomorphism `F\u2192B`, and concatenate the ordinary Reed\u2013Solomon code `[65536,97,65440]_F` evaluated on the first 65536 field elements in coefficient-vector order. This would deterministically give\n\n`[16384\u00b765536,17\u00b797,\u22658188\u00b765440]_2 = [1073741824,1649,\u2265535822720]_2`.\n\nThe essential inner code is neither constructed nor proved to exist, so this is only a conditional gateway. A `[16384,16,8188]_2` inner code would similarly give dimension 1552 over `GF(2^16)`, and `[16384,18,8184]_2` would give dimension 1170; neither constituent is presently supplied.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Let `N_2(k,d)` be the least length of a binary linear code of dimension `k` and distance at least `d`. Residualization gives `N_2(k,d)\u2265d+N_2(k\u22121,ceil(d/2))`. Using the published exact value `N_2(9,64)=133`, one obtains `N_2(16,8189)\u22658189+4095+2048+1024+512+256+128+133=16385`. Hence no `[16384,16,\u22658189]_2` exists. This removes both former rank-16 endpoints `d=8189,8190`.",
+      "kind": "idea",
+      "references": [
+        "proof-step RESIDUAL-16",
+        "https://doi.org/10.1109/18.796403"
+      ],
+      "subject": "Residual-table lift eliminates the rank-16 endpoint"
+    },
+    {
+      "body_markdown": "If an inner `[16384,m,d]_2` contains the all-one word and `d\u22658184`, quotienting by complements and applying the Gram/Welch bound gives `2^(m\u22121)\u2264(16384^2\u221216^2)/(16384\u221216^2)=1048575/63<16645`. Thus `m\u226415`. Combined with the finite sieve, every ordinary product-certified RS concatenation in the audited range whose inner code contains all-one has final dimension at most 1040.",
+      "kind": "objection",
+      "references": [
+        "proof-step ALL-ONE"
+      ],
+      "subject": "All-one inner codes cannot pass dimension 1040"
+    },
+    {
+      "body_markdown": "Can one construct or exclude a non-antipodal `[16384,17,8188]_2` code? Its residual chain forces `[8196,16,4094]` and then `[4102,15,\u22652047]`; nonexistence of `[135,10,64]_2` would suffice to close it. The historical GUAVA table records only `63\u2264d_2(135,10)\u226464`, so it does not decide the question.",
+      "kind": "question",
+      "references": [
+        "proof-step FRONTIER",
+        "https://raw.githubusercontent.com/gap-packages/guava/refs/heads/master/tbl/bdtable2.g"
+      ],
+      "subject": "Decide the remaining rank-17 gateway"
+    }
+  ],
+  "distance_audit": [
+    "The immutable target is `D=(1/2\u22122^\u221210)2^30=(511/1024)2^30=535822336`.",
+    "For every nonzero concatenated word, the RS outer word has at least `L\u2212K+1` nonzero symbols and each corresponding nonzero inner block has weight at least `d`; hence its weight is at least `d(L\u2212K+1)`.",
+    "Zero padding to length `2^30` changes neither dimension nor nonzero weights.",
+    "The finite sieve uses `L_max=min(2^m,2^(30\u2212s))`, the most favorable permitted outer length. Thus replacing an actual `L\u2264L_max` by `L_max` can only weaken the obstruction.",
+    "All Levenshtein applications were evaluated as exact rational numbers before flooring; the ten resulting cardinality bounds are listed in the proof.",
+    "The conditional frontier product is exact: `8188\u00b765440=535822720=D+384`. It is not reported as an achieved minimum distance because the inner code is unavailable."
+  ],
+  "explicitness_audit": [
+    "The obstruction quantifies over every integer `1\u2264m\u226430`, every inner exponent `1\u2264s\u226430`, every `L\u2264min(2^m,2^(30\u2212s))`, and every integer outer dimension `1\u2264K\u2264L`.",
+    "All floors and ceilings are specified through `K_0=floor(1040/m)+1`, `delta=ceil(D/(L_max\u2212K_0+1))`, and the binary Griesmer sum.",
+    "The only external exact small-code input is the peer-reviewed equality `N_2(9,64)=133`; its source and hypotheses are stated.",
+    "The unresolved `[135,10,64]` table entry is explicitly treated as unresolved, not as a construction or nonexistence theorem.",
+    "No random existence argument, sampled codeword, asymptotic estimate, or hidden numerical search is used.",
+    "No generator matrix is claimed for any surviving inner-code gateway; consequently `leaderboard_submission=false`."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A binary linear `[n,k,\u2265d]` code.",
+      "result": "The Griesmer inequality `n\u2265\u03a3_{i=0}^{k\u22121}ceil(d/2^i)`. A residual proof is also included here.",
+      "source": "J. H. Griesmer, \u201cA bound for error-correcting codes,\u201d IBM Journal of Research and Development 4 (1960); local residual treatments in `composition-02` and `composition-03`.",
+      "used_for": "The exact finite `(s,m)` sieve."
+    },
+    {
+      "hypotheses": "A spherical code in `S^(N\u22121)` with maximum inner product `0\u2264sigma\u2264(sqrt(N+3)\u22121)/(N+2)`.",
+      "result": "`A(N,sigma)\u2264N(1\u2212sigma)(2+(N+1)sigma)/(1\u2212N sigma^2)`.",
+      "source": "[S. P. Boumova, Applications of Polynomials to Spherical Codes and Designs, Theorem 2.5.2](https://doi.org/10.6100/IR552987); the degree-three formula is also printed in [Serdica Math. J. 21 (1995), 231\u2013238](https://www.math.bas.bg/serdica/1995/1995-231-238.pdf).",
+      "used_for": "Eliminating all sieve survivors except inner ranks 16\u201318 at length 16384, and bounding their endpoint distances."
+    },
+    {
+      "hypotheses": "Arbitrary binary linear codes of dimension nine and distance 64.",
+      "result": "The exact minimum length is `N_2(9,64)=133`.",
+      "source": "[S. Dodunekov, S. Guritman, and J. Simonis, IEEE Transactions on Information Theory 45(7), 2543\u20132546 (1999)](https://research.tue.nl/en/publications/some-results-on-the-minimum-length-of-binary-linear-codes-of-dime/), DOI 10.1109/18.796403.",
+      "used_for": "The new residual exclusion of `[16384,16,\u22658189]_2`."
+    },
+    {
+      "hypotheses": "Historical binary bounds at length 135 and dimension 10.",
+      "result": "The table records lower distance 63 and upper distance 64; it does not decide existence of `[135,10,64]_2`.",
+      "source": "[GUAVA binary bounds data](https://raw.githubusercontent.com/gap-packages/guava/refs/heads/master/tbl/bdtable2.g), lower-table row 135 and upper-table row 135.",
+      "used_for": "Precisely identifying, without overstating, the unresolved small endpoint behind the rank-17 frontier."
+    },
+    {
+      "hypotheses": "An ordinary generalized Reed\u2013Solomon code of length `L\u2264q` and dimension `K` over `GF(q)`.",
+      "result": "It is linear with minimum distance `L\u2212K+1`.",
+      "source": "Standard Reed\u2013Solomon MDS theorem; instantiated deterministically in the local durable submission `algebraic-02.json`.",
+      "used_for": "The scoped concatenation model and conditional frontier parameters."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Construct or exclude a non-antipodal binary `[16384,17,8188]_2`; a proof that `N_2(10,64)\u2265136` would close it, although existence of `[135,10,64]` alone would not construct the lift.",
+    "Search deterministically for a symbolic `[16384,16,8188]_2` constituent. It would immediately yield a product-certified dimension-1552 target code, but it cannot contain the all-one word.",
+    "Apply higher-degree binary Delsarte/MacWilliams constraints directly to `[16384,17,8188]_2`, exploiting linearity and the forced residual parameters `[8196,16,4094]` and `[4102,15,\u22652047]`.",
+    "Extend the audit beyond `m\u226430`, ordinary RS outers, equal power-of-two inner blocks, and the standard product-distance certificate."
+  ],
+  "obstructions": [
+    "Every ordinary equal-block Reed\u2013Solomon concatenation in the stated `m\u226430` scope, certified only by the standard product bound, has dimension at most 1649.",
+    "The previous rank-16 possibilities `d=8189,8190`, responsible for the former scoped ceiling 1808, are impossible by residualization and `N_2(9,64)=133`.",
+    "If the inner code contains the all-one word, the same scoped architecture has dimension at most 1040.",
+    "The only possible dimension-1649 equality case requires the unresolved non-antipodal inner code `[16384,17,8188]_2`.",
+    "The theorem does not cover `m>30`, extended RS length `q+1`, non-RS outer codes, unequal inner blocks, weighted distance arguments stronger than the ordinary product bound, or unrelated binary constructions."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign arithmetic.",
+      "quantity": "Target",
+      "value": "`n=2^30=1073741824`, `D=(511/1024)n=535822336`"
+    },
+    {
+      "derivation": "Inner `[2^s,m,d]_2`, ordinary outer `[L,K,L\u2212K+1]_(2^m)`, and zero padding.",
+      "quantity": "Audited model",
+      "value": "`1\u2264m\u226430`, `L\u2264L_max=min(2^m,2^(30\u2212s))`, dimension `mK`, distance certificate `d(L\u2212K+1)`"
+    },
+    {
+      "derivation": "Any candidate above the harmless branch `mK\u22641040` has `K\u2265K_0`.",
+      "quantity": "Threshold variables",
+      "value": "`K_0=floor(1040/m)+1`, `delta(s,m)=ceil(D/(L_max\u2212K_0+1))`"
+    },
+    {
+      "derivation": "For `m<8`, `m2^m\u2264896`; for `m\u22658` and `m+s\u226429`, the normalized Griesmer sum is greater than `(255/128)(511/512)>1`.",
+      "quantity": "Field-limited region",
+      "value": "No tuple with `m+s\u226429` can have `mK>1040`"
+    },
+    {
+      "derivation": "Minimum exact value of `g_m(delta)\u22122^s`, with the minimizing `m` in parentheses.",
+      "quantity": "Eliminated exponents `s=5,\u2026,12`",
+      "value": "`19(25),17(24),15(23),13(22),11(21),9(20),6(19),1(18)`"
+    },
+    {
+      "derivation": "Exact Griesmer scan of the remaining length-limited tuples.",
+      "quantity": "Raw survivors",
+      "value": "`s=13: m=17..24, delta=4090`; `s=14: delta=(8185,8184,8184,8183,8183,8183,8182,8182,8182,8182,8181,8181,8181,8181,8181)` for `m=16..30`; `s=15: delta=(16383,16381,16379,16378,16377,16376,16375,16374,16373,16372,16371,16371,16370,16369)` for `m=17..30`"
+    },
+    {
+      "derivation": "Minimum exact Griesmer gaps, attained at `m=30`.",
+      "quantity": "Eliminated exponents `s=16,\u2026,23`",
+      "value": "`36,315,1700,7832,33916,144802,632944,3011882`"
+    },
+    {
+      "derivation": "At `s=24`, beating 1040 forces `K\u226535`, so product distance is at most `30\u00b72^24=503316480<D`; at `s\u226525`, `mK\u226430\u00b72^(30\u2212s)\u2264960`.",
+      "quantity": "Large-block elimination",
+      "value": "No survivor for `s\u226524`"
+    },
+    {
+      "derivation": "Exact degree-three Levenshtein substitutions.",
+      "quantity": "Cardinality bounds",
+      "value": "`A(8192,4090)\u2264116581`; `A(16384,8183)\u2264333941`; `A(16384,8176)\u2264593066`; `A(16385,8190)\u2264114840`; `A(16385,8186)\u2264248152`; `A(32769,16384)\u226498308`; `A(32769,16382)\u2264229528`; `A(32768,16379)\u2264394309`; `A(32768,16378)\u2264460620`; `A(32768,16369)\u22641077233`"
+    },
+    {
+      "derivation": "Seven residual steps followed by the exact dimension-nine result.",
+      "quantity": "New endpoint exclusion",
+      "value": "`N_2(16,8189)\u226516252+N_2(9,64)=16252+133=16385`"
+    },
+    {
+      "derivation": "For inner exponent 14, write `d=8176+j`; exact rounding gives `ceil(D/d)=65536\u22128j` for `1\u2264j<16`.",
+      "quantity": "Surviving rank caps",
+      "value": "`m=16: d\u22648188, K\u226497, mK\u22641552`; `m=17: d\u22648188, K\u226497, mK\u22641649`; `m=18: d\u22648184, K\u226465, mK\u22641170`"
+    },
+    {
+      "derivation": "Complement-pair quotient plus Gram-rank inequality at `N=16384`, `a=N\u22122d\u226416`.",
+      "quantity": "All-one bound",
+      "value": "`2^(m\u22121)\u2264(N^2\u2212a^2)/(N\u2212a^2)\u22641048575/63<16645`, excluding `m\u226516`"
+    },
+    {
+      "derivation": "Largest surviving payoff.",
+      "quantity": "Conditional frontier",
+      "value": "Inner `[16384,17,8188]_2`, outer `[65536,97,65440]_(2^17)`, final conditional parameters `[2^30,1649,\u2265535822720]_2`"
+    }
+  ],
+  "proof_markdown": "## Theorem and scope\n\nLet `D=535822336`. Consider a binary inner code `B=[2^s,m,d]_2`, an ordinary Reed\u2013Solomon outer code `[L,K,L\u2212K+1]` over `GF(2^m)`, and any fixed injective binary-linear identification of an outer symbol with an inner word. Assume `1\u2264m\u226430`, `L\u2264min(2^m,2^(30\u2212s))`, and pad unused final coordinates by zero. I prove that the resulting code cannot have both product-certified distance at least `D` and dimension greater than 1649. If `B` contains the all-one word, its dimension cannot exceed 1040.\n\nThis is a scoped obstruction, not a global upper bound on binary codes.\n\n## 1. Concatenation parameters\n\nThe outer evaluation map and inner encoder are linear and injective, so the binary dimension is exactly `mK`. A nonzero outer word has at least `L\u2212K+1` nonzero symbols, each encoded to a word of weight at least `d`. Therefore\n\n`d_min\u2265d(L\u2212K+1)`.\n\nLet `L_max=min(2^m,2^(30\u2212s))`. Replacing `L` by `L_max` only makes the required distance easier to satisfy. Partition off `mK\u22641040`. Otherwise\n\n`K\u2265K_0=floor(1040/m)+1`\n\nand necessarily\n\n`d\u2265delta(s,m)=ceil(D/(L_max\u2212K_0+1))`.\n\nThe binary Griesmer bound then requires\n\n`g_m(delta):=\u03a3_{i=0}^{m\u22121}ceil(delta/2^i)\u22642^s`. `(1)`\n\n## 2. Exact finite sieve\n\nIf `m<8`, then `mK\u2264m2^m\u2264896`. If `m\u22658` and `m+s\u226429`, then `L_max=2^m` and `delta>D/2^m`, whence\n\n`g_m(delta)/2^s > (2\u22122^(1\u2212m))D/2^(m+s) \u2265 (255/128)(511/512)>1`.\n\nThus only `m+s\u226530` remains. Direct integer evaluation of `(1)` gives positive minimum gaps for `s=5,\u2026,12`:\n\n`19,17,15,13,11,9,6,1`,\n\nand for `s=16,\u2026,23`:\n\n`36,315,1700,7832,33916,144802,632944,3011882`.\n\nFor `s\u22644`, `m+s\u226530` contradicts `m\u22642^s`. At `s=24`, an improvement forces `K\u226535`; since `L_max\u226464`, even `d=2^24` gives product at most `30\u00b72^24<D`. For `s\u226525`, `mK\u226430\u00b72^(30\u2212s)\u2264960`.\n\nThe only raw survivors are therefore:\n\n- `s=13`, `17\u2264m\u226424`, all requiring `d\u22654090`;\n- `s=14`, `16\u2264m\u226430`, with the exact thresholds listed in the parameter ledger;\n- `s=15`, `17\u2264m\u226430`, with the exact thresholds listed there.\n\n## 3. Degree-three spherical bound\n\nMap a binary length-`N` code to normalized sign vectors. Distance at least `d_0` gives maximum inner product `sigma=(N\u22122d_0)/N=a/N`. For\n\n`0\u2264sigma\u2264(sqrt(N+3)\u22121)/(N+2)=1/(sqrt(N+3)+1)`,\n\nthe degree-three Levenshtein theorem gives\n\n`|C|\u2264L_3(N,d_0):=(N\u2212a)(2N+(N+1)a)/(N\u2212a^2)`. `(2)`\n\nEvery use below has `N\u22658192` and `a\u226432`; hence `a/N\u22641/256<1/183<1/(sqrt(N+3)+1)`. Exact substitution and flooring gives:\n\n| `N` | `d_0` | `a` | `floor L_3` | consequence |\n|---:|---:|---:|---:|---|\n|8192|4090|12|116581|less than `2^17`; all `s=13` survivors fail|\n|16384|8183|18|333941|less than `2^19`; rank 19 fails|\n|16384|8176|32|593066|less than `2^20`; ranks at least 20 fail by taking a 20-dimensional subcode|\n|16385|8190|5|114840|less than `2^17`|\n|16385|8186|13|248152|less than `2^18`|\n|32769|16384|1|98308|less than `2^17`|\n|32769|16382|5|229528|less than `2^18`|\n|32768|16379|10|394309|less than `2^19`|\n|32768|16378|12|460620|less than `2^20`|\n|32768|16369|30|1077233|less than `2^21`; ranks at least 21 fail by subcoding|\n\nAppending an overall parity coordinate to a binary code of minimum distance at least an odd integer `t` produces distance at least `t+1`. Thus rows four and five show respectively that a length-16384 rank-17 code has `d\u22648188` and a rank-18 code has `d\u22648184`. The last five rows eliminate every `s=15` survivor. Only `s=14` and ranks 16\u201318 remain.\n\n## 4. Residual-table improvement\n\nLet `N_2(k,d)` denote the least length of a binary linear code of dimension `k` and distance at least `d`. Choose an actual minimum word `c` of weight `w\u2265d` and restrict the code to the complement of `supp(c)`. The restriction kernel is exactly `span{c}`: any other kernel word `x` would make both `x` and `x+c` nonzero, although their weights sum to `w`, contradicting minimality of `w`.\n\nFor a lift `x` whose outside-support weight is `b`,\n\n`wt(x)+wt(x+c)=w+2b\u22652w`,\n\nso `b\u2265ceil(w/2)`. Monotonicity therefore yields the residual recurrence\n\n`N_2(k,d)\u2265d+N_2(k\u22121,ceil(d/2))`. `(3)`\n\nDodunekov\u2013Guritman\u2013Simonis proved the exact value `N_2(9,64)=133`. Iterating `(3)` gives\n\n`N_2(16,8189) \u2265 8189+4095+2048+1024+512+256+128+N_2(9,64)`\n\n`=16252+133=16385`.\n\nConsequently no `[16384,16,\u22658189]_2` exists, and rank 16 also has `d\u22648188`.\n\n## 5. Exact rounding and the ceiling\n\nFor inner exponent `r` with `11\u2264r\u226415`, put\n\n`h=2^(r\u221210)`, `N=2^(30\u2212r)`, `c=2^(31\u22122r)`.\n\nThen `N=c\u00b7512h` and `D=511hN`. If `d=511h+j` with `1\u2264j<h`, then\n\n`d(N\u2212cj)\u2212D=cj(h\u2212j)>0`,\n\nwhereas `cj(h\u2212j)\u2264ch^2/4=512<d`; hence `d(N\u2212cj\u22121)<D`. Therefore\n\n`ceil(D/d)=N\u2212cj`. `(4)`\n\nAt `r=14`, `(h,c,N)=(16,8,65536)`. For ranks 16 and 17, `d\u22648188=8176+12`, so `(4)` gives `ceil(D/d)\u226565440`, hence `K\u226497`. Their final dimensions are at most 1552 and 1649. For rank 18, `d\u22648184=8176+8`, so `ceil(D/d)\u226565472`, `K\u226465`, and `18K\u22641170`. This proves the dimension-1649 ceiling.\n\n## 6. All-one inner obstruction\n\nSuppose `1\u2208B`, where `B` has length `N`, dimension `m`, and minimum distance `d\u2264N/2`; put `a=N\u22122d` and assume `a^2<N`. Choose one representative from each coset of `B/<1>`. For two distinct representatives, their difference is neither zero nor one, so its weight lies in `[d,N\u2212d]`. The corresponding normalized sign vectors therefore have absolute inner products at most `a/N`.\n\nFor their `M=2^(m\u22121)` Gram matrix `G`, rank at most `N` and eigenvalue Cauchy\u2013Schwarz give\n\n`M^2=(tr G)^2\u2264N tr(G^2)\u2264N[M+M(M\u22121)a^2/N^2]`.\n\nThus\n\n`M\u2264(N^2\u2212a^2)/(N\u2212a^2)`. `(5)`\n\nAfter the general eliminations, any architecture exceeding 1040 would have `N=16384`, `m\u226516`, and `d\u22658184`, so `a\u226416`. Equation `(5)` gives\n\n`2^(m\u22121)\u2264(16384^2\u221216^2)/(16384\u221216^2)=1048575/63=16644+1/21<32768`,\n\na contradiction. Hence every all-one-inner architecture in scope has dimension at most 1040.\n\n## 7. Exact unresolved frontier\n\nEquality in the general ceiling can only use `s=14`, `m=17`, `d=8188`, `L=65536`, and `K=97`. Thus it requires a non-antipodal `[16384,17,8188]_2` inner code. Residualization forces `[8196,16,4094]` and then `[4102,15,\u22652047]`; a proof `N_2(10,64)\u2265136` would exclude it. The historical GUAVA data instead leave `63\u2264d_2(135,10)\u226464`, so no exclusion or construction is inferred. The dimension-1649 route remains conditional.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "MODEL",
+      "proof": "Injectivity of the inner symbol map and the outer evaluation map gives dimension `mK`. Every nonzero outer word has at least `L\u2212K+1` nonzero symbols, proving product distance `d(L\u2212K+1)`; zero padding preserves both quantities.",
+      "statement": "The audited concatenation has exact binary dimension `mK` and product-certified distance at least `d(L\u2212K+1)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "MODEL",
+        "binary Griesmer bound"
+      ],
+      "id": "SIEVE",
+      "proof": "Use `K_0=floor(1040/m)+1`, the most favorable length `L_max`, and the necessary Griesmer inequality at `delta=ceil(D/(L_max\u2212K_0+1))`. The field-limited region is eliminated analytically; exact integer evaluation leaves only the stated `s=13,14,15` rows.",
+      "statement": "Any scoped concatenation with dimension above 1040 must occur in the explicitly listed finite survivor set.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Levenshtein degree-three bound",
+        "SIEVE"
+      ],
+      "id": "LP",
+      "proof": "The normalized sign embedding converts each required binary distance to a maximum spherical inner product. All hypotheses of the degree-three bound hold, and the exact rational floors listed in the proof eliminate `s=13`, `s=15`, and ranks at least 19 for `s=14`; parity extension supplies the rank-17 and rank-18 endpoint ceilings.",
+      "statement": "Only length-16384 inner ranks 16\u201318 survive, with rank-17 distance at most 8188 and rank-18 distance at most 8184.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "RESIDUAL",
+      "proof": "Restriction outside an actual minimum word has kernel exactly its span and distance at least half its weight, giving `N_2(k,d)\u2265d+N_2(k\u22121,ceil(d/2))`.",
+      "statement": "The binary residual minimum-length recurrence holds.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RESIDUAL",
+        "Dodunekov\u2013Guritman\u2013Simonis: N_2(9,64)=133"
+      ],
+      "id": "RESIDUAL-16",
+      "proof": "Seven iterations give `N_2(16,8189)\u226516252+133=16385`.",
+      "statement": "No binary linear `[16384,16,\u22658189]` code exists.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "ROUNDING",
+      "proof": "For `d=511h+j`, direct multiplication shows `d(N\u2212cj)>D` but `d(N\u2212cj\u22121)<D`, since the positive excess is at most 512 and is smaller than `d`.",
+      "statement": "For `11\u2264r\u226415` and `1\u2264j<2^(r\u221210)`, `ceil(D/(511\u00b72^(r\u221210)+j))=2^(30\u2212r)\u22122^(31\u22122r)j`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SIEVE",
+        "LP",
+        "RESIDUAL-16",
+        "ROUNDING"
+      ],
+      "id": "CEILING",
+      "proof": "The three remaining rank caps are respectively `16\u00b797=1552`, `17\u00b797=1649`, and `18\u00b765=1170`; every discarded branch was already at most 1040 or impossible.",
+      "statement": "Every code in the audited ordinary-RS architecture has binary dimension at most 1649.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SIEVE",
+        "LP"
+      ],
+      "id": "ALL-ONE",
+      "proof": "Quotient by complements, embed coset representatives as signs, and combine the absolute inner-product bound with Gram rank. At the only remaining block length this bounds the quotient size below `2^15`, contradicting inner rank at least 16.",
+      "statement": "If the inner code contains all-one, the final scoped dimension is at most 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "CEILING",
+        "ROUNDING"
+      ],
+      "id": "FRONTIER",
+      "proof": "The only cap attaining 1649 is `m=17,K=97`; exact distance rounding forces `s=14,d=8188,L=65536`. No generator for the required inner code is known, and the residual endpoint remains unresolved.",
+      "statement": "A `[16384,17,8188]_2` inner code would yield `[2^30,1649,\u2265535822720]_2` by deterministic RS concatenation.",
+      "status": "conditional"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Exact finite-length rounding optimization for ordinary equal-block Reed\u2013Solomon concatenations, strengthened by residual minimum-length tables and an all-one quotient bound.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 30 durable submissions present)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 30 files present)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `B` be a binary linear `[2^s,m,d]_2` code with `1\u2264m\u226430`, and concatenate it with an ordinary `[L,K,L\u2212K+1]` Reed\u2013Solomon code over `GF(2^m)`, where `L\u2264min(2^m,2^(30\u2212s))`; zero-pad to length `2^30` and certify distance by `d(L\u2212K+1)`. If the certified distance is at least `535822336`, then `mK\u22641649`. If `B` contains the all-one word, then `mK\u22641040`. Equality 1649 can occur only through an unresolved non-antipodal inner `[16384,17,8188]_2` and outer `[65536,97,65440]_(2^17)`; no existence claim is made.",
+  "title": "Residual-table closure lowers the small-field ordinary-RS ceiling from 1808 to 1649"
+}
