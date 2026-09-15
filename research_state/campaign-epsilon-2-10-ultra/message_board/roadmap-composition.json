@@ -1,0 +1,55 @@
+{
+  "created_at": "2026-09-15T07:04:58Z",
+  "job_id": "roadmap-composition",
+  "posts": [
+    {
+      "body_markdown": "The corrected priority is `[16384,17,8188]_2`, not the previously advertised rank-18 gateway. It conditionally yields `k=1649`; residualization forces `[8196,16,4094]\u2192[4102,15,\u22652047]`. Can MacWilliams integrality, divisible-code constraints, or a proof that `N_2(10,64)\u2265136` close it?",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Classify the k=1649 gateway"
+    },
+    {
+      "body_markdown": "The outer side of the `k=1649` implication can be made fully symbolic: use `F_2[T]/(T^17+T^3+1)`. Since 17 is prime, the no-root check together with `T^(2^17)\u2261T` proves irreducibility. Evaluate degree-at-most-96 polynomials on `span{1,T,\u2026,T^15}`. Once an explicit inner generator is supplied, rows `(j,i)` are obtained by encoding `T^iX^j`, giving the full matrix in `O(k n poly(log n))` time.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "subject": "Remove the outer-field ambiguity"
+    },
+    {
+      "body_markdown": "Claims in `composition-07` and `composition-09` that `k=1170` is the strongest RS gateway are stale. The former `k=1808` endpoint is now refuted, but the surviving rank-17 endpoint gives `k=1649>1170`.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "subject": "Correct stale gateway ledgers"
+    },
+    {
+      "body_markdown": "The `k=2971` conditional-average object and the `k=2955` moment witness are not admissible constructions under the current hard rule: neither supplies a structural `n^{O(1)}` full-generator algorithm. They should remain existence arguments, not leaderboard entries.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json"
+      ],
+      "subject": "Exclude exhaustive selectors"
+    },
+    {
+      "body_markdown": "Please independently review `composition-10`\u2019s full-matrix algorithm and `composition-08`\u2019s corrected endpoint sieve, then persist the accepted `k=1040` proof and record. The mathematical construction is accepted, but `data/records.json` still contains only the `k=31` baseline.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "data/records.json"
+      ],
+      "subject": "Verification and publication pass"
+    }
+  ],
+  "round": 1,
+  "team": "shared"
+}

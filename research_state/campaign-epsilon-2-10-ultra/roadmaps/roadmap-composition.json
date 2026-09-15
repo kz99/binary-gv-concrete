@@ -1,0 +1,382 @@
+{
+  "critical_path": [
+    "Use the accepted RS\u2013affine construction to certify `[2^30,1040,535822336]_2` with rate `65/2^26`.",
+    "Use the explicit 1040-row generator algorithm from `composition-10` to meet the current polynomial-time full-matrix requirement.",
+    "Persist the proof and verified record; the durable leaderboard still lists only `k=31`.",
+    "For the largest next composition gain, construct or exclude a non-antipodal explicit `[16384,17,8188]_2` inner code.",
+    "If that inner code exists, concatenate it with explicit `[65536,97,65440]_{2^17}` Reed\u2013Solomon to obtain `[2^30,1649,\u2265535822720]_2`.",
+    "If the rank-17 gateway is closed, descend to `[16384,16,8188]_2` (`k=1552`) and `[16384,18,8184]_2` (`k=1170`)."
+  ],
+  "messages": [
+    {
+      "body_markdown": "The corrected priority is `[16384,17,8188]_2`, not the previously advertised rank-18 gateway. It conditionally yields `k=1649`; residualization forces `[8196,16,4094]\u2192[4102,15,\u22652047]`. Can MacWilliams integrality, divisible-code constraints, or a proof that `N_2(10,64)\u2265136` close it?",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Classify the k=1649 gateway"
+    },
+    {
+      "body_markdown": "The outer side of the `k=1649` implication can be made fully symbolic: use `F_2[T]/(T^17+T^3+1)`. Since 17 is prime, the no-root check together with `T^(2^17)\u2261T` proves irreducibility. Evaluate degree-at-most-96 polynomials on `span{1,T,\u2026,T^15}`. Once an explicit inner generator is supplied, rows `(j,i)` are obtained by encoding `T^iX^j`, giving the full matrix in `O(k n poly(log n))` time.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "subject": "Remove the outer-field ambiguity"
+    },
+    {
+      "body_markdown": "Claims in `composition-07` and `composition-09` that `k=1170` is the strongest RS gateway are stale. The former `k=1808` endpoint is now refuted, but the surviving rank-17 endpoint gives `k=1649>1170`.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "subject": "Correct stale gateway ledgers"
+    },
+    {
+      "body_markdown": "The `k=2971` conditional-average object and the `k=2955` moment witness are not admissible constructions under the current hard rule: neither supplies a structural `n^{O(1)}` full-generator algorithm. They should remain existence arguments, not leaderboard entries.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json"
+      ],
+      "subject": "Exclude exhaustive selectors"
+    },
+    {
+      "body_markdown": "Please independently review `composition-10`\u2019s full-matrix algorithm and `composition-08`\u2019s corrected endpoint sieve, then persist the accepted `k=1040` proof and record. The mathematical construction is accepted, but `data/records.json` still contains only the `k=31` baseline.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "data/records.json"
+      ],
+      "subject": "Verification and publication pass"
+    }
+  ],
+  "nodes": [
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json"
+      ],
+      "id": "TARGET",
+      "notes": "`D=2^29\u22122^20=535822336`; equivalently the allowed one-sided character sum is `2^21`.",
+      "statement_markdown": "The immutable target is `(n,D)=(2^30,535822336)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json"
+      ],
+      "id": "FIELD-16",
+      "notes": "The displayed Frobenius and gcd certificate proves irreducibility.",
+      "statement_markdown": "`F=F_2[Z]/(Z^16+Z^5+Z^3+Z^2+1)` is an explicit field of order `2^16`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-16"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json"
+      ],
+      "id": "OUTER-1040",
+      "notes": "Evaluate degree-at-most-64 polynomials on the ordered 15-dimensional subspace `A`.",
+      "statement_markdown": "The outer evaluation code has parameters `[32768,65,32704]_{2^16}`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-16"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json"
+      ],
+      "id": "INNER-1040",
+      "notes": "Coefficient extraction followed by affine truth-table evaluation is injective; every nonconstant affine word is balanced.",
+      "statement_markdown": "The affine inner encoder is `RM(1,15)=[32768,16,16384]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET",
+        "OUTER-1040",
+        "INNER-1040"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json"
+      ],
+      "id": "PARAMETERS-1040",
+      "notes": "Lengths multiply to `32768^2=2^30`; injectivity gives dimension `65\u00b716=1040`.",
+      "statement_markdown": "Coordinatewise concatenation is binary linear of exact length `2^30` and dimension `1040`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "OUTER-1040",
+        "INNER-1040"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json"
+      ],
+      "id": "DISTANCE-1040",
+      "notes": "Every nonzero outer word has at least 32704 nonzero symbols, so weight is at least `32704\u00b716384=D`; a scaled 64-root polynomial attains equality.",
+      "statement_markdown": "The concatenated code has exact minimum distance `535822336`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "FIELD-16",
+        "OUTER-1040",
+        "INNER-1040"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/composition-07/verifier-1-composition-07.json"
+      ],
+      "id": "GENERATOR-1040",
+      "notes": "Rows are indexed by `(j,i)\u2208{0,\u2026,64}\u00d7{0,\u2026,15}` and equal `C(\u03b1^iX^j)`. Columns are ordered pairs `(a,y)`. Each entry uses bounded degree-16 field arithmetic, so all `1040n` entries are emitted in `O(1040n\u00b7poly(16))=n^{O(1)}` time. This supplies the repair requested by the `composition-07` review.",
+      "statement_markdown": "A deterministic algorithm outputs the complete `1040\u00d72^30` generator matrix in polynomial time.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARAMETERS-1040",
+        "DISTANCE-1040",
+        "GENERATOR-1040"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "CERTIFIED-1040",
+      "notes": "The core construction received multiple independent acceptances. Exact rate is `1040/2^30=65/2^26\u22489.685754776\u00d710^-7`, improving `k=31` by 1009.",
+      "statement_markdown": "There is an admissible explicit binary `[2^30,1040,535822336]_2` code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "CERTIFIED-1040"
+      ],
+      "evidence_refs": [
+        "data/records.json",
+        "proofs/rm-1-30-baseline.md"
+      ],
+      "id": "PUBLISH-1040",
+      "notes": "The workspace contains no persisted proof or record for `k=1040`; this is workflow debt, not a mathematical condition.",
+      "statement_markdown": "The `k=1040` theorem is installed in `proofs/` and `data/records.json`, validated, and shown on the durable leaderboard.",
+      "status": "open"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-09/verifier-1-algebraic-09.json"
+      ],
+      "id": "FIELD-LINEAR-CEILING",
+      "notes": "Singleton plus scalar-orbit averaging applies to target-meeting `F_{2^16}`-linear outer codes with injective binary inner maps.",
+      "statement_markdown": "The equal-block `F_{2^16}`-linear outer architecture cannot exceed binary dimension `1040`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "CERTIFIED-1040"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "id": "FIXED-INNER-MAXIMALITY",
+      "notes": "The explicit reciprocal-sum witness `0x0990\u22600` excludes every strict additive outer supercode containing the degree-64 RS space. This does not exclude unrelated additive spaces or changed inner maps.",
+      "statement_markdown": "The accepted RS outer code has no strict binary-additive extension under its fixed affine inner encoder.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "id": "MULTILEVEL-CEILINGS",
+      "notes": "Standard first-active-level RM flags are capped at 1040; arbitrary global coupling with every block projection of rank at most 16 is capped at 1054. Dimensions 1041\u20131054 remain open only for unrelated coupled spaces.",
+      "statement_markdown": "Routine multilevel refinement of the existing `RM(1,15)` block decomposition cannot produce a large improvement.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "id": "RS-SIEVE",
+      "notes": "Covers ordinary equal-block Reed\u2013Solomon concatenation, `m\u226430`, power-of-two inner length, zero padding, and the standard product-distance certificate.",
+      "statement_markdown": "Every code in the audited ordinary-RS architecture has dimension at most `1649`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RS-SIEVE"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "NO-RANK16-8189",
+      "notes": "Residualization plus the exact value `N_2(9,64)=133` gives required length at least 16385.",
+      "statement_markdown": "No binary linear `[16384,16,d]_2` code exists for `d\u22658189`; the former conditional `k=1808` endpoint is refuted.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "id": "OUTER-1649",
+      "notes": "One explicit model is `F_2[T]/(T^17+T^3+1)` with evaluation set `span{1,T,\u2026,T^15}`. Degree-at-most-96 evaluation gives `[65536,97,65440]_{2^17}`. Rows and coordinates are computable in polynomial time.",
+      "statement_markdown": "An explicit outer `[65536,97,65440]_{2^17}` Reed\u2013Solomon code is available.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RS-SIEVE"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "INNER-17-8188",
+      "notes": "No generator is known. It cannot contain the all-one word; its forced residual chain begins `[8196,16,4094]\u2192[4102,15,\u22652047]`.",
+      "statement_markdown": "There exists a symbolically explicit binary `[16384,17,8188]_2` code with a universal distance proof.",
+      "status": "open"
+    },
+    {
+      "dependencies": [
+        "TARGET",
+        "OUTER-1649",
+        "INNER-17-8188"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "id": "CONDITIONAL-1649",
+      "notes": "Concatenation would have length `65536\u00b716384=2^30`, dimension `97\u00b717=1649`, and distance at least `65440\u00b78188=535822720=D+384`. Generator rows are obtained by applying the inner encoder to `\u03b1^iX^j`; runtime is polynomial if the inner encoder is.",
+      "statement_markdown": "The strongest surviving ordinary-RS gateway yields an explicit `[2^30,1649,\u2265535822720]_2` code.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "NO-RANK16-8189"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "id": "CONDITIONAL-1552",
+      "notes": "Requires an explicit non-antipodal `[16384,16,8188]_2` inner code. The outer dimension is 97, so `k=1552` and distance is at least `535822720`.",
+      "statement_markdown": "The best surviving rank-16 inner gateway yields dimension `1552`.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "RS-SIEVE"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "CONDITIONAL-1170",
+      "notes": "Requires `[16384,18,8184]_2`; product with `[65536,65,65472]_{2^18}` gives distance `D+512`. The inner code remains open.",
+      "statement_markdown": "The surviving rank-18 gateway yields dimension `1170`.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "id": "CLOSED-GATEWAYS",
+      "notes": "Cubic Delsarte and residual certificates exclude `[8192,17,4090]_2` and `[32768,18,16381]_2`. Consequently the former conditional `k=1105` and `k=1062` routes are closed; claims that degree-five LP alone does not close the latter are true but stale because a stronger residual argument does.",
+      "statement_markdown": "The principal length-8192 and length-32768 ordinary-RS improvement gateways are impossible.",
+      "status": "refuted"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "id": "AVERAGING-2971",
+      "notes": "The finite averaging proof may establish existence of a matrix, but its unrestricted completion recursion has no polynomial-time structural evaluator and subsumes exhaustive search.",
+      "statement_markdown": "The submitted conditional-average object is an admissible explicit target code of dimension `2971`.",
+      "status": "refuted"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json"
+      ],
+      "id": "MOMENT-2955",
+      "notes": "The 4096-wise-independent moment calculation proves that a good seed exists but supplies neither a fixed algebraic seed nor an admissible selector.",
+      "statement_markdown": "The limited-independence averaging argument supplies an explicit target code of dimension `2955`.",
+      "status": "refuted"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json"
+      ],
+      "id": "AG-PORT",
+      "notes": "The fixed `F_256` architecture forces `L\u22658642288` while the length budget gives `L\u22648388479`.",
+      "statement_markdown": "The audited fixed-`F_256` quotient-coupled AG port can specialize to the target.",
+      "status": "refuted"
+    },
+    {
+      "dependencies": [
+        "CERTIFIED-1040"
+      ],
+      "evidence_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-04/verifier-1-algebraic-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-03/verifier-1-combinatorial-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json"
+      ],
+      "id": "DOMINATED-ROUTES",
+      "notes": "Certified dimensions or ceilings include trace/dual-BCH 991, independent root-killing 996, complete trace-walk 91, and complete convolution 785; direct sums, tensor products, routine Plotkin lifts, repeated/padded RS\u2013RM, and published complete-cloud wide-replacement schedules do not improve 1040.",
+      "statement_markdown": "The other audited structured families do not currently improve the certified `k=1040` construction.",
+      "status": "proved"
+    }
+  ],
+  "progress": 1,
+  "roadmap_id": "roadmap-composition",
+  "summary": "All 32 submission JSON files and all 16 available reviews were audited. The strongest rigorously proved code is the independently accepted RS\u2013affine construction `[2^30,1040,535822336]_2`, with exact rate `65/2^26`; `composition-10` supplies the explicit full-generator algorithm required by the current rules. It has not yet been persisted to the durable record. The corrected highest-value structured-composition frontier is conditional `k=1649`, depending entirely on an explicit non-antipodal `[16384,17,8188]_2` inner code. Older `k=1808`, `k=1105`, and `k=1062` gateways are refuted, while the apparent `k=2971` and `k=2955` constructions fail the polynomial-time explicitness gate.",
+  "target_statement": "Produce the largest rigorously certified explicit binary linear code `C\u2286F_2^(2^30)` with `d_min(C)\u2265535822336`, where the complete generator matrix is deterministically output in `n^{O(1)}` time.",
+  "title": "Structured concatenation and exact finite-gateway roadmap"
+}
