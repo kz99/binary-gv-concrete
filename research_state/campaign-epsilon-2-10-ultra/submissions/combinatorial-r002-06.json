@@ -1,0 +1,191 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No code is submitted. The audited template assigns binary labels `z_1,\u2026,z_m` to an undirected `d`-regular rotation multigraph and labels every directed port `u\u2192v` by `z_u+z_v`. Its raw length is `M=md`. Writing `e_i=z_i+z_1`, let `H=span{e_i}` and let `\u03b5` be the largest absolute character bias of this translated label multiset. The only permitted distance certificate in this obstruction is the standard scalar estimate `\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`, followed by generic zero-padding or arbitrary fixed puncturing satisfying `\u03b2M+|n\u2212M|\u22642^21`.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Reusable lemma for the expander integrator: if `e_1=0,e_2,\u2026,e_m` span `F_2^h`, `m\u226434,915`, and every nonzero character satisfies `|\u03a3_i(-1)^{a(e_i)}|\u00b2\u2264m\u00b2/512`, then `h\u2264837`. The proof uses the 186th Fourier moment and the exact bound `512^93(34915)_93\u00b7185!!/34915^186>3/2`.",
+      "kind": "idea",
+      "references": [
+        "proof_steps:MOMENT-186",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-01.json"
+      ],
+      "subject": "Order-186 translated-label rank lemma (downstream: expander integrator)"
+    },
+    {
+      "body_markdown": "The complete directed-edge construction certified only by `\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)` and generic length adjustment has homogeneous rank at most 837, or dimension at most 838 after adjoining all-one. It therefore cannot approach the accepted dimension-1040 construction. A successor must abandon at least one of complete-port enumeration, this scalar certificate, or generic adjustment.",
+      "kind": "objection",
+      "references": [
+        "proof_steps:ARCHITECTURE-CONCLUDE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json"
+      ],
+      "subject": "Standard one-edge sampler route is capped at 838 (downstream: sampler team)"
+    },
+    {
+      "body_markdown": "Can the sparse-path position give a deterministic map `Path:{0,1}^30\u2192descriptors` over a rank-1040 balanced base, with mixed path parity, and prove simultaneously `|\u03a3_q(-1)^{\u27e8a,g_q\u27e9}|\u22642^21` for every nonzero `a`? The new moment ceiling shows that recovering this through the complete one-edge scalar-mixing argument is impossible.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+        "proof_steps:ARCHITECTURE-CONCLUDE"
+      ],
+      "subject": "Sparse simultaneous-character certificate (downstream: next sparse-path researcher)"
+    }
+  ],
+  "distance_audit": [
+    "The immutable values are `n=2^30`, `D=535,822,336`, and signed-sum allowance `T=n\u22122D=2^21`; hence the relevant two-sided absolute-bias threshold is `T/n=1/512`.",
+    "No minimum-distance claim is made because no code is submitted.",
+    "The conclusion applies only when distance is certified by `\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)` together with the generic adjustment inequality. It is not a universal upper bound on sparse, nonuniform, or correlation-specific sampler constructions."
+  ],
+  "explicitness_audit": [
+    "No random sampling, exhaustive search, conditional expectation, or finite lookup is used.",
+    "All finite numerical claims reduce to displayed integer or rational inequalities.",
+    "Because this is an obstruction and not a leaderboard construction, no generator matrix is claimed."
+  ],
+  "generator_matrix": {
+    "algorithm": "Not applicable: this result submits no code or generator matrix.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Not applicable to an obstruction result.",
+    "runtime_proof": "The full-matrix requirement is not invoked because `leaderboard_submission=false`."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Add the translated-label moment lemma to the shared lemma book and have the expander verifier independently check the rational certificate.",
+    "Test whether weighted/nonuniform vertex measures admit an analogous finite moment ceiling; this would cover more derandomized sampler variants.",
+    "Concentrate constructive work on explicitly indexed sparse path families with mixed parity and a direct simultaneous character-sum proof."
+  ],
+  "obstructions": [
+    "The standard complete directed-edge scalar-mixing architecture has homogeneous rank at most 837 and all-one-augmented dimension at most 838.",
+    "This ceiling is strictly below the independently accepted dimension-1040 RS\u2013affine code, so the architecture cannot improve the campaign record.",
+    "The proof deliberately does not cover sparse edge subsets, nonuniform weights, or stronger character-specific cancellation estimates."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)n`.",
+      "quantity": "Required distance",
+      "value": "`D=535,822,336`"
+    },
+    {
+      "derivation": "`n\u22122D`.",
+      "quantity": "Signed-sum allowance",
+      "value": "`T=2^21=2,097,152`"
+    },
+    {
+      "derivation": "`T/n`.",
+      "quantity": "Absolute-bias threshold",
+      "value": "`\u03c4=1/512`"
+    },
+    {
+      "derivation": "Generic adjustment.",
+      "quantity": "Raw-length window",
+      "value": "`n\u2212T\u2264M\u2264n+T`, with `n+T=1,075,838,976`"
+    },
+    {
+      "derivation": "The adjustment ratio is maximized at `M=n`.",
+      "quantity": "Necessary scalar certificate",
+      "value": "`\u03b2\u22641/512`"
+    },
+    {
+      "derivation": "Trace bound and `md\u2264n+T`.",
+      "quantity": "Vertex ceiling",
+      "value": "`m\u226434,915`"
+    },
+    {
+      "derivation": "Optimized paired-index Fourier moment.",
+      "quantity": "Moment order",
+      "value": "`2r=186`, `r=93`"
+    },
+    {
+      "derivation": "Moment lemma.",
+      "quantity": "Homogeneous rank ceiling",
+      "value": "`h\u2264837`"
+    },
+    {
+      "derivation": "At most one independent constant direction.",
+      "quantity": "Augmented dimension ceiling",
+      "value": "`\u2264838`"
+    },
+    {
+      "derivation": "Campaign comparison.",
+      "quantity": "Benchmarks",
+      "value": "persisted baseline `31`; independently accepted construction `1040`; this architecture ceiling `838`"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nLet `z_1,\u2026,z_m` label the vertices of an undirected `d`-regular rotation multigraph with integral symmetric port multiplicities. Label every directed port `u\u2192v` by `z_u+z_v`, so the raw length is `M=md`. Suppose certification at length `n=2^30` uses only\n\n`\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)`\n\nand the generic adjustment inequality\n\n`\u03b2M+|n\u2212M|\u2264T`, where `T=2^21`, `\u03b5` is the maximum absolute bias of the translated vertex-label characters, and `\u03bb` bounds every nonprincipal absolute eigenvalue of normalized adjacency. Then the edge-label span has dimension at most 837. Padding or puncturing cannot increase this dimension, and adjoining one all-one row gives dimension at most 838.\n\n## 1. Adjustment and trace\n\nFor `M\u2264n`, adjustment gives\n\n`\u03b2\u22641\u2212(n\u2212T)/M`,\n\nwhich increases up to `T/n`; for `M\u2265n`, it gives\n\n`\u03b2\u2264(n+T)/M\u22121`,\n\nwhich decreases from `T/n`. Hence `\u03b2\u22641/512`. Since `\u03b2\u2265\u03b5\u00b2` and `\u03b2\u2265\u03bb`,\n\n`\u03b5\u00b2\u22641/512`, `\u03bb\u22641/512`.\n\nLet `P=(a_uv/d)` be normalized adjacency. Integral symmetric multiplicities give\n\n`tr(P\u00b2)=d^-2 \u03a3_uv a_uv\u00b2\u2265m/d`,\n\nwhile the spectral bound gives\n\n`tr(P\u00b2)\u22641+(m\u22121)/512\u00b2`.\n\nConsequently\n\n`d\u2265ceil(262144m/(m+262143))`.\n\nAlso `md\u2264n+T=1,075,838,976`. The lower bound on `d` is nondecreasing, and\n\n`34915\u00b730812=1,075,800,980\u2264n+T`,\n\n`34916\u00b730813=1,075,866,708>n+T`.\n\nThus `m\u226434,915`.\n\nBecause `\u03bb<1`, the graph is connected. With `e_i=z_i+z_1`, path summation shows that the edge-label span equals `H=span{e_1,\u2026,e_m}`. Put `h=dim H`; note that `e_1=0`.\n\n## 2. The 186th-moment lemma\n\nFor `a\u2208H*`, put\n\n`W_a=\u03a3_i(-1)^{a(e_i)}`.\n\nEvery nonprincipal character obeys `W_a^186\u2264A`, where\n\n`A=(m\u00b2/512)^93`.\n\nLet `Z` count ordered 186-tuples of indices whose labels sum to zero. Fourier orthogonality gives\n\n`2^h Z=\u03a3_a W_a^186\u2264m^186+(2^h\u22121)A`.  (1)\n\nTuples using 93 distinct indices exactly twice contribute\n\n`L=(m)_93\u00b7185!!`,\n\nso `Z\u2265L`.\n\nIf `m\u2264838`, then `h\u2264m\u22121\u2264837`. Assume `839\u2264m\u226434915` and define\n\n`R(m)=L/A=512^93(m)_93\u00b7185!!/m^186`.\n\nFor real `m>184`,\n\n`d(log R)/dm=\u03a3_{i=0}^{92}1/(m\u2212i)\u2212186/m\u226493/(m\u221292)\u2212186/m<0`.\n\nThus `R(m)\u2265R(34915)`.\n\nSet `M_0=34915`. First,\n\n`(M_0)_93/M_0^93=\u03a0_{i=0}^{92}(1\u2212i/M_0)\u22651\u22124278/M_0=30637/34915`.  (2)\n\nIt remains to bound `Q=512^93\u00b7185!!/M_0^93`. Since\n\n`185!!=2^-93 \u03a0_{j=94}^{186}j`,\n\npairing around 140 gives\n\n`Q=c q^46 F`,\n\nwhere\n\n`c=256\u00b7140/M_0`,\n\n`q=256\u00b2\u00b719600/M_0\u00b2`,\n\n`F=\u03a0_{s=1}^{46}(1\u2212s\u00b2/19600)`.\n\nExact cross multiplication gives\n\n`c>1283/1250` because the numerator difference is `4055`, and\n\n`q>1317/1250` because the numerator difference is `133,634,675`.\n\nFurthermore,\n\n`(1317/1250)^46=(1+67/1250)^46>\u03a3_{j=0}^6 binom(46,j)(67/1250)^j>219/20`;  (3)\n\nthe last difference is exactly\n\n`8,219,586,749,760,411 / 3,814,697,265,625,000,000 >0`.\n\nTo control `F`, put `x_s=s\u00b2/19600` and `a=46\u00b2/19600=529/4900`. From\n\n`log(1\u2212x)\u2265\u2212x\u2212x\u00b2/[2(1\u2212a)]` for `0\u2264x\u2264a`,\n\nand the exact sums `\u03a3s\u00b2=33511`, `\u03a3s\u2074=43,463,767`, we obtain\n\n`log F\u2265\u2212166819/94080>\u22129/5`.  (4)\n\nFinally, with `z=21/29`,\n\n`log(25/4)=2\u03a3_{j\u22650}z^(2j+1)/(2j+1)>2(z+z\u00b3/3+z\u2075/5+z\u2077/7)>9/5`;\n\nthe final difference is `940,216,611/86,249,381,545`. Hence (4) implies `F>4/25`.\n\nCombining these estimates,\n\n`Q>(1283/1250)(219/20)(4/25)=280977/156250>7/4`.\n\nTogether with (2),\n\n`R(34915)>(7/4)(30637/34915)>3/2`,\n\nwhere the final integer comparison is `214459>209490`.\n\nTherefore `L\u2212A>A/2=m^186/2^838`. Substituting `Z\u2265L` into (1) yields\n\n`2^h(L\u2212A)\u2264m^186\u2212A<m^186`,\n\nand hence `2^h<2^838`. Since `h` is integral, `h\u2264837`.\n\n## 3. Architecture consequence\n\nDeleting columns cannot increase rank and adding zero columns preserves it. Thus generic puncturing or padding leaves dimension at most 837. One independent all-one row raises it by at most one, giving the claimed ceiling 838. This is an obstruction only for the explicitly stated certificate architecture.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "ADJUST-EXACT",
+      "proof": "Analyze the two rational branches of `(T\u2212|n\u2212M|)/M`; both attain their maximum at `M=n`. Thus `\u03b2\u2264T/n=1/512`, strengthening the earlier `1/511` relaxation.",
+      "statement": "Generic length adjustment forces `\u03b2\u22641/512`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ADJUST-EXACT"
+      ],
+      "id": "TRACE-34915",
+      "proof": "Integral port multiplicities give `tr(P\u00b2)\u2265m/d`, while `\u03bb\u22641/512` gives `tr(P\u00b2)\u22641+(m\u22121)/512\u00b2`. Hence `d\u2265ceil(262144m/(m+262143))`. The exact boundary products at `m=34915,34916` and `md\u2264n+T` give `m\u226434915`.",
+      "statement": "Every sampler in scope has at most 34,915 vertices.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "MOMENT-186",
+      "proof": "The 186th Fourier identity and the contribution from 93 distinct indices used twice give `2^hZ=\u03a3_aW_a^186` and `Z\u2265(m)_93\u00b7185!!`. Monotonicity reduces the normalized comparison to `m=34915`; the exact rational calculation in the proof establishes a ratio greater than `3/2`, yielding `2^h<2^838`.",
+      "statement": "A translated label system with `m\u226434915` and nonprincipal squared bias at most `1/512` has span dimension at most 837.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ADJUST-EXACT",
+        "TRACE-34915",
+        "MOMENT-186"
+      ],
+      "id": "ARCHITECTURE-CONCLUDE",
+      "proof": "Connectivity identifies the edge-label span with the translated-label span. Puncturing and zero-padding do not increase rank; a constant row adds at most one.",
+      "statement": "The complete directed-edge scalar-mixing architecture has homogeneous dimension at most 837 and augmented dimension at most 838.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Derandomized sampler constructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (all entries)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (every shared message-board file)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all durable submissions)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "At `n=2^30` and target absolute bias `1/512`, every complete directed-edge XOR lift of an undirected regular rotation multigraph whose distance is certified only by `\u03b2=\u03b5\u00b2+\u03bb(1\u2212\u03b5\u00b2)` and generic padding or puncturing has homogeneous dimension at most 837 and dimension at most 838 after one all-one augmentation.",
+  "title": "Order-186 Fourier moment lowers the standard one-edge sampler ceiling to 838"
+}

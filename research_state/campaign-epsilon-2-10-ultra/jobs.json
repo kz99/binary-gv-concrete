@@ -1523,9 +1523,9 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "running",
+    "status": "succeeded",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:50:48Z"
+    "updated_at": "2026-09-15T08:09:24Z"
   },
   {
     "attempts": 0,
