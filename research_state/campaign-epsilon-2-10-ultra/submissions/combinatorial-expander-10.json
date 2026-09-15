@@ -1,0 +1,246 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is submitted. Let `C_*` be the accepted RS\u2013affine `[2^30,1040,535822336]_2` code, let `z_i\u2208F_2^1040` be its generator columns, and let `j` be its constant-one message, so `j\u00b7z_i=1` for every coordinate.\n\nFix one anchor column `z_*`. For a selector `e\u2208F_2^n`, form sparse lifted columns `g_i=z_i+e_i z_*`; equivalently, use a singleton when `e_i=0` and an anchored pair when `e_i=1`. The basis-walk compiler from `combinatorial-expander-07` turns these XOR descriptors into valid polynomial-length walks if desired. Append an all-one row to the resulting 1040-row matrix.\n\nThe exact row space is `span(C_*,e)`. Consequently this construction has dimension 1041 precisely when `e\u2209C_*`, and it meets the target precisely when every word in `e+C_*` has weight at least `D`, equivalently every such word has absolute signed sum at most `T=2^21`.\n\nNo qualifying selector is supplied. Instead, the proof rules out two broad structured neighborhoods: a successful selector must be at Hamming distance at least 16,384 from every blockwise-affine selector and at least 1,933,312 from every outer-block-independent inner template modulo `C_*`.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: combinatorial-expander-08/09 and the integrator. For `g_i=z_i+e_i z_*`, appending the constant row gives exactly `span(C_*,e)`: `L_e(j)+1=e`, and then `L_e(x)+(x\u00b7z_*)e` recovers every incumbent word. Thus a fixed-anchor sparse lift is precisely the original one-row extension problem, not a new amplification mechanism.",
+      "kind": "idea",
+      "references": [
+        "combinatorial-expander-04:PARITY-SPLIT",
+        "combinatorial-expander-07:FOURIER-AUGMENT",
+        "this submission:ANCHOR-COLLAPSE"
+      ],
+      "subject": "Fixed-anchor lifts collapse to one-row extensions"
+    },
+    {
+      "body_markdown": "Intended recipient: sparse-selector researchers. Let `\ud835\udc9c` be all vectors affine on each `2^15`-coordinate inner block, and let `\ud835\udcd7={r_h+c:h:F_2^15\u2192F_2, c\u2208C_*}`, where `r_h` repeats `h` on every outer block. Any target-safe rank-1041 selector must satisfy `dist(e,\ud835\udc9c)\u226516384` and `dist(e,\ud835\udcd7)\u22651933312`. In particular, one nonlinear exceptional block cannot repair an affine selector, and changing at most 58 complete blocks of a repeated template cannot work.",
+      "kind": "objection",
+      "references": [
+        "fixed-inner-additive-maximality",
+        "this submission:AFFINE-ROBUSTNESS",
+        "this submission:HOMOGENEOUS-ROBUSTNESS"
+      ],
+      "subject": "Quantitative neighborhoods of structured selectors are closed"
+    },
+    {
+      "body_markdown": "Intended recipients: combinatorial-expander-08/09. Please analyze genuinely outer-varying nonlinear column streams or variable-anchor schedules. A candidate should provide a symbolic polynomial-time indexer, prove all 1040 nonzero-character bounds simultaneously, and explicitly check that its selector lies outside the two Hamming neighborhoods above; host-graph expansion alone is insufficient.",
+      "kind": "request",
+      "references": [
+        "combinatorial-expander-05 sparse-selector request",
+        "combinatorial-expander-07:SPECTRAL-NONCERTIFICATE",
+        "this submission:STRUCTURED-FRONTIER"
+      ],
+      "subject": "Move beyond fixed anchors and repeated templates"
+    }
+  ],
+  "distance_audit": [
+    "The immutable arithmetic is `n=2^30=1,073,741,824`, `D=2^29\u22122^20=535,822,336`, and `T=n\u22122D=2^21=2,097,152=64\u00b72^15`.",
+    "The accepted comparator `C_*` has exact minimum distance `D` and contains `1^n`.",
+    "For `e\u2209C_*`, all new nonzero words are exactly `e+c`, with `c\u2208C_*`. Because `1^n\u2208C_*`, their complements occur in the same coset. Hence their lower-distance requirement is equivalent to `|\u03a3_i(\u22121)^(e_i+c_i)|\u2264T` for every `c\u2208C_*`.",
+    "Every blockwise-affine `e_0\u2209C_*` has a coset word of weight at most `535,805,952=D\u221216,384` by fixed-inner additive maximality. Perturbing at most 16,383 coordinates cannot restore the target.",
+    "For every repeated inner template `r_h`, Parseval supplies an affine inner word at distance at most 16,293 per block. Repeating over 32,768 blocks gives weight at most `533,889,024=D\u22121,933,312`.",
+    "No selector surviving these tests was constructed, so no new minimum distance is claimed."
+  ],
+  "explicitness_audit": [
+    "The incumbent field, evaluation set, coordinate order, monomial basis, and affine inner encoder are deterministic and independently audited.",
+    "The anchor may be fixed as the first coordinate in the incumbent ordering. Given an explicit selector, every lifted entry is one incumbent entry plus at most one anchored entry.",
+    "The obstruction holds for every selector, including noncomputable selectors; it therefore does not rely on random sampling, exhaustive search, conditional expectation, or a hidden lookup.",
+    "The parameterized emitter is polynomial-time, but no deterministic selector satisfying the universal coset bound is supplied. Accordingly it is not a leaderboard construction.",
+    "The workspace is read-only, so no proof or lemma file was persisted and no validator or dashboard publication run was appropriate."
+  ],
+  "generator_matrix": {
+    "algorithm": "Parameterized family only. Enumerate the accepted generator rows indexed by `\u03b1^r X^s`, `0\u2264r\u226415`, `0\u2264s\u226464`, and coordinates `(a,y)\u2208A\u00d7F_2^15`. Fix the first coordinate `i_*`. Given selector bits `e_i`, emit `L[r,i]=G_*[r,i]\u2295(e_i\u2227G_*[r,i_*])` for all 1040 rows and then emit an all-one row. No selector meeting the target is supplied.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "If a selector bit costs at most `P(log n)` operations and an incumbent entry costs at most `Q(log n)`, emission uses at most `1040Q(log n)+n(P(log n)+1040(Q(log n)+2)+1)` bit operations and outputs exactly `1041n` bits; this is `n^{O(1)}` for polynomial `P,Q`.",
+    "runtime_proof": "Precompute the 1040 anchor entries. For each of the `n` coordinates, compute one selector bit and 1040 incumbent entries, then perform at most one AND and one XOR per row; the last row costs one emitted bit per coordinate. The accepted incumbent entry evaluator is polynomial-time. Thus any explicitly indexed selector yields the complete matrix in polynomial time. Since the missing distance-qualified selector is not provided, this proves only the family emitter's explicitness."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The fixed degree-16 field, 32,768-point additive evaluation set, degree-at-most-64 outer space, and affine truth-table inner encoder.",
+      "result": "An independently accepted explicit binary `[2^30,1040,535822336]` code containing the all-one word.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json and reviews/composition-10/verifier-1-composition-10.json",
+      "used_for": "The incumbent columns, exact distance, full rank, and distinguished constant message."
+    },
+    {
+      "hypotheses": "Mixed-parity XOR paths over the incumbent affine-hyperplane columns.",
+      "result": "The exact parity-split character criterion for an augmentable 1040-dimensional core.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-04.json",
+      "used_for": "Identifying the surviving sparse-path interface."
+    },
+    {
+      "hypotheses": "A polynomial-time stream of arbitrary 1040-bit lifted columns.",
+      "result": "Such a stream is polynomial-time equivalent to a bounded-length explicit walk stream; graph syntax itself supplies no bias certificate.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-07.json",
+      "used_for": "Realizing the anchored XOR stream as valid sparse walks and delimiting the remaining task."
+    },
+    {
+      "hypotheses": "Binary-additive outer superspaces of the degree-64 RS space under the unchanged blockwise affine encoder.",
+      "result": "Every strict superspace contains a binary word of weight at most 535,805,952; the reciprocal witness is `0x0990\u22600`.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json, lemma `fixed-inner-additive-maximality`; submissions/combinatorial-08.json through combinatorial-10.json",
+      "used_for": "The blockwise-affine obstruction and its 16,384-bit robust neighborhood."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Derive an analogous row-space description for variable-anchor selectors `g_i=z_i+e_i z_{a(i)}` and identify conditions under which it is not merely a one-row extension.",
+    "Search only symbolic, outer-varying nonlinear selectors or general Fourier-qualified column streams; prove the `2^21` character bound algebraically rather than by finite optimization.",
+    "Persist the anchor-collapse and robustness lemmas, request an independent verifier audit, and run the validator/dashboard only if a writable integrator adopts them."
+  ],
+  "obstructions": [
+    "The upstream complete Ta-Shma, complete Cartesian, Gray-register, and complete free-walk schedules are already below the incumbent or exceed the length budget.",
+    "By the basis-walk compiler, unrestricted sparse-path notation is equivalent to the original explicit balanced-column problem; routing through a good host graph gives no automatic discrepancy control.",
+    "The fixed-anchor specialization collapses exactly to adjoining one selector row to `C_*`.",
+    "Every selector within 16,383 bits of the full blockwise-affine space fails; in particular, making only one inner block nonlinear is insufficient.",
+    "Every selector within 1,933,311 bits of a repeated inner template modulo `C_*` fails; modifications supported on at most 58 whole outer blocks are insufficient.",
+    "The theorem does not rule out a genuinely outer-varying nonlinear selector, a variable-anchor schedule, or an unrelated balanced column stream."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^\u221210)n`.",
+      "quantity": "Required distance",
+      "value": "`D=535,822,336=2^29\u22122^20`"
+    },
+    {
+      "derivation": "`n\u22122D`.",
+      "quantity": "Signed-sum allowance",
+      "value": "`T=2,097,152=2^21=64\u00b72^15`; normalized two-sided bias `1/512`"
+    },
+    {
+      "derivation": "`|A|=|Y|=2^15`.",
+      "quantity": "Block geometry",
+      "value": "`32,768` outer blocks, each of length `32,768`; their product is `2^30`"
+    },
+    {
+      "derivation": "Accepted RS\u2013affine construction.",
+      "quantity": "Durable comparator",
+      "value": "`k=1040`, exact distance `D`, rate `65/2^26`"
+    },
+    {
+      "derivation": "Exact anchor-collapse identity.",
+      "quantity": "Potential fixed-anchor payoff",
+      "value": "`dim span(C_*,e)=1041` iff `e\u2209C_*`; distance remains an unsolved coset condition"
+    },
+    {
+      "derivation": "Fixed-inner witness `N_0\u2212N_1\u226565`.",
+      "quantity": "Affine-selector failure margin",
+      "value": "Bad weight `2^14(32768\u221265)=535,805,952=D\u221216,384`"
+    },
+    {
+      "derivation": "Parseval on `2^15` inner points.",
+      "quantity": "Repeated-template Walsh coefficient",
+      "value": "Some affine coefficient has magnitude at least `ceil(sqrt(32768))=182`"
+    },
+    {
+      "derivation": "`32768\u00b7(32768\u2212182)/2`.",
+      "quantity": "Repeated-template bad weight",
+      "value": "`533,889,024=D\u22121,933,312`, where `1,933,312=59\u00b732,768`"
+    }
+  ],
+  "proof_markdown": "## Setup\n\nLet `L=2^15`, so the coordinate set is `I=A\u00d7Y`, with `|A|=|Y|=L` and `n=L\u00b2`. Let `C_*` be the accepted RS\u2013affine code and `G_*` one of its full-rank 1040-row generators. Write its columns as `z_i`. The constant polynomial gives a message `j` satisfying `j\u00b7z_i=1` for every `i`.\n\nFix a column `z_*`. For an arbitrary selector `e\u2208F_2^I`, define `g_i=z_i+e_i z_*`. For a message `x`, the lifted word is\n\n`L_e(x)_i=x\u00b7g_i=(x\u00b7z_i)+(x\u00b7z_*)e_i`.\n\n### 1. Exact fixed-anchor collapse\n\nBecause `j\u00b7z_*=1` and the incumbent word of `j` is `1^n`,\n\n`L_e(j)=1^n+e`.\n\nAfter appending `1^n`, the row space therefore contains `e`. It then contains every incumbent word because\n\n`c_x=L_e(x)+(x\u00b7z_*)e`.\n\nConversely, the displayed formula places every `L_e(x)` in `span(C_*,e)`. Hence\n\n`span(L_e(F_2^1040),1^n)=span(C_*,e)`.\n\nThis proves binary linearity and exact length. Since `dim C_*=1040`, the dimension is 1041 exactly when `e\u2209C_*`; otherwise it remains 1040.\n\n### 2. Exact distance condition\n\nAssume `e\u2209C_*`. The nonzero words are the old nonzero words of `C_*` and the coset `e+C_*`. The old words already have weight at least `D`. Since `1^n\u2208C_*`, the complement of every word in `e+C_*` is also in that coset. Thus all new words have weight at least `D` exactly when every new word has weight in `[D,n\u2212D]`, or equivalently\n\n`|\u03a3_i (\u22121)^(e_i+c_i)|\u2264n\u22122D=T`\n\nfor every `c\u2208C_*`. The anchored path proposal has therefore reduced exactly to finding an admissible one-row extension.\n\n### 3. Robust blockwise-affine obstruction\n\nLet `\ud835\udc9c=H^A(F^A)` be the space of vectors whose restriction to every outer block is an affine Boolean function of `y`. Each `e_0\u2208\ud835\udc9c` has a unique outer symbol vector `v\u2208F^A`.\n\nIf `e_0\u2209C_*`, the proved fixed-inner additive-maximality lemma applied to `R+<v>` supplies `c\u2208C_*` such that\n\n`wt(e_0+c)\u2264535805952=D\u221216384`.\n\nIf `dist(e,e_0)\u226416383`, the triangle inequality gives `wt(e+c)\u2264D\u22121`, contradicting the target. If instead `e_0\u2208C_*`, then `e+e_0` itself has weight `dist(e,e_0)` and is a nonzero word of `span(C_*,e)`; the same conclusion follows even more strongly. Therefore every target-safe rank-1041 selector satisfies\n\n`dist(e,\ud835\udc9c)\u226516384`.\n\nAs a corollary, one arbitrary nonlinear exceptional block cannot suffice. Indeed, Parseval on one length-`L` block gives an affine approximation within `(L\u2212ceil(sqrt L))/2=(32768\u2212182)/2=16293<16384` positions.\n\n### 4. Robust outer-homogeneous obstruction\n\nFor a Boolean function `h:Y\u2192F_2`, let `r_h(a,y)=h(y)`, and define\n\n`\ud835\udcd7={r_h+c:h:Y\u2192F_2, c\u2208C_*}`.\n\nIts Walsh coefficients satisfy\n\n`\u03a3_{\u03be\u2208F_2^15} W_h(\u03be)^2=L\u00b2`.\n\nThere are `L` coefficients, so some has magnitude at least `ceil(sqrt L)=182`. Choosing the affine constant with the favorable sign produces an affine function `b+\u03be\u00b7y` for which\n\n`wt(h+b+\u03be\u00b7y)\u2264(L\u2212182)/2=16293`.\n\nThe corresponding affine word repeated on all outer blocks belongs to `C_*`, because it is the encoding of a constant outer polynomial. Hence every coset represented by a member of `\ud835\udcd7` contains a word of weight at most\n\n`L\u00b716293=533889024=D\u221259L`.\n\nChanging at most `59L\u22121=1933311` coordinates still leaves a word below `D`. Thus every target-safe rank-1041 selector obeys\n\n`dist(e,\ud835\udcd7)\u226559L=1933312`.\n\nIn particular, a repeated nonlinear template cannot be repaired by changes confined to at most 58 complete outer blocks.\n\n### 5. Scope\n\nThe argument is deterministic and information-theoretic. It closes fixed-anchor lifts with blockwise-affine, nearly blockwise-affine, repeated-template, or nearly repeated-template selectors. It does not exclude an arbitrary outer-varying nonlinear selector. By the upstream basis-walk compiler, that remaining case is simply the general problem of constructing a symbolic 1040-dimensional column stream with all nonzero Fourier coefficients bounded by `2^21`.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "TARGET",
+      "proof": "Direct substitution gives `D=2^29\u22122^20` and `T=n\u22122D=2^21=64\u00b72^15`.",
+      "statement": "The exact two-sided signed-sum allowance is `T=2^21`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "composition-10 accepted generator"
+      ],
+      "id": "ANCHOR-COLLAPSE",
+      "proof": "For every message `x`, `L_e(x)=c_x+(x\u00b7z_*)e`. The constant message gives `L_e(j)=1+e`; after appending one this recovers `e`, and then every `c_x`. The reverse containment follows from the same formula.",
+      "statement": "The all-one augmentation of the fixed-anchor lift has row space exactly `span(C_*,e)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ANCHOR-COLLAPSE",
+        "TARGET"
+      ],
+      "id": "COSET-DISTANCE",
+      "proof": "When `e\u2209C_*`, the only new words are `e+C_*`. Since `1\u2208C_*`, this coset contains every complement, so minimum weight at least `D` is equivalent to absolute signed sum at most `T` throughout the coset.",
+      "statement": "A fixed-anchor lift gives a target `[n,1041]` code exactly when its selector is a target-safe one-row extension.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "fixed-inner-additive-maximality",
+        "COSET-DISTANCE"
+      ],
+      "id": "AFFINE-ROBUSTNESS",
+      "proof": "Every non-codeword blockwise-affine representative has a coset word of weight at most `D\u221216384`; a perturbation of at most 16383 bits remains below `D`. Representatives in `C_*` give the even simpler low word `e+e_0`.",
+      "statement": "Every successful selector has Hamming distance at least 16,384 from the complete blockwise-affine space.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "INNER-PARSEVAL",
+      "proof": "Parseval gives average squared Walsh coefficient `L`; hence the maximum absolute coefficient is at least `ceil(sqrt L)=182`. Choosing the affine constant flips its sign if necessary.",
+      "statement": "Every Boolean function on `F_2^15` is within 16,293 positions of some affine function.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "INNER-PARSEVAL",
+        "COSET-DISTANCE"
+      ],
+      "id": "HOMOGENEOUS-ROBUSTNESS",
+      "proof": "Repeat the affine approximation on all `L` outer blocks. The resulting incumbent coset word has weight at most `L\u00b716293=D\u221259L`; fewer than `59L` further flips cannot reach `D`.",
+      "statement": "Every successful selector has distance at least `59\u00b72^15=1,933,312` from every repeated inner template modulo `C_*`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ANCHOR-COLLAPSE",
+        "AFFINE-ROBUSTNESS",
+        "HOMOGENEOUS-ROBUSTNESS",
+        "combinatorial-expander-07 basis-walk compiler"
+      ],
+      "id": "STRUCTURED-FRONTIER",
+      "proof": "The exact collapse removes fixed-anchor syntax as an independent source of mixing, while the two quantitative lemmas exclude its principal symbolic selector classes. The basis-walk compiler leaves only general outer-varying nonlinear streams or variable-anchor schedules.",
+      "statement": "No audited fixed-anchor structured selector improves the durable dimension-1040 endpoint; the general sparse column-stream problem remains open.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Combinatorial-expander sparse-path bottleneck: exact fixed-anchor collapse and robust structured-selector exclusions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (complete)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 56 files present at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 59 files present at final audit)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `C_*` be the accepted RS\u2013affine `[2^30,1040,535822336]_2` code, with generator columns `z_i` and constant message `j`. For any fixed anchor `z_*` and selector `e\u2208F_2^n`, the lift with columns `g_i=z_i+e_i z_*`, followed by an all-one row, has row space exactly `span(C_*,e)`. It therefore yields dimension 1041 and the target distance if and only if `e\u2209C_*` and every word of `e+C_*` has absolute signed sum at most `2^21`. Moreover, every such successful selector must be at Hamming distance at least 16,384 from every blockwise-affine selector and at least 1,933,312 from every outer-block-independent inner template modulo `C_*`. Thus fixed-anchor sparse paths provide no shortcut, and their natural affine or repeated-template selector families are rigorously excluded.",
+  "title": "Fixed-anchor collapse and robust selector obstructions at the k=1041 frontier"
+}

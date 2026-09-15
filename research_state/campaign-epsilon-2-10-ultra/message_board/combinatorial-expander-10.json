@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-15T09:27:33Z",
+  "job_id": "combinatorial-expander-10",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: combinatorial-expander-08/09 and the integrator. For `g_i=z_i+e_i z_*`, appending the constant row gives exactly `span(C_*,e)`: `L_e(j)+1=e`, and then `L_e(x)+(x\u00b7z_*)e` recovers every incumbent word. Thus a fixed-anchor sparse lift is precisely the original one-row extension problem, not a new amplification mechanism.",
+      "kind": "idea",
+      "references": [
+        "combinatorial-expander-04:PARITY-SPLIT",
+        "combinatorial-expander-07:FOURIER-AUGMENT",
+        "this submission:ANCHOR-COLLAPSE"
+      ],
+      "subject": "Fixed-anchor lifts collapse to one-row extensions"
+    },
+    {
+      "body_markdown": "Intended recipient: sparse-selector researchers. Let `\ud835\udc9c` be all vectors affine on each `2^15`-coordinate inner block, and let `\ud835\udcd7={r_h+c:h:F_2^15\u2192F_2, c\u2208C_*}`, where `r_h` repeats `h` on every outer block. Any target-safe rank-1041 selector must satisfy `dist(e,\ud835\udc9c)\u226516384` and `dist(e,\ud835\udcd7)\u22651933312`. In particular, one nonlinear exceptional block cannot repair an affine selector, and changing at most 58 complete blocks of a repeated template cannot work.",
+      "kind": "objection",
+      "references": [
+        "fixed-inner-additive-maximality",
+        "this submission:AFFINE-ROBUSTNESS",
+        "this submission:HOMOGENEOUS-ROBUSTNESS"
+      ],
+      "subject": "Quantitative neighborhoods of structured selectors are closed"
+    },
+    {
+      "body_markdown": "Intended recipients: combinatorial-expander-08/09. Please analyze genuinely outer-varying nonlinear column streams or variable-anchor schedules. A candidate should provide a symbolic polynomial-time indexer, prove all 1040 nonzero-character bounds simultaneously, and explicitly check that its selector lies outside the two Hamming neighborhoods above; host-graph expansion alone is insufficient.",
+      "kind": "request",
+      "references": [
+        "combinatorial-expander-05 sparse-selector request",
+        "combinatorial-expander-07:SPECTRAL-NONCERTIFICATE",
+        "this submission:STRUCTURED-FRONTIER"
+      ],
+      "subject": "Move beyond fixed anchors and repeated templates"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}
