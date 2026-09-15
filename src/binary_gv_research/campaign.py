@@ -439,6 +439,24 @@ class Campaign:
         self._write_jobs(jobs)
         return self.status()
 
+    def queue_research_wave(self, teams: tuple[str, ...]) -> dict[str, Any]:
+        """Append a focused research wave without auto-queuing synthesis work."""
+        if not teams:
+            raise ValueError("at least one research team is required")
+        unknown = set(teams).difference(TEAM_DIRECTIONS)
+        if unknown:
+            raise ValueError(f"unknown research teams: {', '.join(sorted(unknown))}")
+        self.initialize()
+        jobs = self._read_jobs()
+        next_round = max((int(job.get("round", 1)) for job in jobs), default=0) + 1
+        for team in teams:
+            for index, direction in enumerate(TEAM_DIRECTIONS[team], start=1):
+                jobs.append(self._job(
+                    f"{team}-r{next_round:03d}-{index:02d}", "researcher", direction,
+                    team=team, round_number=next_round))
+        self._write_jobs(jobs)
+        return self.status()
+
     def defer_genius(self) -> dict[str, Any]:
         """Park queued synthesis jobs until an explicit checkpoint is requested."""
         self.initialize()
@@ -541,6 +559,8 @@ YOUR FOCUSED DIRECTION:
 {job['direction']}
 
 TEAM: {job.get('team', 'shared')}; ROUND: {job.get('round', 1)}.
+Every team has the same hard mandate: only a deterministic polynomial-time
+full-generator-matrix construction can be a leaderboard submission.
 Before reasoning, read the durable submissions, lemma book, roadmaps, and every
 file in the shared message_board directory. Use another team's proved lemma
 when it helps. At the end, put up to three concise, substantive posts in
@@ -551,7 +571,7 @@ Produce genuine mathematical work.  A leaderboard_submission=true response must
 contain a complete deterministic construction and an academic proof that checks
 binary linearity, exact length, integer dimension, minimum distance, and every
 finite parameter. It must also give a generator_matrix object whose deterministic
-algorithm outputs every entry of the full generator matrix in n^{O(1)} time,
+algorithm outputs every entry of the full generator matrix in n^{{O(1)}} time,
 with a runtime proof; otherwise set leaderboard_submission=false. Do not use
 random existence, sampled codewords, hidden O-constants, an unavailable theorem,
 canonical exhaustive search, or superpolynomial conditional averages. Set
@@ -836,13 +856,9 @@ you have examined every durable response and review path.
         return False
 
     def _queue_next_research_round(self) -> None:
+        self.queue_research_wave(tuple(TEAM_DIRECTIONS))
         jobs = self._read_jobs()
-        next_round = max((int(job.get("round", 1)) for job in jobs), default=0) + 1
-        for team, directions in TEAM_DIRECTIONS.items():
-            for index, direction in enumerate(directions, start=1):
-                jobs.append(self._job(
-                    f"{team}-r{next_round:03d}-{index:02d}", "researcher", direction,
-                    team=team, round_number=next_round))
+        next_round = max((int(job.get("round", 1)) for job in jobs), default=0)
         for roadmap_id, focus in ROADMAPS.items():
             jobs.append(self._job(
                 f"{roadmap_id}-r{next_round:03d}", "roadmap", focus, phase="synthesis",

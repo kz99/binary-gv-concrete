@@ -63,6 +63,12 @@ class CampaignTests(unittest.TestCase):
         self.assertEqual(campaign._job_effort("GENIUS", "genius"), "ultra")
         self.assertEqual(campaign._job_effort("roadmap-expander", "roadmap"), "xhigh")
 
+    def test_researcher_prompt_has_explicitness_mandate(self):
+        campaign = Campaign(ROOT / "configs" / "campaign-epsilon-2-10-ultra.yaml")
+        job = campaign._job("algebraic-01", "researcher", "test direction", team="algebraic")
+        prompt, _ = campaign._prompt(job)
+        self.assertIn("polynomial-time", prompt)
+
 
 if __name__ == "__main__":
     unittest.main()

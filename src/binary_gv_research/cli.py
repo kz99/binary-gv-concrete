@@ -18,12 +18,15 @@ def main(argv: list[str] | None = None) -> int:
     ):
         item = sub.add_parser(name, help=help_text)
         item.add_argument("config")
-    item = sub.add_parser("add-researchers", help="append ultra-reasoning researcher seats")
+    item = sub.add_parser("add-researchers", help="append mixed-reasoning researcher seats")
     item.add_argument("config")
     item.add_argument("count", type=int)
     item = sub.add_parser("add-team", help="append one named ten-agent research team")
     item.add_argument("config")
     item.add_argument("team")
+    item = sub.add_parser("queue-research-wave", help="append a focused research wave without synthesis jobs")
+    item.add_argument("config")
+    item.add_argument("teams", nargs="+", choices=["algebraic", "combinatorial", "composition", "combinatorial-expander"])
     args = parser.parse_args(argv)
     if args.command == "launch":
         payload = launch_campaign(args.config)
@@ -37,6 +40,8 @@ def main(argv: list[str] | None = None) -> int:
             payload = campaign.add_researchers(args.count)
         elif args.command == "add-team":
             payload = campaign.add_team(args.team)
+        elif args.command == "queue-research-wave":
+            payload = campaign.queue_research_wave(tuple(args.teams))
         elif args.command == "genius-checkpoint":
             payload = campaign.run_genius_checkpoint()
         else:
