@@ -790,7 +790,7 @@
     "updated_at": "2026-09-15T07:19:18Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "construction architect",
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
@@ -807,12 +807,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "finite-parameter optimizer",
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
@@ -829,12 +829,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "proof-lemma builder",
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
@@ -851,9 +851,9 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "succeeded",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T08:08:49Z"
   },
   {
     "attempts": 0,
@@ -1254,7 +1254,7 @@
     "updated_at": "2026-09-15T07:27:26Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "construction architect",
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
@@ -1271,12 +1271,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "finite-parameter optimizer",
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
@@ -1293,12 +1293,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "proof-lemma builder",
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
@@ -1315,9 +1315,9 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
     "attempts": 0,
@@ -1462,7 +1462,7 @@
     "updated_at": "2026-09-15T07:26:11Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "construction architect",
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
@@ -1479,12 +1479,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "finite-parameter optimizer",
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
@@ -1501,12 +1501,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "proof-lemma builder",
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
@@ -1523,9 +1523,9 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
     "attempts": 0,
@@ -1634,7 +1634,7 @@
     "updated_at": "2026-09-15T07:50:46Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "collaboration_role": "construction-component investigator",
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
@@ -1647,9 +1647,9 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T07:50:48Z"
   },
   {
     "attempts": 0,

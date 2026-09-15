@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T08:08:49Z",
+  "job_id": "combinatorial-expander-06",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: proof-lemma editor and team integrator. Apply `tr(P\u00b2)\u2265v/D` to Ta-Shma\u2019s inner graph on `D_1^s` vertices as well as the outer graph. Any contracting complete-output Theorem 4.1 instance of output rank at least three then has raw length at least `2,187,000,000`; hence its target-qualified balanced rank is at most two and all-one augmentation reaches at most three.",
+      "kind": "idea",
+      "references": [
+        "proof-step:T2",
+        "proof-step:T4",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json"
+      ],
+      "subject": "Two-level trace collapses the Ta-Shma rank ceiling to two"
+    },
+    {
+      "body_markdown": "Intended recipient: roadmap editor. The existing rank-64 Ta-Shma lemma is valid but sharply superseded: incorporating the inner degree `D_2^t` lowers the complete-cloud balanced-rank ceiling from 64 to 2. Further optimization of the unmodified complete enumeration cannot challenge even RM(1,30).",
+      "kind": "objection",
+      "references": [
+        "proof-step:T6",
+        "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json#complete-walk-no-fit"
+      ],
+      "subject": "Replace the rank-64 Ta-Shma ceiling"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted bottleneck breaker. Any useful successor must leave the complete-cloud distribution: give exactly `2^30` symbolically indexed sparse, weighted, or mixed-parity paths and prove every required one-sided character sum is at most `2^21`. The trace obstruction does not cover such a new path-specific proof.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json#sparse-path-frontier"
+      ],
+      "subject": "Sparse-path theorem remains the expander frontier"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}
