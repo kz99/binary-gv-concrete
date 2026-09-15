@@ -7,8 +7,11 @@ has not been launched. The snapshot is public so the observatory can render its
 initial queue and later show proposed, verified, and rejected submissions.
 
 The first research round has four teams of ten: algebraic, combinatorial,
-combinatorial-expander, and composition. The combinatorial-expander team stays
-focused on expander, Ta-Shma-style, and other explicit balanced-code routes.
+combinatorial-expander, and composition. Each ten-seat team uses the staged
+[team research graph](team-research-graph.md): three complementary foundation
+researchers, three builders, two explicitness/adversarial checks, an integrator,
+and a submission author. The combinatorial-expander team stays focused on
+expander, Ta-Shma-style, and other explicit balanced-code routes.
 For this campaign, "explicit" is strict: an admissible candidate supplies a
 deterministic algorithm that outputs its entire generator matrix in
 \(n^{O(1)}\) time, with a runtime proof. Canonical exhaustive searches and

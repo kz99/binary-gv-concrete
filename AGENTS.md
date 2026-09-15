@@ -29,8 +29,13 @@ ultra researchers, four max researchers, and three xhigh researchers. The
 GENIUS synthesizer remains ultra. Verifiers, literature analysts, lemma
 editors, and roadmap authors use xhigh. Share lemmas and proof tools across
 roadmaps, while giving each researcher modest preference for its assigned
-roadmap. GENIUS is checkpoint-only: do not queue it automatically. Run it only
-after a request for a global integration pass.
+roadmap. Within each ten-seat team, use the durable dependency graph in
+`research_state/campaign-epsilon-2-10-ultra/team-research-graph.md`: three
+foundation handoffs feed the architecture, parameter, and proof positions;
+explicitness and adversarial audits precede integration and final submission.
+Read predecessor outputs and the shared message board before beginning a
+dependent position. GENIUS is checkpoint-only: do not queue it automatically.
+Run it only after a request for a global integration pass.
 
 ## Submission standard
 

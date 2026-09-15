@@ -3,7 +3,9 @@ import unittest
 from pathlib import Path
 
 from binary_gv_research.agents import CommandAgentProvider
-from binary_gv_research.campaign import Campaign, D, GV_RATE, RESEARCHER_EFFORTS, load_config
+from binary_gv_research.campaign import (
+    Campaign, D, GV_RATE, RESEARCHER_EFFORTS, TEAM_RESEARCH_GRAPH, load_config,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -68,6 +70,14 @@ class CampaignTests(unittest.TestCase):
         job = campaign._job("algebraic-01", "researcher", "test direction", team="algebraic")
         prompt, _ = campaign._prompt(job)
         self.assertIn("polynomial-time", prompt)
+
+    def test_each_ten_seat_team_has_a_staged_collaboration_graph(self):
+        self.assertEqual(len(TEAM_RESEARCH_GRAPH), 10)
+        self.assertEqual(TEAM_RESEARCH_GRAPH[0][1], ())
+        self.assertEqual(TEAM_RESEARCH_GRAPH[1][1], ())
+        self.assertEqual(TEAM_RESEARCH_GRAPH[2][1], ())
+        self.assertEqual(TEAM_RESEARCH_GRAPH[3][1], (1, 2, 3))
+        self.assertEqual(TEAM_RESEARCH_GRAPH[-1][1], (9,))
 
 
 if __name__ == "__main__":

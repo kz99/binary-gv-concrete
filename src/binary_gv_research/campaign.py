@@ -283,6 +283,24 @@ TEAM_DIRECTIONS = {
 }
 
 
+# Each ten-seat team is a small research organization rather than ten parallel
+# attempts at the same problem.  The numbered positions are deliberately stable:
+# their dependencies are stored with every queued job and therefore remain
+# inspectable in the durable campaign state.
+TEAM_RESEARCH_GRAPH = (
+    ("landscape scout", ()),
+    ("construction-component investigator", ()),
+    ("obstruction and parameter auditor", ()),
+    ("construction architect", (1, 2, 3)),
+    ("finite-parameter optimizer", (1, 2, 3)),
+    ("proof-lemma builder", (1, 2, 3)),
+    ("explicitness engineer", (4, 5)),
+    ("adversarial distance and novelty checker", (4, 5, 6)),
+    ("team integrator", (6, 7, 8)),
+    ("record-submission author", (9,)),
+)
+
+
 ROADMAPS = {
     "roadmap-algebraic": "Trace, character-sum, subfield-subcode, and algebraic routes maximizing concrete dimension at bias 2^-10.",
     "roadmap-expander": "Explicit epsilon-balanced and expander-walk routes with finite constants optimized at epsilon=2^-10.",
@@ -374,6 +392,22 @@ class Campaign:
         temp.write_text(json.dumps(jobs, indent=2, sort_keys=True) + "\n")
         temp.replace(self.jobs_path)
 
+    def _append_team_wave(
+        self, jobs: list[dict[str, Any]], team: str, round_number: int, job_id_for_index: Any,
+    ) -> None:
+        """Queue one coordinated ten-seat team, preserving its dependency DAG."""
+        directions = TEAM_DIRECTIONS[team]
+        if len(directions) != len(TEAM_RESEARCH_GRAPH):
+            raise ValueError(f"team {team} must have exactly ten research directions")
+        for index, direction in enumerate(directions, start=1):
+            collaboration_role, dependency_indexes = TEAM_RESEARCH_GRAPH[index - 1]
+            dependencies = [job_id_for_index(dependency) for dependency in dependency_indexes]
+            jobs.append(self._job(
+                job_id_for_index(index), "researcher", direction,
+                team=team, round_number=round_number,
+                depends_on=dependencies, collaboration_role=collaboration_role,
+            ))
+
     def initialize(self) -> dict[str, Any]:
         for name in ("submissions", "reviews", "lemma_book", "roadmaps", "genius", "metadata", "message_board"):
             (self.root / name).mkdir(parents=True, exist_ok=True)
@@ -381,10 +415,9 @@ class Campaign:
             self._normalize_queued_job_efforts()
             return self.status()
         jobs: list[dict[str, Any]] = []
-        for team, directions in TEAM_DIRECTIONS.items():
-            for index, direction in enumerate(directions, start=1):
-                jobs.append(self._job(
-                    f"{team}-{index:02d}", "researcher", direction, team=team, round_number=1))
+        for team in TEAM_DIRECTIONS:
+            self._append_team_wave(
+                jobs, team, 1, lambda index, team=team: f"{team}-{index:02d}")
         if self.cfg.get("literature_agent_enabled", True):
             jobs.append(self._job(
                 "literature-sota-0001", "literature",
@@ -432,10 +465,8 @@ class Campaign:
         if any(job["id"].startswith(prefix) for job in jobs):
             raise ValueError(f"team already exists: {team}")
         round_number = max((int(job.get("round", 1)) for job in jobs), default=1)
-        for index, direction in enumerate(TEAM_DIRECTIONS[team], start=1):
-            jobs.append(self._job(
-                f"{team}-{index:02d}", "researcher", direction,
-                team=team, round_number=round_number))
+        self._append_team_wave(
+            jobs, team, round_number, lambda index: f"{team}-{index:02d}")
         self._write_jobs(jobs)
         return self.status()
 
@@ -450,10 +481,9 @@ class Campaign:
         jobs = self._read_jobs()
         next_round = max((int(job.get("round", 1)) for job in jobs), default=0) + 1
         for team in teams:
-            for index, direction in enumerate(TEAM_DIRECTIONS[team], start=1):
-                jobs.append(self._job(
-                    f"{team}-r{next_round:03d}-{index:02d}", "researcher", direction,
-                    team=team, round_number=next_round))
+            self._append_team_wave(
+                jobs, team, next_round,
+                lambda index, team=team: f"{team}-r{next_round:03d}-{index:02d}")
         self._write_jobs(jobs)
         return self.status()
 
@@ -491,11 +521,14 @@ class Campaign:
         return self.status()
 
     def _job(self, job_id: str, role: str, direction: str, phase: str = "research",
-             dependency: str | None = None, team: str = "shared", round_number: int = 1) -> dict[str, Any]:
+             dependency: str | None = None, team: str = "shared", round_number: int = 1,
+             depends_on: list[str] | None = None, collaboration_role: str | None = None) -> dict[str, Any]:
         return {
             "id": job_id, "role": role, "direction": direction, "phase": phase,
             "dependency": dependency, "status": "queued", "attempts": 0,
             "team": team, "round": round_number,
+            "depends_on": list(depends_on or ()),
+            "collaboration_role": collaboration_role,
             "model": self.cfg.get("model", "gpt-5.6-sol"),
             "reasoning_effort": self._job_effort(job_id, role),
             "error": None,
@@ -548,9 +581,24 @@ class Campaign:
     def _prompt(self, job: dict[str, Any]) -> tuple[str, dict[str, Any]]:
         role = job["role"]
         if role in {"researcher", "literature"}:
-            seat = "state-of-the-art literature analyst" if role == "literature" else "independent construction researcher"
+            seat = "state-of-the-art literature analyst" if role == "literature" else "construction researcher"
+            upstream = list(job.get("depends_on") or ())
+            collaboration_role = job.get("collaboration_role") or "independent focused researcher"
+            if upstream:
+                coordination = f"""YOUR COLLABORATION ROLE: {collaboration_role}.
+Your upstream teammates are {', '.join(upstream)}. Their durable submissions and
+message-board posts are your required handoff. Read them before doing new work;
+reuse, repair, or refute their components instead of restarting their tasks.
+Publish only the new integration, proof, optimization, or audit assigned to this
+position. If an upstream result failed, record the exact obstruction and give the
+next position a usable replacement plan."""
+            else:
+                coordination = f"""YOUR COLLABORATION ROLE: {collaboration_role}.
+You are one of the team's foundation researchers. Establish a durable, sharply
+scoped handoff for the later architecture, proof, and submission positions;
+do not try to write the final submission alone."""
             prompt = f"""You are {job['id']}, an {seat} in the Binary-GV Concrete campaign.
-You run at ultra reasoning. Read AGENTS.md, TARGET.md, the contribution guide,
+You run at {job.get('reasoning_effort', 'ultra')} reasoning. Read AGENTS.md, TARGET.md, the contribution guide,
 the RM baseline proof, and data/records.json before reasoning.
 
 {BASE_SPEC}
@@ -559,13 +607,15 @@ YOUR FOCUSED DIRECTION:
 {job['direction']}
 
 TEAM: {job.get('team', 'shared')}; ROUND: {job.get('round', 1)}.
+{coordination}
 Every team has the same hard mandate: only a deterministic polynomial-time
 full-generator-matrix construction can be a leaderboard submission.
 Before reasoning, read the durable submissions, lemma book, roadmaps, and every
 file in the shared message_board directory. Use another team's proved lemma
 when it helps. At the end, put up to three concise, substantive posts in
 discussion_posts: a reusable lemma, a precise obstacle, or a concrete question
-for other teams. Do not post social updates or unsupported claims.
+for other teams. State the intended downstream recipient when one exists. Do not
+post social updates or unsupported claims.
 
 Produce genuine mathematical work.  A leaderboard_submission=true response must
 contain a complete deterministic construction and an academic proof that checks
@@ -695,9 +745,21 @@ you have examined every durable response and review path.
 
     def _run_phase(self, roles: set[str]) -> None:
         max_attempts = int(self.cfg.get("max_attempts", 3))
+        max_workers = int(self.cfg.get("max_workers", 3))
         while True:
             jobs = self._read_jobs()
-            selected = [job for job in jobs if job["role"] in roles and job["status"] in {"queued", "failed"} and int(job["attempts"]) < max_attempts]
+            completed_ids = {job["id"] for job in jobs if job["status"] == "succeeded"}
+            ready = [
+                job for job in jobs
+                if job["role"] in roles
+                and job["status"] in {"queued", "failed"}
+                and int(job["attempts"]) < max_attempts
+                and all(dependency in completed_ids for dependency in job.get("depends_on", ()))
+            ]
+            # Do not label a job running until a worker can really begin it. This
+            # makes the public queue an honest picture of active work and retains
+            # the DAG's stage boundaries even when many teams are queued.
+            selected = ready[:max_workers]
             if not selected:
                 return
             selected_ids = {job["id"] for job in selected}
@@ -707,7 +769,7 @@ you have examined every durable response and review path.
                     job["attempts"] = int(job["attempts"]) + 1
                     job["updated_at"] = utc_timestamp()
             self._write_jobs(jobs)
-            with ThreadPoolExecutor(max_workers=int(self.cfg.get("max_workers", 3))) as pool:
+            with ThreadPoolExecutor(max_workers=max_workers) as pool:
                 futures = {pool.submit(self._run_job, job): job["id"] for job in selected}
                 for future in as_completed(futures):
                     job_id = futures[future]
