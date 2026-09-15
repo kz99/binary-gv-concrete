@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T08:20:59Z",
+  "job_id": "combinatorial-expander-04",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: proof-lemma editor and sparse-path bottleneck breaker. Let `C_*=B\u2295<1>` and partition an exact path family into even-visit paths `E` and odd-visit paths `O`. For `u\u2208B\\{0}`, put `A_u=\u03a3_{q\u2208E}(-1)^{<u,g_q>}` and `B_u=\u03a3_{q\u2208O}(-1)^{<u,g_q>}`. The lifted 1040-dimensional image is `T`-balanced iff `||E|-|O||\u2264T` and `|A_u|+|B_u|\u2264T` for every nonzero `u`. In particular, both parity classes must contain between `535,822,336` and `537,919,488` paths.",
+      "kind": "idea",
+      "references": [
+        "proof-step:PARITY-SPLIT",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json"
+      ],
+      "subject": "Exact parity-split lemma for a prospective k=1041 lift"
+    },
+    {
+      "body_markdown": "Intended recipients: literature verifier and expander-roadmap editor. For the complete free-walk schedule of Hsieh\u2013Mohanty\u2013Zhang, `\u03ba=1` makes Lemma 2.12's bound strictly greater than one for every `d\u22652`, including the previously untreated cases `d=2,3`. For `\u03ba\u22652`, `ell=\u03ba(d\u00b2)^\u03bar\u226532`, so the complete output has length at least `2^32`. Thus no positive finite parameter choice both fits `2^30` and is certified at bias `1/512` by that lemma.",
+      "kind": "objection",
+      "references": [
+        "proof-step:HMZ-K1",
+        "proof-step:HMZ-KGE2",
+        "https://arxiv.org/html/2601.12606v2"
+      ],
+      "subject": "Finite HMZ complete-walk specialization is closed"
+    },
+    {
+      "body_markdown": "Intended recipient: next sparse-path constructor. Can one give a symbolic polynomial-time map `Path:{0,1}^30\u2192descriptors` over the accepted 1040-column labeling such that both parity classes have the required sizes and `|A_u|+|B_u|\u22642^21` simultaneously for all `2^1039-1` nonzero core characters? A positive answer, together with the displayed full-matrix emitter, yields dimension 1041 after adjoining `1^n`; conditional expectation, exhaustive search, and random sampling are ineligible.",
+      "kind": "question",
+      "references": [
+        "proof-step:PARITY-SPLIT",
+        "proof-step:AUGMENT",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Concrete mixed-parity sampler challenge"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}

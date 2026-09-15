@@ -1,0 +1,255 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new code is submitted. The surviving constructive interface starts from the accepted decomposition `C_*=B\u2295<1>` with `dim(B)=1039`. Label each base coordinate `v` by the corresponding generator column `z_v\u2208F_2^1040`, and let `j` be the message satisfying `<j,z_v>=1` for every `v`.\n\nFor exactly `n=2^30` deterministically indexed paths `q`, define `g_q` as the XOR of the columns encountered by `q`. If the resulting 1040-row matrix is two-sided `T=2^21` balanced, adjoining `1^n` gives a `[2^30,1041,>=D]_2` code. The parity-split theorem below gives an exact necessary-and-sufficient certificate for this event. No path family satisfying that certificate is presently supplied, so this remains a replacement plan rather than a construction claim.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: proof-lemma editor and sparse-path bottleneck breaker. Let `C_*=B\u2295<1>` and partition an exact path family into even-visit paths `E` and odd-visit paths `O`. For `u\u2208B\\{0}`, put `A_u=\u03a3_{q\u2208E}(-1)^{<u,g_q>}` and `B_u=\u03a3_{q\u2208O}(-1)^{<u,g_q>}`. The lifted 1040-dimensional image is `T`-balanced iff `||E|-|O||\u2264T` and `|A_u|+|B_u|\u2264T` for every nonzero `u`. In particular, both parity classes must contain between `535,822,336` and `537,919,488` paths.",
+      "kind": "idea",
+      "references": [
+        "proof-step:PARITY-SPLIT",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json"
+      ],
+      "subject": "Exact parity-split lemma for a prospective k=1041 lift"
+    },
+    {
+      "body_markdown": "Intended recipients: literature verifier and expander-roadmap editor. For the complete free-walk schedule of Hsieh\u2013Mohanty\u2013Zhang, `\u03ba=1` makes Lemma 2.12's bound strictly greater than one for every `d\u22652`, including the previously untreated cases `d=2,3`. For `\u03ba\u22652`, `ell=\u03ba(d\u00b2)^\u03bar\u226532`, so the complete output has length at least `2^32`. Thus no positive finite parameter choice both fits `2^30` and is certified at bias `1/512` by that lemma.",
+      "kind": "objection",
+      "references": [
+        "proof-step:HMZ-K1",
+        "proof-step:HMZ-KGE2",
+        "https://arxiv.org/html/2601.12606v2"
+      ],
+      "subject": "Finite HMZ complete-walk specialization is closed"
+    },
+    {
+      "body_markdown": "Intended recipient: next sparse-path constructor. Can one give a symbolic polynomial-time map `Path:{0,1}^30\u2192descriptors` over the accepted 1040-column labeling such that both parity classes have the required sizes and `|A_u|+|B_u|\u22642^21` simultaneously for all `2^1039-1` nonzero core characters? A positive answer, together with the displayed full-matrix emitter, yields dimension 1041 after adjoining `1^n`; conditional expectation, exhaustive search, and random sampling are ineligible.",
+      "kind": "question",
+      "references": [
+        "proof-step:PARITY-SPLIT",
+        "proof-step:AUGMENT",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Concrete mixed-parity sampler challenge"
+    }
+  ],
+  "distance_audit": [
+    "`D=535,822,336=(n-T)/2`, where `T=n-2D=2,097,152`; hence two-sided balance is exactly `|\u03a3_q(-1)^{c_q}|\u2264T`.",
+    "The parity-split identities cover every nonzero message: `j`, every `u\u2208B\\{0}`, and every `u+j`.",
+    "If the parity-split inequalities were achieved, the lifted core would have rank 1040 and exclude `1^n`; adjoining `1^n` would give dimension 1041, and every core word and its complement would have weight at least `D`.",
+    "No qualifying path family was constructed, so no new minimum-distance value is claimed."
+  ],
+  "explicitness_audit": [
+    "All finite schedules and inequalities in the obstruction are deterministic; no random selection, exhaustive search, conditional expectation, or lookup is used.",
+    "The HMZ complete schedule can be ordered lexicographically, but for `\u03ba\u22652` its full support has the wrong exact length; selecting `2^30` walks would require a new sparse-selector proof not supplied by Lemma 2.12.",
+    "The conditional path-lift emitter below is polynomial in `n` whenever the path indexer and maximum path length are polynomial. The missing object is the explicit path family satisfying all parity-split inequalities.",
+    "The newly available two-level trace and order-186 moment handoffs were incorporated: complete Ta-Shma amplification is capped at augmented dimension 3, and the ordinary one-edge scalar certificate at 838.",
+    "No validator or dashboard build was run because this is an obstruction result, not a leaderboard publication; the workspace is read-only."
+  ],
+  "generator_matrix": {
+    "algorithm": "No target generator is asserted. For any supplied deterministic path family `Q=(q_1,...,q_n)`, enumerate rows of the accepted 1040-dimensional RS\u2013affine generator. For each row `a` and path `q`, emit `G_Q[a,q]=XOR_{v occurring in q} G_*[a,v]`; then append the all-one row. Base entries are computed directly by the fixed `F_2[Z]/(Z^16+Z^5+Z^3+Z^2+1)` arithmetic and affine inner evaluation. This fully outputs the conditional `1041\u00d7n` matrix, but no qualifying `Q` is furnished.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "If every path has length at most `n^c` and its vertices are generated in `n^{O(1)}` time, the full emitter uses `O(1040\u00b7n^(c+1)\u00b7poly(log n))=n^{O(1)}` bit operations.",
+    "runtime_proof": "There are exactly `1041n` output entries. Each of the first 1040 entries in a column is an XOR over at most `n^c+1` explicitly generated base coordinates; each base entry requires constant-degree field arithmetic, hence `poly(log n)` time. The final row costs `O(n)`. This proves polynomial full-output time conditional on the missing explicit path family, and therefore does not qualify as a leaderboard construction."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "An explicit base code of bias `epsilon_0\u2208(0,1/4]`, integers `d\u22652`, `t=d\u00b2`, and positive integers `\u03ba,r`; the construction enumerates every walk following the schedule of length `ell=\u03bat^\u03bar`.",
+      "result": "The complete lift has length `n_0d^ell`, and Lemma 2.12 bounds its bias by `lambda^{ell(1-\u03ba\u00b2/t^(1/4)-1/\u03ba)}\u00b72^{ell(\u03ba+1)/\u03ba}`, where `lambda=max{2/sqrt(d),epsilon_0}`.",
+      "source": "[Hsieh\u2013Mohanty\u2013Zhang, Explicit Almost-Optimal \u03b5-Balanced Codes via Free Expander Walks, arXiv:2601.12606v2](https://arxiv.org/html/2601.12606v2)",
+      "used_for": "The repaired finite complete-output obstruction."
+    },
+    {
+      "hypotheses": "The fixed field, evaluation set, degree-64 outer polynomials, and affine inner map specified in the durable proof.",
+      "result": "An explicit `[2^30,1040,535822336]_2` code with a 1039-dimensional two-sided balanced subcode `B` and decomposition `C_*=B\u2295<1^n>`.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json`",
+      "used_for": "The base labeling and distinguished constant message in the parity-split reduction."
+    },
+    {
+      "hypotheses": "Complete-output Ta-Shma Theorem 4.1 amplification with a subunit displayed contraction certificate.",
+      "result": "A two-level spectral trace calculation forces raw length at least `2,187,000,000` at balanced rank at least three, so standard all-one-augmented dimension is at most three.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json`",
+      "used_for": "The strongest complete Ta-Shma closure in the integrated architecture table."
+    },
+    {
+      "hypotheses": "A complete directed-edge XOR lift certified only by `beta=epsilon\u00b2+lambda(1-epsilon\u00b2)` and generic length adjustment.",
+      "result": "The exact adjustment, trace bound, and 186th Fourier moment give homogeneous rank at most 837 and augmented dimension at most 838.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json`",
+      "used_for": "The strongest ordinary one-edge scalar-certificate closure."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Add the parity-split equivalence to the lemma book as the exact acceptance interface for mixed-parity lifts of `C_*`.",
+    "Search only for sparse, non-Cartesian mixed-parity path families, proving the two partial-character discrepancies directly rather than inheriting a complete-cloud average.",
+    "Independently verify the HMZ `\u03ba=1` finite calculation and mark the prior literature review's `d=2,3` gap repaired.",
+    "Reconcile the accepted dimension-1040 construction with `data/records.json` before any future leaderboard publication."
+  ],
+  "obstructions": [
+    "Every fixed-length path lift of `C_*` has constant visit parity: the distinguished all-one message maps either to zero or to `1^n`, so it cannot be a 1040-dimensional balanced core eligible for an additional constant row.",
+    "HMZ Lemma 2.12 is vacuous for `\u03ba=1`, while every `\u03ba\u22652` complete lift has at least `2^32` coordinates.",
+    "Complete Ta-Shma output is capped at augmented dimension 3 by the newer two-level trace lemma.",
+    "The standard complete one-edge scalar-mixing route is capped at augmented dimension 838 by the 186th-moment lemma.",
+    "Uniform complete Cartesian XOR clouds are capped at 1025, and the complete Gray-register parameterization requires at least `16,722,507,176,960` coordinates.",
+    "None of these results excludes a genuinely sparse, nonuniform, mixed-parity family with a direct simultaneous-character proof."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)n`.",
+      "quantity": "Required distance",
+      "value": "`D=535,822,336=2^29-2^20`"
+    },
+    {
+      "derivation": "`n-2D`.",
+      "quantity": "Signed-sum allowance",
+      "value": "`T=2^21=2,097,152`"
+    },
+    {
+      "derivation": "`T/n`.",
+      "quantity": "Two-sided normalized bias",
+      "value": "`tau=1/512=2^-9`"
+    },
+    {
+      "derivation": "Accepted RS\u2013affine construction.",
+      "quantity": "Current campaign endpoint",
+      "value": "`k=1040`, rate `1040/2^30=65/2^26\u22489.685754776000977e-7`"
+    },
+    {
+      "derivation": "`|E|+|O|=n` and `||E|-|O||\u2264T`.",
+      "quantity": "Required parity-class sizes",
+      "value": "`535,822,336\u2264|E|,|O|\u2264537,919,488`"
+    },
+    {
+      "derivation": "HMZ with `\u03ba=1`.",
+      "quantity": "Lemma 2.12 bound",
+      "value": "`(4 lambda^(-1/sqrt(d)))^ell>1` for every `d\u22652`"
+    },
+    {
+      "derivation": "`\u03ba\u22652`, `d\u22652`, `r\u22651`, `t=d\u00b2`.",
+      "quantity": "Smallest HMZ schedule and output",
+      "value": "`ell\u22652\u00b74\u00b2=32`, hence `n_0d^ell\u22652^32`"
+    },
+    {
+      "derivation": "Two-level trace handoff.",
+      "quantity": "Complete Ta-Shma ceiling",
+      "value": "balanced rank `\u22642`; augmented dimension `\u22643`"
+    },
+    {
+      "derivation": "Trace boundary and 186th moment.",
+      "quantity": "Ordinary one-edge ceiling",
+      "value": "`m\u226434,915`, homogeneous rank `\u2264837`, augmented dimension `\u2264838`"
+    },
+    {
+      "derivation": "Complete Cartesian moment/counting handoff.",
+      "quantity": "Uniform Cartesian ceiling",
+      "value": "augmented dimension `\u2264785` for arity 2 and `\u22641025` for arity at least 3"
+    },
+    {
+      "derivation": "Complete Gray-register handoff.",
+      "quantity": "Minimum raw Gray length at rank 1040",
+      "value": "`1040\u00b7631^3\u00b74^3=16,722,507,176,960`"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nSet `n=2^30`, `D=535,822,336`, and `T=n-2D=2^21`.\n\n1. No positive-parameter complete schedule covered by Lemma 2.12 of [Hsieh\u2013Mohanty\u2013Zhang](https://arxiv.org/html/2601.12606v2) both has output length at most `n` and is certified by that lemma at bias `1/512`.\n2. For an arbitrary mixed-length path lift of the accepted decomposition `C_*=B\u2295<1>`, two explicit parity-class inequalities are equivalent to the lifted 1040-dimensional image being `T`-balanced. Thus they are exactly the missing certificate needed to append an all-one row and obtain dimension 1041.\n\n### 1. Finite free-walk calculation\n\nThe complete schedule has `t=d\u00b2`,\n\n`ell=\u03bat^\u03bar`, `M=n_0d^ell`,\n\nand Lemma 2.12 supplies\n\n`L=lambda^{ell(1-\u03ba\u00b2/t^(1/4)-1/\u03ba)}\u00b72^{ell(\u03ba+1)/\u03ba}`,\n\nwhere `lambda=max{2/sqrt(d),epsilon_0}` and `epsilon_0\u22641/4`.\n\nIf `\u03ba=1`, then\n\n`L=(4 lambda^(-1/sqrt(d)))^ell`.\n\nFor `d\u22654`, `lambda\u22641`, so the parenthesized factor is at least 4. For `d=2`, it equals `4\u00b72^(-1/(2sqrt(2)))>2`; for `d=3`, it is `4\u00b7(sqrt(3)/2)^(1/sqrt(3))>2sqrt(3)`. Hence `L>1` in every case and cannot certify bias at most `1/512`.\n\nIf `\u03ba\u22652`, then `d\u22652`, `t=d\u00b2\u22654`, and `r\u22651` give\n\n`ell=\u03bat^\u03bar\u22652\u00b74\u00b2=32`.\n\nThus `M=n_0d^ell\u22652^32>2^30`. The complete-output construction therefore has the wrong exact length. Deleting most walks would change the distribution to which Lemma 2.12 applies and needs a new sparse-selector theorem.\n\n### 2. Exact parity-split equivalence\n\nLet the accepted message space be `U\u2295<j>`, where `dim(U)=1039` encodes `B` and `<j,z_v>=1` for every base column `z_v`. For a path `q`, including repeated vertices with multiplicity, put\n\n`g_q=\u2295_{v in q}z_v`, `p_q=(number of visited vertices) mod 2`.\n\nThen `<j,g_q>=p_q`. Partition the exactly `n` paths into `E={q:p_q=0}` and `O={q:p_q=1}`. For nonzero `u\u2208U`, define\n\n`A_u=\u03a3_{q\u2208E}(-1)^{<u,g_q>}`, `B_u=\u03a3_{q\u2208O}(-1)^{<u,g_q>}`.\n\nThe signed sums of the lifted words indexed by `u` and `u+j` are respectively\n\n`S_u=A_u+B_u`, `S_{u+j}=A_u-B_u`.\n\nFor real `A,B`,\n\n`max{|A+B|,|A-B|}=|A|+|B|`.\n\nThe remaining nonzero message `j` has signed sum `S_j=|E|-|O|`. Consequently every nonzero lifted message has absolute signed sum at most `T` if and only if\n\n`||E|-|O||\u2264T`,\n\n`|A_u|+|B_u|\u2264T` for every `u\u2208U\\{0}`.\n\nThe first inequality and `|E|+|O|=n` give\n\n`D=(n-T)/2\u2264|E|,|O|\u2264(n+T)/2=n-D`.\n\nThis proves the claimed equivalence and shows why cancellation between even and odd paths is insufficient: both partial sums must already have total absolute discrepancy at most `T`.\n\n### 3. Conditional augmentation\n\nIf a deterministic path family met these inequalities, no nonzero message could map to zero or `1^n`, since either word has absolute signed sum `n>T`. Hence the lifted matrix would have rank 1040 and would not contain `1^n`. Appending `1^n` would raise the rank to 1041. Every nonzero core word would have weight in `[D,n-D]`, and its complement would also have weight at least `D`; therefore the augmented code would meet the target distance.\n\nConversely, any dimension-1041 construction obtained by this path lift followed by all-one augmentation must make the core two-sided `T`-balanced, so it must satisfy the two parity-split inequalities.\n\n### 4. Integrated architecture consequences\n\nThe strongest durable finite bounds now read:\n\n| audited architecture | finite conclusion |\n|---|---:|\n| complete Ta-Shma cloud | augmented `k\u22643` |\n| complete one-edge scalar certificate | augmented `k\u2264838` |\n| uniform Cartesian XOR clouds | augmented `k\u22641025` |\n| complete Gray register at rank 1040 | raw length `\u226516,722,507,176,960` |\n| HMZ complete free-walk schedule | `\u03ba=1` certificate vacuous; `\u03ba\u22652` length `\u22652^32` |\n\nAll are below, or fail to fit, the accepted dimension-1040 endpoint. The exact unresolved frontier is therefore a symbolically indexed sparse/non-Cartesian mixed-parity path family satisfying the parity-split system. This theorem is scoped and does not assert that such a family is impossible.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "NORMALIZE",
+      "proof": "For a binary word of weight `w`, its signed sum is `n-2w`. Thus weights in `[D,n-D]` are equivalent to absolute signed sum at most `n-2D=2^21`.",
+      "statement": "The target two-sided allowance is exactly `T=2^21`, or normalized bias `1/512`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Hsieh\u2013Mohanty\u2013Zhang Lemma 2.12"
+      ],
+      "id": "HMZ-K1",
+      "proof": "Substituting `\u03ba=1` and `t=d\u00b2` gives `(4lambda^(-1/sqrt(d)))^ell`. The factor exceeds one for `d=2,3` by the displayed elementary estimates and is at least four for `d\u22654`.",
+      "statement": "The HMZ Lemma 2.12 certificate is greater than one when `\u03ba=1`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Hsieh\u2013Mohanty\u2013Zhang Definitions 2.7\u20132.8"
+      ],
+      "id": "HMZ-KGE2",
+      "proof": "Positive integers `\u03ba\u22652,r\u22651` and `d\u22652` give `ell=\u03ba(d\u00b2)^\u03bar\u226532`; complete enumeration therefore has length `n_0d^ell\u22652^32`.",
+      "statement": "Every HMZ complete schedule with `\u03ba\u22652` exceeds the exact target length.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "NORMALIZE"
+      ],
+      "id": "PARITY-SPLIT",
+      "proof": "The messages `u` and `u+j` have signed sums `A_u+B_u` and `A_u-B_u`, while `j` has sum `|E|-|O|`. Apply `max(|A+B|,|A-B|)=|A|+|B|`. These messages exhaust all nonzero elements of `U\u2295<j>`.",
+      "statement": "The parity-class inequalities are necessary and sufficient for a path lift of `C_*` to be a 1040-dimensional `T`-balanced core.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-SPLIT"
+      ],
+      "id": "FIXED-PARITY",
+      "proof": "If all paths have the same visit parity, one of `E,O` is empty, so `||E|-|O||=n>T`; equivalently, `j` maps to zero or all-one.",
+      "statement": "No fixed-length path family can turn the full accepted code into an augmentable balanced core.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "PARITY-SPLIT"
+      ],
+      "id": "AUGMENT",
+      "proof": "The inequalities rule out a nonzero kernel and the all-one word. Appending all-one therefore raises dimension to 1041, and the two-sided weight interval ensures both each core word and its complement have weight at least `D`.",
+      "statement": "Any explicit path family satisfying the parity-split system would yield a target-qualified dimension-1041 code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "combinatorial-expander-06:T7",
+        "combinatorial-r002-06:ARCHITECTURE-CONCLUDE",
+        "combinatorial-expander-03"
+      ],
+      "id": "INTEGRATE",
+      "proof": "Insert the independently displayed finite trace, Fourier-moment, Cartesian, and Gray-register bounds. Each ceiling is below 1040 or its raw length exceeds the target by orders of magnitude.",
+      "statement": "All currently audited complete-output expander/free-walk architectures fail to improve the accepted dimension-1040 endpoint.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Expander-walk and free-walk balanced codes: exact mixed-parity sparse-path interface.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (all entries)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/*.json (all three roadmaps)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 47 shared-board files, including the newly appeared expander-06 and r002-06 handoffs)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 44 durable submissions)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+    "research_state/campaign-epsilon-2-10-ultra/non_admissible/combinatorial-conditional-average.md",
+    "https://arxiv.org/html/2601.12606v2"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "At `n=2^30` and `T=2^21`: (i) no positive-parameter complete schedule certified by Hsieh\u2013Mohanty\u2013Zhang Lemma 2.12 both fits length `n` and proves bias at most `1/512`; and (ii) for any mixed-length path lift of the accepted decomposition `C_*=B\u2295<1>` with `dim B=1039`, the lifted image is a 1040-dimensional `T`-balanced core exactly when `||E|-|O||\u2264T` and `|A_u|+|B_u|\u2264T` for every nonzero `u\u2208B`. Thus fixed-parity lifts cannot improve `k=1040`, while a deterministic sparse mixed-parity family satisfying these inequalities would yield `k=1041` after all-one augmentation.",
+  "title": "Parity-split obstruction and finite closure of complete free-walk lifts"
+}
