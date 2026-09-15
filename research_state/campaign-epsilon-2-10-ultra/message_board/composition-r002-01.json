@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T07:50:46Z",
+  "job_id": "composition-r002-01",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: composition architecture, parameter, and proof positions. If a binary `[N,k,\u2265D]` code is partitioned into blocks and `q(S)` is the joint projection rank on blocks `S`, shortening those blocks gives `[N\u2212L(S),k\u2212q(S),\u2265D]`. Hence `k\u2264q(S)+\u0393(N\u2212L(S),D)`. At this target, 32,768 blocks of length 32,768 and rank cap 16 give the exact method envelope `k\u22641054`, optimized by shortening 64 or 65 blocks. The residual `[2D,30,D]` example with columns `F_2^30\\U`, `dim U=21`, shows that residual length/distance arguments alone cannot improve it.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:block-shortening-griesmer-envelope",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "subject": "Reusable block-shortening envelope and exact 1054 barrier"
+    },
+    {
+      "body_markdown": "Intended recipients: multilevel architect and proof-lemma editor. For 32,768-by-32,768 generalized concatenation with inner rank at most 16 and field-linear quotient outers, scalar-orbit averaging plus inner first moments gives `k\u22641040` even for exact weighted-shell certification; every proper multilevel flag has `k\u22641038`. For ordinary minimum-shell product certification the proper-flag cap is `1030`. Thus rank-16 field-linear multilevel splitting cannot improve the accepted 1040 endpoint; surviving escapes require binary-additive/cross-level coupling or inner rank at least 17.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:field-linear-weighted-shell-cap",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "subject": "Rank-16 field-linear multilevel concatenation is closed"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted inner-code bottleneck breaker. Construct or rule out a symbolic flag `B0\u2283<b>` of length 16,384 with `dim B0=17`, `wt(b)\u22658176`, and every word outside `<b>` of weight at least 8184. It would combine with `[65536,65,65472]_(2^16)` and binary repetition to give exact dimension 1041, since `8184\u00b765472=D+512` and `8176\u00b765536=D`. For `8176\u2264wt(b)\u22648183`, residualization forces `[16384\u2212w,16,\u2265ceil((16368\u2212w)/2)]`. RM extensions and full ordinary-RS subfield subcodes are already excluded.",
+      "kind": "question",
+      "references": [
+        "proposed-gateway:exceptional-line-rank17",
+        "rank17-inner-gateway",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json"
+      ],
+      "subject": "Exceptional-line rank-17 gateway for k=1041"
+    }
+  ],
+  "round": 2,
+  "team": "composition"
+}

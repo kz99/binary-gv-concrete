@@ -1,0 +1,256 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is submitted. The durable corpus contains an independently accepted `[2^30,1040,535822336]_2` RS\u2013affine construction, although `data/records.json` still records only the dimension-31 baseline.\n\nThis handoff proves two scoped multilevel obstructions. First, arbitrary binary coupling across 32,768 blocks of length 32,768 and projection rank at most 16 is bounded only by `k\u22641054` using shortening and Griesmer; the method is sharp at its residual step. Second, if the inner rank is at most 16, every quotient outer constituent is field-linear, and distance is certified by exact first-active-level shell weights, then `k\u22641040`; a proper multilevel flag has `k\u22641038`. Under the cruder minimum-shell product certificate, every proper flag has `k\u22641030`.\n\nThe smallest unresolved two-level improvement gateway isolated here has inner length 16,384 and a flag `B0 \u2283 B1=<b>` with `dim B0=17`, `wt(b)\u22658176`, and `wt(c)\u22658184` for every `c\u2208B0\\B1`. Combining its 16-dimensional quotient with `[65536,65,65472]_(2^16)` and its bottom line with binary repetition would give `[2^30,1041,\u2265D]_2`. No such symbolic inner flag is known, so this implication is conditional and is not a construction claim.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: composition architecture, parameter, and proof positions. If a binary `[N,k,\u2265D]` code is partitioned into blocks and `q(S)` is the joint projection rank on blocks `S`, shortening those blocks gives `[N\u2212L(S),k\u2212q(S),\u2265D]`. Hence `k\u2264q(S)+\u0393(N\u2212L(S),D)`. At this target, 32,768 blocks of length 32,768 and rank cap 16 give the exact method envelope `k\u22641054`, optimized by shortening 64 or 65 blocks. The residual `[2D,30,D]` example with columns `F_2^30\\U`, `dim U=21`, shows that residual length/distance arguments alone cannot improve it.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:block-shortening-griesmer-envelope",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "subject": "Reusable block-shortening envelope and exact 1054 barrier"
+    },
+    {
+      "body_markdown": "Intended recipients: multilevel architect and proof-lemma editor. For 32,768-by-32,768 generalized concatenation with inner rank at most 16 and field-linear quotient outers, scalar-orbit averaging plus inner first moments gives `k\u22641040` even for exact weighted-shell certification; every proper multilevel flag has `k\u22641038`. For ordinary minimum-shell product certification the proper-flag cap is `1030`. Thus rank-16 field-linear multilevel splitting cannot improve the accepted 1040 endpoint; surviving escapes require binary-additive/cross-level coupling or inner rank at least 17.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:field-linear-weighted-shell-cap",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "subject": "Rank-16 field-linear multilevel concatenation is closed"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted inner-code bottleneck breaker. Construct or rule out a symbolic flag `B0\u2283<b>` of length 16,384 with `dim B0=17`, `wt(b)\u22658176`, and every word outside `<b>` of weight at least 8184. It would combine with `[65536,65,65472]_(2^16)` and binary repetition to give exact dimension 1041, since `8184\u00b765472=D+512` and `8176\u00b765536=D`. For `8176\u2264wt(b)\u22648183`, residualization forces `[16384\u2212w,16,\u2265ceil((16368\u2212w)/2)]`. RM extensions and full ordinary-RS subfield subcodes are already excluded.",
+      "kind": "question",
+      "references": [
+        "proposed-gateway:exceptional-line-rank17",
+        "rank17-inner-gateway",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json"
+      ],
+      "subject": "Exceptional-line rank-17 gateway for k=1041"
+    }
+  ],
+  "distance_audit": [
+    "`D=(1/2\u22122^-10)2^30=2^29\u22122^20=535,822,336` and `2D=2^30\u22122^21`.",
+    "Shortening deletes only coordinates already forced to zero, so it preserves every nonzero shortened word's weight and hence distance at least `D`.",
+    "The auxiliary residual code with columns `F_2^30\\U`, `dim U=21`, has length `2D`; its nonzero weights are exactly `D` and `2^29`.",
+    "The weighted-shell inequalities are necessary conditions for the stated certification method, not probabilistic estimates and not assertions about arbitrary binary codes.",
+    "For the conditional exceptional-line gateway, a top-active word has at least 65,472 nonzero quotient blocks, each of weight at least 8,184; a bottom-only word is 65,536 copies of `b`. Thus the two cases give `8184\u00b765472=D+512` and `8176\u00b765536=D`.",
+    "The stronger ordinary inner gateway `[16384,17,8188]_2` would yield dimension `17\u00b797=1649` and product distance `8188\u00b765440=D+384`, but its inner code remains unavailable."
+  ],
+  "explicitness_audit": [
+    "No random sampling, conditional-expectation selection, canonical exhaustive construction, or finite lookup is used.",
+    "The finite dynamic programs are exact-integer obstruction proofs only; they do not select a generator matrix and therefore do not evade the campaign's explicitness rule.",
+    "The residual sharpness example is symbolic: fix coordinate subspaces `H\u2282U\u2282F_2^30`, enumerate `F_2^30\\U` lexicographically, and emit those vectors as columns in output-linear time.",
+    "Given a symbolic exceptional-line inner flag with an ordered basis, its conditional concatenated matrix would be emitted by evaluating the fixed Reed\u2013Solomon monomial basis and applying the fixed quotient section, followed by one repeated `b` row, in `O(kn\u00b7poly(log n))` time. The missing inner flag is essential, so this is not counted as explicit.",
+    "The generator-matrix object below describes only the unchanged verified RM fallback, not a new candidate.",
+    "The workspace was read-only, so the three posts and lemmas are returned inline rather than persisted; no validator or dashboard publication run was appropriate."
+  ],
+  "generator_matrix": {
+    "algorithm": "No new candidate matrix is asserted. For the unchanged verified fallback `RM(1,30)`, enumerate `x\u2208F_2^30` lexicographically and emit the 31 rows `1,x_1,\u2026,x_30`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "`O(n log n)` bit operations and `31n` emitted bits.",
+    "runtime_proof": "There are exactly `n=2^30` columns and 31 entries per column. Reading the 30 coordinate bits from a lexicographic counter costs `O(log n)` per column, so the complete matrix is deterministically streamed in `n^{O(1)}` time. This fallback is not a new submission."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A linear code of dimension `K`, distance `\u03b4`, and alphabet size `q`.",
+      "result": "The q-ary Griesmer inequality `\u03a3_(j=0)^(K\u22121) ceil(\u03b4/q^j)\u2264N`.",
+      "source": "[J. H. Griesmer, A bound for error-correcting codes](https://doi.org/10.1147/rd.45.0532); the binary residual proof is also reproduced in the campaign corpus.",
+      "used_for": "Defining the exact outer-distance inverse `d_q(K)` and the binary residual inverse `\u0393(m,D)`."
+    },
+    {
+      "hypotheses": "A binary length-32,768 code with distance at least 16,352.",
+      "result": "A self-contained cubic Delsarte certificate gives cardinality below `2^22`, hence linear dimension at most 21.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json",
+      "used_for": "The indispensable cap on every one-bit quotient outer constituent."
+    },
+    {
+      "hypotheses": "The fixed degree-16 field, additive evaluation set, degree-64 outer space, and affine truth-table inner encoder.",
+      "result": "An independently accepted explicit `[1073741824,1040,535822336]_2` code.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json and research_state/campaign-epsilon-2-10-ultra/reviews/composition-10/verifier-1-composition-10.json",
+      "used_for": "The strongest durable comparison endpoint; it is not resubmitted here."
+    },
+    {
+      "hypotheses": "Full ordinary Reed\u2013Solomon binary subfield subcodes at inner length 16,384.",
+      "result": "Before degree 8,256 their dimension is at most 15; at that degree the norm-trace orbit introduces a word of weight 8,128.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+      "used_for": "Excluding that named family as a source of the rank-17 exceptional-line or ordinary gateway."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Composition architect: concentrate on the surviving 1041\u20131054 block-rank window using binary-additive outer constituents, exact cross-level correlations, or rank-17 inner blocks; field-linear shell splitting is closed.",
+    "Targeted bottleneck breaker: construct or exclude the exceptional-line flag via its residual family `[16384\u2212w,16,\u2265ceil((16368\u2212w)/2)]`, using linear-programming, Pless-moment, or projective-column constraints.",
+    "Proof-lemma editor: persist the shortening envelope and weighted-shell scalar-orbit lemma, together with a short exact-integer verifier for the stated dynamic-program tables, and request independent review.",
+    "Cross-team liaison: propagate the algebraic round-2 exclusion of full RS subfield subcodes and avoid reopening RM/bent extensions, whose Walsh coefficient of magnitude at least 128 creates weight at most 8,128.",
+    "Writable integrator: add accepted lemmas/posts to the durable files, reconcile the independently accepted dimension-1040 construction with `data/records.json`, and then run the validator and dashboard build."
+  ],
+  "obstructions": [
+    "Whole-block or partial-block shortening plus Plotkin\u2013Griesmer cannot lower the generic rank-16 block envelope below 1054; compatibility among equality shortenings is the remaining issue.",
+    "Every rank-at-most-16 field-linear generalized concatenation certified through exact first-active-level shell weights has dimension at most 1040; every proper multilevel instance has dimension at most 1038.",
+    "In the minimum-shell product subclass, every proper multilevel instance has dimension at most 1030.",
+    "The bounds do not cover arbitrary binary-additive outer constituents or distance proofs exploiting correlations between different active levels; these are the main rank-16 escape hatches.",
+    "No exceptional-line rank-17 inner flag is currently available. If its distinguished word is all-one, the existing complement-pair Gram obstruction applies; extensions containing `RM(1,14)` already fail by a Walsh coefficient of magnitude at least 128.",
+    "Full ordinary-RS subfield subcodes cannot realize the rank-17 gateway because their first nonlinear orbit already contains a word of weight 8,128.",
+    "No new target-qualified code was constructed, so neither the dimension-31 persisted baseline nor the accepted dimension-1040 durable candidate is superseded."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)n`.",
+      "quantity": "Required distance",
+      "value": "`D=535,822,336=511\u00b72^20`"
+    },
+    {
+      "derivation": "`2D=n\u22122^21`.",
+      "quantity": "Twice the target distance",
+      "value": "`2D=1,071,644,672`"
+    },
+    {
+      "derivation": "32,768 blocks, each length 32,768 and projection rank at most 16.",
+      "quantity": "Generic block-rank envelope",
+      "value": "`k\u22641054`, optimized at 64 or 65 shortened blocks"
+    },
+    {
+      "derivation": "Exact weighted-shell dynamic program.",
+      "quantity": "Best rank-16 one-level field-linear value",
+      "value": "`16\u00b765=1040`"
+    },
+    {
+      "derivation": "Unique relaxed proper weighted-shell maximum.",
+      "quantity": "Proper multilevel weighted-shell cap",
+      "value": "`k\u22641038`, ledger `(m,K,d_q,S)=(2,71,24528,65536)` and `(14,64,32704,268419072)`"
+    },
+    {
+      "derivation": "Minimum-shell product DP plus Fourier-integrality exclusion of the unique 1032 ledger.",
+      "quantity": "Proper product-certified cap",
+      "value": "`k\u22641030`"
+    },
+    {
+      "derivation": "Top quotient plus bottom repetition.",
+      "quantity": "Conditional exceptional-line dimension",
+      "value": "`16\u00b765+1=1041`"
+    },
+    {
+      "derivation": "Exact products.",
+      "quantity": "Conditional exceptional-line distances",
+      "value": "`8184\u00b765472=D+512`; `8176\u00b765536=D`"
+    },
+    {
+      "derivation": "Ordinary rank-17 inner plus RS outer.",
+      "quantity": "Stronger conditional equal-inner frontier",
+      "value": "`17\u00b797=1649`, with `8188\u00b765440=D+384`"
+    }
+  ],
+  "proof_markdown": "### 1. Block-shortening envelope\n\nLet `C\u2264F_2^N` have dimension `k` and distance at least `D`, and let `S` be a set of coordinate blocks. If `q(S)` is the rank of the joint projection onto those blocks, the projection kernel has dimension `k\u2212q(S)`. Every kernel word is zero on `S`; deleting those blocks therefore produces `[N\u2212L(S),k\u2212q(S),\u2265D]_2`. Writing `\u0393(m,D)` for the largest binary dimension allowed by Griesmer at length `m` gives\n\n`k\u2264q(S)+\u0393(N\u2212L(S),D)\u2264\u03a3_(i\u2208S)r_i+\u0393(N\u2212L(S),D)`.\n\nHere `D=2^29\u22122^20`. Direct summation gives\n\n`G_s(D)=2D\u2212D/2^(s\u22121)` for `1\u2264s\u226421`,\n`G_s(D)=2D+1\u22122^(30\u2212s)` for `21\u2264s\u226430`, and\n`G_s(D)=2D+s\u221230` for `s\u226530`.\n\nConsequently `\u0393(m,D)=m\u22122D+30` for `m\u22652D`, while `\u0393(2D\u2212L,D)=floor(log_2(2D/L))`. For 32,768 equal blocks of length 32,768 and rank cap 16, shortening 64 blocks leaves length `2D` and residual dimension at most 30, giving `1024+30=1054`. Shortening 65 leaves residual dimension 14, again giving `1040+14=1054`; every other number is worse.\n\nThis residual step is sharp. Fix a 21-dimensional subspace `U\u2264F_2^30` and use every vector of `F_2^30\\U` once as a generator column. The length is `2D`. A nonzero functional has weight `D` if it is nonzero on `U`, and `2^29` if it annihilates `U`. Choosing `H\u2264U` of dimension 15 partitions these columns into 32,704 affine `H`-cosets of length 32,768 and local rank 16. This does not construct a global `k=1054` code; it proves that residual length, distance, and local rank alone cannot improve the method.\n\n### 2. Exact weighted-shell inequalities\n\nLet an inner flag be `B0\u2283B1\u2283\u2026\u2283Bt=0`, of length `\u2113=32768` and rank `r\u226416`. Put `m_i=dim(B_i)\u2212dim(B_(i+1))`, `s_i=dim(B_(i+1))`, and `q_i=2^(m_i)`. Choose a binary-linear section `\u03c3_i`. For `a\u22600`, define\n\n`\u03c9_i(a)=min_(b\u2208B_(i+1)) wt(\u03c3_i(a)+b)` and `S_i=\u03a3_(a\u22600)\u03c9_i(a)`.\n\nThe shell over quotient symbol `a` contains `2^(s_i)` words, all of weight at least `\u03c9_i(a)`. Since the total weight of a rank-`r` binary inner code is at most `\u21132^(r\u22121)`,\n\n`\u03a3_i 2^(s_i)S_i\u2264\u21132^(r\u22121)`.\n\nAlso `S_i\u2264\u21132^(m_i\u22121)`: take `b=0` in every coset and sum the section words; each active coordinate is one on exactly half of the quotient messages.\n\nLet the level-`i` outer constituent be an `F_(q_i)`-linear `[32768,K_i,\u03b4_i]` code. Let `d_q(K)` be the largest distance compatible with q-ary Griesmer. Choose a minimum-Hamming-weight outer word and sum the weighted-shell certificate over all its `q\u22121` nonzero scalar multiples. At each supported coordinate, the symbols traverse every nonzero field element once. Thus\n\n`\u03b4_i S_i\u2265(q_i\u22121)D`, and therefore\n`S_i\u2265ceil((q_i\u22121)D/d_(q_i)(K_i))`.\n\nFor `m_i=1`, `S_i\u226432768` forces outer distance at least 16,352. The campaign's cubic Delsarte certificate bounds its dimension by 21.\n\n### 3. Finite weighted-shell optimization\n\nThe preceding necessary conditions give a fully reproducible integer recurrence. A state with accumulated lower rank `s`, shell-mass cost `c`, binary dimension `p`, and active-level count `u` is extended by quotient dimension `m` and outer dimension `K` via\n\n`(s,c,p,u) \u2192 (s+m, c+2^s ceil((2^m\u22121)D/d_(2^m)(K)), p+mK, u+1)`.\n\nRetain only states with final rank `r\u226416` and cost at most `32768\u00b72^(r\u22121)`. The individual shell bound leaves the finite outer ranges `K\u226421,71,69,67,67,66,66,65,\u2026,65` for `m=1,\u2026,16`. Exact integer evaluation gives maxima by active-level count `1,2,3,4,\u22655` equal to `1040,1038,988,1000,\u2264956`.\n\nThe unique relaxed proper maximum has bottom data `(m,K,d_q,S)=(2,71,24528,65536)` and top data `(14,64,32704,268419072)`. Its mass is exactly\n\n`65536+4\u00b7268419072=2^30`,\n\nand its binary dimension is `2\u00b771+14\u00b764=1038`. Hence every proper field-linear weighted-shell flag has `k\u22641038`, and every such flag, including the one-level case, has `k\u22641040`. Equality in the 1038 mass ledger additionally forces the bottom two-space to have full support and every upper coset to consist of four equal-weight words. Partitioning coordinates by the three nonzero bottom-column types then makes every nonzero 14-dimensional section word balanced on each nonempty part. Fourier inversion forces each part length to be divisible by `2^14`; exactly two parts of length 16,384 remain, so the bottom two-space contains all-one. This rigidity is not needed for the numerical cap.\n\n### 4. Product-certificate refinement\n\nIf one uses only shell minima `\u03bb_i`, a shell has `h_i=2^(s_i)(2^(m_i)\u22121)` words and contributes at least `h_i\u03bb_i` to the inner first moment, while product certification requires `\u03bb_i\u2265ceil(D/d_q(K_i))`. The analogous exact recurrence gives one-level maximum 1040 and unique relaxed proper maximum 1032, with levels `(2,68,24529,21845)` and `(14,64,32704,16384)`. Their minimum shell mass is `2^30\u22121`.\n\nAn actual rank-16 inner code has total weight a multiple of `2^15`, so this ledger would force total weight `2^30`, all 65,532 top-shell words balanced, and bottom weights `21845,21845,21846`. If `\u03bc(v)` denotes generator-column multiplicity, its Walsh transform is zero off the bottom two-space, equals 32,768 at zero, and equals `\u221210922,\u221210922,\u221210924` at its three nonzero points. Fourier inversion gives `2^16\u03bc(v)\u2208{43688,43692}` for nontrivial bottom characters, impossible for integral `\u03bc(v)`. Removing this profile leaves two-level maximum 1030; three or more levels are already at most 988. Thus every proper product-certified flag has `k\u22641030`.\n\n### 5. Conditional rank-17 handoff\n\nAssume an explicit length-16,384 flag `B0\u2283B1=<b>` satisfies `dim B0=17`, `wt(b)\u22658176`, and every word in `B0\\B1` has weight at least 8184. Identify `B0/B1` with the fixed field `F_(2^16)`. Use the full-field Reed\u2013Solomon code `[65536,65,65472]_(2^16)` at the quotient level and binary `[65536,1,65536]` repetition at the bottom level. Direct-sum uniqueness proves binary linearity and dimension `16\u00b765+1=1041`; exact length is `16384\u00b765536=2^30`. First-active-level analysis gives minimum distance at least `min(8184\u00b765472,8176\u00b765536)=D`. With a symbolic ordered inner basis, the full generator is output by direct field evaluation and block encoding in polynomial time.\n\nThe inner flag itself is not known. Therefore this is a precise construction component request, not a leaderboard submission.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "MLC-BLOCK-SHORTEN",
+      "proof": "Take the kernel of the joint block projection and delete its identically zero blocks. Rank-nullity gives dimension `k\u2212q(S)` and deletion preserves every remaining word's weight.",
+      "statement": "Block shortening gives `k\u2264q(S)+\u0393(N\u2212L(S),D)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "MLC-BLOCK-SHORTEN"
+      ],
+      "id": "MLC-GRIESMER-ARITH",
+      "proof": "Summing the exact ceilings of `(2^29\u22122^20)/2^j` yields the three displayed formulas for `G_s(D)` and their inverse.",
+      "statement": "The rank-16, 32,768-by-32,768 block envelope is exactly 1054 for this method.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "MLC-GRIESMER-ARITH"
+      ],
+      "id": "MLC-RESIDUAL-SHARP",
+      "proof": "Columns `F_2^30\\U` give nonzero weights `D` or `2^29`; affine cosets of a 15-space inside `U` give the required local rank-16 partition.",
+      "statement": "Residual length/distance/local-rank information alone cannot sharpen the 1054 envelope.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "MLC-SHELL-MASS",
+      "proof": "Sum coset minima across each shell and compare with the exact first moment of a binary linear inner code; a linear section gives `S_i\u2264\u21132^(m_i\u22121)`.",
+      "statement": "Weighted shell costs satisfy the global and individual first-moment inequalities.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "MLC-SHELL-MASS"
+      ],
+      "id": "MLC-SCALAR-ORBIT",
+      "proof": "Scalar multiples of a minimum-Hamming outer word traverse every nonzero quotient symbol once at each supported coordinate, giving `d_q(K)S\u2265(q\u22121)D`.",
+      "statement": "Every field-linear weighted-shell level satisfies the scalar-orbit necessary inequality.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "MLC-SCALAR-ORBIT"
+      ],
+      "id": "MLC-WEIGHTED-DP",
+      "proof": "The stated finite recurrence, outer-dimension ranges, and integer mass budget give maxima 1040 for one level and 1038 for every proper flag.",
+      "statement": "Rank-at-most-16 field-linear weighted-shell concatenation cannot exceed 1040; proper multilevel instances cannot exceed 1038.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "MLC-SHELL-MASS"
+      ],
+      "id": "MLC-PRODUCT-DP",
+      "proof": "The minimum-shell recurrence has unique relaxed proper maximum 1032. Fourier inversion makes that inner ledger nonintegral; the next value is 1030, while all three-or-more-level values are at most 988.",
+      "statement": "Every proper field-linear product-certified flag has dimension at most 1030.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "MLC-EXCEPTIONAL-GATEWAY",
+      "proof": "Standard generalized-concatenation injectivity gives dimension 1041; the two first-active-level cases give distances `D+512` and `D`; direct field evaluation gives a polynomial-time emitter once the inner flag is supplied.",
+      "statement": "The exceptional-line flag would yield an explicit `[2^30,1041,\u2265D]_2` code.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json"
+      ],
+      "id": "MLC-NAMED-FAMILY-EXCLUSIONS",
+      "proof": "Parseval gives an RM-extension coset word of weight at most 8128; the full subfield-subcode norm-trace orbit independently supplies such a low-weight word.",
+      "statement": "RM extensions and full ordinary-RS subfield subcodes cannot supply the exceptional-line flag.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Multilevel concatenation: block-rank envelopes, field-linear weighted-shell obstructions, and the rank-17 exceptional-line gateway",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (complete)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/*.json (all 3 current roadmaps, complete)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 43 files present at final synchronization, complete)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 40 files present at final synchronization, complete)",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/composition-07/verifier-1-composition-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/composition-10/verifier-1-composition-10.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "At `N=2^30` and `D=535822336`: (i) every binary code partitioned into 32,768 blocks of length 32,768 with block-projection rank at most 16 satisfies the shortening\u2013Griesmer envelope `k\u22641054`, and the residual step is sharp; (ii) every rank-at-most-16 generalized concatenation with field-linear quotient outer codes, whose distance is certified by exact first-active-level shell weights, satisfies `k\u22641040`, with `k\u22641038` when at least two levels are active; and (iii) in the minimum-shell product subclass, every proper multilevel flag satisfies `k\u22641030`. These are scoped certificate obstructions, not upper bounds for arbitrary binary codes. A symbolic exceptional-line rank-17 inner flag with weights 8176/8184 would conditionally yield the first one-bit improvement, `k=1041`.",
+  "title": "Rank-16 multilevel closure and the exceptional-line rank-17 gateway"
+}
