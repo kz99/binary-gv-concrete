@@ -1,0 +1,197 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the Frobenius residues and Euclidean algorithm over GF(2): Z^(2^8) mod p=Z^8+Z^7+Z^3+Z, Z^(2^16) mod p=Z, and the relevant gcd remainder chain is Z^2+1,1.",
+    "Checked all inner-symbol cases: H(0) has weight 0, H(1) has weight 2^15, and every other symbol gives a balanced nonconstant affine word of weight 2^14.",
+    "Tried to create a lower-weight word using 64 roots and all-one blocks. The exact formula wt=2^14(32768-N_0+N_1) shows all-one blocks only increase weight, while N_0<=64.",
+    "Evaluated the prescribed 64-root polynomial using exact GF(2^16) arithmetic. Its nonroot image has size 511 and omits 1, yielding block counts (N_0,N_1,N_other)=(64,0,32704) and weight 535822336.",
+    "Checked the degree-65 extension adversarially: its scaled 65-root word has weight 32703*16384=535805952, exactly 16384 below target.",
+    "Checked the two-fiber criterion under translation by the all-one outer vector; this swaps N_0 and N_1 and explains the absolute-value condition.",
+    "Challenged the family-optimality argument. The displayed product distance is initially only a lower bound; the submission omits the scalar-avoidance argument needed to prove it is attained for every specialization.",
+    "Checked the family endpoints m=16 through m=31. Once exact distance is supplied, the maximum dimensions are 1040,561,306,171,100,63,44 for m=16,...,22 and at most 31 afterward.",
+    "Recomputed the canonical sorted-JSON SHA-256 and obtained the supplied immutable digest."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission claims a baseline-beating binary code of length 1073741824 and dimension 1040.",
+      "justification": "The later injectivity, length, and distance arguments verify these parameters, and 1040>31. The high-confidence and leaderboard classifications are therefore honest for the main construction.",
+      "reference": "algebraic-10.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed polynomial defines a fixed field of order 2^16.",
+      "justification": "Independent GF(2) arithmetic reproduces both Frobenius congruences and the gcd remainder chain Z^2+1,1. These meet Rabin's degree-16 irreducibility criterion because 2 is the only prime divisor of 16.",
+      "reference": "algebraic-10.json:5; 42; 120, Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A and V each have 32768 deterministically ordered elements.",
+      "justification": "The powers 1,alpha,...,alpha^15 form the polynomial basis. Restricting the alpha^15 coefficient to zero gives dim_F2(A)=15, while V=F_2^15. Binary coefficient order fixes both coordinate orders.",
+      "reference": "algebraic-10.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "H identifies the additive group of F with RM(1,15).",
+      "justification": "Coefficient extraction is F_2-linear and ranges over every affine Boolean function on 15 variables. Values at 0 and the unit vectors recover all 16 coefficients, proving injectivity.",
+      "reference": "algebraic-10.json:5; 120, Linearity, length, and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer evaluation code has parameters [32768,65,32704] over F.",
+      "justification": "There are 65 unrestricted coefficients. Evaluation is injective because 32768>64, and a product over any 64 evaluation points attains outer weight 32704.",
+      "reference": "algebraic-10.json:5; 121-136",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The RS-affine-inner family is uniquely optimized at m=16,K=65 by the displayed inequality.",
+      "justification": "The numerical comparison is correct, but the proof treats (N-K+1)2^(m-2) as a necessary exact distance although standard concatenation initially supplies only a lower bound. A general scaled-root attainment argument is missing.",
+      "reference": "algebraic-10.json:7-16",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The full degree-at-most-65 extension fails the target.",
+      "justification": "A degree-65 polynomial can have 65 prescribed evaluation roots. Scaling avoids the inner all-one symbol on the other 32703 blocks, giving weight 32703*2^14=535805952, which is 16384 below target.",
+      "reference": "algebraic-10.json:17-24",
+      "verdict": "valid"
+    },
+    {
+      "claim": "An additive strict outer supercode meets the target precisely under the stated two-fiber condition.",
+      "justification": "Its binary weight is 2^14(N-N_0+N_1). Since D contains the all-one vector, u maps to u+1 and N_0,N_1 swap, so the universal distance condition is equivalent to |N_0-N_1|<=64. A strict binary supercode has dimension at least 1041.",
+      "reference": "algebraic-10.json:25-33",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero submitted codeword has weight at least 535822336.",
+      "justification": "A nonzero degree-at-most-64 polynomial has at most 64 zero evaluations, leaving at least 32704 nonzero blocks. Every such block has weight at least 2^14, and 32704*16384=535822336.",
+      "reference": "algebraic-10.json:35-38",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The lower bound is attained by the scaled 64-root polynomial.",
+      "justification": "The nonroot image has at most 32704 elements, fewer than the 65535 nonzero field elements. Scaling by an omitted value gives exactly 64 zero blocks, no all-one block, and 32704 balanced blocks.",
+      "reference": "algebraic-10.json:39",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction and equality witness are deterministic and symbolically recoverable.",
+      "justification": "The modulus, polynomial basis, evaluation set, inner domain, coordinate orders, and message space are fixed. The lexicographic first-element convention in line 39 is recoverable from the fixed coefficient tuple. The code itself does not depend on the equality-witness scalar.",
+      "reference": "algebraic-10.json:41-46",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The affine-balance dependency applies to every relevant inner word.",
+      "justification": "For z not in {0,1}, the corresponding affine function has a nonzero linear part, so the cited pairing argument gives weight 2^14. The exceptional symbols 0 and 1 are handled separately.",
+      "reference": "algebraic-10.json:48-55",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The stated minimum distance and review/publication tasks are accurate.",
+      "justification": "The exact-distance proof verifies 535822336. The remaining task statements concern workflow and do not introduce mathematical assumptions.",
+      "reference": "algebraic-10.json:56-61",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The degree-65 trace construction is dominated, the degree-65 RS extension fails, and an additive non-F-linear extension remains unresolved.",
+      "justification": "The comparison 991<1040 is correct, the explicit low-weight RS word verifies failure, and nothing in the submitted argument excludes the stated additive-extension route.",
+      "reference": "algebraic-10.json:62-63; 65-67",
+      "verdict": "valid"
+    },
+    {
+      "claim": "No ordinary RS plus affine-inner specialization exceeds dimension 1040.",
+      "justification": "The conclusion is repairable and appears true, but the submission has not proved the necessary exact descended distance for arbitrary m and K. Therefore this obstruction is not yet established as written.",
+      "reference": "algebraic-10.json:64",
+      "verdict": "gap"
+    },
+    {
+      "claim": "All parameter-ledger values are arithmetically correct.",
+      "justification": "They recompute to |F|=65536, N=32768, K=65, D=32704, inner parameters [32768,16,16384], n=2^30, k=1040, d=2^29-2^20, rate 65/2^26, and relative distance 511/1024.",
+      "reference": "algebraic-10.json:68-118",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The main theorem and field certificate establish an explicit [2^30,1040,535822336]_2 code.",
+      "justification": "The field calculations and all displayed parameter identities independently recompute correctly.",
+      "reference": "algebraic-10.json:120, Theorem and Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The composite encoder is binary linear, injective, and has exact dimension 1040 and length 2^30.",
+      "justification": "Evaluation and H are F_2-linear. The root bound and injectivity of H give an injective 1040-dimensional message map, while 2^15 blocks of length 2^15 give exact length 2^30.",
+      "reference": "algebraic-10.json:120, Linearity, length, and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance lower bound covers every nonzero codeword.",
+      "justification": "The proof exhausts the zero-symbol, all-one-symbol, and nonconstant-affine-symbol cases; disjoint block weights cannot cancel.",
+      "reference": "algebraic-10.json:120, Minimum distance, first part",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum distance equals the required threshold.",
+      "justification": "The scaled polynomial has precisely the 64 prescribed roots and avoids value 1 elsewhere, so all 32704 remaining blocks have weight exactly 2^14.",
+      "reference": "algebraic-10.json:120, Minimum distance, attainment paragraph",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The target condition for the whole RS-affine-inner family is equivalent to K-1<=N/512.",
+      "justification": "The algebra after assuming exact product distance is correct. However, the proof does not establish that exactness generally, so it currently proves a sufficient certification condition rather than the asserted necessary condition.",
+      "reference": "algebraic-10.json:120, Exact optimization inside the RS-affine-inner family",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The field, outer, inner, concatenation, lower-distance, and submitted exact-distance proof steps are proved.",
+      "justification": "Their dependencies are noncircular and are all supported by the detailed proof and independent recomputation.",
+      "reference": "algebraic-10.json:121-177",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The structured family-optimum proof step is proved.",
+      "justification": "Its finite arithmetic is right, but it inherits the missing general distance-attainment lemma and also should explicitly state 16<=m<=31 and 1<=K<=N for direct unpadded concatenations.",
+      "reference": "algebraic-10.json:178-187",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The JSON rate, research direction, and proved status correctly describe the main code result.",
+      "justification": "1040/2^30 is exactly 65/2^26 and is represented correctly by the JSON number. The principal code theorem is fully proved despite the ancillary optimization gap.",
+      "reference": "algebraic-10.json:189-191",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is accurate provenance metadata.",
+      "justification": "The listed files and directories exist, and the roadmaps directory is empty. None is a hidden dependency for the main proof.",
+      "reference": "algebraic-10.json:192-207",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class, theorem statement, and title accurately report the code.",
+      "justification": "The independently verified parameters are [1073741824,1040,535822336]_2, so leaderboard_candidate and baseline_beaten are correct.",
+      "reference": "algebraic-10.json:208-210",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited submission.",
+      "justification": "SHA-256 of the parsed JSON serialized with sorted keys recomputes to 3e21a60d42dff954720626406d7064da6794e22d752f501a49a15e4d2f148ddd.",
+      "reference": "algebraic-10.json:1-211",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [
+    "Repair the exact-family optimization claim before marking the complete submission accepted: define the scope as direct unpadded/unpunctured RS-RM concatenations with integer 16<=m<=31 and 1<=K<=N, then prove exact binary distance. Choose K-1 evaluation roots and scale their product to avoid the unique outer symbol mapped to the all-one inner word; since D<=N<=2^15<2^m-1, an avoiding scalar exists. This proves d=(N-K+1)2^(m-2), making the target inequality necessary as well as sufficient."
+  ],
+  "source_job_id": "algebraic-10",
+  "source_sha256": "3e21a60d42dff954720626406d7064da6794e22d752f501a49a15e4d2f148ddd",
+  "summary": "REVISE for one local proof gap. The principal deterministic binary [1073741824,1040,535822336]_2 construction is independently verified: field certificate, linearity, exact length, dimension, exact distance, arithmetic, explicitness, rate, and baseline classification all pass. The ancillary claim of unique optimality throughout the RS-affine-inner family incorrectly uses the product-distance lower bound as though necessity had already been proved. A short scalar-avoidance lemma repairs it; there is no fatal obstruction to the k=1040 record.",
+  "verdict": "revise",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}
