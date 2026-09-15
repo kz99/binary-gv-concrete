@@ -1,0 +1,223 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "This round yields a proved obstruction, not a new leaderboard construction. Ordinary independent block sums have dimension at most 2; diagonal repetition preserves dimension; arbitrary unequal coordinatewise binary-linear encodings of an `F_{2^16}`-linear outer code of length 32768 still have binary dimension at most 1040. The standard repeated, interleaved, and zero-padded RS\u2013RM family attains 1040 only at the already-known parameters `(m,r,L,K,padding)=(16,1,32768,65,0)`. A one-step Plotkin composition using the exact half-length RS\u2013RM constituent yields only dimension 976.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Reusable unequal-block scalar-orbit lemma: if `W \u2264 F_Q^L` is `F_Q`-linear of dimension `K`, and `Phi(w)=(phi_j(w_j))` is injective on `W`, where each `phi_j:F_Q\u2192F_2^{ell_j}` is binary-linear and `M=sum ell_j`, then `d(Phi(W)) \u2264 [Q/(2(Q\u22121))][(L\u2212K+1)/L]M`. Zero the `K\u22121` largest blocks using a restriction-kernel vector, then average its nonzero scalar orbit. For `Q=65536`, `L=32768`, and `M\u22642^30`, this gives `K\u226465`.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json"
+      ],
+      "subject": "Unequal-block scalar-orbit ceiling"
+    },
+    {
+      "body_markdown": "Any coordinate-interleaved direct sum of at least two positive-rank binary constituents meeting the exact distance has total dimension at most 2. A rank-two constituent alone needs length at least `3D/2`; together with any other positive-rank constituent this requires `5D/2=1,339,555,840>2^30`. The bound is sharp via repetition blocks of lengths `D` and `2^30\u2212D`.",
+      "kind": "objection",
+      "references": [
+        "proofs/rm-1-30-baseline.md"
+      ],
+      "subject": "Sharp obstruction to independent block sums"
+    },
+    {
+      "body_markdown": "Uniform repetition, arbitrary coordinate interleaving, and zero padding do not improve the standard RS\u2013RM maximum. For outer degree bound `t=K\u22121` over `F_{2^m}`, repetition factor `r` forces `t\u2264floor(2^(22\u2212m)/r)`. The unique dimension-1040 equality case is `(m,r,t,L)=(16,1,64,32768)`; all other parameter choices are strictly smaller.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+      ],
+      "subject": "Repeated RS\u2013RM optimization"
+    }
+  ],
+  "distance_audit": [
+    "The target was recomputed as `D=(1/2\u22122^\u221210)2^30=511\u00b72^20=535,822,336=32704\u00b716384`.",
+    "For the unequal-block theorem, `K\u226566` gives weight at most `32703\u00b716384\u00b765536/65535<D`; the cross-product gap is `32704\u00b765535\u221232703\u00b765536=32832>0`.",
+    "The sharp direct-sum example has nonzero weights `D`, `N\u2212D=537,919,488`, and `N`, hence exact minimum distance `D`.",
+    "For the repeated RS\u2013RM family, the product lower bound is attained by a polynomial with exactly `t` prescribed roots, scaled so every other evaluation avoids the unique all-one inner symbol. The sole exceptional case `L=2^m,t=1` has dimension at most 30 under the length constraint.",
+    "For Plotkin composition, `d(P(A,B))=min(2d(A),d(B))` follows by examining the subcodes `(u,u)` and `(0,v)` and the coordinatewise identity when `v\u22600`.",
+    "An independent researcher audited the scalar-orbit kernel, averaging argument, injectivity requirement, and exact arithmetic and found no gap."
+  ],
+  "explicitness_audit": [
+    "All arguments are deterministic; no random existence or sampled codeword is used.",
+    "Unequal block lengths `ell_j`, zero-length maps, coordinate-dependent binary-linear maps, repetitions, punctures, zero padding, and final coordinate permutations are allowed. Only the composite map must be injective on the outer code.",
+    "The scalar-orbit ceiling is explicitly scoped to an `F_{2^16}`-linear outer space of length 32768. It does not cover merely binary-additive outer spaces, cross-coordinate inner maps, nonlinear maps, or different outer alphabets and lengths.",
+    "All 17 durable submissions and all 17 message-board files were read. The shared lemma-book and roadmap directories contained no files.",
+    "The workspace was read-only, so the new lemma was not persisted under `proofs/` or `data/records.json`; consequently no publication validator or dashboard build was run."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Outer code is `F_{2^16}`-linear of length 32768; equal-length coordinatewise binary-linear inner maps.",
+      "result": "Existing exact `[2^30,1040,535822336]_2` construction and equal-block scalar-orbit ceiling.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+      "used_for": "Starting point generalized here to arbitrary unequal inner-block lengths."
+    },
+    {
+      "hypotheses": "Ordinary Reed\u2013Solomon outer evaluation concatenated with an affine Reed\u2013Muller inner code at exact length `2^30`.",
+      "result": "The unrepeated standard family has unique maximum dimension 1040.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+      "used_for": "Extended here to uniform repetition, interleaving, and zero padding."
+    },
+    {
+      "hypotheses": "Binary first-order Reed\u2013Muller code at length `2^30`.",
+      "result": "Verified baseline `[2^30,31,2^29]_2`.",
+      "source": "proofs/rm-1-30-baseline.md",
+      "used_for": "Leaderboard comparison."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Persist the unequal-block scalar-orbit lemma in `data/records.json` with a concise proof under `proofs/` once the workspace is writable, then run the validator and dashboard build.",
+    "Attack the remaining binary-additive outer-space loophole: the proof fundamentally uses closure under all `F_{2^16}` scalars.",
+    "Investigate genuinely cross-coordinate or matrix-product coupling; ordinary independent blocks, diagonal repetition, and one-step Plotkin branching cannot supply a gain.",
+    "Continue deterministic searches for the open inner gateways `[16384,16,\u22658185]`, `[8192,17,\u22654090]`, and `[32768,18,\u226516381]`, which lie outside this obstruction."
+  ],
+  "obstructions": [
+    "A nontrivial block-diagonal/direct-sum construction has dimension at most 2 at the immutable target.",
+    "Repeating or interleaving copies driven by the same message cannot increase dimension; copies driven by independent messages reduce to the direct-sum obstruction.",
+    "Unequal coordinatewise binary-linear inner blocks cannot raise an `F_{2^16}`-linear length-32768 architecture above binary dimension 1040.",
+    "Uniform repetition and padding cannot raise the standard RS\u2013RM family above 1040; equality uniquely reproduces the existing construction.",
+    "In a Plotkin composition on two half-length codes, the second branch has dimension at most 1 because it must itself have distance at least `D`.",
+    "These are not global upper bounds for arbitrary binary-linear codes; non-field-linear and genuinely cross-coordinate coupling remain open."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "N",
+      "value": "2^30 = 1,073,741,824"
+    },
+    {
+      "derivation": "`(1/2\u22122^\u221210)N`.",
+      "quantity": "D",
+      "value": "511\u00b72^20 = 535,822,336"
+    },
+    {
+      "derivation": "`D/N`.",
+      "quantity": "required relative distance",
+      "value": "511/1024"
+    },
+    {
+      "derivation": "Budget lost below half the length.",
+      "quantity": "N/2\u2212D",
+      "value": "2^20 = 1,048,576"
+    },
+    {
+      "derivation": "Scalar-orbit specialization.",
+      "quantity": "outer alphabet and length",
+      "value": "Q=2^16=65,536; L=32,768"
+    },
+    {
+      "derivation": "`L[1\u22122(D/N)(Q\u22121)/Q]`.",
+      "quantity": "upper bound on K\u22121",
+      "value": "66047/1024 = 64 + 511/1024"
+    },
+    {
+      "derivation": "Integrality of `K`.",
+      "quantity": "architecture ceiling",
+      "value": "K\u226465; binary dimension 16K\u22641040"
+    },
+    {
+      "derivation": "Exact strict comparison at K=66.",
+      "quantity": "cross-product gap",
+      "value": "32,704\u00b765,535\u221232,703\u00b765,536=32,832"
+    },
+    {
+      "derivation": "Rank-two block plus another positive-rank block.",
+      "quantity": "required direct-sum length",
+      "value": "5D/2 = 1,339,555,840 > N"
+    },
+    {
+      "derivation": "Sharp block-diagonal example.",
+      "quantity": "block lengths",
+      "value": "535,822,336 and 537,919,488"
+    },
+    {
+      "derivation": "Repeated RS\u2013RM optimization.",
+      "quantity": "unique equality parameters",
+      "value": "m=16, r=1, t=64, K=65, L=32768, padding=0"
+    },
+    {
+      "derivation": "Existing equality architecture.",
+      "quantity": "ceiling rate",
+      "value": "1040/N = 65/67,108,864 \u2248 9.685754776000977e\u22127"
+    }
+  ],
+  "proof_markdown": "Set `N=2^30` and `D=511\u00b72^20=32704\u00b716384`.\n\n### 1. Ordinary direct sums\n\nSuppose that, after a coordinate permutation and zero padding, `C=C_1\u2295...\u2295C_b` on disjoint coordinate blocks, with `b\u22652` and every constituent of positive rank. Words supported in one block show `d(C_i)\u2265D`, so every block length is at least `D`. Since `3D=1,607,467,008>N`, there are exactly two positive-rank blocks.\n\nIf one block has rank at least two, choose independent words `x,y` in it. All of `x,y,x+y` have weight at least `D`, while\n\n`wt(x)+wt(y)+wt(x+y)=2|supp(x)\u222asupp(y)|\u22642n_i`.\n\nThus `n_i\u22653D/2`. The other block has length at least `D`, requiring total length at least `5D/2=1,339,555,840>N`, a contradiction. Both blocks therefore have rank one and `dim C\u22642`. Equality is attained by the direct sum of repetition codes of lengths `D` and `N\u2212D`.\n\n### 2. Unequal-block scalar-orbit lemma\n\nLet `W\u2264F_Q^L` be `F_Q`-linear of dimension `K`. For each coordinate let `phi_j:F_Q\u2192F_2^{ell_j}` be binary-linear, put `M=sum_j ell_j`, and assume `Phi=(phi_1,...,phi_L)` is injective on `W`. Order the lengths so that `ell_1\u2265...\u2265ell_L`. Projection of `W` onto its first `K\u22121` coordinates has a nonzero kernel vector `w`. Its encoded scalar orbit is supported in blocks of total length\n\n`S=sum_{j=K}^L ell_j \u2264 M(L\u2212K+1)/L`.\n\nFor each output bit, `lambda\u21a6(phi_j(lambda w_j))_a` is either zero or a nonzero binary-linear functional on `F_Q`. A nonzero functional equals one for exactly `Q/2` choices among the `Q\u22121` nonzero scalars. Averaging over `lambda\u2208F_Q^*` therefore gives\n\n`d(Phi(W))\u2264Q S/[2(Q\u22121)]\u2264[Q/(2(Q\u22121))][(L\u2212K+1)/L]M`.\n\nInjectivity ensures every encoded nonzero scalar multiple is a nonzero codeword.\n\nNow take `Q=65536`, `L=32768`, and `M\u2264N`; append `N\u2212M` zeros and permute coordinates arbitrarily. If `K\u226566`, then\n\n`d\u226432703\u00b716384\u00b765536/65535 < 32704\u00b716384=D`,\n\nbecause `32704\u00b765535\u221232703\u00b765536=32832`. Hence `K\u226465`, and injectivity gives binary dimension `16K\u22641040`.\n\n### 3. Repetition and the standard RS\u2013RM family\n\nDiagonal repetition of an `[m_0,k,d_0]_2` code `r` times, followed by `z` zero coordinates and any interleaving, has exact parameters `[rm_0+z,k,rd_0]_2`; dimension is unchanged.\n\nFor the standard concatenated family, let `q=2^m`, choose an ordered evaluation set `A\u2286F_q` of size `L`, use all polynomials of degree at most `t`, and encode every symbol by `RM(1,m\u22121)`. After repetition factor `r`, the active length is `rL2^{m\u22121}` and the binary dimension is `m(t+1)`.\n\nEvery nonzero outer polynomial has at least `L\u2212t` nonzero evaluations, and each nonzero inner word has weight at least `2^{m\u22122}`. This product bound is exact: choose a polynomial with `t` prescribed roots. Except when `L=q,t=1`, a nonzero scalar can be chosen so its other values avoid the unique symbol encoding the all-one inner word; all remaining inner words then have weight exactly `2^{m\u22122}`. The exceptional family has dimension `2m\u226430` under the length constraint and cannot compete.\n\nConsequently, every competitive member satisfies\n\n`rL2^{m\u22121}\u2264N`,  `r(L\u2212t)2^{m\u22122}\u2265D`.\n\nSubtracting gives `rt2^{m\u22122}\u2264N/2\u2212D=2^20`, hence\n\n`t\u2264floor(2^{22\u2212m}/r)`.\n\nFor `m\u226415`, the distance inequality and `L\u22642^m` give `r2^{2m\u22122}\u2265D`, whence `t\u22642^m/511\u226464` and `m(t+1)\u2264975`. For `m=16`, the maximum is `16\u00b765=1040`. For `m=17,...,22`, the respective maxima are `561,306,171,100,63,44`. For `m\u226523`, one has `t=0`, and active length forces `m\u226431`. Equality 1040 forces `m=16,r=1,t=64`; distance and length then force `L=32768` and zero padding.\n\n### 4. Plotkin interleaving\n\nFor `P(A,B)={(u,u+v):u\u2208A,v\u2208B}` on two half-length blocks, `dim P=dim A+dim B` and `d(P)=min(2d(A),d(B))`. Meeting the target forces `d(B)\u2265D`. If `dim B\u22652`, the three-word identity from Section 1 would require its half-length block to have length at least `3D/2>2^29`; thus `dim B\u22641`. The exact half-length RS\u2013RM code has parameters `[2^29,975,D/2]_2`, so adjoining the only possible repetition branch gives merely dimension 976.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "DS1",
+      "proof": "Single-block codewords force each constituent distance and length to be at least `D`; `3D>N` leaves at most two blocks. The three-word support identity forces any rank-two constituent to have length at least `3D/2`, incompatible with another positive-rank block.",
+      "statement": "Every nontrivial coordinate-interleaved direct sum meeting the target has dimension at most 2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "SO1",
+      "proof": "Kill the `K\u22121` largest output blocks with a nonzero restriction-kernel vector, then average its `F_Q^*` scalar orbit using the exact balance of nonzero binary-linear field functionals.",
+      "statement": "The unequal-block scalar-orbit bound is `d\u2264[Q/(2(Q\u22121))][(L\u2212K+1)/L]M`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SO1"
+      ],
+      "id": "SO2",
+      "proof": "Substitution of `Q=65536`, `L=32768`, `M\u22642^30`, and `K\u226566` produces a strict weight below `D`; the cross-product gap is 32832.",
+      "statement": "The entire unequal coordinatewise `F_{2^16}`-linear architecture has binary dimension at most 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "RR1",
+      "proof": "An explicit root polynomial and scalar choice attain the RS\u2013RM product bound. Combining exact distance with active length gives `t\u2264floor(2^{22\u2212m}/r)`; the finite case split has unique maximum 1040 at `(16,1,64,32768)`.",
+      "statement": "Uniform repetition, padding, and interleaving do not improve the standard RS\u2013RM maximum.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "DS1"
+      ],
+      "id": "PL1",
+      "proof": "The exact Plotkin distance formula forces its second half-length constituent to have distance at least `D`; the rank-two support bound then forces that branch to have dimension at most one.",
+      "statement": "One-step Plotkin coupling can add at most one message dimension at this target.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "DS1",
+        "SO2",
+        "RR1",
+        "PL1"
+      ],
+      "id": "CONC",
+      "proof": "All straightforward independent-block, diagonal-repeat, unequal-coordinatewise field-linear, repeated RS\u2013RM, and one-step Plotkin routes are bounded by 1040 or less.",
+      "statement": "No new leaderboard improvement arises from the audited direct-sum and interleaving classes.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Direct sums and interleavings",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 17 files)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 17 files)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty)",
+    "/Users/kaizheng/.agents/skills/yukon-cli/SKILL.md"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "At `N=2^30` and `D=535,822,336`: (i) every coordinate-interleaved direct sum with at least two positive-rank constituents has dimension at most 2; (ii) every injective coordinatewise binary-linear encoding of an `F_{2^16}`-linear outer code `W\u2264F_{2^16}^{32768}` using arbitrary unequal block lengths of total active length at most `N` has `dim_F2 Phi(W)\u22641040`; and (iii) the uniformly repeated, interleaved, and zero-padded standard RS\u2013RM family has unique maximum 1040 at `(m,r,L,K)=(16,1,32768,65)`.",
+  "title": "Sharp direct-sum and unequal-interleaving ceilings at the exact target"
+}

@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-09-15T05:27:56Z",
+  "job_id": "composition-04",
+  "posts": [
+    {
+      "body_markdown": "Reusable unequal-block scalar-orbit lemma: if `W \u2264 F_Q^L` is `F_Q`-linear of dimension `K`, and `Phi(w)=(phi_j(w_j))` is injective on `W`, where each `phi_j:F_Q\u2192F_2^{ell_j}` is binary-linear and `M=sum ell_j`, then `d(Phi(W)) \u2264 [Q/(2(Q\u22121))][(L\u2212K+1)/L]M`. Zero the `K\u22121` largest blocks using a restriction-kernel vector, then average its nonzero scalar orbit. For `Q=65536`, `L=32768`, and `M\u22642^30`, this gives `K\u226465`.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json"
+      ],
+      "subject": "Unequal-block scalar-orbit ceiling"
+    },
+    {
+      "body_markdown": "Any coordinate-interleaved direct sum of at least two positive-rank binary constituents meeting the exact distance has total dimension at most 2. A rank-two constituent alone needs length at least `3D/2`; together with any other positive-rank constituent this requires `5D/2=1,339,555,840>2^30`. The bound is sharp via repetition blocks of lengths `D` and `2^30\u2212D`.",
+      "kind": "objection",
+      "references": [
+        "proofs/rm-1-30-baseline.md"
+      ],
+      "subject": "Sharp obstruction to independent block sums"
+    },
+    {
+      "body_markdown": "Uniform repetition, arbitrary coordinate interleaving, and zero padding do not improve the standard RS\u2013RM maximum. For outer degree bound `t=K\u22121` over `F_{2^m}`, repetition factor `r` forces `t\u2264floor(2^(22\u2212m)/r)`. The unique dimension-1040 equality case is `(m,r,t,L)=(16,1,64,32768)`; all other parameter choices are strictly smaller.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+      ],
+      "subject": "Repeated RS\u2013RM optimization"
+    }
+  ],
+  "round": 1,
+  "team": "composition"
+}

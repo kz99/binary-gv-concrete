@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 13,
-    "succeeded": 31
+    "running": 12,
+    "succeeded": 32
   },
   "doubly_verified_candidates": [
     {
@@ -109,44 +109,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 55,
+    "post_count": 58,
     "recent_posts": [
-      {
-        "body_markdown": "Let `q=32768`. If `\ud835\udcab\u2286F_q^X` is binary linear and every nonzero member has at most 64 zeros, while `W\u2286F_2^X` has distance at least 16352, then `c_{P,Q}(x,y)=Tr(yP(x))+Q(x)` is a target code but has dimension at most `996`. Singleton gives `dim \ud835\udcab\u226415\u00b765=975`; the degree-3 Levenshtein spherical bound gives `dim W\u226421`. This covers arbitrary, not necessarily polynomial, root-killing families with an independent offset code.",
-        "job_id": "combinatorial-06",
-        "kind": "idea",
-        "references": [
-          "root-killing-parameters",
-          "root-family-singleton",
-          "offset-levenshtein"
-        ],
-        "round": 1,
-        "subject": "Independent-offset root-killing ceiling is 996",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "Exact limited independence does not itself control parity. For `rt=30`, choose independent `x_1,\u2026,x_t\u2208F_2^r` and output `y_i=x_i` plus `y_{t+1}=\u03a3_i x_i`. The support has exactly `2^30` seeds and every `t` outputs are independent uniform, but `\u03a3_i \u2113(y_i)=0` for every linear functional `\u2113`; the `(t+1)`-fold parity lift is identically zero.",
-        "job_id": "combinatorial-06",
-        "kind": "objection",
-        "references": [
-          "parity-independence-obstruction"
-        ],
-        "round": 1,
-        "subject": "t-wise sampling can annihilate parity",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "For 4096-wise-independent uniform columns in `F_2^2954`, the pairing moment bound and `4095!!<2^21622` give `(2^2954\u22121)4095!!<2^24576`. Thus some seed yields a balanced 2954-dimensional core, and adjoining one gives `k=2955`. Can anyone exhibit a fixed algebraic seed with a compact all-character certificate? Exhaustive conditional expectation is the forbidden global search and is not a construction.",
-        "job_id": "combinatorial-06",
-        "kind": "question",
-        "references": [
-          "moment-existence",
-          "seed-selection-gap"
-        ],
-        "round": 1,
-        "subject": "Explicit seed needed at the exact k=2955 threshold",
-        "team": "combinatorial"
-      },
       {
         "body_markdown": "For an ordered multiset `D=(d_1,\u2026,d_n)` spanning `F_2^k`, its character code `c_a=(a\u00b7d_i)_i` has `wt(c_a)=(n-\u03a3_i(-1)^(a\u00b7d_i))/2`. Thus the immutable target is exactly the one-sided Cayley condition `\u03a3_i(-1)^(a\u00b7d_i)\u22642^21` for every `a\u22600`. A bipartition character with sum `-n` is harmless.",
         "job_id": "combinatorial-07",
@@ -256,6 +220,39 @@
         "round": 1,
         "subject": "Conditional averaging does not meet the construction rule",
         "team": "combinatorial"
+      },
+      {
+        "body_markdown": "Reusable unequal-block scalar-orbit lemma: if `W \u2264 F_Q^L` is `F_Q`-linear of dimension `K`, and `Phi(w)=(phi_j(w_j))` is injective on `W`, where each `phi_j:F_Q\u2192F_2^{ell_j}` is binary-linear and `M=sum ell_j`, then `d(Phi(W)) \u2264 [Q/(2(Q\u22121))][(L\u2212K+1)/L]M`. Zero the `K\u22121` largest blocks using a restriction-kernel vector, then average its nonzero scalar orbit. For `Q=65536`, `L=32768`, and `M\u22642^30`, this gives `K\u226465`.",
+        "job_id": "composition-04",
+        "kind": "idea",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json"
+        ],
+        "round": 1,
+        "subject": "Unequal-block scalar-orbit ceiling",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "Any coordinate-interleaved direct sum of at least two positive-rank binary constituents meeting the exact distance has total dimension at most 2. A rank-two constituent alone needs length at least `3D/2`; together with any other positive-rank constituent this requires `5D/2=1,339,555,840>2^30`. The bound is sharp via repetition blocks of lengths `D` and `2^30\u2212D`.",
+        "job_id": "composition-04",
+        "kind": "objection",
+        "references": [
+          "proofs/rm-1-30-baseline.md"
+        ],
+        "round": 1,
+        "subject": "Sharp obstruction to independent block sums",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "Uniform repetition, arbitrary coordinate interleaving, and zero padding do not improve the standard RS\u2013RM maximum. For outer degree bound `t=K\u22121` over `F_{2^m}`, repetition factor `r` forces `t\u2264floor(2^(22\u2212m)/r)`. The unique dimension-1040 equality case is `(m,r,t,L)=(16,1,64,32768)`; all other parameter choices are strictly smaller.",
+        "job_id": "composition-04",
+        "kind": "objection",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+        ],
+        "round": 1,
+        "subject": "Repeated RS\u2013RM optimization",
+        "team": "composition"
       }
     ]
   },
@@ -476,6 +473,18 @@
       "status": "proved",
       "submission_class": "obstruction",
       "title": "Reciprocal-sum obstruction to additive extensions of the k=1040 RS\u2013affine code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "composition-04",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Sharp direct-sum and unequal-interleaving ceilings at the exact target"
     }
   ],
   "reasoning_effort": "ultra",
@@ -490,5 +499,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:27:43Z"
+  "updated_at": "2026-09-15T05:27:56Z"
 }
