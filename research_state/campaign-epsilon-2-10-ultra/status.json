@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 30,
-    "succeeded": 2
+    "running": 29,
+    "succeeded": 3
   },
   "doubly_verified_candidates": [
     {
@@ -269,5 +269,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T04:47:22Z"
+  "updated_at": "2026-09-15T04:47:23Z"
 }
