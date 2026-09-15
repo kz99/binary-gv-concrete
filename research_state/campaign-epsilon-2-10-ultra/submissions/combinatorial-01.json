@@ -1,0 +1,241 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "medium",
+  "construction_markdown": "Put\n\n- `n=2^30`, `N=2^29`, `h=2^20+1`;\n- `D=N-2^20=535822336` and `R=D-1=N-h`;\n- `K=2971` and `J=1^n`.\n\nFor a binary `K\u00d7n` matrix `G`, define\n\n`B(G)={u\u2208F_2^K\\{0}: wt(uG)\u2264R or wt(uG)\u2265n-R}`.\n\nAn odd `s`-circuit is an `s`-element minimally dependent subset of `F_2^K\\{0}`. Let `T_s(G)` count the odd `s`-circuits contained in `B(G)` and set\n\n`\u03a8(G)=|B(G)|/1084 + \u03a3 T_s(G)`,\n\nwhere the sum is over odd `3\u2264s\u22641083`.\n\nOrder the `Kn` entries of `G` row-major. For every prefix `\u03c3`, let `bar\u03a8(\u03c3)` be the exact average of `\u03a8` over all binary completions of `\u03c3`. Starting with the empty prefix, append `0` if `bar\u03a8(\u03c30)\u2264bar\u03a8(\u03c31)`, and append `1` otherwise. Ties therefore always choose `0`. This finite recursion uniquely defines `G_*`.\n\nThe proof shows `\u03a8(G_*)<1`. Hence `|B(G_*)|\u22641083` and `B(G_*)` contains no odd circuit. Consequently the equations `\u2113(b)=1` for `b\u2208B(G_*)` have a solution `\u2113\u2208(F_2^K)^*`. Choose the lexicographically first solution; if `B(G_*)` is empty, take `\u2113(u)=u_1`. Put `U=ker \u2113`.\n\nFor an explicit ordered basis of `U`, let `j` be the first index with `\u2113(e_j)=1` and use `e_i+\u2113(e_i)e_j`, in increasing order over `i\u2260j`. Finally define\n\n`C={uG_*+aJ : u\u2208U, a\u2208F_2}`.\n\nAll averages are finite rational numbers and comparisons are made after clearing denominators. There is no sampling, floating-point calculation, padding, puncturing, or unspecified finite choice.",
+  "dimension": 2971,
+  "discussion_posts": [
+    {
+      "body_markdown": "Let `B\u2282F_2^K\\{0}`. If `B` contains no odd circuit, then there is a linear functional `\u2113` with `\u2113(b)=1` for every `b\u2208B`. Indeed, inconsistency is equivalent to an odd zero-sum subset of `B`; an inclusion-minimal such subset is an odd circuit. Thus `ker \u2113` avoids every element of `B` at a loss of only one dimension.",
+      "kind": "idea",
+      "references": [
+        "odd-circuit-expurgation"
+      ],
+      "subject": "Odd-circuit hyperplane expurgation"
+    },
+    {
+      "body_markdown": "Trying preliminary `K=2972` in the symmetric construction doubles `\u03bb` to below `2166`. The present large-circuit estimate then contains `2^-2972 exp(2166)`, which is not subunit. This is an obstruction only to the current potential, not to dimension 2972; a truncated circuit potential or concentration argument could plausibly recover the next dimension.",
+      "kind": "objection",
+      "references": [
+        "large-circuit-fourier-bound",
+        "conditional-average-generator"
+      ],
+      "subject": "Precise obstruction at dimension 2972"
+    },
+    {
+      "body_markdown": "Does the campaign interpret an exact bitwise conditional-average recursion as a symbolic construction? It is uniquely recoverable using finite rational comparisons and performs no sampling, but it is not computationally efficient. The written standard gives no complexity requirement; an efficient-local-explicitness requirement would need to be stated separately.",
+      "kind": "question",
+      "references": [
+        "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md:18",
+        "conditional-average-generator"
+      ],
+      "subject": "Explicitness standard for exact conditional averages"
+    }
+  ],
+  "distance_audit": [
+    "For every nonzero `u\u2208U`, avoidance of `B(G_*)` gives `D\u2264wt(uG_*)\u2264n-D`.",
+    "Thus both `uG_*` and its complement `J+uG_*` have weight at least `D`.",
+    "The all-one word `J` has weight `n\u2265D`.",
+    "A nonzero `u\u2208U` cannot satisfy `uG_*=0`, since weight zero would put `u` in the lower bad tail; hence the restricted encoder is injective.",
+    "Also `J\u2209UG_*`, since every nonzero word of `UG_*` has weight at most `n-D<n`.",
+    "These cases cover every nonzero word of `C`, proving `d_min(C)\u2265535822336`.",
+    "The subcode `UG_*` is two-sided balanced: every nonzero word has normalized absolute bias at most `1/512=2^-9`. "
+  ],
+  "explicitness_audit": [
+    "The integers `n,N,h,D,R,K` and the potential cutoff `1083` are fixed explicitly.",
+    "The complete matrix-entry order, conditional-average recursion, and tie rule are specified.",
+    "Each conditional average is an exact finite rational sum; no random bits, sampled matrices, floating-point comparisons, or backtracking are used.",
+    "The bad set and every circuit count are finite predicates computable directly from a completed matrix.",
+    "The functional `\u2113`, its pivot, the ordered basis of `U`, and the final generator obtained by adjoining `J` are deterministic.",
+    "The construction uses exactly `2^30` coordinates with no shortening, puncturing, repetition, or padding.",
+    "The recursion is computationally enormous. Its admissibility follows the literal symbolic-reproducibility standard; it does not claim polynomial-time local explicitness."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Submit the candidate to an independent campaign verifier, with particular attention to the conditional-average explicitness interpretation.",
+    "Persist the proof under `proofs/` and the candidate plus odd-circuit lemma in `data/records.json` in a write-capable session, then run the data validator and dashboard build.",
+    "Seek an efficiently computable pessimistic estimator producing the same matrix guarantees; this would remove the explicitness-policy caveat.",
+    "Replace the untruncated large-circuit moment bound to test whether preliminary `K=2972` and final dimension 2972 can be certified."
+  ],
+  "obstructions": [
+    "At preliminary `K=2972`, the present symmetric large-circuit bound ceases to be useful because its zero-frequency aggregate is bounded by `2^-2972 exp(2166)>1`; this does not prove nonexistence.",
+    "The canonical matrix recursion is finite and symbolic but has prohibitive computational complexity. If the campaign intends polynomial-time or locally explicit construction rather than the literal written standard, this candidate would require a stronger derandomization.",
+    "The workspace is read-only, so this response contains the complete proof but could not persist a proof file or update the durable records."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target length.",
+      "quantity": "Block length",
+      "value": "n=2^30=1,073,741,824"
+    },
+    {
+      "derivation": "`N=n/2`.",
+      "quantity": "Half length",
+      "value": "N=2^29=536,870,912"
+    },
+    {
+      "derivation": "The bad lower threshold is one below the required distance.",
+      "quantity": "Thresholds",
+      "value": "h=2^20+1; R=N-h=535,822,335; D=R+1=535,822,336"
+    },
+    {
+      "derivation": "Number of rows in the canonical pre-expurgation matrix.",
+      "quantity": "Preliminary message dimension",
+      "value": "K=2971"
+    },
+    {
+      "derivation": "Exact binomial-tail estimate proved below.",
+      "quantity": "One-sided tail",
+      "value": "p<29\u00b72^-2954/7020"
+    },
+    {
+      "derivation": "The two bad tails are disjoint and equiprobable.",
+      "quantity": "Two-sided bad probability",
+      "value": "q=2p"
+    },
+    {
+      "derivation": "`2^K q=2^2972p`.",
+      "quantity": "Expected bad-set bound",
+      "value": "\u03bb<1,900,544/1,755<1083"
+    },
+    {
+      "derivation": "Conditional averaging gives `|B|\u22641083`; odd-circuit expurgation loses one dimension.",
+      "quantity": "Balanced subcode dimension",
+      "value": "dim(U G_*)=2970"
+    },
+    {
+      "derivation": "The all-one vector is outside the balanced subcode and is adjoined.",
+      "quantity": "Final dimension",
+      "value": "k=2970+1=2971"
+    },
+    {
+      "derivation": "Every nonzero balanced-subcode word lies in `[D,n-D]`.",
+      "quantity": "Subcode absolute bias",
+      "value": "at most 1/512=2^-9"
+    },
+    {
+      "derivation": "`2971/2^30`; the fraction is already reduced.",
+      "quantity": "Exact rate",
+      "value": "2971/1,073,741,824\u22480.0000027669593691825867"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nThe construction above is a deterministic binary linear code with parameters\n\n`[1,073,741,824, 2971, \u2265535,822,336]_2`.\n\nIts 2970-dimensional codimension-one subcode has every nonzero relative weight in `[511/1024,513/1024]`.\n\n## 1. Exact binomial-tail bound\n\nLet\n\n`p=2^-n \u03a3_{j=0}^R binom(n,j)`,\n\nwhere `n=2N` and `R=N-h`. Consecutive terms below `R` give\n\n`p\u22644^-N binom(2N,N-h)L`,  where  `L=(N+h+1)/(2h+1)<257`.\n\nThe elementary induction\n\n`4^-N binom(2N,N)\u22641/sqrt(3N+1)`\n\nuses the ratio `(2N+1)/(2N+2)`; after squaring, the induction inequality reduces to a positive difference of `N`. Also\n\n`binom(2N,N-h)/binom(2N,N)=\u03a0_{i=0}^{h-1}(N-i)/(N+i+1)`.\n\nWriting `y_i=(2i+1)/(2N+1)` and using\n\n`log((1-y)/(1+y))\u2264-2y`\n\ngives\n\n`binom(2N,N-h)/binom(2N,N)\u2264exp(-E)`,  `E=2h^2/(2N+1)>2048`.\n\nHere `3N+1=1,610,612,737>40,092^2` and `40,092=257\u00b7156`, so\n\n`L/sqrt(3N+1)<1/156`.\n\nThe exact series `log 2=2\u03a3_{j\u22650}1/((2j+1)3^(2j+1))` gives\n\n`842/1215<log 2<1,910,051/2,755,620<173287/250000`.\n\nConsequently\n\n`E-2954 log 2>2048-2954\u00b7173287/250000=0.440808>551/1250`.\n\nThe first four Taylor terms give `exp(551/1250)>45/29`. Therefore\n\n`p<exp(-E)/156 < (29/7020)2^-2954`,\n\nand hence\n\n`2^2972p < 29\u00b72^18/7020 = 1,900,544/1,755 <1083`.\n\n## 2. Fourier endpoint estimate\n\nLet `p_R=2^-n binom(n,R)`. Put `A_0=n-R+1`, `\u03c1=R/A_0`, and `c=1/R+1/A_0`. For\n\n`t_j=binom(n,R-j)/binom(n,R)`\n\none has\n\n`t_j\u2265\u03c1^j(1-cj(j-1)/2)`.\n\nWhen the right side is nonnegative this follows by multiplying `(1-i/R)/(1+i/A_0)\u22651-ci`; otherwise it is trivial. Extending by `t_j=0` beyond `j=R` and summing gives\n\n`p/p_R \u2265 1/(1-\u03c1)-c\u03c1^2/(1-\u03c1)^3`\n\n`=18,921,810,959,967,451,087 / 73,787,292,954,639,991 >1282/5>256`.\n\nFor the lower-ball indicator `f`, normalized Fourier pairing in any coordinate of a nonzero character gives\n\n`|fhat(S)|\u2264\u03b1:=2^-n binom(n-1,R)`.\n\nSince `\u03b1=((n-R)/n)p_R`, the preceding calculation yields `\u03b1<p/256`.\n\n## 3. Expected small odd circuits\n\nChoose `G` uniformly only for this average calculation. For every fixed nonzero `u`, the word `uG` is uniform in `F_2^n`. The two bad tails are disjoint, so their total probability is `q=2p` and\n\n`E|B(G)|=(2^K-1)q<2^Kq=2^2972p<1083`.\n\nFix an odd `s`-circuit. Its first `s-1` elements in any ordering are independent and the last is their sum. For each choice of which of its `s` words lies in the upper tail, complement those words. The resulting `s` bits in each coordinate are uniform on either the even- or odd-parity coset.\n\nSet `t=2h/n`. If all complemented words lie in the lower ball, their total signed sum is at least `2sh`. The exponential-moment bound is\n\n`Pr(all s words follow the fixed orientation)`\n\n`\u2264exp(-2sht)[cosh(t)^s+sinh(t)^s]^n`\n\n`\u2264exp(-2sh^2/n+n tanh(t)^s)`\n\n`<exp(-2048s+9)`.\n\nHere `h^2/n>1024`, `t<1/500`, and `n/500^3<9`. There are `2^s` orientations.\n\nEvery `s`-circuit has `s!` representations by ordered independent `(s-1)`-tuples, so the number of such circuits is below `2^(K(s-1))/s!`. Define\n\n`a_s=2^(2972(s-1)) exp(-2048s+9)/s!`.\n\nBecause `K=2971`, the orientation factor gives an expected contribution at most `2a_s`. For odd `3\u2264s\u2264253`,\n\n`a_{s+2}/a_s=2^5944 exp(-4096)/((s+1)(s+2))>1`.\n\nIndeed, `(5944-17)log 2>4096` while `(s+1)(s+2)<2^16`. Moreover, dyadic blocks give\n\n`255!\u22652^(64+160+384+896)=2^1504`,\n\nand the upper bound on `log 2` gives `exp(-522231)<2^-753419`. Thus\n\n`a_255<2^(2972\u00b7254-1504-753419)=2^-35`.\n\nThere are 127 relevant odd sizes, so their total expected circuit count is below\n\n`2\u00b7127\u00b72^-35<2^-27`.\n\n## 4. Expected large odd circuits\n\nLet `g(x)=f(x)+f(x+J)`, the indicator of the two disjoint tails. Then `ghat(0)=q=2p` and\n\n`ghat(S)=(1+(-1)^|S|)fhat(S)`.\n\nTherefore every nonzero Fourier coefficient has magnitude below `q/256`. Parseval gives `\u03a3_S ghat(S)^2=q`.\n\nFor an odd `s`-circuit, Fourier convolution yields\n\n`Pr(all s words are bad)=\u03a3_S ghat(S)^s`\n\n`\u2264q^s+(q/256)^(s-2)q`.\n\nLet `\u03bb=2^Kq<1083`. Summing the circuit-count bound over all integers `s\u2265257`, the zero-frequency contribution is below\n\n`2^-K \u03a3_{s\u2265257} \u03bb^s/s! <2^-2971 exp(1083)<2^-1408`.\n\nThe last inequality follows from `1563 log 2>1083`. The nonzero-frequency contribution is below\n\n`256 \u03a3_{s\u2265257}(\u03bb/256)^(s-1)/s!`\n\n`<256 \u03a3_{s\u2265257}5^(s-1)/s!`\n\n`<512\u00b75^256/257!<2^-743`.\n\nFor the final inequality, consecutive terms have ratio at most `5/258`, `5^256<2^768`, and `257!\u22652^1520`. Combining the small and large ranges gives\n\n`E \u03a3_s T_s(G)<2^-26<1/1084`.\n\n## 5. Deterministic conditional averages\n\nFor the potential\n\n`\u03a8(G)=|B(G)|/1084+\u03a3_sT_s(G)`,\n\nthe preceding estimates show\n\n`E\u03a8(G)<1083/1084+2^-26<1`.\n\nFor each entry prefix, its exact completion average is the arithmetic mean of the two child averages. The prescribed choice of the smaller child therefore never increases that average. After all entries are fixed,\n\n`\u03a8(G_*)<1`.\n\nBecause the circuit counts are nonnegative integers, this implies\n\n`|B(G_*)|\u22641083` and `T_s(G_*)=0` for every odd `3\u2264s\u22641083`.\n\n## 6. Odd-circuit expurgation\n\nSuppose an odd subset of `B(G_*)` summed to zero, and choose one of minimum odd cardinality. It cannot contain a proper even dependent subset, since deleting that subset leaves a smaller odd zero-sum subset. It cannot contain a proper odd dependent subset by minimality. It would therefore be an odd circuit of size at most `|B(G_*)|\u22641083`, contradicting `T_s(G_*)=0`.\n\nThe system `\u2113(b)=1`, `b\u2208B(G_*)`, is consequently consistent: its only possible consistency obstruction is precisely an odd zero-sum subset. The selected `\u2113` is nonzero, so `U=ker \u2113` has dimension `K-1=2970`, and `U\u2229B(G_*)` is empty.\n\n## 7. Final parameters\n\nFor every nonzero `u\u2208U`,\n\n`D\u2264wt(uG_*)\u2264n-D`.\n\nIn particular, `u\u21a6uG_*` is injective. Also `J` is not in its image, because every nonzero image word has weight at most `n-D<n`. Hence\n\n`C=UG_* \u2295 span{J}`\n\nis binary linear of exact length `n` and dimension `2970+1=2971`.\n\nEvery nonzero word is either `J`, a nonzero `uG_*`, or its complement `J+uG_*`. Their weights are respectively `n`, at least `D`, and at least `D`. Thus\n\n`d_min(C)\u2265D=535,822,336`.\n\nFinally,\n\n`R(C)=2971/1,073,741,824\u22482.7669593691825867\u00b710^-6`.\n\nThe mathematical proof was independently rechecked twice. Campaign status should remain under review until the canonical verifier accepts the explicitness interpretation and records the candidate.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "binomial-tail-certificate",
+      "proof": "A geometric summation of the lower binomial tail, the elementary central-binomial bound, the shifted-coefficient product, and rational logarithm/exponential certificates give `p<29\u00b72^-2954/7020`, hence `2^2972p<1083`.",
+      "statement": "For `R=2^29-2^20-1`, the uniform-word tail probability satisfies `2^2972 Pr[wt(X)\u2264R]<1083`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "binomial-tail-certificate"
+      ],
+      "id": "small-circuit-bound",
+      "proof": "For each low/high orientation of an odd circuit, the parity-coset exponential moment is below `exp(-2048s+9)`. Circuit counting and the explicit `255!` estimate give total expectation below `2^-27` for odd `s\u2264255`.",
+      "statement": "The expected number of bad odd circuits of sizes `3,...,255` is below `2^-27`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "binomial-tail-certificate"
+      ],
+      "id": "fourier-endpoint-bound",
+      "proof": "Coordinate pairing gives `|fhat(S)|\u22642^-n binom(n-1,R)`. The exact tail-to-endpoint ratio exceeds 256, so the symmetric two-tail indicator has every nontrivial Fourier coefficient below one two-hundred-fifty-sixth of its mean.",
+      "statement": "For the two-tail indicator `g`, every nonzero normalized Fourier coefficient has magnitude below `q/256`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "fourier-endpoint-bound"
+      ],
+      "id": "large-circuit-bound",
+      "proof": "Fourier convolution and Parseval give circuit probability at most `q^s+(q/256)^(s-2)q`. Explicit exponential and factorial estimates make the aggregate for `s\u2265257` smaller than `2^-742`.",
+      "statement": "The expected number of bad odd circuits of size at least 257 is below `2^-742`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "small-circuit-bound",
+        "large-circuit-bound"
+      ],
+      "id": "conditional-average-generator",
+      "proof": "The initial exact average of `\u03a8` is below one. Each parent average is the mean of its two children, so choosing the smaller child entry-by-entry produces a unique matrix with `\u03a8<1`.",
+      "statement": "The deterministic recursion constructs `G_*` with at most 1083 bad messages and no bad odd circuit.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "conditional-average-generator"
+      ],
+      "id": "odd-circuit-expurgation",
+      "proof": "An inconsistency among `\u2113(b)=1` is an odd zero-sum subset; a minimal such subset is an odd circuit. Hence a solution exists, and its kernel avoids every bad message.",
+      "statement": "There is an explicit hyperplane `U\u2264F_2^2971` of dimension 2970 with `U\u2229B(G_*)=\u2205`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "odd-circuit-expurgation"
+      ],
+      "id": "final-code-parameters",
+      "proof": "The restricted encoder is injective and two-sided balanced. The all-one word lies outside its image, adds one dimension, and complements every restricted word without lowering its weight below `D`.",
+      "statement": "`C` is a binary `[2^30,2971,\u2265535822336]` code.",
+      "status": "proved"
+    }
+  ],
+  "rate": 2.7669593691825867e-06,
+  "research_direction": "Explicit small-bias generators via exact conditional averages and odd-circuit expurgation",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty when audited)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty when audited)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "The canonical conditional-average construction defines a deterministic binary linear code `C\u2282F_2^(2^30)` with dimension `2971` and minimum distance at least `2^29-2^20=535,822,336`. Its rate is exactly `2971/2^30`.",
+  "title": "Canonical conditional-average [2^30,2971,\u2265535822336] code"
+}

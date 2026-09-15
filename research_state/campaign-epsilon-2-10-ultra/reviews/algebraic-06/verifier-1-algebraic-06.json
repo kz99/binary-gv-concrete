@@ -1,0 +1,231 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical SHA-256 as SHA-256 of json.dumps(parsed_json, sort_keys=True); it equals the supplied immutable digest exactly. The different raw-file digest is formatting-dependent.",
+    "Reimplemented GF(2) polynomial arithmetic. Both Frobenius residues and both Euclidean identities hold, so the chosen degree-16 modulus is irreducible.",
+    "Tried to create collisions in the 32768-point evaluation set and a nonzero encoder-kernel polynomial. The polynomial basis makes the points distinct, and the degree-64 root bound excludes a kernel.",
+    "Checked every inner-symbol case: H(0) has weight 0, H(1) has weight 32768, and every other symbol produces a balanced affine word of weight 16384.",
+    "Derived the exact formula wt(c_f)=2^14(32768-N_0(f)+N_1(f)). Since N_0(f)<=64, neither all-one blocks nor cancellation between codewords can lower the weight below the target.",
+    "Directly evaluated the prescribed 64-root polynomial in the stated field. It has exactly 64 roots; only 511 distinct scalars are forbidden, lambda=1 is admissible, and the resulting word has weight exactly 535822336.",
+    "Tested the degree-65 extension. A scaled 65-root word has weight 32703*16384=535805952, which is 16384 below the target.",
+    "Recomputed the K=66 scalar-orbit average as 535814127.87475395; the cross-multiplied gap is 32832>0.",
+    "Broke the unqualified architecture-optimality wording by taking outer code F^32768 and injective inner maps. Its binary dimension is 16*32768=524288, so 1040 is maximal only among constructions meeting the target distance.",
+    "Tested the noninjective-map wording using zero inner maps. Scalar averaging can then select only a zero encoded word, which does not contradict minimum distance; injectivity is essential to the obstruction.",
+    "Verified the tensor obstruction from the average-weight bound and exact tensor-product distance; 4/9<511/1024.",
+    "Audited the residual/puncturing endpoint argument through [8,5,3]; the terminal Hamming inequality is 32*(1+8)=288>256."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The immutable source identity matches the audited submission.",
+      "justification": "The campaign canonicalization gives SHA-256 6107a9cf53bf87ba620b981bf60bff2c6f084834bb6da87590d010c9bda5304c exactly.",
+      "reference": "algebraic-06.json:1-261",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The headline fields describe a baseline-beating length-2^30, dimension-1040 candidate.",
+      "justification": "The construction verifies these parameters, and 1040-31=1009.",
+      "reference": "algebraic-06.json:2-6,50",
+      "verdict": "valid"
+    },
+    {
+      "claim": "p(Z)=Z^16+Z^5+Z^3+Z^2+1 defines F_(2^16).",
+      "justification": "Independent arithmetic reproduces Z^(2^8)=Z^8+Z^7+Z^3+Z and Z^(2^16)=Z modulo p, as well as the displayed gcd certificate. The degree-16 Frobenius criterion therefore applies.",
+      "reference": "algebraic-06.json:5,136 (Explicit field),138-143",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A is an explicitly ordered set of 32768 distinct evaluation points.",
+      "justification": "The residues 1,alpha,...,alpha^15 form a polynomial basis, so the span through alpha^14 has binary dimension 15. Binary coefficient indices determine the stated order.",
+      "reference": "algebraic-06.json:5,85-89",
+      "verdict": "valid"
+    },
+    {
+      "claim": "H is an injective binary-linear realization of RM(1,15) with parameters [32768,16,16384]_2.",
+      "justification": "H(z)_0 recovers z_0 and H(z)_(e_i)+H(z)_0 recovers z_i. Nonconstant affine functions are balanced, while the sole nonzero constant symbol is 1 and gives the all-one word.",
+      "reference": "algebraic-06.json:5,100-104,145-152",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer evaluation code has exact parameters [32768,65,32704] over F_(2^16).",
+      "justification": "Evaluation is injective because 64<32768. The root bound gives distance at least 32704, and a product over 64 distinct evaluation points attains that outer weight.",
+      "reference": "algebraic-06.json:5,90-99,154-161",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The final construction is deterministic and binary linear, with exact length 2^30 and dimension 1040.",
+      "justification": "The composite encoder is binary linear and injective. It has 2^15 blocks of length 2^15, and its 65 field coefficients contribute 65*16 binary dimensions.",
+      "reference": "algebraic-06.json:5-6,105-114,163-171",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Ordinary binary tensor products cannot improve the leaderboard in the stated way.",
+      "justification": "For each factor with dimension at least two, the average-weight bound gives relative distance at most 2/3. Tensor-product distances multiply exactly, giving at most 4/9 when two such factors occur.",
+      "reference": "algebraic-06.json:9-14,73,203-208",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The scalar-orbit ceiling extends without qualification to arbitrary binary-linear inner maps.",
+      "justification": "The coordinatewise average inequality does hold for arbitrary maps, but the minimum-distance conclusion does not: a selected scalar multiple may encode to zero. The application needs injective inner maps or an equivalent nonzero-image hypothesis.",
+      "reference": "algebraic-06.json:17-23",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The two proposed inner-code gateways have the stated consequences.",
+      "justification": "A [16384,16,>=8185] inner code with an outer [65536,73,65464] RS code gives dimension 1168 and distance 535822840. A [8192,17,>=4090] inner code with [131072,65,131008] gives dimension 1105 and distance 535822720.",
+      "reference": "algebraic-06.json:26-32",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The distance audit proves both the universal lower bound and exact attainment.",
+      "justification": "Every nonzero polynomial has at most 64 evaluation roots, and every nonzero block weighs at least 16384. The fixed scaled 64-root polynomial has no all-one surviving blocks, so equality holds.",
+      "reference": "algebraic-06.json:35-40",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction is symbolically recoverable and contains no random or length-changing operation.",
+      "justification": "The modulus, basis, evaluation subspace, message space, coordinate orders, and degree cutoff are fixed. The equality-witness scalar is selected deterministically and is not needed to define the code.",
+      "reference": "algebraic-06.json:42-48",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The cited affine-balance and scalar-orbit sources apply to the concrete construction.",
+      "justification": "The affine functions have 15 variables and nonzero linear part in the relevant cases. The scalar-orbit seed applies to an F_(2^16)-linear outer code, and the concrete specialization is reproved in the submission.",
+      "reference": "algebraic-06.json:51-63",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed publication and persistence tasks are pending but do not hide a mathematical dependency.",
+      "justification": "The complete construction and proof are present inline. Moving them into proofs/ and data/records.json is subsequent workflow rather than a missing ingredient in the code proof.",
+      "reference": "algebraic-06.json:66-70",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The equal-block scalar obstruction is valid as stated for arbitrary binary-linear inner maps.",
+      "justification": "Its proof requires injectivity to ensure the low-average scalar multiple is a nonzero binary codeword. The word \u201cencoding\u201d may suggest this, but the hypothesis must be stated consistently.",
+      "reference": "algebraic-06.json:74",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The full degree-at-most-65 RS extension fails the target.",
+      "justification": "A 65-root polynomial can be scaled to avoid value 1 at its remaining points, producing weight 32703*16384=535805952<535822336.",
+      "reference": "algebraic-06.json:75",
+      "verdict": "valid"
+    },
+    {
+      "claim": "No binary [2^r,r+2,2^(r-1)-1] code exists for r>=3, in particular no [16384,16,8191] code exists.",
+      "justification": "Residualizing a minimum word gives length 2^(r-1)+1, dimension r+1, and distance at least 2^(r-2). Puncturing preserves dimension and reduces to the next case; iteration reaches the Hamming-bound-impossible [8,5,3] case.",
+      "reference": "algebraic-06.json:76,210-215",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission does not claim a global upper bound for arbitrary binary linear codes.",
+      "justification": "It explicitly preserves the non-field-linear weighted-concatenation loophole.",
+      "reference": "algebraic-06.json:77",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every parameter-ledger value is arithmetically correct.",
+      "justification": "The recomputed values are |F|=65536, N=32768, K=65, D=32704, inner parameters [32768,16,16384], n=1073741824, k=1040, d=535822336, rate 65/67108864, relative distance 511/1024, and baseline gain 1009.",
+      "reference": "algebraic-06.json:79-134",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The main theorem establishes an exact binary [1073741824,1040,535822336]_2 code.",
+      "justification": "The field certificate, injective encoder, length calculation, root bound, complete inner-weight analysis, and equality witness jointly prove all three exact parameters.",
+      "reference": "algebraic-06.json:136 (main construction theorem and proof)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Dimension 1040 is unconditionally maximal within the stated injective-inner-map architecture.",
+      "justification": "This omits the essential target-distance hypothesis. The full outer space F^32768 with injective inner maps has binary dimension 524288. The proof establishes maximality only among codes with minimum distance at least 535822336.",
+      "reference": "algebraic-06.json:136 (Theorem),259",
+      "verdict": "false"
+    },
+    {
+      "claim": "For any binary-linear phi:F_Q->F_2^L, the average nonzero-symbol weight is at most LQ/(2(Q-1)).",
+      "justification": "Each nonzero output-coordinate functional equals one on exactly Q/2 nonzero field inputs, while a zero coordinate contributes nothing.",
+      "reference": "algebraic-06.json:136 (Scalar-orbit ceiling, first paragraph)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The scalar-orbit average yields a nonzero low-weight concatenated codeword for arbitrary coordinate-dependent maps.",
+      "justification": "That conclusion follows under the theorem's injectivity assumption, because every nonzero outer scalar multiple then has a nonzero block. It is not justified for genuinely arbitrary, possibly noninjective maps.",
+      "reference": "algebraic-06.json:136 (Scalar-orbit ceiling, second and third paragraphs)",
+      "verdict": "gap"
+    },
+    {
+      "claim": "Under injectivity and the target-distance condition, outer dimension K>=66 is impossible.",
+      "justification": "Singleton gives support at most 32703, and the orbit average is 32703*16384*65536/65535<32704*16384. Thus some nonzero binary word misses the target.",
+      "reference": "algebraic-06.json:136 (Scalar-orbit ceiling calculation)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The tensor-product proof is correct.",
+      "justification": "A nonzero product-code matrix has at least d_2 nonzero columns, each of weight at least d_1, and a tensor of minimum words attains d_1d_2.",
+      "reference": "algebraic-06.json:136 (Ordinary tensor-product obstruction)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The endpoint residual proof is correct at ordinary academic rigor.",
+      "justification": "Griesmer equality and exclusion of the next distance justify each recursive endpoint, puncturing preserves dimension because the residual distance is at least two, and the terminal Hamming contradiction is valid.",
+      "reference": "algebraic-06.json:136 (Endpoint obstruction)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The central structured proof steps accurately summarize the construction, linearity, length, dimension, and exact distance.",
+      "justification": "Their dependency chain is acyclic and each conclusion follows from the detailed proof.",
+      "reference": "algebraic-06.json:137-193",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The scalar-orbit proof step establishes the architecture ceiling without restating injectivity and the target condition.",
+      "justification": "Those hypotheses are essential. Without the target condition the claimed ceiling is false; without injectivity the averaged image need not be a nonzero codeword.",
+      "reference": "algebraic-06.json:194-201",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The tensor-collapse and inner-endpoint proof steps are proved.",
+      "justification": "Their average-weight, exact-product-distance, residual, puncturing, Griesmer, and Hamming-bound arguments check independently.",
+      "reference": "algebraic-06.json:203-215",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The reported rate and proved status correctly describe the concrete code.",
+      "justification": "1040/2^30=65/67108864=9.685754776000977e-7, and the principal construction has no unresolved proof condition.",
+      "reference": "algebraic-06.json:218-220",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path inventory introduces no hidden dependency.",
+      "justification": "All listed files exist, all referenced JSON parses, the named proof-step IDs resolve, and the two directories recorded as empty are empty.",
+      "reference": "algebraic-06.json:221-256",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class and title honestly report a leaderboard candidate.",
+      "justification": "The verified dimension 1040 exceeds the immutable dimension-31 baseline at the exact target length and distance.",
+      "reference": "algebraic-06.json:258,260",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [
+    "Qualify every architecture-optimality statement\u2014including the theorem in proof_markdown, proof step scalar-orbit-ceiling, and theorem_statement\u2014as applying only to concatenated codes with d_min at least 535822336.",
+    "In discussion_posts[1], obstructions[1], the scalar-orbit proof prose, and its proof step, require injective inner maps (or an equivalent hypothesis ensuring every selected nonzero outer scalar multiple encodes nontrivially), and explicitly use that hypothesis when deriving a minimum-distance violation."
+  ],
+  "source_job_id": "algebraic-06",
+  "source_sha256": "6107a9cf53bf87ba620b981bf60bff2c6f084834bb6da87590d010c9bda5304c",
+  "summary": "REVISE for two local ancillary scope defects. The concrete deterministic binary code independently verifies with exact parameters [1073741824,1040,535822336]_2 and exact rate 65/67108864, so its arithmetic, length, dimension, distance, explicitness, and baseline-improvement classification all pass. However, the claimed 1040-dimensional architecture ceiling must be restricted to codes meeting the target distance, and its scalar-orbit application must consistently retain injectivity so that the averaged low-weight image is nonzero. These repairs do not affect the verified leaderboard construction.",
+  "verdict": "revise",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}

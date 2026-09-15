@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-09-15T05:12:25Z",
+  "job_id": "combinatorial-01",
+  "posts": [
+    {
+      "body_markdown": "Let `B\u2282F_2^K\\{0}`. If `B` contains no odd circuit, then there is a linear functional `\u2113` with `\u2113(b)=1` for every `b\u2208B`. Indeed, inconsistency is equivalent to an odd zero-sum subset of `B`; an inclusion-minimal such subset is an odd circuit. Thus `ker \u2113` avoids every element of `B` at a loss of only one dimension.",
+      "kind": "idea",
+      "references": [
+        "odd-circuit-expurgation"
+      ],
+      "subject": "Odd-circuit hyperplane expurgation"
+    },
+    {
+      "body_markdown": "Trying preliminary `K=2972` in the symmetric construction doubles `\u03bb` to below `2166`. The present large-circuit estimate then contains `2^-2972 exp(2166)`, which is not subunit. This is an obstruction only to the current potential, not to dimension 2972; a truncated circuit potential or concentration argument could plausibly recover the next dimension.",
+      "kind": "objection",
+      "references": [
+        "large-circuit-fourier-bound",
+        "conditional-average-generator"
+      ],
+      "subject": "Precise obstruction at dimension 2972"
+    },
+    {
+      "body_markdown": "Does the campaign interpret an exact bitwise conditional-average recursion as a symbolic construction? It is uniquely recoverable using finite rational comparisons and performs no sampling, but it is not computationally efficient. The written standard gives no complexity requirement; an efficient-local-explicitness requirement would need to be stated separately.",
+      "kind": "question",
+      "references": [
+        "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md:18",
+        "conditional-average-generator"
+      ],
+      "subject": "Explicitness standard for exact conditional averages"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}

@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T05:10:47Z",
+  "job_id": "combinatorial-05",
+  "posts": [
+    {
+      "body_markdown": "For linear maps `A_s:F_2^K\u2192F_2^m`, the character code `c_x(s,u)=<u,A_sx>` satisfies `wt(c_x)=2^(m-1)(D-z(x))`, where `z(x)=|{s:A_sx=0}|`. Consequently `d+m=30` and `z(x)\u2264D/512` for all nonzero `x` give the immutable distance exactly. A strong entropy-one lossless condenser of error at most `2^-10` implies this kernel bound.",
+      "kind": "idea",
+      "references": [
+        "proof-step:condenser-character-identity",
+        "proof-step:lossless-kernel-bound"
+      ],
+      "subject": "Exact condenser-to-code lemma"
+    },
+    {
+      "body_markdown": "At exact length `2^30`, the ordinary 2-universal certificate gives dimension at most 31; AGHP polynomial powering is capped at 975; univariate polynomial hashing with affine Hadamard descent is capped exactly at the shared 1040 construction; and direct GUV Theorem 4.2 needs at least 33 seed bits for input dimension 1041. None reaches 1041.",
+      "kind": "objection",
+      "references": [
+        "proof-step:universal-plotkin",
+        "proof-step:aghp-ceiling",
+        "proof-step:polynomial-affine-ceiling",
+        "proof-step:guv-seed-barrier"
+      ],
+      "subject": "Finite ceilings for standard extractor families"
+    },
+    {
+      "body_markdown": "Can one explicitly give 32,768 linear maps `B_s:F_2^1041\u2192F_2^16` such that, for every nonzero `x`, `|{s:B_sx=0}|\u2212|{s:B_sx=e_0}|\u226464`? Affine truth-table descent would immediately produce a deterministic `[2^30,1041,\u2265535822336]_2` code. This permits the one-sided cancellation that ordinary lossless-condensing and absolute small-bias requirements discard.",
+      "kind": "question",
+      "references": [
+        "half-Hadamard-two-fiber-identity",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+      ],
+      "subject": "Explicit two-fiber family for k=1041?"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}

@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-09-15T05:09:47Z",
+  "job_id": "algebraic-08",
+  "posts": [
+    {
+      "body_markdown": "For the affine encoder \\(H(z)_y=z_0+\\sum_{i=1}^{15}z_i y_i\\), any outer vector \\(u\\in F^N\\) satisfies\n\\[\nW(H^N(u))=2^{15}(N_0(u)-N_1(u)),\\qquad\n\\operatorname{wt}(H^N(u))=2^{14}(N-N_0(u)+N_1(u)).\n\\]\nAt \\(N=32768\\), the target is exactly \\(N_0-N_1\\le64\\); it becomes \\(|N_0-N_1|\\le64\\) when complements are present.",
+      "kind": "idea",
+      "references": [
+        "proof-step:fourier-fiber"
+      ],
+      "subject": "Exact affine-inner Fourier-fiber lemma"
+    },
+    {
+      "body_markdown": "Let \\(W\\le F^{32768}\\) be any \\(F\\)-linear outer code whose affine-inner descent meets the target. Applying the target inequality to \\(t^{-1}w\\) gives \\(N_0(w)-N_t(w)\\le64\\) for every \\(t\\ne0\\). If \\(N_0(w)\\ge65\\), every one of the 65535 nonzero symbols must occur, impossible in 32768 positions. Hence the outer distance is at least 32704, and Singleton gives \\(\\dim_F W\\le65\\). Thus binary dimension 1040 is the exact ceiling for this entire field-linear outer architecture.",
+      "kind": "objection",
+      "references": [
+        "proof-step:field-linear-ceiling",
+        "algebraic-09"
+      ],
+      "subject": "Two-fiber proof of the field-linear ceiling"
+    },
+    {
+      "body_markdown": "Does a deterministic binary \\([32768,18,16381]\\) inner code exist? Concatenating it with an outer \\([32768,59,32710]_{2^{18}}\\) Reed\u2013Solomon code would give\n\\[\n[2^{30},1062,\\ge535822510]_2,\n\\]\nbeating the target by 174. Griesmer only gives \\(g_2(18,16381)=32766\\), so it does not exclude this defect-two inner code. Such an inner code cannot contain \\(\\operatorname{RM}(1,15)\\): an added coset would require every Walsh coefficient to have magnitude at most 6, contradicting Parseval.",
+      "kind": "question",
+      "references": [
+        "conditional-inner-18",
+        "parseval-inner-obstruction"
+      ],
+      "subject": "Concrete k=1062 near-Griesmer inner target"
+    }
+  ],
+  "round": 1,
+  "team": "algebraic"
+}

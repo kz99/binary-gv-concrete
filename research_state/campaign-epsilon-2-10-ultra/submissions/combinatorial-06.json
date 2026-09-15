@@ -1,0 +1,270 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard code is claimed. Two deterministic sampler templates were audited.\n\nFirst, put `q=2^15`, let `X` have `q` elements, let `\ud835\udcab\u2286F_q^X` be binary linear with every nonzero `P` having at most 64 zeros, and let `W\u2286F_2^X` be binary linear. Define\n\n\\[\nc_{P,Q}(x,y)=\\operatorname{Tr}_{F_q/F_2}(yP(x))+Q(x),\\qquad (x,y)\\in X\\times F_q.\n\\]\n\nThis is the independent-offset root-killing sampler. If `W` has distance at least 16352, it meets the target, but the proved dimension ceiling is `dim \ud835\udcab+dim W\u2264975+21=996`.\n\nSecond, the shared scalar-orbit lemma was specialized to an `F_{2^16}`-linear outer code of length 32768 concatenated through coordinate-dependent injective binary-linear maps of length 32768. This entire architecture has dimension at most 1040, matching the shared under-review RS\u2013RM construction.\n\nA separate exact calculation shows where limited independence stops being a construction. A 4096-wise-independent polynomial family can support, by averaging, 2954 balanced generator rows and an all-one row, formally giving `[2^30,2955,\u2265535822337]_2`. No seed is selected. Exhaustive conditional-expectation bit fixing would be a prohibited numerical witness search, so this is only a precise seed-selection target.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Let `q=32768`. If `\ud835\udcab\u2286F_q^X` is binary linear and every nonzero member has at most 64 zeros, while `W\u2286F_2^X` has distance at least 16352, then `c_{P,Q}(x,y)=Tr(yP(x))+Q(x)` is a target code but has dimension at most `996`. Singleton gives `dim \ud835\udcab\u226415\u00b765=975`; the degree-3 Levenshtein spherical bound gives `dim W\u226421`. This covers arbitrary, not necessarily polynomial, root-killing families with an independent offset code.",
+      "kind": "idea",
+      "references": [
+        "root-killing-parameters",
+        "root-family-singleton",
+        "offset-levenshtein"
+      ],
+      "subject": "Independent-offset root-killing ceiling is 996"
+    },
+    {
+      "body_markdown": "Exact limited independence does not itself control parity. For `rt=30`, choose independent `x_1,\u2026,x_t\u2208F_2^r` and output `y_i=x_i` plus `y_{t+1}=\u03a3_i x_i`. The support has exactly `2^30` seeds and every `t` outputs are independent uniform, but `\u03a3_i \u2113(y_i)=0` for every linear functional `\u2113`; the `(t+1)`-fold parity lift is identically zero.",
+      "kind": "objection",
+      "references": [
+        "parity-independence-obstruction"
+      ],
+      "subject": "t-wise sampling can annihilate parity"
+    },
+    {
+      "body_markdown": "For 4096-wise-independent uniform columns in `F_2^2954`, the pairing moment bound and `4095!!<2^21622` give `(2^2954\u22121)4095!!<2^24576`. Thus some seed yields a balanced 2954-dimensional core, and adjoining one gives `k=2955`. Can anyone exhibit a fixed algebraic seed with a compact all-character certificate? Exhaustive conditional expectation is the forbidden global search and is not a construction.",
+      "kind": "question",
+      "references": [
+        "moment-existence",
+        "seed-selection-gap"
+      ],
+      "subject": "Explicit seed needed at the exact k=2955 threshold"
+    }
+  ],
+  "distance_audit": [
+    "The required one-sided signed-sum bound is `\u03a3_j(-1)^{c_j}\u22642^21`, since `(2^30\u22122^21)/2=535822336`. Absolute bias `1/512` is sufficient but stronger.",
+    "For the root-killing sampler with `P\u22600`, character orthogonality gives signed sum `q\u00b7\u03a3_{P(x)=0}(-1)^{Q(x)}`, whose absolute value is at most `64q=2^21`.",
+    "For `P=0`, the word is `q` repetitions of `Q`; hence the target is equivalent to `d(W)\u2265535822336/q=16352`. These cases cover every nonzero template word.",
+    "For the affine-inner field-linear architecture, scalar averaging at outer dimension 66 produces a nonzero word of weight at most `32703\u00b716384\u00b765536/65535`, strictly below `32704\u00b716384=535822336`.",
+    "The unselected 4096-wise seed would satisfy strict character sums `<2^21`, hence distance at least `535822337`; no such word set is claimed as a construction."
+  ],
+  "explicitness_audit": [
+    "The root-killing and scalar-orbit ceilings quantify over fully specified finite templates and use no random choice.",
+    "The 4096-wise family can be indexed exactly using 99 degree-at-most-4095 polynomials over an explicit `F_{2^30}` tower, all field points, a fixed 2954-bit projection, and 12,165,120 seed bits.",
+    "No seed with the required simultaneous character bounds is supplied. Defining it through exhaustive conditional averages would turn every probabilistic GV argument into a nominal construction and conflicts with the explicit ban on numerical searches.",
+    "The shared lemma-book and roadmap directories were empty at the final audit. No record was published, so the validator/dashboard publication step was not invoked in this read-only run."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A spherical code in `S^{n-1}` has all distinct inner products at most `s`, where `0\u2264s<(sqrt(n+3)\u22121)/(n+2)`.",
+      "result": "The degree-3 Levenshtein bound is `A(n,s)\u2264n(1\u2212s)(2+(n+1)s)/(1\u2212ns^2)`.",
+      "source": "S. P. Boumova, [Applications of Polynomials to Spherical Codes and Designs, Theorem 2.5.2](https://research.tue.nl/files/2152866/200210490.pdf), 2002.",
+      "used_for": "Bounding the independent offset code `W` by `|W|\u22642,466,889`, hence `dim W\u226421`."
+    },
+    {
+      "hypotheses": "Positive integer factorials.",
+      "result": "Robbins' explicit two-sided Stirling error bounds imply `4095!!<2^21622`.",
+      "source": "H. Robbins, [A Remark on Stirling's Formula](https://heuklyd.github.io/papers/pdf/Robbins-1955.pdf), American Mathematical Monthly 62 (1955), 26\u201329.",
+      "used_for": "The exact 4096th-moment threshold."
+    },
+    {
+      "hypotheses": "An `F_{2^m}`-linear outer code concatenated through coordinate-dependent injective binary-linear inner maps.",
+      "result": "Singleton plus averaging a nonzero scalar orbit bounds the weight of some nonzero concatenated word.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json`, step `rm-scalar-orbit-bound`, strengthened to arbitrary injective binary-linear inner maps in `algebraic-06.json`.",
+      "used_for": "The exact 1040 ceiling for the field-linear affine-inner architecture."
+    },
+    {
+      "hypotheses": "The quotient `F_2[T]/(T^15+T+1)` and its displayed Rabin certificate.",
+      "result": "It is an explicit field of order `2^15`; adjoining a root of `U^2+U+1` gives `F_{2^30}` because `3` does not divide `2^15\u22121`.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json`, step `field-certificate`.",
+      "used_for": "A fully finite model of the unselected 4096-wise polynomial family."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Find a non-search algebraic selector for one seed in the specified 4096-wise polynomial family and prove all `2^2954\u22121` character bounds by a compact structural certificate.",
+    "Search for coupled offsets or genuinely `F_2`-additive outer spaces that evade both the 996 independent-offset ceiling and the 1040 field-linear scalar-orbit ceiling; the shared two-fiber criterion `|N_0\u2212N_1|\u226464` is the immediate test.",
+    "Pursue deterministic sparse path families with a fresh code-specific bias proof; the shared combinatorial-04 obstruction already excludes direct full-cloud instantiations of the published wide-replacement norm bounds."
+  ],
+  "obstructions": [
+    "Independent root-killing fibers plus an unrestricted offset code cannot reach the shared dimension 1040: their exact ceiling is 996.",
+    "The equal-block `F_{2^16}`-linear outer/injective binary-inner architecture is capped at 1040 by scalar-orbit averaging.",
+    "Ordinary exact `t`-wise independence is not a parity certificate; an exact `2^30`-seed counterexample makes the lifted parity identically zero.",
+    "The optimized 4096-wise moment calculation supplies only an averaging witness. Its generic conditional-expectation implementation requires exhaustive branch evaluation and is therefore a forbidden numerical search, not an admissible explicit code."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`(1/2\u22122^-10)2^30=(2^30\u22122^21)/2`.",
+      "quantity": "Target signed-sum budget",
+      "value": "`B=2^21=2,097,152`; normalized absolute bias `B/2^30=1/512`"
+    },
+    {
+      "derivation": "`q=2^15` and `B/q=64`.",
+      "quantity": "Root-killing parameters",
+      "value": "`q=32768`, at most 64 zero fibers, offset distance at least 16352"
+    },
+    {
+      "derivation": "The `q`-ary Singleton bound for length `q` and distance at least `q\u221264`.",
+      "quantity": "Root-family dimension",
+      "value": "`|\ud835\udcab|\u2264q^65`, hence `dim_F2 \ud835\udcab\u226465\u00b715=975`"
+    },
+    {
+      "derivation": "Levenshtein with `n=32768`, `s=1\u22122\u00b716352/32768=1/512`.",
+      "quantity": "Offset-code cardinality ceiling",
+      "value": "`|W|\u2264511\u00b733793/7=2,466,889<2^22`, hence `dim W\u226421`"
+    },
+    {
+      "derivation": "`975+21`.",
+      "quantity": "Independent-offset root-killing ceiling",
+      "value": "`k\u2264996`"
+    },
+    {
+      "derivation": "Scalar-orbit comparison `32703\u00b765536<32704\u00b765535`, whose cross-multiplied gap is 32832.",
+      "quantity": "Affine-inner outer dimension",
+      "value": "`K\u226465` over `F_{2^16}`, hence binary `k\u22641040`"
+    },
+    {
+      "derivation": "For `q_h=(2h\u22121)!!/2^(12h)`, `q_(h+1)/q_h=(2h+1)/4096`; the minimum is at `h=2048`.",
+      "quantity": "Optimal pairing moment",
+      "value": "`t=2h=4096`"
+    },
+    {
+      "derivation": "Robbins gives `4095!!<2^21622`, so `(2^2954\u22121)4095!!<2^(2954+21622)=2^24576`.",
+      "quantity": "Limited-independence existence threshold",
+      "value": "Balanced core dimension 2954; affine dimension 2955, conditional on selecting a good seed"
+    },
+    {
+      "derivation": "99 polynomials \u00d7 4096 coefficients \u00d7 30 bits.",
+      "quantity": "Polynomial-family seed length",
+      "value": "`12,165,120` bits"
+    },
+    {
+      "derivation": "Strict signed sum `<2^21` has even parity.",
+      "quantity": "Conditional distance",
+      "value": "At least `535,822,337` if an admissible seed is supplied"
+    }
+  ],
+  "proof_markdown": "# Finite obstructions for direct derandomized samplers\n\nLet `N=2^30` and `B=2^21`. For a binary word `c`,\n\\[\n\\operatorname{wt}(c)=\\frac{N-\\sum_j(-1)^{c_j}}2.\n\\]\nThus the target is the one-sided condition `\u03a3_j(-1)^{c_j}\u2264B`; an absolute bound by `B` is sufficient.\n\n## 1. Independent-offset root killing\n\nLet `q=2^15`, `|X|=q`, and let `\ud835\udcab\u2286F_q^X` and `W\u2286F_2^X` be binary-linear spaces. Assume every nonzero `P\u2208\ud835\udcab` has at most 64 zeros. Define\n\\[\nc_{P,Q}(x,y)=\\operatorname{Tr}(yP(x))+Q(x).\n\\]\nThis is binary linear and has length `q^2=N`. If its word is zero, setting `y=0` gives `Q=0`; nondegeneracy of the trace pairing then gives `P=0`. Hence its dimension is `dim \ud835\udcab+dim W`.\n\nFor `P\u22600`, character orthogonality gives\n\\[\n\\sum_{x,y}(-1)^{c_{P,Q}(x,y)}\n=q\\sum_{x:P(x)=0}(-1)^{Q(x)},\n\\]\nwhose absolute value is at most `64q=B`. For `P=0`, the word is `q` repetitions of `Q`, so the target requires `d(W)\u2265D/q=16352`.\n\nDistinct members of `\ud835\udcab` agree in at most 64 positions. Therefore `\ud835\udcab`, viewed as a possibly nonlinear `q`-ary code, has distance at least `q\u221264`; Singleton gives\n\\[\n|\ud835\udcab|\\le q^{65},\\qquad \\dim_{F_2}\ud835\udcab\\le975.\n\\]\n\nMap each word of `W` to its normalized sign vector in `S^{q-1}`. Distinct vectors have inner product at most\n\\[\ns=1-2(16352)/32768=1/512.\n\\]\nHere\n\\[\n\\frac1{512}<\\frac{180}{32770}<\\frac{\\sqrt{32771}-1}{32770},\n\\]\nso the degree-3 [Levenshtein bound](https://research.tue.nl/files/2152866/200210490.pdf) applies:\n\\[\n|W|\\le\\frac{q(1-s)(2+(q+1)s)}{1-qs^2}\n=\\frac{511\\cdot33793}{7}=2{,}466{,}889<2^{22}.\n\\]\nSince `W` is linear, `dim W\u226421`. Consequently every code in this template has\n\\[\n\\dim C\\le975+21=996.\n\\]\nThe usual degree-at-most-64 polynomial family realizes the 975-dimensional first summand, but no independent offset can bring this template to 1040.\n\n## 2. Field-linear affine fibers\n\nUse the shared scalar-orbit lemma with `Q=65536`, outer length `L=32768`, inner length `H=32768`, and injective coordinate-dependent binary-linear inner maps. If the outer dimension were `K\u226566`, Singleton would give a nonzero outer word supported on at most 32703 coordinates. Averaging its nonzero scalar multiples gives a nonzero concatenated word of weight at most\n\\[\n32703\\frac{HQ}{2(Q-1)}\n=32703\\cdot16384\\frac{65536}{65535}.\n\\]\nThis is below `32704\u00b716384=D`, since\n\\[\n32704\\cdot65535-32703\\cdot65536=32832>0.\n\\]\nThus `K\u226465` and the binary dimension is at most `16\u00b765=1040`.\n\n## 3. Limited independence is not parity control\n\nFor any `rt=30`, take a seed `(x_1,\u2026,x_t)\u2208(F_2^r)^t` and output\n\\[\ny_i=x_i\\ (i\u2264t),\\qquad y_{t+1}=\\sum_i x_i.\n\\]\nThe seed space has exactly `2^30` points. Any `t` outputs are independent uniform: when one original variable is omitted it is recovered from the last output and the others. Nevertheless, for every linear functional `\u2113`,\n\\[\n\\sum_{i=1}^{t+1}\\ell(y_i)=0.\n\\]\nThus the parity of all outputs is identically zero. An averaging-sampler or `t`-wise-independence assertion alone cannot prove parity amplification.\n\n## 4. Exact moment threshold and the missing selector\n\nLet `Y_1,\u2026,Y_N\u2208F_2^K` be 4096-wise-independent uniform columns and put\n\\[\nS_u=\\sum_j(-1)^{u\\cdot Y_j},\\qquad u\\ne0.\n\\]\nIn the expansion of `S_u^4096`, a term has nonzero expectation only when every used index has even multiplicity. Pairing the 4096 positions therefore gives\n\\[\n\\mathbb E S_u^{4096}\\le4095!!\\,N^{2048}.\n\\]\nFor\n\\[\n\\Phi=B^{-4096}\\sum_{u\\ne0}S_u^{4096}\n\\]\nand `K=2954`,\n\\[\n\\mathbb E\\Phi\\le(2^{2954}-1)\\frac{4095!!}{2^{24576}}<1.\n\\]\nIndeed, [Robbins' explicit factorial bounds](https://heuklyd.github.io/papers/pdf/Robbins-1955.pdf) give\n\\[\n4095!!=\\frac{4096!}{2^{2048}2048!}\n<\\sqrt2e^{1/49152}(4096/e)^{2048}<2^{21622}.\n\\]\nThe standard exact family can be formed from 99 independent degree-at-most-4095 polynomials over `F_{2^30}`, evaluated at all field points and projected from 2970 to the first 2954 basis bits. Vandermonde interpolation proves 4096-wise independence.\n\nThe inequality proves that some seed has `\u03a6<1`. Such a seed would give `|S_u|<B` for all `u\u22600`, a 2954-dimensional balanced core, and\u2014after adjoining the all-one word\u2014a `[N,2955,\u2265D+1]_2` code.\n\nHowever, neither a seed nor a non-search selector is provided. Greedily choosing the branch with smaller exact conditional average requires exhaustive counting over remaining seeds or, equivalently,\n\\[\n\\sum_uS_u^{4096}=2^{2954}\\#\\{(i_1,\\ldots,i_{4096}):Y_{i_1}+\\cdots+Y_{i_{4096}}=0\\}-N^{4096}.\n\\]\nThat is the generic numerical witness search excluded by the campaign rules. Hence the moment calculation is a precise finite roadmap, not a leaderboard construction.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "target-bias",
+      "proof": "Apply `wt(c)=(N\u2212\u03a3(-1)^{c_j})/2` with `N=2^30`; the allowed signed sum is `N\u22122D=2^21`.",
+      "statement": "The immutable distance is equivalent to a one-sided signed-sum bound of `2^21`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-bias"
+      ],
+      "id": "root-killing-parameters",
+      "proof": "Character orthogonality kills every fiber with `P(x)\u22600`; at most 64 surviving fibers contribute `q` each. The `P=0` slice is exactly `q` repetitions of `W`.",
+      "statement": "The independent-offset root-killing template meets the target exactly when its offset slice has distance at least 16352.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "root-killing-parameters"
+      ],
+      "id": "root-family-singleton",
+      "proof": "Any two distinct functions agree in at most 64 positions, so the `q`-ary distance is at least `q\u221264`; Singleton bounds the cardinality by `q^65`.",
+      "statement": "The root-killing function family has binary dimension at most 975.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "root-killing-parameters",
+        "Levenshtein-L3"
+      ],
+      "id": "offset-levenshtein",
+      "proof": "Normalized sign vectors have maximum inner product `1/512`. Substitution in `L_3(32768,1/512)` gives exactly 2,466,889, below `2^22`.",
+      "statement": "Every binary linear `[32768,k,\u226516352]` offset code has `k\u226421`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "root-family-singleton",
+        "offset-levenshtein"
+      ],
+      "id": "root-killing-ceiling",
+      "proof": "The encoder is injective on the direct sum, so dimensions add and are at most `975+21`.",
+      "statement": "Every independent-offset root-killing sampler in the stated class has dimension at most 996.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json"
+      ],
+      "id": "affine-scalar-ceiling",
+      "proof": "Singleton supplies support at most 32703 for outer dimension 66; averaging its scalar orbit gives a nonzero word strictly below the target. Injectivity of every inner map ensures the averaged orbit contains no zero image.",
+      "statement": "The exact `F_{2^16}`-linear outer/affine-inner architecture has binary dimension at most 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "parity-independence-obstruction",
+      "proof": "The displayed linear seed transformation is invertible after any one output is omitted, while the sum of all outputs is zero.",
+      "statement": "At exact support size `2^30`, `t`-wise independence can coexist with an identically zero `(t+1)`-fold parity.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-bias",
+        "Robbins-1955"
+      ],
+      "id": "moment-existence",
+      "proof": "Pairing the 4096 positions bounds each moment by `4095!!N^2048`; Robbins gives `4095!!<2^21622`, making the union potential strictly below one at core dimension 2954.",
+      "statement": "Averaging over the specified 4096-wise family proves that some seed would yield an affine target code of dimension 2955.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "moment-existence"
+      ],
+      "id": "seed-selection-gap",
+      "proof": "No fixed seed or independently evaluable structural selector is supplied; exact conditional branch evaluation is an exhaustive numerical witness search prohibited by the contribution standard.",
+      "statement": "Turning the 2955-dimensional existence statement into an admissible construction remains conditional.",
+      "status": "conditional"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Derandomized sampler constructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "At the immutable target, every independent-offset root-killing sampler `Tr(yP(x))+Q(x)` with at most 64 zero fibers has binary dimension at most 996, while the exact `F_{2^16}`-linear affine-inner architecture is capped at 1040. Exact t-wise independence alone does not certify parity. An optimized 4096-wise moment calculation reaches a 2955-dimensional existence threshold, but its missing non-search seed selector is essential, so no new leaderboard code is submitted.",
+  "title": "Root-killing sampler ceilings and the missing explicit seed at k=2955"
+}

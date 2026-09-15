@@ -1,0 +1,252 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let\n\\[\np(Z)=Z^{16}+Z^5+Z^3+Z^2+1,\n\\qquad F=\\mathbb F_2[Z]/(p),\n\\]\nand put \\(\\alpha=Z\\bmod p\\). Write every \\(z\\in F\\) uniquely as \\(z=\\sum_{i=0}^{15}z_i\\alpha^i\\).\n\nFix\n\\[\nA=\\operatorname{span}_{\\mathbb F_2}\\{1,\\alpha,\\ldots,\\alpha^{14}\\},\n\\qquad Y=\\mathbb F_2^{15}.\n\\]\nOrder both sets by increasing binary coefficient integer. Define\n\\[\nH(z)_y=z_0+\\sum_{i=1}^{15}z_i y_i,\n\\qquad y=(y_1,\\ldots,y_{15})\\in Y.\n\\]\nThus \\(H\\) is the explicit additive identification of \\(F\\) with \\(\\operatorname{RM}(1,15)\\).\n\nFor\n\\[\nf(X)=\\sum_{j=0}^{64}c_jX^j\\in F[X],\n\\]\ndefine\n\\[\nC(f)=\\bigl(H(f(a))_y\\bigr)_{(a,y)\\in A\\times Y},\n\\qquad\nC=\\{C(f):\\deg f\\le64\\}.\n\\]\nCoordinates are ordered first by \\(a\\), then by \\(y\\). There is no padding, puncturing, sampling, or unspecified constituent code. The candidate remains under review pending formal campaign acceptance.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "For the affine encoder \\(H(z)_y=z_0+\\sum_{i=1}^{15}z_i y_i\\), any outer vector \\(u\\in F^N\\) satisfies\n\\[\nW(H^N(u))=2^{15}(N_0(u)-N_1(u)),\\qquad\n\\operatorname{wt}(H^N(u))=2^{14}(N-N_0(u)+N_1(u)).\n\\]\nAt \\(N=32768\\), the target is exactly \\(N_0-N_1\\le64\\); it becomes \\(|N_0-N_1|\\le64\\) when complements are present.",
+      "kind": "idea",
+      "references": [
+        "proof-step:fourier-fiber"
+      ],
+      "subject": "Exact affine-inner Fourier-fiber lemma"
+    },
+    {
+      "body_markdown": "Let \\(W\\le F^{32768}\\) be any \\(F\\)-linear outer code whose affine-inner descent meets the target. Applying the target inequality to \\(t^{-1}w\\) gives \\(N_0(w)-N_t(w)\\le64\\) for every \\(t\\ne0\\). If \\(N_0(w)\\ge65\\), every one of the 65535 nonzero symbols must occur, impossible in 32768 positions. Hence the outer distance is at least 32704, and Singleton gives \\(\\dim_F W\\le65\\). Thus binary dimension 1040 is the exact ceiling for this entire field-linear outer architecture.",
+      "kind": "objection",
+      "references": [
+        "proof-step:field-linear-ceiling",
+        "algebraic-09"
+      ],
+      "subject": "Two-fiber proof of the field-linear ceiling"
+    },
+    {
+      "body_markdown": "Does a deterministic binary \\([32768,18,16381]\\) inner code exist? Concatenating it with an outer \\([32768,59,32710]_{2^{18}}\\) Reed\u2013Solomon code would give\n\\[\n[2^{30},1062,\\ge535822510]_2,\n\\]\nbeating the target by 174. Griesmer only gives \\(g_2(18,16381)=32766\\), so it does not exclude this defect-two inner code. Such an inner code cannot contain \\(\\operatorname{RM}(1,15)\\): an added coset would require every Walsh coefficient to have magnitude at most 6, contradicting Parseval.",
+      "kind": "question",
+      "references": [
+        "conditional-inner-18",
+        "parseval-inner-obstruction"
+      ],
+      "subject": "Concrete k=1062 near-Griesmer inner target"
+    }
+  ],
+  "distance_audit": [
+    "For an inner symbol z, its Walsh sum is 32768 for z=0, -32768 for z=1, and 0 otherwise.",
+    "For nonconstant f of degree at most 64, both f and f-1 have at most 64 roots in A, so |W(C(f))|\u226464\u00b732768=2^21.",
+    "The nonzero constant f=1 gives the all-one word; every other nonzero constant gives balanced blocks.",
+    "Therefore every nonzero word has weight at least (2^30-2^21)/2=535822336.",
+    "A deterministic scaled polynomial with exactly 64 roots avoids symbol 1 elsewhere, attaining the bound exactly."
+  ],
+  "explicitness_audit": [
+    "The field modulus, polynomial basis, evaluation set, inner coordinate set, degree cutoff, and all coordinate orderings are explicitly specified.",
+    "The displayed Frobenius residues and Euclidean remainder chain give a finite irreducibility certificate for p.",
+    "The exact-distance scale is the first field element outside an explicitly defined finite image, hence is symbolically recoverable.",
+    "The data validator passed: one exact-size record was validated. Dashboard mathematical validation also passed all seven formulas.",
+    "The full dashboard artifact build reached TypeScript compilation but could not create `tsconfig.app.tsbuildinfo` because the workspace is read-only; no publication was attempted."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "For a monic degree-16 polynomial over F_2, verify X^(2^16)=X modulo p and the gcd test at 16/2=8, since 2 is the sole prime divisor of 16.",
+      "result": "Rabin's finite-field criterion certifies irreducibility.",
+      "source": "M. O. Rabin, [Probabilistic Algorithms in Finite Fields](https://doi.org/10.1137/0209024), SIAM Journal on Computing 9 (1980), 273\u2013280.",
+      "used_for": "Certifying the explicit model of F_{2^16}."
+    },
+    {
+      "hypotheses": "A nonconstant affine Boolean function has a nonzero linear part.",
+      "result": "Its truth table on F_2^15 has weight 2^14.",
+      "source": "data/records.json, lemma `rm-affine-balance`; proofs/rm-1-30-baseline.md",
+      "used_for": "The inner-code weight calculation; the pairing proof is also reproduced here."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Obtain formal independent campaign acceptance and merge this certificate with the equivalent durable k=1040 submissions.",
+    "Resolve the explicit defect-two inner-code question [32768,18,16381], which would yield k=1062.",
+    "Investigate an F_2-additive but non-F-linear strict outer extension satisfying the two-fiber inequality in every coset.",
+    "In a writable campaign step, materialize the proof and record, then rerun the validator and complete the dashboard artifact build."
+  ],
+  "obstructions": [
+    "Every F_{2^16}-linear outer code used with this affine inner encoder is capped at outer dimension 65 and binary dimension 1040.",
+    "The full degree-at-most-65 outer polynomial space fails: a scaled 65-root polynomial has weight 535805952, exactly 16384 below target.",
+    "Any prospective [32768,18,16381] inner code containing RM(1,15) is impossible by the Walsh Parseval identity; a genuinely different inner structure would be required.",
+    "The durable degree-65 trace-polynomial construction has dimension 991 and is therefore dominated.",
+    "No global optimality beyond the stated field-linear architecture is claimed."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "deg p=16 and the Rabin certificate",
+      "quantity": "outer field",
+      "value": "|F|=2^16=65536"
+    },
+    {
+      "derivation": "dim_F2 A=15",
+      "quantity": "outer evaluation length",
+      "value": "N=2^15=32768"
+    },
+    {
+      "derivation": "65 unrestricted F-coefficients",
+      "quantity": "outer dimension",
+      "value": "K=65 over F"
+    },
+    {
+      "derivation": "a nonzero degree-at-most-64 polynomial has at most 64 roots",
+      "quantity": "outer distance",
+      "value": "32768-64=32704"
+    },
+    {
+      "derivation": "all affine truth tables on 15 variables",
+      "quantity": "inner parameters",
+      "value": "[32768,16,16384]_2"
+    },
+    {
+      "derivation": "2^15\u00b72^15",
+      "quantity": "final length",
+      "value": "2^30=1073741824"
+    },
+    {
+      "derivation": "65\u00b716",
+      "quantity": "final dimension",
+      "value": "1040"
+    },
+    {
+      "derivation": "64\u00b72^15",
+      "quantity": "maximum nonconstant Walsh magnitude",
+      "value": "2^21=2097152"
+    },
+    {
+      "derivation": "(2^30-2^21)/2=32704\u00b716384",
+      "quantity": "exact minimum distance",
+      "value": "535822336"
+    },
+    {
+      "derivation": "1040/2^30=65/2^26",
+      "quantity": "exact rate",
+      "value": "0.00000096857547760009765625"
+    },
+    {
+      "derivation": "(2^29-2^20)/2^30",
+      "quantity": "relative distance",
+      "value": "511/1024"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nThe construction above is a deterministic binary linear code with exact parameters\n\\[\n[2^{30},1040,535{,}822{,}336]_2.\n\\]\n\n## Field certificate\n\nRepeated squaring modulo\n\\[\np(Z)=Z^{16}+Z^5+Z^3+Z^2+1\n\\]\ngives\n\\[\nZ^{256}\\equiv Z^8+Z^7+Z^3+Z,\n\\qquad Z^{65536}\\equiv Z.\n\\]\nThus \\(Z^{256}+Z\\equiv h:=Z^8+Z^7+Z^3\\). Direct division over \\(\\mathbb F_2[Z]\\) gives\n\\[\np=(Z^8+Z^7+Z^6+Z^5+Z^4+Z^2+1)h+(Z^2+1),\n\\]\n\\[\nh=(Z^6+Z^5+Z^4+Z^3+Z^2+1)(Z^2+1)+1.\n\\]\nHence \\(\\gcd(p,Z^{256}+Z)=1\\). Together with \\(Z^{65536}\\equiv Z\\), Rabin's degree-16 criterion proves that \\(p\\) is irreducible. Therefore \\(F\\) is the explicitly represented field of order \\(2^{16}\\).\n\n## Inner Fourier calculation\n\nThe map \\(H\\) is binary linear and injective: \\(H(z)=0\\) evaluated at \\(y=0\\) gives \\(z_0=0\\), and evaluation at the fifteen unit vectors then gives \\(z_1=\\cdots=z_{15}=0\\).\n\nFor fixed \\(z\\), character orthogonality gives\n\\[\n\\sum_{y\\in Y}(-1)^{H(z)_y}=\n\\begin{cases}\n2^{15},&z=0,\\\\\n-2^{15},&z=1,\\\\\n0,&z\\notin\\{0,1\\}.\n\\end{cases}\n\\]\nIndeed, the last case has a nonzero linear coefficient, and pairing \\(y\\) with \\(y+e_i\\) cancels the terms. Thus \\(H(F)=\\operatorname{RM}(1,15)\\) has parameters \\([32768,16,16384]_2\\).\n\nFor an outer vector \\(u\\), write \\(N_t(u)=|\\{a:u_a=t\\}|\\). Its concatenated Walsh sum and weight are exactly\n\\[\nW(u)=2^{15}(N_0(u)-N_1(u)),\n\\]\n\\[\n\\operatorname{wt}(H^A(u))\n=2^{14}(32768-N_0(u)+N_1(u)).\n\\]\n\n## Binary linearity, length, and dimension\n\nPolynomial evaluation and \\(H\\) are binary linear, so \\(C\\) is binary linear. Its coordinate set has size\n\\[\n|A||Y|=2^{15}2^{15}=2^{30}.\n\\]\nThe message space has \\(65\\) coefficients in \\(F\\), hence binary dimension \\(65\\cdot16=1040\\). The encoder is injective: if \\(C(f)=0\\), injectivity of \\(H\\) gives \\(f(a)=0\\) at all \\(32768\\) points of \\(A\\). A polynomial of degree at most 64 with that many roots is zero.\n\n## Minimum distance\n\nLet \\(f\\) be nonconstant. Both \\(f\\) and \\(f-1\\) are nonzero polynomials of degree at most 64, so\n\\[\nN_0(f)\\le64,\n\\qquad N_1(f)\\le64.\n\\]\nConsequently\n\\[\n|W(C(f))|\n=2^{15}|N_0(f)-N_1(f)|\n\\le64\\cdot2^{15}=2^{21},\n\\]\nand\n\\[\n\\operatorname{wt}(C(f))\n\\ge\\frac{2^{30}-2^{21}}2\n=2^{29}-2^{20}\n=535{,}822{,}336.\n\\]\nThe nonzero constant \\(f=1\\) gives the all-one word; any other nonzero constant gives balanced inner blocks. Hence every nonzero codeword is covered.\n\nThe bound is attained. Let \\(R\\) be the first 64 points of \\(A\\), and put\n\\[\ng(X)=\\prod_{r\\in R}(X-r).\n\\]\nEvery value in \\(g(A\\setminus R)\\) is nonzero, and this image has at most \\(32704<65535=|F^*|\\) elements. Let \\(z\\) be the first element of \\(F^*\\setminus g(A\\setminus R)\\), and set \\(f=z^{-1}g\\). Then \\(f\\) has exactly 64 zeros on \\(A\\) and never equals 1 elsewhere. Its remaining 32704 blocks are nonconstant affine words of weight \\(2^{14}\\). Therefore\n\\[\n\\operatorname{wt}(C(f))=32704\\cdot2^{14}=535{,}822{,}336,\n\\]\nproving the exact minimum distance.\n\n## Optimality within the field-linear outer architecture\n\nLet \\(W\\le F^{32768}\\) be any \\(F\\)-linear outer code whose blockwise image under \\(H\\) meets the target. For every nonzero \\(w\\in W\\), the exact weight formula implies\n\\[\nN_0(w)-N_1(w)\\le64.\n\\]\nFor any \\(t\\in F^*\\), apply this to \\(t^{-1}w\\). Scaling preserves its zero fiber and sends its \\(t\\)-fiber to the 1-fiber, so\n\\[\nN_0(w)-N_t(w)\\le64.\n\\]\nIf \\(N_0(w)\\ge65\\), then \\(N_t(w)\\ge1\\) for all 65535 nonzero \\(t\\), forcing at least \\(65+65535>32768\\) coordinates. Thus every nonzero outer word has at most 64 zeros, and the outer Hamming distance is at least 32704.\n\nPuncturing any 32703 coordinates is therefore injective on \\(W\\), giving\n\\[\n|W|\\le |F|^{65},\n\\qquad \\dim_F W\\le65.\n\\]\nHence binary dimension 1040 is optimal for every \\(F\\)-linear outer code with this affine inner encoder.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-model",
+      "proof": "The displayed Frobenius congruences and Euclidean remainder identities satisfy Rabin's complete degree-16 irreducibility test.",
+      "statement": "p(Z)=Z^16+Z^5+Z^3+Z^2+1 is irreducible over F_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "id": "inner-rm",
+      "proof": "Coefficient extraction is injective and binary linear. Nonconstant affine functions pairwise cancel in their Walsh sums and have weight 2^14.",
+      "statement": "H is an explicit [32768,16,16384]_2 affine inner encoder.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-rm"
+      ],
+      "id": "fourier-fiber",
+      "proof": "Summing an inner block gives +2^15 for symbol 0, -2^15 for symbol 1, and zero for every other symbol; summing blocks yields the formulas.",
+      "statement": "W(u)=2^15(N_0(u)-N_1(u)) and wt(H^A(u))=2^14(32768-N_0(u)+N_1(u)).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "id": "outer-rs",
+      "proof": "Evaluation is injective, and a nonzero degree-at-most-64 polynomial has at most 64 roots among the 32768 distinct evaluation points.",
+      "statement": "The outer evaluation code has exact parameters [32768,65,32704] over F.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-rm",
+        "outer-rs"
+      ],
+      "id": "binary-parameters",
+      "proof": "Both encoders are binary linear and injective; lengths multiply and the 65 field coefficients contribute 65\u00b716 binary dimensions.",
+      "statement": "C is binary linear of length 2^30 and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "fourier-fiber",
+        "outer-rs",
+        "binary-parameters"
+      ],
+      "id": "distance-lower",
+      "proof": "For nonconstant f, both fibers 0 and 1 have size at most 64, giving |W|\u22642^21. Nonzero constants are handled separately.",
+      "statement": "Every nonzero codeword has weight at least 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "inner-rm",
+        "distance-lower"
+      ],
+      "id": "distance-exact",
+      "proof": "The deterministic scaled 64-root polynomial avoids the unique all-one symbol on every nonroot block, attaining the lower bound.",
+      "statement": "The minimum distance is exactly 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "fourier-fiber"
+      ],
+      "id": "field-linear-ceiling",
+      "proof": "Scaling a nonzero outer word through every nonzero field element forces it to have at most 64 zero coordinates; puncturing 32703 coordinates and applying Singleton gives outer dimension at most 65.",
+      "statement": "No F-linear outer code with this affine inner encoder has binary dimension exceeding 1040 at the target.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Explicit Fourier-bias calculations via affine-inner finite-field descent",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final enumeration)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final enumeration)",
+    "scripts/validate-data.mjs",
+    "scripts/publish_pages.sh",
+    "dashboard/package.json"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There exists a fully deterministic binary linear code with exact parameters [1,073,741,824, 1,040, 535,822,336]_2.",
+  "title": "Exact [2^30,1040,535822336] code from an explicit Fourier-fiber calculation"
+}

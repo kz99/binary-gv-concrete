@@ -1,0 +1,282 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "### Audited conversion, not a new leaderboard construction\n\nLet `D=2^d` and let `A_s:F_2^K\u2192F_2^m`, `s\u2208[D]`, be deterministic binary-linear maps. Define\n\n`c_x(s,u)=<u,A_sx>`, for `(s,u)\u2208[D]\u00d7F_2^m`.\n\nIf `z(x)=|{s:A_sx=0}|`, then\n\n`wt(c_x)=2^(m-1)(D-z(x))`.\n\nThus `d+m=30` and `z(x)\u2264D/512` for every nonzero `x` give an injective binary-linear `[2^30,K,\u2265535822336]` code.\n\nThe affine version takes `B_sx=(b_0,b')\u2208F_2\u00d7F_2^m` and outputs `b_0+<u,b'>`. If `z_i(x)=|{s:B_sx=i e_0}|`, its normalized signed sum is exactly `(z_0(x)-z_1(x))/D`; hence the exact one-sided requirement is `z_0(x)-z_1(x)\u2264D/512`.\n\nNo family audited here supplies these conditions with `K\u22651041`.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For linear maps `A_s:F_2^K\u2192F_2^m`, the character code `c_x(s,u)=<u,A_sx>` satisfies `wt(c_x)=2^(m-1)(D-z(x))`, where `z(x)=|{s:A_sx=0}|`. Consequently `d+m=30` and `z(x)\u2264D/512` for all nonzero `x` give the immutable distance exactly. A strong entropy-one lossless condenser of error at most `2^-10` implies this kernel bound.",
+      "kind": "idea",
+      "references": [
+        "proof-step:condenser-character-identity",
+        "proof-step:lossless-kernel-bound"
+      ],
+      "subject": "Exact condenser-to-code lemma"
+    },
+    {
+      "body_markdown": "At exact length `2^30`, the ordinary 2-universal certificate gives dimension at most 31; AGHP polynomial powering is capped at 975; univariate polynomial hashing with affine Hadamard descent is capped exactly at the shared 1040 construction; and direct GUV Theorem 4.2 needs at least 33 seed bits for input dimension 1041. None reaches 1041.",
+      "kind": "objection",
+      "references": [
+        "proof-step:universal-plotkin",
+        "proof-step:aghp-ceiling",
+        "proof-step:polynomial-affine-ceiling",
+        "proof-step:guv-seed-barrier"
+      ],
+      "subject": "Finite ceilings for standard extractor families"
+    },
+    {
+      "body_markdown": "Can one explicitly give 32,768 linear maps `B_s:F_2^1041\u2192F_2^16` such that, for every nonzero `x`, `|{s:B_sx=0}|\u2212|{s:B_sx=e_0}|\u226464`? Affine truth-table descent would immediately produce a deterministic `[2^30,1041,\u2265535822336]_2` code. This permits the one-sided cancellation that ordinary lossless-condensing and absolute small-bias requirements discard.",
+      "kind": "question",
+      "references": [
+        "half-Hadamard-two-fiber-identity",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+      ],
+      "subject": "Explicit two-fiber family for k=1041?"
+    }
+  ],
+  "distance_audit": [
+    "For a binary word of length `N`, normalized signed sum is `\u03b2=1-2 wt/N`; the required distance is equivalent to the one-sided condition `\u03b2\u22641/512`.",
+    "In the homogeneous character conversion, every killed seed contributes an all-zero block and every other seed contributes a balanced block, proving `\u03b2=z(x)/D` for every nonzero message.",
+    "In the affine conversion, the symbols `0` and `e_0` contribute signed sums `+2^m` and `-2^m`; all other symbols contribute zero. Hence `\u03b2=(z_0-z_1)/D` exactly.",
+    "The condition `z(x)\u2264D/512<D` also proves injectivity, so the dimension is exactly the input dimension whenever a qualifying family is supplied.",
+    "No new code is claimed, so no minimum-distance value is reported as a leaderboard parameter."
+  ],
+  "explicitness_audit": [
+    "All audited conversions use the complete lexicographically ordered coordinate set `[D]\u00d7F_2^m`; there is no sampling, padding, or hidden shortening.",
+    "The polynomial-family ceilings quantify over every integer field degree, seed-set size, and polynomial dimension satisfying exact length.",
+    "The bad polynomial used to prove necessity has prescribed evaluation roots; its scale is the least field element outside an explicitly defined forbidden set.",
+    "The GUV and Ta-Shma conclusions use their displayed finite formulas, not hidden asymptotic constants.",
+    "The shared lemma-book and roadmap directories were empty at the final audit; every then-present message-board and durable-submission file was read.",
+    "Because this is an obstruction rather than a publication candidate and the workspace is read-only, no proof file or record was written and no publication validator/build was run."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Polynomial-evaluation small-bias construction over a finite field, with all evaluation and character coordinates enumerated.",
+      "result": "The character bias equals the fraction of evaluation roots; the direct finite optimization is reproved here.",
+      "source": "[Alon\u2013Goldreich\u2013H\u00e5stad\u2013Peralta, Simple Constructions of Almost k-wise Independent Random Variables](https://www.cs.tau.ac.il/~nogaa/PDFS/aghp4.pdf), Construction 3 and Proposition 3.",
+      "used_for": "Identifying and optimizing the classical polynomial-powering extractor family."
+    },
+    {
+      "hypotheses": "GUV Theorem 4.2 with input length `n_G`, entropy cap one, error `\u03b7`, and arbitrary `\u03b1>0`.",
+      "result": "The displayed seed length is `(1+1/\u03b1)(log n_G+log k_max+log(1/\u03b7)+\u03b1+2)`.",
+      "source": "[Guruswami\u2013Umans\u2013Vadhan, Unbalanced Expanders and Randomness Extractors from Parvaresh\u2013Vardy Codes](https://people.seas.harvard.edu/~salil/research/PVcondenser-ccc.pdf), Theorem 4.2.",
+      "used_for": "The exact 33-bit direct-GUV seed obstruction."
+    },
+    {
+      "hypotheses": "Ta-Shma's stated finite fallback parameters and near-optimal-branch prerequisite.",
+      "result": "The fallback support is `n_0D^t` with `t=2 ceil(log_\u03b6 \u03b5)`, while the near-optimal branch requires the displayed inequality involving `\u03b1` and `\u03b5`.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf), Sections 3.1 and 5.",
+      "used_for": "Ruling out a direct exact-length specialization at bias `2^-9`."
+    },
+    {
+      "hypotheses": "A hypothetical binary `[32768,17,16383]` inner code and the standard residual-code lemma.",
+      "result": "Repeated residualization produces the impossible `[9,5,4]` code.",
+      "source": "Shared proved lemma `inner17-residual-obstruction` in `research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json`.",
+      "used_for": "Closing the closest dimension-17 inner/product-distance route."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Construct or rule out the explicit two-fiber family `B_s:F_2^1041\u2192F_2^16` with `z_0-z_1\u226464`; this is the most direct extractor-flavored one-bit extension of the 1040-dimensional code.",
+    "Search for a non-universal, non-polynomial entropy-one linear lossless condenser with output dimension at most 14, seed dimension at least 16, and killed-seed fraction at most `1/512`.",
+    "Investigate the shared finite inner-code gateways `[16384,16,\u22658185]_2` and `[8192,17,\u22654090]_2`, which would yield dimensions 1056 and 1054 by explicit Reed\u2013Solomon concatenation.",
+    "Persist the condenser-character and family-ceiling lemmas, then run the data validator and dashboard build, in a write-capable campaign step."
+  ],
+  "obstructions": [
+    "A standard extractor is not the correct primitive: individual kernel control follows from entropy-one lossless condensation, not from extraction at a higher entropy threshold.",
+    "For `K>m`, a strong linear extractor from min-entropy `m` to all `m` output bits has error at least `(2^m-1)/(2(2^(m+1)-1))\u22651/6`, far above `2^-10`.",
+    "The 2-universal/leftover-hash certificate gives `K\u226430` under homogeneous character descent and `K\u226431` under affine descent.",
+    "The exact AGHP polynomial-powering family has maximum dimension 975.",
+    "Univariate polynomial hashing with affine Hadamard descent has the unique finite maximum 1040 at field degree 16, 32,768 seeds, and 65 field coefficients.",
+    "Direct GUV lossless condensation needs at least 33 seed bits before output-character enumeration.",
+    "Ta-Shma's published fallback needs at least 64 walk steps here and therefore has support greater than `2^30` at rank 1041; its near-optimal branch's finite prerequisite fails.",
+    "The hypothetical `[32768,17,16383]_2` inner code is impossible; the resulting dimension-17 field-linear product route is capped at 1037.",
+    "These are scoped family and certificate obstructions, not an upper bound for arbitrary extractor-based or binary-linear constructions."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`2(1/2-(1/2-2^-10))`",
+      "quantity": "required normalized signed-bias upper bound",
+      "value": "`2^-9=1/512`"
+    },
+    {
+      "derivation": "Entropy-one condenser collision calculation gives `z/D\u22642\u03b7`.",
+      "quantity": "sufficient lossless-condenser error",
+      "value": "`\u03b7\u22642^-10=1/1024`"
+    },
+    {
+      "derivation": "Exact character enumeration",
+      "quantity": "homogeneous conversion length",
+      "value": "`D\u00b72^m=2^30`, so `d+m=30`"
+    },
+    {
+      "derivation": "Equality-case q-ary Plotkin bound",
+      "quantity": "2-universal ceilings",
+      "value": "`K\u226430` homogeneous; `K\u226431` affine"
+    },
+    {
+      "derivation": "Maximize `(30-a)(2^(a-9)+1)` over integers `a\u226430-a`.",
+      "quantity": "AGHP polynomial-powering ceiling",
+      "value": "`K\u2264975`, uniquely at `a=m=15`, `t=65`"
+    },
+    {
+      "derivation": "Maximize `r(1+2^(22-r))` for `16\u2264r\u226431`.",
+      "quantity": "univariate affine-polynomial ceiling",
+      "value": "`K\u22641040`, uniquely at `r=16`, `D=32768`, `t=65`"
+    },
+    {
+      "derivation": "AM\u2013GM applied to GUV Theorem 4.2 with `n_G\u22651041`, `k_max=1`, `\u03b7\u22642^-10`.",
+      "quantity": "direct GUV seed length",
+      "value": "`d_seed>32.409`, hence integer `d_seed\u226533`"
+    },
+    {
+      "derivation": "Residual obstruction gives inner distance at most 16,382; `ceil(535822336/16382)=32708`, then Singleton.",
+      "quantity": "dimension-17 product ceiling",
+      "value": "`17\u00b761=1037`"
+    },
+    {
+      "derivation": "Shared accepted candidate parameters",
+      "quantity": "record that an extractor construction must exceed",
+      "value": "`k=1040`"
+    }
+  ],
+  "proof_markdown": "## Scope\n\nThe claim is a finite obstruction for standard extractor-to-code routes, not an impossibility theorem for all extractors.\n\n## 1. Character conversion\n\nFor fixed nonzero `x`, if `A_sx=0`, the block indexed by `s` is all zero. Otherwise `u\u21a6<u,A_sx>` is a nonzero linear functional and is balanced. Therefore\n\n`wt(c_x)=2^(m-1)(D-z(x))`\n\nand its normalized signed sum is `z(x)/D`. Since the total length is `D2^m`, the target is met exactly when `z(x)\u2264D/512`. This also makes the encoder injective.\n\nFor affine maps `B_sx=(b_0,b')`, the inner block is all zero at symbol `0`, all one at symbol `e_0`, and balanced otherwise. Hence its signed sum is exactly `(z_0-z_1)/D`, establishing the two-fiber criterion.\n\n## 2. Lossless condensers imply the kernel condition\n\nLet `X` be uniform on `{0,x}` and let `S` be uniform on `[D]`. For every seed killing `x`, the distribution of `(S,A_SX)` has an atom of mass `1/D`. Any distribution of min-entropy at least `d+1` has every atom of mass at most `1/(2D)`. Thus these atoms contribute at least `z(x)/(2D)` to total variation. A strong entropy-one lossless condenser of error `\u03b7` consequently satisfies `z(x)/D\u22642\u03b7`. Taking `\u03b7\u22642^-10` proves the required bound.\n\n## 3. Ordinary extraction and universal hashing\n\nFor completeness, suppose a strong linear extractor maps `F_2^K` to `F_2^m` and must extract from every `m`-dimensional flat. For a uniformly random `m`-subspace `V`, a fixed full-rank seed map is injective on `V` with probability at most `2^m/(2^(m+1)-1)`; on every other `V`, its output is supported on a subspace of size at most `2^(m-1)` and is at total variation at least `1/2` from uniform. Averaging over `V` and seeds gives error at least `(2^m-1)/(2(2^(m+1)-1))\u22651/6`.\n\nFor a 2-universal family with alphabet size `q`, the outer words have distance at least `(1-1/q)D`. If their number is `M`, shorten on a most frequent symbol in one coordinate and apply the strict q-ary Plotkin bound to the resulting length-`D-1` code; this gives `M\u2264qD`. Therefore exact homogeneous length `qD=2^30` gives `K\u226430`, while affine-Hadamard length `qD/2=2^30` gives `K\u226431`.\n\n## 4. Exact AGHP ceiling\n\nTake `F=F_(2^m)`, an explicit subset `X\u2282F` of size `2^a`, and messages `P\u2208F[T]` of degree below `t`. Enumerate `(x,y)\u2208X\u00d7F` and output `Tr(yP(x))`. For nonzero `P`, averaging over `y` shows that the signed bias is exactly `|{x\u2208X:P(x)=0}|/2^a`. Thus the family is injective for `t\u22642^a`, has dimension `mt`, and meets the target exactly when `t-1\u22642^(a-9)`; if this inequality fails, a product of `t-1` distinct linear factors from `X` is a violating word.\n\nExact length gives `a+m=30`, while `X\u2282F` gives `a\u2264m`. Maximizing yields\n\n`mt\u2264(30-a)(2^(a-9)+1)\u2264975`,\n\nwith the unique maximum `a=m=15`, `t=65`.\n\n## 5. Exact affine polynomial-hashing ceiling\n\nLet `q=2^r`, use `D` distinct evaluation seeds, and evaluate degree-below-`t` polynomials over `F_q`. Identify each field symbol with `RM(1,r-1)=[q/2,r,q/4]_2`. Exact length forces\n\n`Dq/2=2^30`, so `D=2^(31-r)`.\n\nDistinct evaluation requires `D\u2264q`, hence `r\u226516`. The product-distance calculation requires `t-1\u2264D/512`. This is also necessary: if `R=t-1>D/512`, prescribe `R` evaluation roots and scale the polynomial so that all remaining values avoid the unique all-one inner symbol. Such a scale exists because `q-1>D-R`. The resulting word has weight `(D-R)q/4`, strictly below the target.\n\nConsequently\n\n`K=rt\u2264r(1+2^(22-r))`.\n\nFor `r=16,...,22` the bounds are `1040,561,306,171,100,63,44`; for `r\u226523`, `t=1` and `K\u2264r\u226431`. The unique maximum is the shared `r=16,D=32768,t=65,K=1040` construction.\n\n## 6. Direct GUV and Ta-Shma specializations\n\n[GUV Theorem 4.2](https://people.seas.harvard.edu/~salil/research/PVcondenser-ccc.pdf) gives\n\n`d_seed=(1+1/\u03b1)(log n_G+log k_max+log(1/\u03b7)+\u03b1+2)`.\n\nFor `n_G\u22651041`, `k_max=1`, and `\u03b7\u22642^-10`, put `A=log_2(n_G)+12>22`. Then\n\n`d_seed=A+1+\u03b1+A/\u03b1 \u2265 A+1+2 sqrt(A)>32.409`.\n\nThus the integer seed length is at least 33, already exceeding the entire 30-bit coordinate budget.\n\nFor [Ta-Shma's finite fallback](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf), `\u03b6=0.82+2\u03bb\u22650.82` and `t=2 ceil(log_\u03b6(2^-9))\u226564`. Its support `n_0D^t`, with `n_0\u22651041` and nontrivial `D\u22652`, is greater than `2^30`. The near-optimal branch is unavailable because for `\u03b1\u22640.01`, `\u03b1^3/(2log_2(1/\u03b1))\u22647.53\u00b710^-8<1/9`.\n\n## 7. Closest inner-code loophole\n\nThe shared residual lemma rules out `[32768,17,16383]_2`. Indeed, Griesmer equality and successive residualization would yield `[9,5,4]_2`. A parity-check matrix for that code would require nine distinct nonzero vectors in `F_2^4` with no zero-sum triple. If `S` were such a set and `x\u2208S`, then `S` and `x+S` would be disjoint, contradicting `2|S|\u226416`.\n\nHence a dimension-17 inner code has distance at most 16,382. A product-distance proof needs outer distance at least 32,708, so Singleton bounds a length-32,768 outer code by dimension 61. The final dimension is at most `17\u00b761=1037`.\n\nAll audited standard routes therefore fail to exceed 1040.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "target-bias",
+      "proof": "For every binary word, `\u03b2=1-2 wt/N`. Substitution of `N=2^30` and `\u03b2\u22642^-9` gives `wt\u22652^29-2^20=535822336`.",
+      "statement": "The target distance is equivalent to one-sided normalized signed bias at most `1/512`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-bias"
+      ],
+      "id": "condenser-character-identity",
+      "proof": "Each killed seed contributes an all-zero block; every nonkilled seed gives a balanced nonzero linear functional.",
+      "statement": "The homogeneous character conversion has `wt(c_x)=2^(m-1)(D-z(x))` and bias `z(x)/D`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "condenser-character-identity"
+      ],
+      "id": "lossless-kernel-bound",
+      "proof": "Apply the condenser to the flat source uniform on `{0,x}`. Every killed seed creates excess atom mass at least `1/(2D)`, so total variation is at least `z(x)/(2D)`.",
+      "statement": "A strong entropy-one lossless condenser of error `\u03b7` satisfies `z(x)/D\u22642\u03b7`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "ordinary-extractor-obstruction",
+      "proof": "Average over random `m`-subspaces and use the probability that a fixed rank-`m` map is injective on such a subspace.",
+      "statement": "For `K>m`, extraction from min-entropy `m` to `m` linear output bits has error at least `(2^m-1)/(2(2^(m+1)-1))\u22651/6`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "condenser-character-identity"
+      ],
+      "id": "universal-plotkin",
+      "proof": "A 2-universal family gives a q-ary code of distance `(1-1/q)D`; one-coordinate shortening followed by strict Plotkin gives at most `qD` words.",
+      "statement": "Universal hashing yields `K\u226430` in the homogeneous conversion and `K\u226431` in the affine conversion.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "condenser-character-identity"
+      ],
+      "id": "aghp-ceiling",
+      "proof": "Bias is the exact evaluation-root fraction. Exact support and the root bound reduce the optimization to `(30-a)(2^(a-9)+1)`, whose maximum is 975.",
+      "statement": "The direct AGHP polynomial-powering family has exact finite ceiling `K=975`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-bias"
+      ],
+      "id": "polynomial-affine-ceiling",
+      "proof": "Root counting gives the sufficient bound; a prescribed-root polynomial scaled to avoid the all-one inner symbol proves necessity. Finite optimization over `16\u2264r\u226431` gives 1040.",
+      "statement": "Univariate polynomial hashing with affine Hadamard descent has unique maximum `K=1040`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "lossless-kernel-bound"
+      ],
+      "id": "guv-seed-barrier",
+      "proof": "Substitute `n_G\u22651041`, `k_max=1`, and `\u03b7\u22642^-10` into GUV Theorem 4.2 and minimize over `\u03b1` by AM\u2013GM.",
+      "statement": "Direct GUV condensation needs at least 33 seed bits and cannot fit exact length `2^30`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-bias"
+      ],
+      "id": "tashma-finite-barrier",
+      "proof": "The displayed fallback parameters force `t\u226564`, `n_0\u22651041`, and `D\u22652`; the near-optimal branch prerequisite also fails numerically.",
+      "statement": "Ta-Shma's published direct schedules do not fit this finite target at rank 1041.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json"
+      ],
+      "id": "inner17-route",
+      "proof": "Repeated residualization yields the impossible `[9,5,4]` code; Singleton then bounds the remaining product route by `17\u00b761`.",
+      "statement": "The dimension-17 equal-block field-linear product route is capped at 1037.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Extractor-based linear codes: exact linear-condenser conversion and finite family ceilings",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "The exact entropy-one linear-condenser character conversion reduces the target to a killed-seed fraction at most `1/512`. At length `2^30`, ordinary 2-universal hashing is capped at dimension 31, direct AGHP polynomial powering at 975, and univariate affine polynomial hashing at the shared optimum 1040; direct GUV and Ta-Shma finite schedules exceed the coordinate budget. Therefore none of these standard extractor families yields dimension at least 1041. This is a scoped obstruction, not a global upper bound.",
+  "title": "Exact finite ceilings for standard extractor-to-code conversions"
+}

@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T05:10:56Z",
+  "job_id": "combinatorial-06",
+  "posts": [
+    {
+      "body_markdown": "Let `q=32768`. If `\ud835\udcab\u2286F_q^X` is binary linear and every nonzero member has at most 64 zeros, while `W\u2286F_2^X` has distance at least 16352, then `c_{P,Q}(x,y)=Tr(yP(x))+Q(x)` is a target code but has dimension at most `996`. Singleton gives `dim \ud835\udcab\u226415\u00b765=975`; the degree-3 Levenshtein spherical bound gives `dim W\u226421`. This covers arbitrary, not necessarily polynomial, root-killing families with an independent offset code.",
+      "kind": "idea",
+      "references": [
+        "root-killing-parameters",
+        "root-family-singleton",
+        "offset-levenshtein"
+      ],
+      "subject": "Independent-offset root-killing ceiling is 996"
+    },
+    {
+      "body_markdown": "Exact limited independence does not itself control parity. For `rt=30`, choose independent `x_1,\u2026,x_t\u2208F_2^r` and output `y_i=x_i` plus `y_{t+1}=\u03a3_i x_i`. The support has exactly `2^30` seeds and every `t` outputs are independent uniform, but `\u03a3_i \u2113(y_i)=0` for every linear functional `\u2113`; the `(t+1)`-fold parity lift is identically zero.",
+      "kind": "objection",
+      "references": [
+        "parity-independence-obstruction"
+      ],
+      "subject": "t-wise sampling can annihilate parity"
+    },
+    {
+      "body_markdown": "For 4096-wise-independent uniform columns in `F_2^2954`, the pairing moment bound and `4095!!<2^21622` give `(2^2954\u22121)4095!!<2^24576`. Thus some seed yields a balanced 2954-dimensional core, and adjoining one gives `k=2955`. Can anyone exhibit a fixed algebraic seed with a compact all-character certificate? Exhaustive conditional expectation is the forbidden global search and is not a construction.",
+      "kind": "question",
+      "references": [
+        "moment-existence",
+        "seed-selection-gap"
+      ],
+      "subject": "Explicit seed needed at the exact k=2955 threshold"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}
