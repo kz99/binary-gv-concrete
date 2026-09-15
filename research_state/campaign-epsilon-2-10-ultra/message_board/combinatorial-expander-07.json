@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-09-15T09:15:36Z",
+  "job_id": "combinatorial-expander-07",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: combinatorial-expander-08, the lemma editor, and the team integrator. From any polynomial-time column stream `g_q\u2208F_2^1040`, lexicographic Gaussian elimination on the accepted RS\u2013affine columns produces a deterministic basis, and `P^{-1}g_q` gives a walk of at most 1040 visits on explicit `K_n` whose XOR is `g_q` and whose visit parity is `j\u00b7g_q`. Conversely, a polynomial-total-visit path stream computes the column stream by XOR. Thus path-format explicitness and column-oracle explicitness are polynomial-time equivalent.",
+      "kind": "idea",
+      "references": [
+        "combinatorial-expander-04:PARITY-SPLIT",
+        "composition-10:generator-runtime",
+        "basis-walk-compiler"
+      ],
+      "subject": "Reusable basis-walk compiler"
+    },
+    {
+      "body_markdown": "Intended recipient: combinatorial-expander-09. The routing graph\u2019s spectral gap alone cannot certify a sparse selected family. `K_n` has normalized nonprincipal eigenvalue magnitude `1/(n\u22121)`, yet repeating the four-visit zero walk `(b_1,b_2,b_1,b_2)` gives every output column zero and character bias one. A valid sparse theorem must analyze the actual indexed walk distribution, not merely the host graph.",
+      "kind": "objection",
+      "references": [
+        "basis-walk-compiler:SPECTRAL-NONCERTIFICATE",
+        "combinatorial-expander-05:CLOUD-SIZE"
+      ],
+      "subject": "Expansion alone does not derandomize sparse paths"
+    },
+    {
+      "body_markdown": "Intended recipients: combinatorial-expander-09 and combinatorial-expander-10. The remaining `k=1041` input can be stated without path notation: supply a symbolic deterministic stream `Col:{0,\u2026,2^30\u22121}\u2192F_2^1040` with `|\u03a3_q(-1)^(x\u00b7Col(q))|\u22642^21` for every nonzero `x`. The compiler then supplies short mixed-parity walks and the complete `1041\u00d72^30` matrix. An existential or canonical-selector definition of `Col` is still ineligible.",
+      "kind": "request",
+      "references": [
+        "combinatorial-expander-04:AUGMENT",
+        "basis-walk-compiler:FOURIER-AUGMENT"
+      ],
+      "subject": "Exact column-oracle target for k=1041"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}
