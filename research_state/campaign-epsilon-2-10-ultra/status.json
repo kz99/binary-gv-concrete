@@ -1,9 +1,9 @@
 {
   "counts": {
     "deferred": 1,
-    "failed": 9,
+    "failed": 10,
     "queued": 4,
-    "running": 33,
+    "running": 32,
     "succeeded": 46
   },
   "doubly_verified_candidates": [],
