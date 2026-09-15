@@ -1,0 +1,197 @@
+{
+  "baseline_beaten": false,
+  "block_length": null,
+  "confidence": "high",
+  "construction_markdown": "Consider only the standard AG\u2013affine concatenation template. Let q=2^m, let X/F_q be a smooth projective geometrically integral curve, let D=P_1+...+P_L consist of distinct F_q-rational points, and let G be an F_q-rational divisor of degree a<L disjoint from D. The outer code is C_L(D,G), with K=l(G) and designed distance at least L-a. Concatenate each F_q symbol through a fixed F_2-linear isomorphism F_q\u2192RM(1,m-1), whose parameters are [2^(m-1),m,2^(m-2)]_2. Exact binary length forces L=2^(31-m), and the product-distance certificate forces a\u2264A_m=2^(22-m). No curve or divisor meeting the surviving conditions is constructed here; this is an obstruction and parameter-audit result.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For the standard C_L(D,G) concatenation with RM(1,m-1), exact length and product distance force L=2^(31-m) and deg G\u22642^(22-m). After removing the fixed part of |G|, if r=l(G)-1 and the induced map has degree \u03b4, then a necessary condition is L\u2264\u03b4 U_q(\u03c0(floor(A_m/\u03b4),r)), for some 1\u2264\u03b4\u2264floor(A_m/r). Here \u03c0 is Castelnuovo's bound and U_q is the minimum of the Serre and finite-Ihara point bounds. This is a finite exact-integer sieve usable by the architecture and parameter positions.",
+      "kind": "idea",
+      "references": [
+        "proofs/rm-1-30-baseline.md",
+        "lemma_book/lemma-book.json"
+      ],
+      "subject": "Reusable complete-linear-series sieve for AG\u2013affine concatenation"
+    },
+    {
+      "body_markdown": "The sieve proves the dimension caps mK\u2264826 for m=14, \u2264975 for m=15, and \u22641040 for m=16; all m\u226517 are smaller. Consequently every standard product-certified AG\u2013affine improvement over the existing k=1040 record must use m\u226413. At m=13, even k=1053 would force a basepoint-free birational g^80_512 on a curve over F_8192 with exactly 262144 evaluation points and genus 1404\u2264g\u22641407.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r001-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r001-02.json"
+      ],
+      "subject": "Close m\u226514 and isolate the m=13 extremal gateway"
+    },
+    {
+      "body_markdown": "Can the characteristic-2 and F_8192-descent hypotheses be verified for the second Castelnuovo theorem at (d,r,g)=(512,80,1404..1407)? The classical threshold \u03c0_1(512,80)=1392 would put the image on a surface of minimal degree. If the resulting scroll and ruling descend to F_8192, adjunction forces divisor coefficient u=7 and hence a degree-7 map to P^1, contradicting #X(F_8192)=262144 because 7(8192+1)=57351. This implication is not used in the proved obstruction pending a descent-safe theorem.",
+      "kind": "question",
+      "references": [
+        "https://www.college-de-france.fr/sites/default/files/media/document/2023-03/1983-1984_serre.pdf"
+      ],
+      "subject": "To algebraic bottleneck/literature position: descent-safe second Castelnuovo theorem"
+    }
+  ],
+  "distance_audit": [
+    "Outer designed distance is L-a; inner distance is 2^(m-2).",
+    "The required inequality (L-a)2^(m-2)\u22652^29-2^20 is equivalent, using L=2^(31-m), to a\u22642^(22-m).",
+    "At m=13, a=512 gives (262144-512)\u00b72048=535822336 exactly.",
+    "The result does not assert that any surviving outer curve/divisor exists, so no new minimum distance is claimed."
+  ],
+  "explicitness_audit": [
+    "All quantities in the obstruction sieve are computed by finite exact-integer formulas; no random sampling, exhaustive code search, or conditional-expectation selector is used.",
+    "No explicit curve satisfying a surviving gateway is supplied, so this result is deliberately not a leaderboard submission.",
+    "If an explicit curve, evaluation-point ordering, divisor, and Riemann\u2013Roch basis were supplied with polynomial-time algorithms, the usual concatenated generator matrix could be streamed deterministically in polynomial time; this conditional observation does not establish such an instance."
+  ],
+  "generator_matrix": {
+    "algorithm": "Conditional template only: enumerate the specified Riemann\u2013Roch basis f_1,...,f_K and ordered points P_1,...,P_L; evaluate f_i(P_j) in F_(2^m); replace each field symbol by its m-row binary multiplication/evaluation block under the fixed polynomial-basis isomorphism and the canonical RM(1,m-1) generator; stream the resulting mK by 2^(m-1)L matrix. No qualifying curve data are supplied in this result.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Given polynomial-time curve arithmetic, point enumeration, and Riemann\u2013Roch basis algorithms, O(mKLn_inner\u00b7poly(log n)) bit operations with n_inner=2^(m-1), hence n^O(1).",
+    "runtime_proof": "There are mK\u00b7L\u00b72^(m-1)=kn output bits, so streaming them with polynomial-time finite-field operations costs O(kn\u00b7poly(log n)). Since k\u2264n, this is n^O(1). The statement is conditional on explicit curve data and is not invoked as a construction claim."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "X is a smooth projective geometrically integral genus-g curve over F_q.",
+      "result": "#X(F_q)\u2264q+1+floor(2sqrt(q))g.",
+      "source": "[J.-P. Serre, 1983\u201384 Coll\u00e8ge de France course summary](https://www.college-de-france.fr/sites/default/files/media/document/2023-03/1983-1984_serre.pdf); see also Serre, C. R. Acad. Sci. Paris 296 (1983), 397\u2013402.",
+      "used_for": "Genus lower bounds and the point-count branch of the finite parameter sieve."
+    },
+    {
+      "hypotheses": "A nondegenerate integral curve of degree e in projective r-space.",
+      "result": "Its geometric genus is at most \u03c0(e,r), where e-1=s(r-1)+epsilon and \u03c0=binom(s,2)(r-1)+s\u00b7epsilon.",
+      "source": "Classical Castelnuovo genus bound.",
+      "used_for": "Upper-bounding the genus of the image of the complete linear series."
+    },
+    {
+      "hypotheses": "E is an effective special divisor on a smooth curve.",
+      "result": "l(E)\u2264deg(E)/2+1.",
+      "source": "Clifford's theorem.",
+      "used_for": "Initial dimension cap for m\u226415, especially after the point count forces genus above deg(E)."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Verify a characteristic-2, finite-field-descent version of the second Castelnuovo theorem and its scroll ruling for the m=13 gateway.",
+    "Run the same near-Castelnuovo classification at m=12: k>1040 requires K\u226587, while the sieve permits at most K=99; K=99 forces a birational series of degree 1019\u20131024 and genus at least 4841.",
+    "Search explicit high-point curves only inside the surviving m\u226413 windows; reject proposals immediately unless their complete linear series passes the \u03b4\u2013Castelnuovo\u2013Ihara inequality."
+  ],
+  "obstructions": [
+    "Within the standard product-distance AG\u2013affine family, the global finite sieve gives k\u22645409; this is an upper bound, not an attained construction.",
+    "Every m\u226514 instance has k\u22641040 and therefore cannot strictly improve the accepted k=1040 affine RS construction.",
+    "At m=13, k\u22651053 can occur only through an exceptionally constrained near-Castelnuovo curve; ordinary high-genus point-rich towers do not by themselves supply the required low-degree, high-dimensional linear series.",
+    "The possible second-Castelnuovo/scroll contradiction is not yet counted as proved because characteristic-2 validity and descent of the ruling were not verified."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Binary length n",
+      "value": "1073741824=2^30"
+    },
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Required distance",
+      "value": "535822336=2^29-2^20"
+    },
+    {
+      "derivation": "Inner block length times number of outer evaluation points equals 2^30.",
+      "quantity": "Outer length",
+      "value": "L=2^(31-m)"
+    },
+    {
+      "derivation": "Product-distance inequality.",
+      "quantity": "Outer divisor-degree cap",
+      "value": "A_m=2^(22-m)"
+    },
+    {
+      "derivation": "Exact finite \u03b4\u2013Castelnuovo\u2013point-count sieve; entries are outer K caps.",
+      "quantity": "K caps for m=2,...,13",
+      "value": "2425,1803,1321,956,687,490,348,246,174,125,99,81"
+    },
+    {
+      "derivation": "Multiply the preceding K caps by m.",
+      "quantity": "Binary k caps for m=2,...,13",
+      "value": "4850,5409,5284,4780,4122,3430,2784,2214,1740,1375,1188,1053"
+    },
+    {
+      "derivation": "Same sieve for m=14,15; elementary l(G)\u2264a+1 for m=16.",
+      "quantity": "Binary k caps at m=14,15,16",
+      "value": "826,975,1040"
+    },
+    {
+      "derivation": "At m=13, K=81 and a=512.",
+      "quantity": "Extremal gateway",
+      "value": "q=8192, L=262144, g in [1404,1407], basepoint-free birational g^80_512"
+    },
+    {
+      "derivation": "Conditional gateway product distance.",
+      "quantity": "m=13 certified distance if the gateway exists",
+      "value": "(262144-512)\u00b72048=535822336"
+    }
+  ],
+  "proof_markdown": "Let q=2^m and concatenate C_L(D,G) with RM(1,m-1). Exact length gives L\u00b72^(m-1)=2^30, hence L=2^(31-m). If a=deg G, the standard product bound is (L-a)2^(m-2), so the target requires a\u2264A=2^(22-m).\n\nChoose a nonzero section of G and replace G by a linearly equivalent effective divisor E. Remove the fixed divisor B from |E|. The resulting E'=E-B is basepoint-free, has degree a'\u2264A, and l(E')=K. Put r=K-1. The complete series defines X\u2192Y\u2282P^r. If \u03b4 is the degree onto the normalization of Y and e=deg Y, then a'=\u03b4e, e\u2265r, and #X(F_q)\u2264\u03b4#Y(F_q). Castelnuovo gives g(Y)\u2264\u03c0(e,r), where, for e-1=s(r-1)+epsilon with 0\u2264epsilon<r-1, \u03c0(e,r)=s(s-1)(r-1)/2+s\u00b7epsilon.\n\nFor any genus h curve, use the integer point bound U_q(h)=min(q+1+floor(2sqrt(q))h, q+1+floor((isqrt(R)-h)/2)), where R=(8q+1)h^2+4hq(q-1). The second branch follows directly from the Frobenius eigenvalues. If t_i=alpha_i+conjugate(alpha_i), then N_1=q+1-sum(t_i), N_2=q^2+1+2hq-sum(t_i^2), N_1\u2264N_2, and (sum(t_i))^2\u2264h sum(t_i^2). Solving the resulting quadratic in N_1 gives the displayed bound. Therefore a necessary condition is\n\nL\u2264\u03b4 U_q(\u03c0(floor(A/\u03b4),r))\n\nfor some integer 1\u2264\u03b4\u2264floor(A/r).\n\nFor m\u226414, Serre's bound first forces genus(X)>A. Thus E is special and Clifford gives K\u2264floor(A/2)+1. Evaluate the preceding necessary inequality for every allowed \u03b4 using integer arithmetic. The resulting K caps are:\n\n| m | K cap | binary mK cap | max \u03b4U at K=cap+1 | L |\n|---:|---:|---:|---:|---:|\n|2|2425|4850|536782099|536870912|\n|3|1803|5409|268393494|268435456|\n|4|1321|5284|134128554|134217728|\n|5|956|4780|67107816|67108864|\n|6|687|4122|33531697|33554432|\n|7|490|3430|16771511|16777216|\n|8|348|2784|8380898|8388608|\n|9|246|2214|4190144|4194304|\n|10|174|1740|2090975|2097152|\n|11|125|1375|1043207|1048576|\n|12|99|1188|524257|524288|\n|13|81|1053|259059|262144|\n|14|59|826|129025|131072|\n|15|65|975|55575|65536|\n\nEach fourth-column entry is already below L. Increasing K increases r, decreases floor(A/\u03b4), and cannot increase either Castelnuovo's genus allowance or the admissible \u03b4 range; hence all larger K are excluded. For m=16, A=64 and the elementary bound l(G)\u2264a+1 gives k=16K\u22641040. For m\u226517 the same bound gives m(2^(22-m)+1)\u2264561, decreasing thereafter. This proves the global cap k\u22645409 and closes m\u226514 against improvement over k=1040.\n\nFinally take m=13 and suppose K=81. Then r=80. The \u03b4\u22652 branches fail the necessary point inequality, so \u03b4=1. Serre gives genus at least ceil((262144-8193)/181)=1404, while Castelnuovo gives genus at most \u03c0(512,80)=1407. If a'\u2264511, then \u03c0(511,80)=1401, a contradiction. Hence a'=a=512, the series has no fixed part, and it is birational. This proves the stated m=13 gateway without asserting its existence.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Concatenated length is L\u00b72^(m-1)=2^30. The product lower bound is (L-a)2^(m-2)\u22652^29-2^20. Substitution and division by 2^(m-2) give a\u22642^(22-m).",
+      "statement": "Exact length and product distance force L=2^(31-m) and deg G\u22642^(22-m).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "Replace G by an effective equivalent divisor using a nonzero section and remove the fixed part. The complete basepoint-free series has projective dimension r=K-1. If its map has degree \u03b4 and image degree e, then a'=\u03b4e and rational fibers have at most \u03b4 points. Apply Castelnuovo to the image and the stated point bound to its normalization.",
+      "statement": "Every surviving instance satisfies the finite \u03b4\u2013Castelnuovo\u2013point-count inequality.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2"
+      ],
+      "id": "P3",
+      "proof": "For m\u226414 the Serre point bound gives genus greater than A_m, so Clifford supplies a finite K range. Exact integer evaluation of the inequality gives the displayed caps. For m\u226516 use l(G)\u2264deg G+1.",
+      "statement": "The standard product-certified AG\u2013affine family has k\u22645409, and m\u226514 has k\u22641040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3"
+      ],
+      "id": "P4",
+      "proof": "At m=13 and K=81, every \u03b4\u22652 fails the point inequality. The birational branch has genus at least 1404 by Serre and at most 1407 by Castelnuovo. Degree at most 511 would lower the Castelnuovo cap to 1401, so the moving degree is exactly 512.",
+      "statement": "Any m=13, k=1053 gateway is a basepoint-free birational g^80_512 on a genus-1404-to-1407 curve with 262144 rational evaluation points.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "A classical second-Castelnuovo argument suggests containment in a minimal-degree scroll and then a degree-7 ruling, but characteristic-2 applicability and F_q descent were not established.",
+      "statement": "The m=13 gateway is impossible by a descended scroll ruling.",
+      "status": "conditional"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Algebraic-geometric evaluation codes: obstruction and exact finite-parameter audit for standard AG\u2013affine concatenation.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps",
+    "research_state/campaign-epsilon-2-10-ultra/message_board",
+    "research_state/campaign-epsilon-2-10-ultra/submissions"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For every exact-length binary code obtained by concatenating a one-point or general functional AG evaluation code C_L(D,G) over F_(2^m) with RM(1,m-1), when the required binary distance is certified by the standard product bound, the binary dimension is at most 5409. More sharply, every m\u226514 instance has dimension at most 1040, so a strict improvement over the accepted k=1040 construction must use m\u226413. At m=13, dimension 1053 would force a basepoint-free birational g^80_512 on an F_8192-curve having at least 262144 rational points and genus between 1404 and 1407.",
+  "title": "Castelnuovo\u2013Ihara parameter ceiling for product-certified AG\u2013affine codes"
+}

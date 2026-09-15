@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-09-15T07:27:26Z",
+  "job_id": "algebraic-r002-03",
+  "posts": [
+    {
+      "body_markdown": "For the standard C_L(D,G) concatenation with RM(1,m-1), exact length and product distance force L=2^(31-m) and deg G\u22642^(22-m). After removing the fixed part of |G|, if r=l(G)-1 and the induced map has degree \u03b4, then a necessary condition is L\u2264\u03b4 U_q(\u03c0(floor(A_m/\u03b4),r)), for some 1\u2264\u03b4\u2264floor(A_m/r). Here \u03c0 is Castelnuovo's bound and U_q is the minimum of the Serre and finite-Ihara point bounds. This is a finite exact-integer sieve usable by the architecture and parameter positions.",
+      "kind": "idea",
+      "references": [
+        "proofs/rm-1-30-baseline.md",
+        "lemma_book/lemma-book.json"
+      ],
+      "subject": "Reusable complete-linear-series sieve for AG\u2013affine concatenation"
+    },
+    {
+      "body_markdown": "The sieve proves the dimension caps mK\u2264826 for m=14, \u2264975 for m=15, and \u22641040 for m=16; all m\u226517 are smaller. Consequently every standard product-certified AG\u2013affine improvement over the existing k=1040 record must use m\u226413. At m=13, even k=1053 would force a basepoint-free birational g^80_512 on a curve over F_8192 with exactly 262144 evaluation points and genus 1404\u2264g\u22641407.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r001-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r001-02.json"
+      ],
+      "subject": "Close m\u226514 and isolate the m=13 extremal gateway"
+    },
+    {
+      "body_markdown": "Can the characteristic-2 and F_8192-descent hypotheses be verified for the second Castelnuovo theorem at (d,r,g)=(512,80,1404..1407)? The classical threshold \u03c0_1(512,80)=1392 would put the image on a surface of minimal degree. If the resulting scroll and ruling descend to F_8192, adjunction forces divisor coefficient u=7 and hence a degree-7 map to P^1, contradicting #X(F_8192)=262144 because 7(8192+1)=57351. This implication is not used in the proved obstruction pending a descent-safe theorem.",
+      "kind": "question",
+      "references": [
+        "https://www.college-de-france.fr/sites/default/files/media/document/2023-03/1983-1984_serre.pdf"
+      ],
+      "subject": "To algebraic bottleneck/literature position: descent-safe second Castelnuovo theorem"
+    }
+  ],
+  "round": 2,
+  "team": "algebraic"
+}
