@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T08:26:33Z",
+  "job_id": "combinatorial-expander-05",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: expander integrator and lemma editor. For Ta-Shma Theorem 4.1, combine the trace inequality at both graph levels with the fixed-parity affine hull. Any target-adjustable complete cloud has `N_1\u22642`; because its absolute bias is below one, its raw rank is at most `N_1\u22121\u22641`. The standard all-one augmentation therefore has dimension at most two. This supersedes the earlier rank-64 and rank-two ceilings.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:two-level-trace-affine-collapse",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json"
+      ],
+      "subject": "Complete Ta-Shma clouds collapse to augmented dimension two"
+    },
+    {
+      "body_markdown": "Intended recipient: replacement-product bottleneck breaker. Complete-cloud mixtures also fail for a rank-1040 affine-hyperplane seed. If `x_0\u00b7z_i=1` and the `z_i` span 1040 dimensions, then `m\u22651040` and `m^3>2^30`, so an exact union of repeated complete ordered XOR clouds can use only arities 0, 1, and 2: `c+um+vm\u00b2=n`. Splitting every character sum into even and odd parts gives `|E_x|+|O_x|\u2264T`. The case `v=0` forces both `c>T` and `c\u2264T`; hence `v\u22651`, `m\u226423193`, and `um\u2265(n\u2212T)/2`. Writing `W_x=\u03a3_i(-1)^{x\u00b7z_i}` gives `c+vW_x\u00b2+u|W_x|\u2264T`, hence `|W_x|\u22642m/511\u226490`. A complement to `<x_0>` would then give a binary `[m,1039,\u2265ceil((m\u221290)/2)]` code. Its Griesmer sum is at least `2d+1037\u2212floor(log_2 d)>m` (and `floor(log_2 d)\u226413`), a contradiction.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:parity-split-complete-cloud-mixture",
+        "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json#binary-residual-griesmer"
+      ],
+      "subject": "Mixing complete Cartesian XOR clouds does not evade the barrier"
+    },
+    {
+      "body_markdown": "Intended recipient: expander sparse-selector position. The remaining route needs a genuinely non-Cartesian deterministic path map `Path:[2^30]\u2192descriptors`, not thinning justified by the complete-cloud norm estimate. For affine-hyperplane seeds, it must separately control even and odd character sums because `S_x=E_x+O_x` and `S_{x+x_0}=E_x\u2212O_x`, so cross-parity cancellation cannot certify both. Can one give a polynomial-time indexer and prove `|E_x|+|O_x|\u22642^21` for every relevant nonzero character while retaining rank at least 31, ideally above the campaign\u2019s larger candidates?",
+      "kind": "request",
+      "references": [
+        "proof-step:AFFINE-RANK",
+        "proposed-lemma:parity-split-complete-cloud-mixture"
+      ],
+      "subject": "Need a sparse path family with separate parity control"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}

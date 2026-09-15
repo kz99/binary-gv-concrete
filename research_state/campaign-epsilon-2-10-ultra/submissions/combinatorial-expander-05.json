@@ -1,0 +1,285 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard code is submitted. The audited object is Ta-Shma\u2019s complete-output `s`-wide lift. It uses `N_1` outer labels `z_v\u2208F_2^r`, an outer `(N_1,D_1,\u03bb_1)` rotation graph, and an inner `(D_1^s,D_2,\u03bb_2)` graph. Lexicographically enumerating all starting states and all `t`-step instruction strings produces\n\n`M=N_1D_1^sD_2^t`\n\ncolumns. Each column is the XOR of exactly `t+1` visited outer labels. The published absolute-bias certificate is\n\n`B=Q^floor(t/s)`,  \n`Q=\u03bb_2^s+s\u03bb_2^(s-1)+s^2(\u03bb_2^(s-3)+\u03b6)`.\n\nThe new optimization proves that any exact or uniformly repeated, blindly punctured/zero-padded specialization capable of meeting the target has `N_1\u22642`, balanced rank at most one, and dimension at most two after adjoining the all-one row.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: expander integrator and lemma editor. For Ta-Shma Theorem 4.1, combine the trace inequality at both graph levels with the fixed-parity affine hull. Any target-adjustable complete cloud has `N_1\u22642`; because its absolute bias is below one, its raw rank is at most `N_1\u22121\u22641`. The standard all-one augmentation therefore has dimension at most two. This supersedes the earlier rank-64 and rank-two ceilings.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:two-level-trace-affine-collapse",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json"
+      ],
+      "subject": "Complete Ta-Shma clouds collapse to augmented dimension two"
+    },
+    {
+      "body_markdown": "Intended recipient: replacement-product bottleneck breaker. Complete-cloud mixtures also fail for a rank-1040 affine-hyperplane seed. If `x_0\u00b7z_i=1` and the `z_i` span 1040 dimensions, then `m\u22651040` and `m^3>2^30`, so an exact union of repeated complete ordered XOR clouds can use only arities 0, 1, and 2: `c+um+vm\u00b2=n`. Splitting every character sum into even and odd parts gives `|E_x|+|O_x|\u2264T`. The case `v=0` forces both `c>T` and `c\u2264T`; hence `v\u22651`, `m\u226423193`, and `um\u2265(n\u2212T)/2`. Writing `W_x=\u03a3_i(-1)^{x\u00b7z_i}` gives `c+vW_x\u00b2+u|W_x|\u2264T`, hence `|W_x|\u22642m/511\u226490`. A complement to `<x_0>` would then give a binary `[m,1039,\u2265ceil((m\u221290)/2)]` code. Its Griesmer sum is at least `2d+1037\u2212floor(log_2 d)>m` (and `floor(log_2 d)\u226413`), a contradiction.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:parity-split-complete-cloud-mixture",
+        "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json#binary-residual-griesmer"
+      ],
+      "subject": "Mixing complete Cartesian XOR clouds does not evade the barrier"
+    },
+    {
+      "body_markdown": "Intended recipient: expander sparse-selector position. The remaining route needs a genuinely non-Cartesian deterministic path map `Path:[2^30]\u2192descriptors`, not thinning justified by the complete-cloud norm estimate. For affine-hyperplane seeds, it must separately control even and odd character sums because `S_x=E_x+O_x` and `S_{x+x_0}=E_x\u2212O_x`, so cross-parity cancellation cannot certify both. Can one give a polynomial-time indexer and prove `|E_x|+|O_x|\u22642^21` for every relevant nonzero character while retaining rank at least 31, ideally above the campaign\u2019s larger candidates?",
+      "kind": "request",
+      "references": [
+        "proof-step:AFFINE-RANK",
+        "proposed-lemma:parity-split-complete-cloud-mixture"
+      ],
+      "subject": "Need a sparse path family with separate parity control"
+    }
+  ],
+  "distance_audit": [
+    "The immutable distance is `D=2^29\u22122^20=535,822,336`. Thus `T=n\u22122D=2^21=2,097,152`.",
+    "For generator columns `a_j`, a message `x` has weight `(n\u2212\u03a3_j(-1)^{x\u00b7a_j})/2`. The target only requires the one-sided inequality `\u03a3_j(-1)^{x\u00b7a_j}\u2264T`; Ta-Shma\u2019s theorem supplies the stronger absolute inequality.",
+    "The corresponding balanced-bias threshold is `\u03c4=T/n=2^-9=1/512`, not the distance deficit `2^-10`.",
+    "Blind deletion or zero padding from a raw length `L` is certified only when `BL+|n\u2212L|\u2264T`; hence `n\u2212T\u2264L\u2264n+T` and `B<1`.",
+    "The obstruction proves that every complete-cloud specialization within this certification regime has balanced rank at most one. It therefore cannot attain even the verified `k=31` baseline.",
+    "No new code is asserted, so `minimum_distance` is null rather than the target value."
+  ],
+  "explicitness_audit": [
+    "No random sampling, exhaustive selector, conditional expectation, or finite lookup is used.",
+    "The complete raw cloud has a deterministic lexicographic emitter: enumerate `(v,i_1,\u2026,i_s,j_1,\u2026,j_t)`, simulate the explicit rotation maps, XOR the `t+1` visited labels, and retain multiplicities.",
+    "In every nontrivial contracting instance within the length window, `D_1,D_2\u22652`, so `s,t\u2264log_2 M`; with explicit rotation tables and `M<2n`, raw full-matrix emission is polynomial in `n`.",
+    "Uniform repetition, lexicographically specified blind puncturing, and zero-column padding are deterministic and cannot increase rank. Code-aware puncturing or nonzero padding would require a new distance proof and is outside the theorem.",
+    "The generator object records only the unchanged verified RM fallback because the optimized replacement-product route produces no eligible matrix.",
+    "The workspace was read-only, so no proof, record, validator, or dashboard files were modified."
+  ],
+  "generator_matrix": {
+    "algorithm": "No new candidate matrix is asserted. For the unchanged verified fallback `RM(1,30)`, enumerate every `x=(x_1,\u2026,x_30)\u2208F_2^30` in lexicographic order and emit the column `(1,x_1,\u2026,x_30)^T`. This outputs the complete `31\u00d72^30` generator matrix.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Exactly `31n` output bits; fewer than `33n` bit writes and binary-counter flips in a streaming implementation, hence `O(n log n)` and in particular `n^{O(1)}`.",
+    "runtime_proof": "There are exactly `n=2^30` counter states. Each contributes 31 matrix entries. Across the full lexicographic count, the binary counter performs fewer than `2n` bit flips, so deterministic running time is polynomial and output-linear up to the fixed 31-row factor."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Undirected regular outer and inner rotation graphs; nonnegative theorem parameters satisfying `\u03b5_0+2\u03b2+2\u03bb_1\u2264\u03bb_2\u00b2`; complete enumeration of all starting states and instruction strings.",
+      "result": "The complete output has length `N_1D_1^sD_2^t`, and its absolute bias is at most `Q^floor(t/s)` for the displayed `Q`.",
+      "source": "[Amnon Ta-Shma, \u201cExplicit, almost optimal, epsilon-balanced codes,\u201d STOC 2017](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "Definition of the audited replacement product, compatibility inequality, output length, fixed walk length, and bias certificate."
+    },
+    {
+      "hypotheses": "A binary linear `[m,k,d]` code.",
+      "result": "The Griesmer inequality `m\u2265\u03a3_{i=0}^{k\u22121}ceil(d/2^i)`.",
+      "source": "J. H. Griesmer, \u201cA bound for error-correcting codes,\u201d IBM Journal of Research and Development 4 (1960); also proved locally in lemma `binary-residual-griesmer`.",
+      "used_for": "The supplementary obstruction to mixtures of complete Cartesian XOR clouds."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Persist `two-level-trace-affine-collapse` as a minimal lemma and request an independent campaign verification before changing any record.",
+    "Treat complete Cartesian enumeration\u2014including mixtures of complete arities\u2014as closed. Search only for a symbolically indexed non-Cartesian path family with a new all-character proof.",
+    "For affine-hyperplane seeds, require separate even/odd signed-sum bounds; explicitly verify exact length, retained rank, and polynomial-time full-matrix output.",
+    "Transfer the same inner-trace plus affine-hull method to the complete Gray-register construction, where the upstream audit indicates a balanced-rank ceiling of 64."
+  ],
+  "obstructions": [
+    "The blind-adjustment window is only `M\u2264n+T=1,075,838,976`.",
+    "Contraction and the outer trace force `D_1\u22653` whenever `N_1\u22653`.",
+    "The inner trace then forces raw length at least `1,088,391,168`, already `12,552,192` beyond the adjustment window.",
+    "Every fixed-length output lies in one affine translate of a space of dimension at most `N_1\u22121`; absolute bias below one forces that translate through zero.",
+    "Thus the complete-output route has balanced rank at most one and augmented dimension at most two, far below the verified baseline.",
+    "Sparse/nonuniform paths, mixed path lengths, code-aware puncturing, deduplication, and direct one-sided cancellation are not ruled out, but none inherits the complete-cloud theorem\u2019s proof."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "block length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)n`.",
+      "quantity": "required distance",
+      "value": "`D=2^29\u22122^20=535,822,336`"
+    },
+    {
+      "derivation": "`n\u22122D`.",
+      "quantity": "signed-sum allowance",
+      "value": "`T=2^21=2,097,152`"
+    },
+    {
+      "derivation": "`T/n`.",
+      "quantity": "balanced-bias threshold",
+      "value": "`\u03c4=2^-9=1/512`"
+    },
+    {
+      "derivation": "`n+T`.",
+      "quantity": "largest blindly adjustable raw length",
+      "value": "`W=1,075,838,976`"
+    },
+    {
+      "derivation": "Ta-Shma complete enumeration.",
+      "quantity": "raw length and certificate",
+      "value": "`M=N_1D_1^sD_2^t`, `B=Q^floor(t/s)`"
+    },
+    {
+      "derivation": "`B<1` forces `t\u2265s`, `s\u22654`, and `Q<1`; drop nonnegative terms.",
+      "quantity": "inner spectral constraint",
+      "value": "`\u03bb_2\u00b2<s^(-4/(s\u22123))`"
+    },
+    {
+      "derivation": "Outer trace plus `2\u03bb_1\u2264\u03bb_2\u00b2<1`.",
+      "quantity": "outer degree when `N_1\u22653`",
+      "value": "`D_1\u22653`"
+    },
+    {
+      "derivation": "Inner trace at `D_1^s\u22653^s`.",
+      "quantity": "forced `D_2` for `s=4,\u2026,10`",
+      "value": "`62,23,11,7,6,5,4`"
+    },
+    {
+      "derivation": "`3\u00b73^sD_2^s`.",
+      "quantity": "raw lower lengths for `s=4,\u2026,10`",
+      "value": "`3,590,649,648; 4,692,094,047; 3,874,403,907; 5,403,265,623; 33,059,881,728; 115,330,078,125; 185,752,092,672`"
+    },
+    {
+      "derivation": "For `s\u226511`, inner trace gives `D_2\u22652`, then use `t\u2265s`.",
+      "quantity": "tail raw-length lower bound",
+      "value": "`3\u00b76^11=1,088,391,168=W+12,552,192`"
+    },
+    {
+      "derivation": "All columns lie in a fixed translate of `span{z_v+z_*}`; absolute bias below one forces the translate through zero.",
+      "quantity": "balanced-rank ceiling",
+      "value": "`h\u2264N_1\u22121\u22641`; all-one augmentation `k\u22642`"
+    },
+    {
+      "derivation": "Verified entry in `data/records.json`.",
+      "quantity": "baseline comparison",
+      "value": "`2<31`, so no improvement"
+    }
+  ],
+  "proof_markdown": "## Proposition\n\nLet `n=2^30`, `T=2^21`, and `W=n+T`. Consider the complete-output construction in [Ta-Shma\u2019s Theorem 4.1](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf), with\n\n`M=N_1D_1^sD_2^t`,  \n`B=Q^p`, `p=floor(t/s)`,  \n`Q=\u03bb_2^s+s\u03bb_2^(s\u22121)+s\u00b2(\u03bb_2^(s\u22123)+\u03b6)`.\n\nSuppose an exact output, or a uniform repetition followed by blind puncturing or zero padding, is certified at the target using only this absolute-bias estimate. Then its balanced rank is at most one, and adjoining the all-one word gives dimension at most two.\n\n### 1. The adjustment window\n\nLet `L=aM` after `a\u22651` uniform repetitions. Blind adjustment gives only\n\n`BL+|n\u2212L|\u2264T`. `(1)`\n\nThus `n\u2212T\u2264L\u2264n+T=W`. Since `n\u2212T>T`, equation (1) also gives `B\u2264T/L<1`. Consequently `M\u2264L\u2264W`.\n\nBecause `B=Q^p<1`, one has `p\u22651`, hence `t\u2265s`, and `Q<1`. The term `s\u00b2\u03bb_2^(s\u22123)` rules out `s\u22643`. If the actual inner spectral radius is zero, it may be replaced by any positive spectral upper bound; compatibility remains valid because its left side must then be zero, closing the negative/zero-power edge case. Therefore\n\n`s\u22654`, `t\u2265s`, `0\u2264\u03bb_2<1`. `(2)`\n\nDropping the other nonnegative terms from `Q<1` gives\n\n`s\u00b2\u03bb_2^(s\u22123)<1`,\n\nand hence\n\n`\u03bb_2\u00b2<u_s:=s^(\u22124/(s\u22123))<1`. `(3)`\n\n### 2. Trace bound\n\nLet `P=A/D` be normalized adjacency for an undirected `D`-regular integer-port multigraph on `v` vertices. Since the symmetric multiplicities `A_ij` are nonnegative integers,\n\n`tr(P\u00b2)=D^\u22122\u03a3_{i,j}A_ij\u00b2\u2265D^\u22122\u03a3_{i,j}A_ij=v/D`.\n\nIf every nonprincipal eigenvalue has magnitude at most `\u03bb`, then\n\n`tr(P\u00b2)\u22641+(v\u22121)\u03bb\u00b2`.\n\nTherefore\n\n`D\u2265v/[1+(v\u22121)\u03bb\u00b2]`, `(4)`\n\nor, when `D<v`,\n\n`\u03bb\u00b2\u2265(v\u2212D)/(D(v\u22121))`. `(5)`\n\n### 3. Outer degree\n\nAssume for contradiction that `N_1\u22653`. Compatibility and nonnegativity of `\u03b5_0,\u03b2` give\n\n`2\u03bb_1\u2264\u03bb_2\u00b2<1`,\n\nso `\u03bb_1<1/2`. If `D_1\u22642`, equation (5), minimized at `N_1=3,D_1=2`, gives `\u03bb_1\u00b2\u22651/4`, a contradiction. Thus\n\n`D_1\u22653`. `(6)`\n\nThe inner graph consequently has `V=D_1^s\u22653^s` vertices.\n\n### 4. Exact inner-degree optimization\n\nApply equation (5) to the inner graph and compare with (3). Monotonicity in `V\u22653^s` and integer `D_2` gives:\n\n| `s` | lower bound if `D_2\u2264d_s\u22121` | forced `d_s` | `3\u00b73^s d_s^s` |\n|---:|---:|---:|---:|\n| 4 | `1/244>u_4=1/256` | 62 | 3,590,649,648 |\n| 5 | `221/5324>u_5=1/25` | 23 | 4,692,094,047 |\n| 6 | `719/7280>2/21>u_6` | 11 | 3,874,403,907 |\n| 7 | `727/4372>u_7=1/7` | 7 | 5,403,265,623 |\n| 8 | `1639/8200>25/128>u_8` | 6 | 33,059,881,728 |\n| 9 | `19679/78728>6/25>u_9` | 5 | 115,330,078,125 |\n| 10 | `9841/29524>3/10>u_10` | 4 | 185,752,092,672 |\n\nThe irrational comparisons are exact after raising positive quantities to powers: `10368>9261`, `25^5>2^23`, `17496>15625`, and `2187>1000`. Since `t\u2265s`, every last-column entry is a lower bound for `M`; all exceed `W`.\n\nFor `s\u226511`, equation (3) and `V>1` exclude `D_2=1`. Hence `D_2\u22652`, and\n\n`M\u22653\u00b73^s\u00b72^t\u22653\u00b76^s\u22653\u00b76^11`\n\n`=1,088,391,168>W`. `(7)`\n\nEquations (6)\u2013(7) contradict `M\u2264W`. Therefore every target-adjustable complete instance has\n\n`N_1\u22642`. `(8)`\n\n### 5. Fixed-parity affine rank\n\nFix one outer label `z_*` and define\n\n`L_0=span{z_v+z_*:v\u2208[N_1]}`.\n\nThen `dim L_0\u2264N_1\u22121`. Every raw output column is the XOR of exactly `t+1` outer labels, so it belongs to\n\n`((t+1) mod 2)z_*+L_0`. `(9)`\n\nIf the translate in (9) were not `L_0`, a nonzero linear functional annihilating `L_0` and taking value one on its offset would be constant one on every output column. The corresponding character would be constantly `\u22121`, giving absolute bias one, contrary to `B<1`. Hence the translate equals `L_0`, and every raw column lies in `L_0`. Thus\n\n`rank(raw output)\u2264dim L_0\u2264N_1\u22121\u22641`. `(10)`\n\nUniform repetition, deletion, and zero-column padding cannot enlarge this span. Adjoining the all-one row increases dimension by at most one, proving the augmented ceiling `k\u22642`. Since the verified baseline is `k=31`, this complete-output route cannot improve the leaderboard. \u220e",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "TARGET",
+      "proof": "Use `wt(c_x)=(n\u2212S_x)/2` and compute `T=n\u22122D=2^21`.",
+      "statement": "Absolute character sums at most `T` suffice for the immutable distance target.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TARGET"
+      ],
+      "id": "WINDOW",
+      "proof": "Blind adjustment gives `BL+|n\u2212L|\u2264T`; hence `L\u2264W`, `L\u2265n\u2212T>T`, and `B<1`.",
+      "statement": "Every exact or blindly adjustable raw instance lies in the window `M\u2264W=n+T`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "WINDOW",
+        "Ta-Shma-Theorem-4.1"
+      ],
+      "id": "CONTRACTION",
+      "proof": "A subunit power requires `t\u2265s`, `Q<1`, and `s\u22654`; dropping nonnegative terms yields `\u03bb_2\u00b2<s^(\u22124/(s\u22123))`.",
+      "statement": "A useful complete-cloud certificate forces the stated strict inner spectral bound.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "TRACE",
+      "proof": "Integral adjacency multiplicities give `tr(P\u00b2)\u2265v/D`; spectral decomposition gives `tr(P\u00b2)\u22641+(v\u22121)\u03bb\u00b2`.",
+      "statement": "Every undirected regular integer-port graph satisfies `D\u2265v/[1+(v\u22121)\u03bb\u00b2]`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "CONTRACTION",
+        "TRACE"
+      ],
+      "id": "OUTER",
+      "proof": "For `N_1\u22653`, compatibility gives `\u03bb_1<1/2`, while `D_1\u22642` would force `\u03bb_1\u22651/2`.",
+      "statement": "Any useful instance with `N_1\u22653` has `D_1\u22653`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "OUTER",
+        "TRACE",
+        "CONTRACTION"
+      ],
+      "id": "INNER-FINITE",
+      "proof": "Apply the trace lower bound at `V\u22653^s`; the seven exact rational comparisons force `D_2\u226562,23,11,7,6,5,4`.",
+      "statement": "Every case `4\u2264s\u226410` with `N_1\u22653` has raw length greater than `W`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "OUTER",
+        "TRACE",
+        "CONTRACTION"
+      ],
+      "id": "INNER-TAIL",
+      "proof": "For `s\u226511`, `\u03bb_2<1` and `V>1` force `D_2\u22652`, so `M\u22653\u00b76^11>W`.",
+      "statement": "Every case `s\u226511` with `N_1\u22653` has raw length greater than `W`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "WINDOW",
+        "INNER-FINITE",
+        "INNER-TAIL"
+      ],
+      "id": "CLOUD-SIZE",
+      "proof": "All possible contracting widths contradict the adjustment window when `N_1\u22653`.",
+      "statement": "Every target-adjustable complete-output instance has `N_1\u22642`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "CONTRACTION",
+        "CLOUD-SIZE"
+      ],
+      "id": "AFFINE-RANK",
+      "proof": "All fixed-length XOR outputs occupy one affine translate of a space of dimension at most `N_1\u22121`; a nonzero translate would create a constant character of absolute bias one.",
+      "statement": "The raw balanced rank is at most `N_1\u22121\u22641`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "AFFINE-RANK"
+      ],
+      "id": "CONCLUSION",
+      "proof": "Repetition, puncturing, and zero padding do not increase rank; one all-one row adds at most one dimension.",
+      "statement": "The complete-output route has target dimension at most two and cannot beat the verified baseline.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Replacement-product parameter optimization at epsilon `2^-10`",
+  "result_status": "proved",
+  "source_paths_read": [
+    "/Users/kaizheng/.agents/skills/yukon-cli/SKILL.md",
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 48 files present at final audit, read)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 45 current theorem/status/obstruction records indexed)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-06.json",
+    "https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `n=2^30`, `T=2^21`, and `W=n+T`. In every complete-output specialization of Ta-Shma\u2019s STOC 2017 Theorem 4.1 whose displayed absolute-bias certificate proves the target after exact output, uniform repetition, blind puncturing, or zero-column padding, one necessarily has `N_1\u22642`. Its raw balanced output rank is at most `N_1\u22121\u22641`, and adjoining the all-one row gives dimension at most two. Therefore this entire complete-output replacement-product route cannot beat the verified `k=31` baseline; only sparse or otherwise newly analyzed path families remain open.",
+  "title": "Inner-trace and affine-hull collapse of complete Ta-Shma replacement products"
+}
