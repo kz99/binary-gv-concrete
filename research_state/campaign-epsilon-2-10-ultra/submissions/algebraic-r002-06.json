@@ -1,0 +1,236 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new code is claimed. Four scoped templates were audited: ordinary binary tensor products; fully recursive Plotkin towers `C_m={(u,u+v):u\u2208U_{m-1},v\u2208V_{m-1}}`; full-field binary subfield subcodes used as inner codes for ordinary Reed\u2013Solomon concatenation; and the degree-67/69 trace-layer extension from `algebraic-r002-01`. The result supplies obstruction and reduction lemmas for downstream integration. The strongest proved campaign construction remains the independently accepted dimension-1040 RS\u2013affine code.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: algebraic integrator and lemma editor. Let `D_m=ceil((511/1024)2^m)`. Every fully recursive binary Plotkin tower of length `2^m` and distance at least `D_m` has dimension at most `m+1`. Indeed, the second constituent at every split needs relative distance at least `511/512` (or 1 below level 10), hence has dimension at most one, while the first constituent inherits threshold `D_(m-1)`. At `m=30` the ceiling is 31, attained by `RM(1,30)`.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:recursive-plotkin-ceiling-31",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json"
+      ],
+      "subject": "Recursive Plotkin towers stop exactly at k=31"
+    },
+    {
+      "body_markdown": "Intended recipient: product architect and parameter optimizer. I independently verified the full-field RS subfield-subcode orbit formula and product table. At the exact root cutoff the inner-dimension/outer-dimension products for `a=15,...,21` are `16\u00b765,17\u00b733,18\u00b717,28\u00b79,39\u00b75,51\u00b73,64\u00b72`, namely `1040,561,306,252,195,153,128`; `a\u226414` is alphabet-infeasible and `a\u226522` gives at most 236. Thus this entire root/product-certified family is capped at 1040 and cannot realize the rank-17 inner gateway.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:subfield-inner-rs-product-ceiling",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json"
+      ],
+      "subject": "Independent certification of the subfield-inner product ceiling"
+    },
+    {
+      "body_markdown": "Intended recipient: trace architect and algebraic integrator. The codimension-10 weighted-orbit certificate from `algebraic-r002-01` reproduces exactly: `A^{-1}B=0x11c96ecc`, and enumeration of the 435, 142506, and 5852925 masks of weights 2, 5, and 8 gives maximum output weights 20, 23, and 26, below 22, 25, and 28. Hence every binary subspace `V\u2264F_(2^30)^2` of dimension at least 50 meets every `(67,69)` weighted-scaling orbit. A safe extension above k=1040 therefore exists in this architecture iff the full explicit k=1051 degree-69 code is safe; its distance remains open.",
+      "kind": "reply",
+      "references": [
+        "proposed-lemma:degree-69-weighted-orbit-dichotomy",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "subject": "Codimension-10 orbit certificate independently verified"
+    }
+  ],
+  "distance_audit": [
+    "The target is `D=2^29-2^20=535822336`, with relative distance `511/1024`.",
+    "Every binary linear factor of dimension at least two has relative distance at most `2/3`. Two such tensor factors therefore give relative distance at most `4/9`, and `4/9<511/1024` because the difference is `503/9216`.",
+    "At a Plotkin split of a length-`2^m` target code, the second constituent has length `2^(m-1)` but needs distance at least `D_m`; its required relative distance is `511/512` for `m\u226510` and 1 for `m\u22649`. Thus its dimension is at most one.",
+    "For the full-field subfield inner code, the root bound gives inner distance at least `2^a-t`. Combining it with the ordinary-RS outer distance yields the verified dimension table with maximum 1040.",
+    "The weighted-orbit lemma is only a reduction. It does not prove the missing `|S(f)|\u22642^21` bound for all odd trace polynomials of degree at most 69, so no k=1051 distance claim is made."
+  ],
+  "explicitness_audit": [
+    "No new generator matrix is selected, so this is not a leaderboard submission.",
+    "The codimension-10 verifier checks exactly `binom(30,2)+binom(30,5)+binom(30,8)=5995866` fixed masks. This is `O((log n)^8)` work at the target and verifies a proof lemma; it neither searches for nor selects a code.",
+    "The full-field subfield-code rows are symbolically described by doubling orbits and canonical Frobenius-kernel bases and can be streamed in polynomial time, but their best product specialization is dominated by k=1040.",
+    "The conditional full degree-69 trace matrix is deterministically generable, but explicitness does not repair its unresolved universal distance bound.",
+    "The generator object below describes only the unchanged verified RM fallback."
+  ],
+  "generator_matrix": {
+    "algorithm": "No new candidate matrix is asserted. For the unchanged verified fallback `RM(1,30)`, enumerate `x\u2208F_2^30` lexicographically and emit the 31 rows `1,x_1,...,x_30`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "`O(n log n)` bit operations, emitting exactly `31n` bits.",
+    "runtime_proof": "There are `n=2^30` columns. Reading the 30 coordinate bits from a lexicographic counter and emitting the 31 entries costs `O(log n)` per column, hence deterministic `n^{O(1)}` time."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Persist the recursive-Plotkin ceiling, the independently audited subfield-product ceiling, and the degree-69 weighted-orbit dichotomy as minimal reusable lemmas; request independent review.",
+    "Concentrate the product roadmap on a symbolic non-antipodal `[16384,17,8188]_2` inner code, which would give k=1649, or on the surviving `m\u226413` AG\u2013affine windows. Ordinary tensors, recursive Plotkin towers, and full ordinary-RS subfield inners are closed.",
+    "For the trace roadmap, prove or refute the sole remaining universal statement `|\u03a3_x(-1)^Tr(f(x))|\u22642^21` for every nonconstant odd polynomial of degree at most 69. A proof yields k=1051; a counterexample closes every 50-dimensional degree-67/69 selector."
+  ],
+  "obstructions": [
+    "An ordinary binary tensor product cannot gain dimension at the target: if two factors have dimension at least two it misses the distance, while one-dimensional factors do not increase dimension.",
+    "Every fully recursive binary Plotkin tower at length `2^30` and the immutable distance has dimension at most 31; this scoped ceiling is sharp by `RM(1,30)`.",
+    "Full ordinary-RS binary subfield-subcode inners, combined with ordinary RS outers and the inherited root/product certificate, have dimension at most 1040.",
+    "Such full subfield subcodes cannot supply `[16384,17,8188]_2`: before degree 8256 their dimension is at most 15, while the first nonlinear norm-trace orbit introduces a complementary word of weight 8128.",
+    "Within the degree-67/69 trace extension, selecting a special coefficient subspace of dimension at least 50 cannot avoid a bad weighted orbit. The architecture succeeds above 1040 only if the entire k=1051 degree-69 code succeeds.",
+    "The AG\u2013affine handoff closes every standard product-certified instance with `m\u226514` at k\u22641040, but its `m\u226413` windows remain open and are not excluded here."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1073741824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)2^30`.",
+      "quantity": "Required distance",
+      "value": "`D=535822336=511\u00b72^20`"
+    },
+    {
+      "derivation": "Average-weight bound for two nontrivial binary factors.",
+      "quantity": "Tensor relative-distance ceiling",
+      "value": "`(2/3)^2=4/9<511/1024`"
+    },
+    {
+      "derivation": "`D/2^29`.",
+      "quantity": "Top Plotkin second-constituent relative distance",
+      "value": "`511/512`"
+    },
+    {
+      "derivation": "Thirty recursive splits, each adding at most one dimension, from a length-one base of dimension at most one.",
+      "quantity": "Fully recursive Plotkin ceiling",
+      "value": "`k\u226431`"
+    },
+    {
+      "derivation": "`2^30-D`.",
+      "quantity": "Full-field RS root cutoff",
+      "value": "`B=537919488=2^29+2^20`"
+    },
+    {
+      "derivation": "One constant plus admissible doubling-orbit sizes `30,30,30,30,30,30,30,15,10`.",
+      "quantity": "Direct full-field subfield-code dimension",
+      "value": "`236`"
+    },
+    {
+      "derivation": "Exact orbit counts and outer Singleton bounds for `a=15,...,21`.",
+      "quantity": "Subfield-inner product dimensions",
+      "value": "`1040,561,306,252,195,153,128`"
+    },
+    {
+      "derivation": "Ambient coefficient dimension 60 and gateway requirement `991+dim(V)>1040`.",
+      "quantity": "Degree-67/69 selector threshold",
+      "value": "`dim(V)\u226550`, equivalently codimension at most 10"
+    },
+    {
+      "derivation": "`binom(30,2)+binom(30,5)+binom(30,8)`.",
+      "quantity": "Codimension-10 mask checks",
+      "value": "`5995866`"
+    },
+    {
+      "derivation": "Full 60-dimensional top layer added to the 991-dimensional anchor.",
+      "quantity": "Conditional full degree-69 dimension",
+      "value": "`1051`"
+    },
+    {
+      "derivation": "Independently accepted RS\u2013affine construction.",
+      "quantity": "Current proved campaign endpoint",
+      "value": "`k=1040`, rate `65/67108864\u22489.685754776000977e-7`"
+    }
+  ],
+  "proof_markdown": "## 1. Binary tensor products\n\nFor a binary linear `[l,k,d]` code, each active coordinate is one on exactly `2^(k-1)` codewords. Hence\n\n`(2^k-1)d \u2264 l\u00b72^(k-1)`.\n\nIf `k\u22652`, this gives `d/l\u22642^(k-1)/(2^k-1)\u22642/3`.\n\nThe ordinary tensor product of `[l_i,k_i,d_i]_2` codes has length `l_1l_2`, dimension `k_1k_2`, and exact distance `d_1d_2`. For the lower bound, view a nonzero product word as a matrix: a nonzero row has at least `d_2` nonzero positions, hence at least `d_2` nonzero columns, each of weight at least `d_1`. A tensor of minimum words attains `d_1d_2`.\n\nThus, if two factors have dimension at least two, the product relative distance is at most `4/9<511/1024`. Further factors cannot increase relative distance. If at most one factor has dimension above one, multiplying the dimensions leaves that factor's dimension unchanged. Ordinary binary tensoring therefore cannot manufacture a larger target code.\n\n## 2. Recursive Plotkin towers\n\nPut `D_m=ceil(511\u00b72^m/1024)`. Then `D_30=D`, and direct inspection of the single rounding boundary gives\n\n`ceil(D_m/2)=D_(m-1)`.\n\nConsider a Plotkin split\n\n`C_m={(u,u+v):u\u2208U_(m-1), v\u2208V_(m-1)}`.\n\nIts exact distance is `min(2d(U),d(V))`: the two displayed subcodes attain the two terms, while `wt(u)+wt(u+v)\u2265wt(v)` proves the lower bound when `v\u22600`. Consequently `d(C_m)\u2265D_m` implies\n\n`d(U)\u2265D_(m-1)` and `d(V)\u2265D_m`.\n\nThe code `V` has length `2^(m-1)`. For `m\u226510`, its required relative distance is `511/512`; for `m\u22649`, rounding gives `D_m=2^(m-1)`. Both exceed `2/3`, so the average-weight inequality forces `dim(V)\u22641`. If the `U` branch is recursively Plotkin-decomposed down to length one, induction gives\n\n`dim(C_m)\u2264dim(C_0)+m\u2264m+1`.\n\nAt `m=30`, `k\u226431`. The bound is sharp inside this template because the usual recursion for `RM(1,30)` uses `U=RM(1,29)` and a repetition-code `V` at every level.\n\n## 3. Degree-69 weighted-orbit certificate\n\nLet `F=F_(2^30)` and let `V\u2264F^2` have codimension `c\u226410`. Write `V` as the common kernel of independent binary-linear forms `ell_i`. For fixed `(a,b)\u2260(0,0)`, set\n\n`F_i(u)=ell_i(a u^67,b u^69)`.\n\nBecause `67=2^6+2+1` and `69=2^6+2^2+1`, these are Boolean polynomials of algebraic degree at most three and vanish at zero. The parity of their common-zero count equals\n\n`\u03a3_u \u03a0_i(1+F_i(u)) mod 2`.\n\nA Boolean polynomial of degree below 30 sums to zero over `F_2^30`; hence the count is even immediately when `c\u22649`. For `c=10`, only a square-free degree-30 term can contribute.\n\nAfter extending scalars, the Moore coordinates `Y_r=u^(2^r)`, `r\u2208Z/30`, are independent linear coordinates. Every cubic term is a translate of one of\n\n`Y_rY_(r+1)Y_(r+6)` or `Y_rY_(r+2)Y_(r+6)`.\n\nA degree-30 term would therefore require ten such triples to partition `Z/30`. In `R=F_2[x]/(x^30-1)`, put\n\n`A=1+x+x^6`, `B=1+x^2+x^6`, `J=1+x+...+x^29`.\n\nThe independently recomputed inverse of `A` has support\n\n`{0,2,3,4,6,7,9,12,15,16,17,21,23,24,25,26,29}`\n\nand `A^(-1)B=0x11c96ecc`, whose support is\n\n`{2,3,6,7,9,10,11,13,14,16,19,22,23,24,28}`.\n\nIf incidence masks `a,b` describe an exact cover, then `Aa+Bb=J`, so `a=J+(A^(-1)B)b` and\n\n`wt((A^(-1)B)b)=20+wt(b)`.\n\nSumming the covered vertex labels modulo three forces `wt(b)\u2208{2,5,8}`. Exhausting the respectively 435, 142506, and 5852925 masks gives maximum output weights 20, 23, and 26, whereas an exact cover would require 22, 25, and 28. Thus no cover exists. The common-zero count is even and includes zero, so it contains another, nonzero `u`.\n\nTherefore every dimension-at-least-50 `V` meets every weighted orbit `{(a u^67,b u^69):u\u22600}`. Scaling `x=uy` preserves the lower odd-degree space and its character-sum maximum, so a target-safe such `V` is equivalent to the entire `F^2` layer being safe. This proves the all-or-nothing reduction, not the missing distance statement.\n\n## 4. Full subfield inner codes under ordinary-RS product certification\n\nLet\n\n`S(a,t)=ev_(F_(2^a))({f:deg f\u2264t})\u2229F_2^(2^a)`.\n\nEvery function has a unique representative of degree below `2^a`. It is binary-valued exactly when `f^2=f mod (X^(2^a)-X)`. Hence its positive exponent support is a union of complete doubling orbits modulo `2^a-1`; an orbit of size `r` contributes exactly its fixed field `F_(2^r)`, hence `r` binary dimensions. Thus\n\n`dim S(a,t)=1+\u03a3_(O\u2286{1,...,t})|O|`.\n\nAt the target root cutoff `B_a=floor(513\u00b72^a/1024)`, multiplication by two is cyclic rotation of an `a`-bit word. Any permitted two-one word has both cyclic gaps at least nine; any permitted word with at least three ones has every gap at least ten. These conditions give inner-dimension bounds\n\n`16,17,18,28,39,51,64` for `a=15,...,21`,\n\nand at most 236 for `22\u2264a\u226430`. At `a=30`, the exact orbit sizes are seven copies of 30, followed by 15 and 10, plus the constant, totaling 236.\n\nConcatenate this inner code, of dimension `r`, with an ordinary RS outer code of length `N=2^(30-a)` over `F_(2^r)`. The root/product certificate first forces `t\u2264B_a`. In every nontrivial case `t\u22652^(a-1)`, so the outer distance must be at least `ceil(511N/512)`. Singleton gives\n\n`K\u2264N/512+1` for `a\u226421`, and `K\u22641` for `a\u226522`.\n\nFor `a\u226414`, the orbit dimension is at most `a+1`, so the outer length exceeds its alphabet size. For `a=15,...,21`, the products `rK` are exactly bounded by\n\n`1040,561,306,252,195,153,128`.\n\nFor `a\u226522`, `rK\u2264236`. The maximum of this scoped family is therefore 1040, attained only at the familiar affine-inner parameters.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "AVG",
+      "proof": "Sum all codeword weights coordinatewise; each active coordinate contributes exactly `2^(k-1)`.",
+      "statement": "Every binary linear `[l,k,d]` code satisfies `(2^k-1)d\u2264l2^(k-1)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "AVG"
+      ],
+      "id": "TENSOR",
+      "proof": "Tensor distances multiply exactly, while each factor of dimension at least two has relative distance at most `2/3`.",
+      "statement": "A binary tensor product with two nontrivial factors cannot meet relative distance `511/1024`; one-dimensional factors cannot increase dimension.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "AVG"
+      ],
+      "id": "PLOTKIN",
+      "proof": "At each split, the second constituent needs relative distance `511/512` or 1 and hence dimension at most one; the first inherits the rounded target. Induction over 30 levels gives 31.",
+      "statement": "Every fully recursive binary Plotkin tower at the immutable target has dimension at most 31.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "ORBIT-PARITY",
+      "proof": "Common-zero parity reduces to the top multilinear coefficient. The explicit cyclic-mask calculation excludes every ten-triple exact cover; all 5995866 cases reproduce the stated maxima.",
+      "statement": "Every codimension-at-most-10 subspace of `F_(2^30)^2` meets every nonzero `(67,69)` weighted-scaling orbit.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ORBIT-PARITY",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "id": "ORBIT-DICHOTOMY",
+      "proof": "The lower odd-degree coefficient space is invariant under nonzero variable scaling, so safety is constant on each weighted orbit.",
+      "statement": "A target-safe degree-67/69 selector of dimension at least 50 exists iff the full 60-dimensional top layer is target-safe.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "SUBFIELD-ORBITS",
+      "proof": "The identity `f^2=f mod (X^(2^a)-X)` gives complete doubling orbits and fixed-field coefficient dimensions; cyclic-gap counting gives the displayed finite ranks.",
+      "statement": "Full-field ordinary-RS binary subfield subcodes have the exact orbit formula, with target-cutoff dimension 236 at `a=30`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SUBFIELD-ORBITS"
+      ],
+      "id": "SUBFIELD-PRODUCT",
+      "proof": "The root/product inequality, alphabet feasibility, and Singleton bound give the seven displayed finite products and the `a\u226522` cap.",
+      "statement": "Ordinary-RS concatenations using these full subfield inners have binary dimension at most 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ORBIT-DICHOTOMY"
+      ],
+      "id": "TRACE-69-DISTANCE",
+      "proof": "Generic Hasse\u2013Weil gives only `68\u00b72^15`; no uniform `64\u00b72^15` theorem or counterexample is currently available.",
+      "statement": "The full odd-degree-through-69 trace code meets the target distance.",
+      "status": "conditional"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Tensor and product constructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (every current file, complete)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all current headline, theorem, status, and obstruction fields audited)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-06/verifier-1-algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/composition-10/verifier-1-composition-10.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "At `n=2^30` and `D=535822336`: (i) an ordinary binary tensor product meeting the target has at most one factor of dimension greater than one and therefore gains no dimension by tensoring; (ii) every fully recursive binary Plotkin tower has dimension at most 31, sharply attained by `RM(1,30)`; (iii) ordinary-RS concatenations using full-field binary RS subfield subcodes and the inherited root/product certificate have dimension at most 1040; and (iv) every dimension-at-least-50 selector in the degree-67/69 trace layers meets every weighted-scaling orbit, so that architecture improves on 1040 if and only if the full conditional k=1051 degree-69 code meets the target. No new leaderboard candidate is certified.",
+  "title": "Binary tensor/Plotkin collapse with audited round-2 product frontiers"
+}

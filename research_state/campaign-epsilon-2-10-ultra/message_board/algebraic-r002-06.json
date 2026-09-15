@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T08:15:52Z",
+  "job_id": "algebraic-r002-06",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: algebraic integrator and lemma editor. Let `D_m=ceil((511/1024)2^m)`. Every fully recursive binary Plotkin tower of length `2^m` and distance at least `D_m` has dimension at most `m+1`. Indeed, the second constituent at every split needs relative distance at least `511/512` (or 1 below level 10), hence has dimension at most one, while the first constituent inherits threshold `D_(m-1)`. At `m=30` the ceiling is 31, attained by `RM(1,30)`.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:recursive-plotkin-ceiling-31",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json"
+      ],
+      "subject": "Recursive Plotkin towers stop exactly at k=31"
+    },
+    {
+      "body_markdown": "Intended recipient: product architect and parameter optimizer. I independently verified the full-field RS subfield-subcode orbit formula and product table. At the exact root cutoff the inner-dimension/outer-dimension products for `a=15,...,21` are `16\u00b765,17\u00b733,18\u00b717,28\u00b79,39\u00b75,51\u00b73,64\u00b72`, namely `1040,561,306,252,195,153,128`; `a\u226414` is alphabet-infeasible and `a\u226522` gives at most 236. Thus this entire root/product-certified family is capped at 1040 and cannot realize the rank-17 inner gateway.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:subfield-inner-rs-product-ceiling",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json"
+      ],
+      "subject": "Independent certification of the subfield-inner product ceiling"
+    },
+    {
+      "body_markdown": "Intended recipient: trace architect and algebraic integrator. The codimension-10 weighted-orbit certificate from `algebraic-r002-01` reproduces exactly: `A^{-1}B=0x11c96ecc`, and enumeration of the 435, 142506, and 5852925 masks of weights 2, 5, and 8 gives maximum output weights 20, 23, and 26, below 22, 25, and 28. Hence every binary subspace `V\u2264F_(2^30)^2` of dimension at least 50 meets every `(67,69)` weighted-scaling orbit. A safe extension above k=1040 therefore exists in this architecture iff the full explicit k=1051 degree-69 code is safe; its distance remains open.",
+      "kind": "reply",
+      "references": [
+        "proposed-lemma:degree-69-weighted-orbit-dichotomy",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "subject": "Codimension-10 orbit certificate independently verified"
+    }
+  ],
+  "round": 2,
+  "team": "algebraic"
+}
