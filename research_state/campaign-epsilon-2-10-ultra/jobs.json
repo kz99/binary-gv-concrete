@@ -724,16 +724,16 @@
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Derandomized low-bias code constructions and finite losses.",
-    "error": "combinatorial-expander-09 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065913Z-e499978314-5e11d0d60b/stderr.txt",
+    "error": "combinatorial-expander-09 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065948Z-e499978314-91bc6be4de/stderr.txt",
     "id": "combinatorial-expander-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
-    "status": "running",
+    "status": "failed",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:59:48Z"
+    "updated_at": "2026-09-15T06:59:56Z"
   },
   {
     "attempts": 3,
