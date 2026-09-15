@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 33,
-    "succeeded": 5
+    "running": 32,
+    "succeeded": 6
   },
   "doubly_verified_candidates": [
     {
@@ -16,6 +16,18 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "Exact [2^30,1040,535822336] Reed\u2013Solomon\u2013affine concatenation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-03",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
     },
     {
       "accepted_reviews": 1,
@@ -209,7 +221,7 @@
       "title": "Exact [2^30,1040,535822336] Reed\u2013Solomon\u2013affine concatenation"
     },
     {
-      "accepted_reviews": 0,
+      "accepted_reviews": 1,
       "baseline_beaten": true,
       "dimension": 1040,
       "id": "algebraic-03",
@@ -281,5 +293,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T04:54:40Z"
+  "updated_at": "2026-09-15T04:55:26Z"
 }
