@@ -14,8 +14,11 @@ entropy-form GV benchmark is \(k\approx2{,}955\) at this blocklength.
 The entire workflow is organized around increasing this concrete leaderboard
 dimension toward GV. General constructions matter only when they yield a
 better exact code or strengthen such a proof. Random sampling is not admissible.
-Each result needs a readable proof and one independent AI verifier acceptance
-before it is ranked.
+Every ranked construction must also provide a deterministic algorithm that
+outputs its full generator matrix in time polynomial in \(n\), with a runtime
+proof. Canonical exhaustive searches and superpolynomial conditional-average
+selectors are not explicit for this leaderboard. Each result needs a readable
+proof and one independent AI verifier acceptance before it is ranked.
 
 The public observatory is at
 [kz99.github.io/binary-gv-concrete-observatory](https://kz99.github.io/binary-gv-concrete-observatory/#/record).

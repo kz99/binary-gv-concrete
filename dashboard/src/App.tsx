@@ -29,6 +29,7 @@ type CampaignCandidate = {
   dimension: number | null;
   minimum_distance: number | null;
   rate: number | null;
+  polynomial_generator?: boolean;
   baseline_beaten: boolean;
   accepted_reviews: number;
   source_path: string;
@@ -379,6 +380,7 @@ function RecordPage() {
   const proposed = useMemo(
     () => campaign.promising_candidates
       .filter((candidate) => candidate.rate != null && candidate.dimension != null)
+      .filter((candidate) => candidate.polynomial_generator === true)
       .filter((candidate) => !snapshot.records.some((entry) => entry.id === candidate.id))
       .sort((a, b) => (b.rate ?? -1) - (a.rate ?? -1)),
     [campaign],
@@ -425,7 +427,7 @@ function RecordPage() {
           </>
         )}
         <p className="admission-note">
-          Green cards are verified records. Amber cards are proposed research outputs shown for transparency; they are not ranked or certified until one independent verifier accepts their proof. The GV value is displayed solely as a target line.
+          Green cards are verified records. Amber cards are proposed research outputs shown for transparency; they are not ranked or certified until one independent verifier accepts their proof. Every displayed construction must include a deterministic polynomial-time algorithm for outputting its full generator matrix. The GV value is displayed solely as a target line.
         </p>
       </div>
     </main>
@@ -691,7 +693,7 @@ function ContributePage() {
             <span className="eyebrow">Open research problem</span>
             <h1>Improve the verified dimension.</h1>
             <p>
-              Contribute a deterministic, symbolic binary code with the largest provable dimension at the exact target. Every submission carries a mathematical proof and is independently audited by two AI verifier agents before it can enter the record table.
+              Contribute a deterministic binary code with the largest provable dimension at the exact target. Its full generator matrix must be computable in polynomial time, and every submission is independently audited by one verifier agent before it can enter the record table.
             </p>
           </div>
           <div className="contribute-target">
@@ -706,10 +708,10 @@ function ContributePage() {
       <div className="page-shell contribute-content">
         <section className="contribution-flow" aria-label="Submission workflow">
           {[
-            ['01', 'Construct', 'Specify every field, constituent code, map, and exact-size transformation deterministically.'],
-            ['02', 'Prove', 'Write a concise academic note proving binary linearity, length, dimension, distance, and explicitness.'],
+            ['01', 'Construct', 'Specify every field, constituent code, map, and a deterministic polynomial-time algorithm that emits the complete generator matrix.'],
+            ['02', 'Prove', 'Write a concise academic note proving binary linearity, length, dimension, distance, and the generator-runtime bound.'],
             ['03', 'Submit', 'Open a pull request with an under-review JSON record and the proof certificate.'],
-            ['04', 'Verify', 'Two separate AI agents recompute and audit the claim before it becomes rankable.'],
+            ['04', 'Verify', 'One independent AI verifier recomputes and audits the claim before it becomes rankable.'],
           ].map(([number, title, copy]) => (
             <article key={number}>
               <span>{number}</span>

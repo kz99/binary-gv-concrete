@@ -44,6 +44,20 @@ PROOF_STEP = {
     },
 }
 
+GENERATOR_MATRIX = {
+    "type": "object", "additionalProperties": False,
+    "required": [
+        "outputs_full_matrix_in_polynomial_time", "algorithm",
+        "runtime_bound", "runtime_proof",
+    ],
+    "properties": {
+        "outputs_full_matrix_in_polynomial_time": {"const": True},
+        "algorithm": {"type": "string", "minLength": 1},
+        "runtime_bound": {"type": "string", "minLength": 1},
+        "runtime_proof": {"type": "string", "minLength": 1},
+    },
+}
+
 
 RESEARCH_SCHEMA = {
     "type": "object", "additionalProperties": False,
@@ -52,7 +66,7 @@ RESEARCH_SCHEMA = {
         "leaderboard_submission", "baseline_beaten", "block_length", "dimension",
         "minimum_distance", "rate", "construction_markdown", "theorem_statement",
         "proof_markdown", "proof_steps", "literature_dependencies", "parameter_ledger",
-        "explicitness_audit", "distance_audit", "obstructions", "next_tasks",
+        "generator_matrix", "explicitness_audit", "distance_audit", "obstructions", "next_tasks",
         "source_paths_read", "discussion_posts", "confidence",
     ],
     "properties": {
@@ -72,6 +86,7 @@ RESEARCH_SCHEMA = {
         "theorem_statement": {"type": "string"},
         "proof_markdown": {"type": "string"},
         "proof_steps": {"type": "array", "items": PROOF_STEP},
+        "generator_matrix": GENERATOR_MATRIX,
         "literature_dependencies": {"type": "array", "items": {
             "type": "object", "additionalProperties": False,
             "required": ["source", "result", "hypotheses", "used_for"],
@@ -124,6 +139,7 @@ VERIFIER_SCHEMA = {
         "source_job_id", "source_sha256", "verdict", "independent_review",
         "arithmetic_passed", "exact_length_passed", "distance_passed",
         "dimension_passed", "explicitness_passed", "readability_passed",
+        "generator_runtime_passed",
         "baseline_classification_passed", "verified_block_length", "verified_dimension",
         "verified_minimum_distance", "verified_rate", "line_audit",
         "counterexample_attempts", "fatal_obstruction", "required_changes", "summary",
@@ -137,6 +153,7 @@ VERIFIER_SCHEMA = {
         "distance_passed": {"type": "boolean"},
         "dimension_passed": {"type": "boolean"},
         "explicitness_passed": {"type": "boolean"},
+        "generator_runtime_passed": {"type": "boolean"},
         "readability_passed": {"type": "boolean"},
         "baseline_classification_passed": {"type": "boolean"},
         "verified_block_length": {"type": ["integer", "null"]},
@@ -283,7 +300,12 @@ dimension at least 32; the concrete GV-rate reference corresponds to dimension
 it can yield a larger verified k. Random sampling is not an
 admissible construction.  Every field, code, tower level, divisor, graph,
 ordering, shortening, puncturing, and padding choice must be deterministic and
-symbolically recoverable.  Distance must be proved for every nonzero codeword.
+symbolically recoverable.  Hard explicitness requirement: the complete k-by-n
+generator matrix must be output by a deterministic algorithm in n^{O(1)} time;
+the proof must state the algorithm and establish that bound.  A canonical
+exhaustive search, conditional-expectation selector, finite lookup, or other
+superpolynomial procedure is not admissible, even if it uniquely defines a
+matrix. Distance must be proved for every nonzero codeword.
 
 Asymptotic insights are useful only when they supply a concrete symbolic code
 or a finite lemma that can improve this leaderboard. Do not spend a campaign
@@ -309,6 +331,8 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
         raise ValueError("campaign.reasoning_effort must be ultra")
     if cfg.get("verifier_reasoning_effort") != "xhigh":
         raise ValueError("campaign.verifier_reasoning_effort must be xhigh")
+    if cfg.get("require_polynomial_generator_matrix") is not True:
+        raise ValueError("campaign requires a polynomial-time full generator-matrix algorithm")
     if int(cfg.get("researcher_count", 0)) != 40:
         raise ValueError("the campaign must have four groups of ten researchers")
     if int(cfg.get("verifier_count", 0)) != 1:
@@ -429,6 +453,16 @@ class Campaign:
     def _review_paths(self) -> list[str]:
         return [str(path.relative_to(self.paths.workspace)) for path in sorted((self.root / "reviews").glob("**/*.json"))]
 
+    @staticmethod
+    def _has_polynomial_generator(source: dict[str, Any]) -> bool:
+        generator = source.get("generator_matrix")
+        return (
+            isinstance(generator, dict)
+            and generator.get("outputs_full_matrix_in_polynomial_time") is True
+            and all(isinstance(generator.get(key), str) and generator[key].strip()
+                    for key in ("algorithm", "runtime_bound", "runtime_proof"))
+        )
+
     def _prompt(self, job: dict[str, Any]) -> tuple[str, dict[str, Any]]:
         role = job["role"]
         if role in {"researcher", "literature"}:
@@ -452,9 +486,12 @@ for other teams. Do not post social updates or unsupported claims.
 Produce genuine mathematical work.  A leaderboard_submission=true response must
 contain a complete deterministic construction and an academic proof that checks
 binary linearity, exact length, integer dimension, minimum distance, and every
-finite parameter.  Do not use random existence, sampled codewords, hidden
-O-constants, or an unavailable theorem.  Set leaderboard_submission=false when
-any essential step is conditional.  State concise lemmas; put explanations in
+finite parameter. It must also give a generator_matrix object whose deterministic
+algorithm outputs every entry of the full generator matrix in n^{O(1)} time,
+with a runtime proof; otherwise set leaderboard_submission=false. Do not use
+random existence, sampled codewords, hidden O-constants, an unavailable theorem,
+canonical exhaustive search, or superpolynomial conditional averages. Set
+leaderboard_submission=false when any essential step is conditional. State concise lemmas; put explanations in
 their proofs.  You may report a rigorous obstruction lemma when no
 candidate survives.  Rate must equal dimension/1,073,741,824 exactly up to JSON
 number precision. baseline_beaten is true only if the proved dimension is
@@ -474,7 +511,11 @@ The immutable source SHA-256 is {canonical_hash(source)}.  Recompute every
 integer and verify every cited theorem's hypotheses, exact-length operation,
 dimension claim, and minimum-distance implication.  Try to break the construction
 with edge cases and low-weight words. Check whether its baseline-improvement
-classification is honest. Reject an unfixable false or inadmissible claim; request revision for
+classification is honest. Explicitness is a hard gate: require a concrete
+deterministic algorithm that outputs all k*n generator-matrix entries in n^{O(1)}
+time and a valid runtime proof. A canonical exhaustive search, conditional-average
+selector, or superpolynomial procedure is inadmissible and must be rejected with
+generator_runtime_passed=false. Reject an unfixable false or inadmissible claim; request revision for
 a local gap; accept a correct proof written clearly enough for an ordinary
 mathematical reader.  Do not reject for ceremonial or proof-assistant-level
 formalism.  Set source_job_id and source_sha256 exactly.
@@ -689,7 +730,7 @@ you have examined every durable response and review path.
                 # A researcher may still be atomically finishing its note.  Do
                 # not queue a reviewer until the submitted certificate parses.
                 continue
-            if not source.get("leaderboard_submission"):
+            if not source.get("leaderboard_submission") or not self._has_polynomial_generator(source):
                 continue
             source_id = source_path.stem
             for index in range(1, int(self.cfg["verifier_count"]) + 1):
@@ -707,6 +748,7 @@ you have examined every durable response and review path.
                 continue
             if (
                 not source.get("leaderboard_submission")
+                or not self._has_polynomial_generator(source)
                 or not isinstance(source.get("dimension"), int)
                 or source["dimension"] <= CURRENT_K
                 or source.get("block_length") != N
@@ -718,7 +760,11 @@ you have examined every durable response and review path.
             if reviews.exists():
                 for path in reviews.glob("*.json"):
                     try:
-                        accepted += json.loads(path.read_text()).get("verdict") == "accept"
+                        review = json.loads(path.read_text())
+                        accepted += (
+                            review.get("verdict") == "accept"
+                            and review.get("generator_runtime_passed") is True
+                        )
                     except json.JSONDecodeError:
                         continue
             if accepted >= int(self.cfg["verifier_count"]):
@@ -759,7 +805,7 @@ you have examined every durable response and review path.
             except json.JSONDecodeError:
                 continue
             source_id = source_path.stem
-            if not source.get("leaderboard_submission") and source.get("result_status") not in {"proved", "conditional"}:
+            if not source.get("leaderboard_submission") or not self._has_polynomial_generator(source):
                 continue
             reviews = []
             review_dir = self.root / "reviews" / source_id
@@ -774,7 +820,12 @@ you have examined every durable response and review path.
                 "submission_class": source.get("submission_class"), "dimension": source.get("dimension"),
                 "minimum_distance": source.get("minimum_distance"), "rate": source.get("rate"),
                 "baseline_beaten": source.get("baseline_beaten"),
-                "accepted_reviews": sum(review.get("verdict") == "accept" for review in reviews),
+                "polynomial_generator": True,
+                "accepted_reviews": sum(
+                    review.get("verdict") == "accept"
+                    and review.get("generator_runtime_passed") is True
+                    for review in reviews
+                ),
                 "source_path": str(source_path.relative_to(self.paths.workspace)),
             }
             candidates.append(item)

@@ -15,9 +15,13 @@ n=2^{30}=1{,}073{,}741{,}824,\qquad
 d_{\min}(C)\geq\left(\frac12-2^{-10}\right)n=535{,}822{,}336.
 \]
 
-The leaderboard score is its dimension \(k=\dim C\). A construction must be
-symbolic and reproducible from its mathematical definition; random sampling,
-probabilistic existence alone, and numerical searches are not submissions.
+The leaderboard score is its dimension \(k=\dim C\). A construction is
+**explicit only if** a deterministic algorithm outputs the entire \(k\times n\)
+generator matrix in \(n^{O(1)}\) time. The proof must state that algorithm and
+prove its runtime bound. Random sampling, probabilistic existence alone,
+numerical searches, canonical exhaustive searches, and
+conditional-expectation recursions with superpolynomial runtime are not
+submissions.
 
 ## 2. Benchmarks
 
@@ -52,6 +56,12 @@ codes, maps, fields, restrictions, shortenings, puncturings, and padding. Show
 all finite arithmetic. Cite invoked theorems precisely enough that a reader can
 locate them.
 
+The explicitness section must include pseudocode (or an equally precise
+algorithm), an output-size accounting for all \(kn\) entries, and a proof of a
+runtime \(n^c\) for a fixed constant \(c\). A generator specified only by a
+finite optimization, an average over completions, or an unbounded search is
+ineligible.
+
 Lemmas must have minimal statements and no explanatory prose. Put explanation
 in their proofs. If clarity requires it, split a lemma into smaller lemmas.
 
@@ -76,6 +86,12 @@ parameter table.
   "minimumDistance": 535822336,
   "rate": 2.9802322387695312e-8,
   "status": "under-review",
+  "generatorMatrix": {
+    "outputsFullMatrixInPolynomialTime": true,
+    "algorithm": "Describe the deterministic matrix-generation algorithm.",
+    "runtimeBound": "O(n^c) for a fixed constant c.",
+    "runtimeProof": "Account for every output entry and preprocessing step."
+  },
   "proofPath": "proofs/your-code-id.md"
 }
 ```
@@ -85,11 +101,12 @@ The complete field-level example is in `SUBMISSION_EXAMPLE.json`.
 ## 6. Verification and publication
 
 Open a pull request. One independent verifier agent starts reviewing as soon as
-the complete candidate is available, recomputes the parameters, and reads the
-proof. They accept ordinary mathematical exposition and do not require formal
-proof-assistant detail, but reject a claim with an unfixable mathematical
-obstruction. One acceptance may set the record status to `verified` and place
-it on the main leaderboard.
+the complete candidate is available, recomputes the parameters, audits the
+polynomial-time generator algorithm, and reads the proof. They accept ordinary
+mathematical exposition and do not require formal proof-assistant detail, but
+must reject a superpolynomial or merely canonical generator, as well as any
+claim with an unfixable mathematical obstruction. One acceptance may set the
+record status to `verified` and place it on the main leaderboard.
 
 Run `node scripts/validate-data.mjs` and `cd dashboard && pnpm build` before
 submitting.

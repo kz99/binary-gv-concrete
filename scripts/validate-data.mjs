@@ -18,6 +18,10 @@ for (const record of data.records) {
   if (Math.abs(record.rate - record.dimension / N) > 1e-15) {
     throw new Error(`${record.id}: rate does not equal dimension / block length`);
   }
+  const generator = record.generatorMatrix;
+  if (!generator?.outputsFullMatrixInPolynomialTime || !generator.algorithm || !generator.runtimeBound || !generator.runtimeProof) {
+    throw new Error(`${record.id}: missing polynomial-time full-generator-matrix certificate`);
+  }
   if (record.status === 'verified') {
     if (record.verification.arithmetic !== 'passed' || record.verification.proof !== 'passed') {
       throw new Error(`${record.id}: verified entry has an incomplete audit`);

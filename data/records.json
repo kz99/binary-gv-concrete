@@ -42,6 +42,12 @@
       "rateType": "exact",
       "relativeDistance": 0.5,
       "status": "verified",
+      "generatorMatrix": {
+        "outputsFullMatrixInPolynomialTime": true,
+        "algorithm": "Enumerate x in F_2^30 in lexicographic order and emit the rows 1,x_1,...,x_30 evaluated at x.",
+        "runtimeBound": "O(n log n) bit operations for 31n output bits and coordinate indexing.",
+        "runtimeProof": "There are 31n output entries. Each entry is emitted after reading one indexed bit of x, and lexicographic incrementation costs O(log n) per column. Thus the complete matrix is emitted in O(n log n) time."
+      },
       "verification": {
         "arithmetic": "passed",
         "proof": "passed",

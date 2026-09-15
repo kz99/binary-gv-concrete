@@ -12,6 +12,7 @@
     "rate",
     "rateType",
     "status",
+    "generatorMatrix",
     "verification",
     "proofPath"
   ],
@@ -25,6 +26,16 @@
     "rateType": { "enum": ["exact", "certified_lower_bound"] },
     "status": { "enum": ["draft", "under-review", "verified", "rejected"] },
     "proofPath": { "type": "string", "pattern": "^proofs/.+\\.md$" },
+    "generatorMatrix": {
+      "type": "object",
+      "required": ["outputsFullMatrixInPolynomialTime", "algorithm", "runtimeBound", "runtimeProof"],
+      "properties": {
+        "outputsFullMatrixInPolynomialTime": { "const": true },
+        "algorithm": { "type": "string", "minLength": 1 },
+        "runtimeBound": { "type": "string", "minLength": 1 },
+        "runtimeProof": { "type": "string", "minLength": 1 }
+      }
+    },
     "verification": {
       "type": "object",
       "required": ["arithmetic", "proof", "reviewers", "agents", "writing", "summary", "reviews"],

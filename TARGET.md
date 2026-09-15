@@ -32,8 +32,13 @@ or \(k_{\mathrm{GV}}=2954.64132225\ldots\) at this blocklength. Thus
 The operating aim is to approach this concrete GV reference by increasing the
 verified dimension \(k\) at the fixed distance. General asymptotic insight is
 useful only insofar as it produces a better concrete code or a necessary lemma.
-Random sampling is not an admissible construction method. Every claimed
-parameter must follow from a human-readable mathematical proof.
+Random sampling is not an admissible construction method. Explicitness is a
+hard requirement: a deterministic algorithm must output the entire
+\(k\times n\) generator matrix in \(n^{O(1)}\) time, and the certificate must
+prove that runtime bound. A canonical exhaustive search or
+conditional-expectation enumeration is not admissible, regardless of whether
+it uniquely specifies a finite code. Every claimed parameter must follow from
+a human-readable mathematical proof.
 
 The former \(7/16\) campaign is retained only as historical material under
 `archive/target-7-16/`.

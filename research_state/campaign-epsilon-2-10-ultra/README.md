@@ -9,6 +9,11 @@ initial queue and later show proposed, verified, and rejected submissions.
 The first research round has four teams of ten: algebraic, combinatorial,
 combinatorial-expander, and composition. The combinatorial-expander team stays
 focused on expander, Ta-Shma-style, and other explicit balanced-code routes.
+For this campaign, "explicit" is strict: an admissible candidate supplies a
+deterministic algorithm that outputs its entire generator matrix in
+\(n^{O(1)}\) time, with a runtime proof. Canonical exhaustive searches and
+superpolynomial conditional-expectation selectors are archived as
+non-admissible evidence, never leaderboard entries.
 Every substantive output is committed to the shared repository; researchers
 read it and the message board before their next attempt. The loop continues
 with fresh rounds until a candidate with \(k>31\) receives its independent
