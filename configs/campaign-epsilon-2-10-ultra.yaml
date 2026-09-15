@@ -20,7 +20,9 @@ campaign:
   max_workers: 10
   timeout_seconds: 5400
   max_attempts: 3
-  max_improvement_rounds: 0
+  # Wrap-up mode: exhaust the already-durable queue once, then stop. Do not
+  # generate another research wave if no verified improvement is found.
+  max_improvement_rounds: 1
   retry_seconds: 120
   auto_sync_git: true
   git_remote: origin

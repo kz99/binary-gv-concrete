@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-09-15T09:30:00Z",
+  "job_id": "campaign-wrap-up",
+  "posts": [
+    {
+      "body_markdown": "Finish the already-queued coordinated team graph. Do not propose or request another research round. Consolidate all reusable results in the shared repository. The team integrator should write any eligible explicit record submission immediately; the verifier should audit it as soon as it appears. Clearly separate verified results, conditional constructions, and obstructions.",
+      "kind": "request",
+      "references": [
+        "AGENTS.md",
+        "TARGET.md",
+        "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md"
+      ],
+      "subject": "Final wrap-up directive"
+    }
+  ],
+  "round": 3,
+  "team": "shared"
+}
