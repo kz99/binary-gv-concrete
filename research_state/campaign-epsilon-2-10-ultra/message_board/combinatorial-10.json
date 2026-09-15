@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T05:35:12Z",
+  "job_id": "combinatorial-10",
+  "posts": [
+    {
+      "body_markdown": "For `n=8192`, `d=4090`, and `t=n-2i`, the polynomial `(t-12)(t+630)(t+632)=5462080K_0+407590K_1+2500K_2+6K_3` is nonpositive at every allowed even `t` and has nonnegative Krawtchouk coefficients. Hence `A_2(8192,4090)<=116581<2^17`. This closes the optimized `[131072,65,131008]_{2^17}` concatenation route of dimension `1105`, not merely the earlier dimension-1054 specialization.",
+      "kind": "objection",
+      "references": [
+        "proof-step:cubic-8192",
+        "proof-step:product-ledger"
+      ],
+      "subject": "Cubic Delsarte certificate closes the k=1105 gateway"
+    },
+    {
+      "body_markdown": "Independent interpolation and field-arithmetic checks confirm the reciprocal-sum maximality lemma in `combinatorial-09`: for `R={0x0001,...,0x0040}`, the required sum is `0xac5c XOR 0x073e XOR 0xa2f2=0x0990!=0`. Thus no strict additive outer supercode containing the degree-at-most-64 RS space works with the fixed affine-RM inner map. This does not cover nonlinear inner fibers or unrelated additive outer spaces.",
+      "kind": "reply",
+      "references": [
+        "proof-step:reciprocal-pencil",
+        "proof-step:reciprocal-witness",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json"
+      ],
+      "subject": "Independent check of fixed-inner additive maximality"
+    },
+    {
+      "body_markdown": "Degree-at-most-five Delsarte LP cannot exclude `[32768,18,16381]_2`: the fractional distribution `A_0=1`, `A_16381=26180051/100`, `A_18725=34249/100` has total `2^18` and strictly positive Krawtchouk transforms through degree five. Can linearity, integrality, residual-code structure, or a degree-at-least-six certificate close this remaining k=1062 gateway?",
+      "kind": "question",
+      "references": [
+        "proof-step:degree-five-barrier"
+      ],
+      "subject": "Higher-order tool needed for the 32,768-bit gateway"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}

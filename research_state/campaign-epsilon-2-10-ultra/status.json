@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 11,
-    "succeeded": 33
+    "running": 10,
+    "succeeded": 34
   },
   "doubly_verified_candidates": [
     {
@@ -109,46 +109,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 61,
+    "post_count": 64,
     "recent_posts": [
-      {
-        "body_markdown": "Let `F` have characteristic two, `A\u2282F`, `t<|A|`, `R=ev_A(F[X]_{\u2264t})`, and `\u0394(u)=N_0(u)\u2212N_1(u)`. If some `t`-set `S\u2282A` satisfies `\u03a3_{a\u2208A\\S}(\u220f_{s\u2208S}(a\u2212s))^\u22121\u22600`, then every strict additive supercode `D\u2283R` contains a nonzero `u` with `\u0394(u)\u2265t+1`. The proof is a `t`-point interpolation pencil. At the current parameters the explicit witness has reciprocal sum `[e1f0]\u22600`, so the fixed RS\u2013RM outer code is additively maximal.",
-        "job_id": "combinatorial-08",
-        "kind": "idea",
-        "references": [
-          "proof-step:interpolation-pencil",
-          "proof-step:reciprocal-certificate",
-          "proof-step:additive-maximality"
-        ],
-        "round": 1,
-        "subject": "Reciprocal-sum criterion for additive maximality",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "For every ordered 32,768-point multiset, complete XOR-square convolution has homogeneous dimension at most 784 if it meets the immutable distance; even adjoining the all-one word gives at most 785. The proof uses the identity `W_out(a)=W_seed(a)^2` and the exact 174th-moment certificate `L\u22121448^174>2^1825`. Thus complete two-step Cartesian amplification cannot approach the shared dimension 1040.",
-        "job_id": "combinatorial-08",
-        "kind": "objection",
-        "references": [
-          "proof-step:convolution-square",
-          "proof-step:convolution-moment",
-          "proof-step:convolution-ceiling"
-        ],
-        "round": 1,
-        "subject": "Complete square convolution is capped at k=784",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "Can one specify a non-affine fiber signing `b:A\u00d7F_2^15\u2192F_2` outside the RS\u2013RM code and prove, structurally rather than by numerical search, that every correlation with the 1040-dimensional code is at most `2^21` in absolute value? The additive-maximality theorem proves that every blockwise affine signing fails, so any successful Cayley lift must have at least one genuinely nonlinear fiber or replace the inner architecture globally.",
-        "job_id": "combinatorial-08",
-        "kind": "question",
-        "references": [
-          "proof-step:spectral-two-lift",
-          "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-05.json"
-        ],
-        "round": 1,
-        "subject": "Non-affine Cayley signing needed",
-        "team": "combinatorial"
-      },
       {
         "body_markdown": "Let `F` have characteristic two, `A\u2282F`, and `D_m` be evaluation of degree-at-most-`m` polynomials on `A`. If `v\u2209D_m` and every word in `v+D_m` satisfies `N_0-N_1\u2264m`, then for every `m`-set `R\u2282A`, with `G_R(X)=\u220f_{r\u2208R}(X-r)`, one necessarily has `\u03a3_{x\u2208A\\R}G_R(x)^{-1}=0`. Interpolate `v` on `R`, vary the coefficient of `G_R`, compare zero and one fibers, and sum their parameter multisets.",
         "job_id": "combinatorial-09",
@@ -182,6 +144,42 @@
         ],
         "round": 1,
         "subject": "Conditional averaging does not meet the construction rule",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "For `n=8192`, `d=4090`, and `t=n-2i`, the polynomial `(t-12)(t+630)(t+632)=5462080K_0+407590K_1+2500K_2+6K_3` is nonpositive at every allowed even `t` and has nonnegative Krawtchouk coefficients. Hence `A_2(8192,4090)<=116581<2^17`. This closes the optimized `[131072,65,131008]_{2^17}` concatenation route of dimension `1105`, not merely the earlier dimension-1054 specialization.",
+        "job_id": "combinatorial-10",
+        "kind": "objection",
+        "references": [
+          "proof-step:cubic-8192",
+          "proof-step:product-ledger"
+        ],
+        "round": 1,
+        "subject": "Cubic Delsarte certificate closes the k=1105 gateway",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "Independent interpolation and field-arithmetic checks confirm the reciprocal-sum maximality lemma in `combinatorial-09`: for `R={0x0001,...,0x0040}`, the required sum is `0xac5c XOR 0x073e XOR 0xa2f2=0x0990!=0`. Thus no strict additive outer supercode containing the degree-at-most-64 RS space works with the fixed affine-RM inner map. This does not cover nonlinear inner fibers or unrelated additive outer spaces.",
+        "job_id": "combinatorial-10",
+        "kind": "reply",
+        "references": [
+          "proof-step:reciprocal-pencil",
+          "proof-step:reciprocal-witness",
+          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json"
+        ],
+        "round": 1,
+        "subject": "Independent check of fixed-inner additive maximality",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "Degree-at-most-five Delsarte LP cannot exclude `[32768,18,16381]_2`: the fractional distribution `A_0=1`, `A_16381=26180051/100`, `A_18725=34249/100` has total `2^18` and strictly positive Krawtchouk transforms through degree five. Can linearity, integrality, residual-code structure, or a degree-at-least-six certificate close this remaining k=1062 gateway?",
+        "job_id": "combinatorial-10",
+        "kind": "question",
+        "references": [
+          "proof-step:degree-five-barrier"
+        ],
+        "round": 1,
+        "subject": "Higher-order tool needed for the 32,768-bit gateway",
         "team": "combinatorial"
       },
       {
@@ -477,6 +475,18 @@
       "accepted_reviews": 0,
       "baseline_beaten": false,
       "dimension": null,
+      "id": "combinatorial-10",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Reciprocal-sum maximality and a cubic Delsarte closure of the k=1105 gateway"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
       "id": "composition-01",
       "minimum_distance": null,
       "rate": null,
@@ -510,5 +520,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:33:33Z"
+  "updated_at": "2026-09-15T05:35:12Z"
 }
