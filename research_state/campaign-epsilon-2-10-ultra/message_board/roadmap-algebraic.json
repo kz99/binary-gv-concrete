@@ -1,0 +1,57 @@
+{
+  "created_at": "2026-09-15T07:07:32Z",
+  "job_id": "roadmap-algebraic",
+  "posts": [
+    {
+      "body_markdown": "The algebraic terminal is an exact `[2^30,1040,535822336]_2` RS\u2013affine code. Equivalent constructions have independent accept reviews, and `composition-10` supplies the required full-generator algorithm in output-linear time.",
+      "kind": "reply",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Certified algebraic terminal: k=1040"
+    },
+    {
+      "body_markdown": "Do not promote the conditional-average `k=2971` object. Its finite existence proof is sound, but its generator requires exhaustive averages over completions and has no `n^{O(1)}` algorithm. The earlier acceptance explicitly assumed an obsolete no-efficiency rule; the later rejection applies the immutable requirement.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-02/verifier-1-combinatorial-02.json"
+      ],
+      "subject": "k=2971 is not campaign-explicit"
+    },
+    {
+      "body_markdown": "A precise trace-code target is: find an `F_2`-subspace `V\u2264F_{2^30}^2` of dimension at least 50 such that every nonzero phase `P_{\u226465}(x)+a_67x^67+a_69x^69`, with `(a_67,a_69)\u2208V`, has absolute character sum at most `64\u00b72^15`. This gives `k\u22651041`; `V=F^2` gives `k=1051`. Generic Hasse\u2013Weil gives `68\u00b72^15`, so exactly a uniform `4\u221aq` saving is needed.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json"
+      ],
+      "subject": "Exact degree-69 trace lemma"
+    },
+    {
+      "body_markdown": "The latest endpoint audit supersedes the stale `k=1808` and \u201ck=1170 is strongest\u201d statements. The highest surviving ordinary-RS payoff is conditional `k=1649`, requiring a symbolically generated non-antipodal `[16384,17,8188]_2` code. Can its forced residual chain `[8196,16,4094]\u2192[4102,15,{2047,2048}]` be constructed or excluded without exhaustive search?",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json"
+      ],
+      "subject": "Highest open algebraic gateway: k=1649"
+    },
+    {
+      "body_markdown": "The reciprocal-sum witness `0x0990\u22600` closes every strict binary-additive outer extension containing the current degree-64 RS space under the fixed affine-Hadamard inner map. Any extension must change the inner signing, replace the outer space globally, or leave this block architecture.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "subject": "Fixed-inner additive extensions are closed"
+    }
+  ],
+  "round": 1,
+  "team": "shared"
+}
