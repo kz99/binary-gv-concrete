@@ -1,0 +1,248 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "Fix `F16 = F2[u]/(u^4+u+1)` and `K = F256 = F16[v]/(v^2+v+u^3)`. Since `Tr_F16/F2(u^3)=1`, the second polynomial is irreducible. Use the ordered binary basis `(1,u,u^2,u^3,v,uv,u^2v,u^3v)` and order field elements by their coefficient bit strings.\n\nLet `F1=K(x1)` and, for `i=1,2,3,4`, define\n`F_{i+1}=F_i(z_{i+1})`, `z_{i+1}^16+z_{i+1}=x_i^17`, and `x_{i+1}=z_{i+1}/x_i`.\nIn `Gal(F5/F4)`, let `sigma_a(z5)=z5+a` for `a in F16`. Put `H=F5^{<sigma_1>}`. Equivalently,\n`H=F4(y)`, where `y=z5^2+z5` and `y^8+y^4+y^2+y=x4^17`.\nThen `[H:F4]=8`, `[H:F3]=128`, `g(H)=553,601`, and `H` has exactly `L=8,356,224` rational places.\n\nOn `F3`, let `P` be the pole of `x1`, let `Q` be the common-zero place, and let `S1` be the sum of the fifteen rational branches with `x1=0` and `z2 in F16*`. Set `B=2S1+681P` and `A=Con_{H/F3}(B)`. Thus `deg(B)=711`, `deg(A)=91,008`, and ten explicitly listed functions give `ell_H(A)>=10`.\n\nLet `K_H=(dx1)` be a canonical divisor, `m=1,016,192`, and `E=K_H-A`. By weak approximation, choose `u0 in H*` such that `G=E+(u0)` has coefficient zero at every rational place of `H`. Choose the first such `u0` in the fixed height-first enumeration of rational expressions in `(x1,z2,z3,z4,y)`. Then `deg(G)=m` and `ell(G)>=462,602`. Greedily select the first `462,602` linearly independent functions in `L(G)` under the same enumeration; call their span `W`.\n\nOrder all rational places by the first differing valuation on the fixed exhaustive enumeration of `H*`. Evaluate `W` at all `L` rational places. This gives an exact `K`-linear outer code of dimension `462,602` and distance at least `7,340,032`.\n\nEncode each outer symbol through `RM(1,7)=[128,8,64]_2`: if its basis coordinates are `(b0,...,b7)`, output `(b0+sum_{j=1}^7 b_j t_j)_{t in F2^7}`, with `t` in lexicographic order. Append exactly `4,145,152` zero coordinates. No shortening or puncturing is used.",
+  "dimension": 3700816,
+  "distance_audit": [
+    "The outer divisor has degree `m=1,016,192<L=8,356,224`, so all-point evaluation is injective.",
+    "For nonzero `f in W`, the effective divisor `(f)+G` has degree `m`; consequently at most `m` evaluation coordinates vanish and outer weight is at least `L-m=7,340,032`.",
+    "Every nonzero outer symbol maps to a nonzero `RM(1,7)` word of weight at least `64`. Thus every nonzero concatenated word has weight at least `7,340,032*64=469,762,048`.",
+    "The selected outer subspace has exact dimension `462,602`; injectivity of the inner map gives exact binary dimension `8*462,602=3,700,816`.",
+    "Appending zero coordinates changes neither dimension nor Hamming weight."
+  ],
+  "explicitness_audit": [
+    "Both finite fields are defined by specified irreducible polynomials and a fixed ordered binary basis.",
+    "All five tower levels and the degree-eight intermediate field are given by explicit equations and a specified order-two translation subgroup.",
+    "The evaluation divisor is the sum of all rational places; their exact count and splitting classes are proved, and a valuation-signature ordering is fixed.",
+    "The speciality divisor is the explicit conorm of `2S1+681P`, with `S1` specified by its fifteen `F16*` branches.",
+    "The canonical divisor is `(dx1)`. The weak-approximation solution, the basis of `L(G)`, and the exact-dimensional subspace are selected by fixed height-first enumeration and lexicographic linear algebra.",
+    "The inner encoder and its coordinate ordering are given by an explicit Boolean evaluation formula.",
+    "There is no random choice, sampling, puncturing, or shortening. The final `4,145,152` coordinates are deterministically appended zeros."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The Garcia--Stichtenoth tower over `F_{q^2}` with even `q`, specialized here to `q=16`.",
+      "result": "Definition 0.1 and Proposition 1.1 give the tower and Galois translations; Lemma 2.3, Definition 2.4, Lemma 2.9, and Remark 3.4 give the exceptional-place splitting and exact characteristic-two rational-place counts; Theorem 2.10 gives the full-level genera.",
+      "source": "[Garcia--Stichtenoth, A tower of Artin--Schreier extensions of function fields attaining the Drinfeld--Vladut bound, Invent. Math. 121 (1995)](https://doi.org/10.1007/BF01884295)",
+      "used_for": "Exact tower, genus endpoints, and rational-place decomposition."
+    },
+    {
+      "hypotheses": "The third field of the same Garcia--Stichtenoth tower over `F_{q^2}`, specialized to `q=16`.",
+      "result": "Figure 1 and the displayed principal divisors before equation (2.1) describe `P,Q,S0,S1`; Proposition 2.3 gives the lattice basis for four-support Riemann--Roch spaces.",
+      "source": "[Yang--Hu, Weierstrass Semigroups From a Tower of Function Fields Attaining the Drinfeld--Vladut Bound, arXiv:1911.04269v1](https://arxiv.org/pdf/1911.04269)",
+      "used_for": "The three principal-divisor identities underlying the ten explicit sections, and the finite four-support divisor sweep."
+    },
+    {
+      "hypotheses": "Finite separable extensions of one-variable function fields over a perfect constant field.",
+      "result": "Hilbert's different formula, Hurwitz, weak approximation, Riemann--Roch, and the standard evaluation-code distance argument.",
+      "source": "[Stichtenoth, Algebraic Function Fields and Codes, second edition](https://doi.org/10.1007/978-3-540-76878-4)",
+      "used_for": "Exact quotient genus, moving the divisor off all evaluation places, dimension, injectivity, and distance."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Submit the proof for the two independent verifier acceptances required before changing any campaign record to `verified`.",
+    "Implement the deterministic normalization, weak-approximation, and Riemann--Roch routines and record reproducible hashes for the resulting generator description.",
+    "Search divisors with asymmetric coefficients on the individual `S0` and `S1` branches, or additional sections appearing only after pullback to `H`; the four-orbit symmetric family is exhausted."
+  ],
+  "obstructions": [
+    "This does not beat the `7/1920` envelope: its rate is smaller by exactly `200501/1006632960`, approximately `0.0001991798480351766`.",
+    "For degree `e=1,2,4` intermediates above `F4`, the exact rational-place counts are below the required outer distance `7,340,032`. For `e=16`, the ordinary Riemann--Roch lower bound after the `2^23` outer-length cap is `-60,928`; hence `e=8` is the unique ordinary finite-level winner in this chain.",
+    "An exact enumeration of all `284,592` effective divisors `rQ+sS0+tS1+uP` with `r+15s+15t+u=711` gives maximum Riemann--Roch dimension `10`. This is not an obstruction to asymmetric componentwise divisors or to new sections on `H`.",
+    "No global optimality among all divisors or all GS-derived constructions is claimed."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Final binary length",
+      "value": "n=2^30=1,073,741,824"
+    },
+    {
+      "derivation": "`H=F5^{<sigma_1>}`.",
+      "quantity": "Tower degrees",
+      "value": "[H:F4]=8, [H:F3]=128, [F5:H]=2"
+    },
+    {
+      "derivation": "Hilbert different plus Hurwitz.",
+      "quantity": "Exact genus",
+      "value": "g(H)=553,601"
+    },
+    {
+      "derivation": "`8((256-1)16^3+16)+256`.",
+      "quantity": "Rational evaluation places",
+      "value": "L=8,356,224"
+    },
+    {
+      "derivation": "`469,762,048/64`.",
+      "quantity": "Required outer distance",
+      "value": "T=7,340,032"
+    },
+    {
+      "derivation": "`L-T`.",
+      "quantity": "Outer divisor degree",
+      "value": "m=1,016,192"
+    },
+    {
+      "derivation": "`deg(2S1+681P)=2*15+681`.",
+      "quantity": "Base speciality divisor",
+      "value": "deg(B)=711, ell(B)=10"
+    },
+    {
+      "derivation": "`128*711`.",
+      "quantity": "Pulled-back speciality divisor",
+      "value": "deg(A)=91,008, ell_H(A)>=10"
+    },
+    {
+      "derivation": "`2g(H)-2-m`.",
+      "quantity": "Residual canonical degree",
+      "value": "91,008"
+    },
+    {
+      "derivation": "`m+1-g(H)+ell_H(A)`.",
+      "quantity": "Certified outer dimension",
+      "value": "462,602"
+    },
+    {
+      "derivation": "All-point AG evaluation.",
+      "quantity": "Outer parameters",
+      "value": "[8,356,224,462,602,>=7,340,032]_256"
+    },
+    {
+      "derivation": "`128L`.",
+      "quantity": "Raw binary length",
+      "value": "1,069,596,672"
+    },
+    {
+      "derivation": "`2^30-128L`.",
+      "quantity": "Zero padding",
+      "value": "4,145,152"
+    },
+    {
+      "derivation": "`8*462,602`.",
+      "quantity": "Final binary dimension",
+      "value": "3,700,816"
+    },
+    {
+      "derivation": "Reduced exact fraction.",
+      "quantity": "Proved rate",
+      "value": "3,700,816/1,073,741,824 = 231,301/67,108,864 = 0.0034466534852981567"
+    },
+    {
+      "derivation": "New dimension minus `3,688,448`.",
+      "quantity": "Improvement over verified baseline",
+      "value": "12,368 binary dimensions"
+    },
+    {
+      "derivation": "`7/1920 - 231301/67108864`.",
+      "quantity": "Remaining envelope gap",
+      "value": "200,501/1,006,632,960 = 0.0001991798480351766"
+    },
+    {
+      "derivation": "With `M=2^23`, the outer gap is `(M-L)+(g-1)-M/15-10`.",
+      "quantity": "Finite-loss decomposition",
+      "value": "32,384 padding loss - 84,608/15 finite-genus advantage - 10 speciality gain = 401,002/15 outer dimensions; binary gap 3,208,016/15"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nThere is a deterministic binary linear code with parameters\n`[1,073,741,824, 3,700,816, >=469,762,048]_2`.\n\n### Proof\n\n#### 1. Constants and intermediate field\n\nLet `q=16`, `K=F256`, and define the tower by\n`F1=K(x1)` and\n`F_{i+1}=F_i(z_{i+1})`, where\n`z_{i+1}^16+z_{i+1}=x_i^17` and `x_{i+1}=z_{i+1}/x_i`.\nThe full constant field is `K`. The last step is Galois with translations `sigma_a(z5)=z5+a`, `a in F16` [Garcia--Stichtenoth](https://doi.org/10.1007/BF01884295).\n\nLet `H=F5^{<sigma_1>}`. If `y=z5^2+z5`, then `y` is fixed by `sigma_1` and\n`y+y^2+y^4+y^8=z5+z5^16=x4^17`.\nSince `[F5:H]=2`, this proves\n`H=F4(y)`, `y^8+y^4+y^2+y=x4^17`, and `[H:F4]=8`.\n\n#### 2. Exact rational-place count\n\nLet `A4` be the rational places of `F4` over `x1=alpha`, `alpha in K*`. The map `z -> z^16+z` from `K` to `F16` is the trace map and has kernel `F16`. At every nonzero branch, `x_i^17` lies in `F16*`; hence every step has exactly sixteen rational successors and remains nonzero. Therefore\n`|A4|=(16^2-1)16^3=1,044,480`, and every member splits completely in `F5/F4`.\n\nThe characteristic-two exceptional-place classification of Garcia--Stichtenoth gives two further disjoint classes. The class `C4={Q4} union S0^(4)` has `16` rational places and splits completely in `F5/F4`. The class `S^(4)`, the support of the pole divisor of `x4`, has `16^2=256` rational places and is totally ramified. These three classes exhaust the rational places of `F4`; their total is the exact value `(16^2-1)16^3+16^2+16` from Remark 3.4. The same ramification diagram is reproduced in [Yang--Hu, Figure 1](https://arxiv.org/pdf/1911.04269).\n\nA completely split `F4` place gives eight rational places in `H`, while a totally ramified place gives one. Conversely, a rational place of `H` restricts to a rational place of `F4`. Consequently\n`N1(H)=8(1,044,480+16)+256=8,356,224` exactly.\n\n#### 3. Exact genus\n\nGarcia--Stichtenoth's genus formula gives\n`g(F4)=67,185` and `g(F5)=1,109,505`. Hurwitz therefore gives\n`deg Diff(F5/F4)=(2*1,109,505-2)-16(2*67,185-2)=69,120`.\n\nFor `c in F16*`, define `rho_c(x_i)=c x_i` and `rho_c(z_i)=c^2 z_i`. These assignments preserve the tower equations and\n`rho_c sigma_a rho_c^{-1}=sigma_{c^{-2}a}`.\nSquaring permutes `F16*`, so conjugation is transitive on the fifteen nonidentity translations. Their global Hilbert-different contributions are consequently equal. Hilbert's different formula gives each contribution as\n`69,120/15=4,608`.\n\nThe group of `F5/H` is `{1,sigma_1}`, so `deg Diff(F5/H)=4,608`. A second application of Hurwitz yields\n`2,219,008=2(2g(H)-2)+4,608`, hence\n`g(H)=553,601`.\nThis uses the wild Hilbert-different formula, not a tame quotient formula; see [Stichtenoth, Theorems 3.8.7 and 3.4.13](https://doi.org/10.1007/978-3-540-76878-4).\n\n#### 4. Ten explicit speciality sections\n\nOn `F3`, let `P,Q,S0,S1` have the standard exceptional-place notation. Here `deg(S1)=15`. The principal divisors, obtained from the displayed formulas before equation (2.1) in [Yang--Hu](https://arxiv.org/pdf/1911.04269), are\n`(x1)=Q+S0+16S1-256P`,\n`(z2)=17Q+17S0-272P`, and\n`(z3)=272Q-17S1-17P`.\n\nSet `B=2S1+681P`. The functions\n`1, x1, z2, x1*z3, x1^2, x1*z2, x1^2*z3, z2^2, x1*z2*z3, x1^2*z3^2`\nhave respective `(S1 valuation, P pole order)` pairs\n`(0,0),(16,256),(0,272),(-1,273),(32,512),(16,528),(15,529),(0,544),(-1,545),(-2,546)`.\nTheir valuations at `Q` and every component of `S0` are nonnegative, and the three displayed principal divisors show that no other pole occurs. Thus all ten lie in `L(B)`. Their pole orders at `P` are distinct, so a nontrivial linear combination cannot cancel its unique largest pole. They are linearly independent. Hence `ell(B)>=10` (indeed Yang--Hu's lattice basis gives equality).\n\nLet `A=Con_{H/F3}(B)`. Since `[H:F3]=128`,\n`deg(A)=128(2*15+681)=91,008`.\nConorming the divisor inequality for each of the ten functions proves `ell_H(A)>=10`.\n\n#### 5. Moving the evaluation divisor and Riemann--Roch\n\nLet `D` be the sum of all `L=8,356,224` rational places of `H`, and set\n`T=469,762,048/64=7,340,032` and\n`m=L-T=1,016,192`.\nSince `2g(H)-2-m=91,008=deg(A)`, take the canonical divisor `K_H=(dx1)` and put `E=K_H-A`.\n\nFor each `P_i` in `supp(D)`, choose a local uniformizer `t_i`. Weak approximation supplies `u0 in H*` satisfying\n`v_{P_i}(u0-t_i^{-v_{P_i}(E)})>-v_{P_i}(E)` simultaneously. Thus `v_{P_i}(u0)=-v_{P_i}(E)`, and\n`G=E+(u0)` has coefficient zero at every `P_i`. Moreover `deg(G)=m` and `K_H-G` is linearly equivalent to `A`.\n\nRiemann--Roch now gives\n`ell(G)=m+1-g(H)+ell(K_H-G)`\n`>=1,016,193-553,601+10=462,602`.\nChoose the specified exact `462,602`-dimensional subspace `W` of `L(G)`.\n\nBecause `deg(G)<deg(D)`, evaluation on `D` is injective. For nonzero `f in W`, every evaluation zero contributes to the effective divisor `(f)+G`, whose degree is `m`. Therefore at most `m` of the `L` evaluations vanish, and the outer code has parameters\n`[8,356,224,462,602,>=8,356,224-1,016,192]_256`\n`=[8,356,224,462,602,>=7,340,032]_256`.\n\n#### 6. Binary concatenation and padding\n\nThe inner code maps an eight-bit vector to an affine Boolean function on `F2^7`. A nonconstant affine function has weight `64`, while the nonzero constant function has weight `128`; hence `RM(1,7)=[128,8,64]_2`.\n\nCoordinatewise concatenation gives raw length\n`8,356,224*128=1,069,596,672`, exact binary dimension\n`462,602*8=3,700,816`, and distance at least\n`7,340,032*64=469,762,048`.\nAppending `4,145,152` zero coordinates gives length exactly `2^30` without changing dimension or distance.\n\nThe rate is\n`3,700,816/2^30=231,301/67,108,864=0.0034466534852981567`.\nIt is below `7/1920` by exactly `200,501/1,006,632,960`. Thus this is a finite-size optimization within the vanilla GS plus `RM(1,7)` envelope, not a beyond-ceiling construction.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "The fixed field of the order-two translation `z5 -> z5+1` contains `y=z5^2+z5`. Telescoping gives `y+y^2+y^4+y^8=z5+z5^16=x4^17`; the degree calculation identifies the fixed field.",
+      "statement": "The explicitly defined intermediate field satisfies `[H:F4]=8`, `[H:F3]=128`, and `H=F4(y)` with `y^8+y^4+y^2+y=x4^17`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "The `1,044,480` nonzero branches and the `16` exceptional split branches each give eight rational quotient places; the `256` totally ramified branches each give one. The Garcia--Stichtenoth exact count exhausts all rational base places.",
+      "statement": "`H` has exactly `8,356,224` rational places.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P3",
+      "proof": "The full-step different has degree `69,120`. Scaling automorphisms conjugate all fifteen nonidentity translations, so Hilbert's formula assigns contribution `4,608` to each. Hurwitz for the order-two fixed field gives `g(H)=553,601`.",
+      "statement": "The intermediate genus is exactly `553,601`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P4",
+      "proof": "The three displayed principal-divisor identities give the complete pole support and valuations of the ten monomials. Their `P`-pole orders are distinct, proving independence.",
+      "statement": "For `B=2S1+681P` on `F3`, `deg(B)=711` and `ell(B)>=10`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "Conorm multiplies degree by `[H:F3]=128` and carries each divisor inequality `(f)+B>=0` to `(f)+Con(B)>=0`.",
+      "statement": "`A=Con_{H/F3}(B)` has degree `91,008` and `ell_H(A)>=10`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3",
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "For `E=(dx1)-A`, weak approximation produces an equivalent divisor `G` with zero coefficient at every evaluation place. Then `K_H-G~A`, so Riemann--Roch gives `ell(G)>=462,602`.",
+      "statement": "There is a deterministic degree-`1,016,192` divisor disjoint from all rational places whose Riemann--Roch space contains an exact `462,602`-dimensional selected subspace.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P6"
+      ],
+      "id": "P7",
+      "proof": "Evaluation is injective since `deg(G)<L`. Every nonzero evaluated function has at most `deg(G)` zero coordinates.",
+      "statement": "The outer code has parameters `[8,356,224,462,602,>=7,340,032]_256`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P7"
+      ],
+      "id": "P8",
+      "proof": "The injective `[128,8,64]` inner map multiplies dimension by eight and distance by at least sixty-four. Exact zero padding reaches `2^30`.",
+      "statement": "The final binary code has parameters `[1,073,741,824,3,700,816,>=469,762,048]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "id": "P9",
+      "proof": "For intermediate degree `e in {1,2,4,8,16}`, equal Hilbert contributions give `g_e=69,488e-2,303` and the place decomposition gives `N_e=1,044,496e+256`. Only `e=8` supplies enough places with a positive ordinary Riemann--Roch guarantee. Yang--Hu's exact lattice formula, exhaustively evaluated over all `r+15s+15t+u=711`, has maximum ten.",
+      "statement": "The degree-eight level is the unique ordinary-Riemann--Roch winner in the last GS step, and the chosen speciality divisor is optimal within the natural four-orbit effective divisor family.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.0034466534852981567,
+  "research_direction": "Optimize the exact finite-length Garcia--Stichtenoth `F256` plus `RM(1,7)` construction through exact intermediate genus, all rational evaluation places, and a certified speciality divisor, while remaining within the vanilla asymptotic envelope.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "ceiling_optimization",
+  "theorem_statement": "There exists a deterministic, symbolically recoverable binary linear code `C subseteq F2^1,073,741,824` with exact dimension `3,700,816` and minimum distance at least `469,762,048`. Its proved rate is `231,301/67,108,864`, improving the verified dimension by `12,368` but remaining strictly below the vanilla ceiling `7/1920`.",
+  "title": "Exact degree-eight GS quotient with a ten-section pulled-back speciality divisor"
+}

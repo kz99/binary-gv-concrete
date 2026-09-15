@@ -1,0 +1,246 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "### Fields and local codes\n\nFix\n\n`K = F_2[u]/(u^8+u^4+u^3+u+1) = F_256`\n\nand, independently,\n\n`F = F_2[z]/(z^7+z+1) = F_128`.\n\nOrder both fields by coefficient vectors in their displayed polynomial bases, and order the 128 inner coordinates by `x \u2208 F` in that order. Write `Tr` for `Tr_{F/F_2}`.\n\nFor `y=\u03a3_{i=0}^7 y_i u^i \u2208 K`, put\n\n`b(y)=\u03a3_{i=0}^6 y_i z^i`, `c(y)=y_7`,\n\nand define the affine encoder\n\n`\u03b9(y)(x)=Tr(b(y)x)+c(y)`.\n\nIts image is `H=RM(1,7)=[128,8,64]_2`. For `a\u2208F`, define\n\n`q_a(x)=Tr(a x^3)`.\n\nThe enlarged inner code\n\n`B={q_a+\u03b9(y):a\u2208F,y\u2208K}`\n\nis `[128,15,56]_2`, contains `H`, and has quotient dimension seven.\n\n### Exact outer code\n\nUse `q=16`, `p=2`, `r=4`, and level `(k,s)=(4,3)` of the completed Garcia\u2013Stichtenoth tower over `K`. Concretely, start with `F_1=K(x_1)` and\n\n`F_{i+1}=F_i(z_{i+1})`, `z_{i+1}^16+z_{i+1}=x_i^17`, `x_i=z_i/x_{i-1}` for `i\u22652`.\n\nInside `F_5/F_4`, take the degree-eight intermediate field fixed by `z_5\u21a6z_5+1`; equivalently it is `F_{4,3}=F_4(w)` with `w=z_5^2+z_5` and\n\n`w^8+w^4+w^2+w=x_4^17`.\n\nOrder the standard completely splitting rational places lexicographically by residue tuples in the fixed polynomial basis. Excluding the distinguished common pole `P_\u221e`, take the first\n\n`L=8,355,840`\n\nplaces `P_1,\u2026,P_L`. Put\n\n`D=\u03a3P_j`, `G=1,015,808 P_\u221e`.\n\nLet `A_full=C_L(D,G)\u2282K^L`. Order `K^L` lexicographically, form the unique reduced-row-echelon basis of `A_full`, and let `A` be the span of its first\n\n`K_0=461,056`\n\nrows. Thus `A` has exact `K`-dimension `K_0` and distance at least `7,340,032`.\n\n### Two-level encoder\n\nLet\n\n`M=2^23=8,388,608`, `P=M-L=32,768`.\n\nFor `v=(v_1,\u2026,v_L)\u2208A` and `a\u2208F`, define `Enc(v,a)` as `M` consecutive blocks of length 128:\n\n- block `j\u2264L` is `(q_a(x)+\u03b9(v_j)(x))_{x\u2208F}`;\n- block `j>L` is `(q_a(x))_{x\u2208F}`.\n\nCoordinates are ordered first by `j`, then by the fixed order on `F`. The final code is\n\n`C={Enc(v,a):v\u2208A,a\u2208F}`.\n\nThere is no sampling, puncturing, shortening, or graph choice. The former padding is zero padding only for the lower GS\u2013RM level; the repeated Gold layer occupies all `M` blocks.",
+  "dimension": 3688455,
+  "distance_audit": [
+    "For `a=0` and `v\u22600`, at least `7,340,032` outer symbols are nonzero and each corresponding affine block has weight at least 64. Hence the weight is at least `64\u00b77,340,032=469,762,048`.",
+    "For `a\u22600`, every one of the first `L` blocks is an affine shift of a nonzero Gold quadratic and has weight at least 56.",
+    "On each of the final `P=32,768` blocks, the word is the unshifted `q_a`, which has weight exactly 64.",
+    "Thus the nonzero-Gold case has weight at least `56L+64P=470,024,192`, exceeding the target by `262,144`.",
+    "The cases `a=0` and `a\u22600` exhaust every nonzero codeword; no invalid addition of independent layer-distance products is used."
+  ],
+  "explicitness_audit": [
+    "The polynomial `z^7+z+1` is irreducible: a reducible degree-seven polynomial has a factor of degree at most three, while the remainders modulo the irreducibles of degrees one, two, and three are nonzero.",
+    "The degree-eight field polynomial has the Rabin certificate `u^256\u2261u` and `gcd(u^8+u^4+u^3+u+1,u^16+u)=1`.",
+    "`F_128` is defined independently of `F_256`; it is not incorrectly treated as a subfield. Their only identification is the displayed `F_2`-linear coefficient map `K\u2245F\u2295F_2`.",
+    "The tower level is the explicit fixed field of `z_5\u21a6z_5+1`, the divisor degree is `1,015,808`, and the evaluation-place ordering is fixed symbolically.",
+    "Taking the first rows of the canonical RREF basis makes the outer dimension exactly `461,056`, rather than merely invoking a lower bound.",
+    "Every block and coordinate order is fixed. The construction is deterministic and uses no random existence argument.",
+    "The candidate must enter `data/records.json` as `under-review`; the research audits performed here do not replace the campaign's two official verifier acceptances."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Completed Garcia\u2013Stichtenoth tower over `F_{q^2}` with `q=p^r\u22654`, level `k\u22651`, and `0\u2264s\u2264r`. Here `q=16`, `p=2`, `r=4`, `k=4`, and `s=3`.",
+      "result": "Proposition 2.1 gives `N_{k,s}\u2265(q^2\u22121)q^{k\u22121}p^s` and `g_{k,s}\u2264g_{k+1}/p^{r\u2212s}+1`; Equation (3) gives the exact genus of the undensified levels.",
+      "source": "Ballet, Pieltant, Rambaud, and Sijsling, [On some bounds for symmetric tensor rank of multiplication in finite fields](https://perso.telecom-paristech.fr/rambaud/articles/BPRS.pdf), Equation (3) and Proposition 2.1.",
+      "used_for": "Existence of the `L=8,355,840` rational evaluation places and the bound `g_{4,3}\u2264554,753`."
+    },
+    {
+      "hypotheses": "A function field of genus `g`, distinct rational evaluation places disjoint from `G`, and `deg G<L`.",
+      "result": "Riemann\u2013Roch gives `ell(G)\u2265deg G+1\u2212g`; evaluation is injective when `deg G<L`; and the evaluation code has distance at least `L\u2212deg G`.",
+      "source": "Henning Stichtenoth, [Algebraic Function Fields and Codes, second edition](https://doi.org/10.1007/978-3-540-76878-4), Chapter 2.",
+      "used_for": "Dimension, injectivity, and designed distance of the exact GS outer constituent."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Transcribe this certificate to `proofs/gs-rm-gold-repetition.md` and add a `3,688,455`-dimensional record to `data/records.json` with status `under-review`; the present workspace was read-only.",
+    "Obtain two independent official verifier-agent acceptances covering arithmetic, proof, explicitness, and writing before changing the status to `verified`.",
+    "Run `node scripts/validate-data.mjs` and the dashboard build after materializing the record.",
+    "Investigate a correlated top-level outer code whose Gold Walsh signs interact with the GS evaluations; independent weighted-support certification is proved here to cap the gain at seven bits."
+  ],
+  "obstructions": [
+    "The construction does not beat `7/1920`. The first integer dimension above that ceiling is `3,914,684`, leaving a gap of `226,229` dimensions.",
+    "The Gold quotient is locally maximal among quadratic extensions of `RM(1,7)` having coset separation at least 56: a constant-rank-six alternating-form subspace on seven variables has dimension at most seven.",
+    "Even allowing coordinate-varying Gold labels and crediting weight 64 on the padding blocks, the independent weighted-support argument forces the top outer binary dimension to be at most seven.",
+    "These obstructions apply to independent first-nonzero-level or weighted-product certification. They do not rule out global coupling with the particular GS outer code, a nonquadratic inner mechanism, or a different block length."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Binary block length `n`",
+      "value": "`2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`7n/16`.",
+      "quantity": "Required distance `T`",
+      "value": "`469,762,048`"
+    },
+    {
+      "derivation": "`n/128`.",
+      "quantity": "Number of inner blocks `M`",
+      "value": "`2^23=8,388,608`"
+    },
+    {
+      "derivation": "`(16^2\u22121)16^3\u00b72^3`.",
+      "quantity": "GS evaluation length `L`",
+      "value": "`8,355,840`"
+    },
+    {
+      "derivation": "`M\u2212L`.",
+      "quantity": "Lower-level zero blocks `P`",
+      "value": "`32,768`"
+    },
+    {
+      "derivation": "`16^5+16^4\u221216^3\u22122\u00b716^2+1`.",
+      "quantity": "Undensified genus `g_5`",
+      "value": "`1,109,505`"
+    },
+    {
+      "derivation": "`floor(g_5/2+1)`.",
+      "quantity": "Genus upper bound for `F_{4,3}`",
+      "value": "`554,753`"
+    },
+    {
+      "derivation": "`T/64`.",
+      "quantity": "Required outer distance `D_0`",
+      "value": "`7,340,032`"
+    },
+    {
+      "derivation": "`L\u2212D_0`.",
+      "quantity": "Divisor degree",
+      "value": "`1,015,808`"
+    },
+    {
+      "derivation": "`1,015,808+1\u2212554,753`.",
+      "quantity": "Selected exact outer dimension `K_0`",
+      "value": "`461,056` over `F_256`"
+    },
+    {
+      "derivation": "Affine functions `Tr(bx)+c`.",
+      "quantity": "Lower inner code",
+      "value": "`H=[128,8,64]_2`"
+    },
+    {
+      "derivation": "Gold quadratics plus affine functions.",
+      "quantity": "Enlarged inner code",
+      "value": "`B=[128,15,56]_2`"
+    },
+    {
+      "derivation": "`8K_0`.",
+      "quantity": "Lower-level binary dimension",
+      "value": "`3,688,448`"
+    },
+    {
+      "derivation": "`dim_F2 F_128`.",
+      "quantity": "Repeated Gold-layer dimension",
+      "value": "`7`"
+    },
+    {
+      "derivation": "`8K_0+7`.",
+      "quantity": "Final exact dimension `k`",
+      "value": "`3,688,455`"
+    },
+    {
+      "derivation": "`64D_0`.",
+      "quantity": "Lower-level distance bound",
+      "value": "`469,762,048`"
+    },
+    {
+      "derivation": "`56L+64P`.",
+      "quantity": "Nonzero-Gold distance bound",
+      "value": "`470,024,192`"
+    },
+    {
+      "derivation": "`k/2^30`.",
+      "quantity": "Certified rate",
+      "value": "`3,688,455/1,073,741,824 = 0.003435141406953335`"
+    },
+    {
+      "derivation": "`(7/1920)2^30=58,720,256/15=3,914,683+11/15`.",
+      "quantity": "First ceiling-beating dimension",
+      "value": "`3,914,684`"
+    },
+    {
+      "derivation": "`3,914,684\u22123,688,455`.",
+      "quantity": "Remaining ceiling gap",
+      "value": "`226,229`"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nThere is a deterministic binary linear code\n\n`C\u2282F_2^1,073,741,824`\n\nwith exact dimension `3,688,455` and minimum distance at least `469,762,048`.\n\n### 1. Fields and the outer constituent\n\nLet\n\n`K=F_2[u]/(u^8+u^4+u^3+u+1)`.\n\nRabin's degree-eight criterion applies because exact reduction gives `u^256\u2261u`, while `u^16+u` has remainder `u^6+u^4+u^3+u^2`, and the Euclidean remainder sequence against the defining polynomial ends in `1`. Thus `K=F_256`.\n\nUse the completed Garcia\u2013Stichtenoth level `F_{4,3}/K` specified in the construction. The tower theorem gives\n\n`L=(256\u22121)16^3\u00b78=8,355,840`\n\nstandard rational splitting places away from `P_\u221e`. Its undensified level-five genus is\n\n`g_5=16^5+16^4\u221216^3\u22122\u00b716^2+1=1,109,505`.\n\nSince `r\u2212s=1`, the completed-tower bound and integrality give\n\n`g_{4,3}\u2264floor(g_5/2+1)=554,753`.\n\nSet `a_0=1,015,808`, `G=a_0P_\u221e`, and let `D` be the sum of the selected `L` places. Since `a_0<L`, evaluation on `L(G)` is injective. Riemann\u2013Roch gives\n\n`ell(G)\u2265a_0+1\u2212g_{4,3}\u22651,015,809\u2212554,753=461,056`.\n\nEvery nonzero evaluation word has at most `a_0` zero coordinates, so its weight is at least\n\n`L\u2212a_0=7,340,032`.\n\nSelecting the first `K_0=461,056` rows of the canonical RREF basis gives an exact-dimensional subcode\n\n`A=[8,355,840,461,056,\u22657,340,032]_{256}`.\n\nSubcodes preserve minimum distance.\n\n### 2. The Gold inner flag\n\nLet\n\n`F=F_2[z]/(z^7+z+1)`.\n\nA reducible polynomial of degree seven has an irreducible factor of degree at most three. The displayed polynomial has no linear factor, and its remainders modulo `z^2+z+1`, `z^3+z+1`, and `z^3+z^2+1` are respectively `1`, `z`, and `z`. Hence it is irreducible and `F=F_128`.\n\nFor `b\u2208F` and `c\u2208F_2`, put\n\n`h_{b,c}(x)=Tr(bx)+c`.\n\nThe trace pairing is nondegenerate: for `b\u22600`, choosing `x=b^\u22121` gives `Tr(bx)=Tr(1)=1`, since the extension degree is odd. Consequently the functions `h_{b,c}` form an eight-dimensional code. A nonzero linear functional is balanced, so this is\n\n`H=RM(1,7)=[128,8,64]_2`.\n\nFor `a\u2208F`, put `q_a(x)=Tr(a x^3)`. The map `a\u21a6q_a` is `F_2`-linear. Assume `a\u22600`. Its polar form is\n\n`\u03b2_a(x,y)=q_a(x+y)+q_a(x)+q_a(y)`\n\n`=Tr(a(x^2y+xy^2))`\n\n`=Tr((a x^2+(a x)^64)y)`,\n\nwhere `Tr(t y^2)=Tr(t^64 y)` was used. By nondegeneracy, `x` is in the radical precisely when\n\n`a x^2+(a x)^64=0`.\n\nSquaring this equation gives `a^2x^4+a x=0`. For `x\u22600`, this is `a x^3=1`. Because `gcd(3,127)=1`, there is a unique nonzero solution\n\n`r=a^42`, `r^3=a^\u22121`.\n\nThus `rad \u03b2_a={0,r}` and the polar rank is six. Moreover\n\n`q_a(r)=Tr(a r^3)=Tr(1)=1`.\n\nFor `b\u2208F`, define the Walsh coefficient\n\n`W_a(b)=\u03a3_{x\u2208F} (\u22121)^(q_a(x)+Tr(bx))`.\n\nSquaring and substituting `z=x+y` gives\n\n`W_a(b)^2=\u03a3_z (\u22121)^(q_a(z)+Tr(bz)) \u03a3_y (\u22121)^(\u03b2_a(z,y))`.\n\nThe inner character sum is 128 exactly for `z\u2208rad \u03b2_a` and zero otherwise. Hence\n\n`W_a(b)^2=128(1+(\u22121)^(1+Tr(br)))\u2208{0,256}`,\n\nso `W_a(b)\u2208{0,\u00b116}`. Therefore\n\n`wt(q_a+h_{b,c})=(128\u2212(\u22121)^cW_a(b))/2\u2208{56,64,72}`.\n\nFor `b=0`, the two radical terms cancel because `q_a(r)=1`; thus `W_a(0)=0` and\n\n`wt(q_a)=64`.\n\nWhen `a\u22600`, the nonzero polar form also proves that `q_a` is not affine. Consequently\n\n`Q={q_a:a\u2208F}`\n\nhas dimension seven, `Q\u2229H=0`, and\n\n`B=Q\u2295H=[128,15,56]_2`.\n\nThe minimum 56 is attained: choose `b` with `Tr(br)=1`, so `|W_a(b)|=16`, and choose `c` for the lighter sign.\n\n### 3. Linearity, exact length, and exact dimension\n\nThe coefficient map `K\u2192F\u2295F_2` in the construction is an `F_2`-linear bijection, so `\u03b9:K\u2192H` is an injective binary-linear encoder.\n\nBoth `v\u21a6(\u03b9(v_j))` and `a\u21a6(q_a,\u2026,q_a)` are binary linear. Hence `C` is binary linear.\n\nThere are `M=2^23` blocks of length 128, so\n\n`length(C)=128M=2^7\u00b72^23=2^30=1,073,741,824`.\n\nThe lower level has binary dimension `8K_0=3,688,448`. Its intersection with the repeated Gold level is zero: on each of the final `P=32,768` blocks the lower level is zero, whereas `q_a` has weight 64 whenever `a\u22600`. Thus an element of the intersection forces `a=0`, and then injectivity of the lower encoder forces the lower word to be zero. Therefore\n\n`dim_F2 C=8K_0+7=3,688,455` exactly.\n\n### 4. Minimum distance\n\nTake a nonzero `Enc(v,a)`.\n\nIf `a=0`, then `v\u22600`. The outer word has at least `7,340,032` nonzero symbols, each encoded by a nonzero word of `H` of weight at least 64. Therefore\n\n`wt(Enc(v,0))\u226564\u00b77,340,032=469,762,048`.\n\nIf `a\u22600`, each of the first `L` blocks is an affine shift of `q_a` and has weight at least 56. Each of the final `P` blocks is `q_a` itself and has weight 64. Hence\n\n`wt(Enc(v,a))\u226556L+64P`\n\n`=56\u00b78,355,840+64\u00b732,768`\n\n`=467,927,040+2,097,152`\n\n`=470,024,192`.\n\nBoth cases meet the target. This proves the theorem.\n\n### 5. Rate and ceiling comparison\n\nThe exact rate is\n\n`R=3,688,455/2^30=0.003435141406953335`.\n\nIt improves the verified dimension by seven. However,\n\n`(7/1920)2^30=58,720,256/15=3,914,683+11/15`,\n\nso strict ceiling crossing first occurs at dimension `3,914,684`. This construction is therefore `226,229` dimensions short and is not a beyond-ceiling result.\n\n### 6. Sharp restricted obstruction\n\nThe seven-dimensional Gold quotient is maximal among quadratic local extensions with separation 56. Indeed, polarization maps quadratic functions modulo affine functions injectively into alternating forms on the seven-dimensional binary space. A quadratic function whose polar rank is `r` has distance\n\n`64\u22122^(6\u2212r/2)`\n\nfrom `H`. Since an alternating form in odd dimension has even rank at most six, separation at least 56 forces every nonzero polar form to have rank six.\n\nLet `S` be an `m`-dimensional linear space of alternating forms in which every nonzero form has rank six. Each nonzero form has a one-dimensional radical and hence one nonzero radical vector, so the number of pairs `(B,x)` with `B\u22600`, `x\u22600`, and `Bx=0` is `2^m\u22121`. For fixed `x\u22600`, the map `S\u2192x^\u22a5`, `B\u21a6B(x,\u00b7)`, has a six-dimensional target, so its kernel contains at least `2^(m\u22126)\u22121` nonzero forms. Consequently\n\n`2^m\u22121\u2265127(2^(m\u22126)\u22121)`.\n\nAt `m=8` this would say `255\u2265381`, and the inequality only worsens thereafter. Thus `m\u22647`, with equality attained by the Gold family.\n\nThere is also no larger coordinate-varying Gold outer layer under the same independent weighted-support proof. If such a binary-linear label space has dimension `t`, every nonzero label word must satisfy\n\n`56\u00b7supp_active+64\u00b7supp_pad\u226556M`.\n\nAt each coordinate its projection has rank at most seven, so across all `2^t` messages it is nonzero at most `2^t\u00b7127/128` times. Summing the required inequality over nonzero messages gives\n\n`(2^t\u22121)56M\u22642^t(127/128)(56L+64P)`.\n\nAfter division by `2^t56M`, the right side is\n\n`(127/128)(1793/1792)=227711/229376`,\n\nwhereas for `t\u22658` the left side is at least\n\n`255/256=228480/229376`.\n\nThis contradiction proves `t\u22647`. The obstruction concerns independent blockwise certification; a global correlation with the GS evaluations could evade it.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "F1",
+      "proof": "The degree-seven factor test and degree-eight Rabin certificate establish the displayed finite fields and ordered polynomial bases. The trace pairing over `F_128` is nondegenerate because `Tr(1)=1`.",
+      "statement": "The two finite fields and the affine inner encoder are deterministic and well-defined.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "F1",
+        "Ballet\u2013Pieltant\u2013Rambaud\u2013Sijsling Proposition 2.1",
+        "Riemann\u2013Roch and AG evaluation-code theorem"
+      ],
+      "id": "O1",
+      "proof": "At `(q,k,s)=(16,4,3)`, the tower supplies `L=8,355,840` places and genus at most `554,753`. With divisor degree `1,015,808`, Riemann\u2013Roch supplies at least `461,056` dimensions and designed distance `7,340,032`. The canonical RREF selection makes the chosen subcode dimension exactly `461,056`.",
+      "statement": "There is a deterministic outer code `[8,355,840,461,056,\u22657,340,032]_{256}`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "F1"
+      ],
+      "id": "I1",
+      "proof": "For nonzero `a`, the polar radical of `Tr(ax^3)` is `{0,a^42}`. Squaring its Walsh transform shows every affine shift has weight `56`, `64`, or `72`, and the unshifted quadratic has weight `64`. The nonzero polar form separates the Gold space from the affine code.",
+      "statement": "The nested inner flag `B=[128,15,56]_2 \u2283 H=[128,8,64]_2` has quotient dimension seven.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "O1",
+        "I1"
+      ],
+      "id": "C1",
+      "proof": "Zero-extend the lower outer word from `L` to `M=2^23` blocks and repeat one Gold quadratic across all `M` blocks. The displayed formula fixes every output coordinate.",
+      "statement": "The two-level generalized-concatenation encoder is deterministic and binary linear.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "C1",
+        "I1"
+      ],
+      "id": "D1",
+      "proof": "There are `M` blocks of length 128. The lower level and repeated Gold level meet trivially because the last `32,768` lower blocks are zero while every nonzero `q_a` has weight 64.",
+      "statement": "The code has exact length `2^30` and exact dimension `8\u00b7461,056+7=3,688,455`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "O1",
+        "I1",
+        "C1"
+      ],
+      "id": "D2",
+      "proof": "If the Gold label is zero, product distance gives `64\u00b77,340,032=469,762,048`. If it is nonzero, the first `L` blocks contribute at least `56L` and the padding blocks contribute exactly `64P`, totaling `470,024,192`.",
+      "statement": "Every nonzero codeword has weight at least `469,762,048`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "D1"
+      ],
+      "id": "R1",
+      "proof": "Direct division gives rate `0.003435141406953335`. The first integer strictly above `(7/1920)2^30` is `3,914,684`, which is `226,229` larger.",
+      "statement": "The construction is a seven-dimension record improvement but does not beat `7/1920`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "I1"
+      ],
+      "id": "X1",
+      "proof": "Counting nonzero radical vectors in a constant-rank-six subspace of alternating forms proves quadratic quotient dimension at most seven. A separate weighted-support average rules out an eighth coordinate-varying Gold label under independent blockwise certification.",
+      "statement": "The seven-bit gain is sharp for the independent quadratic/Gold generalized-concatenation mechanism analyzed here.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.003435141406953335,
+  "research_direction": "Seek a correlated generalized-concatenation or Construction-X layer in which the GS affine symbols control the signs of the Gold Walsh coefficients globally. Independent quadratic labels, even when the padding blocks receive their exact weight-64 credit, are rigorously capped at seven added binary dimensions.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "ceiling_optimization",
+  "theorem_statement": "There is a deterministic, symbolically recoverable binary linear code with parameters `[1,073,741,824, 3,688,455, \u2265469,762,048]_2`. It is obtained by adding a seven-dimensional repeated Gold-quadratic quotient to the zero-extended densified GS\u2013RM baseline. Its exact rate is `3,688,455/2^30 = 0.003435141406953335`; this improves the current verified dimension by seven but remains below `7/1920`.",
+  "title": "A Seven-Dimensional Gold Layer over the Padded GS\u2013RM Construction"
+}

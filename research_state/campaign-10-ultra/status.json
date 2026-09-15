@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 5,
-    "running": 9,
-    "succeeded": 12
+    "running": 7,
+    "succeeded": 14
   },
   "doubly_verified_candidates": [],
   "gs_hadamard_template_ceiling": 0.0036458333333333334,
@@ -71,6 +71,18 @@
     {
       "accepted_reviews": 0,
       "ceiling_beaten": false,
+      "dimension": 3700816,
+      "id": "researcher-0011",
+      "minimum_distance": 469762048,
+      "rate": 0.0034466534852981567,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0011.json",
+      "status": "proved",
+      "submission_class": "ceiling_optimization",
+      "title": "Exact degree-eight GS quotient with a ten-section pulled-back speciality divisor"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
       "dimension": 3700792,
       "id": "researcher-0001",
       "minimum_distance": 469762048,
@@ -79,6 +91,18 @@
       "status": "proved",
       "submission_class": "ceiling_optimization",
       "title": "Exact GS degree-eight all-point special-divisor code: dimension 3,700,792"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": 3688455,
+      "id": "researcher-0014",
+      "minimum_distance": 469762048,
+      "rate": 0.003435141406953335,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0014.json",
+      "status": "proved",
+      "submission_class": "ceiling_optimization",
+      "title": "A Seven-Dimensional Gold Layer over the Padded GS\u2013RM Construction"
     },
     {
       "accepted_reviews": 0,
@@ -149,5 +173,5 @@
     "current_dimension": 3688448,
     "minimum_distance": 469762048
   },
-  "updated_at": "2026-09-15T02:54:10Z"
+  "updated_at": "2026-09-15T03:18:34Z"
 }
