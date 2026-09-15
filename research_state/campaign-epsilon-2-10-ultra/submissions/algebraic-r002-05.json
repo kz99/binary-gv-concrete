@@ -1,0 +1,301 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new code above dimension 1040 is claimed. The numerical construction fields report the independently certified campaign anchor used for every comparison.\n\nFix `F=F_2[\u03b1]/(\u03b1^16+\u03b1^5+\u03b1^3+\u03b1^2+1)`, `A=span_F2{1,\u03b1,\u2026,\u03b1^14}`, and `Y=F_2^15`. Write `z=\u03a3_(i=0)^15 z_i \u03b1^i` and define `H(z)_y=z_0+\u03a3_(i=1)^15 z_i y_i`. The anchor is\n\n`C_0={ (H(f(a))_y)_(a,y) : f\u2208F[X], deg f\u226464 }`.\n\nBoth `A` and `Y` have size 32768, so the length is exactly `2^30`. A basis consists of the 1040 words obtained from `f=\u03b1^iX^j`, with `0\u2264i\u226415` and `0\u2264j\u226464`. Since `a\u21a6a^j` has Boolean degree at most the binary popcount of `j`, and every `j\u226464` has popcount at most 6, `C_0\u2286RM(7,30)` in the natural `(a,y)` coordinates.\n\nThe new contribution is a finite Reed\u2013Muller extension obstruction: `C_0` cannot acquire even one missing affine `a`-coordinate, and any target-safe augmentation by words from `RM(2,30)` can add at most 105 dimensions and must be a genuinely coupled graph between pure `y`-quadratics and non-RS blockwise-affine functions. No such nonzero safe graph was constructed.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: algebraic-r002-06 and the proof-lemma editor. For every nonzero linear `\u03bb:A\u2192F_2`, choose a 6-space `U\u2264ker \u03bb`, choose `a_0` with `\u03bb(a_0)=1`, and put `P=L_U/L_U(a_0)`, where `L_U(X)=\u220f_(u\u2208U)(X-u)`. Then `C(P)+\u03bb` has exact weight `(32768-128)16384=534773760<D`. Thus no target-safe supercode of the dimension-1040 anchor contains a missing natural affine `a`-row, and in particular none contains natural `RM(1,30)`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:RM-AFFINE-ROW-WITNESS",
+        "canonical-rs-affine-code"
+      ],
+      "subject": "Explicit affine-row obstruction for the 1040 anchor"
+    },
+    {
+      "body_markdown": "Intended recipients: the next Reed\u2013Muller architect and proof-lemma editor. If `W\u2264RM(2,30)` and `C_0+W` is target-safe, projection onto the 105 coefficients `y_i y_j` induces an injection `W/(W\u2229C_0)\u2192F_2^105`. Projection onto the blockwise-affine outer function modulo the RS space is also injective. Hence every surviving augmentation is a coupled graph and `dim(C_0+W)\u22641145`; neither a pure outer extension nor a pure `y`-quadratic direction can survive.",
+      "kind": "idea",
+      "references": [
+        "proof-step:RM2-GRAPH-CEILING",
+        "fixed-inner-additive-maximality"
+      ],
+      "subject": "Quadratic augmentations reduce to a 105-dimensional graph problem"
+    },
+    {
+      "body_markdown": "Intended recipient: the degree-69 bottleneck breaker. The genuine top-layer phase `Tr(x^69+x^67+x^37+x^19+x^17+x^9)=Tr((x^2+x)^35)` satisfies `|S|\u226440\u00b72^15` because its sum is `S(x^35)+S(x^35+x)`. This certifies one mixed `(67,69)` phase, but not its cosets with the degree-65 anchor. Can the two-to-one descent be made uniform over the entire 60-dimensional top layer? The codimension-10 all-or-nothing certificate shows that a merely 50-dimensional anchored patch is not a separate gateway.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json",
+        "https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf"
+      ],
+      "subject": "Uniformize the safe mixed degree-69 phase"
+    }
+  ],
+  "distance_audit": [
+    "The immutable requirement is `D=(1/2-2^-10)2^30=2^29-2^20=535822336`; its signed-sum cap is `2^30-2D=2^21`.",
+    "For nonconstant `f` of degree at most 64, let `N_b(f)=|{a\u2208A:f(a)=b}|`. The affine-inner spectrum gives `wt(C(f))=2^14(32768-N_0(f)+N_1(f))`. Since `N_0(f)\u226464`, every nonzero word has weight at least `D`. A degree-64 polynomial with 64 roots, scaled to avoid value 1 at every nonroot, attains `D`.",
+    "For the affine-row witness, `P^{-1}(0)\u2229A=U` and `P^{-1}(1)\u2229A=a_0+U`. These 128 blocks cancel; every other block is balanced. Its exact weight is `2^29-2^21=534773760=D-2^20`.",
+    "Fixed-inner additive maximality supplies weight at most `2^14(32768-65)=535805952=D-16384` for every strict additive outer extension under the unchanged affine encoder.",
+    "A nonzero pure `y`-quadratic has polar rank `2h\u226414`. After adding a suitable affine `y`-word already in `C_0`, its repeated-block weight is `2^29-2^(29-h)\u22642^29-2^22=532676608<D`.",
+    "For an inner subcode of `RM(r,14)`, `r\u22644`, every weight is divisible by 8. Thus distance at least 8188 would imply distance at least 8192, but `g_16(8192)=16385>16384`.",
+    "For the degree-69 trace gateway, the generic signed-sum bound is `68\u00b72^15=2228224`, exceeding the permitted `64\u00b72^15=2097152` by 131072; equivalently, the generic distance certificate misses `D` by 65536."
+  ],
+  "explicitness_audit": [
+    "The field polynomial, evaluation space, coordinate ordering, row ordering, and every generator entry of `C_0` are symbolic and deterministic.",
+    "The full generator is streamed without random sampling, puncturing, padding, lookup tables, or a conditional selector.",
+    "Given `\u03bb`, Gaussian elimination deterministically chooses `U\u2264ker \u03bb` and `a_0`; multiplying the 64 displayed linear factors constructs the bad extension witness in polynomial time.",
+    "The ordinary-RS and trace-orbit scans use deterministic cyclotomic-orbit enumeration and exact integer arithmetic in time polynomial in `n`; they are proof audits, not hidden construction searches.",
+    "No generator is asserted for a quadratic augmentation or for the conditional degree-69, inner-code, or AG gateways.",
+    "The workspace was read-only, so this note could not be added under `proofs/`, and the data validator and dashboard build were not run."
+  ],
+  "generator_matrix": {
+    "algorithm": "Order `A` and `Y` by their 15-bit coefficient vectors. Index rows lexicographically by `(j,i)` with `0\u2264j\u226464` and `0\u2264i\u226415`. At column `(a,y)`, compute `z=\u03b1^i a^j` modulo `\u03b1^16+\u03b1^5+\u03b1^3+\u03b1^2+1`, write `z=\u03a3z_s\u03b1^s`, and output `z_0+\u03a3_(s=1)^15 z_s y_s`. These are exactly the entries of `C(\u03b1^iX^j)`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "At most `1040\u00b7n\u00b7[64(256 AND + 300 XOR)+30]` elementary bit operations, plus exactly `1040n` output writes; hence `O(n)` for the fixed parameters and certainly `n^{O(1)}`.",
+    "runtime_proof": "Naive multiplication of two degree-below-16 binary polynomials followed by reduction modulo the fixed pentanomial uses at most 256 coefficient products and fewer than 300 XORs. Computing `a^j` naively needs at most 63 multiplications, multiplication by `\u03b1^i` needs one more, and evaluating `H` needs at most 30 bit operations. There are exactly `1040n` entries. Lexicographic counters and degree-16 field registers suffice, so the matrix can be streamed with polynomial time and constant-size arithmetic state apart from the output."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A polynomial of degree at most `r` evaluated on `F_2^m`.",
+      "result": "Ax divisibility implies every weight in `RM(r,m)` is divisible by `2^floor((m-1)/r)`.",
+      "source": "[James Ax, Zeroes of Polynomials Over Finite Fields](https://doi.org/10.2307/2373163)",
+      "used_for": "At `m=14,r\u22644`, forcing all inner-code weights to be divisible by 8; at `r\u22643`, forcing divisibility by 16."
+    },
+    {
+      "hypotheses": "A binary linear `[N,K,d]` code.",
+      "result": "The Griesmer inequality is `N\u2265\u03a3_(i=0)^(K-1) ceil(d/2^i)`.",
+      "source": "[J. H. Griesmer, A bound for error-correcting codes](https://doi.org/10.1147/rd.45.0532)",
+      "used_for": "Excluding dimension 16 at length 16384 and distance 8192."
+    },
+    {
+      "hypotheses": "Binary odd-degree trace polynomials over `F_(2^m)`.",
+      "result": "The Carlitz\u2013Uchiyama/Weil estimate bounds the additive-character sum by `(d-1)2^(m/2)` for reduced odd degree `d`.",
+      "source": "[J. F. Voloch, On the duals of binary BCH codes](https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf)",
+      "used_for": "The exact degree-69 gap and the `40\u00b72^15` estimate for the mixed safe phase."
+    },
+    {
+      "hypotheses": "An alternating-matrix code with minimum nonzero rank at least 18 in dimension 30 over `F_2`.",
+      "result": "The Delsarte\u2013Goethals alternating rank-metric bound gives size at most `2^203`.",
+      "source": "[Abiad\u2013Alfarano\u2013Ravagnani, Eigenvalue bounds and alternating rank-metric codes, Theorem 2.2](https://arxiv.org/abs/2405.09254)",
+      "used_for": "The upstream bound 234 on a target-safe quadratic space containing natural `RM(1,30)`, and hence the `1014` ceiling for quadratic augmentation of the trace anchor."
+    },
+    {
+      "hypotheses": "The fixed degree-64 RS evaluation space over the stated `F_(2^16)` model and the fixed affine truth-table inner encoder.",
+      "result": "Every strict `F_2`-additive outer supercode contains a binary word of weight at most 535805952.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (`fixed-inner-additive-maximality`)",
+      "used_for": "Proving injectivity of the pure-`y` quadratic projection for any target-safe `RM(2,30)` augmentation."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Directly attack the remaining coupled graph problem: for `Q(y)` and `g:A\u2192F`, evaluate the exact quadratic Walsh sum of every coset `Q+H(g+r)`, `r\u2208R`, and either exhibit one safe pair for `k=1041` or prove every pair has correlation above `2^21`.",
+    "For the trace route, prove the full uniform degree-69 bound `|S(P)|\u226464\u00b72^15` or find one violating phase. The all-or-nothing certificate makes this the only anchored trace gateway above 1040.",
+    "Restrict searches for the conditional `[16384,17,8188]_2` inner gateway to Boolean degree at least 5; `RM(r,14)` with `r\u22644` is now excluded.",
+    "Keep the `m=13`, `k=1053` AG-affine gateway separate and conditional: it requires an explicit curve with 262144 rational points and a birational `g^80_512`.",
+    "In a writable checkout, persist the affine-row and quadratic-graph lemmas, request independent verification, then run `node scripts/validate-data.mjs` and the dashboard build."
+  ],
+  "obstructions": [
+    "No deterministic target-safe code of dimension above the accepted 1040 anchor was obtained.",
+    "Although `C_0\u2286RM(7,30)`, its intersection with natural `RM(1,30)` has only dimension 16, consisting of affine functions of `y`; adjoining any one of the missing 15 affine `a`-directions fails explicitly.",
+    "Every target-safe quadratic augmentation of `C_0` has added dimension at most 105, but the ceiling 1145 is not an existence result. All surviving directions must couple a nonzero pure `y`-quadratic to a non-RS blockwise-affine outer function.",
+    "The trace anchor `C_65` contains natural `RM(1,30)`; its quadratic part already has dimension 211, while the target-safe quadratic ceiling is 234. Consequently quadratic augmentation reaches at most `991+(234-211)=1014<1040`.",
+    "No subcode of `RM(r,14)`, `r\u22644`, can supply a `[16384,16,8188]` or `[16384,17,8188]` inner constituent.",
+    "The full degree-69 trace family has dimension 1051, but its generic Weil certificate exceeds the signed-sum budget by `4\u00b72^15`; the one proved safe mixed phase does not control its 991-dimensional family of lower-degree cosets.",
+    "The exact full-subfield-subcode/ordinary-RS scan has unique maximum 1040. The first surviving AG-affine point is only a conditional dimension-1053 gateway."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)n`.",
+      "quantity": "Required distance",
+      "value": "`D=2^29-2^20=535,822,336`"
+    },
+    {
+      "derivation": "`n-2D`.",
+      "quantity": "Signed-sum budget",
+      "value": "`B=2^21=2,097,152=64\u00b72^15`"
+    },
+    {
+      "derivation": "`65` field coefficients, each of binary dimension 16.",
+      "quantity": "Certified anchor dimension and rate",
+      "value": "`k=1040`; `R=1040/2^30=65/67,108,864\u22489.685754776000977e-7`"
+    },
+    {
+      "derivation": "Every exponent `j\u226464` has binary popcount at most 6; the affine inner variable adds at most one degree.",
+      "quantity": "Natural RM containment",
+      "value": "`C_0\u2286RM(7,30)` and `dim(C_0\u2229RM(1,30))=16`"
+    },
+    {
+      "derivation": "Two 64-element fibers cancel in the subspace-polynomial witness.",
+      "quantity": "Affine-row witness",
+      "value": "`wt=32640\u00b716384=2^29-2^21=534,773,760`"
+    },
+    {
+      "derivation": "`dim RM(2,30)=466`; the blockwise-affine part has `121+15\u00b716=361` dimensions and the pure squarefree `y`-quadratic part has `C(15,2)=105`.",
+      "quantity": "Quadratic decomposition",
+      "value": "`466=361+105`; safe extension ceiling `1040+105=1145`"
+    },
+    {
+      "derivation": "Upstream alternating-rank bound and exact quadratic intersection.",
+      "quantity": "Trace-anchor quadratic ceiling",
+      "value": "`991+(234-211)=1014`"
+    },
+    {
+      "derivation": "Ax divisibility followed by binary Griesmer.",
+      "quantity": "Length-16384 low-degree RM inner ceiling",
+      "value": "For `r\u22644` and `d\u22658188`, `dim C\u226415`"
+    },
+    {
+      "derivation": "Exact trace cyclotomic-orbit enumeration.",
+      "quantity": "Degree-69 RM filtration",
+      "value": "`dim(C_69\u2229RM(r,30))=(31,211,571,871,1021,1051)` for `r=1,\u2026,6`"
+    },
+    {
+      "derivation": "Exact reduced odd-degree Weil calculation.",
+      "quantity": "Degree-69 analytic gap",
+      "value": "Generic `68\u00b72^15`; required `64\u00b72^15`; excess `131,072`"
+    },
+    {
+      "derivation": "Deterministic enumeration of every cyclotomic-orbit threshold in the full-subfield-subcode inner family.",
+      "quantity": "Ordinary-RS maxima for inner exponents `a=15,\u2026,30`",
+      "value": "`1040,561,306,171,100,63,64,78,93,109,126,144,163,183,204,236`; unique maximum 1040 at `(a,t,r,K)=(15,16384,16,65)`"
+    },
+    {
+      "derivation": "Upstream AG finite sieve.",
+      "quantity": "First unresolved AG-affine specialization",
+      "value": "`m=13`, conditional `k=1053`, with `(q,L,a,K)=(8192,262144,512,81)` and genus `1404\u20261407`"
+    }
+  ],
+  "proof_markdown": "### 1. Certified Reed\u2013Muller anchor\n\nThe stated quotient polynomial is irreducible by the accepted Rabin certificate, so `F` has 65536 elements. The maps `f\u21a6(f(a))_(a\u2208A)` and `H` are binary-linear. The coordinate set has size `|A||Y|=32768^2=2^30`.\n\nThe message space has dimension `65\u00b716=1040`. If its image is zero, injectivity of `H` makes `f` vanish at every point of `A`. Since `deg f\u226464<32768`, this forces `f=0`; hence the dimension is exactly 1040.\n\nFor nonconstant `f`, both `f` and `f-1` have at most 64 roots. The block spectrum of `H` is weight 0 at symbol 0, weight 32768 at symbol 1, and weight 16384 otherwise. Therefore\n\n`wt(C(f))=2^14(32768-N_0(f)+N_1(f))\u22652^14(32768-64)=D`.\n\nThe constant cases are immediate. Exact equality follows by taking a polynomial with 64 prescribed roots and scaling it so none of its 32704 nonroot values is 1; at most 32704 of the 65535 nonzero scales are forbidden.\n\nFinally, `a^j=\u220f_(s:j_s=1)a^(2^s)` is a product of `popcount(j)` binary-linear Frobenius maps. Thus its coordinate functions have Boolean degree at most `popcount(j)\u22646`, and multiplication by a `y` variable in `H` raises degree by at most one. Hence `C_0\u2286RM(7,30)`.\n\n### 2. Exact affine-row obstruction\n\nLet `\u03bb:A\u2192F_2` be nonzero linear. Choose a 6-dimensional `U\u2264ker \u03bb` and `a_0\u2208A` with `\u03bb(a_0)=1`. Its subspace polynomial\n\n`L_U(X)=\u220f_(u\u2208U)(X-u)`\n\nis additive and has kernel exactly `U`. Since `a_0\u2209U`, define `P(X)=L_U(X)/L_U(a_0)`. It has degree 64, so `C(P)\u2208C_0`. Additivity gives\n\n`P(a)=0 iff a\u2208U`, and `P(a)=1 iff a\u2208a_0+U`.\n\nOn `U`, both `H(P(a))` and `\u03bb(a)` vanish. On `a_0+U`, they are both the constant-one block and cancel. Outside those two fibers, `P(a)\u2209{0,1}`, so `H(P(a))+\u03bb(a)` is balanced. Consequently\n\n`wt(C(P)+\u03bb)=(32768-128)16384=534773760<D`.\n\nThus no target-safe supercode of `C_0` contains a nonconstant affine function of `a`, and none contains natural `RM(1,30)`.\n\nFor completeness, `C_0\u2229RM(1,30)` is exactly the 16-dimensional space of affine functions of `y`. Indeed, if `C(f)` is globally affine, then after subtracting a constant field symbol its outer value is a polynomial `p(a)` taking only values 0 and 1. The degree-at-most-128 polynomial `p(p-1)` vanishes at all 32768 points of `A`, hence is identically zero; the integral-domain property forces `p` to be constant.\n\n### 3. Quadratic graph ceiling\n\nEvery `q\u2208RM(2,30)` has a unique decomposition\n\n`q(a,y)=Q_y(y)+H(g_q(a))_y`,\n\nwhere `Q_y` is a squarefree homogeneous quadratic in the 15 variables `y`, the constant coordinate of `g_q` has degree at most 2 in `a`, and its other 15 coordinates have degree at most 1. The first space has dimension `C(15,2)=105`; the blockwise-affine space has dimension `(1+15+105)+15(1+15)=361`.\n\nLet `W\u2264RM(2,30)` and suppose `C_0+W` meets the target. Project `W` onto `Q_y`. If `q` lies in the kernel, then `q=H(g_q)`. Unless `g_q` belongs to the outer RS evaluation space `R`, this creates a strict binary-additive outer extension under the unchanged encoder. Fixed-inner additive maximality supplies a word of weight at most 535805952, a contradiction. Hence\n\n`ker(\u03c0|W)=W\u2229C_0`,\n\nso `W/(W\u2229C_0)` injects into a 105-dimensional space and\n\n`dim(C_0+W)\u22641040+105=1145`.\n\nThere is also no pure quadratic escape. If `g_q\u2208R`, adding an anchor word leaves `Q_y` alone. A nonzero quadratic in 15 variables has polar rank `2h` with `1\u2264h\u22647`; some affine shift has Walsh magnitude `2^(15-h)`. Every affine `y`-shift is already in `C_0`, so repeating this shift over all 32768 outer blocks produces weight\n\n`2^29-2^(29-h)\u22642^29-2^22<D`.\n\nThus projection of the new quotient onto `g_q mod R` is injective as well. Every possible augmentation is therefore a genuinely coupled graph; the argument does not assert that any nonzero graph is safe.\n\n### 4. Low-degree inner RM obstruction\n\nLet `B\u2264RM(r,14)` with `r\u22644` and `d(B)\u22658188`. Ax divisibility makes every word weight divisible by `2^floor(13/r)`, hence by 8. Therefore `d(B)\u22658192`. If `dim B\u226516`, Griesmer gives\n\n`16384\u2265\u03a3_(i=0)^15 ceil(8192/2^i)=16385`,\n\na contradiction. Thus `dim B\u226415`. In particular, neither conditional length-16384 inner gateway of dimension 16 or 17 can be realized inside order at most 4.\n\nThe exceptional-line dimension-1041 flag is similarly impossible in `RM(3,14)`. Divisibility by 16 raises every top-shell weight from 8184 to at least 8192. Its distinguished word is either at least 8192, immediately contradicting Griesmer, or has weight 8176. In the latter case, residualizing it gives `[8208,16,\u22654104]_2`, whereas `g_16(4104)=8218>8208`.\n\n### 5. Trace-layer finite optimization\n\nExact cyclotomic-orbit enumeration gives\n\n`dim(C_69\u2229RM(r,30))=(31,211,571,871,1021,1051)` for `r=1,\u2026,6`.\n\nThus RM order at most 5 cannot improve dimension 1040 within the degree-69 trace architecture. Order 6 reaches the full dimension 1051 family, but generic Weil gives only `|S|\u226468\u00b72^15`; the target requires `64\u00b72^15`.\n\nThe upstream codimension-10 certificate is all-or-nothing: because the degree-65 anchor has dimension 991, any top-layer subspace large enough to beat 1040 has dimension at least 50, and such a safe subspace exists only if the entire 60-dimensional `(x^67,x^69)` layer is safe. Hence dimensions 1041 through 1050 are not independent trace checkpoints.\n\nOne mixed phase is rigorously safe. In characteristic two,\n\n`Tr((x^2+x)^35)=Tr(x^69+x^67+x^37+x^19+x^17+x^9)`.\n\nThe map `x\u21a6x^2+x` is two-to-one onto the trace-zero hyperplane, so its character sum equals `S(x^35)+S(x^35+x)`. Since `x\u21a6x^5` permutes `F_(2^30)`, the first term reduces to degree 7. Weil therefore gives\n\n`|S|\u22646\u00b72^15+34\u00b72^15=40\u00b72^15`.\n\nThis controls only that phase, not all its lower-degree cosets, so it is not a code extension.\n\n### 6. Conclusion\n\nThe finite audit found no admissible `k>1040` construction. It proves three reusable exclusions: natural `RM(1,30)` cannot be adjoined to the accepted anchor; quadratic augmentation of that anchor is a coupled graph problem with added dimension at most 105; and all length-16384 RM inner subcodes of order at most 4 are too small for the surviving concatenation gateways. These are architecture-specific statements, not a global upper bound on binary codes.",
+  "proof_steps": [
+    {
+      "dependencies": [
+        "canonical-rs-affine-code",
+        "explicit-degree-16-field-models",
+        "affine-truth-table-spectrum"
+      ],
+      "id": "RM-AFFINE-ANCHOR",
+      "proof": "Evaluation and the affine inner map are injective. The root bound gives distance at least `D`, and a degree-64 polynomial with 64 roots and no nonroot value 1 attains equality. Binary degree is at most 7 because `popcount(j)\u22646` for `j\u226464`.",
+      "statement": "The accepted code is an explicit `[2^30,1040,D]_2` subcode of natural `RM(7,30)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RM-AFFINE-ANCHOR"
+      ],
+      "id": "RM1-INTERSECTION",
+      "proof": "A globally affine anchor word has outer values in an affine translate of `{0,1}`. After subtracting the translate, `p(p-1)` has degree at most 128 and 32768 roots, forcing `p` constant.",
+      "statement": "`C_0\u2229RM(1,30)` is exactly the 16-dimensional space of affine functions of `y`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RM-AFFINE-ANCHOR"
+      ],
+      "id": "RM-AFFINE-ROW-WITNESS",
+      "proof": "Normalize the additive subspace polynomial of a 6-space in `ker \u03bb`. Its zero and one fibers are `U` and `a_0+U`; these 128 blocks cancel and all remaining blocks are balanced.",
+      "statement": "Adjoining any missing natural affine `a`-coordinate creates a word of weight 534773760 and destroys the target distance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "affine-truth-table-spectrum"
+      ],
+      "id": "RM2-DECOMPOSITION",
+      "proof": "Separate the 105 monomials `y_i y_j`. Every remaining degree-at-most-two monomial is constant or linear in `y` and therefore has a unique representation `H(g(a))`.",
+      "statement": "Natural `RM(2,30)` is the direct sum of a 105-dimensional pure-`y` quadratic space and a 361-dimensional blockwise-affine space.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RM2-DECOMPOSITION",
+        "fixed-inner-additive-maximality"
+      ],
+      "id": "RM2-GRAPH-CEILING",
+      "proof": "The kernel of pure-quadratic projection would be a forbidden strict fixed-inner additive outer extension. Conversely, a kernel under outer projection would leave a pure quadratic, whose Walsh coefficient yields a word below `D`.",
+      "statement": "Every target-safe `C_0+W` with `W\u2264RM(2,30)` satisfies `dim(C_0+W)\u22641145`, and every new quotient direction is genuinely coupled.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Ax divisibility theorem",
+        "binary-residual-griesmer"
+      ],
+      "id": "INNER-RM4-CEILING",
+      "proof": "Weights are divisible by 8, so `d\u22658188` implies `d\u22658192`; the dimension-16 Griesmer sum is 16385.",
+      "statement": "If `B\u2264RM(r,14)`, `r\u22644`, has length 16384 and distance at least 8188, then `dim B\u226415`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "INNER-RM4-CEILING",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json"
+      ],
+      "id": "EXCEPTIONAL-LINE-RM3",
+      "proof": "Order-3 divisibility raises top-shell weights to 8192. If the distinguished word weighs 8176, residualization gives `[8208,16,\u22654104]`, contradicted by the Griesmer value 8218; the other branch is immediate.",
+      "statement": "The conditional exceptional-line `k=1041` inner flag cannot lie in `RM(3,14)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "id": "TRACE-RM-FILTRATION",
+      "proof": "Deterministically enumerate binary cyclotomic trace orbits and their algebraic degrees. The cumulative dimensions are `31,211,571,871,1021,1051`.",
+      "statement": "Within the degree-69 trace family, RM order at most 5 cannot beat 1040; order 6 is the first possible improvement.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TRACE-RM-FILTRATION",
+        "Carlitz-Uchiyama/Weil bound",
+        "degree-69 codimension-10 certificate"
+      ],
+      "id": "DEGREE69-GATE",
+      "proof": "The full family has signed-sum certificate `68\u00b72^15`, while the cap is `64\u00b72^15`. The all-or-nothing certificate reduces every anchored improvement to safety of the full 60-dimensional top layer.",
+      "statement": "The explicit `k=1051` degree-69 trace code is the unique closest trace gateway, but its required distance remains unproved.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "Carlitz-Uchiyama/Weil bound"
+      ],
+      "id": "MIXED-DEGREE69-PHASE",
+      "proof": "Use the trace identity for `(x^2+x)^35`, the two-to-one trace-zero image, the permutation `x\u21a6x^5`, and degree-7 and degree-35 Weil bounds.",
+      "statement": "The displayed mixed `(67,69)` phase has signed sum at most `40\u00b72^15`, but this does not certify its cosets.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Reed--Muller extensions: exact finite filtration, affine-row exclusion, quadratic graph reduction, and low-degree inner-code divisibility",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ (every JSON file present)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `C_0` be the explicit dimension-1040 RS\u2013affine subcode of natural `RM(7,30)`. First, adjoining any nonconstant natural affine function of the 15 outer variables produces an explicit word of weight `2^29-2^21<D`; hence no target-safe supercode of `C_0` contains natural `RM(1,30)`. Second, if `W\u2264RM(2,30)` and `C_0+W` is target-safe, then `W/(W\u2229C_0)` injects into the 105-dimensional pure-`y` quadratic space, so `dim(C_0+W)\u22641145`, with every surviving direction necessarily coupled. Third, every length-16384 subcode of `RM(r,14)`, `r\u22644`, with distance at least 8188 has dimension at most 15. No new code above dimension 1040 is certified.",
+  "title": "Finite Reed\u2013Muller extension audit: affine-row failure and a 105-dimensional quadratic graph ceiling"
+}

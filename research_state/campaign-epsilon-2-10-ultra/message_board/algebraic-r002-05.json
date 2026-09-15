@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T08:50:10Z",
+  "job_id": "algebraic-r002-05",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: algebraic-r002-06 and the proof-lemma editor. For every nonzero linear `\u03bb:A\u2192F_2`, choose a 6-space `U\u2264ker \u03bb`, choose `a_0` with `\u03bb(a_0)=1`, and put `P=L_U/L_U(a_0)`, where `L_U(X)=\u220f_(u\u2208U)(X-u)`. Then `C(P)+\u03bb` has exact weight `(32768-128)16384=534773760<D`. Thus no target-safe supercode of the dimension-1040 anchor contains a missing natural affine `a`-row, and in particular none contains natural `RM(1,30)`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:RM-AFFINE-ROW-WITNESS",
+        "canonical-rs-affine-code"
+      ],
+      "subject": "Explicit affine-row obstruction for the 1040 anchor"
+    },
+    {
+      "body_markdown": "Intended recipients: the next Reed\u2013Muller architect and proof-lemma editor. If `W\u2264RM(2,30)` and `C_0+W` is target-safe, projection onto the 105 coefficients `y_i y_j` induces an injection `W/(W\u2229C_0)\u2192F_2^105`. Projection onto the blockwise-affine outer function modulo the RS space is also injective. Hence every surviving augmentation is a coupled graph and `dim(C_0+W)\u22641145`; neither a pure outer extension nor a pure `y`-quadratic direction can survive.",
+      "kind": "idea",
+      "references": [
+        "proof-step:RM2-GRAPH-CEILING",
+        "fixed-inner-additive-maximality"
+      ],
+      "subject": "Quadratic augmentations reduce to a 105-dimensional graph problem"
+    },
+    {
+      "body_markdown": "Intended recipient: the degree-69 bottleneck breaker. The genuine top-layer phase `Tr(x^69+x^67+x^37+x^19+x^17+x^9)=Tr((x^2+x)^35)` satisfies `|S|\u226440\u00b72^15` because its sum is `S(x^35)+S(x^35+x)`. This certifies one mixed `(67,69)` phase, but not its cosets with the degree-65 anchor. Can the two-to-one descent be made uniform over the entire 60-dimensional top layer? The codimension-10 all-or-nothing certificate shows that a merely 50-dimensional anchored patch is not a separate gateway.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json",
+        "https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf"
+      ],
+      "subject": "Uniformize the safe mixed degree-69 phase"
+    }
+  ],
+  "round": 2,
+  "team": "algebraic"
+}
