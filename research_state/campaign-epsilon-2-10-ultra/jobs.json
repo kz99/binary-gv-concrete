@@ -592,7 +592,7 @@
     "updated_at": "2026-09-15T04:47:22Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Ta-Shma-style epsilon-balanced codes and their exact finite instantiation.",
@@ -603,12 +603,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Ta-Shma bias amplification with every constant exposed.",
@@ -619,16 +619,16 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Wide replacement products and Gray-code constructions.",
-    "error": "combinatorial-expander-03 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065838Z-01d09fe870-e78cf73f01/stderr.txt",
+    "error": "combinatorial-expander-03 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065913Z-01d09fe870-659ad07bf2/stderr.txt",
     "id": "combinatorial-expander-03",
     "model": "gpt-5.6-sol",
     "phase": "research",
@@ -637,10 +637,10 @@
     "round": 1,
     "status": "failed",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:38Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Expander-walk and free-walk balanced codes.",
@@ -651,12 +651,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Replacement-product parameter optimization at epsilon=2^-10.",
@@ -667,12 +667,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Lossless-expander and sampler-based constructions.",
@@ -683,12 +683,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Spectral graph products and explicit bias reduction.",
@@ -699,12 +699,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Extractor-based balanced codes with concrete length accounting.",
@@ -715,12 +715,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Derandomized low-bias code constructions and finite losses.",
@@ -731,12 +731,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Synthesize the strongest combinatorial-expander record candidate.",
@@ -747,9 +747,9 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:58:39Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
     "attempts": 1,
@@ -1008,7 +1008,7 @@
     "updated_at": "2026-09-15T06:51:41Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Trace and character-sum codes.",
@@ -1019,12 +1019,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Subfield subcodes and concatenation.",
@@ -1035,12 +1035,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Algebraic-geometric evaluation codes.",
@@ -1051,12 +1051,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "BCH and cyclic-code bias bounds.",
@@ -1067,12 +1067,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Reed--Muller extensions.",
@@ -1083,12 +1083,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Tensor and product constructions.",
@@ -1099,12 +1099,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Boolean polynomial constructions.",
@@ -1115,12 +1115,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Explicit Fourier-bias calculations.",
@@ -1131,12 +1131,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Finite-field lifting and descent.",
@@ -1147,12 +1147,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Exact parameter optimization of algebraic routes.",
@@ -1163,12 +1163,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T06:58:40Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Explicit small-bias generators.",
@@ -1179,12 +1179,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Epsilon-balanced code instantiations.",
@@ -1195,12 +1195,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Expander-walk codes.",
@@ -1211,12 +1211,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Replacement-product constructions.",
@@ -1227,12 +1227,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Extractor-based linear codes.",
@@ -1243,12 +1243,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Derandomized sampler constructions.",
@@ -1259,12 +1259,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Cayley graph and character constructions.",
@@ -1275,12 +1275,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Spectral amplification.",
@@ -1291,12 +1291,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Limited-independence constructions.",
@@ -1307,12 +1307,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Finite constant optimization of combinatorial routes.",
@@ -1323,12 +1323,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Multilevel concatenation.",
@@ -1339,12 +1339,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:41Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Structured inner-code search with proofs.",
@@ -1355,12 +1355,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Outer-code and alphabet-reduction tradeoffs.",
@@ -1371,12 +1371,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Direct sums and interleavings.",
@@ -1387,12 +1387,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Puncturing, shortening, and padding arithmetic.",
@@ -1403,12 +1403,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Code product transformations.",
@@ -1419,12 +1419,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Hybrid algebraic-combinatorial constructions.",
@@ -1435,12 +1435,12 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Exact finite-length rounding optimization.",
@@ -1451,12 +1451,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Audit of known explicit constructions at the checkpoint.",
@@ -1467,12 +1467,12 @@
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "created_at": "2026-09-15T06:58:26Z",
     "dependency": null,
     "direction": "Synthesis of reusable lemmas into a higher-k candidate.",
@@ -1483,8 +1483,8 @@
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "failed",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T06:58:42Z"
+    "updated_at": "2026-09-15T06:59:13Z"
   }
 ]
