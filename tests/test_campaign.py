@@ -16,6 +16,7 @@ class CampaignTests(unittest.TestCase):
         self.assertEqual(config["campaign"]["researcher_count"], 20)
         self.assertEqual(config["campaign"]["block_length"], 2**30)
         self.assertEqual(config["campaign"]["minimum_distance"], 7 * 2**30 // 16)
+        self.assertTrue(config["campaign"]["auto_sync_git"])
         self.assertEqual(CEILING_RATE, 7 / 1920)
 
     def test_agent_command_hard_codes_ultra(self):

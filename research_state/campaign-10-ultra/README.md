@@ -26,3 +26,12 @@ slightly above the vanilla GS--Hadamard template ceiling `7/1920`.
 The JSON contains the complete construction description, parameter ledger,
 distance audit, proof roadmap, and literature dependencies. Its status remains
 **under review**; no verifier acceptance has been recorded yet.
+
+## Repository synchronization
+
+The campaign is configured to commit and push durable outputs after each job
+finishes. This includes submissions, metadata, reviews, lemma-book and roadmap
+artifacts, GENIUS synthesis, and progress snapshots. Agent traces, caches, and
+the local runner PID remain ignored because they are execution details rather
+than research results. A failed push does not interrupt the local campaign; the
+next manual sync or campaign run can publish the pending files.

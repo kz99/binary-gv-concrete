@@ -16,6 +16,12 @@ campaign:
   timeout_seconds: 5400
   max_attempts: 3
   retry_seconds: 120
+  # Publish durable outputs after each completed job. Agent traces and caches
+  # remain local; submissions, metadata, reviews, synthesis, and snapshots are
+  # synchronized to the configured Git remote.
+  auto_sync_git: true
+  git_remote: origin
+  git_branch: main
   block_length: 1073741824
   minimum_distance: 469762048
   current_record_dimension: 3688448

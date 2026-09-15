@@ -519,8 +519,79 @@ you have examined every durable response and review path.
                     target["updated_at"] = utc_timestamp()
                     self._write_jobs(jobs)
                     self.export_snapshot()
+                    # Make every durable result visible to collaborators as soon
+                    # as the job finishes. This is best-effort and never turns a
+                    # successful mathematical job into a failed one if GitHub
+                    # authentication or connectivity is temporarily unavailable.
+                    self._sync_git(f"{job_id} completed")
             if any(job["status"] == "failed" and int(job["attempts"]) < max_attempts for job in self._read_jobs() if job["role"] in roles):
                 time.sleep(min(int(self.cfg.get("retry_seconds", 120)), 30))
+
+    def _sync_git(self, reason: str) -> None:
+        """Commit and push durable campaign state without touching user files.
+
+        Agent traces, caches, and the runner PID are intentionally ignored. Only
+        machine-readable submissions, metadata, reviews, synthesis artifacts,
+        and progress snapshots are synchronized. A pre-existing staged change
+        causes a skip, so an in-progress collaborator commit is never folded into
+        an automated campaign commit.
+        """
+        if not self.cfg.get("auto_sync_git", False):
+            return
+        try:
+            # Do not interfere with a human's staged work.
+            staged = subprocess.run(
+                ["git", "diff", "--cached", "--quiet"], cwd=self.paths.workspace,
+                stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, check=False,
+            )
+            if staged.returncode != 0:
+                return
+            durable = [
+                self.root / "jobs.json", self.root / "snapshot.json", self.root / "status.json",
+                *sorted((self.root / "metadata").glob("*.json")),
+                *sorted((self.root / "submissions").glob("*.json")),
+                *sorted((self.root / "reviews").glob("**/*.json")),
+                *sorted((self.root / "lemma_book").glob("*.json")),
+                *sorted((self.root / "roadmaps").glob("*.json")),
+                *sorted((self.root / "genius").glob("*.json")),
+            ]
+            existing = [path for path in durable if path.exists()]
+            if not existing:
+                return
+            relative = [str(path.relative_to(self.paths.workspace)) for path in existing]
+            add = subprocess.run(
+                ["git", "add", "--", *relative], cwd=self.paths.workspace,
+                stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, check=False,
+            )
+            if add.returncode != 0:
+                return
+            staged_paths = subprocess.run(
+                ["git", "diff", "--cached", "--name-only"], cwd=self.paths.workspace,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False,
+            ).stdout.splitlines()
+            allowed = set(relative)
+            if not set(staged_paths).issubset(allowed):
+                # This should only be reachable if another process staged files
+                # between the checks; leave the index untouched for the author.
+                return
+            if not staged_paths:
+                return
+            message = "Sync Binary GV campaign: " + reason
+            commit = subprocess.run(
+                ["git", "commit", "-m", message], cwd=self.paths.workspace,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False,
+            )
+            if commit.returncode != 0:
+                return
+            remote = str(self.cfg.get("git_remote", "origin"))
+            branch = str(self.cfg.get("git_branch", "main"))
+            subprocess.run(
+                ["git", "push", remote, branch], cwd=self.paths.workspace,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False,
+            )
+        except OSError:
+            # Synchronization is auxiliary; the local campaign remains durable.
+            return
 
     def _queue_verifiers(self) -> None:
         jobs = self._read_jobs()
