@@ -1,6 +1,6 @@
 [
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Trace and character-sum codes.",
@@ -11,12 +11,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Subfield subcodes and concatenation.",
@@ -27,12 +27,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Algebraic-geometric evaluation codes.",
@@ -43,12 +43,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "BCH and cyclic-code bias bounds.",
@@ -59,12 +59,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "succeeded",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:39:52Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Reed--Muller extensions.",
@@ -75,12 +75,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Tensor and product constructions.",
@@ -91,12 +91,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Boolean polynomial constructions.",
@@ -107,12 +107,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Explicit Fourier-bias calculations.",
@@ -123,12 +123,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Finite-field lifting and descent.",
@@ -139,12 +139,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Exact parameter optimization of algebraic routes.",
@@ -155,12 +155,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Explicit small-bias generators.",
@@ -171,12 +171,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Epsilon-balanced code instantiations.",
@@ -187,12 +187,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Expander-walk codes.",
@@ -203,12 +203,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Replacement-product constructions.",
@@ -219,12 +219,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Extractor-based linear codes.",
@@ -235,12 +235,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Derandomized sampler constructions.",
@@ -251,12 +251,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Cayley graph and character constructions.",
@@ -267,12 +267,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Spectral amplification.",
@@ -283,12 +283,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Limited-independence constructions.",
@@ -299,12 +299,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Finite constant optimization of combinatorial routes.",
@@ -315,12 +315,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Multilevel concatenation.",
@@ -331,12 +331,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Structured inner-code search with proofs.",
@@ -347,12 +347,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Outer-code and alphabet-reduction tradeoffs.",
@@ -363,12 +363,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Direct sums and interleavings.",
@@ -379,12 +379,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Puncturing, shortening, and padding arithmetic.",
@@ -395,12 +395,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Code product transformations.",
@@ -411,12 +411,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Hybrid algebraic-combinatorial constructions.",
@@ -427,12 +427,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Exact finite-length rounding optimization.",
@@ -443,12 +443,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Audit of known explicit constructions at the checkpoint.",
@@ -459,12 +459,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Synthesis of reusable lemmas into a higher-k candidate.",
@@ -475,12 +475,12 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "composition",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Audit explicit epsilon-balanced-code literature and extract the strongest finite constants and parameter choices for a larger dimension at epsilon=2^-10.",
@@ -491,9 +491,9 @@
     "reasoning_effort": "ultra",
     "role": "literature",
     "round": 1,
-    "status": "queued",
+    "status": "running",
     "team": "shared",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T04:28:15Z"
   },
   {
     "attempts": 0,

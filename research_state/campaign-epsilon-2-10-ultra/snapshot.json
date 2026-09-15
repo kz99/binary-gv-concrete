@@ -1,6 +1,8 @@
 {
   "counts": {
-    "queued": 36
+    "queued": 5,
+    "running": 30,
+    "succeeded": 1
   },
   "doubly_verified_candidates": [],
   "leaderboard_objective": {
@@ -10,11 +12,61 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 0,
-    "recent_posts": []
+    "post_count": 3,
+    "recent_posts": [
+      {
+        "body_markdown": "For \\(q=2^m\\) and odd \\(D\\) satisfying \\((D-1)\\sqrt q<q\\), evaluate \\(b+\\operatorname{Tr}(\\sum_{1\\le j\\le D,\\ j\\text{ odd}}a_jx^j)\\) on all \\(x\\in\\mathbb F_q\\). The resulting binary code has dimension \\(m(D+1)/2+1\\) and distance at least \\(q/2-(D-1)\\sqrt q/2\\). This follows from the genus-\\((d-1)/2\\) Artin\u2013Schreier bound and the same bound proves injectivity.",
+        "job_id": "algebraic-04",
+        "kind": "idea",
+        "references": [
+          "odd-trace-artin-schreier",
+          "Voloch-2001-dual-BCH"
+        ],
+        "round": 1,
+        "subject": "Reusable odd-trace Weil lemma",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "A genuinely cyclic binary code of length \\(N=2^{30}\\) has generator \\((X+1)^{N-k}\\). If \\(k\\ge4\\), it contains \\((X+1)^{N-4}\\), whose weight is \\(2^{\\mathrm{wt}_2(N-4)}=2^{28}<535{,}822{,}336\\); hence exact-length cyclic codes have \\(k\\le3\\). Separately, primitive narrow-sense BCH codes of length \\(N-1\\), certified only by designed distance and parity extension, are capped at dimension \\(236\\) at this target.",
+        "job_id": "algebraic-04",
+        "kind": "objection",
+        "references": [
+          "cyclic-repeated-root-obstruction",
+          "primitive-narrow-bch-count"
+        ],
+        "round": 1,
+        "subject": "Standard cyclic/BCH routes have sharp finite ceilings",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "The next full dual-BCH layer adds the exponent \\(67\\) coset and would give \\(k=1021\\), but genus \\(33\\) yields only \\(|S|\\le66\\sqrt q\\), missing the target by \\(2^{15}\\) in weight. Is there a uniform theorem giving \\(|S(aX^{67}+P)|\\le64\\sqrt q\\) for all nonzero allowed \\(a\\) and all odd \\(P\\) of degree at most \\(65\\), or a counterexample? A fixed nonzero \\(a\\) would already support a one-bit \\(k=992\\) augmentation if the bound held.",
+        "job_id": "algebraic-04",
+        "kind": "question",
+        "references": [
+          "Voloch-2001-dual-BCH",
+          "degree-67-boundary"
+        ],
+        "round": 1,
+        "subject": "Can the degree-67 coset be admitted?",
+        "team": "algebraic"
+      }
+    ]
   },
   "model": "gpt-5.6-sol",
-  "promising_candidates": [],
+  "promising_candidates": [
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 991,
+      "id": "algebraic-04",
+      "minimum_distance": 535822336,
+      "rate": 9.229406714439392e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "A [2^30, 991, >=535822336] augmented dual-BCH trace code"
+    }
+  ],
   "reasoning_effort": "ultra",
   "researcher_count": 30,
   "schema": "binary-gv-campaign-snapshot-v1",
@@ -27,5 +79,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T04:27:32Z"
+  "updated_at": "2026-09-15T04:39:52Z"
 }
