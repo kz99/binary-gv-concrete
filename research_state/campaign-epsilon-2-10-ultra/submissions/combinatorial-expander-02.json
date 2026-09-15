@@ -1,0 +1,254 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No code is submitted. The audited object is Ta-Shma\u2019s complete-output `s`-wide lift. Start with labels `z_v\u2208F_2^r`, `v\u2208[N_1]`; an outer undirected `(N_1,D_1,\u03bb_1)` rotation graph; and an inner `(D_1^s,D_2,\u03bb_2)` graph. Enumerate every starting state and every `t`-step instruction string. The resulting multiset has exactly\n\n`M=N_1 D_1^s D_2^t`\n\ncolumns, each the XOR of the `t+1` outer labels visited by the corresponding path. Ta-Shma\u2019s Theorem 4.1 bounds its absolute bias by\n\n`Q^floor(t/s)`, where\n`Q=\u03bb_2^s+s\u03bb_2^(s-1)+s^2(\u03bb_2^(s-3)+\u03b6)`,\n\nunder `\u03b5_0+2\u03b2+2\u03bb_1\u2264\u03bb_2^2`. The proved obstruction below shows that a contracting instance with outer-label span at least 65 has `M\u22652^30+2^24`; hence the complete-output component cannot fit the target length.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: proof-lemma builder. For Ta-Shma STOC 2017, Theorem 4.1, any complete-output instance whose displayed bias certificate is below one and whose outer labels span at least 65 dimensions has raw size at least `2^30+2^24`. Consequently a length-`2^30` direct lift has balanced rank at most 64. The proof combines `Q\u2265s^2\u03bb_2^(s-3)`, compatibility, and `tr(P^2)\u2265N/D`.",
+      "kind": "idea",
+      "references": [
+        "TS3",
+        "TS4",
+        "https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf"
+      ],
+      "subject": "Ta-Shma full-cloud rank ceiling is 64"
+    },
+    {
+      "body_markdown": "Intended recipient: construction architect and finite-parameter optimizer. The standard all-one augmentation raises a Ta-Shma balanced core by only one dimension, so this complete-cloud route is capped at target dimension 65\u2014far below the shared proved `k=1040` construction. Blind puncturing also fails because the raw lower bound `2^30+2^24` exceeds the maximum theorem-only puncturing window `2^30+2^21`.",
+      "kind": "objection",
+      "references": [
+        "TS5",
+        "target-signed-sum-normalization",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "subject": "Discard direct complete-cloud amplification"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted bottleneck breaker. Can one specify exactly `2^30` paths or weighted path indices over outer labels spanning at least 1040 dimensions, with a polynomial-time indexer, and prove `|\u03a3_path (-1)^{a\u00b7label(path)}|\u22642^21` for every nonzero test `a`? Such a sparse theorem would yield a 1040-dimensional balanced core and, after adjoining all-one, a `k=1041` target code. Ta-Shma\u2019s uniform full-cloud norm proof does not survive thinning automatically.",
+      "kind": "question",
+      "references": [
+        "TS5",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Exact sparse-path challenge for k=1041"
+    }
+  ],
+  "distance_audit": [
+    "For a length-`2^30` word, absolute bias at most `\u03c4=2^-9` gives weight at least `(1-\u03c4)2^29=2^29-2^20=535,822,336`.",
+    "Ta-Shma\u2019s theorem supplies a two-sided absolute-bias certificate, stronger than the campaign\u2019s one-sided requirement.",
+    "A `\u03c4`-balanced core contains no all-one word. Adjoining the all-one word therefore adds exactly one dimension and preserves minimum distance by complementing every core word.",
+    "The obstruction bounds only the published complete-output certificate. It makes no minimum-distance claim for a new code and does not exclude a new one-sided or sparse-path proof."
+  ],
+  "explicitness_audit": [
+    "The complete path cloud is deterministically indexed by `(v,w,i_0,\u2026,i_{t-1})\u2208[N_1]\u00d7[D_1]^s\u00d7[D_2]^t`.",
+    "Given deterministic rotation maps and base labels, every output column is computed without search or randomness.",
+    "Duplicate path labels must remain with their multiplicities: deduplication changes the uniform distribution certified by the theorem.",
+    "A specially chosen puncture set, weighted path family, or sparse subfamily requires a new simultaneous all-character proof.",
+    "No validator or dashboard build was run because this is an obstruction handoff, not a publication candidate, and the workspace is read-only."
+  ],
+  "generator_matrix": {
+    "algorithm": "For a fully specified audited instance, enumerate `(v,w,i_0,\u2026,i_{t-1})` lexicographically. Apply the deterministic Ta-Shma PATH recursion, XOR the `t+1` visited labels `z_v`, and emit the resulting `r` bits as one column of the transposed generator matrix. If auditing the standard all-one augmentation, append a final row containing one in every column. No target-meeting instance is claimed.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "`O(M[t(T_G+T_H)+r(t+1)+s])` bit operations for `M=N_1D_1^sD_2^t`, where `T_G,T_H` bound one rotation-map evaluation.",
+    "runtime_proof": "There are exactly `M` path indices. Each requires `t` outer/inner rotation steps and `t+1` XORs of `r`-bit labels, after which all `rM` output entries are emitted. Thus explicit polynomial-time rotation maps give polynomial total time in the raw matrix size, matching its output-size lower bound. The obstruction is therefore parameter-theoretic, not an explicitness failure."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "An initial `\u03b5_0`-biased distribution, an undirected outer `(N_1,D_1,\u03bb_1)` graph with local inversion, an inner graph on `D_1^s` vertices that is `\u03b6`-pseudorandom, and `\u03b5_0+2\u03b2+2\u03bb_1\u2264\u03bb_2^2`.",
+      "result": "Theorem 4.1 gives complete-output size `N_1D_1^sD_2^t` and absolute bias at most `[\u03bb_2^s+s\u03bb_2^(s-1)+s^2(\u03bb_2^(s-3)+\u03b6)]^floor(t/s)`.",
+      "source": "[Amnon Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes, STOC 2017](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "The exact complete-output formula and compatibility condition."
+    },
+    {
+      "hypotheses": "Section 5 chooses `\u03b1\u22641/100` subject to `\u03b1^3/(2 log_2(1/\u03b1))\u22651/log_2(1/\u03b5)`; Section 3 uses `\u03b5_0=0.8`, `\u03b2=0.01`, `\u03b6=\u03b5_0+2\u03b2+2\u03bb<0.9`, and `t=2 ceil(log_\u03b6 \u03b5)`.",
+      "result": "At `\u03b5=1/512`, the near-optimal branch prerequisite fails, while the fallback has `t\u226564`.",
+      "source": "[Ta-Shma, Sections 3 and 5](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "Independent audit of the paper\u2019s instantiated finite schedules."
+    },
+    {
+      "hypotheses": "The exact shared RS\u2013affine construction and its balanced-core decomposition.",
+      "result": "The durable corpus proves a target code of dimension 1040 containing a 1039-dimensional `1/512`-balanced core.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+      "used_for": "Determining that a useful new expander route must reach target dimension at least 1041."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Add the minimal rank-64 full-cloud obstruction lemma to the durable lemma book in a write-capable step.",
+    "Architecture and parameter positions should stop optimizing unmodified complete-output Ta-Shma instances; the proved ceiling is already below the shared `k=1040` code.",
+    "The bottleneck-breaker should investigate deterministic sparse or weighted path families with a fresh simultaneous character-sum proof.",
+    "A one-sided analysis may exploit the harmless negative all-one character; it must still prove the upper signed-sum bound for every other nonzero message."
+  ],
+  "obstructions": [
+    "A contracting Theorem 4.1 certificate forces `s\u22654` and `\u03bb_1^2<(1/4)s^(-8/(s-3))`.",
+    "The trace bound for the outer graph then makes the complete starting cloud too large: balanced rank at least 65 forces at least `2^30+2^24` raw outputs.",
+    "Thus an exact-length complete-output Ta-Shma balanced code has rank at most 64; standard all-one augmentation gives target dimension at most 65.",
+    "The paper\u2019s near-optimal Section 5 parameter condition has no solution at bias `1/512`, and its Section 3 fallback needs at least 64 walk steps.",
+    "Repetition, zero padding, and puncturing certified only from the raw absolute-bias bound do not repair the length mismatch.",
+    "Sparse path selection, nonuniform weights, code-aware puncturing, and new one-sided analyses remain outside this obstruction."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "exact block length",
+      "value": "`N=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)N`.",
+      "quantity": "required distance",
+      "value": "`D=2^29-2^20=535,822,336`"
+    },
+    {
+      "derivation": "`1-2D/N`.",
+      "quantity": "sufficient absolute bias",
+      "value": "`\u03c4=2^-9=1/512`"
+    },
+    {
+      "derivation": "Ta-Shma Theorem 4.1 complete enumeration.",
+      "quantity": "raw output count",
+      "value": "`M=N_1D_1^sD_2^t`"
+    },
+    {
+      "derivation": "Drop nonnegative terms from the theorem\u2019s displayed base.",
+      "quantity": "contraction consequence",
+      "value": "`\u03bb_1^2<(1/4)s^(-8/(s-3))`"
+    },
+    {
+      "derivation": "Exact trace/contraction case split for `4\u2264s\u226411`.",
+      "quantity": "forced outer degrees `(s:D_1)`",
+      "value": "`4:65, 5:64, 6:58, 7:50, 8:42, 9:36, 10:31, 11:27`"
+    },
+    {
+      "derivation": "For `s\u226512`, `\u03bb_1^2<1/4`, while `D_1\u22643` would give `\u03bb_1^2\u226531/96`.",
+      "quantity": "tail outer degree",
+      "value": "`D_1\u22654`"
+    },
+    {
+      "derivation": "`65\u00b74^12`.",
+      "quantity": "uniform raw-length lower bound",
+      "value": "`2^30+2^24=1,090,519,040`"
+    },
+    {
+      "derivation": "Blind deletion can increase signed sum by every deleted coordinate.",
+      "quantity": "largest theorem-only puncturable raw length",
+      "value": "`(1+\u03c4)N=2^30+2^21=1,075,838,976`"
+    },
+    {
+      "derivation": "Difference between the preceding two bounds.",
+      "quantity": "puncturing obstruction margin",
+      "value": "`2^24-2^21=14,680,064`"
+    },
+    {
+      "derivation": "A balanced core has rank at most 64; adjoining all-one adds one.",
+      "quantity": "direct-route target-dimension ceiling",
+      "value": "`65`"
+    },
+    {
+      "derivation": "At `\u03b1\u22641/100`, `\u03b1^3/(2log_2(1/\u03b1))<1/12,000,000<1/9`.",
+      "quantity": "near-optimal Section 5 prerequisite",
+      "value": "`fails for \u03b5=1/512`"
+    },
+    {
+      "derivation": "`\u03b6>41/50` and `512\u00b741^31>50^31`.",
+      "quantity": "Section 3 fallback walk length",
+      "value": "`t=2 ceil(log_\u03b6(1/512))\u226564`"
+    }
+  ],
+  "proof_markdown": "## Sharpened finite obstruction\n\nLet `r` be the span dimension of the `N_1` outer labels in a complete-output instance of [Ta-Shma\u2019s Theorem 4.1](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf). If the theorem\u2019s displayed bound is below one and `r\u226565`, then\n\n`M=N_1D_1^sD_2^t \u2265 2^30+2^24`.\n\nConsequently no complete-output specialization of length at most `2^30` has balanced rank at least 65. After the standard all-one augmentation, this route has target dimension at most 65.\n\n### 1. Rank and the graph trace bound\n\nEvery amplified label is an XOR of visited outer labels, so amplification cannot increase their span. Hence `N_1\u2265r\u226565`.\n\nLet `P` be the normalized adjacency matrix of an undirected `D`-regular rotation multigraph on `m` vertices. Write `P_uv=a_uv/D`, where the integral symmetric port multiplicities have row sum `D`. Then\n\n`tr(P^2)=D^-2 \u03a3_{u,v}a_uv^2 \u2265 D^-2 \u03a3_{u,v}a_uv=m/D`.\n\nIf every nonconstant eigenvalue has absolute value at most `\u03bb`, spectral decomposition gives\n\n`tr(P^2)\u22641+(m-1)\u03bb^2`.\n\nTherefore\n\n`D\u2265m/[1+(m-1)\u03bb^2]`.\n\n### 2. What contraction forces\n\nWrite\n\n`Q=\u03bb_2^s+s\u03bb_2^(s-1)+s^2(\u03bb_2^(s-3)+\u03b6)`.\n\nIf `t<s`, the theorem\u2019s exponent `floor(t/s)` is zero and its bound is one. For `s\u22643`, the term `s^2\u03bb_2^(s-3)` is at least one for every positive admissible spectral upper bound; an actual zero eigenvalue may be replaced by any positive upper bound. Thus a subunit certificate requires `t\u2265s`, `s\u22654`, and `Q<1`.\n\nSince `\u03b6\u22650`, contraction gives\n\n`s^2\u03bb_2^(s-3)<1`, hence `\u03bb_2^2<s^(-4/(s-3))`.\n\nThe compatibility hypothesis and nonnegativity of `\u03b5_0,\u03b2` give `2\u03bb_1\u2264\u03bb_2^2`. Consequently\n\n`\u03bb_1^2<a_s`, where `a_s=(1/4)s^(-8/(s-3))`.\n\n### 3. Exact finite degree split\n\nFor `4\u2264s\u226411`, define\n\n`d_s=(65,64,58,50,42,36,31,27)`.\n\nIf `D_1\u2264d_s-1`, monotonicity of `(m-D)/(D(m-1))` in `m\u226565` and `D\u2264d_s-1` makes the trace lower bound at least\n\n`b_s=(1/4096,1/2016,1/456,1/196,3/328,3/224,7/384,3/128)`.\n\nThe inequality `b_s\u2265a_s` is equivalent to `(4b_s)^(s-3)s^8\u22651`. In order of `s=4,\u2026,11`, the exact values are\n\n`64`, `390625/254016`, `1679616/1481544`, `1`, `4076863488/3707398432`, `31381059609/30840979456`, `82354300000000/75144747810816`, and `1406408618241/1099511627776`.\n\nAll are at least one, contradicting `\u03bb_1^2<a_s`. Hence `D_1\u2265d_s`. The resulting lower bounds `65d_s^s` are respectively\n\n`1,160,290,625`, `69,793,218,560`, `2,474,465,015,360`, `50,781,250,000,000`, `629,372,379,767,040`, `6,601,397,183,447,040`, `53,275,838,653,752,065`, and `361,338,936,826,108,995`.\n\nEach exceeds `2^30+2^24`.\n\nFor `s\u226512`, one has `a_s<1/4`. If `D_1\u22643`, the trace bound at `N_1\u226565` gives\n\n`\u03bb_1^2\u2265(65-3)/(3\u00b764)=31/96>1/4`,\n\na contradiction. Thus `D_1\u22654`, and\n\n`M\u226565\u00b74^s\u226565\u00b74^12=2^30+2^24=1,090,519,040`.\n\nThis completes the rank-length proof.\n\n### 4. Exact-length adjustments\n\nThe lower bound exceeds the target length by `2^24`. Repetition cannot decrease length. Deduplication changes the certified path distribution.\n\nSuppose a raw `B_0`-biased multiset of length `M>N` is blindly punctured to `N`. Its remaining absolute signed sum is bounded only by\n\n`B_0M+(M-N)`.\n\nTo certify bias at most `\u03c4`, it is necessary that `M-N\u2264\u03c4N=2^21`, or `M\u22642^30+2^21`. But the proved lower bound is `2^30+2^24`, larger by `14,680,064`. Thus theorem-only puncturing also fails.\n\n### 5. The paper\u2019s instantiated schedules\n\nThe near-optimal Section 5 branch requires `\u03b1\u22641/100` and\n\n`\u03b1^3/(2log_2(1/\u03b1))\u22651/log_2(1/\u03c4)=1/9`.\n\nThe left side is less than `1/12,000,000`, so this branch is unavailable.\n\nThe Section 3 fallback fixes `\u03b5_0=4/5`, `\u03b2=1/100`, and `\u03b6=41/50+2\u03bb<9/10`. Since `512\u00b741^31>50^31`, one has `\u03b6^31>1/512`; therefore `t=2ceil(log_\u03b6(1/512))\u226564`. Its complete path enumeration also exceeds the coordinate budget.\n\nThe obstruction is confined to the published complete-output theorem and its displayed certificates. A deterministic sparse or weighted path family with a new all-character proof remains open.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "TS1",
+      "proof": "For every binary word, `\u03a3_j(-1)^{c_j}=N-2wt(c)`. Substituting `N=2^30` and `\u03c4=2^-9` gives the exact target interval.",
+      "statement": "Absolute bias `1/512` suffices for the immutable minimum distance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "TS2",
+      "proof": "Every path output is an XOR of outer labels. Integral adjacency multiplicities give `tr(P^2)\u2265m/D`, while spectral decomposition gives `tr(P^2)\u22641+(m-1)\u03bb^2`.",
+      "statement": "Amplification preserves outer span and every audited outer graph satisfies `D\u2265m/[1+(m-1)\u03bb^2]`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TS2"
+      ],
+      "id": "TS3",
+      "proof": "A subunit theorem bound requires `s\u22654`, `t\u2265s`, and `Q<1`. The term `s^2\u03bb_2^(s-3)` and compatibility imply `\u03bb_1^2<(1/4)s^(-8/(s-3))`.",
+      "statement": "Every contracting Theorem 4.1 instance obeys the stated outer spectral upper bound.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TS2",
+        "TS3"
+      ],
+      "id": "TS4",
+      "proof": "The exact `s=4,\u2026,11` table forces degrees `65,64,58,50,42,36,31,27`; for `s\u226512`, the trace inequality forces `D_1\u22654`. All cases give `M\u226565\u00b74^12=2^30+2^24`.",
+      "statement": "Balanced rank at least 65 forces raw complete-output length at least `1,090,519,040`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TS1",
+        "TS4"
+      ],
+      "id": "TS5",
+      "proof": "Blind deletion from raw length `M` can increase an absolute signed sum by `M-N`, so target certification requires `M\u2264(1+\u03c4)N=N+2^21`, contradicting `M\u2265N+2^24`.",
+      "statement": "Exact length, repetition, zero padding, and theorem-only puncturing do not evade the obstruction.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TS4"
+      ],
+      "id": "TS6",
+      "proof": "A balanced core from the direct theorem has rank at most 64. Since it excludes the all-one vector, the standard all-one augmentation adds exactly one dimension.",
+      "statement": "The direct complete-output Ta-Shma route has target dimension at most 65 after augmentation.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "TS7",
+      "proof": "The Section 5 prerequisite is at most `1/12,000,000<1/9`; the Section 3 constants satisfy `\u03b6>41/50` and `(41/50)^31>1/512`, forcing `t\u226564`.",
+      "statement": "Neither parameter schedule instantiated in the paper fits the finite target.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "TS8",
+      "proof": "Lexicographically enumerate all `M` starting-state/instruction tuples, evaluate deterministic rotations, XOR the visited labels, and emit all `rM` entries.",
+      "statement": "The audited full-cloud matrix is polynomial-time generable when its constituents are explicit; the failure is its finite length.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Ta-Shma bias amplification with every constant exposed",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all shared board files)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all durable submissions indexed and audited)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+    "https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For every complete-output application of Ta-Shma\u2019s STOC 2017 Theorem 4.1, if the outer labels span at least 65 binary dimensions and the displayed bias certificate is below one, then the raw output length is at least `2^30+2^24=1,090,519,040`. Hence no such exact-length lift has balanced rank at least 65; even the standard all-one augmentation has dimension at most 65, and blind puncturing based only on the theorem\u2019s absolute-bias bound cannot meet the immutable target.",
+  "title": "A rank-64 ceiling for complete-output Ta-Shma amplification at length 2^30"
+}

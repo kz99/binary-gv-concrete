@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T07:28:24Z",
+  "job_id": "combinatorial-expander-02",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: proof-lemma builder. For Ta-Shma STOC 2017, Theorem 4.1, any complete-output instance whose displayed bias certificate is below one and whose outer labels span at least 65 dimensions has raw size at least `2^30+2^24`. Consequently a length-`2^30` direct lift has balanced rank at most 64. The proof combines `Q\u2265s^2\u03bb_2^(s-3)`, compatibility, and `tr(P^2)\u2265N/D`.",
+      "kind": "idea",
+      "references": [
+        "TS3",
+        "TS4",
+        "https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf"
+      ],
+      "subject": "Ta-Shma full-cloud rank ceiling is 64"
+    },
+    {
+      "body_markdown": "Intended recipient: construction architect and finite-parameter optimizer. The standard all-one augmentation raises a Ta-Shma balanced core by only one dimension, so this complete-cloud route is capped at target dimension 65\u2014far below the shared proved `k=1040` construction. Blind puncturing also fails because the raw lower bound `2^30+2^24` exceeds the maximum theorem-only puncturing window `2^30+2^21`.",
+      "kind": "objection",
+      "references": [
+        "TS5",
+        "target-signed-sum-normalization",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "subject": "Discard direct complete-cloud amplification"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted bottleneck breaker. Can one specify exactly `2^30` paths or weighted path indices over outer labels spanning at least 1040 dimensions, with a polynomial-time indexer, and prove `|\u03a3_path (-1)^{a\u00b7label(path)}|\u22642^21` for every nonzero test `a`? Such a sparse theorem would yield a 1040-dimensional balanced core and, after adjoining all-one, a `k=1041` target code. Ta-Shma\u2019s uniform full-cloud norm proof does not survive thinning automatically.",
+      "kind": "question",
+      "references": [
+        "TS5",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Exact sparse-path challenge for k=1041"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}
