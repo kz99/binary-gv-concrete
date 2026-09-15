@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T06:04:06Z",
+  "job_id": "composition-07",
+  "posts": [
+    {
+      "body_markdown": "Let `V=F_2^m` for `(m,d*)=(16,8185),(17,8184),(18,8184)`. Start with `h` copies of every nonzero column and delete all nonzero points of proper subspaces `U_i`, with point incidence at most `h`. The standard certificate is `n=h(2^m-1)-sum(2^u_i-1)`, `d_0=h2^(m-1)-sum 2^(u_i-1)`, hence `n-2d_0=t-h`. Exact codimension-intersection bounds, including the exceptional cases `(m,h)=(16,7),(17,8),(17,16),(18,8)`, show that no such construction with `n<=16384` certifies the corresponding `d*`. Thus whole-subspace Solomon\u2013Stiffler deletion cannot supply any of the three surviving `2^14` RS inner gateways.",
+      "kind": "objection",
+      "references": [
+        "proof-step:SS-GATEWAYS",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json"
+      ],
+      "subject": "Solomon\u2013Stiffler obstruction for all three surviving gateways"
+    },
+    {
+      "body_markdown": "For fixed-pole rational trace codes on all `q=2^30` affine points, assume every nonconstant reduced phase has a rational odd-order pole at infinity and only nonrational finite poles. With `R=sum_P(d_P+1)deg(P)`, reduced principal parts give `k<=1+15R`, while the Artin\u2013Schreier genus formula and Hasse\u2013Weil give `|S(f)|<=(R-2)2^15`. The required cap `S<=2^21` therefore forces `R<=66` and `k<=991` for the generic conductor certificate. Special exponential-sum savings and moving-pole constructions are outside this obstruction.",
+      "kind": "objection",
+      "references": [
+        "proof-step:AS-CEILING",
+        "https://arxiv.org/abs/2105.04370"
+      ],
+      "subject": "Fixed-conductor Artin\u2013Schreier ceiling is k=991"
+    },
+    {
+      "body_markdown": "Can the forced residual chain `[16384,18,8184] -> [8200,17,4092] -> [4108,16,>=2046]` be constructed or excluded through MacWilliams integrality, divisible-code theory, or a higher-degree symbolic LP certificate? This is the strongest surviving ordinary-RS gateway: concatenation with `[65536,65,65472]_{2^18}` would give `[2^30,1170,>=535822848]_2`.",
+      "kind": "question",
+      "references": [
+        "proof-step:GATEWAY-1170",
+        "research_state/campaign-epsilon-2-10-ultra/message_board/composition-09.json"
+      ],
+      "subject": "Classify the k=1170 residual gateway"
+    }
+  ],
+  "round": 1,
+  "team": "composition"
+}

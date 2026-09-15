@@ -1,0 +1,273 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard code is submitted. The ruled-out template concatenates a binary inner `[ell,m,d]_2` code with an ordinary or once-extended Reed\u2013Solomon outer `[N,K,N-K+1]_(2^m)`, where `2 <= m <= 30` and `N <= 2^m+1`. The raw binary code has length `L=N ell`, dimension `mK`, and product-distance certificate `delta=d(N-K+1)`. It is adjusted to length `n=2^30` either by appending `n-L` zeros or by puncturing a fixed set of `L-n` coordinates and using the generic loss bound `delta-(L-n)`. Whole-symbol shortening and puncturing of the RS code are already subsumed by varying `(N,K)`.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "If a binary `[L,k,delta]` code is adjusted to length `n` by zero padding when `L<=n`, or by arbitrary fixed puncturing when `L>=n`, then the generic certificate is `d_final>=delta-max(0,L-n)`. Writing `B=n-2D`, this is equivalent to `L-2delta+|n-L|<=B`. If the right side certifies `D>0`, puncturing is injective and preserves dimension. Whole-symbol shortening of an MDS outer code merely changes `(N,K)` and is already included in a parameter search.",
+      "kind": "idea",
+      "references": [
+        "proof-step:ADJUST",
+        "proof-step:SHORTEN"
+      ],
+      "subject": "Exact blind length-adjustment lemma"
+    },
+    {
+      "body_markdown": "For equal-inner ordinary or once-extended RS concatenation with `2<=m<=30`, standard product distance followed by zero padding or generic puncture loss cannot certify a target code of dimension at least 2972. Exact arithmetic leaves only 57 inner pairs: 7 at `m=17`, 35 at `m=18`, 13 at `m=19`, and one each at `m=20,21`. Forty-nine are forbidden Griesmer codes; the remaining eight are eliminated by the shared length-8192 cubic LP bound and residual/Pless-moment arguments.",
+      "kind": "objection",
+      "references": [
+        "proof-step:ENUM",
+        "proof-step:LOGACEV",
+        "proof-step:M17-LP",
+        "proof-step:M18-DEFECT",
+        "proof-step:M19-DEFECT"
+      ],
+      "subject": "Small-field equal-inner RS corridor closed"
+    },
+    {
+      "body_markdown": "Can a support-aware puncturing theorem escape the generic loss of one distance unit per deleted coordinate? A useful result would specify the puncture set symbolically and prove, simultaneously for every nonzero concatenated word, a loss strictly below `L-n`; otherwise the exact blind-adjustment sieve here applies. The theorem must handle inner pairs outside the 57-pair product-bound corridor, since every pair inside it is nonexistent.",
+      "kind": "question",
+      "references": [
+        "proof-step:ADJUST",
+        "proof-step:CONCLUDE"
+      ],
+      "subject": "Support-aware puncturing beyond blind loss"
+    }
+  ],
+  "distance_audit": [
+    "A nonzero outer RS word has at least `N-K+1` nonzero symbols, each contributing at least the exact inner minimum distance `d`; hence the raw distance is at least `d(N-K+1)`.",
+    "Zero padding preserves distance and dimension. Puncturing `q=L-n` coordinates loses at most `q` weight from every word.",
+    "Whenever `d(N-K+1)-q>=D>0`, no raw nonzero word can lie in the puncturing kernel, so the final dimension remains exactly `mK`.",
+    "The Griesmer bootstrap and exact integer enumeration are necessary conditions for every construction using these two distance certificates.",
+    "Every one of the 57 surviving inner parameter pairs is proved nonexistent, so no certified concatenation survives.",
+    "The theorem does not cover symbol-sensitive distance analysis or a puncture set accompanied by a sharper support-specific loss proof."
+  ],
+  "explicitness_audit": [
+    "The finite enumeration uses only integer addition, multiplication, floor division, ceiling division, and popcount; its loop bounds and complete nonempty output are displayed in the proof.",
+    "Padding appends zeros. For a deterministic representative puncture operation, flatten coordinates in outer-block order and inner-coordinate order and delete the final `L-n` positions; the generic bound actually holds for every fixed set.",
+    "No floating-point comparison, random sampling, existential constituent, hidden asymptotic constant, or unspecified search is used.",
+    "The Logacev range is checked numerically for every invocation; all relevant distances are at most 4096.",
+    "All 28 durable submissions and all 28 message-board files present at the final corpus audit were read individually; the shared lemma-book and roadmap directories were empty.",
+    "The workspace was read-only, so the obstruction could not be persisted under `proofs/` or `data/records.json`. Since this is not a publication-ready leaderboard construction, the write-producing dashboard build was not run."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A binary linear code of dimension `r` and distance `e` with `3<=e<=2^(r-2)-2`.",
+      "result": "`n_2(r,e)>=g_r(e)+1`; equality in the binary Griesmer bound is impossible in this range.",
+      "source": "[H. C. A. van Tilborg, \u201cA proof of the nonexistence of a binary (55,7,26) code,\u201d Theorem 1.4, quoting Logacev](https://pure.tue.nl/ws/portalfiles/portal/1760600/252962.pdf)",
+      "used_for": "Eliminating all 49 exact-Griesmer inner pairs and all zero-residual-excess cases."
+    },
+    {
+      "hypotheses": "An arbitrary binary code of length 8192 and minimum distance at least 4090.",
+      "result": "The cubic Delsarte certificate gives cardinality at most `116581<2^17`.",
+      "source": "[composition-02.json](/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json)",
+      "used_for": "Eliminating all seven `m=17` arithmetic survivors after puncturing at most five inner coordinates."
+    },
+    {
+      "hypotheses": "The canonical conditional-average target construction and its independent verification.",
+      "result": "A concurrent durable submission was independently accepted with dimension 2971, making 2972 the next record threshold used in this sieve.",
+      "source": "[verifier-1-combinatorial-01.json](/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json)",
+      "used_for": "Selecting the concrete dimension threshold `mK>=2972`; the obstruction itself does not depend on that construction's proof."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Develop a support-aware puncturing bound that controls intersections of the puncture set with every minimum-support outer word and every nonzero inner symbol orbit.",
+    "Extend the exact sieve beyond `m=30`, or to unequal/multilevel inner blocks, only where it can reach dimension at least 2972.",
+    "In a writable campaign step, add the blind-adjustment and finite-corridor lemmas to `data/records.json`, write the proof note under `proofs/`, request independent verification, and run the validator and dashboard build."
+  ],
+  "obstructions": [
+    "No equal-inner ordinary or once-extended RS concatenation with `2<=m<=30` can be certified at dimension at least 2972 by product distance followed by zero padding or generic puncture loss.",
+    "The numerically strongest phantom row is the nonexistent inner `[6149,18,3072]_2`; with outer dimension 199 it would have produced binary dimension 3582.",
+    "Generic blind puncturing improves the maximal outer dimension by one in eight `m=18` rows, but every corresponding inner code is nonexistent.",
+    "Whole-symbol shortening or puncturing of the RS outer code cannot evade the theorem because the resulting MDS parameters are already enumerated.",
+    "Fields with `m>30`, non-RS outer codes, unequal or multilevel inner maps, and support-specific puncturing estimates remain outside the theorem.",
+    "No new target code is constructed, so this result does not itself beat the dimension-31 baseline."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "length and distance",
+      "value": "`n=2^30=1073741824`, `D=2^29-2^20=535822336`"
+    },
+    {
+      "derivation": "`n-2D`.",
+      "quantity": "two-sided distance budget",
+      "value": "`B=2^21=2097152`"
+    },
+    {
+      "derivation": "First integer above the concurrently accepted durable dimension 2971.",
+      "quantity": "sieve threshold",
+      "value": "`k_*=2972`"
+    },
+    {
+      "derivation": "`K_0(m)=ceil(2972/m)`.",
+      "quantity": "outer thresholds for `m=17,...,21`",
+      "value": "`175,166,157,149,142`"
+    },
+    {
+      "derivation": "Griesmer lower bound `ell>=(2-2^(1-m))d`.",
+      "quantity": "universal distance bootstrap",
+      "value": "`d<=floor((n*2^(m-1)-D(2^m-1))/((K_0-1)(2^m-1)))`"
+    },
+    {
+      "derivation": "After the bootstrap, `g_m(d)>=2d` for `17<=m<=21`.",
+      "quantity": "sharpened distance caps",
+      "value": "`6026,6355,6721,7084,7436`"
+    },
+    {
+      "derivation": "Exact padding and puncturing loops.",
+      "quantity": "surviving pair counts",
+      "value": "`m=17:7; m=18:35; m=19:13; m=20:1; m=21:1; all other 2<=m<=30:0`"
+    },
+    {
+      "derivation": "Compare `ell` with `g_m(d)`.",
+      "quantity": "survivor defects",
+      "value": "`49` Griesmer-equality pairs; `8` positive-defect pairs"
+    },
+    {
+      "derivation": "Padding at `(m,d,ell)=(18,3072,6149)`.",
+      "quantity": "largest arithmetic payoff before inner-code existence",
+      "value": "`N=174620`, outer `K=199`, binary `k=3582`, padding `3444`"
+    },
+    {
+      "derivation": "First two projective-code moments for `[6150,18,3072]`.",
+      "quantity": "polynomial moment contradiction",
+      "value": "`sum_(c!=0)(wt(c)-3072)(wt(c)-4096)=-412483584<0`"
+    },
+    {
+      "derivation": "First moment for `[8197,18,4096]`.",
+      "quantity": "required excess weight",
+      "value": "`659456`, versus at most `4101`"
+    },
+    {
+      "derivation": "First moment for `[8198,19,4096]`.",
+      "quantity": "required excess weight",
+      "value": "`1576960`, versus at most `4102`"
+    }
+  ],
+  "proof_markdown": "### Theorem and scope\n\nPut `n=2^30` and `D=535822336`. For `2<=m<=30`, let `I` be a binary linear `[ell,m,d]_2` code whose displayed `d` is its actual minimum distance. Let `A` be an ordinary or once-extended Reed\u2013Solomon code `[N,K,N-K+1]_(2^m)`, with `N<=2^m+1`, and concatenate through any binary-linear isomorphism `F_(2^m)->I`.\n\nThe raw code is binary linear of length `L=N ell`, dimension `mK`, and distance at least\n\n`delta=d(N-K+1)`.\n\nSuppose exact length `n` is obtained either by zero padding when `L<=n`, or by fixed puncturing when `L>=n`, with distance certified by the generic loss `delta-(L-n)`. Then no resulting certificate can give both dimension at least 2972 and distance at least `D`.\n\nThis is a certificate obstruction. A sharper symbol-sensitive distance proof or support-aware puncturing argument is outside its scope.\n\n### 1. Exact adjustment and shortening arithmetic\n\nPadding gives `[n,mK,>=delta]_2`. Puncturing `q=L-n` fixed coordinates gives distance at least `delta-q`. If this is at least `D>0`, puncturing is injective: a nonzero kernel word would have raw weight at most `q<delta`. Thus its dimension is also `mK`.\n\nWriting `B=n-2D`, both branches are summarized by\n\n`L-2delta+|n-L|<=B`.\n\nIndeed this becomes `n-2delta<=B` for padding and `2L-n-2delta<=B` for puncturing.\n\nShortening an MDS `[N,K,N-K+1]` outer code in `s<K` symbols produces `[N-s,K-s,N-K+1]`; puncturing `s` outer symbols produces `[N-s,K,N-K+1-s]` while the dimension remains `K`. Both are again represented by some `(N',K')` in the enumeration below, so whole-symbol adjustment supplies no additional case.\n\n### 2. Griesmer bootstrap\n\nFor a binary `[ell,m,d]` code, residualizing a minimum word gives `[ell-d,m-1,>=ceil(d/2)]`. Induction yields\n\n`ell>=g_m(d):=sum_(i=0)^(m-1) ceil(d/2^i)>=(2-2^(1-m))d`.\n\nSet `K_0=ceil(2972/m)` and `t=K_0-1`. Any candidate has `K>=K_0`.\n\nFor padding, `N ell<=n` and\n\n`D<=d(N-K+1)<=n/(2-2^(1-m))-td`.\n\nFor puncturing,\n\n`D<=n-N(ell-d)-(K-1)d`.\n\nSince `N ell>=n` and `(ell-d)/ell>=(alpha-1)/alpha` for `alpha=2-2^(1-m)`, the same upper bound follows. Hence\n\n`d<=d_0(m):=floor((n*2^(m-1)-D(2^m-1))/(t(2^m-1)))`.\n\nFor `m=2,...,8`, `K_0>2^m+1`, so no outer code exists. The displayed bound is finite for every `9<=m<=30`.\n\n### 3. Exact finite enumeration\n\nFor padding define `Delta=ceil(D/d)`. A necessary and sufficient condition in the relaxed `K=K_0` parameter problem is\n\n`g_m(d)<=ell<=floor(n/(Delta+t))`\n\nand\n\n`Delta+t<=min(2^m+1,floor(n/ell))`.\n\nFor puncturing put `H=n-D-td`. Every candidate satisfies\n\n`N(ell-d)<=H`, `N ell>=n`.\n\nThus\n\n`ell<=floor(nd/(D+td))`,\n\nand an integer outer length exists in the relaxed problem exactly when\n\n`max(K_0,ceil(n/ell))<=min(2^m+1,floor(H/(ell-d)))`.\n\nThe exhaustive computation is therefore the following exact-integer loop:\n\n```text\nfor m = 2,...,30:\n    K0 = ceil(2972/m); t = K0-1; Q = 2^m\n    if K0 > Q+1: continue\n    d0 = floor((n*2^(m-1)-D*(2^m-1))/(t*(2^m-1)))\n    for d = 1,...,d0:\n        g = sum_{i=0}^{m-1} ceil(d/2^i)\n        Delta = ceil(D/d)\n        test every ell in [g, floor(n/(Delta+t))] by the padding inequality\n        H = n-D-td\n        test every ell in [g, floor(nd/(D+td))] by the puncturing interval\n```\n\nThe padding and puncturing sets coincide. They are empty for `m=9,...,16` and `m=22,...,30`. The nonempty output, written as `(d,ell)`, is:\n\n- `m=17`: `(4094,8192),(4094,8193),(4095,8194),(4095,8195),(4096,8195),(4096,8196),(4096,8197)`.\n\n- `m=18`: `(2048,4101),(2816,5638),(2944,5894),(3008,6022),(3040,6086),(3056,6118),(3064,6134),(3068,6142),(3070,6146),(3071,6148),(3072,6149),(3072,6150),(3328,6662),(3456,6918),(3520,7046),(3552,7110),(3568,7142),(3576,7158),(3580,7166),(3582,7170),(3583,7172),(3584,7173),(3584,7174),(3712,7430),(3840,7685),(3968,7941),(4032,8069),(4064,8133),(4080,8165),(4088,8181),(4092,8189),(4094,8193),(4095,8195),(4096,8196),(4096,8197)`.\n\n- `m=19`: `(3072,6150),(3584,7174),(3840,7686),(3968,7942),(4032,8070),(4064,8134),(4080,8166),(4088,8182),(4092,8190),(4094,8194),(4095,8196),(4096,8197),(4096,8198)`.\n\n- `m=20`: `(4096,8198)`.\n\n- `m=21`: `(4096,8199)`.\n\nThere are 57 pairs. Forty-nine satisfy `ell=g_m(d)`. The eight positive-defect cases consist of four `m=17` pairs, the three `m=18` pairs\n\n`[6150,18,3072]`, `[7174,18,3584]`, `[8197,18,4096]`,\n\nand `[8198,19,4096]`.\n\n### 4. Griesmer-equality pairs\n\nLogacev's theorem states that\n\n`3<=e<=2^(r-2)-2  =>  n_2(r,e)>=g_r(e)+1`.\n\nEvery exact pair above has `r>=17` and `2048<=e<=4096`, so its hypotheses hold. Therefore none of the 49 Griesmer-equality inner codes exists.\n\n### 5. The four remaining `m=17` pairs\n\nThe shared cubic Delsarte certificate uses, at length 8192 and with `y=8192-2x`,\n\n`F(x)=(y-12)(y+630)(y+632)`\n\n`=5462080 K_0+407590 K_1+2500 K_2+6K_3`.\n\nIt is nonpositive at every allowed distance `x>=4090`, while\n\n`F(0)/5462080=1989921197/17069<2^17`.\n\nThus no binary code of length 8192, size `2^17`, and distance at least 4090 exists.\n\nFor each of the seven enumerated `m=17` pairs, puncture `ell-8192<=5` inner coordinates. This preserves all `2^17` words and leaves distance at least\n\n`d-(ell-8192)>=4091`,\n\na contradiction. Hence all `m=17` pairs are impossible.\n\n### 6. Residual and moment tools for defect-one codes\n\nSuppose `C` has parameters `[g_r(d)+1,r,d]`, with one of the four remaining defect-one triples. If `c` has weight `w<2d`, restriction to the complement of its support has kernel exactly `span(c)` and gives a residual code\n\n`[g_r(d)+1-w,r-1,>=e]`, where `e=d-floor(w/2)`.\n\nFor the present ranges,\n\n`g_r(x)=2x+r-2-s_2(x-1)`,\n\nwhere `s_2` is binary popcount. The residual excess over `g_(r-1)(e)` is\n\n`2-s_2(d-1)+s_2(e-1)` for even `w`,\n\nand\n\n`1-s_2(d-1)+s_2(e-1)` for odd `w`.\n\nA negative excess violates Griesmer; zero excess violates Logacev. Direct popcount evaluation therefore gives these complete nonzero-weight possibilities:\n\n| code | possible weights |\n|---|---|\n| `[6150,18,3072]` | `{3072,4096} union [6144,6150]` |\n| `[7174,18,3584]` | `{3584,4096,5120} union [7168,7174]` |\n| `[8197,18,4096]` | `{4096} union [8192,8197]` |\n| `[8198,19,4096]` | `{4096} union [8192,8198]` |\n\nEach code has no zero column: deleting one would produce a forbidden Griesmer code. It also has no repeated nonzero columns: shortening on a repeated pair would produce a forbidden `[g_(r-1)(d),r-1,>=d]` code. Therefore, with `M=2^r-1`, its nonzero weight distribution satisfies\n\n`sum A_w=M`,\n\n`sum w A_w=n_c 2^(r-1)`,\n\n`sum w(w-1)A_w=n_c(n_c-1)2^(r-2)`.\n\nFinally, there is at most one word in each displayed upper interval. Two such words have zero sets of size at most `n_c-2d`, so their sum has weight at most `2(n_c-2d)<=12<d`.\n\n### 7. The four defect-one contradictions\n\nFor `[6150,18,3072]`, sum `P(w)=(w-3072)(w-4096)` over nonzero codewords. It is zero on the two lower weights and positive on every heavy weight, but the three moments give\n\n`sum P(w)A_w=-412483584`,\n\na contradiction.\n\nFor `[7174,18,3584]`, let `C=A_5120` and let either no heavy word occur or one heavy word of weight `h in [7168,7174]` occur. Summing `(w-3584)(w-4096)` gives\n\n`1572864 C + (h-3584)(h-4096)=55181312`,\n\nwith the second term omitted when no heavy word exists. The denominator is `1572864=3*2^19`. The corresponding numerator has 2-adic valuation `17` with no heavy word, and valuations `17,0,2,0,4,0,2` for `h=7168,...,7174`. It is never divisible by `2^19`, a contradiction.\n\nFor `[8197,18,4096]`, the first moment requires excess above constant weight 4096 equal to\n\n`8197*2^17-4096(2^18-1)=659456`.\n\nThe sole possible heavy word contributes at most `8197-4096=4101`, a contradiction.\n\nFor `[8198,19,4096]`, the analogous excess is\n\n`8198*2^18-4096(2^19-1)=1576960`,\n\nwhile the sole heavy word contributes at most `4102`. This is again impossible.\n\nAll 57 arithmetic survivors are therefore nonexistent, proving the theorem.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "ADJUST",
+      "proof": "Concatenation gives raw `[N ell,mK,>=d(N-K+1)]`. Padding preserves parameters; puncturing `q` coordinates loses at most `q` distance and is injective whenever the surviving lower bound is positive. Algebra yields the unified deficit inequality.",
+      "statement": "Zero padding and generic fixed puncturing have the exact unified certificate `L-2delta+|n-L|<=n-2D`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "SHORTEN",
+      "proof": "Shortening an MDS outer code in `s` symbols changes `[N,K,N-K+1]` to `[N-s,K-s,N-K+1]`; outer puncturing changes it to `[N-s,K,N-K+1-s]`. Both parameter triples occur by varying `(N,K)`.",
+      "statement": "Whole-symbol shortening or puncturing creates no additional RS parameter case.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "GRIESMER",
+      "proof": "Residualization of a minimum word proves the Griesmer sum. Combining `ell>=(2-2^(1-m))d` with each length-adjustment branch gives the displayed finite upper bound `d_0(m)`.",
+      "statement": "Every dimension-at-least-2972 candidate lies in a finite, explicit `(m,d,ell,N)` range.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ADJUST",
+        "GRIESMER"
+      ],
+      "id": "ENUM",
+      "proof": "The displayed exact-integer loop checks the necessary relaxed `K=ceil(2972/m)` inequalities for both branches. It outputs 57 pairs, with independently reproduced counts `7,35,13,1,1` for `m=17,...,21` and zero elsewhere through `m=30`.",
+      "statement": "Padding and blind puncturing have the same complete 57-pair arithmetic corridor for `2<=m<=30`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ENUM"
+      ],
+      "id": "LOGACEV",
+      "proof": "All 49 equality pairs lie in the range `3<=d<=2^(m-2)-2`, so Logacev's strict improvement of Griesmer excludes them.",
+      "statement": "None of the 49 exact-Griesmer inner codes exists.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ENUM"
+      ],
+      "id": "M17-LP",
+      "proof": "Puncturing at most five inner coordinates sends every `m=17` survivor to a length-8192 code of size `2^17` and distance at least 4091, contradicting the exact cubic Delsarte bound at distance 4090.",
+      "statement": "All seven `m=17` survivors are impossible.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "LOGACEV"
+      ],
+      "id": "RESIDUAL-MOMENTS",
+      "proof": "Residualization and the digit formula classify all low weights. Logacev excludes zero residual defect. Forbidden zero or repeated columns give projectivity, hence the first two Pless moments. Two heavy words would have mutual distance at most 12.",
+      "statement": "Each remaining defect-one code has the displayed restricted weight set, projective moments, and at most one heavy word.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RESIDUAL-MOMENTS"
+      ],
+      "id": "M18-DEFECT",
+      "proof": "The negative quadratic-moment sum excludes `[6150,18,3072]`; the exact divisibility equation excludes `[7174,18,3584]`; and the first-moment excess excludes `[8197,18,4096]`.",
+      "statement": "The three positive-defect `m=18` inner codes do not exist.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RESIDUAL-MOMENTS"
+      ],
+      "id": "M19-DEFECT",
+      "proof": "All low nonzero weights would equal 4096 and at most one heavy word exists, but the first moment requires excess 1576960 while one heavy word contributes at most 4102.",
+      "statement": "The defect-one `[8198,19,4096]` code does not exist.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SHORTEN",
+        "ENUM",
+        "LOGACEV",
+        "M17-LP",
+        "M18-DEFECT",
+        "M19-DEFECT"
+      ],
+      "id": "CONCLUDE",
+      "proof": "Every parameter tuple required by the standard product-plus-adjustment certificate uses one of the 57 nonexistent inner codes.",
+      "statement": "No equal-inner RS/extended-RS construction in the stated `2<=m<=30` scope certifies dimension at least 2972 at the immutable target.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Puncturing, shortening, and padding arithmetic for equal-inner Reed\u2013Solomon concatenation",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 28 files present at final audit, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 28 files present at final audit, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json",
+    "research_state/archive/target-7-16/campaign-10-ultra/submissions/*.json (all 15 archived durable submissions individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For every `2<=m<=30`, consider an equal-inner concatenation of a binary `[ell,m,d]_2` code with an ordinary or once-extended Reed\u2013Solomon `[N,K,N-K+1]_(2^m)` code. If exact length `2^30` is obtained by zero padding or fixed puncturing and distance is certified by the standard product bound followed, in the punctured case, by the generic loss of at most one per deleted coordinate, then the resulting code cannot simultaneously have dimension at least 2972 and minimum distance at least 535822336. Whole-symbol shortening and puncturing of the outer RS code are included. The result does not cover support-aware puncturing with a sharper loss proof.",
+  "title": "Padding and blind puncturing cannot lift small-field equal-inner RS past dimension 2971"
+}

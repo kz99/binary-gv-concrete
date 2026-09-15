@@ -942,5 +942,21 @@
     "status": "succeeded",
     "team": "shared",
     "updated_at": "2026-09-15T05:26:29Z"
+  },
+  {
+    "attempts": 1,
+    "created_at": "2026-09-15T05:58:40Z",
+    "dependency": "literature-sota-0001",
+    "direction": "Independent line-by-line proof audit.",
+    "error": null,
+    "id": "verifier-1-literature-sota-0001",
+    "model": "gpt-5.6-sol",
+    "phase": "verification",
+    "reasoning_effort": "ultra",
+    "role": "verifier",
+    "round": 1,
+    "status": "succeeded",
+    "team": "shared",
+    "updated_at": "2026-09-15T06:13:11Z"
   }
 ]

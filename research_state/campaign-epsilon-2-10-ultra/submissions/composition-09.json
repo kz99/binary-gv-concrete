@@ -1,0 +1,345 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is submitted. The strongest complete admissible checkpoint candidate remains the durable RS\u2013RM construction.\n\nLet `p(T)=T^16+T^5+T^3+T^2+1`, `F=F\u2082[T]/(p)`, and let `\u03b1` be the residue class of `T`. Take the explicitly ordered additive subspace `A=span_F\u2082{1,\u03b1,\u2026,\u03b1^14}`, of size 32768. Evaluate every polynomial in `F[X]` of degree at most 64 on `A`, obtaining an outer `[32768,65,32704]_{2^16}` Reed\u2013Solomon code. Identify `F` with `F\u2082^16` in the displayed polynomial basis and encode each symbol by the affine truth table `H(z)_y=z\u2080+\u03a3_{i=1}^{15}z_i y_i`, `y\u2208F\u2082^15`. This is the injective binary-linear inner code `RM(1,15)=[32768,16,16384]\u2082`. Their coordinatewise concatenation is the already-durable `[2^30,1040,535822336]\u2082` candidate.\n\nThe strongest unresolved ordinary-RS route instead requires a presently unavailable deterministic inner `[16384,18,8184]\u2082`; if supplied, concatenation with `[65536,65,65472]_{2^18}` would give `[2^30,1170,\u2265535822848]\u2082`.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For binary-code LP calculations, let `c=n\u22122d`, choose `a\u2261n (mod 2)`, and put `P(y)=(y\u2212c)(y+a)(y+a+2)`. On the allowed parity lattice `y\u2264c`, `P(y)\u22640`. Its Krawtchouk coefficients are `f\u2080=n(2a+2\u2212c)\u2212ca(a+2)`, `f\u2081=3n\u22122+a(a+2)\u2212c(2a+2)`, `f\u2082=2(2a+2\u2212c)`, and `f\u2083=6`. Whenever these are nonnegative and `f\u2080>0`, Delsarte gives `A\u2082(n,d)\u2264floor(P(n)/f\u2080)`. At `(n,d,a)=(16384,8183,862)` this is 333941, and at `(16384,8176,496)` it is 593064.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "subject": "Reusable parity-lattice cubic Delsarte certificate"
+    },
+    {
+      "body_markdown": "The checkpoint ledger should not describe the general `[16384,17,8184]` gateway as closed. Only its particular Plotkin realization is closed. Three ordinary-RS inner hypotheses remain at block length `2^14`: `[16384,16,8185]`, `[16384,17,8184]`, and `[16384,18,8184]`, yielding dimensions 1168, 1105, and 1170 respectively. Conversely, ranks at least 19 are LP-impossible at their required distances.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json"
+      ],
+      "subject": "Correction to the ordinary-RS gateway ledger"
+    },
+    {
+      "body_markdown": "Can the residual chain `[16384,18,8184] \u2192 [8200,17,4092] \u2192 [4108,16,\u22652046]` be classified using weight-enumerator congruences, MacWilliams identities, or a symbolic construction? Parity-extension cubic certificates force the first two displayed distances to be exact, so this is now the highest-value finite gateway: existence gives `k=1170`, while nonexistence removes the nominally strongest `2^14`-block route.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/message_board/composition-02.json"
+      ],
+      "subject": "Classify the forced rank-18 residual chain"
+    }
+  ],
+  "distance_audit": [
+    "`D=2^29\u22122^20=535822336=32704\u00b716384`.",
+    "Every nonzero degree-at-most-64 outer polynomial has at most 64 roots on the 32768-point evaluation set, and every nonzero inner word has weight at least 16384; hence every nonzero concatenated word has weight at least `D`.",
+    "Exactness for the durable `k=1040` code follows by taking a degree-64 polynomial with 64 prescribed roots and choosing the lexicographically first nonzero scalar avoiding the at most 32704 scalars that map a remaining value to the unique constant-one inner symbol. All 32704 nonzero blocks then have weight 16384.",
+    "The three conditional products were recomputed exactly: `8185\u00b765464=535822840=D+504` and `8184\u00b765472=535822848=D+512`.",
+    "The Hermitian specialization gives `(262144\u2212512)\u00b72048=D`; adjoining all-one preserves distance because every homogeneous-Hadamard core word has weight at most `n/2`.",
+    "No distance conclusion uses sampling, an average-weight heuristic, or an asymptotic error term."
+  ],
+  "explicitness_audit": [
+    "The field polynomial, polynomial basis, additive evaluation set, evaluation order, degree bound, and affine inner map of the durable `k=1040` code are all finite and symbolically recoverable.",
+    "The field source supplies the Rabin certificate `T^(2^16)\u2261T mod p` and `gcd(p,T^(2^8)\u2212T)=1`; the parameter and exact-distance calculations were independently recomputed.",
+    "All floors, ceilings, outer dimensions, and product distances for the `2^14` gateways are stated explicitly.",
+    "The three better RS routes are marked conditional because no generator matrix or symbolic inner construction is known.",
+    "The conditional-average `k=2971` proposal is not treated as admissible: its bit-by-bit exhaustive comparison over completions is the numerical/exhaustive witness search prohibited by the contribution guide, despite the mathematical conditional-expectation calculation being consistent.",
+    "Asymptotic expander and condenser results were accepted only when their literal finite schedules fit within `2^30`; unavailable `o(n)` constants were not used.",
+    "No proof file or record was written because this is not a leaderboard submission and the workspace was read-only. Consequently publication validation and dashboard rebuilding were not applicable."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Explicit degree-64 evaluation on the stated 32768-element additive subspace, followed coordinatewise by the affine `RM(1,15)` encoder.",
+      "result": "Deterministic binary linear `[2^30,1040,535822336]` code, including a finite irreducibility certificate and exact-distance witness.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json` and equivalent durable submissions `algebraic-01`, `algebraic-03`, `algebraic-06`\u2013`algebraic-10`",
+      "used_for": "Checkpoint reference construction and scoped architecture ceiling."
+    },
+    {
+      "hypotheses": "Binary codes at the exact inner parameters, with parity-sensitive cubic Krawtchouk polynomials and standard residualization.",
+      "result": "Nonexistence of several inner gateways and the reusable cubic LP method; the general rank-17 and rank-18 length-16384 cases remain open.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json` and `combinatorial-10.json`",
+      "used_for": "Exact ordinary-RS sieve and residual narrowing."
+    },
+    {
+      "hypotheses": "Literal polynomial-powering construction specialized to support at most `2^30`.",
+      "result": "At most 975 balanced-core dimensions, or 976 after the safe all-one augmentation.",
+      "source": "[Alon\u2013Goldreich\u2013H\u00e5stad\u2013Peralta](https://www.cs.tau.ac.il/~nogaa/PDFS/aghp4.pdf)",
+      "used_for": "Algebraic small-bias audit."
+    },
+    {
+      "hypotheses": "One-point Hermitian construction with homogeneous Hadamard inner code and exact total length `2^30`.",
+      "result": "The forced specialization `p=64`, `q=4096`, divisor degree 512 has Riemann\u2013Roch dimension 37, yielding core dimension 444 and augmented dimension 445.",
+      "source": "[Ben-Aroya\u2013Ta-Shma](https://www.cs.tau.ac.il/~amnon/Papers/BT.TOC13.pdf)",
+      "used_for": "Exact AG small-bias specialization."
+    },
+    {
+      "hypotheses": "The paper's full Cartesian independent-sample amplification, applied to rank at least 1041.",
+      "result": "At least three base samples are necessary, so the initial state space already has at least `1041^3>2^30` elements.",
+      "source": "[Naor\u2013Naor](https://www.wisdom.weizmann.ac.il/~naor/PAPERS/bias.pdf)",
+      "used_for": "Finite small-bias amplification obstruction."
+    },
+    {
+      "hypotheses": "Literal Definitions 2.7\u20132.8 schedule and Lemma 2.12 bias certificate.",
+      "result": "For `\u03ba\u22652`, the walk factor alone is at least `2^32`; for `\u03ba=1`, the displayed certificate is greater than one.",
+      "source": "[Hsieh\u2013Mohanty\u2013Zhang](https://arxiv.org/html/2601.12606v2)",
+      "used_for": "Finite free-expander-walk obstruction."
+    },
+    {
+      "hypotheses": "Direct finite specializations at rank above 1040 and length at most `2^30`.",
+      "result": "The published direct schedules do not improve the durable candidate under their literal finite bounds.",
+      "source": "[Ta-Shma](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf), [Guruswami\u2013Umans\u2013Vadhan](https://people.seas.harvard.edu/~salil/research/PVcondenser-ccc.pdf), and [Cohen\u2013Cohen ECCC TR25-179](https://eccc.weizmann.ac.il/report/2025/179/download)",
+      "used_for": "Expander, condenser, and Gray-register screen."
+    },
+    {
+      "hypotheses": "The currently proved distance estimate for the paper's high-distance TAG codes.",
+      "result": "The paper reports that these instances are outperformed by the corresponding AG code concatenated with Hadamard under that estimate.",
+      "source": "[Cohen\u2013Doron\u2013Goldgraber\u2013Manket](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ICALP.2026.68)",
+      "used_for": "Recent algebraic-code screen."
+    },
+    {
+      "hypotheses": "Concatenated construction as stated in the paper.",
+      "result": "The inner code is selected randomly, so it does not meet the campaign's deterministic-construction rule.",
+      "source": "[Doron\u2013Mosheiff\u2013Wootters](https://arxiv.org/abs/2405.08584)",
+      "used_for": "Admissibility audit."
+    },
+    {
+      "hypotheses": "Standard affine or positive-defect Solomon\u2013Stiffler parameterizations and standard cyclic/BCH prescriptions.",
+      "result": "Exact length/intersection constraints or repeated-root/BCH distance behavior prevent an improvement in the audited specializations.",
+      "source": "[Chen](https://arxiv.org/html/2406.10825), [positive Griesmer-defect constructions](https://arxiv.org/html/2605.11431), [Pang et al.](https://arxiv.org/abs/2202.03472), and [Voloch](https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf)",
+      "used_for": "Recent algebraic-family screen."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Prioritize the existence or nonexistence of a binary linear `[16384,18,8184]` code using its forced residual chain; it is the largest identified finite gateway, at global dimension 1170.",
+    "In parallel, study `[16384,16,8185]`; it yields dimension 1168 and currently has neither a Griesmer nor cubic-LP obstruction.",
+    "Apply higher-degree Delsarte polynomials, MacWilliams integrality, divisible-code theory, and residual weight-enumerator constraints to both inner cases before attempting broader construction families.",
+    "Treat the `K=1` repetition remnants for block lengths `2^20` through `2^29` as smaller near-half-distance instances, not as genuine concatenation gains.",
+    "Revisit conditional averaging only if a compact structural evaluator replaces exhaustive completion search, and revisit expander walks only with an explicit pruned schedule of at most 30 total seed bits."
+  ],
+  "obstructions": [
+    "The durable trace/dual-BCH code reaches only `k=991`; increasing odd degree enough to exceed 1040 loses the generic Weil certificate.",
+    "The AGHP polynomial-powering core reaches 975 dimensions, corrected to 976 after all-one augmentation; root-killing offsets reach at most 996.",
+    "The exact one-point Hermitian/Hadamard specialization reaches only 445 dimensions.",
+    "Exact-length binary cyclic codes are repeated-root ideals because `X^(2^30)\u22121=(X+1)^(2^30)`; dimension at least four already introduces a word of weight `2^28`.",
+    "Any proposed inner extension containing `RM(1,14)` would need every added component to have Walsh amplitude at most 16, whereas Parseval forces amplitude at least 128; standard bent, plateaued, Kerdock, and Delsarte\u2013Goethals extensions therefore fail.",
+    "The literal Naor\u2013Naor Cartesian amplification and literal HMZ free-walk schedule exceed the coordinate budget before attaining the required absolute bias `1/512`.",
+    "The conditional-average `k=2971` witness depends on campaign-forbidden exhaustive numerical selection.",
+    "The audit is scoped: it does not prove global optimality of 1040, and it leaves three `2^14`-inner RS gateways plus `K=1` repetition reductions unresolved."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Length `n`",
+      "value": "`2^30 = 1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^\u221210)2^30 = 2^29\u22122^20`.",
+      "quantity": "Required distance `D`",
+      "value": "`535,822,336`"
+    },
+    {
+      "derivation": "For generator-column character sum `S_a`, `wt(c_a)=(n\u2212S_a)/2`; hence `wt\u2265D` iff `S_a\u22642^21`.",
+      "quantity": "One-sided character-sum cap",
+      "value": "`2,097,152 = 2^21`"
+    },
+    {
+      "derivation": "An absolute-bias proof needs `|S_a|/n\u22642^\u22129`.",
+      "quantity": "Sufficient signed bias",
+      "value": "`1/512`"
+    },
+    {
+      "derivation": "Outer dimension 65 times inner dimension 16.",
+      "quantity": "Strongest complete durable candidate",
+      "value": "`[2^30,1040,535822336]\u2082`"
+    },
+    {
+      "derivation": "`1040/2^30`, reduced by 16.",
+      "quantity": "Candidate rate",
+      "value": "`65/2^26 = 9.685754776000977\u00d710^\u22127`"
+    },
+    {
+      "derivation": "`K=65536\u2212ceil(D/8185)+1=73`; `16K=1168`.",
+      "quantity": "Conditional rank-16 gateway",
+      "value": "Inner `[16384,16,8185]`; global distance `D+504`"
+    },
+    {
+      "derivation": "`K=65536\u2212ceil(D/8184)+1=65`; `17K=1105`.",
+      "quantity": "Conditional rank-17 gateway",
+      "value": "Inner `[16384,17,8184]`; global distance `D+512`"
+    },
+    {
+      "derivation": "The same outer dimension 65 gives `18K=1170`.",
+      "quantity": "Conditional rank-18 gateway",
+      "value": "Inner `[16384,18,8184]`; global distance `D+512`"
+    },
+    {
+      "derivation": "Cubic Delsarte certificates.",
+      "quantity": "Closed higher ranks at inner length 16384",
+      "value": "`A\u2082(16384,8183)\u2264333941<2^19`; `A\u2082(16384,8176)\u2264593064<2^20`"
+    },
+    {
+      "derivation": "Exact monomial count `9+7+6+5+4+3+2+1=37`, times 12 binary dimensions, then all-one.",
+      "quantity": "Hermitian/Hadamard specialization",
+      "value": "`k=445`"
+    },
+    {
+      "derivation": "33 degree coefficients over `F_{2^30}`, plus the constant bit.",
+      "quantity": "Odd trace-polynomial code",
+      "value": "`k=991`"
+    },
+    {
+      "derivation": "At `b=20`, shortening plus Plotkin/cubic bounds leave only outer dimension one.",
+      "quantity": "Largest explicitly bounded repetition remnant",
+      "value": "Inner `[2^20,r,\u2265523264]`, `1041\u2264r\u22641064`"
+    }
+  ],
+  "proof_markdown": "### Scope\n\nThis is a finite audit of the 24 durable checkpoint submissions and the cited construction templates, not a universal upper bound on binary linear codes.\n\n### 1. The durable 1040-dimensional code\n\nThe displayed polynomial `p` passes the degree-16 Rabin test recorded in the durable proof, so `F` has 65536 elements. The evaluation map on degree-at-most-64 polynomials is injective and `F`-linear, hence has binary dimension `65\u00b716=1040`. The affine truth-table encoder is injective and binary-linear. The concatenation is therefore binary-linear, has dimension 1040, and has length `32768\u00b732768=2^30`.\n\nA nonzero outer polynomial has at most 64 roots, so it has at least 32704 nonzero coordinates. Every nonzero `RM(1,15)` word has weight at least 16384. Thus every nonzero concatenated word has weight at least `32704\u00b716384=D`.\n\nFor equality, prescribe 64 roots in `A` and form their monic product `g`. Let `u\u2208F` be the symbol mapped to the constant-one inner word. Among the 65535 nonzero scalars, at most 32704 satisfy `\u03bbg(a)=u` at some nonroot `a`. Choose the first remaining scalar in coefficient-vector order. Then all 32704 nonzero inner blocks are balanced, so the resulting word has weight exactly `D`. This independently confirms `[2^30,1040,D]\u2082`.\n\n### 2. Cubic parity-lattice lemma\n\nFor a binary code of length `n` and distance `d`, write `c=n\u22122d` and `y=n\u22122x`. Choose `a\u2261n (mod 2)` and set `P(y)=(y\u2212c)(y+a)(y+a+2)`. At every allowed nonzero distance, `y\u2264c`; moreover `y+a` is even, so `(y+a)(y+a+2)\u22650`. Hence `P(y)\u22640`.\n\nUsing `K\u2081=y`, `K\u2082=(y\u00b2\u2212n)/2`, and `K\u2083=(y\u00b3\u2212(3n\u22122)y)/6`, its Krawtchouk expansion has coefficients\n\n`f\u2080=n(2a+2\u2212c)\u2212ca(a+2)`,\n`f\u2081=3n\u22122+a(a+2)\u2212c(2a+2)`,\n`f\u2082=2(2a+2\u2212c)`, and `f\u2083=6`.\n\nWhen these are nonnegative and `f\u2080>0`, the Delsarte inequality gives `A\u2082(n,d)\u2264floor(P(n)/f\u2080)`. Two exact applications are:\n\n- `(n,d,a)=(16384,8183,862)`: `f\u2080=14578048`, `P(n)=4868214124928`, hence `A\u2082\u2264333941<2^19`.\n- `(n,d,a)=(16384,8176,496)`: `f\u2080=7857152`, `P(n)=4659799352320`, hence `A\u2082\u2264593064<2^20`.\n\nThese bounds apply even to nonlinear codes.\n\n### 3. Exact `2^14` RS-inner ledger\n\nLet the inner code be `[16384,r,d]\u2082`. A full-length RS outer code over `F_{2^r}` has length `L=65536`, and its maximum usable dimension is `K=L\u2212ceil(D/d)+1`; the binary dimension is `rK`. Alphabet size forces `r\u226516`.\n\n- For `r=16`, beating 1040 requires `K\u226566`, which forces `d\u22658185`. At this distance `K=73`, giving dimension 1168 and distance `D+504`.\n- For `r=17`, beating 1040 requires `K\u226562`, which forces `d\u22658184`. Here `K=65`, giving dimension 1105 and distance `D+512`.\n- For `r=18`, beating 1040 requires `K\u226558`; again `d\u22658184` and `K=65`, giving dimension 1170 and distance `D+512`.\n- For `r=19`, the necessary distance is at least 8183, contradicted by `A\u2082(16384,8183)<2^19`.\n- For every `r\u226520`, even outer distance 65536 requires inner distance at least `ceil(D/65536)=8176`, contradicted by `A\u2082(16384,8176)<2^20\u22642^r`.\n\nThus exactly three rank cases survive at this block length.\n\n### 4. Forced residual chain for the nominal `k=1170` gateway\n\nAssume a linear `[16384,18,\u22658184]` code exists. If its distance were at least 8185, append an overall parity coordinate. This produces `[16385,18,\u22658186]`. With `y=16385\u22122x`,\n\n`(y\u221213)(y+1171)(y+1173)=20336856K\u2080+1392264K\u2081+4662K\u2082+6K\u2083`,\n\nand Delsarte gives fewer than 248153 words, contradicting `2^18`. Its distance must therefore equal 8184. Residualizing a minimum word gives `[8200,17,\u22654092]`. If this residual had distance at least 4093, parity extension would give `[8201,17,\u22654094]`; the certificate\n\n`(y\u221213)(y+585)(y+587)=5040824K\u2080+352760K\u2081+2318K\u2082+6K\u2083`\n\nbounds its size by less than 125418, contradicting `2^17`. Hence the residual distance is exactly 4092, and one more residualization yields `[4108,16,\u22652046]`. This narrows the gateway but does not settle existence.\n\n### 5. Remaining ordinary-RS block sizes\n\nCombining the exact Plotkin, shortening, Griesmer, residual, and cubic bounds in the durable `composition-02` and `combinatorial-10` proofs with the lemma above gives the following exhaustive status for full-length, power-of-two-block RS concatenation aimed at dimension above 1040:\n\n| Inner exponent `b` | Status |\n|---|---|\n| `b\u22649` | Closed by alphabet size and Plotkin. |\n| `b=10,11,12` | Closed respectively by cardinality bounds `4106<2^13`, `12364<2^14`, and `41537<2^16`. |\n| `b=13` | Closed by `A\u2082(8192,4090)\u2264116581<2^17` and `A\u2082(8192,4088)\u2264151931<2^18`. |\n| `b=14` | Exactly the three cases in Section 3 remain. |\n| `b=15` | Closed, including the rank-17 and rank-18 exceptional cases proved in the durable submissions. |\n| `b=16,17` | Closed by Plotkin plus cubic bounds. |\n| `b=18,19` | Closed by shortening and exact cubic certificates, including outer dimensions one and two at `b=19`. |\n| `b=20` | Outer dimension at least two is closed; only `[2^20,r,\u2265523264]`, `1041\u2264r\u22641064`, with outer repetition remains. |\n| `21\u2264b\u226429` | Only outer repetition remains; it merely reduces the target to a shorter near-half-distance inner code. |\n| `b=30` | Tautologically the original problem. |\n\nTherefore every proper outer-dimension-at-least-two route is closed except the three `b=14` gateways.\n\n### 6. Other audited families\n\nThe odd trace-polynomial construction through degree 65 has dimension 991 and character-sum bound `64\u00b72^15=2^21`. Degree 69 would cross 1040 but its generic Weil estimate is too weak. The AGHP powering support forces field exponent at most 15 and degree at most 64, giving core dimension 975; because its homogeneous-Hadamard core has all weights at most `n/2`, adjoining all-one safely corrects this to 976. The exact [Ben-Aroya\u2013Ta-Shma Hermitian specialization](https://www.cs.tau.ac.il/~amnon/Papers/BT.TOC13.pdf) forces `p=64`, divisor degree 512, and Riemann\u2013Roch dimension 37, hence dimension `37\u00b712+1=445` after the same augmentation.\n\nFor [Naor\u2013Naor](https://www.wisdom.weizmann.ac.il/~naor/PAPERS/bias.pdf), a rank-at-least-1041 base has at least 1041 columns. Plotkin forces base relative distance at most one half, while their contraction condition requires at least three independent samples. Thus the Cartesian start already has `1041^3=1128111921>2^30` states. For the literal [HMZ free-walk schedule](https://arxiv.org/html/2601.12606v2), `\u2113=\u03bad^(2\u03ba)r`; if `\u03ba\u22652`, then `\u2113\u226532` and `d^\u2113\u22652^32`, while at `\u03ba=1` their stated bias expression exceeds one. Neither literal construction fits.\n\nThe direct Ta-Shma, GUV, Cohen\u2013Cohen, cyclic/BCH, standard Solomon\u2013Stiffler, difference-set, relative-difference-set, and orthogonal-array specializations were likewise eliminated only within the finite hypotheses stated in their durable audits.\n\nFinally, `combinatorial-01` gives a mathematically coherent conditional-expectation calculation at dimension 2971, but its lexicographic bit choice is implemented by exhaustive comparison over all completions. The contribution guide expressly disallows such numerical/exhaustive witness searches. It is therefore not an admissible campaign construction without a new compact structural evaluator.\n\nThis proves the scoped audit theorem while leaving the stated inner-code gateways genuinely conditional.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Direct integer arithmetic gives `D=2^29\u22122^20=535822336`; the generator-column identity gives the one-sided cap `2^21`.",
+      "statement": "Normalize the immutable target and its character-sum form.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "Field evaluation, injective affine inner encoding, root counting, and the finite scalar-avoidance witness prove binary linearity, exact length, dimension 1040, and exact distance `D`.",
+      "statement": "Independently audit the durable RS\u2013RM candidate.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P3",
+      "proof": "The parity-lattice sign argument and nonnegative Krawtchouk expansion prove `A\u2082(n,d)\u2264P(n)/f\u2080`.",
+      "statement": "Prove the reusable cubic Delsarte lemma.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P3"
+      ],
+      "id": "P4",
+      "proof": "Exact ceiling calculations for `K`, followed by the two cubic bounds, leave precisely ranks 16, 17, and 18 with the stated distances.",
+      "statement": "Classify all record-improving `2^14`-inner full-length RS routes.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "Two parity extensions and their displayed cubic certificates force exact distances 8184 and 4092 before two standard residualizations.",
+      "statement": "Derive the forced residual chain for a hypothetical rank-18 inner code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P4"
+      ],
+      "id": "G16",
+      "proof": "If the stated inner code exists, ordinary RS product distance and dimension give `[2^30,1168,\u2265D+504]\u2082`.",
+      "statement": "A deterministic `[16384,16,8185]\u2082` inner code would improve the checkpoint candidate.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "P4",
+        "P5"
+      ],
+      "id": "G18",
+      "proof": "If the stated inner code exists, the `[65536,65,65472]_{2^18}` outer code gives `[2^30,1170,\u2265D+512]\u2082`.",
+      "statement": "A deterministic `[16384,18,8184]\u2082` inner code would give the strongest identified finite RS improvement.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "P4"
+      ],
+      "id": "P6",
+      "proof": "The exact block-by-block Plotkin, shortening, residual, Griesmer, and cubic ledger closes every proper outer-dimension-at-least-two case except the three `b=14` hypotheses.",
+      "statement": "Complete the scoped power-of-two full-length RS sieve.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P7",
+      "proof": "Exact parameter specializations give the trace, AGHP, Hermitian, cyclic/BCH, and AG ceilings stated in the audit.",
+      "statement": "Audit the principal algebraic and small-bias templates.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P8",
+      "proof": "Literal finite schedule formulas imply the Naor\u2013Naor and HMZ coordinate lower bounds; the other cited direct conversions are covered by their durable finite audits.",
+      "statement": "Audit the principal expander and condenser templates.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P9",
+      "proof": "The contributor guide prohibits the exhaustive numerical selection used by the conditional-average proposal; no compact formulaic selector is supplied.",
+      "statement": "Apply the campaign's deterministic explicitness rule.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P6",
+        "P7",
+        "P8",
+        "P9"
+      ],
+      "id": "P10",
+      "proof": "No audited admissible family exceeds the durable dimension 1040, while all unresolved improvements are explicitly isolated as conditional gateways.",
+      "statement": "Conclude the scoped checkpoint audit without asserting global optimality.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Audit of known explicit constructions at the checkpoint",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 24 files)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 24 files)",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-02/verifier-1-algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-03/verifier-1-algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-04/verifier-1-algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-08/verifier-1-algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-09/verifier-1-algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Scoped checkpoint theorem. At `n=2^30` and `D=535822336`, the durable RS\u2013RM construction is a deterministic binary linear `[n,1040,D]` code. None of the 24 durable submissions or the audited algebraic, small-bias, AG, cyclic/BCH, expander, condenser, difference-set, orthogonal-array, or recent TAG templates supplies a complete campaign-admissible code of dimension greater than 1040. Within ordinary full-length Reed\u2013Solomon concatenation with a power-of-two inner block, every proper outer-dimension-at-least-two route to `k>1040` is rigorously excluded except the hypotheses `[16384,16,8185]\u2082`, `[16384,17,8184]\u2082`, and `[16384,18,8184]\u2082`. The last would yield `[2^30,1170,\u2265535822848]\u2082`, but its existence remains open. This is not a global upper bound on the target dimension.",
+  "title": "Checkpoint audit: k=1040 survives; the sharp open RS gateway is k=1170"
+}

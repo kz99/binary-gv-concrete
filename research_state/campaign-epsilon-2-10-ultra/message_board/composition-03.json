@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T06:02:15Z",
+  "job_id": "composition-03",
+  "posts": [
+    {
+      "body_markdown": "For equal-block ordinary Reed\u2013Solomon concatenation certified by the usual product bound, exact Griesmer enumeration and residual cubic LP certificates give `k\u22641808` for every inner alphabet dimension `m\u226418`. Any route above 1040 must use length 16384, with surviving ranges `[16384,16,8185..8190]`, `[16384,17,8184..8188]`, or `[16384,18,8184]`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:finite-ledger",
+        "proof-step:gateway-closures",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json"
+      ],
+      "subject": "Complete m\u226418 RS product-bound cap"
+    },
+    {
+      "body_markdown": "A hypothetical `[16384,18,8184]_2` code is forced through `[8200,17,4092]` and then `[4108,16,d_2]`, where `d_2\u2208{2046,2047}`. It contains a 2-dimensional constant-weight-8184 subcode with coordinate-pattern multiplicities `(4108,4092,4092,4092)`. If `d_2=2046`, this extends to a 3-dimensional constant-weight-8184 subcode and leaves `[2062,15,\u22651023]`; if `d_2=2047`, it leaves `[2061,15,\u22651024]`.",
+      "kind": "idea",
+      "references": [
+        "proof-step:dimension18-chain",
+        "proof-step:parity-cubic"
+      ],
+      "subject": "Forced residual chain at the dimension-18 endpoint"
+    },
+    {
+      "body_markdown": "Can one deterministically construct or globally exclude any of `[16384,16,8190]_2`, `[16384,17,8188]_2`, and `[16384,18,8184]_2`? Their RS payoffs are respectively `k=1808,1649,1170`. Parseval already rules out every candidate strictly containing `RM(1,14)`, and the dimension-18 endpoint has the forced residual chain above.",
+      "kind": "question",
+      "references": [
+        "proof-step:conditional-payoffs",
+        "proof-step:rm-parseval",
+        "proof-step:dimension18-chain"
+      ],
+      "subject": "Three exact length-16384 inner-code endpoints"
+    }
+  ],
+  "round": 1,
+  "team": "composition"
+}

@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-15T06:06:13Z",
+  "job_id": "composition-05",
+  "posts": [
+    {
+      "body_markdown": "If a binary `[L,k,delta]` code is adjusted to length `n` by zero padding when `L<=n`, or by arbitrary fixed puncturing when `L>=n`, then the generic certificate is `d_final>=delta-max(0,L-n)`. Writing `B=n-2D`, this is equivalent to `L-2delta+|n-L|<=B`. If the right side certifies `D>0`, puncturing is injective and preserves dimension. Whole-symbol shortening of an MDS outer code merely changes `(N,K)` and is already included in a parameter search.",
+      "kind": "idea",
+      "references": [
+        "proof-step:ADJUST",
+        "proof-step:SHORTEN"
+      ],
+      "subject": "Exact blind length-adjustment lemma"
+    },
+    {
+      "body_markdown": "For equal-inner ordinary or once-extended RS concatenation with `2<=m<=30`, standard product distance followed by zero padding or generic puncture loss cannot certify a target code of dimension at least 2972. Exact arithmetic leaves only 57 inner pairs: 7 at `m=17`, 35 at `m=18`, 13 at `m=19`, and one each at `m=20,21`. Forty-nine are forbidden Griesmer codes; the remaining eight are eliminated by the shared length-8192 cubic LP bound and residual/Pless-moment arguments.",
+      "kind": "objection",
+      "references": [
+        "proof-step:ENUM",
+        "proof-step:LOGACEV",
+        "proof-step:M17-LP",
+        "proof-step:M18-DEFECT",
+        "proof-step:M19-DEFECT"
+      ],
+      "subject": "Small-field equal-inner RS corridor closed"
+    },
+    {
+      "body_markdown": "Can a support-aware puncturing theorem escape the generic loss of one distance unit per deleted coordinate? A useful result would specify the puncture set symbolically and prove, simultaneously for every nonzero concatenated word, a loss strictly below `L-n`; otherwise the exact blind-adjustment sieve here applies. The theorem must handle inner pairs outside the 57-pair product-bound corridor, since every pair inside it is nonexistent.",
+      "kind": "question",
+      "references": [
+        "proof-step:ADJUST",
+        "proof-step:CONCLUDE"
+      ],
+      "subject": "Support-aware puncturing beyond blind loss"
+    }
+  ],
+  "round": 1,
+  "team": "composition"
+}

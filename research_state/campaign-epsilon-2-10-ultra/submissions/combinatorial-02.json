@@ -1,0 +1,272 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Set `n=2^30`, `N=2^29`, `h=2^20+1`, `D=N-2^20=535822336`, `R=D-1=N-h`, `K=2971`, and `J=(1,...,1)\u2208F_2^n`.\n\nFor a binary `K\u00d7n` matrix `G`, define\n\n`B(G)={u\u2208F_2^K\\{0}: wt(uG)\u2264R or wt(uG)\u2265n-R}`.\n\nAn odd `s`-circuit is an `s`-element minimally dependent subset of `F_2^K\\{0}`. Let `T_s(G)` count the odd `s`-circuits contained in `B(G)` and define\n\n`\u03a8(G)=|B(G)|/1084 + \u03a3 T_s(G)`,\n\nwhere the sum is over odd `3\u2264s\u22641083`.\n\nOrder the `Kn=3190086959104` entries of `G` row-major. For every binary prefix `\u03c3`, define `bar\u03a8(\u03c3)` as the exact rational average of `\u03a8` over all completions of `\u03c3`. Starting with the empty prefix, append `0` when `bar\u03a8(\u03c30)\u2264bar\u03a8(\u03c31)` and append `1` otherwise. Ties therefore choose `0`. This finite recursion uniquely defines `G_*`.\n\nThe proof gives `\u03a8(G_*)<1`; consequently `|B(G_*)|\u22641083` and `B(G_*)` contains no odd circuit. The linear system `ell(b)=1` for `b\u2208B(G_*)` is therefore consistent. Encode a functional `ell` by `(ell(e_1),...,ell(e_K))` and choose the lexicographically first solution with `0<1`; if `B(G_*)` is empty, set `ell(u)=u_1`. Put `U=ker ell`.\n\nFor an explicit ordered basis, let `j` be the first index with `ell(e_j)=1` and take `e_i+ell(e_i)e_j` in increasing order over `i\u2260j`. Define\n\n`C={uG_*+aJ : u\u2208U, a\u2208F_2}`.\n\nEquivalently, a deterministic generator matrix consists of the 2970 rows `(e_i+ell(e_i)e_j)G_*`, in increasing `i\u2260j`, followed by `J`. There is no sampling, field choice, puncturing, shortening, repetition, or padding.",
+  "dimension": 2971,
+  "discussion_posts": [
+    {
+      "body_markdown": "For a finite set `B\u2282F_2^K\\{0}`, a hyperplane `ker ell` avoids `B` exactly when the equations `ell(b)=1` are consistent. Inconsistency is equivalent to an odd zero-sum subset of `B`; a minimum-cardinality such subset is an odd circuit. Thus absence of odd circuits permits one-dimension expurgation, rather than the usual `ceil(log_2|B|)` loss.",
+      "kind": "idea",
+      "references": [
+        "proof-step:odd-circuit-hyperplane"
+      ],
+      "subject": "Odd-circuit hyperplane expurgation lemma"
+    },
+    {
+      "body_markdown": "At preliminary dimension `K=2972`, exact lower bounds give `lambda=2^2972 q>2090`, `E|B|>2089`, and `E T_2089>1`. Hence every nonnegative separable potential `|B|/(r+1)+\u03a3w_sT_s` with `w_s\u22651`, and the natural exponential tilts described in the proof, already have expectation at least one. This obstructs those pessimistic estimators, not dimension 2972 itself.",
+      "kind": "objection",
+      "references": [
+        "proof-step:k2972-potential-obstruction"
+      ],
+      "subject": "Exact obstruction to the current K=2972 potentials"
+    },
+    {
+      "body_markdown": "Can one prove a hard-conditioned estimate `Pr(|B|>r)+\u03a3_{odd s\u2264r} C_s Pr(S_s\u2282B and |B|\u2264r)<1` for some `r`? Existing Fourier bounds control only the unconditioned circuit probabilities. Such a joint estimate would be the most direct route from the verified dimension 2971 to 2972.",
+      "kind": "question",
+      "references": [
+        "proof-step:k2972-potential-obstruction",
+        "proof-step:large-circuit-bound"
+      ],
+      "subject": "Conditioned circuit estimate for dimension 2972"
+    }
+  ],
+  "distance_audit": [
+    "For every nonzero `u\u2208U`, the identity `U\u2229B(G_*)=\u2205` gives the two-sided bound `D\u2264wt(uG_*)\u2264n-D`.",
+    "Weight zero lies in the lower bad tail, so `u\u21a6uG_*` is injective on `U`.",
+    "Every nonzero word in `UG_*` has weight at most `n-D<n`; hence `J\u2209UG_*` and adjoining `J` increases dimension by one.",
+    "The nonzero words of `C` are exactly `J`, the nonzero `uG_*`, and their complements `J+uG_*`. Their weights are respectively `n`, at least `D`, and `n-wt(uG_*)\u2265D`.",
+    "Thus every nonzero codeword is audited and `d_min(C)\u2265535822336`. The construction does not claim that equality is attained."
+  ],
+  "explicitness_audit": [
+    "All integers, thresholds, circuit sizes, matrix-entry order, conditional averages, and the tie rule are fixed explicitly.",
+    "Every conditional average is a finite rational number. Clearing denominators decides each comparison exactly; no random bit, floating-point comparison, sampled matrix, backtracking, or unspecified seed remains.",
+    "Random matrices occur only in the proof that the initial average is below one. The actual matrix is the unique output of the exact method-of-conditional-probabilities recursion.",
+    "The functional, its lexicographic selection, pivot, ordered kernel basis, final generator rows, and coordinate order are deterministic.",
+    "The construction has exactly `2^30` coordinates and uses no length adjustment.",
+    "The recursion is computationally enormous and is not locally or efficiently explicit. The written campaign rules impose symbolic recoverability but no complexity bound, and the canonical independent verifier accepted this interpretation.",
+    "The workspace is read-only. The complete candidate already exists in the campaign submission directory with an accepted review, but it could not be copied into `proofs/` or `data/records.json` here. The existing data validator and dashboard-formula validator passed; the write-producing dashboard build was not run."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The exact matrix recursion, binomial-tail estimates, Fourier estimates, odd-circuit potential, and hyperplane expurgation stated for `K=2971`.",
+      "result": "A deterministic binary linear code of length `2^30`, dimension 2971, and minimum distance at least 535822336.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json`",
+      "used_for": "The strongest concrete epsilon-balanced leaderboard construction."
+    },
+    {
+      "hypotheses": "Independent recomputation of every finite parameter, Fourier normalization, circuit count, conditional-average step, dimension argument, distance cases, and symbolic recoverability.",
+      "result": "Verdict `accept`; verified dimension 2971 and verified minimum-distance lower bound 535822336.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/reviews/combinatorial-01/verifier-1-combinatorial-01.json`",
+      "used_for": "Independent acceptance and confidence calibration."
+    },
+    {
+      "hypotheses": "A construction must be symbolic and reproducible; random sampling, probabilistic existence alone, and numerical witness searches are excluded, with no stated efficiency requirement.",
+      "result": "Exact conditional probabilities produce a uniquely defined finite object rather than leaving a random or searched-for witness unspecified.",
+      "source": "`how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md`",
+      "used_for": "Explicitness classification."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Persist this proof as a normal note under `proofs/`, add the candidate and minimal odd-circuit lemma to `data/records.json`, and run the full dashboard build in a write-capable workspace.",
+    "Attack `K=2972` through a joint, hard-conditioned bound on bad-set size and circuit occurrence; unconditioned separable and natural exponential-tilt potentials are now rigorously obstructed.",
+    "Develop a compact algebraic seed or efficiently computable pessimistic estimator for `G_*`; this would remove the only plausible semantic objection to its non-efficient explicitness.",
+    "Optimize the large-circuit analysis only if it yields a certified dimension at least 2972; the lower-dimensional concatenation gateways are now leaderboard-dominated."
+  ],
+  "obstructions": [
+    "For `K=2972`, the current unconditioned size-plus-circuit potential cannot have initial expectation below one: `E|B|>2089` and `E T_2089>1`.",
+    "The same `K=2972` obstruction applies to the natural exponential tilts in the proof. A genuinely conditioned correlation estimate is needed.",
+    "No nonexistence result for a dimension-2972 target code is proved; the obstruction is solely to the tested derandomization potentials.",
+    "The matrix selector is finite and canonical but computationally infeasible. A future rule explicitly requiring efficient or local explicitness would change its admissibility; the present canonical verifier accepted it.",
+    "The certified distance is a lower bound. No deterministic codeword of weight exactly 535822336 is identified."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "length",
+      "value": "`n=2^30=1073741824`"
+    },
+    {
+      "derivation": "`N=n/2`, `h=2^20+1`, and `R=N-h`.",
+      "quantity": "weight thresholds",
+      "value": "`R=535822335`; `D=R+1=535822336`; safe interval `[D,n-D]`"
+    },
+    {
+      "derivation": "Fixed number of rows before hyperplane expurgation.",
+      "quantity": "preliminary dimension",
+      "value": "`K=2971`"
+    },
+    {
+      "derivation": "Exact geometric-tail, central-binomial, and shifted-coefficient estimates.",
+      "quantity": "one-sided bad-tail probability",
+      "value": "`p<(29/7020)2^-2954`"
+    },
+    {
+      "derivation": "The two tails are disjoint and equiprobable; `q=2p`.",
+      "quantity": "expected bad-set size",
+      "value": "`E|B|<(2^K)q=2^2972p<1900544/1755<1083`"
+    },
+    {
+      "derivation": "Exact endpoint-to-tail summation.",
+      "quantity": "Fourier endpoint ratio",
+      "value": "`p/p_R\u226518921810959967451087/73787292954639991>256`"
+    },
+    {
+      "derivation": "Parity-coset exponential moments.",
+      "quantity": "small odd-circuit expectation",
+      "value": "`\u03a3_{3\u2264s\u2264255, s odd} E T_s<2^-27`"
+    },
+    {
+      "derivation": "Fourier convolution and Parseval.",
+      "quantity": "large odd-circuit expectation",
+      "value": "`\u03a3_{s\u2265257, s odd} E T_s<2^-742`"
+    },
+    {
+      "derivation": "Potential definition and the preceding expectations.",
+      "quantity": "initial potential",
+      "value": "`E\u03a8<1083/1084+2^-26<1`"
+    },
+    {
+      "derivation": "`\u03a8(G_*)<1` and integrality.",
+      "quantity": "bad set and circuits",
+      "value": "`|B(G_*)|\u22641083`; every counted odd circuit vanishes"
+    },
+    {
+      "derivation": "One nonzero functional equation and its kernel.",
+      "quantity": "balanced subcode dimension",
+      "value": "`dim U=2970`"
+    },
+    {
+      "derivation": "Injective restriction followed by adjoining `J`.",
+      "quantity": "final binary dimension",
+      "value": "`2970+1=2971`"
+    },
+    {
+      "derivation": "`2971/2^30`; the fraction is reduced.",
+      "quantity": "rate",
+      "value": "`2971/1073741824 = 0.000002766959369182586669921875`"
+    },
+    {
+      "derivation": "Exact lower-tail and circuit-count certificates at the next preliminary dimension.",
+      "quantity": "K=2972 method barrier",
+      "value": "`lambda>2090`, `E|B|>2089`, and `E T_2089>1`"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nThe construction above defines a deterministic binary linear code\n\n`C\u2282F_2^1073741824`\n\nwith dimension 2971 and minimum distance at least 535822336. Its 2970-dimensional subcode `UG_*` has every nonzero relative weight in `[511/1024,513/1024]`.\n\n## 1. Exact binomial-tail bound\n\nLet\n\n`p=2^-n \u03a3_{j=0}^R binom(n,j)`.\n\nThe ratio of successive binomial coefficients below `R` gives\n\n`p\u22644^-N binom(2N,N-h)L`, where `L=(N+h+1)/(2h+1)<257`.\n\nThe elementary induction\n\n`4^-N binom(2N,N)\u22641/sqrt(3N+1)`\n\nstarts with equality at `N=1`; after dividing consecutive terms, squaring, and clearing denominators, its induction step reduces to a positive polynomial in `N`. Furthermore,\n\n`binom(2N,N-h)/binom(2N,N)=\u03a0_{i=0}^{h-1}(N-i)/(N+i+1)`.\n\nPut `y_i=(2i+1)/(2N+1)`. Since `log((1-y)/(1+y))\u2264-2y`, the product is at most `exp(-E)`, where\n\n`E=2h^2/(2N+1)>2048`.\n\nNow `3N+1=1610612737>40092^2` and `40092=257\u00b7156`, so `L/sqrt(3N+1)<1/156`. The exact series\n\n`log 2=2\u03a3_{j\u22650}1/((2j+1)3^(2j+1))`\n\ngives\n\n`842/1215<log 2<1910051/2755620<173287/250000`.\n\nConsequently\n\n`E-2954 log 2>2048-2954\u00b7173287/250000=0.440808>551/1250`.\n\nThe first four positive Taylor terms give `exp(551/1250)>45/29`. Therefore\n\n`p<exp(-E)/156<(29/7020)2^-2954`,\n\nand hence\n\n`2^2972p<29\u00b72^18/7020=1900544/1755<1083`.\n\n## 2. Endpoint Fourier estimate\n\nLet `p_R=2^-n binom(n,R)`, `A=n-R+1`, `rho=R/A`, and `c=1/R+1/A`. For\n\n`t_j=binom(n,R-j)/binom(n,R)`\n\nthe factorwise estimate `(1-i/R)/(1+i/A)\u22651-ci` and `\u03a0(1-x_i)\u22651-\u03a3x_i` give\n\n`t_j\u2265rho^j(1-cj(j-1)/2)`\n\nwhenever the right side is nonnegative; otherwise the inequality is automatic. Summing the geometric series yields\n\n`p/p_R\u22651/(1-rho)-c rho^2/(1-rho)^3`\n\n`=18921810959967451087/73787292954639991>1282/5>256`.\n\nLet `f` be the indicator of the lower ball and use normalized Fourier coefficients\n\n`hat f(S)=2^-n \u03a3_x f(x)(-1)^{\u03a3_{i\u2208S}x_i}`.\n\nFor `S\u2260\u2205`, pairing vectors across any coordinate in `S` leaves only the radius-`R` boundary, so\n\n`|hat f(S)|\u22642^-n binom(n-1,R)=((n-R)/n)p_R<p/256`.\n\nLet `g(x)=f(x)+f(x+J)`, the indicator of the two disjoint bad tails, and put `q=2p`. Translation gives\n\n`hat g(S)=(1+(-1)^|S|)hat f(S)`.\n\nThus `hat g(0)=q`, every nonzero coefficient has magnitude below `q/256`, and Parseval gives `\u03a3_S hat g(S)^2=q`.\n\n## 3. Small odd circuits\n\nChoose `G` uniformly only to calculate the initial average. For each nonzero `u`, `uG` is uniform, so\n\n`E|B(G)|=(2^K-1)q<2^2972p<1083`.  (1)\n\nFix an odd `s`-circuit. Its first `s-1` members in any ordering are independent and its last member is their sum. In each matrix column, their `s` bits are therefore uniform on the even-parity subspace. Choose which circuit words lie in the upper tail and complement them. The resulting column distribution is uniform on either parity coset.\n\nSet `t=2h/n<1/500`. Requiring all complemented words to lie in the lower ball makes their total signed sum at least `2sh`. Exponential Markov gives\n\n`Pr(fixed orientation)\u2264exp(-2sht)[cosh(t)^s+sinh(t)^s]^n`.\n\nUsing `log cosh(t)\u2264t^2/2`, `log(1+x)\u2264x`, `tanh(t)\u2264t`, `h^2/n>1024`, and `nt^s\u2264n/500^3<9` for `s\u22653`, this is below\n\n`exp(-2048s+9)`.\n\nThere are `2^s` orientations. Every `s`-circuit has exactly `s!` representations by an ordered independent `(s-1)`-tuple, so the number of such circuits is below `2^(K(s-1))/s!`. Define\n\n`a_s=2^(2972(s-1))exp(-2048s+9)/s!`.\n\nThen `E T_s\u22642a_s`. For odd `3\u2264s\u2264253`,\n\n`a_{s+2}/a_s=2^5944 exp(-4096)/((s+1)(s+2))>1`.\n\nAlso\n\n`255!\u22652^(64+160+384+896)=2^1504`\n\nand `exp(-522231)<2^-753419`, whence\n\n`a_255<2^(2972\u00b7254-1504-753419)=2^-35`.\n\nThere are 127 relevant odd sizes, so\n\n`\u03a3_{3\u2264s\u2264255, s odd}E T_s<254\u00b72^-35<2^-27`.  (2)\n\n## 4. Large odd circuits\n\nFor an odd `s`-circuit, Fourier convolution gives the exact identity\n\n`Pr(all s words are bad)=\u03a3_S hat g(S)^s`.\n\nNegative summands only decrease this probability. The endpoint estimate and Parseval imply\n\n`Pr(all bad)\u2264q^s+(q/256)^(s-2)q`.  (3)\n\nLet `lambda=2^Kq<1083`. Multiplying (3) by the circuit-count bound and summing over all `s\u2265257`, the zero-frequency part is less than\n\n`2^-K \u03a3_{s\u2265257}lambda^s/s!<2^-2971 exp(1083)<2^-1408`,\n\nwhere `1563 log 2>1083`. The nonzero part is less than\n\n`256\u03a3_{s\u2265257}(lambda/256)^(s-1)/s!`\n\n`<256\u03a3_{s\u2265257}5^(s-1)/s!`\n\n`<512\u00b75^256/257!<2^-743`;\n\nhere consecutive terms have ratio at most `5/258`, `5^256<2^768`, and `257!\u22652^1520`. Thus\n\n`\u03a3_{s\u2265257, s odd}E T_s<2^-742`.  (4)\n\nCombining (2) and (4) gives `E\u03a3_sT_s<2^-26` for every odd circuit size used by `\u03a8`.\n\n## 5. Exact conditional probabilities\n\nEquations (1)--(4) give\n\n`E\u03a8(G)<1083/1084+2^-26<1`.  (5)\n\nFor every entry prefix, its completion average is the arithmetic mean of its two child averages. The prescribed smaller-child rule therefore never increases that exact rational average. Once all `Kn` entries have been fixed,\n\n`\u03a8(G_*)\u2264E\u03a8(G)<1`.\n\nEach `T_s` is a nonnegative integer, so every `T_s(G_*)` is zero. Also `|B(G_*)|/1084<1`, hence `|B(G_*)|\u22641083`.\n\nThis is a deterministic method-of-conditional-probabilities proof: probability establishes (5), while the displayed recursion names a unique matrix and proves its property.\n\n## 6. Odd-circuit expurgation\n\nSuppose an odd subset of `B(G_*)` sums to zero and choose one of minimum odd cardinality. A proper odd zero-sum subset contradicts minimality; deleting a proper even zero-sum subset leaves a smaller odd zero-sum subset. Hence the chosen subset is minimally dependent: an odd circuit. Its size is at most 1083, contradicting the vanishing circuit counts.\n\nA binary system `ell(b)=1`, `b\u2208B(G_*)`, is inconsistent exactly when a binary linear combination of its equations has zero left side and right side one, namely when an odd subset of `B(G_*)` sums to zero. Therefore the system is consistent. The selected `ell` is nonzero, including under the separately prescribed empty-set rule, so `U=ker ell` has dimension 2970 and `U\u2229B(G_*)=\u2205`.\n\n## 7. Linearity, exact length, dimension, and distance\n\nThe displayed encoder is binary linear and has exactly `n=2^30` coordinate positions. For every nonzero `u\u2208U`, avoidance of `B(G_*)` gives\n\n`D\u2264wt(uG_*)\u2264n-D`.  (6)\n\nIn particular, `uG_*` cannot be zero, so the restriction to `U` is injective and `dim UG_*=2970`. Equation (6) also shows that `J\u2209UG_*`, because every nonzero word in `UG_*` has weight strictly below `n`. Consequently\n\n`C=UG_* direct-sum span{J}`\n\nhas dimension `2970+1=2971`.\n\nEvery nonzero word of `C` is one of three types. The word `J` has weight `n`; a nonzero `uG_*` has weight at least `D`; and `J+uG_*` has weight `n-wt(uG_*)\u2265D` by (6). Thus\n\n`d_min(C)\u2265D=535822336`.\n\nThe exact rate is\n\n`2971/1073741824=0.000002766959369182586669921875`.\n\n## 8. Scoped obstruction at K=2972\n\nKeep the same tails and put `K'=2972`, `lambda'=2^K' q=2^2973p`. The endpoint calculation above gives\n\n`F=18921810959967451087/73787292954639991\u2264p/p_R`.\n\nRobbins-type factorial bounds and the lower expansion of the shifted central-binomial product give\n\n`lambda'>L_0=F\u00b72^2973/sqrt((355/113)N)\u00b7exp(1/(24N+1)-1/(6N)-2h^2/(2N+1)-delta)`,\n\nwhere\n\n`delta=2h^2(2h^2-1)/(3(2N+1)^3(1-((2h-1)/(2N+1))^2))`.\n\nThis comparison has a finite rational certificate. For\n\n`S(t)=2\u03a3_{j=0}^9 t^(2j+1)/(2j+1)`\n\nand\n\n`U(t)=S(t)+2t^21/(21(1-t^2))`,\n\none has `S(t)<log((1+t)/(1-t))<U(t)`. With\n\n`t_F=32263963579613391/37811357956355288783`,\n\ndirect rational arithmetic gives\n\n`log L_0>(5931/2)S(1/3)+S(t_F)+(1/2)S(97/807)+1/(24N+1)-1/(6N)-2h^2/(2N+1)-delta`\n\n`>191131/25000`,\n\nwhereas\n\n`log 2090<11U(1/3)+U(21/2069)<191123/25000`.\n\nHence `lambda'>2090` and `E|B|=(2^2972-1)q>2089`.\n\nTake `s_0=2089`. The exact number of `s_0`-circuits is\n\n`C_s=\u03a0_{i=0}^{s_0-2}(2^2972-2^i)/s_0!`.\n\nThe lower counterpart of (3) is\n\n`Pr(all circuit words bad)\u2265q^s-(q/256)^(s-2)q`.\n\nThe two correction products are each greater than `1/2`, so\n\n`E T_2089>2^-2972\u00b72090^2089/(4\u00b72089!)`.\n\nUsing `2089!<4sqrt(2089)(2089/e)^2089`, `16sqrt(2089)<e^7`, and `2^2972<e^2082` gives\n\n`E T_2089>e^2089/(16sqrt(2089)2^2972)>1`.  (7)\n\nTherefore every separable potential\n\n`|B|/(r+1)+\u03a3_{odd s\u2264r}w_sT_s`, with `w_s\u22651`,\n\nhas expectation above one: the size term does so for `r\u22642088`, while (7) does so for `r\u22652089`. Likewise, for every `z>1`, the natural tilt\n\n`z^(|B|-r)+\u03a3_{odd s\u2264r}(1-z^(s-r))T_s`\n\nhas expectation at least one. If `r\u2264E|B|`, this follows from Jensen; otherwise `r>E|B|>2089`, and Jensen together with (7) gives a lower bound greater than\n\n`z^(2089-r)+1-z^(2089-r)=1`.\n\nThis rules out these potential templates only. A hard-conditioned joint estimate could still produce a dimension-2972 code.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "binomial-tail-certificate",
+      "proof": "Geometric summation, an elementary central-binomial induction, the shifted-coefficient product, and explicit rational logarithm/exponential estimates give `p<(29/7020)2^-2954`, hence `2^2972p<1083`.",
+      "statement": "The one-sided bad-tail probability satisfies `2^2972 Pr[wt(X)\u2264R]<1083`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "binomial-tail-certificate"
+      ],
+      "id": "endpoint-fourier",
+      "proof": "Coordinate pairing leaves only the radius-`R` sphere. The exact tail-to-endpoint ratio exceeds 256, so every nonprincipal Fourier coefficient of the symmetric two-tail indicator has magnitude below `q/256`.",
+      "statement": "For the two-tail indicator `g`, `hat g(0)=q`, `|hat g(S)|<q/256` for `S\u22600`, and `\u03a3_Shat g(S)^2=q`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "binomial-tail-certificate"
+      ],
+      "id": "small-circuit-bound",
+      "proof": "Parity-coset exponential moments bound each oriented odd circuit; exact circuit counting and factorial estimates make the total for odd sizes through 255 less than `2^-27`.",
+      "statement": "The expected number of bad odd circuits of sizes 3 through 255 is below `2^-27`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "endpoint-fourier"
+      ],
+      "id": "large-circuit-bound",
+      "proof": "Fourier convolution gives `Pr(all bad)=\u03a3_Shat g(S)^s`; the endpoint bound and Parseval make the aggregate for odd `s\u2265257` less than `2^-742`.",
+      "statement": "The expected number of bad odd circuits of size at least 257 is below `2^-742`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "binomial-tail-certificate",
+        "small-circuit-bound",
+        "large-circuit-bound"
+      ],
+      "id": "conditional-average-generator",
+      "proof": "The initial exact average of `\u03a8` is below one, and every prefix average is the mean of its two child averages. Choosing the smaller child produces the unique `G_*` with `\u03a8(G_*)<1`.",
+      "statement": "`G_*` has at most 1083 bad messages and no bad odd circuit of any possible size within that bad set.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "conditional-average-generator"
+      ],
+      "id": "odd-circuit-hyperplane",
+      "proof": "A minimum odd zero-sum subset is an odd circuit. Its absence is exactly the consistency condition for `ell(b)=1`; the chosen kernel consequently avoids every bad message.",
+      "statement": "There is a deterministically selected hyperplane `U\u2264F_2^2971` of dimension 2970 with `U\u2229B(G_*)=\u2205`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "odd-circuit-hyperplane"
+      ],
+      "id": "linearity-dimension",
+      "proof": "The restriction `u\u21a6uG_*` is injective because zero is bad, and `J` is outside its image because every nonzero image word has weight below `n`.",
+      "statement": "`C=UG_* direct-sum span{J}` is binary linear of exact length `2^30` and dimension 2971.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "odd-circuit-hyperplane",
+        "linearity-dimension"
+      ],
+      "id": "minimum-distance",
+      "proof": "Every nonzero restricted word lies in `[D,n-D]`; adjoining `J` only adds the all-one word and complements of restricted words.",
+      "statement": "Every nonzero codeword has weight at least 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "endpoint-fourier"
+      ],
+      "id": "k2972-potential-obstruction",
+      "proof": "An explicit lower-tail certificate gives `lambda'>2090`; the exact 2089-circuit count and Fourier lower bound then give `E T_2089>1`. Size terms handle smaller cutoffs, and Jensen handles the natural exponential tilts.",
+      "statement": "At `K=2972`, all tested nonnegative separable size/circuit potentials and natural exponential tilts have expectation at least one.",
+      "status": "proved"
+    }
+  ],
+  "rate": 2.7669593691825867e-06,
+  "research_direction": "Epsilon-balanced code instantiations via exact conditional probabilities and odd-circuit hyperplane expurgation",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "schemas/record.schema.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/runner.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 23 current files, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 23 current files, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/**/*.json (all 13 current reviews, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There is a deterministically and symbolically specified binary linear code `C\u2282F_2^(2^30)` with dimension 2971 and minimum distance at least `2^29-2^20=535822336`. Its rate is exactly `2971/2^30`. Moreover, within the same `K=2972` random-matrix framework, every tested unconditioned separable size/circuit potential and natural exponential tilt has initial expectation at least one; this latter statement is a scoped method obstruction, not a code upper bound.",
+  "title": "Canonical conditional-average [2^30,2971,\u2265535822336] epsilon-balanced code"
+}

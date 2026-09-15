@@ -1,0 +1,261 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the canonical sorted-JSON SHA-256; it equals the supplied immutable digest. The raw-file digest differs only because campaign hashing canonicalizes parsed JSON.",
+    "Independently recomputed Rabin's certificate: T^(2^16)=T mod p and the gcd chain ends in 1.",
+    "Tested every inner-symbol case: 0 gives weight 0, 1 gives the all-one block, and every other nonzero symbol gives weight 2^14.",
+    "Tried to create an evaluation-kernel word; a nonzero degree-at-most-64 polynomial cannot vanish at all 32768 evaluation points.",
+    "Checked the extremal fiber formula wt(c_P)=2^14(32768-N_0+N_1); N_0,N_1<=64 implies the claimed two-sided interval.",
+    "Checked P=0, P=1, every other constant, every nonconstant polynomial, and both cosets of B separately.",
+    "Evaluated the prescribed 64-root polynomial in the displayed field. Under natural coefficient order its nonroot image has size 511, omits 1, and lambda=1 already attains weight 535822336.",
+    "Tested the degree-65 extension: a scaled 65-root word has weight 32703*16384=535805952, confirming that the degree-64 cutoff is essential.",
+    "Recomputed 1041*631^3=261540414231 and the free-walk minimum ell=2*(2^2)^2=32.",
+    "Checked the HMZ kappa=1 edge cases d=2,3; the published bound still exceeds one, but not for the reason stated in proof step HMZ.",
+    "Recomputed the two DMW finite bounds: the stated constants force final dimension below one.",
+    "Challenged the RS-OPT provenance. algebraic-10.json does not contain repetition parameter r or prove the repeated/padded claim; the needed argument is in composition-04.json.",
+    "Checked the proposed degree-67 trace direction: its augmented dimension is only 1+34*30=1021; degree 69 is the first analogous cutoff exceeding 1040.",
+    "Examined the exclusion of the deterministic conditional-average k=2971 proposal. Conditional expectation is not inherently random sampling, so the categorical admissibility assertion requires a precise policy justification."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission claims a baseline-beating binary code of length 1073741824, dimension 1040, and exact minimum distance 535822336.",
+      "justification": "The construction proof verifies all three parameters, and 1040>31. The headline baseline and leaderboard classification is honest.",
+      "reference": "literature-sota-0001.json:2-6,55,112,294-296,314-316",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed polynomial p=T^16+T^5+T^3+T+1 is irreducible over F_2.",
+      "justification": "Writing p as 0x1002b gives T^(2^8) mod p=0x50f0 and T^(2^16) mod p=T. The gcd input is 0x50f2, with remainder chain 0x1311,0x0fa7,0x03f8,0x0047,0x0015,0x0006,0x0001. These are exactly Rabin's degree-16 checks.",
+      "reference": "literature-sota-0001.json:5,45-46,201 section 2,210-215",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A and the inner coordinate set each have 32768 deterministically ordered elements.",
+      "justification": "The polynomial basis is fixed, A is the span of its first 15 vectors, and the stated coefficient-tuple ordering symbolically determines the coordinates.",
+      "reference": "literature-sota-0001.json:5,47-48,146-164",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Phi is a binary-linear bijection E to RM(1,15).",
+      "justification": "Its values at 0 and the fifteen unit vectors recover all sixteen field coefficients. Equal dimensions then give bijectivity; the exceptional nonzero symbol 1 maps to the all-one word and all other nonzero symbols are balanced.",
+      "reference": "literature-sota-0001.json:5,49,161-164,201 section 2",
+      "verdict": "valid"
+    },
+    {
+      "claim": "C is binary linear of exact length 2^30 and dimension 1040.",
+      "justification": "Evaluation and Phi are F_2-linear. Evaluation is injective because 32768>64, while the message space has 65 field coefficients, hence binary dimension 65*16=1040. There are 32768 blocks of length 32768.",
+      "reference": "literature-sota-0001.json:5-6,50,151-178,201 section 2,217-224",
+      "verdict": "valid"
+    },
+    {
+      "claim": "B is an explicit dimension-1039 hyperplane and C=B direct-sum <1^N>.",
+      "justification": "The condition on the constant coefficient is one nonzero binary equation. Toggling that bit adds the constant polynomial 1, whose codeword is 1^N; injectivity makes the decomposition direct.",
+      "reference": "literature-sota-0001.json:5,9,40-41,170-178,201 section 3,226-243",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero word of B has weight in [535822336,537919488].",
+      "justification": "For nonconstant P, both P and P-1 have at most 64 roots, and wt(c_P)=2^14(32768-N_0+N_1). Thus the deviation from 2^29 is at most 64*2^14=2^20. Nonzero constants in B have a nonzero linear part and weight exactly 2^29.",
+      "reference": "literature-sota-0001.json:36-41,201 section 3,226-234",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Adjoining the all-one direction preserves the lower-distance bound for every nonzero codeword.",
+      "justification": "The new coset consists of complements of B-words. The interval [D,N-D] is complement invariant, and the remaining new word is 1^N itself.",
+      "reference": "literature-sota-0001.json:41,201 section 3,236-243",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance lower bound is attained.",
+      "justification": "The 64-root product has exactly those roots. Each of 32704 nonroots forbids at most one of 65535 nonzero scalars, so a deterministic first admissible scalar exists and makes all nonroot blocks balanced. Its weight is 32704*16384=535822336.",
+      "reference": "literature-sota-0001.json:42,51,180-183,201 section 4,245-252",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction contains no hidden random choice, puncturing, shortening, or padding.",
+      "justification": "The field, basis, evaluation set, messages, coordinate order, encoder, roots, and equality-witness scalar are all fixed symbolically. Any minor bit-order convention changes only a coordinate permutation.",
+      "reference": "literature-sota-0001.json:45-53",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The AGHP complete powering comparator has balanced dimension 975, or 976 after all-one augmentation.",
+      "justification": "The exact specialization has m=15 and 65 field coefficients, giving 15*65=975 dimensions and root bias at most 64/2^15=1/512. The all-one augmentation safely complements its one-sided core.",
+      "reference": "literature-sota-0001.json:56-62,201 section 5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The odd trace-polynomial comparator has balanced dimension 990 and augmented dimension 991.",
+      "justification": "There are 33 independent F_(2^30) coefficients. The Carlitz-Uchiyama/Hasse-Weil bound gives signed character magnitude 64*2^15, equivalently weight deviation 32*2^15=2^20. The source should call the former a character-sum deviation to avoid ambiguity.",
+      "reference": "literature-sota-0001.json:63-68,201 section 5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The cited Hermitian and extended norm-trace specializations give dimensions 36 and 444.",
+      "justification": "The numbers recompute: the elementary specialization has p=64, divisor parameter 512, total degree 7, and binomial(9,2)=36; the norm-trace specialization has Riemann-Roch dimension 37 over a 12-bit alphabet, giving 444. However, the submission neither states these finite parameters nor proves the asserted optimization.",
+      "reference": "literature-sota-0001.json:69-74,201 section 5",
+      "verdict": "gap"
+    },
+    {
+      "claim": "Ta-Shma's complete-output Theorem 4.1 cannot give rank at least 1041 within 2^30 coordinates under its stated norm certificate.",
+      "justification": "The local finite case split is sound once the theorem's regular-graph, pseudorandomness, nonnegative-error, and compatibility hypotheses are included. The near-optimal prerequisite also fails since its left side is at most about 7.53e-8 while 1/log_2(512)=1/9.",
+      "reference": "literature-sota-0001.json:75-80,121,201 section 5,272-279",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Cohen-Cohen complete Gray-register certificate needs at least 261540414231 raw coordinates.",
+      "justification": "A useful norm bound forces ell>=3 and omega_H<1/2; compatibility gives omega_G<1/40. The trace bound then forces d>=631, double-conflict-freeness forces width at least 3, and 1041*631^3=261540414231.",
+      "reference": "literature-sota-0001.json:81-86,122,196-198,272-279",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The HMZ complete-output schedule has no fitting certificate from Lemma 2.12.",
+      "justification": "For kappa>=2, ell=kappa(d^2)^kappa r>=32 and d^ell>=2^32. For kappa=1 the bound is indeed greater than one, but the proof's negative-exponent inference is incomplete for d=2,3, where the paper's lambda=2/sqrt(d)>1; those cases require a short direct calculation. The statement must also be scoped to failure of Lemma 2.12's certificate, not nonexistence of every underlying walk.",
+      "reference": "literature-sota-0001.json:18-24,87-92,123,191-193,201 section 5,263-270",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The DMW displayed finite constants force final dimension below one.",
+      "justification": "For the random-outer form c=128*sqrt(e), the target yields k<=1/(16e)<1. For the soft-decoding form c>=288 ln 2, it yields k<=4/(81 ln^2 2)<1. The hypotheses field should additionally state the niceness, inner-length, and special outer-code assumptions.",
+      "reference": "literature-sota-0001.json:93-98,201 section 5",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The KTSY and later TAG papers do not provide a usable finite target certificate through the cited estimates.",
+      "justification": "The KTSY estimate retains an unspecified constant under its degree hypotheses, while the later TAG result explicitly does not improve the relevant high-distance construction. This supports failure of these published certificates, not a universal TAG impossibility.",
+      "reference": "literature-sota-0001.json:99-104,124,201 section 5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The repeated, interleaved, and zero-padded RS-affine family has unique maximum 1040 at the displayed parameters.",
+      "justification": "The conclusion is repairable and correct, but the cited algebraic-10.json treats only the direct exact-length family and does not contain repetition parameter r or the bound t<=floor(2^(22-m)/r). The required exact-distance and repetition argument is in composition-04.json, which is not cited here.",
+      "reference": "literature-sota-0001.json:105-110,255-261",
+      "verdict": "gap"
+    },
+    {
+      "claim": "A binary [16384,16,8185] inner code would give a [2^30,1168,>=535822840] concatenation.",
+      "justification": "A length-65536 RS outer code can use dimension 73 and distance 65464. Then 16*73=1168 and 8185*65464=535822840.",
+      "reference": "literature-sota-0001.json:113-115,126",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Degree 67 is an appropriate next trace cutoff for improving the k=1040 leaderboard.",
+      "justification": "Within the stated odd-trace architecture, degrees 1,3,...,67 give only 1+34*30=1021 dimensions. Degree 69 is the first analogous cutoff above 1040, giving 1051. The proposed task therefore violates the campaign's concrete-improvement objective as written.",
+      "reference": "literature-sota-0001.json:116",
+      "verdict": "false"
+    },
+    {
+      "claim": "All conditional-expectation constructions, including the deterministic k=2971 proposal, are inadmissible.",
+      "justification": "Random sampling is inadmissible, but conditional expectation is not categorically random: the referenced proposal fixes every bit through exact rational conditional averages. If it is to be excluded as a prohibited numerical search, that policy distinction and its application must be justified explicitly; otherwise the SOTA discussion must acknowledge it.",
+      "reference": "literature-sota-0001.json:27,125",
+      "verdict": "unclear"
+    },
+    {
+      "claim": "The Ta-Shma, Cohen-Cohen, HMZ, and recent trace-code obstruction statements are scoped architecture/certificate obstructions rather than universal code bounds.",
+      "justification": "The text correctly limits the conclusions to the displayed complete-output schedules and published certificates.",
+      "reference": "literature-sota-0001.json:119-127",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The core parameter ledger is arithmetically correct.",
+      "justification": "It recomputes to N=2^30, D=2^29-2^20, tau=2^-9, |E|=2^16, L=2^15, outer [32768,65,32704], inner [32768,16,16384], k=1040, and rate 65/67108864.",
+      "reference": "literature-sota-0001.json:129-189",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The free-walk and Gray-register ledger values are correct.",
+      "justification": "At kappa=d=2,r=1 one gets ell=32 and d^ell=2^32; independently, 1041*631^3=261540414231.",
+      "reference": "literature-sota-0001.json:190-199",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Proof sections 1 and 2 establish normalization, field representation, linearity, exact length, and dimension.",
+      "justification": "Every identity and injectivity argument in these sections independently checks.",
+      "reference": "literature-sota-0001.json:201 sections 1-2",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Proof section 3 establishes the balanced hyperplane and all-one decomposition.",
+      "justification": "The fiber formula, constant cases, dimension loss, and complement argument exhaust every word.",
+      "reference": "literature-sota-0001.json:201 section 3",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Proof section 4 establishes exact minimum distance.",
+      "justification": "The root-product and scalar-avoidance argument is deterministic and attains the previously proved lower bound.",
+      "reference": "literature-sota-0001.json:201 section 4",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Proof section 5 establishes every claimed finite literature comparison.",
+      "justification": "Its principal numerical conclusions are plausible or verified, but it only asserts several specializations, inherits the RS source mismatch, and compresses theorem hypotheses needed for the HMZ and DMW applications.",
+      "reference": "literature-sota-0001.json:201 section 5",
+      "verdict": "gap"
+    },
+    {
+      "claim": "Proof steps NORM, FIELD, PARAM, BAL, AUG, and EXACT are proved with noncircular dependencies.",
+      "justification": "They accurately summarize the independently verified construction, parameter, and exact-distance arguments.",
+      "reference": "literature-sota-0001.json:202-253",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Proof step RS-OPT is proved by its stated dependency.",
+      "justification": "Its repetition formula and exact family scope are absent from the cited algebraic-10 source. Importing the repaired composition-04 lemma, including scalar avoidance and its exceptional case, fixes the gap.",
+      "reference": "literature-sota-0001.json:254-261",
+      "verdict": "gap"
+    },
+    {
+      "claim": "Proof step HMZ establishes failure of every complete-output HMZ construction.",
+      "justification": "It proves only that Lemma 2.12 supplies no fitting certificate, and its kappa=1 explanation omits the d=2,3 calculation.",
+      "reference": "literature-sota-0001.json:263-270",
+      "verdict": "gap"
+    },
+    {
+      "claim": "Proof step WRP establishes the two stated complete-output wide-replacement obstructions.",
+      "justification": "The trace-of-P^2 graph bound and finite Ta-Shma case split are sound; the Cohen-Cohen calculation correctly forces degree 631 and width 3.",
+      "reference": "literature-sota-0001.json:272-279",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Proof step AUDIT proves that no audited explicit literature route exceeds dimension 1040.",
+      "justification": "The dependency list omits AGHP, Voloch, Hermitian/norm-trace, DMW, and TAG, and it inherits the RS and HMZ gaps. The scoped SOTA clause should remain under review until those local repairs are made.",
+      "reference": "literature-sota-0001.json:281-291",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The rate, provenance list, candidate status, and main code theorem are consistent.",
+      "justification": "The rate equals 1040/2^30, the source lists and directories match the recorded snapshot, and the principal code theorem is fully proved.",
+      "reference": "literature-sota-0001.json:294-315,317",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The final theorem's literature-SOTA conjunct is established as written.",
+      "justification": "The code and balanced-core clauses are valid, but the literature conjunct depends on the unsupported RS provenance, incomplete HMZ scope, underspecified finite comparator hypotheses, and unresolved conditional-averaging policy classification.",
+      "reference": "literature-sota-0001.json:315-316",
+      "verdict": "gap"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [
+    "Change the RS-family dependency from algebraic-10.json to the repaired repeated/padded/interleaved proof in composition-04.json, and import its scalar-avoidance argument and exceptional case explicitly.",
+    "Repair HMZ proof step kappa=1 for d=2,3 and narrow its conclusion to: Lemma 2.12 supplies no fitting complete-output certificate. State the base-bias, positivity, degree, and all-signings hypotheses.",
+    "Expand the finite literature ledger enough to expose the Hermitian/norm-trace parameters and DMW theorem hypotheses; clarify that 64*2^15 is a signed character-sum bound, not the trace code's weight deviation.",
+    "Add AGHP, Voloch, Hermitian/norm-trace, DMW, and TAG to AUDIT's dependency chain, or remove the final proved SOTA conjunct until those comparisons are properly sourced.",
+    "Replace the degree-67 trace roadmap task with a cutoff that can beat k=1040, beginning at degree 69 in the stated odd-trace family. When updating the roadmap, prioritize the strongest currently known conditional finite gateway.",
+    "Resolve the conditional-averaging policy claim: do not equate conditional expectation categorically with random sampling. Either justify why the particular exhaustive selector violates the numerical-search rule, or acknowledge its deterministic symbolic status and adjust the SOTA/leaderboard discussion."
+  ],
+  "source_job_id": "literature-sota-0001",
+  "source_sha256": "aeddfa023e26e092215be21db224995b8fa7f9ae0538200e510bf3aef43f3b25",
+  "summary": "REVISE for local ancillary gaps. The principal deterministic binary [1073741824,1040,535822336]_2 construction is independently verified: field certificate, binary linearity, exact length, dimension, exact minimum distance, rate, explicitness, readability, and baseline classification all pass. The unresolved issues concern the broader literature-SOTA clause and roadmap: an RS-family source mismatch, an incomplete/overbroad HMZ proof step, underspecified comparator hypotheses and dependency links, a noncompetitive degree-67 task, and an unresolved policy assertion about deterministic conditional averaging. None is a fatal obstruction to the k=1040 code.",
+  "verdict": "revise",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}

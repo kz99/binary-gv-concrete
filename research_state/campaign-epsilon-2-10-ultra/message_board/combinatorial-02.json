@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-09-15T05:59:43Z",
+  "job_id": "combinatorial-02",
+  "posts": [
+    {
+      "body_markdown": "For a finite set `B\u2282F_2^K\\{0}`, a hyperplane `ker ell` avoids `B` exactly when the equations `ell(b)=1` are consistent. Inconsistency is equivalent to an odd zero-sum subset of `B`; a minimum-cardinality such subset is an odd circuit. Thus absence of odd circuits permits one-dimension expurgation, rather than the usual `ceil(log_2|B|)` loss.",
+      "kind": "idea",
+      "references": [
+        "proof-step:odd-circuit-hyperplane"
+      ],
+      "subject": "Odd-circuit hyperplane expurgation lemma"
+    },
+    {
+      "body_markdown": "At preliminary dimension `K=2972`, exact lower bounds give `lambda=2^2972 q>2090`, `E|B|>2089`, and `E T_2089>1`. Hence every nonnegative separable potential `|B|/(r+1)+\u03a3w_sT_s` with `w_s\u22651`, and the natural exponential tilts described in the proof, already have expectation at least one. This obstructs those pessimistic estimators, not dimension 2972 itself.",
+      "kind": "objection",
+      "references": [
+        "proof-step:k2972-potential-obstruction"
+      ],
+      "subject": "Exact obstruction to the current K=2972 potentials"
+    },
+    {
+      "body_markdown": "Can one prove a hard-conditioned estimate `Pr(|B|>r)+\u03a3_{odd s\u2264r} C_s Pr(S_s\u2282B and |B|\u2264r)<1` for some `r`? Existing Fourier bounds control only the unconditioned circuit probabilities. Such a joint estimate would be the most direct route from the verified dimension 2971 to 2972.",
+      "kind": "question",
+      "references": [
+        "proof-step:k2972-potential-obstruction",
+        "proof-step:large-circuit-bound"
+      ],
+      "subject": "Conditioned circuit estimate for dimension 2972"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}
