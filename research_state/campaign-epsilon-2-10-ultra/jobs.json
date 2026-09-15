@@ -958,5 +958,37 @@
     "status": "succeeded",
     "team": "shared",
     "updated_at": "2026-09-15T06:13:11Z"
+  },
+  {
+    "attempts": 1,
+    "created_at": "2026-09-15T06:13:15Z",
+    "dependency": "combinatorial-02",
+    "direction": "Independent line-by-line proof audit.",
+    "error": null,
+    "id": "verifier-1-combinatorial-02",
+    "model": "gpt-5.6-sol",
+    "phase": "verification",
+    "reasoning_effort": "ultra",
+    "role": "verifier",
+    "round": 1,
+    "status": "succeeded",
+    "team": "shared",
+    "updated_at": "2026-09-15T06:24:40Z"
+  },
+  {
+    "attempts": 1,
+    "created_at": "2026-09-15T06:13:15Z",
+    "dependency": "composition-07",
+    "direction": "Independent line-by-line proof audit.",
+    "error": null,
+    "id": "verifier-1-composition-07",
+    "model": "gpt-5.6-sol",
+    "phase": "verification",
+    "reasoning_effort": "ultra",
+    "role": "verifier",
+    "round": 1,
+    "status": "running",
+    "team": "shared",
+    "updated_at": "2026-09-15T06:13:15Z"
   }
 ]

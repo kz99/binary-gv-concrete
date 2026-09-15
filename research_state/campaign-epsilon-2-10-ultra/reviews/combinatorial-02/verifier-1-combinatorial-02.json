@@ -1,0 +1,234 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": false,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical SHA-256 using sorted-key JSON serialization; it exactly matches the supplied immutable digest.",
+    "Checked the threshold off-by-one: avoiding weights at most R and at least n-R gives exactly D<=wt<=n-D.",
+    "Recomputed every tight binomial-tail inequality, including the exact final margin 1083-1900544/1755=121/1755.",
+    "Checked the endpoint-ratio lower bound when its summand becomes negative and when the geometric sum is extended beyond j=R.",
+    "Checked both parity cosets in the small-circuit exponential-moment calculation and the factor 2^s for tail orientations.",
+    "Checked odd circuit sizes 3, 253, 255, and the handoff to 257; no odd size is omitted.",
+    "Tested the Fourier-convolution bound with negative nonprincipal coefficients; for odd s their removal remains a valid upper bound.",
+    "Tested an odd zero-sum set that is not initially a circuit; a minimum-cardinality such set is necessarily an odd circuit.",
+    "Checked the B(G_*)=empty case; the prescribed ell(u)=u_1 is nonzero and gives a 2970-dimensional kernel.",
+    "Tried a nonzero u in U with uG_*=0; this would put u in the lower bad tail, contradicting U\u2229B(G_*)=empty.",
+    "Tried to place J in UG_*; every nonzero word of UG_* has weight at most n-D<n.",
+    "Checked safe endpoint weights D and n-D; their complements remain at n-D and D.",
+    "Recomputed the K=2972 logarithmic certificate and both correction factors for E T_2089>1.",
+    "Challenged explicitness by attempting to execute the stated next-bit rule. The submission provides only an average over completions, not an evaluator or an n^{O(1)} runtime proof."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": false,
+  "fatal_obstruction": "The immutable submission does not supply the mandatory n^{O(1)} full-generator algorithm or runtime proof. G_* is specified only through conditional averages over matrix completions, while lines 47 and 82 expressly concede non-efficient explicitness and invoke a nonexistent no-complexity rule. Thus this source is inadmissible as an explicit leaderboard construction, even though its finite-existence argument is sound.",
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission has the supplied immutable campaign identity.",
+      "justification": "SHA-256 of json.dumps(parsed_json, sort_keys=True) is exactly 767e1e37e85fed19d3c5e856000992ff189f2ab8192b0a69e8a8eb39c02286e2.",
+      "reference": "combinatorial-02.json:1-272",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The numerical headline parameters are n=1073741824, dimension 2971, and certified distance at least 535822336.",
+      "justification": "These values follow from the finite conditional-average construction and the subsequent hyperplane argument.",
+      "reference": "combinatorial-02.json:3-6,71",
+      "verdict": "valid"
+    },
+    {
+      "claim": "baseline_beaten=true is an honest leaderboard classification.",
+      "justification": "Dimension 2971 exceeds 31 only for the canonically defined finite code. Without the required polynomial-time generator, it is not an admissible explicit improvement.",
+      "reference": "combinatorial-02.json:2",
+      "verdict": "false"
+    },
+    {
+      "claim": "The parameters n,N,h,R,D,K and Kn are consistent.",
+      "justification": "N=536870912, h=1048577, R=N-h=535822335, D=R+1=535822336, K=2971, and Kn=3190086959104.",
+      "reference": "combinatorial-02.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The bad-message thresholds give the required safe interval.",
+      "justification": "For integer weights, u\u2209B(G) means R+1<=wt(uG)<=n-R-1, namely D<=wt(uG)<=n-D with n-D=537919488.",
+      "reference": "combinatorial-02.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The potential counts every circuit size needed for hyperplane expurgation.",
+      "justification": "Psi<1 implies |B|<=1083. Any circuit contained in B then has size at most 1083, and distinct nonzero binary vectors have no circuits of size one or two.",
+      "reference": "combinatorial-02.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The smaller-child recursion uniquely defines a finite matrix G_*.",
+      "justification": "The entry order, exact averages, comparison rule, and tie rule determine a unique matrix, so the finite symbolic-existence claim is valid.",
+      "reference": "combinatorial-02.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The recursion establishes an admissible explicit generator.",
+      "justification": "No algorithm for evaluating the conditional averages is stated, and no output-size or n^{O(1)} bit-runtime proof is supplied. Finiteness and denominator clearing do not meet the active explicitness definition.",
+      "reference": "combinatorial-02.json:5,41-47",
+      "verdict": "false"
+    },
+    {
+      "claim": "The functional, pivot, kernel basis, and final rows contain no unspecified finite choices.",
+      "justification": "Lexicographic selection, the empty-set rule, first pivot, and increasing basis order are deterministic. Conditional on G_*, these operations are valid.",
+      "reference": "combinatorial-02.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Absence of odd circuits yields a hyperplane avoiding B(G_*).",
+      "justification": "The system ell(b)=1 is inconsistent exactly when an odd subset of B sums to zero; a minimum-cardinality such subset is an odd circuit.",
+      "reference": "combinatorial-02.json:8-15,157 (\u00a76)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The discussion of the K=2972 obstruction is correctly scoped.",
+      "justification": "The exact lower certificate gives lambda'>2090 and E T_2089>1. The text correctly treats this as an obstruction to specified potentials, not a code upper bound.",
+      "reference": "combinatorial-02.json:16-31,78-81",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The distance audit covers every nonzero final codeword.",
+      "justification": "The cases are J, nonzero uG_*, and J+uG_*. Their weights are n, at least D, and n-wt(uG_*)>=D.",
+      "reference": "combinatorial-02.json:34-40",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The deterministic-choice statements prove symbolic reproducibility and exact length.",
+      "justification": "All orders and tie rules are fixed, and G_* has exactly n columns. These facts do not, however, prove polynomial runtime.",
+      "reference": "combinatorial-02.json:41-46",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The campaign rules impose no complexity bound.",
+      "justification": "AGENTS.md, TARGET.md, the campaign README, and CONTRIBUTOR_INSTRUCTIONS.md all require a full-matrix algorithm running in n^{O(1)} time and a proof of that bound.",
+      "reference": "combinatorial-02.json:47",
+      "verdict": "false"
+    },
+    {
+      "claim": "All required submission artifacts were completed.",
+      "justification": "Line 48 itself admits that no proof note under proofs/ and no data/records.json entry were produced; those artifacts are absent.",
+      "reference": "combinatorial-02.json:48,72-75",
+      "verdict": "gap"
+    },
+    {
+      "claim": "leaderboard_submission=true is admissible.",
+      "justification": "The missing polynomial-time generator certificate excludes this immutable source from the leaderboard.",
+      "reference": "combinatorial-02.json:50",
+      "verdict": "false"
+    },
+    {
+      "claim": "The earlier combinatorial-01 acceptance validates this construction under the current rules.",
+      "justification": "That review expressly used the obsolete position that no efficiency requirement applied. It cannot discharge the active runtime requirement, and this review independently checked the mathematics.",
+      "reference": "combinatorial-02.json:51-63",
+      "verdict": "false"
+    },
+    {
+      "claim": "CONTRIBUTOR_INSTRUCTIONS.md has no stated efficiency requirement.",
+      "justification": "Its lines 18-24 and 59-63 explicitly require an n^{O(1)} full-generator algorithm and runtime proof and exclude a generator specified only by averages over completions.",
+      "reference": "combinatorial-02.json:64-69",
+      "verdict": "false"
+    },
+    {
+      "claim": "Only a future rule requiring efficient explicitness would alter admissibility.",
+      "justification": "Efficient full-matrix generation is already the active rule. The acknowledged missing efficient estimator is a present obstruction.",
+      "reference": "combinatorial-02.json:75,82",
+      "verdict": "false"
+    },
+    {
+      "claim": "The parameter ledger arithmetic is correct.",
+      "justification": "The thresholds, tail bound, Fourier ratio, circuit bounds, dimensions, rate, and K=2972 numerical barrier all recompute as stated.",
+      "reference": "combinatorial-02.json:85-155",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The exact binomial-tail argument proves 2^2972 p<1083.",
+      "justification": "The central-binomial induction, shifted-product bound, logarithm estimates, and exponential estimate give 2^2972p<1900544/1755=1082.931054..., with margin 121/1755.",
+      "reference": "combinatorial-02.json:157 (\u00a71)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The endpoint Fourier estimate gives every nonprincipal coefficient magnitude below q/256.",
+      "justification": "The tail-to-endpoint expression is exactly 18921810959967451087/73787292954639991=256.437256...>256. Coordinate pairing, translation by J, and Parseval then give the stated bounds.",
+      "reference": "combinatorial-02.json:157 (\u00a72)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The expected number of small bad odd circuits is below 2^-27.",
+      "justification": "The parity-coset moment bound, 2^s orientations, s! representation count, monotonicity through s=255, and factorial/exponential estimates all check.",
+      "reference": "combinatorial-02.json:157 (\u00a73)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The expected number of large bad odd circuits is below 2^-742.",
+      "justification": "Fourier convolution has the stated normalization. Parseval yields q^s+(q/256)^(s-2)q, and the exponential and factorial summations recompute correctly.",
+      "reference": "combinatorial-02.json:157 (\u00a74)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Conditional averaging produces a finite G_* with Psi(G_*)<1.",
+      "justification": "Every prefix average is the mean of its two child averages, and 1083/1084+2^-26<1 with exact margin 16776945/18186502144. This proves finite existence, not the required runtime.",
+      "reference": "combinatorial-02.json:157 (\u00a75)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Odd-circuit expurgation gives dim U=2970 and U\u2229B(G_*)=empty.",
+      "justification": "The consistency criterion is correct, and the selected functional is nonzero even when B is empty.",
+      "reference": "combinatorial-02.json:157 (\u00a76)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The finite code is binary linear of exact length n, dimension 2971, and distance at least D.",
+      "justification": "Avoidance of B gives injectivity on U; J is outside UG_*; and the exhaustive word-type analysis proves the distance bound.",
+      "reference": "combinatorial-02.json:157 (\u00a77),208-230",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The K=2972 potential obstruction is numerically and logically valid.",
+      "justification": "Exact rational evaluation gives log L0=7.645246253...>7.64524 and the upper certificate for log 2090 as 7.64491934496...<7.64492. The circuit and Fourier correction factors exceed 1/2, so E T_2089>1; the Jensen argument follows for the intended integer cutoff r.",
+      "reference": "combinatorial-02.json:157 (\u00a78),232-239",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The conditional-average-generator proof step establishes target explicitness.",
+      "justification": "It proves a unique finite witness and its combinatorial property but contains no polynomial-time evaluator or runtime analysis.",
+      "reference": "combinatorial-02.json:199-202",
+      "verdict": "gap"
+    },
+    {
+      "claim": "The exact rate is 2971/2^30.",
+      "justification": "The fraction is reduced and equals 0.000002766959369182586669921875.",
+      "reference": "combinatorial-02.json:147-150,242",
+      "verdict": "valid"
+    },
+    {
+      "claim": "submission_class=leaderboard_candidate is correct under the immutable target.",
+      "justification": "The source lacks the required polynomial-time full-generator certificate and is therefore non-admissible.",
+      "reference": "combinatorial-02.json:244,269",
+      "verdict": "false"
+    },
+    {
+      "claim": "The theorem statement supplies the required explicit construction.",
+      "justification": "Its deterministic symbolic finite-object statement is mathematically supported, but it omits the mandatory n^{O(1)} generation claim and proof.",
+      "reference": "combinatorial-02.json:270-271",
+      "verdict": "gap"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [
+    "Provide explicit pseudocode for computing every conditional average and outputting all 2971\u00d72^30 generator entries, together with a rigorous n^{O(1)} bit-runtime and output-size analysis. If using a joint-weight dynamic program, state its states, transitions, circuit enumeration, exact-arithmetic costs, and total exponent.",
+    "Correct lines 47, 65-68, and 82, and remove the leaderboard/baseline-improvement classification until the polynomial generator certificate has been independently accepted.",
+    "Place the repaired proof in proofs/, add the required under-review record and reusable lemma entry, and run the data validator and dashboard build before publication."
+  ],
+  "source_job_id": "combinatorial-02",
+  "source_sha256": "767e1e37e85fed19d3c5e856000992ff189f2ab8192b0a69e8a8eb39c02286e2",
+  "summary": "REJECT. The arithmetic and finite probabilistic-existence argument independently verify a canonically defined binary linear [1073741824,2971,>=535822336] code, and no low-weight counterexample was found. However, the immutable source is not an admissible explicit construction: it supplies neither an n^{O(1)} evaluator for its conditional averages nor a full-generator runtime proof, and it explicitly relies on the opposite policy. Consequently it does not beat the verified explicit baseline. The numerical verified fields describe only the finite object proved by the averaging argument, not a verified leaderboard record.",
+  "verdict": "reject",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 2971,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 2.7669593691825867e-06
+}
