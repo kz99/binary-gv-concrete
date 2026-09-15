@@ -276,8 +276,8 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
     cfg = value["campaign"]
     if cfg.get("reasoning_effort") != "ultra":
         raise ValueError("campaign.reasoning_effort must be ultra")
-    if int(cfg.get("researcher_count", 0)) != 10:
-        raise ValueError("the pilot must have exactly 10 researchers")
+    if int(cfg.get("researcher_count", 0)) < 10:
+        raise ValueError("the campaign must have at least 10 researchers")
     if int(cfg.get("verifier_count", 0)) != 2:
         raise ValueError("every submission must receive exactly two independent reviews")
     if int(cfg.get("roadmap_count", 0)) < 3:
@@ -330,6 +330,26 @@ class Campaign:
             jobs.append(self._job("lemma-writer-0001", "lemma_writer", "Edit all reusable proof steps into the shared lemma book.", phase="synthesis"))
         if self.cfg.get("genius_enabled", True):
             jobs.append(self._job("GENIUS", "genius", "Construct the strongest integrated exact and asymptotic family from all campaign evidence.", phase="genius"))
+        self._write_jobs(jobs)
+        return self.status()
+
+    def add_researchers(self, count: int) -> dict[str, Any]:
+        """Append ultra-reasoning researcher seats to a live durable queue."""
+        if count < 1:
+            raise ValueError("count must be positive")
+        self.initialize()
+        jobs = self._read_jobs()
+        existing = {job["id"] for job in jobs}
+        ordinal = 1
+        while f"researcher-{ordinal:04d}" in existing:
+            ordinal += 1
+        for _ in range(count):
+            while f"researcher-{ordinal:04d}" in existing:
+                ordinal += 1
+            job_id = f"researcher-{ordinal:04d}"
+            jobs.append(self._job(job_id, "researcher", DIRECTIONS[(ordinal - 1) % len(DIRECTIONS)]))
+            existing.add(job_id)
+            ordinal += 1
         self._write_jobs(jobs)
         return self.status()
 
@@ -556,7 +576,7 @@ you have examined every durable response and review path.
         payload = {
             "schema": "binary-gv-campaign-snapshot-v1", "updated_at": utc_timestamp(),
             "model": self.cfg.get("model"), "reasoning_effort": "ultra",
-            "researcher_count": 10, "counts": counts,
+            "researcher_count": sum(job["role"] == "researcher" for job in jobs), "counts": counts,
             "target": {"block_length": N, "minimum_distance": D, "current_dimension": CURRENT_K},
             "gs_hadamard_template_ceiling": CEILING_RATE,
             "promising_candidates": candidates, "doubly_verified_candidates": verified,
