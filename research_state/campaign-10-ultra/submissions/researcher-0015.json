@@ -1,0 +1,257 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "Let `Q=2^30`. Let `h_30(Z)` be the lexicographically first monic irreducible polynomial of degree 30 over `F_2`, using coefficient-vector lexicographic order, and set `F=F_2[Z]/(h_30)`. Order `F` lexicographically in the polynomial basis. Let `\u03b7` be the first field element satisfying `Tr_{F/F_2}(\u03b7)=1`.\n\nSet `J={1,3,5,\u2026,4097}`. For `b\u2208F_2` and `a_j\u2208F`, define\n\n`f(X)=b\u03b7+\u03a3_{j\u2208J} a_j X^j`\n\nand\n\n`c_f=(Tr_{F/F_2}(f(\u03b1)))_{\u03b1\u2208F}`.\n\nThe proposed code is `C_TR={c_f}`. No shortening, puncturing, repetition, or padding is used. Every field, message coordinate, exponent, and evaluation coordinate is symbolically recoverable.",
+  "dimension": 61471,
+  "distance_audit": [
+    "There are exactly `|J|=(4097+1)/2=2049` nonconstant coefficient positions.",
+    "For a nonconstant message, the degree `t` of `f` is odd and at most 4097. Its pole order is therefore prime to characteristic two, excluding Artin\u2013Schreier degeneracy.",
+    "The additive Weil bound gives `|\u03a3_{\u03b1\u2208F}(-1)^{Tr(f(\u03b1))}|\u2264(t\u22121)\u221aQ\u22644096\u00b732768=2^27`.",
+    "Since the character sum equals `Q\u22122 wt(c_f)`, every nonconstant word has weight at least `(2^30\u22122^27)/2=7\u00b72^26=469,762,048`.",
+    "If all `a_j` vanish and `b=1`, the result is the all-one word because `Tr(\u03b7)=1`. Thus every nonzero message is covered.",
+    "The same inequality rules out a zero codeword from a nonconstant message, proving injectivity as well as distance.",
+    "The claimed minimum_distance field is a rigorous lower bound; equality is not asserted."
+  ],
+  "explicitness_audit": [
+    "`F` is fixed by a lexicographically specified irreducible polynomial, not by an unspecified field isomorphism.",
+    "`\u03b7` is fixed by a finite lexicographic rule.",
+    "Coordinates are all elements of `F`, ordered by their 30-bit polynomial-basis coefficient vectors.",
+    "The message space uses the closed-form set of all positive odd exponents through 4097.",
+    "The construction uses no random sampling, search-selected codeword, hidden constant, shortening, puncturing, or padding.",
+    "The conditional Hermitian and intermediate-trace directions below are not counted as leaderboard constructions."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A nontrivial additive character over `F_Q` and a polynomial whose unique pole has order `t` not divisible by the characteristic and which is not Artin\u2013Schreier-degenerate.",
+      "result": "The complete additive character sum has magnitude at most `(t\u22121)\u221aQ` in the genus-zero case.",
+      "source": "[Bombieri, On exponential sums in finite fields, Theorem 5](https://doi.org/10.2307/2373048)",
+      "used_for": "The distance and injectivity proofs for `C_TR`."
+    },
+    {
+      "hypotheses": "The genus-zero trace-code divisor and point-count inequalities stated in Theorem 2.1, instantiated with base field size 2, extension degree 30, and `G=4097P_\u221e`.",
+      "result": "The trace of the full degree-at-most-4097 Reed\u2013Solomon code has dimension `30(4097\u22122048)+1=61,471`.",
+      "source": "[Le and Chetty, On Dimension of Algebraic-Geometric Trace Codes](https://arxiv.org/abs/0902.1729)",
+      "used_for": "Independent confirmation of the self-contained dimension calculation."
+    },
+    {
+      "hypotheses": "A linear code over a finite extension `E/F`.",
+      "result": "`(C\u2229F^n)^\u22a5=Tr(C^\u22a5)` and the corresponding subfield/trace dimension bounds.",
+      "source": "[Delsarte, On subfield subcodes of modified Reed\u2013Solomon codes](https://doi.org/10.1109/TIT.1975.1055435)",
+      "used_for": "Scoping the generic subfield-subcode obstruction."
+    },
+    {
+      "hypotheses": "The formal Hermitian trace-code family in Theorem 7.1, with `r=1024`, ambient field `F_{2^20}`, and binary trace.",
+      "result": "The message monomials satisfy the stated weighted-degree, parity, and `j<r/6` restrictions; the published distance estimates retain hidden constants.",
+      "source": "[Cohen\u2013Doron\u2013Goldgraber\u2013Manket, Tracing AG Codes: Toward Meeting the Gilbert\u2013Varshamov Bound](https://eccc.weizmann.ac.il/report/2025/174/download)",
+      "used_for": "The exact `363,800`-bit domain ceiling for that formal exact-length Hermitian family and the finite-certification audit."
+    },
+    {
+      "hypotheses": "One-point Hermitian codes over `F_{q^2}` with `q=r^m`, restricted to `F_r`.",
+      "result": "The subfield dimension is one below pole order `q^3/r` and `2m+1` at that threshold.",
+      "source": "[El Khalfaoui and Nagy, On the Dimension of the Subfield Subcodes of 1-Point Hermitian Codes](https://arxiv.org/abs/1906.10444)",
+      "used_for": "Literature confirmation of the exact 21-dimensional half-degree binary Hermitian subfield code."
+    },
+    {
+      "hypotheses": "A linear `[n,k,d]` code over `F_q`.",
+      "result": "`n\u2265\u03a3_{i=0}^{k\u22121}\u2308d/q^i\u2309`.",
+      "source": "[Griesmer, A bound for error-correcting codes](https://doi.org/10.1147/rd.45.0532)",
+      "used_for": "The exact upper endpoint of the surviving `F_16` intermediate-trace window."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Attack the deterministic code `S_*=C_L(D,(9\u00b72^26)P_\u221e)\u2229F_2^{2^30}` on the `q=1024` Hermitian curve. Binary evaluation is equivalent to `f\u00b2+f=(x^{2^20}+x)h` with `h\u2208L(2^27P_\u221e)`; characterize the image of this Artin\u2013Schreier quotient map and compute `dim S_*` exactly.",
+    "Pursue the narrow intermediate route `Tr_{256/16}(C_out)` followed by the explicit `[128,4,68]_2` inner code. A ceiling-beating result requires an explicit `[8,355,840,r,\u22656,908,266]_{16}` trace code with `978,671\u2264r\u2264987,027`.",
+    "For the trace-RS family, seek structured spaces with canonical odd degree above 4097 and a rigorously stronger character-sum estimate. The ordinary conductor bound is exhausted at dimension 61,471.",
+    "If newer TAG machinery is pursued, expose every constant and validity threshold. The published asymptotic `O`, `\u03a9`, and `\u0398` statements cannot certify this finite target."
+  ],
+  "obstructions": [
+    "The proved trace-RS dimension `61,471` is `3,626,977` below the verified dimension `3,688,448` and `3,853,213` below the first integer dimension that beats `7/1920`.",
+    "Every fixed symbolwise binary trace-coordinate encoder `F_{2^m}\u2192F_2^t` is simply a binary linear inner code: nondegeneracy of the trace pairing represents each coordinate as `x\u21a6Tr(\u03b2x)`. Thus fixed trace lists are not a new global alphabet-reduction mechanism.",
+    "At `m=8,t=128`, averaging over the 255 nonzero inputs gives `d_inner\u2264\u230a128\u00b7128/255\u230b=64`. Hence no fixed 128-coordinate trace encoder improves upon `RM(1,7)` at the baseline footprint.",
+    "For the baseline GS divisor degree `a=1,015,808` and evaluation length `L=8,355,840`, the full binary subfield subcode is exactly `{0,1}`. Indeed, binary evaluation makes `f\u00b2+f` vanish at all `L` places, while its pole degree is at most `2a=2,031,616<L`; hence `f\u00b2+f=0` and `f\u2208F_2`.",
+    "Generic Delsarte accounting has the wrong tradeoff: subfield subcodes inherit distance but their generic dimension lower bound is zero here, whereas trace codes have a dimension lower bound but no inherited distance bound. This is a proof-method obstruction, not an upper bound on structure-specific trace codes.",
+    "For the formal exact-length Hermitian TAG family of Cohen\u2013Doron\u2013Goldgraber\u2013Manket, maximal `T=g=523,776` permits exactly 18,190 `F_{2^20}` monomials, so its binary image dimension is at most `20\u00b718,190=363,800`, even under perfect injectivity.",
+    "The stronger published TAG distance statements retain hidden constants, and some later message-space cutoffs themselves use asymptotic notation. They therefore do not constitute finite certificates at `2^30`.",
+    "The exact Hermitian target subfield code has proved length and distance, but its dimension in the interval from pole order `2^29` to `9\u00b72^26` is not supplied by the available exact theorem."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Block length",
+      "value": "`N=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(7/16)N`.",
+      "quantity": "Required minimum distance",
+      "value": "`D_*=7\u00b72^26=469,762,048`"
+    },
+    {
+      "derivation": "Value in the verified campaign record.",
+      "quantity": "Current verified dimension",
+      "value": "`3,688,448`"
+    },
+    {
+      "derivation": "`(7/1920)N=3,914,683+11/15`; dimension is integral.",
+      "quantity": "First dimension strictly above the template ceiling",
+      "value": "`3,914,684`"
+    },
+    {
+      "derivation": "The evaluation field is used directly as the coordinate set.",
+      "quantity": "Trace-RS field and length",
+      "value": "`Q=2^30=N`"
+    },
+    {
+      "derivation": "Largest odd degree whose Weil error `(t\u22121)\u221aQ` is at most `Q/8`.",
+      "quantity": "Canonical degree cutoff",
+      "value": "`t=4097`"
+    },
+    {
+      "derivation": "Positive odd integers from 1 through 4097.",
+      "quantity": "Number of nonconstant coefficient slots",
+      "value": "`2049`"
+    },
+    {
+      "derivation": "One binary constant plus 30 bits for each odd exponent; injectivity follows from the distance bound.",
+      "quantity": "Exact trace-RS dimension",
+      "value": "`1+30\u00b72049=61,471`"
+    },
+    {
+      "derivation": "Exact quotient `61,471/1,073,741,824`.",
+      "quantity": "Proved rate",
+      "value": "`0.00005724932998418808`"
+    },
+    {
+      "derivation": "`4096\u00b72^15`.",
+      "quantity": "Maximum character-sum error",
+      "value": "`2^27=134,217,728`"
+    },
+    {
+      "derivation": "`(2^30\u22122^27)/2`.",
+      "quantity": "Trace-RS distance lower bound",
+      "value": "`469,762,048`"
+    },
+    {
+      "derivation": "At `r=1024`, `g=r(r\u22121)/2`; the formal parity restrictions give `\u03a3_{a=0}^{84}(256\u2212a)=18,190` monomials.",
+      "quantity": "Formal Hermitian TAG binary-domain cap",
+      "value": "`20\u00b718,190=363,800`"
+    },
+    {
+      "derivation": "For `q=1024`, the trace of `L(1152P_\u221e)=span{1,x,y}` has kernel equal to the 19-dimensional trace-zero constant space.",
+      "quantity": "Explicit Hermitian trace subcode at target distance",
+      "value": "`[2^30,41,\u2265469,762,048]_2`"
+    },
+    {
+      "derivation": "Eight diagonal `[15,4,8]` simplex blocks plus one `RM(1,3)=[8,4,4]` block.",
+      "quantity": "Intermediate binary inner code",
+      "value": "`[128,4,68]_2`"
+    },
+    {
+      "derivation": "`\u2308469,762,048/68\u2309`; the product is `469,762,088`.",
+      "quantity": "Required `F_16` outer distance",
+      "value": "`6,908,266`"
+    },
+    {
+      "derivation": "The first six `16`-ary Griesmer terms sum to `7,368,819`, after which every term is one.",
+      "quantity": "Maximum possible `F_16` outer dimension at that distance",
+      "value": "`987,027`"
+    },
+    {
+      "derivation": "Final binary dimension is `4r`; `4\u00b7978,671=3,914,684`.",
+      "quantity": "Ceiling-beating intermediate-trace threshold",
+      "value": "`r\u2265978,671`"
+    }
+  ],
+  "proof_markdown": "### 1. Exact trace-RS theorem\n\nThe message space has binary dimension `1+30|J|=61,471`. The encoder is binary-linear because field trace, polynomial evaluation, and the coefficient parametrization are binary-linear. It has exactly `Q=2^30` coordinates.\n\nSuppose first that some `a_j` is nonzero, and let `t` be the largest such exponent. Then `t` is odd and `1\u2264t\u22644097`. A polynomial of odd degree cannot be of the form `u\u00b2+u+c`, since every nonconstant such function has even pole order at infinity. The additive Weil bound therefore applies:\n\n`|S_f|=|\u03a3_{\u03b1\u2208F}(-1)^{Tr(f(\u03b1))}|\u2264(t\u22121)\u221aQ\u22644096\u00b72^15=2^27`.\n\nWriting `w=wt(c_f)`, one has `S_f=Q\u22122w`, so\n\n`w\u2265(Q\u2212|S_f|)/2\u2265(2^30\u22122^27)/2=7\u00b72^26`.\n\nIn particular, a nonconstant message cannot encode to zero. If all nonconstant coefficients vanish, then `b=1` gives the all-one word by the definition of `\u03b7`. Thus the encoder is injective, its dimension is exactly 61,471, and every nonzero word satisfies the required distance.\n\nRepeatedly using\n\n`Tr(a\u03b1^{2j})=Tr(a^{2^29}\u03b1^j)`\n\nshows that this is also the full coordinatewise trace of the degree-at-most-4097 Reed\u2013Solomon code, expressed in canonical odd-degree form.\n\n### 2. Fixed trace-coordinate lemma\n\nFor `F=F_{2^m}`, the pairing `(a,b)\u21a6Tr(ab)` is nondegenerate. Hence every binary-linear functional on `F` is uniquely `x\u21a6Tr(\u03b2x)`, and every fixed symbolwise trace encoder is exactly an ordinary binary linear inner code.\n\nFor `m=8,t=128`, sum the weights of the 255 nonzero inner words. Each nonzero coordinate functional equals one on exactly 128 field elements, while a zero functional contributes nothing. Consequently the sum is at most `128\u00b7128`, and some nonzero word has weight at most `\u230a16384/255\u230b=64`. The baseline `RM(1,7)` inner code attains 64. This rules out improvement by merely choosing a different fixed list of 128 trace coordinates; it does not rule out global, value-sensitive trace constructions.\n\n### 3. Baseline subfield-subcode collapse\n\nLet the baseline one-point GS code use `G=1,015,808P_\u221e` and the `L=8,355,840` evaluation places. If `ev(f)` is binary, then `f\u00b2+f` vanishes at every evaluation place and has pole divisor of degree at most `2,031,616`. Since a nonzero function has equally many zeros and poles by degree, and `2,031,616<L`, one must have `f\u00b2+f=0`. Its only roots are 0 and 1, so `f\u2208F_2`. Therefore the full binary subfield subcode is the one-dimensional repetition code. This is an actual code theorem, not merely failure of a lower bound.\n\n### 4. Exact-length Hermitian structural lemma\n\nLet `q=1024`, `E=F_{q\u00b2}=F_{2^20}`, and\n\n`H: y^q+y=x^{q+1}`.\n\nIt has `N=q\u00b3=2^30` affine rational places and a unique point `P_\u221e`. Put `D` equal to the sum of the affine places and `w=x^{q\u00b2}+x`. Then `(w)=D\u2212NP_\u221e`.\n\nAt pole order `N/2`, if `ev(f)` is binary, then `(f\u00b2+f)/w` has no poles and is therefore a constant `c\u2208E`. Conversely,\n\n`Tr_{E/F_2}(cx)\u00b2+Tr_{E/F_2}(cx)=c(x^{q\u00b2}+x)=cw`.\n\nSubtracting this solution leaves a root of `u\u00b2+u`, hence a binary constant. Thus\n\n`C_L(D,(N/2)P_\u221e)\u2229F_2^N={ev(Tr(cx)+b):c\u2208E,b\u2208F_2}`\n\nand has exact parameters `[2^30,21,2^29]_2`.\n\nFor the target pole order `s_*=9\u00b72^26`, the same argument gives the exact reduction\n\n`f\u00b2+f=w h`, with `h\u2208L((2s_*\u2212N)P_\u221e)=L(2^27P_\u221e)`.\n\nThis proves binary linearity, exact length, and distance at least `N\u2212s_*=D_*` for the target subfield code, but it does not determine its dimension. A certified 41-dimensional subcode is obtained by tracing `L(1152P_\u221e)=span_E{1,x,y}`: the trace function has pole order at most `2^19\u00b71152=s_*`, and its kernel is precisely the 19-dimensional trace-zero constant space. Hence its dimension is `20\u00b73\u221219=41`.\n\n### 5. Formal Hermitian TAG ceiling\n\nFor the formal exact-length Hermitian family in CDGM Theorem 7.1, take `r=1024`, `q=r\u00b2=2^20`, binary trace, and maximal `T=g=r(r\u22121)/2=523,776`. Its restrictions force `j=2a+1` for `0\u2264a\u226484` and `i=2b`. The weighted-degree inequality gives `0\u2264b\u2264255\u2212a`. Therefore\n\n`dim_{F_q}V=\u03a3_{a=0}^{84}(256\u2212a)=18,190`.\n\nThe binary trace image consequently has dimension at most `20\u00b718,190=363,800`. Every smaller allowed `T` only removes monomials. Thus this particular formal family cannot reach the incumbent even if its trace map were injective and its hidden distance constant were ideal.\n\n### 6. Narrow surviving intermediate-trace route\n\nFeed the same four-bit message into eight copies of the `[15,4,8]` simplex code and one `RM(1,3)=[8,4,4]` code. This gives an explicit `[128,4,68]_2` inner code. An `F_16` outer code of length `L=8,355,840` and distance at least\n\n`d_16=\u2308D_*/68\u2309=6,908,266`\n\nwould concatenate to length `128L=1,069,547,520`, dimension `4r`, and distance at least `68d_16=469,762,088`. Padding `2^22` zeros gives exact length `2^30`.\n\nThe 16-ary Griesmer bound gives `r\u2264987,027`, while strict improvement over `7/1920` requires `4r\u22653,914,684`, or `r\u2265978,671`. Hence a trace construction `Tr_{256/16}(C_out)` can beat the ceiling only inside the narrow interval `978,671\u2264r\u2264987,027`. No code meeting both requirements is proved here, so this remains conditional.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "TR-1",
+      "proof": "The lexicographic irreducible polynomial, polynomial basis, trace-one element, odd exponent set, and evaluation ordering are all finite symbolic rules.",
+      "statement": "The trace-RS construction is deterministic and has exactly `2^30` binary coordinates.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TR-1"
+      ],
+      "id": "TR-2",
+      "proof": "The message space has `2049` independent `F_{2^30}` coefficients and one binary constant. The Weil distance bound excludes every nonconstant kernel vector; the trace-one constant excludes the remaining kernel vector.",
+      "statement": "The trace-RS code has exact binary dimension `1+30\u00b72049=61,471`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TR-2"
+      ],
+      "id": "TR-3",
+      "proof": "For every nonconstant message the largest exponent is odd and at most 4097, so the additive Weil error is at most `2^27`; converting the character sum to weight gives `7\u00b72^26`. The nonzero constant word has weight `2^30`.",
+      "statement": "Every nonzero trace-RS codeword has weight at least `469,762,048`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "OBS-1",
+      "proof": "Nondegeneracy of the trace pairing represents every binary coordinate functional as a scalar trace. Average weight over the 255 nonzero inputs is at most `16384/255`, so a `[128,8]` image has distance at most 64.",
+      "statement": "Changing a fixed list of 128 trace coordinates cannot improve the baseline inner distance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "OBS-2",
+      "proof": "For binary-valued evaluations, `f\u00b2+f` has `8,355,840` prescribed zeros but pole degree at most `2,031,616`; hence it is zero and `f` is a binary constant.",
+      "statement": "The baseline GS binary subfield subcode has exact dimension one.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "CDGM Theorem 7.1"
+      ],
+      "id": "OBS-3",
+      "proof": "At maximal `T`, enumerate `j=2a+1`, `i=2b`, with `0\u2264a\u226484` and `0\u2264b\u2264255\u2212a`; the sum is 18,190 field monomials and at most 363,800 binary dimensions.",
+      "statement": "The formal exact-length Hermitian TAG family audited here cannot reach the incumbent.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "HERM-1",
+      "proof": "The principal divisor of `x^{q\u00b2}+x` is `D\u2212q\u00b3P_\u221e`; division of `f\u00b2+f` by this function yields the stated Artin\u2013Schreier quotient relation.",
+      "statement": "The exact Hermitian target subfield code is binary linear, has length `2^30`, and distance at least the target.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "HERM-1"
+      ],
+      "id": "HERM-2",
+      "proof": "No available exact theorem determines the image dimension of `f\u21a6(f\u00b2+f)/(x^{q\u00b2}+x)` at pole order `9\u00b72^26`; the proved trace subspace has only dimension 41.",
+      "statement": "The Hermitian target subfield code is competitive.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "16-ary Griesmer bound"
+      ],
+      "id": "MID-1",
+      "proof": "The explicit inner code has parameters `[128,4,68]`; product-distance arithmetic and the 16-ary Griesmer sum force `978,671\u2264r\u2264987,027` for a ceiling-beating outer trace code.",
+      "statement": "An intermediate `F_256\u2192F_16` trace followed by `[128,4,68]_2` is the only surviving audited product-distance window.",
+      "status": "conditional"
+    }
+  ],
+  "rate": 5.724932998418808e-05,
+  "research_direction": "Structure-aware trace and subfield extraction, especially the Hermitian Frobenius-fixed filtration and the narrow `F_256\u2192F_16` intermediate-trace window.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "There is a completely deterministic binary trace-evaluation code `[2^30,61,471,\u2265469,762,048]_2`. It is noncompetitive. Moreover, fixed 128-coordinate traces cannot improve the RM(1,7) inner distance, the baseline GS binary subfield subcode has dimension one, and the formal exact-length Hermitian TAG family audited here has binary dimension at most 363,800. No audited trace/subfield mechanism beats the incumbent or the `7/1920` ceiling.",
+  "title": "Exact trace-RS construction and finite trace/subfield obstruction audit"
+}

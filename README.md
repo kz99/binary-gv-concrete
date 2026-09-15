@@ -8,6 +8,13 @@ n=2^{30}=1,073,741,824
 
 with minimum relative distance at least \(7/16\). The research objective is to maximize the dimension \(k\), equivalently the rate \(R=k/n\), using deterministic symbolic constructions with human-readable proofs.
 
+The finite target is a concrete test case for the asymptotic objective: construct
+an explicit binary family with relative distance
+\(1/2-\varepsilon\) and rate \(\Omega(\varepsilon^2)\) as
+\(\varepsilon\to0\), with all constants and proofs explicit. The designated
+near-half-distance checkpoint is \(\varepsilon=2^{-15}\), which at
+\(n=2^{30}\) means \(d_{\min}\ge536{,}838{,}144\).
+
 The public observatory is designed around three rules:
 
 1. A candidate is a mathematically specified code, not a random sample or a numerical search result.

@@ -224,11 +224,11 @@ DIRECTIONS = [
     "Find an explicit binary inner code or structured family that changes the one-level concatenation optimization enough to beat 7/1920, and instantiate it exactly at n=2^30.",
     "Develop a multilevel or generalized concatenation construction that provably crosses 7/1920 while keeping a human-readable minimum-distance proof.",
     "Use trace codes, subfield subcodes, or algebraic alphabet reduction to retain more of a GS outer code's dimension than Hadamard concatenation and prove the exact binary parameters.",
-    "Instantiate an epsilon-balanced or expander-amplified explicit construction at epsilon=1/8 and n=2^30, exposing all constants and exact shortening or padding losses.",
+    "Develop an explicit asymptotic family at relative distance 1/2-epsilon with rate Omega(epsilon^2), and instantiate the near-half checkpoint epsilon=2^-15 at n=2^30 with all constants and exact shortening or padding losses.",
     "Investigate deterministic replacements for random inner codes in low-rate concatenation theorems; produce a symbolic constituent and a proof, not a sampling argument.",
     "Search alternative explicit AG towers, divisors, or algebraic code operations whose binary reduction escapes the vanilla GS+Hadamard rate formula.",
     "Combine explicit base codes with expander distance amplification or direct-sum/product operations to cross 7/1920 at exact length, proving the weight propagation lemma.",
-    "Synthesize reusable proved lemmas from the repository into a genuinely beyond-ceiling architecture; attack the strongest missing lemma rather than merely proposing it.",
+    "Synthesize reusable proved lemmas into a genuinely asymptotic family with distance 1/2-epsilon and rate Omega(epsilon^2); instantiate epsilon=2^-15 and attack the strongest missing uniform lemma rather than merely proposing it.",
 ]
 
 
@@ -247,6 +247,15 @@ so a new record needs dimension at least 3,688,449.  Random sampling is not an
 admissible construction.  Every field, code, tower level, divisor, graph,
 ordering, shortening, puncturing, and padding choice must be deterministic and
 symbolically recoverable.  Distance must be proved for every nonzero codeword.
+
+The ultimate objective is an explicit asymptotic family C_epsilon with relative
+distance at least 1/2-epsilon and rate at least c*epsilon^2 for an explicit
+constant c>0 as epsilon tends to zero.  The designated near-half checkpoint is
+epsilon=2^-15=1/32768, whose relative distance is 16383/32768 and whose
+minimum distance at n=2^30 is 536,838,144.  Treat the fixed 7/16 instance as a
+stress test only: a finite certificate does not establish an asymptotic family.
+For every asymptotic claim, state the allowed epsilon range, block-length
+growth, constants, and uniform proof of the distance and rate bounds.
 
 The vanilla one-level Garcia--Stichtenoth plus RM(1,m-1) Hadamard calculation
 has rate envelope
@@ -649,6 +658,12 @@ you have examined every durable response and review path.
             "model": self.cfg.get("model"), "reasoning_effort": "ultra",
             "researcher_count": sum(job["role"] == "researcher" for job in jobs), "counts": counts,
             "target": {"block_length": N, "minimum_distance": D, "current_dimension": CURRENT_K},
+            "asymptotic_target": {
+                "relative_distance": self.cfg.get("asymptotic_relative_distance", "1/2-epsilon"),
+                "rate": self.cfg.get("asymptotic_rate_target", "Omega(epsilon^2)"),
+                "checkpoint_epsilon": self.cfg.get("asymptotic_checkpoint_epsilon", "2^-15"),
+                "checkpoint_minimum_distance": self.cfg.get("asymptotic_checkpoint_minimum_distance", 536_838_144),
+            },
             "gs_hadamard_template_ceiling": CEILING_RATE,
             "promising_candidates": candidates, "doubly_verified_candidates": verified,
         }

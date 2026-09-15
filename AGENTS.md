@@ -10,6 +10,15 @@ The score is the rigorously proved rate \(R=k/n\). Do not optimize or rank by a 
 
 Read `how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md` before proposing or reviewing a submission. It is the canonical public specification for this project.
 
+That target is the finite stress test. The ultimate objective is an explicit
+family \(C_\varepsilon\) with relative distance at least
+\(1/2-\varepsilon\) and rate \(\Omega(\varepsilon^2)\) as
+\(\varepsilon\to0\). The designated near-half-distance checkpoint is
+\(\varepsilon=2^{-15}\), i.e. relative distance \(16383/32768\); at
+\(n=2^{30}\) this is \(d_{\min}\ge536{,}838{,}144\). Every claimed
+asymptotic family must state its constant, range of \(\varepsilon\),
+block-length growth, and proof of uniformity.
+
 ## Campaign runtime
 
 Every autonomous role in the official campaign---researcher, literature analyst,

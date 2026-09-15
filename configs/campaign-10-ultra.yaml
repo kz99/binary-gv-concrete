@@ -16,6 +16,10 @@ campaign:
   timeout_seconds: 5400
   max_attempts: 3
   retry_seconds: 120
+  asymptotic_relative_distance: "1/2-epsilon"
+  asymptotic_rate_target: "Omega(epsilon^2)"
+  asymptotic_checkpoint_epsilon: "2^-15"
+  asymptotic_checkpoint_minimum_distance: 536838144
   # Publish durable outputs after each completed job. Agent traces and caches
   # remain local; submissions, metadata, reviews, synthesis, and snapshots are
   # synchronized to the configured Git remote.

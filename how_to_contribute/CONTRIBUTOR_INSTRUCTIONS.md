@@ -44,6 +44,21 @@ Therefore a strict new record must certify
 
 while preserving the exact length and required minimum distance.
 
+The broader asymptotic objective is an explicit family of codes:
+
+\[
+\frac{d(C_\varepsilon)}{n_\varepsilon}\ge \frac12-\varepsilon,
+\qquad
+R(C_\varepsilon)\ge c\,\varepsilon^2
+\]
+
+for an explicit constant \(c>0\) as \(\varepsilon\to0\) (or an explicitly
+accounted-for \(\varepsilon^{2+o(1)}\) bound). The designated near-half test is
+\(\varepsilon=2^{-15}\), i.e. relative distance \(16383/32768\); at
+\(n=2^{30}\) this requires \(d_{\min}\ge536,838,144\). The \(7/16\) instance
+remains the current finite leaderboard target and is not, by itself, an
+asymptotic result.
+
 For comparison, the binary Gilbert–Varshamov benchmark at relative distance \(7/16\) is
 
 \[

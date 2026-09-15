@@ -8,6 +8,34 @@ n=2^{30},\qquad d_{\min}\ge \frac{7}{16}n=469,762,048.
 
 Construct an explicit binary linear code \(C\subseteq\mathbb F_2^n\) with the largest rigorously proved dimension \(k\).
 
+## Asymptotic objective
+
+The finite instance is a stress test for the asymptotic goal. Ultimately seek an
+explicit family of binary linear codes \(C_\varepsilon\), for sufficiently small
+\(\varepsilon>0\), satisfying
+
+\[
+\frac{d(C_\varepsilon)}{n_\varepsilon}\ge \frac12-\varepsilon,
+\qquad
+R(C_\varepsilon)\ge c\,\varepsilon^2
+\]
+
+for an explicit constant \(c>0\) (or a bound of the form
+\(\varepsilon^{2+o(1)}\) with all losses stated). Researchers must identify
+which parts of a finite certificate survive uniformly in \(\varepsilon\), and
+must not present a one-off \(n=2^{30}\) construction as an asymptotic family.
+The current dashboard instance corresponds to \(\varepsilon=1/16\).
+
+The next designated near-half-distance checkpoint is
+\(\varepsilon=2^{-15}=1/32768\). At the existing test length
+\(n=2^{30}\), this means
+\[
+d_{\min}\ge (1/2-2^{-15})n=536{,}838{,}144.
+\]
+This checkpoint is for testing the asymptotic architecture; it does not replace
+the historical (7/16) leaderboard target unless a new campaign is explicitly
+started for it.
+
 ## Admissibility
 
 A ranked construction must be:

@@ -73,14 +73,19 @@ button { font: inherit; }
 .scale-labels, .scale-foot { display: flex; justify-content: space-between; color: var(--muted); font: 9px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
 .scale-track { position: relative; height: 8px; margin: 22px 0 15px; background: #dfe2dc; }
 .scale-fill { height: 100%; background: var(--green); }
+.scale-proposed-segment { position: absolute; top: 0; height: 100%; background: #d4875e; opacity: .9; }
 .record-pin { position: absolute; top: 0; transform: translate(-50%, -100%); padding-bottom: 11px; color: var(--green-dark); white-space: nowrap; }
 .record-pin i { position: absolute; left: 50%; bottom: 0; width: 1px; height: 9px; background: var(--green); }
 .record-pin b { font: 500 9px var(--mono); }
+.proposed-pin { position: absolute; top: 8px; transform: translateX(-50%); padding-top: 13px; color: #9a4f2c; white-space: nowrap; }
+.proposed-pin i { position: absolute; left: 50%; top: 0; width: 1px; height: 9px; background: #c87952; }
+.proposed-pin b { font: 500 9px var(--mono); }
 .literature-pin { position: absolute; top: -13px; height: 34px; transform: translateX(-50%); color: #c77b58; }
 .literature-pin i { display: block; height: 34px; border-left: 2px dashed #dca183; }
 .scale-foot span:last-child { color: var(--orange); }
 .scale-foot span { display: inline-flex; align-items: center; gap: 6px; }
 .baseline-key { width: 15px; height: 0; border-top: 2px dashed #dca183; }
+.proposed-key { width: 15px; height: 5px; background: #d4875e; }
 
 .leaderboard-heading { display: grid; grid-template-columns: 74px 1fr auto; padding: 0 18px 11px; color: var(--muted); font: 500 9px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
 .records-list { display: grid; gap: 12px; }

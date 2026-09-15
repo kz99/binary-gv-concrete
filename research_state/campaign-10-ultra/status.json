@@ -1,8 +1,14 @@
 {
+  "asymptotic_target": {
+    "checkpoint_epsilon": "2^-15",
+    "checkpoint_minimum_distance": 536838144,
+    "rate": "Omega(epsilon^2)",
+    "relative_distance": "1/2-epsilon"
+  },
   "counts": {
     "queued": 5,
-    "running": 7,
-    "succeeded": 14
+    "running": 6,
+    "succeeded": 15
   },
   "doubly_verified_candidates": [],
   "gs_hadamard_template_ceiling": 0.0036458333333333334,
@@ -107,6 +113,18 @@
     {
       "accepted_reviews": 0,
       "ceiling_beaten": false,
+      "dimension": 61471,
+      "id": "researcher-0015",
+      "minimum_distance": 469762048,
+      "rate": 5.724932998418808e-05,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0015.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Exact trace-RS construction and finite trace/subfield obstruction audit"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
       "dimension": 61455,
       "id": "researcher-0006",
       "minimum_distance": 469762048,
@@ -173,5 +191,5 @@
     "current_dimension": 3688448,
     "minimum_distance": 469762048
   },
-  "updated_at": "2026-09-15T03:18:34Z"
+  "updated_at": "2026-09-15T03:39:51Z"
 }

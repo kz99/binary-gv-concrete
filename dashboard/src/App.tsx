@@ -194,9 +194,10 @@ function ParameterBar() {
   );
 }
 
-function ProgressScale({ record }: { record: RecordEntry }) {
+function ProgressScale({ record, proposed }: { record: RecordEntry; proposed?: CampaignCandidate }) {
   const share = record.rate / gvRate;
   const literatureShare = literatureRate / gvRate;
+  const proposedShare = proposed?.rate == null ? null : proposed.rate / gvRate;
   return (
     <section className="benchmark-panel">
       <div className="benchmark-copy">
@@ -212,6 +213,12 @@ function ProgressScale({ record }: { record: RecordEntry }) {
         </div>
         <div className="scale-track">
           <div className="scale-fill" style={{ width: `${share * 100}%` }} />
+          {proposedShare != null && proposedShare > share && (
+            <div
+              className="scale-proposed-segment"
+              style={{ left: `${share * 100}%`, width: `${(proposedShare - share) * 100}%` }}
+            />
+          )}
           <span
             className="literature-pin"
             style={{ left: `${literatureShare * 100}%` }}
@@ -223,10 +230,18 @@ function ProgressScale({ record }: { record: RecordEntry }) {
             <i />
             <b>record {formatScore(record)}</b>
           </span>
+          {proposedShare != null && proposedShare > share && (
+            <span className="proposed-pin" style={{ left: `${proposedShare * 100}%` }}>
+              <i />
+              <b>best proposed {formatRate(proposed?.rate ?? 0)}</b>
+            </span>
+          )}
         </div>
         <div className="scale-foot">
           <span><i className="baseline-key" /> Fixed explicit literature baseline</span>
-          <span>Existential reference only</span>
+          {proposedShare != null && proposedShare > share ? (
+            <span><i className="proposed-key" /> Best proposed claim</span>
+          ) : <span>Existential reference only</span>}
         </div>
       </div>
     </section>
@@ -388,7 +403,7 @@ function RecordPage() {
         <div className="campaign-feed-status" role="status">
           <span className="feed-dot" /> Live research feed {live ? 'connected' : 'using latest checkpoint'} · {succeeded} jobs completed · {totalResearch} researchers · refreshed every 30 seconds
         </div>
-        <ProgressScale record={leader} />
+        <ProgressScale record={leader} proposed={proposed[0]} />
         <div className="leaderboard-heading">
           <span>Rank</span>
           <span>Construction and certified parameters</span>
