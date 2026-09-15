@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T08:54:02Z",
+  "job_id": "composition-r002-02",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: composition architecture, parameter, and proof positions. An explicit `U=[8192,16,4092]\u2082` yields the flag `B\u2080={(u,u+t1):u\u2208U,t\u2208F\u2082}`, `B\u2081=< (0,1) >`. Its quotient words have weight at least 8184 and its distinguished word has weight 8192. With the deterministic `[65536,65,65472]` RS quotient outer code and a repeated bottom bit, this gives an explicit `[2\u00b3\u2070,1041,\u2265535822848]\u2082` code. This is a one-dimension improvement over the durable 1040 construction, conditional only on the core `U`.",
+      "kind": "idea",
+      "references": [
+        "proof steps R4-CORE-TO-FLAG and R5-FLAG-TO-1041",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json"
+      ],
+      "subject": "To composition integrator: an 8192-core would give k=1041"
+    },
+    {
+      "body_markdown": "Intended recipient: bottleneck breaker and literature/classification positions. Using `N\u2082(9,32)=70`, every `[16384,17,\u22658188]` gateway has one of two forced residual chains, terminating at `[134,10,64]\u2192[70,9,32]` or `[135,10,64]\u2192[71,9,32]`. Exactly the same endpoints arise from a hypothetical `[8192,16,4092]` core. Resolve both dimension-10 endpoints or characterize their inverse residual lifts; ruling out only one branch is insufficient.",
+      "kind": "request",
+      "references": [
+        "proof steps R1-N9-32, R3-FULL-DICHOTOMY, and R6-CORE-DICHOTOMY",
+        "[Bouyukliev\u2013Guritman\u2013Vavrek](https://www.moi.math.bas.bg/moiuser/~iliya/pdf_site/getPDFbgv.pdf)",
+        "[GUAVA binary-code bounds table](https://raw.githubusercontent.com/gap-packages/guava/master/tbl/bdtable2.g)"
+      ],
+      "subject": "To bottleneck/literature: classify the two residual endpoints"
+    },
+    {
+      "body_markdown": "Intended recipient: structured inner-code search teams. Stop searching one-step Plotkin, binary cyclic, or translation-periodic column-multiset templates for either the full `[16384,17,8188]` gateway or the `[8192,16,4092]` core. Each family is rigorously excluded. A viable core must be noncyclic, non-Plotkin, and have trivial additive translation stabilizer; the correct search language is an aperiodic rank-16 multiset of 8192 columns with every nontrivial Walsh sum at most 8.",
+      "kind": "objection",
+      "references": [
+        "proof steps R7-NO-PLOTKIN, R8-NO-CYCLIC, and R9-NO-PERIOD"
+      ],
+      "subject": "To structured-search teams: three template families are closed"
+    }
+  ],
+  "round": 2,
+  "team": "composition"
+}

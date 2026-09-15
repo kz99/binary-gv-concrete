@@ -1,0 +1,267 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No unconditional inner code was found. The strongest concrete handoff is the following deterministic reduction.\n\nAssume an explicit binary code `U=[8192,16,4092]\u2082` with ordered generator rows `u\u2081,\u2026,u\u2081\u2086`. Define\n\n`B\u2080={(u,u+t\u00b71\u2088\u2081\u2089\u2082):u\u2208U, t\u2208F\u2082}` and `B\u2081=span{b}`, where `b=(0,1\u2088\u2081\u2089\u2082)`.\n\nThen `dim(B\u2080)=17`, `dim(B\u2081)=1`, `wt(b)=8192`, and every word of `B\u2080\\B\u2081` has weight at least 8184: for `t=0` its weight is `2wt(u)\u22658184`, while for `t=1` its weight is exactly 8192. Thus this is the exceptional-line flag required by `composition-r002-01`.\n\nFor completeness, the resulting conditional target code can be specified directly. Let `F=F\u2082[Z]/(Z\u00b9\u2076+Z\u2075+Z\u00b3+Z\u00b2+1)`, order its 65536 elements by their 16-bit polynomial coordinates, and take the full-length Reed\u2013Solomon evaluation code of polynomials of degree at most 64. It has parameters `[65536,65,65472]\u208dF\u208e`. Identify the polynomial basis of `F` with the ordered rows of `U`; write the induced linear isomorphism as `\u03c8:F\u2192U`. For an outer word `(a_x)_{x\u2208F}`, encode block `x` as `(\u03c8(a_x),\u03c8(a_x))`, and optionally add `b` in every block. The binary dimension is `16\u00b765+1=1041`, length is `65536\u00b716384=2\u00b3\u2070`, and the conditional distance is at least `min(8184\u00b765472,8192\u00b765536)=535822848>D`.\n\nThe unresolved object is exactly the symbolic, polynomial-time generator for `U`. It cannot be replaced by a lookup or exhaustive selector.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: composition architecture, parameter, and proof positions. An explicit `U=[8192,16,4092]\u2082` yields the flag `B\u2080={(u,u+t1):u\u2208U,t\u2208F\u2082}`, `B\u2081=< (0,1) >`. Its quotient words have weight at least 8184 and its distinguished word has weight 8192. With the deterministic `[65536,65,65472]` RS quotient outer code and a repeated bottom bit, this gives an explicit `[2\u00b3\u2070,1041,\u2265535822848]\u2082` code. This is a one-dimension improvement over the durable 1040 construction, conditional only on the core `U`.",
+      "kind": "idea",
+      "references": [
+        "proof steps R4-CORE-TO-FLAG and R5-FLAG-TO-1041",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json"
+      ],
+      "subject": "To composition integrator: an 8192-core would give k=1041"
+    },
+    {
+      "body_markdown": "Intended recipient: bottleneck breaker and literature/classification positions. Using `N\u2082(9,32)=70`, every `[16384,17,\u22658188]` gateway has one of two forced residual chains, terminating at `[134,10,64]\u2192[70,9,32]` or `[135,10,64]\u2192[71,9,32]`. Exactly the same endpoints arise from a hypothetical `[8192,16,4092]` core. Resolve both dimension-10 endpoints or characterize their inverse residual lifts; ruling out only one branch is insufficient.",
+      "kind": "request",
+      "references": [
+        "proof steps R1-N9-32, R3-FULL-DICHOTOMY, and R6-CORE-DICHOTOMY",
+        "[Bouyukliev\u2013Guritman\u2013Vavrek](https://www.moi.math.bas.bg/moiuser/~iliya/pdf_site/getPDFbgv.pdf)",
+        "[GUAVA binary-code bounds table](https://raw.githubusercontent.com/gap-packages/guava/master/tbl/bdtable2.g)"
+      ],
+      "subject": "To bottleneck/literature: classify the two residual endpoints"
+    },
+    {
+      "body_markdown": "Intended recipient: structured inner-code search teams. Stop searching one-step Plotkin, binary cyclic, or translation-periodic column-multiset templates for either the full `[16384,17,8188]` gateway or the `[8192,16,4092]` core. Each family is rigorously excluded. A viable core must be noncyclic, non-Plotkin, and have trivial additive translation stabilizer; the correct search language is an aperiodic rank-16 multiset of 8192 columns with every nontrivial Walsh sum at most 8.",
+      "kind": "objection",
+      "references": [
+        "proof steps R7-NO-PLOTKIN, R8-NO-CYCLIC, and R9-NO-PERIOD"
+      ],
+      "subject": "To structured-search teams: three template families are closed"
+    }
+  ],
+  "distance_audit": [
+    "Immutable target: `D=(1/2-2\u207b\u00b9\u2070)2\u00b3\u2070=2\u00b2\u2079-2\u00b2\u2070=535822336`.",
+    "Conditional full-gateway payoff: `8188\u00b765440=535822720=D+384`, with dimension `17\u00b797=1649`.",
+    "Conditional 8192-core flag payoff: `8184\u00b765472=535822848=D+512`; the pure distinguished-line word has weight `8192\u00b765536=536870912=D+1048576`.",
+    "The exact small-code input strengthens the ordinary Griesmer estimates to `N\u2082(16,4094)\u22658195`, `N\u2082(17,8188)\u226516383`, `N\u2082(15,2046)\u22654099`, and `N\u2082(16,4092)\u22658191`.",
+    "No unconditional target code is asserted, so `minimum_distance`, `dimension`, and `rate` are null."
+  ],
+  "explicitness_audit": [
+    "The hypothetical target matrix has a fully specified deterministic block algorithm, fixed field polynomial, fixed field-element ordering, fixed RS evaluation set, and fixed row ordering inherited from the hypothetical core.",
+    "Given a deterministic generator for `U`, the entire `1041\u00d72\u00b3\u2070` target matrix is output in fewer than `2\u00b3\u2070\u00b72\u00b9\u2075<n\u00b2` elementary bit operations; output size itself is `1041n`.",
+    "No deterministic symbolic generator for `U=[8192,16,4092]\u2082` is presently supplied. Therefore the hard explicitness requirement fails and `leaderboard_submission=false`.",
+    "No random sampling, canonical exhaustive construction, conditional-expectation selector, or finite lookup is used. The finite classification in the cited dimension-nine paper is used only as a proved nonexistence lower bound.",
+    "No records, proof files, validator output, or dashboard were modified because this is a foundation handoff rather than a publication candidate."
+  ],
+  "generator_matrix": {
+    "algorithm": "Conditional algorithm: take an explicit ordered `16\u00d78192` generator `G_U`. Use `F=F\u2082[Z]/(Z\u00b9\u2076+Z\u2075+Z\u00b3+Z\u00b2+1)` and list field elements by increasing 16-bit polynomial coordinate. For each of the 65 monomials and each of the 16 field-basis coefficients, evaluate the corresponding monomial at all 65536 field elements. At evaluation value `a`, express `a` in the fixed basis, multiply that 16-bit vector by `G_U` to obtain `\u03c8(a)`, and output the 16384-bit block `(\u03c8(a),\u03c8(a))`. These are 1040 rows. Output one final row consisting of 65536 copies of `(0\u2088\u2081\u2089\u2082,1\u2088\u2081\u2089\u2082)`. No unconditional execution is claimed because `G_U` is missing.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Conditional on the core generator, fewer than `1040\u00b765536\u00b7(64\u00b716\u00b2+16\u00b78192)+1041n < 2\u00b9\u2075n < n\u00b2` bit operations at `n=2\u00b3\u2070`.",
+    "runtime_proof": "Horner evaluation of each degree-at-most-64 monomial row costs at most `64\u00b716\u00b2` bit operations per field point under schoolbook fixed-degree arithmetic. Forming a block from the 16 core rows costs at most `16\u00b78192` bit operations, and writing the output costs `1041n`. Substitution of the fixed parameters gives the displayed bound. Thus the reduction preserves explicit polynomial-time full-matrix generation, but only after an explicit `G_U` is supplied."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Binary linear codes; no additional structural hypothesis.",
+      "result": "The exact minimum length is `N\u2082(9,32)=70`; the paper also supplies a `[70,9,32]\u2082` construction.",
+      "source": "[Bouyukliev, Guritman, and Vavrek, Some Bounds for the Minimum Length of Binary Linear Codes of Dimension Nine](https://www.moi.math.bas.bg/moiuser/~iliya/pdf_site/getPDFbgv.pdf)",
+      "used_for": "Strengthening the residual lower bounds by four coordinates and forcing the two exact residual-chain endpoints. Its exhaustive computation is used only as an external obstruction theorem, never as the target construction."
+    },
+    {
+      "hypotheses": "The GAP table entries are read with the package's documented dimension indexing.",
+      "result": "The current table data encode `62\u2264d\u2082(134,10)\u226464` and `63\u2264d\u2082(135,10)\u226464`; neither terminal `[134,10,64]` nor `[135,10,64]` is certified impossible there.",
+      "source": "[Official GUAVA binary-code bounds data](https://raw.githubusercontent.com/gap-packages/guava/master/tbl/bdtable2.g)",
+      "used_for": "Establishing that both residual endpoints remain genuine targeted bottlenecks rather than silently settled cases."
+    },
+    {
+      "hypotheses": "A rank-17 flag of length 16384 has a distinguished line of weight at least 8176 and all words outside that line have weight at least 8184.",
+      "result": "The quotient-RS plus repeated-bottom construction has target dimension 1041 and distance at least `D`.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json",
+      "used_for": "Turning the new `[8192,16,4092]` core reduction into a concrete conditional leaderboard payoff."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Search directly for a symbolic aperiodic rank-16 column multiset of size 8192 with Walsh inequalities `\u03a3_x \u03bc(x)(-1)^{a\u00b7x}\u22648` for every nonzero `a`; any survivor must come with a closed-form generator, not a lookup.",
+    "Classify inverse residual lifts from `[70,9,32]` and `[71,9,32]` through the two forced chains. Prove nonexistence of both `[134,10,64]` and `[135,10,64]`, or derive structural constraints that rule out the required lifts.",
+    "Investigate non-Plotkin two-level or orbit constructions whose column multiset has trivial translation stabilizer. Cyclic repeated-root codes and union-of-translate-pairs should be removed from the search space.",
+    "Have the composition architecture/proof positions integrate the core-to-flag lemma; if an explicit core appears, the conditional generator and all target arithmetic are already ready for submission."
+  ],
+  "obstructions": [
+    "A full `[16384,17,8188]\u2082` gateway has only one coordinate of slack over the strengthened lower bound `N\u2082(17,8188)\u226516383`, and its residual tower is forced into two small terminal branches.",
+    "Neither the full gateway nor the `[8192,16,4092]` core can be a one-step Plotkin code.",
+    "No binary cyclic code of the relevant power-of-two length and dimension at least 16 can work: it contains a word of weight at most 1024 at length 16384, or 512 at length 8192.",
+    "The generator-column multiset of either object must have trivial additive translation stabilizer; otherwise quotienting a period produces a shorter code forbidden by the strengthened residual bounds.",
+    "The usual pairwise-disjoint whole-subspace Solomon\u2013Stiffler deletion certificate cannot reach `[8192,16,4092]`; more general affine or nonuniform deletions are not excluded."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Target length and distance",
+      "value": "`n=2\u00b3\u2070=1073741824`, `D=2\u00b2\u2079-2\u00b2\u2070=535822336`"
+    },
+    {
+      "derivation": "Full inner gateway needed by the 17-bit RS route.",
+      "quantity": "Full gateway",
+      "value": "`[16384,17,8188]\u2082`, signed Walsh cap `16384-2\u00b78188=8`"
+    },
+    {
+      "derivation": "Residual recurrence plus `N\u2082(9,32)=70`.",
+      "quantity": "Strengthened full-gateway lower bounds",
+      "value": "`N\u2082(16,4094)\u22658195`; `N\u2082(17,8188)\u226516383`; `N\u2082(17,8189)\u226516386`"
+    },
+    {
+      "derivation": "Outer RS parameters inherited from the full-gateway route.",
+      "quantity": "Conditional k=1649 payoff",
+      "value": "Outer `[65536,97,65440]` over `F\u2082\u00b9\u2077`; `k=17\u00b797=1649`; distance `D+384`"
+    },
+    {
+      "derivation": "New core sufficient for the exceptional-line shell.",
+      "quantity": "Core gateway",
+      "value": "`U=[8192,16,4092]\u2082`, signed Walsh cap `8192-2\u00b74092=8`"
+    },
+    {
+      "derivation": "`B\u2080={(u,u+t1)}` and `B\u2081=< (0,1) >`.",
+      "quantity": "Flag shell",
+      "value": "Length 16384, rank 17; outside-line distance at least 8184; distinguished-line weight 8192"
+    },
+    {
+      "derivation": "Full-field RS evaluation of degree at most 64 over `F\u2082\u00b9\u2076`.",
+      "quantity": "Flag outer code",
+      "value": "`[65536,65,65472]`; binary quotient dimension `16\u00b765=1040`"
+    },
+    {
+      "derivation": "Add the repeated distinguished-line row.",
+      "quantity": "Conditional target result",
+      "value": "`[2\u00b3\u2070,1041,\u2265535822848]\u2082`; conditional rate `1041/1073741824`"
+    },
+    {
+      "derivation": "Residual recurrence plus `N\u2082(9,32)=70`.",
+      "quantity": "Core lower bounds",
+      "value": "`N\u2082(15,2046)\u22654099`; `N\u2082(16,4092)\u22658191`; `N\u2082(16,4093)\u22658194`"
+    },
+    {
+      "derivation": "Lucas' theorem applied to `(X+1)^(N-16)`.",
+      "quantity": "Cyclic witnesses",
+      "value": "Weight 1024 for `N=16384`; weight 512 for `N=8192`"
+    }
+  ],
+  "proof_markdown": "### Residual lemma and refined finite bounds\n\nLet `N\u2082(k,d)` denote the minimum length of a binary linear code of dimension `k` and distance at least `d`. If `c` is a minimum word of weight `d` in a `[N,k,d]\u2082` code, puncture on its support. The kernel is exactly `<c>`: a second independent kernel word would split the support of `c` into two nonzero codewords, one of weight at most `d/2<d`. For any other word, comparing it with its sum with `c` shows that its weight outside `supp(c)` is at least `ceil(d/2)`. Therefore\n\n`N\u2082(k,d) \u2265 d + N\u2082(k-1,ceil(d/2))`.\n\nThe exact theorem `N\u2082(9,32)=70` from [Bouyukliev\u2013Guritman\u2013Vavrek](https://www.moi.math.bas.bg/moiuser/~iliya/pdf_site/getPDFbgv.pdf) now gives\n\n`N\u2082(16,4094)\u22654094+2047+1024+512+256+128+64+70=8195`,\n\n`N\u2082(16,4095)\u22654095+2048+1024+512+256+128+64+70=8197`,\n\nand hence `N\u2082(17,8188)\u226516383` and `N\u2082(17,8189)\u226516386`.\n\n### Forced full-gateway residuals\n\nSuppose `C=[16384,17,\u22658188]\u2082`. The last bound forces its actual minimum to be 8188. Residualizing a minimum word gives `[8196,16,\u22654094]`; its actual minimum is 4094 because a value at least 4095 would require length 8197. The next residual is `[4102,15,\u22652047]`. Griesmer gives `g(15,2049)=4110`, so its minimum is 2047 or 2048.\n\nIf it is 2048, repeated residualization forces\n\n`[4102,15,2048]\u2192[2054,14,1024]\u2192[1030,13,512]\u2192[518,12,256]\u2192[262,11,128]\u2192[134,10,64]\u2192[70,9,32]`.\n\nIf it is 2047, it forces\n\n`[4102,15,2047]\u2192[2055,14,1024]\u2192[1031,13,512]\u2192[519,12,256]\u2192[263,11,128]\u2192[135,10,64]\u2192[71,9,32]`.\n\nExactness at successive stages follows from `g(14,1025)=2061`, `g(13,513)=1036`, `g(12,257)=523`, `g(11,129)=266`, `g(10,65)=137`, and `g(9,33)=72`.\n\n### The 8192-core reduction\n\nSuppose `U=[8192,16,4092]\u2082`. The flag construction in `construction_markdown` is linear and has dimension 17 because `(0,1)` is independent of all `(u,u)`. Its weight calculation proves the claimed flag parameters. Concatenating its 16-dimensional quotient with the `[65536,65,65472]` full-field RS code and repeating the bottom line gives dimension `16\u00b765+1=1041`. A nonzero quotient outer word has at least 65472 nonzero blocks, each of weight at least 8184 even after adding the bottom word. A pure bottom word has weight `8192\u00b765536`. This proves the conditional target distance.\n\nThe core itself is also defect-one. The recurrence gives `N\u2082(16,4092)\u22658191` and `N\u2082(16,4093)\u22658194`, so its actual minimum would be 4092. Its residual is exactly `[4100,15,2046]`, since `N\u2082(15,2047)\u22654101`. The next residual has parameters `[2054,14,d]` with `d\u2208{1023,1024}`. The `d=1024` branch continues through lengths `1030,518,262,134,70`; the `d=1023` branch continues through `1031,519,263,135,71`, with the same dimensions and distances as the full-gateway branches above.\n\n### Structured-family exclusions\n\nFor a one-step Plotkin code `P(A,V)={(a,a+v)}` of half-length `m`, target distance implies `d(V)` is at least the full target distance and `d(A)` at least half of it. Every binary linear code of dimension at least two and length `m` has distance at most `2m/3`: in a two-dimensional subcode, the three nonzero words have total weight at most `2m`. Thus a full gateway would have `dim(V)\u22641` and `dim(A)\u226516`, producing a forbidden `[8192,16,\u22654094]` subcode. Likewise a core would produce a forbidden `[4096,15,\u22652046]` subcode. Hence neither is one-step Plotkin.\n\nFor binary cyclic length `N=2\u02e2`, `X\u1d3a-1=(X+1)\u1d3a`, and every cyclic code is generated by a power of `X+1`. A code of dimension at least 16 contains `(X+1)^(N-16)`. Lucas' theorem gives its coefficient weight `2^popcount(N-16)=2^(s-4)`, namely 1024 for `s=14` and 512 for `s=13`. Both are far below the required distances.\n\nFinally, let `\u03bc:F\u2082\u02b3\u2192Z\u22650` be the generator-column multiplicity and `S(a)=\u03a3_x \u03bc(x)(-1)^(a\u00b7x)`. Minimum distance is equivalent to an upper bound on every nontrivial `S(a)`. If `\u03bc(x)=\u03bc(x+h)` for nonzero `h`, collapse the pairs modulo `<h>`. For every nonzero quotient character, `S(a)=2T(a)`. In the full gateway `S(a)\u22648`, so the quotient has length 8192, dimension 16, and distance at least `(8192-4)/2=4094`, contradicting `N\u2082(16,4094)\u22658195`. Applied to the core, the quotient would be `[4096,15,\u22652046]`, contradicting `N\u2082(15,2046)\u22654099`. Thus both column multisets must be additively aperiodic.",
+  "proof_steps": [
+    {
+      "dependencies": [
+        "Bouyukliev\u2013Guritman\u2013Vavrek exact dimension-nine result"
+      ],
+      "id": "R1-N9-32",
+      "proof": "The cited paper proves nonexistence at length 69 and constructs length 70.",
+      "statement": "`N\u2082(9,32)=70`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "R2-RESIDUAL",
+      "proof": "Puncturing outside a minimum word has kernel exactly its span; comparing `x` and `x+c` gives residual distance at least `ceil(d/2)`.",
+      "statement": "`N\u2082(k,d)\u2265d+N\u2082(k-1,ceil(d/2))`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "R1-N9-32",
+        "R2-RESIDUAL",
+        "Griesmer bound"
+      ],
+      "id": "R3-FULL-DICHOTOMY",
+      "proof": "The refined lower bounds force exact minima 8188 and 4094. The next minimum is 2047 or 2048, after which the displayed Griesmer inequalities force every successive value.",
+      "statement": "Every `[16384,17,\u22658188]\u2082` code follows exactly one of the two residual chains ending at `[134,10,64]\u2192[70,9,32]` or `[135,10,64]\u2192[71,9,32]`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "R4-CORE-TO-FLAG",
+      "proof": "Direct dimension and weight calculation for `(u,u+t1)`.",
+      "statement": "Every explicit `[8192,16,4092]\u2082` code deterministically yields a rank-17 exceptional-line flag with outside-line distance 8184 and line weight 8192.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "R4-CORE-TO-FLAG",
+        "composition-r002-01 exceptional-line composition"
+      ],
+      "id": "R5-FLAG-TO-1041",
+      "proof": "The fixed full-field RS quotient has parameters `[65536,65,65472]`; blockwise encoding gives length `2\u00b3\u2070`, dimension 1041, and distance at least `8184\u00b765472=D+512`.",
+      "statement": "An explicit polynomial-time `[8192,16,4092]\u2082` core would yield an explicit target code of dimension 1041.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "R1-N9-32",
+        "R2-RESIDUAL",
+        "Griesmer bound"
+      ],
+      "id": "R6-CORE-DICHOTOMY",
+      "proof": "The bounds `N\u2082(16,4093)\u22658194` and `N\u2082(15,2047)\u22654101` force the first two minima; later values follow from the same Griesmer checks as R3.",
+      "statement": "Every `[8192,16,4092]\u2082` core has one of two exact residual chains ending at the same dimension-10 and dimension-9 endpoints as R3.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "R1-N9-32",
+        "R2-RESIDUAL"
+      ],
+      "id": "R7-NO-PLOTKIN",
+      "proof": "The two-dimensional averaging bound forces the second Plotkin constituent to have dimension at most one; the first constituent would violate `N\u2082(16,4094)\u22658195` or `N\u2082(15,2046)\u22654099`.",
+      "statement": "Neither required inner object can be a one-step Plotkin code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Lucas' theorem"
+      ],
+      "id": "R8-NO-CYCLIC",
+      "proof": "Repeated-root ideal classification supplies `(X+1)^(N-16)` of weight `2^(s-4)`.",
+      "statement": "Binary cyclic power-of-two-length codes cannot furnish the full gateway, exceptional flag, or 8192-core.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "R1-N9-32",
+        "R2-RESIDUAL"
+      ],
+      "id": "R9-NO-PERIOD",
+      "proof": "Quotienting any nonzero translation period halves the Walsh cap and produces a forbidden `[8192,16,4094]` or `[4096,15,2046]` code.",
+      "statement": "Every viable full gateway or 8192-core generator-column multiset has trivial additive translation stabilizer.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "R10-SS-CERTIFICATE",
+      "proof": "Deleting disjoint nonzero subspaces of dimensions `u_i` from the 16-dimensional simplex would require `\u03a3(2^u_i-1)=57343`. The usual distance certificate requires `\u03a32^u_i\u226457352`, hence at most nine subspaces. Pairwise trivial intersection permits at most one dimension at least nine, so the sum is at most `2^15+8\u00b72^8=34816`, a contradiction.",
+      "statement": "The standard pairwise-disjoint whole-subspace Solomon\u2013Stiffler deletion certificate cannot produce the 8192-core.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Structured inner-code search with proofs",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 54 files present at analysis time)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 51 durable submissions audited; directly relevant files read in full)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-06.json"
+  ],
+  "submission_class": "proof_tool",
+  "theorem_statement": "Using the exact finite result `N\u2082(9,32)=70`, a full `[16384,17,8188]\u2082` gateway and a hypothetical `[8192,16,4092]\u2082` exceptional-line core each have one of two forced residual towers ending at `[134,10,64]\u2192[70,9,32]` or `[135,10,64]\u2192[71,9,32]`. Both inner objects are excluded from one-step Plotkin, binary cyclic, and additively periodic column-multiset families. Conversely, any deterministic polynomial-time `[8192,16,4092]\u2082` core yields a completely specified conditional `[2\u00b3\u2070,1041,\u2265535822848]\u2082` construction.",
+  "title": "Defect-one residual endpoints and an 8192-core reduction for k=1041"
+}
