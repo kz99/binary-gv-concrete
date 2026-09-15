@@ -615,6 +615,23 @@ class Campaign:
         payload["recovered_schema_failures"] = recovered
         return payload
 
+    def requeue_interrupted_jobs(self) -> dict[str, Any]:
+        """Return jobs left running by a stopped controller to the durable queue."""
+        self.initialize()
+        jobs = self._read_jobs()
+        recovered = 0
+        for job in jobs:
+            if job.get("status") == "running":
+                job["status"] = "queued"
+                job["error"] = "Requeued after the campaign controller was stopped for wrap-up."
+                job["updated_at"] = utc_timestamp()
+                recovered += 1
+        if recovered:
+            self._write_jobs(jobs)
+        payload = self.export_snapshot()
+        payload["requeued_interrupted_jobs"] = recovered
+        return payload
+
     def _submission_paths(self) -> list[str]:
         return [str(path.relative_to(self.paths.workspace)) for path in sorted((self.root / "submissions").glob("*.json"))]
 
