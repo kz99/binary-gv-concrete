@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 
 from binary_gv_research.agents import CommandAgentProvider
-from binary_gv_research.campaign import Campaign, D, GV_RATE, load_config
+from binary_gv_research.campaign import Campaign, D, GV_RATE, RESEARCHER_EFFORTS, load_config
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +14,8 @@ class CampaignTests(unittest.TestCase):
         config, _ = load_config(ROOT / "configs" / "campaign-epsilon-2-10-ultra.yaml")
         self.assertEqual(config["campaign"]["reasoning_effort"], "ultra")
         self.assertEqual(config["campaign"]["verifier_reasoning_effort"], "xhigh")
+        self.assertEqual(tuple(config["campaign"]["researcher_reasoning_efforts"]), RESEARCHER_EFFORTS)
+        self.assertEqual(config["campaign"]["synthesis_reasoning_effort"], "xhigh")
         self.assertTrue(config["campaign"]["require_polynomial_generator_matrix"])
         self.assertEqual(config["campaign"]["researcher_count"], 40)
         self.assertEqual(config["campaign"]["block_length"], 2**30)
@@ -52,6 +54,13 @@ class CampaignTests(unittest.TestCase):
         }
         self.assertTrue(Campaign._has_polynomial_generator(valid))
         self.assertFalse(Campaign._has_polynomial_generator({}))
+
+    def test_research_team_mixes_three_reasoning_levels(self):
+        campaign = Campaign(ROOT / "configs" / "campaign-epsilon-2-10-ultra.yaml")
+        efforts = [campaign._job_effort(f"team-{index:02d}", "researcher") for index in range(1, 11)]
+        self.assertEqual(efforts, list(RESEARCHER_EFFORTS))
+        self.assertEqual(campaign._job_effort("GENIUS", "genius"), "ultra")
+        self.assertEqual(campaign._job_effort("roadmap-expander", "roadmap"), "xhigh")
 
 
 if __name__ == "__main__":

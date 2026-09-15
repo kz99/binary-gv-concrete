@@ -24,10 +24,12 @@ as a construction method.
 
 ## Runtime and coordination
 
-Researchers, literature analysts, verifiers, lemma editors, roadmap authors,
-and the GENIUS synthesizer run at `model_reasoning_effort="ultra"`. Share
-lemmas and proof tools across roadmaps, while giving each researcher modest
-preference for its assigned roadmap.
+Each ten-seat research team mixes `ultra`, `max`, and `xhigh` reasoning: three
+ultra researchers, four max researchers, and three xhigh researchers. The
+GENIUS synthesizer remains ultra. Verifiers, literature analysts, lemma
+editors, and roadmap authors use xhigh. Share lemmas and proof tools across
+roadmaps, while giving each researcher modest preference for its assigned
+roadmap.
 
 ## Submission standard
 

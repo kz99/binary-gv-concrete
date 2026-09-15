@@ -22,6 +22,7 @@ D = 535_822_336
 CURRENT_K = 31
 EPSILON_DENOMINATOR = 1_024
 GV_RATE = 0.0000027517241633056023
+RESEARCHER_EFFORTS = ("ultra", "max", "xhigh", "max", "ultra", "xhigh", "max", "ultra", "xhigh", "max")
 
 
 def utc_timestamp() -> str:
@@ -331,6 +332,10 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
         raise ValueError("campaign.reasoning_effort must be ultra")
     if cfg.get("verifier_reasoning_effort") != "xhigh":
         raise ValueError("campaign.verifier_reasoning_effort must be xhigh")
+    if tuple(cfg.get("researcher_reasoning_efforts", ())) != RESEARCHER_EFFORTS:
+        raise ValueError("research teams must mix three ultra, four max, and three xhigh seats")
+    if cfg.get("synthesis_reasoning_effort") != "xhigh":
+        raise ValueError("campaign synthesis reasoning effort must be xhigh")
     if cfg.get("require_polynomial_generator_matrix") is not True:
         raise ValueError("campaign requires a polynomial-time full generator-matrix algorithm")
     if int(cfg.get("researcher_count", 0)) != 40:
@@ -373,6 +378,7 @@ class Campaign:
         for name in ("submissions", "reviews", "lemma_book", "roadmaps", "genius", "metadata", "message_board"):
             (self.root / name).mkdir(parents=True, exist_ok=True)
         if self.jobs_path.exists():
+            self._normalize_queued_job_efforts()
             return self.status()
         jobs: list[dict[str, Any]] = []
         for team, directions in TEAM_DIRECTIONS.items():
@@ -440,12 +446,37 @@ class Campaign:
             "dependency": dependency, "status": "queued", "attempts": 0,
             "team": team, "round": round_number,
             "model": self.cfg.get("model", "gpt-5.6-sol"),
-            "reasoning_effort": (
-                self.cfg["verifier_reasoning_effort"] if role == "verifier" else "ultra"
-            ),
+            "reasoning_effort": self._job_effort(job_id, role),
             "error": None,
             "created_at": utc_timestamp(), "updated_at": utc_timestamp(),
         }
+
+    def _job_effort(self, job_id: str, role: str) -> str:
+        if role == "researcher":
+            try:
+                seat = int(job_id.rsplit("-", 1)[-1])
+            except ValueError:
+                seat = sum(ord(char) for char in job_id) + 1
+            return RESEARCHER_EFFORTS[(seat - 1) % len(RESEARCHER_EFFORTS)]
+        if role == "genius":
+            return "ultra"
+        if role == "verifier":
+            return str(self.cfg["verifier_reasoning_effort"])
+        return str(self.cfg["synthesis_reasoning_effort"])
+
+    def _normalize_queued_job_efforts(self) -> None:
+        jobs = self._read_jobs()
+        changed = False
+        for job in jobs:
+            if job.get("status") != "queued":
+                continue
+            expected = self._job_effort(str(job["id"]), str(job["role"]))
+            if job.get("reasoning_effort") != expected:
+                job["reasoning_effort"] = expected
+                job["updated_at"] = utc_timestamp()
+                changed = True
+        if changed:
+            self._write_jobs(jobs)
 
     def _submission_paths(self) -> list[str]:
         return [str(path.relative_to(self.paths.workspace)) for path in sorted((self.root / "submissions").glob("*.json"))]
@@ -843,8 +874,9 @@ you have examined every durable response and review path.
             counts[job["status"]] = counts.get(job["status"], 0) + 1
         payload = {
             "schema": "binary-gv-campaign-snapshot-v1", "updated_at": utc_timestamp(),
-            "model": self.cfg.get("model"), "reasoning_effort": "ultra",
+            "model": self.cfg.get("model"), "reasoning_effort": "mixed",
             "verifier_reasoning_effort": self.cfg["verifier_reasoning_effort"],
+            "researcher_reasoning_efforts": list(RESEARCHER_EFFORTS),
             "researcher_count": sum(job["role"] == "researcher" for job in jobs), "counts": counts,
             "target": {
                 "block_length": N,
