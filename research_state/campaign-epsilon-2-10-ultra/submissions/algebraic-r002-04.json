@@ -1,0 +1,291 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard construction is claimed. This turn closes and normalizes the standard cyclic/BCH architectures.\n\nFix `F=F_2[T]/(T^30+T+1)`, `q=|F|=2^30`, and `theta=T mod (T^30+T+1)`. For odd `d`, define\n\n`C_d={ (b+Tr(sum_{j odd, 1<=j<=d} a_j x^j))_{x in F} : b in F_2, a_j in F }`.\n\nThe proved anchor `C_65` has parameters `[2^30,991,535822336]_2`; it is not resubmitted because the shared campaign already has a stronger dimension-1040 RS\u2013affine construction. The conditional frontier `C_69` has exact dimension 1051 and a fully explicit generator matrix, but its distance is not proved: ordinary Hasse\u2013Weil gives only `535756800`.\n\nTwo additional exact closures are proved. First, the largest target-safe binary cyclic code of exact length `2^30` has dimension exactly 3. Second, the parity-extended primitive narrow-sense BCH construction whose distance is certified only by its consecutive roots has maximum dimension 236 at the target.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: lemma editor and algebraic integrator. For `N=2^m`, every binary cyclic code is the chain ideal `<(X+1)^(N-k)>` in `F_2[X]/((X+1)^N)`. If `k>=4`, it contains `(X+1)^(N-4)`, of weight `N/4`. The `k=3` ideal has basis exponents `N-3,N-2,N-1`; Lucas' theorem shows that its seven nonzero words have weights `N/2` or `N`. Thus the maximum cyclic dimension at the immutable target is exactly 3, not merely at most 3.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:exact-power-of-two-cyclic-optimum-3",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json"
+      ],
+      "subject": "Exact repeated-root cyclic optimum"
+    },
+    {
+      "body_markdown": "Intended recipient: degree-69 bottleneck breaker. Put `M(a,b)=max_{P in L_65}|S(P+aX^67+bX^69)|`. Under `(a,b)->(a u^67,b u^69)`, `M` is invariant. Since `gcd(67,2^30-1)=1` and `gcd(69,2^30-1)=3`, the nonzero coefficient pairs have exactly `2^30+3` orbits: representatives `(1,beta)` for every `beta in F`, and `(0,gamma)` for the three cubic classes. One may normalize with `67^(-1)=849377860 mod (2^30-1)`. Translation preserves the top pair after trace reduction. This is the smallest exact affine-normal-form ledger for attacking the universal bound.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:degree-69-affine-normal-forms",
+        "proposed-lemma:degree-69-weighted-orbit-dichotomy"
+      ],
+      "subject": "Normalize the degree-69 coefficient search to q+3 orbits"
+    },
+    {
+      "body_markdown": "Intended recipient: algebraic bottleneck and literature positions. The checked refinements do not certify `C_69`: Voloch's improved theorem requires `t>2^14`, whereas designed distance 71 has `t=35`; F\u00e9rard's specialized improvement concerns top degree `2^a-1`, not 69; and the Scholten\u2013Zhu nonsupersingularity theorem concerns genus `2^r-1`, not genus 34. Please either prove `|S(f)|<=64\u00b72^15` for every reduced odd `deg(f)<=69`, or exhibit one explicit violating phase. By the weighted-orbit dichotomy, a counterexample closes every dimension-at-least-1041 extension using only the 67/69 layers.",
+      "kind": "request",
+      "references": [
+        "https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf",
+        "https://www.numdam.org/articles/10.24033/bsmf.2418/",
+        "https://arxiv.org/abs/math/0012178",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "subject": "Exact degree-69 character-sum decision remains"
+    }
+  ],
+  "distance_audit": [
+    "The immutable distance is `D=2^29-2^20=535822336`. For a trace family containing the external constant, the equivalent signed-sum requirement is `|S(f)|<=q-2D=2^21=64\u00b72^15`.",
+    "The exact-length cyclic ideal of dimension 3 has minimum distance `q/2=536870912>D`. Every cyclic ideal of dimension at least 4 contains a word of weight `q/4=268435456<D`.",
+    "For the full-field BCH/subfield-subcode polynomial cutoff `B=q-D=537919488`, every nonzero representative has at most `B` roots, so its binary evaluation has weight at least `q-B=D`.",
+    "For every nonzero reduced odd polynomial of degree at most 65, the Artin\u2013Schreier curve has genus at most 32. Hasse\u2013Weil therefore gives `|S|<=64\u00b72^15`, covering every nonzero word of `C_65`; the constant-only word has weight `q`.",
+    "F\u00e9rard's attainment theorem at designed distance `67=2^6+3` supplies a degree-at-most-65 trace word with weight deviation exactly `2^20`. Hence `d_min(C_65)=D`, not just `>=D`.",
+    "The generic degree-67 certificate gives only `d>=2^29-33\u00b72^15=535789568`, short by 32768.",
+    "The generic degree-69 certificate gives only `d>=2^29-34\u00b72^15=535756800`, short by 65536. No target-distance claim is made for `C_69`.",
+    "For `C(V)=C_65+{Tr(aX^67+bX^69):(a,b) in V}`, target distance is equivalent to the absolute signed-sum cap for every nonconstant phase because the external constant supplies every complement."
+  ],
+  "explicitness_audit": [
+    "The field is the fixed quotient `F_2[T]/(T^30+T+1)`; the accepted Rabin certificate in `algebraic-04.json` proves irreducibility.",
+    "Columns are all 30-bit polynomial-basis field elements in increasing integer order. Rows are ordered first by exponent and then by the basis coefficients `1,theta,...,theta^29`.",
+    "The proved `C_65` matrix consists of the all-one row and 990 rows `Tr(theta^i x^j)` for odd `j<=65`. The conditional `C_69` matrix appends the analogous 60 rows for `j=67,69`.",
+    "The complete matrices are streamed deterministically in `O(k n (log n)^3)` bit operations. No sampling, selector, exhaustive construction search, padding, or hidden coordinate ordering is involved.",
+    "The `q+3` orbit classification and the upstream 5,995,866-mask codimension-10 check are proof reductions; neither selects a generator matrix.",
+    "Explicitness is not the obstruction for `C_69`; the sole missing item is a universal distance proof."
+  ],
+  "generator_matrix": {
+    "algorithm": "Represent `F` in the polynomial basis `1,theta,...,theta^29` and enumerate columns by integers `0,...,2^30-1`, interpreted as coefficient bitmasks. Emit row 0 as all ones. For every odd `j=1,3,...,69` and `i=0,...,29`, emit entry `Tr_(F/F_2)(theta^i x^j)` in column `x`. This outputs the complete `1051 by 2^30` matrix of the conditional degree-69 code. Restricting to `j<=65` outputs the proved `991 by 2^30` anchor.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "`O(k n (log n)^3)` bit operations and `O(log n)` working bits beyond streamed output; in particular at most `O(n^2(log n)^3)`.",
+    "runtime_proof": "Let `m=log_2 n=30`. Naive multiplication modulo the fixed degree-`m` polynomial costs `O(m^2)` bit operations. Binary powering to an exponent at most 69 and computing the absolute trace using `m-1` Frobenius squarings cost `O(m^3)` per matrix entry under a conservative accounting. There are exactly `k n` entries and `k<=1051<=n`, proving the stated deterministic polynomial bound."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A primitive binary dual-BCH trace word of designed distance `2t+1`, represented by an odd polynomial of degree at most `2t-1`.",
+      "result": "The trace representation and Carlitz\u2013Uchiyama bound give `|S(f)|<=(2t-2)sqrt(q)`. Voloch's further theorem applies only when `2^(m/2-1)<t<2^ceil(m/2)`.",
+      "source": "[J. F. Voloch, On the duals of binary BCH codes](https://web.ma.utexas.edu/users/voloch/Preprints/bch.pdf)",
+      "used_for": "Trace-code interpretation and the generic degree-65/67/69 bounds. At `m=30,t=35`, the improved-range hypothesis fails because `35<16384`."
+    },
+    {
+      "hypotheses": "Even extension degree `n`, with the special designed distances in Theorem 1.1 or top degree `2^a-1` in Theorem 8.3.",
+      "result": "The Carlitz\u2013Uchiyama bound is attained for designed distance `2^a+3`; a separate nonattainment improvement is proved for top degree `2^a-1`.",
+      "source": "[\u00c9. F\u00e9rard, Poids des duaux des codes BCH de distance prescrite 2^a+1 et sommes exponentielles](https://www.numdam.org/articles/10.24033/bsmf.2418/)",
+      "used_for": "With `n=30,a=6`, designed distance 67 proves `d_min(C_65)=D` exactly. The specialized improved bound does not cover top degree 69."
+    },
+    {
+      "hypotheses": "Hyperelliptic curves of 2-rank zero in characteristic two and genus `2^r-1`.",
+      "result": "Such a hyperelliptic curve is not supersingular for `r>1`.",
+      "source": "[J. Scholten and H. J. Zhu, Hyperelliptic curves in characteristic 2](https://arxiv.org/abs/math/0012178)",
+      "used_for": "Applicability audit only: the degree-69 Artin\u2013Schreier curve has genus 34, so this theorem does not settle the frontier."
+    },
+    {
+      "hypotheses": "`V<=F_(2^30)^2` has binary dimension at least 50.",
+      "result": "Every such `V` meets every weighted scaling orbit `(a,b)->(a u^67,b u^69)`, proved by Chevalley\u2013Warning through codimension 9 and an explicit exact-cover certificate at codimension 10.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json",
+      "used_for": "The all-or-nothing reduction from a dimension-at-least-1041 selected extension to the full dimension-1051 code."
+    },
+    {
+      "hypotheses": "Full-field ordinary Reed\u2013Solomon binary subfield subcodes with a fixed degree cutoff.",
+      "result": "Their exact dimension is one plus the sizes of all complete doubling orbits contained under the cutoff.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+      "used_for": "The exact dimension-236 parity-extended BCH calculation."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Attack the normalized degree-67 subcase `M(1,0)` first: a uniform `64\u00b72^15` bound is a necessary part of the full theorem, while one explicit phase above the cap refutes the entire degree-69 gateway.",
+    "For the remaining top pairs, use representatives `(1,beta)` and three cubic-class representatives `(0,gamma)` rather than arbitrary `(a,b)`. Any successful theorem must still be uniform over all `P in L_65`.",
+    "Persist and independently verify the exact cyclic optimum and the degree-69 affine-normal-form lemma before using them in the final algebraic integration."
+  ],
+  "obstructions": [
+    "Exact-length binary cyclic codes at length `2^30` have target-safe dimension at most 3, and this ceiling is exact.",
+    "The parity-extended primitive narrow-sense BCH route certified solely by consecutive roots has maximum dimension 236.",
+    "The generic one-pole Artin\u2013Schreier/Carlitz\u2013Uchiyama certificate stops at the exact dimension-991 code `C_65`.",
+    "The first full trace code exceeding the shared dimension-1040 campaign endpoint is `C_69` with dimension 1051, but Hasse\u2013Weil misses the required distance by 65536.",
+    "A special 50-dimensional coefficient selector in the degree-67/69 layers cannot evade a bad scaling orbit: such a selector is safe if and only if the full 60-dimensional top layer is safe.",
+    "The checked Voloch, F\u00e9rard, and Scholten\u2013Zhu refinements do not satisfy the finite hypotheses needed to close degree 69."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`2^30`",
+      "quantity": "immutable length",
+      "value": "`1073741824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)2^30=2^29-2^20`",
+      "quantity": "required distance",
+      "value": "`535822336`"
+    },
+    {
+      "derivation": "`2^30-2D`",
+      "quantity": "required absolute signed-sum cap",
+      "value": "`2097152=64\u00b72^15`"
+    },
+    {
+      "derivation": "Repeated-root chain ideal and Lucas weights",
+      "quantity": "exact maximum target-safe cyclic dimension",
+      "value": "`3`, attained with distance `2^29`"
+    },
+    {
+      "derivation": "`B=2^30-D`",
+      "quantity": "full-field BCH polynomial cutoff",
+      "value": "`537919488=2^29+2^20`"
+    },
+    {
+      "derivation": "One constant plus orbit sizes `30,30,30,30,30,30,30,15,10`",
+      "quantity": "parity-extended designed-root BCH dimension",
+      "value": "`236`"
+    },
+    {
+      "derivation": "`1+33\u00b730`",
+      "quantity": "degree-65 trace dimension",
+      "value": "`991`"
+    },
+    {
+      "derivation": "Hasse\u2013Weil plus F\u00e9rard attainment",
+      "quantity": "degree-65 minimum distance",
+      "value": "`535822336` exactly"
+    },
+    {
+      "derivation": "`1+34\u00b730` and genus 33",
+      "quantity": "degree-67 generic result",
+      "value": "`k=1021`, only `d>=535789568`"
+    },
+    {
+      "derivation": "`1+35\u00b730` and genus 34",
+      "quantity": "degree-69 generic result",
+      "value": "`k=1051`, only `d>=535756800`"
+    },
+    {
+      "derivation": "`991+dim(V)>1040`",
+      "quantity": "two-layer selector threshold",
+      "value": "`dim(V)>=50`, hence codimension at most 10"
+    },
+    {
+      "derivation": "`gcd(67,2^30-1)=1`, `gcd(69,2^30-1)=3`",
+      "quantity": "nonzero weighted-scaling orbit count",
+      "value": "`2^30+3`"
+    },
+    {
+      "derivation": "Extended Euclidean algorithm",
+      "quantity": "inverse used to normalize a nonzero degree-67 coefficient",
+      "value": "`67^(-1)=849377860 mod 1073741823`"
+    },
+    {
+      "derivation": "`1051/2^30`",
+      "quantity": "conditional degree-69 rate",
+      "value": "`9.78820025920868e-7`"
+    }
+  ],
+  "proof_markdown": "## 1. Target normalization\n\nPut `q=2^30` and `s=sqrt(q)=2^15`. For a Boolean trace phase `f`, let `S(f)=sum_x (-1)^f(x)`. Its truth-table weight is `(q-S(f))/2`. Since every `C_d` contains the external constant, it contains both a phase and its complement. Therefore its target distance is equivalent to\n\n`|S(f)|<=q-2D=2^21=64s`\n\nfor every nonconstant phase.\n\n## 2. Exact classification of length-q cyclic codes\n\nIn characteristic two,\n\n`X^q-1=(X+1)^q`.\n\nWriting `Y=X+1`, every ideal of `F_2[X]/(X^q-1)=F_2[Y]/(Y^q)` is `<Y^(q-k)>` and has dimension `k`. If `k>=4`, the ideal contains `Y^(q-4)`. Lucas' theorem gives\n\n`wt((1+X)^e)=2^wt_2(e)`.\n\nThe binary expansion of `q-4` has 28 ones, so `Y^(q-4)` has weight `2^28<D`. Hence `k<=3`.\n\nFor `k=3`, use the basis `A=Y^(q-3)`, `B=Y^(q-2)`, and `J=Y^(q-1)`. Lucas' theorem identifies their supports as\n\n`A={i: bit_1(i)=0}`, `B={i: bit_0(i)=0}`, and `J={0,...,q-1}`.\n\nThus `A`, `B`, `A+B`, their complements by `J`, and `A+B+J` all have weight `q/2`; `J` has weight `q`. Every nonzero word therefore has weight at least `q/2`. The exact cyclic optimum is `[q,3,q/2]_2`.\n\n## 3. The designed-root BCH route\n\nLet `Q=q-1` and `B=q-D=2^29+2^20`. Consider\n\n`S_B=ev_F({f in F[X]:deg(f)<=B}) intersect F_2^q`.\n\nA function of degree below `q` is binary-valued exactly when `f^2=f mod (X^q-X)`. For positive exponents this makes its support a union of complete doubling orbits modulo `Q`; an orbit of size `r` contributes exactly `r` binary dimensions through its coefficient field `F_(2^r)`. Thus\n\n`dim(S_B)=1+sum_(O contained in [1,B]) |O|`.\n\nDoubling modulo `Q` cyclically rotates the 30-bit exponent word. Requiring every rotation to be at most `2^29+2^20` permits the weight-one orbit; weight-two separations 9 through 15; and the unique weight-three necklace with gaps `10,10,10`. The corresponding orbit sizes are seven copies of 30, then 15 and 10. Hence\n\n`dim(S_B)=1+7\u00b730+15+10=236`.\n\nEvery nonzero representing polynomial has at most `B` roots, so its evaluation has weight at least `q-B=D`. On `F*`, Fourier duality identifies the punctured code with the primitive narrow-sense BCH code of designed distance `D-1`; the `x=0` coordinate is its parity extension. A smaller designed distance cannot certify `D` after adding one parity coordinate, so 236 is the exact maximum within this consecutive-root certificate.\n\n## 4. Dual-BCH trace codes\n\nFor odd `d<=69`, `C_d` is binary linear and has exact length `q`. A nonzero odd polynomial of degree `e` defines the Artin\u2013Schreier curve\n\n`Y^2+Y=P(X)`\n\nof genus `(e-1)/2`. Hasse\u2013Weil gives\n\n`|S(P)|<=(e-1)s`.\n\nThis bound is strictly below `q` for `e<=69`, so no nonzero parameter tuple evaluates to a constant phase. The evaluation map is injective and\n\n`dim(C_d)=1+30(d+1)/2`.\n\nFor `d=65`, the signed-sum cap is exactly `64s`, giving `k=991` and `d_min>=D`. F\u00e9rard's Theorem 1.1(ii), applied with extension degree 30 and `a=6`, states that the Carlitz\u2013Uchiyama bound is attained at designed distance `2^6+3=67`. Its punctured word has weight deviation `64\u00b72^14=2^20`; the zero coordinate does not alter its weight. Thus `d_min(C_65)=D` exactly.\n\nFor degrees 67 and 69, the same calculation gives dimensions 1021 and 1051 but only signed-sum caps `66s` and `68s`, respectively. These yield the sub-target lower bounds recorded in the parameter ledger.\n\n## 5. New affine normal form for the terminal layers\n\nLet `L_65` be the odd coefficient space through degree 65 and define\n\n`M(a,b)=max_(P in L_65)|sum_(x in F)(-1)^Tr(P(x)+a x^67+b x^69)|`.\n\nSubstitution `x=uy` shows\n\n`M(a,b)=M(a u^67,b u^69)`.\n\nNow `gcd(67,q-1)=1`, while `gcd(69,q-1)=3`. If `a!=0`, put `r=849377860`, for which `67r=1 mod (q-1)`, and take `u=a^(-r)`. This gives the unique representative `(1,b a^(-69r))`; consequently there are exactly `q` orbits with first coordinate nonzero. If `a=0,b!=0`, the orbits are the three cubic classes of `F*`. There are therefore exactly `q+3` nonzero weighted-scaling orbits.\n\nTranslations introduce no new degree-67 or degree-69 coefficient. Indeed, Lucas' theorem shows that the odd exponents below 69 occurring in `(X+t)^69` are `1,5,65`, and those below 67 occurring in `(X+t)^67` are `1,3,65`; even exponents reduce to lower odd exponents under `Tr(z^2)=Tr(z)`. Constants disappear under the absolute value. Hence affine changes preserve the displayed top-pair normal form.\n\n## 6. All-or-nothing extension theorem\n\nFor `V<=F^2`, set\n\n`C(V)=C_65+{(Tr(a x^67+b x^69))_(x in F):(a,b) in V}`.\n\nInjectivity gives `dim(C(V))=991+dim(V)`. Beating the shared dimension-1040 endpoint requires `dim(V)>=50`, equivalently codimension at most 10.\n\nThe upstream weighted-orbit lemma proves that every such `V` meets every orbit `(a u^67,b u^69)`. For codimension at most 9 this follows from Chevalley\u2013Warning applied to at most nine cubic equations in 30 variables. At codimension 10, the possible parity obstruction reduces to exact covers of `Z/30` by ten translates of `{0,1,6}` or `{0,2,6}`. The fixed mask computation checks 5,995,866 cases and obtains maxima `20,23,26`, below the required `22,25,28`, excluding every cover.\n\nSafety is constant on a weighted orbit by the scaling identity for `M`. Therefore a target-safe `V` of dimension at least 50 exists if and only if the full `V=F^2` is safe. In the positive case the result is the explicit dimension-1051 code `C_69`; a single violating phase rules out every such selector. This equivalence is proved, but neither outcome of the character-sum decision is presently established.\n\n## 7. Literature and explicitness conclusion\n\nThe checked specialized theorems do not close the remaining `4s` gap. Voloch's improved range begins at `t>2^14`, whereas here `t=35`. F\u00e9rard's degree-specific improvement is for degree `2^a-1`, and Scholten\u2013Zhu's nonsupersingularity theorem concerns genus `2^r-1`; neither covers degree 69 and genus 34.\n\nThe complete `C_69` generator is nevertheless deterministic and polynomial-time, as specified in `generator_matrix`. Thus the terminal obstruction is purely the universal distance inequality, not construction explicitness.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "CYCLIC-EXACT",
+      "proof": "The repeated-root quotient is a chain ring. Lucas' theorem gives a weight-`q/4` word in every ideal of dimension at least four and gives the complete seven-word weight audit for the dimension-three ideal.",
+      "statement": "The maximum dimension of an exact-length binary cyclic code meeting the target is exactly 3.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json"
+      ],
+      "id": "BCH-236",
+      "proof": "Binary-valued polynomial functions decompose into complete doubling orbits. The 30-bit cyclic-gap classification gives orbit sizes `30,30,30,30,30,30,30,15,10`, and the polynomial root bound gives distance `D`.",
+      "statement": "The parity-extended primitive narrow-sense BCH route certified by consecutive roots has exact maximum dimension 236.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Hasse\u2013Weil",
+        "J. F. Voloch, On the duals of binary BCH codes"
+      ],
+      "id": "TRACE-GENERIC",
+      "proof": "The Artin\u2013Schreier genus is `(e-1)/2`; its point-count identity gives `|S(P)|<=(e-1)2^15`. The strict comparison with `q` also proves coefficient injectivity.",
+      "statement": "The generic full odd-layer trace certificate reaches the target through degree 65 and certifies dimension 991.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TRACE-GENERIC",
+        "\u00c9. F\u00e9rard, Theorem 1.1(ii)"
+      ],
+      "id": "TRACE-65-EXACT",
+      "proof": "Hasse\u2013Weil gives the lower bound `D`; F\u00e9rard supplies a designed-distance-67 dual-BCH word with weight deviation exactly `2^20`.",
+      "statement": "The degree-65 trace code has minimum distance exactly 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "TOP-ORBIT-NORMAL-FORM",
+      "proof": "Scaling invariance, the gcd values 1 and 3, and the explicit inverse of 67 give `q` normalized first-coordinate orbits and three cubic orbits. Lucas expansion plus trace reduction proves translation invariance of the top pair.",
+      "statement": "The nonzero degree-67/69 coefficient pairs have exactly `q+3` affine-normal-form classes for the maximized character sum.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TOP-ORBIT-NORMAL-FORM",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json"
+      ],
+      "id": "SELECTOR-DICHOTOMY",
+      "proof": "Every dimension-at-least-50 subspace meets every weighted orbit, and safety is invariant along each orbit.",
+      "statement": "A target-safe 67/69 selector beating dimension 1040 exists if and only if the full dimension-1051 degree-69 code is target-safe.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "TRACE-GENERIC",
+        "SELECTOR-DICHOTOMY"
+      ],
+      "id": "TRACE-69-DISTANCE",
+      "proof": "Ordinary Hasse\u2013Weil gives only `68\u00b72^15`; none of the checked specialized theorems supplies the required `64\u00b72^15` cap, and no explicit counterexample is known.",
+      "statement": "Every reduced odd polynomial of degree at most 69 over `F_(2^30)` has absolute character sum at most `2^21`.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json"
+      ],
+      "id": "FULL-MATRIX",
+      "proof": "The fixed quotient field, fixed basis, fixed column order, and explicit trace rows determine every entry. Conservative field-operation accounting gives `O(k n(log n)^3)` bit operations.",
+      "statement": "The full degree-65 and conditional degree-69 generator matrices are output deterministically in polynomial time.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "BCH and cyclic-code bias bounds",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 50 current files)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 47 current headline, theorem, status, obstruction, and discussion fields audited)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-r002-06.json"
+  ],
+  "submission_class": "proof_tool",
+  "theorem_statement": "At `n=2^30` and `D=535822336`: (i) the maximum target-safe dimension among exact-length binary cyclic codes is exactly 3; (ii) the parity-extended primitive narrow-sense BCH construction certified only by consecutive roots has maximum dimension 236; (iii) the generic Carlitz\u2013Uchiyama/Artin\u2013Schreier trace certificate is sharply attained by the exact `[2^30,991,D]_2` degree-65 code; and (iv) every degree-67/69 coefficient selector large enough to beat the shared dimension-1040 endpoint is safe if and only if the full explicit dimension-1051 degree-69 code is safe. The latter distance statement remains unresolved. The degree-69 top coefficient pairs reduce to exactly `2^30+3` nonzero weighted-scaling normal forms.",
+  "title": "Sharp cyclic/BCH closure and the normalized degree-69 frontier"
+}
