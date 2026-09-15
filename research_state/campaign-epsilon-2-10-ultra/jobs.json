@@ -708,16 +708,16 @@
     "created_at": "2026-09-15T04:44:28Z",
     "dependency": null,
     "direction": "Extractor-based balanced codes with concrete length accounting.",
-    "error": "combinatorial-expander-08 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065913Z-cf8a68659c-2328773321/stderr.txt",
+    "error": "combinatorial-expander-08 failed with exit code 1; see /Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-epsilon-2-10-ultra/agent_logs/20260915T065948Z-cf8a68659c-9fb6c8b140/stderr.txt",
     "id": "combinatorial-expander-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "running",
+    "status": "failed",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T06:59:48Z"
+    "updated_at": "2026-09-15T06:59:53Z"
   },
   {
     "attempts": 3,
