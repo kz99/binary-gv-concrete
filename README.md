@@ -31,6 +31,8 @@ The public observatory is at
 - `proofs/` — human-readable proof certificates
 - `dashboard/` — static public observatory
 - `research_state/` — campaign state and public research outputs
+- `non-explicit-constructions/` — mathematically useful but non-admissible
+  existence-style constructions and the missing explicitness step
 - `archive/target-7-16/` — historical, non-current campaign material
 
 ## Contributing
