@@ -677,7 +677,12 @@ you have examined every durable response and review path.
         jobs = self._read_jobs()
         existing = {job["id"] for job in jobs}
         for source_path in sorted((self.root / "submissions").glob("*.json")):
-            source = json.loads(source_path.read_text())
+            try:
+                source = json.loads(source_path.read_text())
+            except json.JSONDecodeError:
+                # A researcher may still be atomically finishing its note.  Do
+                # not queue a reviewer until the submitted certificate parses.
+                continue
             if not source.get("leaderboard_submission"):
                 continue
             source_id = source_path.stem
@@ -690,7 +695,10 @@ you have examined every durable response and review path.
 
     def _has_verified_improvement(self) -> bool:
         for source_path in (self.root / "submissions").glob("*.json"):
-            source = json.loads(source_path.read_text())
+            try:
+                source = json.loads(source_path.read_text())
+            except json.JSONDecodeError:
+                continue
             if (
                 not source.get("leaderboard_submission")
                 or not isinstance(source.get("dimension"), int)
@@ -700,10 +708,13 @@ you have examined every durable response and review path.
             ):
                 continue
             reviews = self.root / "reviews" / source_path.stem
-            accepted = 0 if not reviews.exists() else sum(
-                json.loads(path.read_text()).get("verdict") == "accept"
-                for path in reviews.glob("*.json")
-            )
+            accepted = 0
+            if reviews.exists():
+                for path in reviews.glob("*.json"):
+                    try:
+                        accepted += json.loads(path.read_text()).get("verdict") == "accept"
+                    except json.JSONDecodeError:
+                        continue
             if accepted >= int(self.cfg["verifier_count"]):
                 return True
         return False
@@ -737,14 +748,21 @@ you have examined every durable response and review path.
         candidates = []
         verified = []
         for source_path in sorted((self.root / "submissions").glob("*.json")):
-            source = json.loads(source_path.read_text())
+            try:
+                source = json.loads(source_path.read_text())
+            except json.JSONDecodeError:
+                continue
             source_id = source_path.stem
             if not source.get("leaderboard_submission") and source.get("result_status") not in {"proved", "conditional"}:
                 continue
             reviews = []
             review_dir = self.root / "reviews" / source_id
             if review_dir.exists():
-                reviews = [json.loads(path.read_text()) for path in sorted(review_dir.glob("*.json"))]
+                for path in sorted(review_dir.glob("*.json")):
+                    try:
+                        reviews.append(json.loads(path.read_text()))
+                    except json.JSONDecodeError:
+                        continue
             item = {
                 "id": source_id, "title": source.get("title"), "status": source.get("result_status"),
                 "submission_class": source.get("submission_class"), "dimension": source.get("dimension"),
