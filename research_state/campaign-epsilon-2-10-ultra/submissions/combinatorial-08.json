@@ -1,0 +1,272 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is submitted. Two spectral-amplification architectures are resolved.\n\nFirst, let `F=F_2[\u03b8]/(\u03b8^16+\u03b8^5+\u03b8^3+\u03b8^2+1)`, `A=span_F2{1,\u03b8,\u2026,\u03b8^14}`, and let `R\u2282F^A` be evaluation of `F[X]_{\u226464}`. Each `z=\u03a3z_i\u03b8^i` is encoded by the affine block `\u03a6(z)_y=z_0+\u03a3_{i=1}^{15}z_i y_i`, `y\u2208F_2^15`. The resulting shared RS\u2013RM code has dimension 1040. The theorem proves that no strict `F_2`-additive outer supercode of `R` retains the target distance under this fixed blockwise encoder. Equivalently, every affine-fiber Cayley one-bit lift is either dependent or invalid.\n\nSecond, for any ordered multiset `(d_i)_{i=1}^{32768}` in any binary vector space, form all `2^30` ordered XOR pairs `(d_i+d_j)_{i,j}`. If their character code meets the target, its homogeneous dimension is at most 784; adjoining the all-one word raises this to at most 785.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Let `F` have characteristic two, `A\u2282F`, `t<|A|`, `R=ev_A(F[X]_{\u2264t})`, and `\u0394(u)=N_0(u)\u2212N_1(u)`. If some `t`-set `S\u2282A` satisfies `\u03a3_{a\u2208A\\S}(\u220f_{s\u2208S}(a\u2212s))^\u22121\u22600`, then every strict additive supercode `D\u2283R` contains a nonzero `u` with `\u0394(u)\u2265t+1`. The proof is a `t`-point interpolation pencil. At the current parameters the explicit witness has reciprocal sum `[e1f0]\u22600`, so the fixed RS\u2013RM outer code is additively maximal.",
+      "kind": "idea",
+      "references": [
+        "proof-step:interpolation-pencil",
+        "proof-step:reciprocal-certificate",
+        "proof-step:additive-maximality"
+      ],
+      "subject": "Reciprocal-sum criterion for additive maximality"
+    },
+    {
+      "body_markdown": "For every ordered 32,768-point multiset, complete XOR-square convolution has homogeneous dimension at most 784 if it meets the immutable distance; even adjoining the all-one word gives at most 785. The proof uses the identity `W_out(a)=W_seed(a)^2` and the exact 174th-moment certificate `L\u22121448^174>2^1825`. Thus complete two-step Cartesian amplification cannot approach the shared dimension 1040.",
+      "kind": "objection",
+      "references": [
+        "proof-step:convolution-square",
+        "proof-step:convolution-moment",
+        "proof-step:convolution-ceiling"
+      ],
+      "subject": "Complete square convolution is capped at k=784"
+    },
+    {
+      "body_markdown": "Can one specify a non-affine fiber signing `b:A\u00d7F_2^15\u2192F_2` outside the RS\u2013RM code and prove, structurally rather than by numerical search, that every correlation with the 1040-dimensional code is at most `2^21` in absolute value? The additive-maximality theorem proves that every blockwise affine signing fails, so any successful Cayley lift must have at least one genuinely nonlinear fiber or replace the inner architecture globally.",
+      "kind": "question",
+      "references": [
+        "proof-step:spectral-two-lift",
+        "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-05.json"
+      ],
+      "subject": "Non-affine Cayley signing needed"
+    }
+  ],
+  "distance_audit": [
+    "For length `2^30`, the required distance is equivalent to raw signed sum at most `2^21=2^30\u22122\u00b7535822336`.",
+    "For the affine inner encoder, the exact formulas are `W(\u03a6^A(u))=2^15\u0394(u)` and `wt(\u03a6^A(u))=2^14(32768\u2212\u0394(u))`.",
+    "The interpolation obstruction produces `\u0394(u)\u226565`, hence weight at most `2^14\u00b732703=535805952`, exactly 16,384 below the target.",
+    "For square convolution, every nonzero output character has raw signed sum `W(a)^2`; the target therefore forces `|W(a)|\u22641448` because `1448^2<2^21<1449^2`.",
+    "No minimum-distance claim is made for a new leaderboard code."
+  ],
+  "explicitness_audit": [
+    "The field modulus, polynomial basis, evaluation set, affine encoder, and outer degree cutoff are fixed symbolically.",
+    "Hex notation `[w]` means the polynomial-basis field element whose coefficient bits form the four-digit hexadecimal word `w`; all displayed products are reduced modulo the fixed field polynomial.",
+    "The obstructing 64-set is exactly `(span{1,\u03b8,\u2026,\u03b8^5}\\{1+\u03b8+\u22ef+\u03b8^5})\u222a{\u03b8^6}`; no search-selected set is used.",
+    "The reciprocal certificate follows from a displayed linearized polynomial, fiber identities, and exact field products.",
+    "The convolution theorem quantifies over every ordered seed multiset, including repetitions and arbitrary ambient dimension.",
+    "The moment comparison uses only exact integer products; no floating-point logarithm is part of the proof.",
+    "The result remains a draft obstruction because this workspace is read-only; no record, proof file, validator run, or dashboard publication was attempted."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The displayed Rabin certificate for `Z^16+Z^5+Z^3+Z^2+1` and the degree-at-most-64 evaluation construction.",
+      "result": "The quotient is `F_{2^16}`, and the shared RS\u2013RM construction has outer space `R=ev_A(F[X]_{\u226464})` of binary dimension 1040.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+      "used_for": "The fixed architecture to which additive maximality is applied."
+    },
+    {
+      "hypotheses": "Affine Boolean truth tables on fifteen variables and the one-sided Cayley character formulation.",
+      "result": "Symbols `0`, `1`, and all other field symbols have inner signed sums `+2^15`, `\u22122^15`, and `0`, respectively.",
+      "source": "proofs/rm-1-30-baseline.md; research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+      "used_for": "The exact fiber-weight and spectral identities; these identities are also reproved directly."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Search for algebraically specified non-affine fiber signings with a compact simultaneous-correlation proof; affine-fiber extensions are now closed.",
+    "Generalize the reciprocal-sum criterion to inner maps with several nonzero Fourier fibers, seeking similarly explicit maximality or extension tests.",
+    "Analyze unequal-seed and sparse/non-Cartesian convolutions; the square-moment obstruction does not cover them.",
+    "Have an independent verifier recompute the `[e1f0]` field certificate and the `k\u2264784` integer moment comparison, then persist reusable lemmas in a writable campaign step.",
+    "Resolve whether the separate `k=2971` conditional-average proposal satisfies the contribution guide\u2019s prohibition on numerical searches; it currently has no accepted review."
+  ],
+  "obstructions": [
+    "Every strict `F_2`-additive outer supercode containing the degree-at-most-64 RS evaluation space fails under the fixed blockwise `RM(1,15)` encoder.",
+    "Every affine-fiber Cayley one-bit lift of the shared dimension-1040 code either adds no dimension or creates a raw character value at least 2,129,920, exceeding `2^21`.",
+    "Complete ordered square convolution of 32,768 seeds has homogeneous dimension at most 784 at the target; its customary all-one extension has dimension at most 785.",
+    "The first obstruction does not exclude a different additive outer space that does not contain `R`, a non-affine fiber signing, or a different inner encoder.",
+    "The convolution obstruction does not cover two unequal seed sets, sparse pair selection, non-Cartesian products, or code-specific signed cancellation."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)2^30`.",
+      "quantity": "Required distance",
+      "value": "`D=535,822,336=2^29\u22122^20`"
+    },
+    {
+      "derivation": "`n\u22122D`.",
+      "quantity": "Raw signed-sum threshold",
+      "value": "`T=2^21=2,097,152`"
+    },
+    {
+      "derivation": "Degree-16 explicit field and a 15-dimensional evaluation hyperplane.",
+      "quantity": "RS\u2013RM architecture",
+      "value": "`|F|=65536`, `|A|=32768`, `dim_F2 R=16\u00b765=1040`"
+    },
+    {
+      "derivation": "Fixed replacement of one point in a six-dimensional subspace.",
+      "quantity": "Reciprocal witness set",
+      "value": "`S=(span{1,\u2026,\u03b8^5}\\{1+\u22ef+\u03b8^5})\u222a{\u03b8^6}`, `|S|=64`"
+    },
+    {
+      "derivation": "Exact quotient-field calculation.",
+      "quantity": "Reciprocal certificate",
+      "value": "`\u03a3_{a\u2208A\\S} h_S(a)^\u22121=[e1f0]\u22600`"
+    },
+    {
+      "derivation": "Interpolation-pencil contradiction.",
+      "quantity": "Bad affine-fiber imbalance",
+      "value": "`\u0394\u226565`"
+    },
+    {
+      "derivation": "`65\u00b72^15` and `2^14(32768\u221265)`.",
+      "quantity": "Failed lift parameters",
+      "value": "`W\u22652,129,920`; `wt\u2264535,805,952`"
+    },
+    {
+      "derivation": "`1448^2=2,096,704<2^21<2,099,601=1449^2`.",
+      "quantity": "Square-convolution seed-correlation bound",
+      "value": "`|W_seed|\u22641448`"
+    },
+    {
+      "derivation": "Use the 174th moment, i.e. 87 paired seed indices.",
+      "quantity": "Moment order",
+      "value": "`r=87`"
+    },
+    {
+      "derivation": "`L=binom(32768,87)174!/2^87` and the exact dyadic estimates in the proof.",
+      "quantity": "Moment denominator",
+      "value": "`L\u22121448^174>2^1825`"
+    },
+    {
+      "derivation": "`2^k<2^2610/2^1825=2^785`.",
+      "quantity": "Complete square-convolution ceiling",
+      "value": "`k\u2264784`, or `k\u2264785` after adjoining all-one"
+    }
+  ],
+  "proof_markdown": "## 1. Exact affine-fiber spectrum\n\nLet `F=F_2[\u03b8]/(P)`, where `P(\u03b8)=\u03b8^16+\u03b8^5+\u03b8^3+\u03b8^2+1`, and let `A=span_F2{1,\u03b8,\u2026,\u03b8^14}`. The shared field certificate proves that `F` has 65,536 elements. Put\n\n`R=ev_A(F[X]_{\u226464})\u2282F^A`.\n\nFor `z=\u03a3_{i=0}^{15}z_i\u03b8^i`, define\n\n`\u03a6(z)_y=z_0+\u03a3_{i=1}^{15}z_i y_i`,  `y\u2208F_2^15`.\n\nThe inner signed sum is `+2^15` for `z=0`, `\u22122^15` for `z=1`, and zero otherwise. The last assertion follows by pairing `y` with `y+e_i` for a nonzero linear coefficient. Therefore, writing\n\n`\u0394(u)=N_0(u)\u2212N_1(u)`,\n\none has exactly\n\n`W(\u03a6^A(u))=2^15\u0394(u)`,\n\n`wt(\u03a6^A(u))=2^14(32768\u2212\u0394(u))`.\n\nConsequently the immutable distance is equivalent to `\u0394(u)\u226464` for every nonzero outer vector.\n\n## 2. Interpolation-pencil lemma\n\nLet `f\u2208F^A\\R`, and suppose every vector in the coset `f+R` satisfies `\u0394\u226464`. Fix any 64-set `S\u2282A`. Let `p_S` be the unique polynomial of degree at most 63 interpolating `f` on `S`, and put\n\n`h_S(X)=\u220f_{s\u2208S}(X\u2212s)`.\n\nFor each `\u03bb\u2208F`, define\n\n`u_\u03bb=f+ev_A(p_S+\u03bbh_S)`.\n\nEvery `u_\u03bb` lies in `f+R`, so it is neither zero nor one. At each point of `S`, all `u_\u03bb` vanish. At each `a\u2208A\\S`, the map `\u03bb\u21a6u_\u03bb(a)` is a bijection of `F`. Hence\n\n`\u03a3_{\u03bb\u2208F}\u0394(u_\u03bb)=64|F|`.\n\nSince each summand is at most 64, every summand equals 64.\n\nFor `a\u2209S`, set\n\n`\u03b1_a=(f(a)+p_S(a))/h_S(a)`,\n\n`\u03b2_a=(f(a)+p_S(a)+1)/h_S(a)=\u03b1_a+h_S(a)^\u22121`.\n\nThen\n\n`\u0394(u_\u03bb)=64+#{a:\u03b1_a=\u03bb}\u2212#{a:\u03b2_a=\u03bb}`.\n\nEquality with 64 for every `\u03bb` says that the multisets `{\u03b1_a}` and `{\u03b2_a}` coincide. Their sums must therefore agree, forcing\n\n`\u03a3_{a\u2208A\\S}h_S(a)^\u22121=0`. \n\nThus one explicit 64-set with nonzero reciprocal sum rules out every `f\u2209R`.\n\n## 3. Explicit reciprocal-sum certificate\n\nRepresent a field element by `[w]`, where hexadecimal bit `i` is the coefficient of `\u03b8^i`. Let\n\n`U=span{1,\u03b8,\u2026,\u03b8^5}`,\n\n`e=[003f]=1+\u03b8+\u22ef+\u03b8^5`, `\u03b4=[0040]=\u03b8^6`, `u=e+\u03b4=[007f]`,\n\nand choose\n\n`S=(U\\{e})\u222a{\u03b4}`.\n\nLet `L_U(X)=\u220f_{x\u2208U}(X\u2212x)`. Starting with `L_0=X`, the recurrence\n\n`L_{i+1}=L_i^2+L_i(\u03b8^i)L_i`,  `0\u2264i\u22645`,\n\nproduces\n\n`L_U(X)=[6115]X+[c6ca]X^2+[2198]X^4+[d9a4]X^8+[71ee]X^16+[2e0c]X^32+X^64`.\n\nPut `c=[6115]=L_U'`, `c_1=[c6ca]`, `d=L_U(\u03b4)=[e9f1]`, and\n\n`r=\u03a3_{x\u2208U\\{0}}x^\u22121=c_1/c=[b0cf]`.\n\nThe equality for `r` follows by comparing the first two coefficients of `L_U(X)/X`.\n\nSince\n\n`h_S(X)=L_U(X)(X\u2212\u03b4)/(X\u2212e)`,\n\nthe omitted point `e` contributes `(cu)^\u22121`. For `a\u2208A\\U`, `a\u2260\u03b4`,\n\n`h_S(a)^\u22121=L_U(a)^\u22121+u((a+\u03b4)L_U(a))^\u22121`.\n\nLet `B=L_U(A)`. Its dimension is nine and every fiber of `L_U:A\u2192B` has 64 points. Full fibers cancel in characteristic two. The fiber over `d` has only 63 terms after deleting `\u03b4`, so\n\n`\u03a3_{a\u2208A\\U, a\u2260\u03b4}L_U(a)^\u22121=d^\u22121`.\n\nFor the second sum, the fiber over `d` contributes `r/d`. For `y\u2208B\\{0,d}`, logarithmic differentiation of `L_U(X)+(y+d)` gives\n\n`\u03a3_{L_U(z)=y+d}z^\u22121=c/(y+d)`.\n\nIts aggregate contribution is\n\n`\u03a3_{y\u2208B\\{0,d}} c/[y(y+d)]=0`,\n\nbecause `1/[y(y+d)]=d^\u22121(1/y+1/(y+d))` and translation by `d` permutes `B\\{0,d}`. Therefore\n\n`\u03a3_{a\u2208A\\S}h_S(a)^\u22121=(cu)^\u22121+(1+ur)/d`.\n\nThe following exact products, all modulo `P`, finish the certificate:\n\n`[6115][b0cf]=[c6ca]`,\n\n`[e9f1][073e]=[0001]`,\n\n`[6115][007f]=[5ba3]`,\n\n`[5ba3][3c17]=[0001]`,\n\n`[007f][b0cf]=[b576]`,\n\n`[b577][073e]=[dde7]`,\n\n`[3c17]+[dde7]=[e1f0]\u22600`.\n\nThus the required reciprocal sum is nonzero.\n\n## 4. Additive maximality and Cayley interpretation\n\nFor every `f\u2209R`, the preceding contradiction proves that some `u\u2208f+R` has integer `\u0394(u)\u226565`. Hence\n\n`wt(\u03a6^A(u))\u22642^14(32768\u221265)=535805952`.\n\nIf an additive space `D` strictly contains `R`, choose `f\u2208D\\R`; then `f+R\u2282D`, so `D` contains this bad vector. Therefore `R` is maximal among additive outer spaces meeting the target under `\u03a6^A`.\n\nA Cayley one-bit lift assigns a bit `b(a,y)` to every existing generator. If every fiber `b(a,\u00b7)` is affine, there is a unique `f(a)\u2208F` with `b(a,\u00b7)=\u03a6(f(a))`. If `f\u2208R`, the new row is dependent. Otherwise the bad coset member has raw character sum\n\n`2^15\u0394(u)\u226565\u00b732768=2129920>2^21`.\n\nThus every affine-fiber lift is dependent or violates the target.\n\n## 5. Complete XOR-square convolution\n\nLet `m=32768`, let `(d_i)_{i=1}^m` be any ordered multiset in a binary vector space, and let\n\n`H=span{d_i+d_j:1\u2264i,j\u2264m}`.\n\nThe complete ordered-pair character code has length `m^2=2^30` and dimension `k=dim H`. Put `e_i=d_i+d_1`; these vectors span `H`. For `a\u2208H*`, define\n\n`W_a=\u03a3_i(\u22121)^{a(e_i)}`.\n\nThe raw signed sum of the corresponding output word is exactly\n\n`\u03a3_{i,j}(\u22121)^{a(d_i+d_j)}=W_a^2`.\n\nThus the target gives `|W_a|\u22641448` for every nonzero `a`, since\n\n`1448^2=2096704<2^21<2099601=1449^2`.\n\nTake `r=87`. Let `Z` count ordered 174-tuples of seed indices whose `e`-values XOR to zero. Fourier orthogonality gives\n\n`2^k Z=\u03a3_{a\u2208H*}W_a^174\u2264m^174+(2^k\u22121)1448^174`.\n\nTuples formed by choosing 87 distinct indices and using each exactly twice give\n\n`Z\u2265L=binom(m,87)174!/2^87`.\n\nHence\n\n`2^k(L\u22121448^174)<m^174`.\n\nIt remains only to certify the denominator. Write\n\n`L=[\u220f_{j=0}^{86}(32768\u2212j)][\u220f_{j=88}^{174}j]/2^87`.\n\nThe elementary inequality `\u220f(1\u2212x_j)\u22651\u2212\u03a3x_j` gives\n\n`\u220f_{j=0}^{86}(32768\u2212j)> (7/8)2^1305`,\n\nbecause `\u03a3_{j=0}^{86}j=3741` and `1\u22123741/32768>7/8`. Direct exact integer multiplication gives\n\n`7\u220f_{j=88}^{174}j>5\u00b72^610`.\n\nTherefore `L>5\u00b72^1825`. Also `1448^174=(1448^2)^87<2^1827=4\u00b72^1825`, so\n\n`L\u22121448^174>2^1825`.\n\nSince `m^174=(2^15)^174=2^2610`, it follows that\n\n`2^k<2^785`,\n\nand hence `k\u2264784`.\n\nEvery square-convolution word has nonnegative raw signed sum. Consequently adjoining the all-one word preserves the target by complementing these words and adds at most one dimension. Even this affine closure has dimension at most 785.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "target-fiber-identity",
+      "proof": "Character orthogonality gives inner signed sums `+2^15`, `\u22122^15`, and zero at symbols `0`, `1`, and all other symbols. Summing the blocks gives the displayed exact weight formula.",
+      "statement": "For every `u\u2208F^A`, `W(\u03a6^A(u))=2^15\u0394(u)` and `wt(\u03a6^A(u))=2^14(32768\u2212\u0394(u))`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-fiber-identity"
+      ],
+      "id": "interpolation-pencil",
+      "proof": "Interpolate a proposed new direction on 64 points and vary the coefficient of their vanishing polynomial. Averaging `\u0394` over all field coefficients forces equality in every member of the pencil; equality of the zero- and one-parameter multisets then forces the reciprocal sum to vanish.",
+      "statement": "If every word in a coset `f+R`, `f\u2209R`, satisfies `\u0394\u226464`, then every 64-set `S\u2282A` has `\u03a3_{a\u2209S}h_S(a)^\u22121=0`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "reciprocal-certificate",
+      "proof": "The displayed linearized polynomial, its 64-point fibers, logarithmic derivative identity, and exact hexadecimal field products give reciprocal sum `[e1f0]`.",
+      "statement": "The fixed set `S=(span{1,\u2026,\u03b8^5}\\{1+\u22ef+\u03b8^5})\u222a{\u03b8^6}` has nonzero reciprocal sum.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "interpolation-pencil",
+        "reciprocal-certificate"
+      ],
+      "id": "additive-maximality",
+      "proof": "For every `f\u2209R`, the nonzero certificate contradicts the assumption that all of `f+R` has `\u0394\u226464`; integrality supplies a member with `\u0394\u226565`. Any strict additive supercode contains such a coset.",
+      "statement": "No strict additive outer supercode of `R` meets the target under the fixed affine inner encoder.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-fiber-identity",
+        "additive-maximality"
+      ],
+      "id": "spectral-two-lift",
+      "proof": "Every affine fiber is uniquely `\u03a6(f(a))`. A dependent `f` lies in `R`; otherwise additive maximality gives a character sum at least `65\u00b72^15>2^21`.",
+      "statement": "Every affine-fiber Cayley one-bit lift is dependent or violates the spectral threshold.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "convolution-square",
+      "proof": "Translate the seeds by `d_1`. The output character sum factors into the product of two identical seed sums.",
+      "statement": "For complete ordered XOR-square convolution, every output character sum is `W_a^2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "convolution-square"
+      ],
+      "id": "convolution-moment",
+      "proof": "Fourier orthogonality counts zero-XOR 174-tuples. Restricting to 87 distinct indices each repeated twice gives `Z\u2265binom(32768,87)174!/2^87`.",
+      "statement": "The complete convolution satisfies the stated 174th-moment inequality.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "convolution-moment"
+      ],
+      "id": "convolution-ceiling",
+      "proof": "The exact dyadic certificate gives `L\u22121448^174>2^1825`, while the numerator is `2^2610`. Thus `2^k<2^785`.",
+      "statement": "Every target-meeting complete square convolution has homogeneous dimension at most 784 and all-one-extended dimension at most 785.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Spectral amplification via Cayley lifts, affine-fiber extensions, and complete XOR convolution",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "In the explicit `F_{2^16}` RS\u2013RM architecture, the degree-at-most-64 outer evaluation space `R` is maximal among `F_2`-additive outer spaces whose blockwise affine descent has minimum distance at least 535,822,336. More sharply, every `f\u2209R` has `u\u2208f+R` with `N_0(u)\u2212N_1(u)\u226565`, so the corresponding binary word has weight at most 535,805,952. Separately, every complete ordered XOR-square convolution of 32,768 seeds meeting the target has homogeneous dimension at most 784, or at most 785 after adjoining the all-one word.",
+  "title": "Additive maximality of affine-fiber Cayley lifts and a k\u2264784 convolution ceiling"
+}

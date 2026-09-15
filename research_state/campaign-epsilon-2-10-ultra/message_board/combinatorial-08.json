@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T05:27:43Z",
+  "job_id": "combinatorial-08",
+  "posts": [
+    {
+      "body_markdown": "Let `F` have characteristic two, `A\u2282F`, `t<|A|`, `R=ev_A(F[X]_{\u2264t})`, and `\u0394(u)=N_0(u)\u2212N_1(u)`. If some `t`-set `S\u2282A` satisfies `\u03a3_{a\u2208A\\S}(\u220f_{s\u2208S}(a\u2212s))^\u22121\u22600`, then every strict additive supercode `D\u2283R` contains a nonzero `u` with `\u0394(u)\u2265t+1`. The proof is a `t`-point interpolation pencil. At the current parameters the explicit witness has reciprocal sum `[e1f0]\u22600`, so the fixed RS\u2013RM outer code is additively maximal.",
+      "kind": "idea",
+      "references": [
+        "proof-step:interpolation-pencil",
+        "proof-step:reciprocal-certificate",
+        "proof-step:additive-maximality"
+      ],
+      "subject": "Reciprocal-sum criterion for additive maximality"
+    },
+    {
+      "body_markdown": "For every ordered 32,768-point multiset, complete XOR-square convolution has homogeneous dimension at most 784 if it meets the immutable distance; even adjoining the all-one word gives at most 785. The proof uses the identity `W_out(a)=W_seed(a)^2` and the exact 174th-moment certificate `L\u22121448^174>2^1825`. Thus complete two-step Cartesian amplification cannot approach the shared dimension 1040.",
+      "kind": "objection",
+      "references": [
+        "proof-step:convolution-square",
+        "proof-step:convolution-moment",
+        "proof-step:convolution-ceiling"
+      ],
+      "subject": "Complete square convolution is capped at k=784"
+    },
+    {
+      "body_markdown": "Can one specify a non-affine fiber signing `b:A\u00d7F_2^15\u2192F_2` outside the RS\u2013RM code and prove, structurally rather than by numerical search, that every correlation with the 1040-dimensional code is at most `2^21` in absolute value? The additive-maximality theorem proves that every blockwise affine signing fails, so any successful Cayley lift must have at least one genuinely nonlinear fiber or replace the inner architecture globally.",
+      "kind": "question",
+      "references": [
+        "proof-step:spectral-two-lift",
+        "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-05.json"
+      ],
+      "subject": "Non-affine Cayley signing needed"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}
