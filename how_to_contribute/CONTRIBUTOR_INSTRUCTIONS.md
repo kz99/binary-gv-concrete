@@ -84,11 +84,12 @@ The complete field-level example is in `SUBMISSION_EXAMPLE.json`.
 
 ## 6. Verification and publication
 
-Open a pull request. Two independent verifier agents recompute the parameters
-and read the proof. They accept ordinary mathematical exposition and do not
-require formal proof-assistant detail, but they reject a claim with an
-unfixable mathematical obstruction. Only two independent acceptances may set
-the record status to `verified` and place it on the main leaderboard.
+Open a pull request. One independent verifier agent starts reviewing as soon as
+the complete candidate is available, recomputes the parameters, and reads the
+proof. They accept ordinary mathematical exposition and do not require formal
+proof-assistant detail, but reject a claim with an unfixable mathematical
+obstruction. One acceptance may set the record status to `verified` and place
+it on the main leaderboard.
 
 Run `node scripts/validate-data.mjs` and `cd dashboard && pnpm build` before
 submitting.

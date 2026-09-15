@@ -18,6 +18,7 @@ class CampaignTests(unittest.TestCase):
         self.assertEqual(config["campaign"]["minimum_distance"], 2**29 - 2**20)
         self.assertEqual(D, 2**29 - 2**20)
         self.assertEqual(config["campaign"]["epsilon_denominator"], 1024)
+        self.assertEqual(config["campaign"]["verifier_count"], 1)
         self.assertTrue(config["campaign"]["auto_sync_git"])
         self.assertGreater(GV_RATE, 0)
 

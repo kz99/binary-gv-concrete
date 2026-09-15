@@ -297,8 +297,8 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
         raise ValueError("campaign.reasoning_effort must be ultra")
     if int(cfg.get("researcher_count", 0)) != 30:
         raise ValueError("the campaign must have three groups of ten researchers")
-    if int(cfg.get("verifier_count", 0)) != 2:
-        raise ValueError("every submission must receive exactly two independent reviews")
+    if int(cfg.get("verifier_count", 0)) != 1:
+        raise ValueError("every submission must receive exactly one independent review")
     if int(cfg.get("roadmap_count", 0)) < 3:
         raise ValueError("at least three proof roadmaps are required")
     if int(cfg.get("block_length", 0)) != N or int(cfg.get("minimum_distance", 0)) != D:
@@ -431,8 +431,8 @@ strictly greater than 31 at the immutable near-half-distance target.
             source_id = str(job["dependency"])
             source_path = self.root / "submissions" / f"{source_id}.json"
             source = json.loads(source_path.read_text())
-            prompt = f"""You are {job['id']}, one of two independent mathematical reviewers.
-Do not rely on the other reviewer.  Read and audit {source_path.relative_to(self.paths.workspace)} line by line.
+            prompt = f"""You are {job['id']}, the independent mathematical reviewer.
+Read and audit {source_path.relative_to(self.paths.workspace)} line by line.
 
 {BASE_SPEC}
 
@@ -568,6 +568,12 @@ you have examined every durable response and review path.
                     # successful mathematical job into a failed one if GitHub
                     # authentication or connectivity is temporarily unavailable.
                     self._sync_git(f"{job_id} completed")
+                    if target["role"] == "researcher":
+                        # A complete candidate enters its one-review gate as soon
+                        # as its durable submission is available; it never waits
+                        # for the rest of the research round.
+                        self._queue_verifiers()
+                        self._run_phase({"verifier"})
             if any(job["status"] == "failed" and int(job["attempts"]) < max_attempts for job in self._read_jobs() if job["role"] in roles):
                 time.sleep(min(int(self.cfg.get("retry_seconds", 120)), 30))
 
@@ -646,7 +652,7 @@ you have examined every durable response and review path.
             if not source.get("leaderboard_submission"):
                 continue
             source_id = source_path.stem
-            for index in range(1, 3):
+            for index in range(1, int(self.cfg["verifier_count"]) + 1):
                 job_id = f"verifier-{index}-{source_id}"
                 if job_id not in existing:
                     jobs.append(self._job(job_id, "verifier", "Independent line-by-line proof audit.", phase="verification", dependency=source_id))
@@ -669,7 +675,7 @@ you have examined every durable response and review path.
                 json.loads(path.read_text()).get("verdict") == "accept"
                 for path in reviews.glob("*.json")
             )
-            if accepted >= 2:
+            if accepted >= int(self.cfg["verifier_count"]):
                 return True
         return False
 
@@ -720,7 +726,7 @@ you have examined every durable response and review path.
             }
             candidates.append(item)
             if (
-                source.get("leaderboard_submission") and item["accepted_reviews"] >= 2
+                source.get("leaderboard_submission") and item["accepted_reviews"] >= int(self.cfg["verifier_count"])
                 and source.get("block_length") == N
                 and isinstance(source.get("dimension"), int)
                 and source.get("minimum_distance", 0) >= D

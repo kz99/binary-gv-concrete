@@ -1,7 +1,7 @@
 [
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Trace and character-sum codes.",
     "error": null,
@@ -13,11 +13,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Subfield subcodes and concatenation.",
     "error": null,
@@ -29,11 +29,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Algebraic-geometric evaluation codes.",
     "error": null,
@@ -45,11 +45,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "BCH and cyclic-code bias bounds.",
     "error": null,
@@ -61,11 +61,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Reed--Muller extensions.",
     "error": null,
@@ -77,11 +77,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Tensor and product constructions.",
     "error": null,
@@ -93,11 +93,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Boolean polynomial constructions.",
     "error": null,
@@ -109,11 +109,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Explicit Fourier-bias calculations.",
     "error": null,
@@ -125,11 +125,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Finite-field lifting and descent.",
     "error": null,
@@ -141,11 +141,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Exact parameter optimization of algebraic routes.",
     "error": null,
@@ -157,11 +157,11 @@
     "round": 1,
     "status": "queued",
     "team": "algebraic",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Explicit small-bias generators.",
     "error": null,
@@ -173,11 +173,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Epsilon-balanced code instantiations.",
     "error": null,
@@ -189,11 +189,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Expander-walk codes.",
     "error": null,
@@ -205,11 +205,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Replacement-product constructions.",
     "error": null,
@@ -221,11 +221,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Extractor-based linear codes.",
     "error": null,
@@ -237,11 +237,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Derandomized sampler constructions.",
     "error": null,
@@ -253,11 +253,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Cayley graph and character constructions.",
     "error": null,
@@ -269,11 +269,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Spectral amplification.",
     "error": null,
@@ -285,11 +285,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Limited-independence constructions.",
     "error": null,
@@ -301,11 +301,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Finite constant optimization of combinatorial routes.",
     "error": null,
@@ -317,11 +317,11 @@
     "round": 1,
     "status": "queued",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Multilevel concatenation.",
     "error": null,
@@ -333,11 +333,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Structured inner-code search with proofs.",
     "error": null,
@@ -349,11 +349,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Outer-code and alphabet-reduction tradeoffs.",
     "error": null,
@@ -365,11 +365,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Direct sums and interleavings.",
     "error": null,
@@ -381,11 +381,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Puncturing, shortening, and padding arithmetic.",
     "error": null,
@@ -397,11 +397,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Code product transformations.",
     "error": null,
@@ -413,11 +413,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Hybrid algebraic-combinatorial constructions.",
     "error": null,
@@ -429,11 +429,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Exact finite-length rounding optimization.",
     "error": null,
@@ -445,11 +445,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Audit of known explicit constructions at the checkpoint.",
     "error": null,
@@ -461,11 +461,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Synthesis of reusable lemmas into a higher-k candidate.",
     "error": null,
@@ -477,11 +477,11 @@
     "round": 1,
     "status": "queued",
     "team": "composition",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Audit explicit epsilon-balanced-code literature and extract the strongest finite constants and parameter choices for a larger dimension at epsilon=2^-10.",
     "error": null,
@@ -493,11 +493,11 @@
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Trace, character-sum, subfield-subcode, and algebraic routes maximizing concrete dimension at bias 2^-10.",
     "error": null,
@@ -509,11 +509,11 @@
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Explicit epsilon-balanced and expander-walk routes with finite constants optimized at epsilon=2^-10.",
     "error": null,
@@ -525,11 +525,11 @@
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Structured concatenation, multilevel, and finite parameter-search routes maximizing the certified dimension at the exact target.",
     "error": null,
@@ -541,11 +541,11 @@
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Edit all reusable proof steps into the shared lemma book.",
     "error": null,
@@ -557,11 +557,11 @@
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:18:04Z",
+    "created_at": "2026-09-15T04:27:32Z",
     "dependency": null,
     "direction": "Construct the highest-dimension exact leaderboard candidate from all campaign evidence.",
     "error": null,
@@ -573,6 +573,6 @@
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:18:04Z"
+    "updated_at": "2026-09-15T04:27:32Z"
   }
 ]

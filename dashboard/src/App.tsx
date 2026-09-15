@@ -202,7 +202,7 @@ function ParameterBar() {
       </div>
       <div>
         <span>Admission</span>
-        <strong>2-agent verified</strong>
+        <strong>1-agent verified</strong>
         <small>proof required</small>
       </div>
     </section>
@@ -259,7 +259,7 @@ function ProgressScale({ record, proposed }: { record: RecordEntry; proposed?: C
 function VerificationBadge({ entry }: { entry: RecordEntry }) {
   return (
     <span className="verified-badge" title={entry.verification.summary}>
-      <ShieldCheck size={15} /> Verified 2/2
+      <ShieldCheck size={15} /> Verified
     </span>
   );
 }
@@ -356,13 +356,13 @@ function ProposedCard({ candidate, rank }: { candidate: CampaignCandidate; rank:
         <div className="construction-detail proposed-detail">
           <p>
             {candidate.baseline_beaten ? 'Claims to improve the current verified baseline. ' : ''}
-            This mathematical proof is awaiting two independent verifier-agent reviews.
+            This mathematical proof enters one independent verifier review as soon as it is submitted.
           </p>
           <a href={sourceUrl} target="_blank" rel="noreferrer">Read submission <ArrowUpRight size={14} /></a>
         </div>
         <div className="proposed-audit">
           <span><FlaskConical size={12} /> {candidate.status}</span>
-          <span>{candidate.accepted_reviews}/2 verifier acceptances</span>
+          <span>{candidate.accepted_reviews}/1 verifier acceptance</span>
         </div>
       </div>
     </article>
@@ -425,7 +425,7 @@ function RecordPage() {
           </>
         )}
         <p className="admission-note">
-          Green cards are verified records. Amber cards are proposed research outputs shown for transparency; they are not ranked or certified until two independent verifier agents accept their proofs. The GV value is displayed solely as a target line.
+          Green cards are verified records. Amber cards are proposed research outputs shown for transparency; they are not ranked or certified until one independent verifier accepts their proof. The GV value is displayed solely as a target line.
         </p>
       </div>
     </main>
@@ -538,9 +538,9 @@ function ReviewPolicy() {
       <section className="policy-layout">
         <article className="policy-card emphasis">
           <span className="eyebrow">Admission gate</span>
-          <h2>Two independent correctness votes</h2>
-          <MathBlock>{'\\text{Agent A accepts}\\;\\land\\;\\text{Agent B accepts}\\;\\Longrightarrow\\;\\text{leaderboard eligible}'}</MathBlock>
-          <p>Each verifier reads the construction and proof independently. An unresolved mathematical obstruction blocks publication.</p>
+          <h2>One independent correctness vote</h2>
+          <MathBlock>{'\\text{Independent verifier accepts}\\;\\Longrightarrow\\;\\text{leaderboard eligible}'}</MathBlock>
+          <p>The verifier reads the construction and proof independently. An unresolved mathematical obstruction blocks publication.</p>
         </article>
         <article className="policy-card">
           <span>01</span>

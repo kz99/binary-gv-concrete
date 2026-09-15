@@ -22,8 +22,8 @@ for (const record of data.records) {
     if (record.verification.arithmetic !== 'passed' || record.verification.proof !== 'passed') {
       throw new Error(`${record.id}: verified entry has an incomplete audit`);
     }
-    if (record.verification.reviewers < 2 || new Set(record.verification.agents).size < 2) {
-      throw new Error(`${record.id}: verified entry needs two separate AI verifier agents`);
+    if (record.verification.reviewers < 1 || new Set(record.verification.agents).size < 1) {
+      throw new Error(`${record.id}: verified entry needs one independent AI verifier agent`);
     }
     if (record.verification.writing !== 'passed') {
       throw new Error(`${record.id}: verified entry has not passed the pragmatic writing review`);
@@ -31,8 +31,8 @@ for (const record of data.records) {
     const acceptedReviews = record.verification.reviews.filter(
       (review) => review.decision === 'accepted' && review.correctness === 'passed' && review.writing === 'passed',
     );
-    if (acceptedReviews.length < 2 || new Set(acceptedReviews.map((review) => review.agent)).size < 2) {
-      throw new Error(`${record.id}: verified entry needs two recorded independent acceptances`);
+    if (acceptedReviews.length < 1 || new Set(acceptedReviews.map((review) => review.agent)).size < 1) {
+      throw new Error(`${record.id}: verified entry needs one recorded independent acceptance`);
     }
     if (record.rate > previousRate) throw new Error('verified records are not rate-sorted');
     previousRate = record.rate;

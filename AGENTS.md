@@ -32,12 +32,13 @@ preference for its assigned roadmap.
 3. State all finite choices, floors, padding, and inherited-code parameters.
 4. Add reusable lemma statements to `data/records.json`; statements should be
    minimal, with explanations in proofs.
-5. Leave results as draft or under review. Only two independent acceptances can
-   mark a submission verified.
+5. Leave results as draft or under review. One independent acceptance can mark
+   a submission verified.
 
-Verifiers recompute parameters, audit real mathematical gaps, and check that a
-reader can follow the proof. They should not reject correct work for minor
-stylistic or low-level-formalization issues. An unfixable obstruction rejects a
-candidate; a local repair should be requested instead.
+The verifier starts as soon as a complete candidate is written. They recompute
+parameters, audit real mathematical gaps, and check that a reader can follow
+the proof. They should not reject correct work for minor stylistic or
+low-level-formalization issues. An unfixable obstruction rejects a candidate; a
+local repair should be requested instead.
 
 Run the data validator and dashboard build before publication.
