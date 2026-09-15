@@ -1,0 +1,231 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign\u2019s canonical hash as SHA-256 of json.dumps(parsed_submission, sort_keys=True); it exactly matches the immutable source hash.",
+    "Reimplemented polynomial arithmetic over GF(2). Both displayed Frobenius congruences and Euclidean identities hold, and gcd(p,U^256+U)=1.",
+    "Tried to factor p through every possible proper factor degree allowed by U^(2^16)-U. The gcd at exponent 8 excludes degrees 1, 2, 4, and 8, leaving only degree 16.",
+    "Checked the kernel and complete weight cases of H: z=0 has weight 0, z=theta^15 has weight 32768, and every other nonzero z has weight 16384.",
+    "Tried to obtain an encoder kernel from a nonzero degree-at-most-64 polynomial. This would require 32768 distinct roots, contradicting the degree bound.",
+    "Tracked the exceptional inner symbol explicitly. If f has r roots and e surviving values equal to theta^15, then wt(c_f)=(32768-r+e)2^14, so exceptional symbols can only increase weight.",
+    "Tried to break the equality witness by making every scalar forbidden. At most 32704 scalars are forbidden, whereas F* has 65535 elements, so an admissible deterministic scalar necessarily exists.",
+    "Checked the degree-at-most-65 extension: a scaled 65-root word has weight 32703*16384=535805952, exactly 16384 below the target.",
+    "Recomputed n=32768^2=1073741824, k=65*16=1040, d=32704*16384=535822336, d/n=511/1024, and k/n=65/67108864."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The headline fields assert a deterministic binary code of length 1073741824 and dimension 1040, with high confidence and a beaten baseline.",
+      "justification": "The subsequent field, injectivity, distance, and arithmetic arguments validate these values; 1040>31.",
+      "reference": "algebraic-02.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The polynomial p defines F with polynomial basis 1,theta,...,theta^15, and A is a 32768-point subset.",
+      "justification": "The field certificate proves p irreducible. The first 15 basis elements are linearly independent, so A is a 15-dimensional binary subspace with 2^15 distinct points.",
+      "reference": "algebraic-02.json:5, construction_markdown",
+      "verdict": "valid"
+    },
+    {
+      "claim": "H is a binary-linear bijection from F onto RM(1,15), with parameters [32768,16,16384]_2.",
+      "justification": "Its constant and 15 linear coefficients are exactly the polynomial-basis coordinates of z. Evaluation at zero and the unit vectors proves injectivity; equal 16-dimensional domain and image spaces give bijectivity. Nonconstant affine words are balanced.",
+      "reference": "algebraic-02.json:5, construction_markdown",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Evaluation of degree-at-most-64 polynomials on A gives an outer [32768,65,32704] code over F.",
+      "justification": "The message space has 65 field coefficients. Evaluation is injective because 32768>64. The root bound gives distance at least 32704, and a product over any 64 evaluation points attains it.",
+      "reference": "algebraic-02.json:5, construction_markdown",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The first discussion post identifies the same k=1040 construction and its exact-distance scaling argument in algebraic-03.",
+      "justification": "The referenced submission uses the same field, evaluation code, and affine-inner construction up to a basis-coordinate relabeling. This is ancillary and not a dependency of the submitted proof.",
+      "reference": "algebraic-02.json:7-17",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The block-distance/Singleton argument caps the stated minimum-inner-weight template at binary dimension 1040.",
+      "justification": "The product bound needs D>=ceil(535822336/16384)=32704. Singleton gives at most (2^16)^(32768-32704+1)=(2^16)^65 words, hence at most 1040 binary dimensions.",
+      "reference": "algebraic-02.json:18-27",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A weighted-symbol outer construction is correctly identified as a route not excluded by the scoped Singleton ceiling.",
+      "justification": "The ceiling uses only block support and the minimum nonzero inner weight; it does not rule out exploiting the larger weight of theta^15.",
+      "reference": "algebraic-02.json:28-36",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The distance-audit bullets give the correct root count, inner weights, product bound, and equality conclusion.",
+      "justification": "Each statement follows from the polynomial root bound, affine balance, and the admissible-scalar witness. The product is exactly 535822336.",
+      "reference": "algebraic-02.json:38-43",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction is symbolically explicit and contains no hidden random, padding, puncturing, or post-concatenation shortening choice.",
+      "justification": "The modulus, bases, evaluation points, inner positions, message space, coordinate orders, root subspace, and least admissible scalar are all finitely specified.",
+      "reference": "algebraic-02.json:44-50",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission is correctly classified as a leaderboard submission.",
+      "justification": "It has the exact required length, meets the required distance, and its proved dimension 1040 strictly exceeds the verified baseline dimension 31.",
+      "reference": "algebraic-02.json:51",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The affine-balance dependency applies to every nonconstant inner affine word.",
+      "justification": "Whenever z differs from 0 and theta^15, at least one linear coefficient z_0,...,z_14 is nonzero, exactly satisfying the lemma\u2019s hypothesis.",
+      "reference": "algebraic-02.json:52-58",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The general affine-inner concatenation formula applies to the outer code.",
+      "justification": "The outer code is F_(2^16)-linear with parameters [N,K,D], and H is an injective binary-linear [2^15,16,2^14] realization. The submission also reproves the needed specialization.",
+      "reference": "algebraic-02.json:59-64",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum_distance field equals the exact target value.",
+      "justification": "535822336=2^29-2^20=(1/2-2^-10)2^30.",
+      "reference": "algebraic-02.json:66",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed next tasks do not introduce an unproved dependency into the construction.",
+      "justification": "They concern later persistence, validation, publication, and exploration; the mathematical proof is already self-contained in the submission.",
+      "reference": "algebraic-02.json:67-72",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The degree-at-most-65 Reed-Solomon extension fails the target by one inner minimum-weight block.",
+      "justification": "A polynomial with 65 prescribed roots can be scaled to avoid theta^15 at all 32703 nonroots, giving weight 535805952, which is 16384 below the target.",
+      "reference": "algebraic-02.json:73-74",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The stated Singleton obstruction for support-only concatenation is correct.",
+      "justification": "Outer distance 32704 forces N-D+1=65, so the q-ary Singleton bound gives binary dimension at most 16*65=1040.",
+      "reference": "algebraic-02.json:75",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The cited degree-at-most-65 odd trace construction has dimension 991 and does not improve k=1040.",
+      "justification": "Its 33 field-coefficient directions contribute 990 binary dimensions and its constant bit contributes one more; 991<1040.",
+      "reference": "algebraic-02.json:76",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The ledger\u2019s field, outer-code, and inner-code parameters are correct.",
+      "justification": "The values are |F|=65536, N=32768, K=65, D=32704, and inner parameters [32768,16,16384]_2.",
+      "reference": "algebraic-02.json:78-103",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The ledger\u2019s binary length, dimension, distance, rate, and relative distance are correct.",
+      "justification": "They recompute as 2^30, 1040, 535822336, 65/67108864, and 511/1024 respectively; the displayed decimal rate is exact.",
+      "reference": "algebraic-02.json:104-128",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The theorem statement in the proof asserts exact parameters [1073741824,1040,535822336]_2 and rate 65/2^26.",
+      "justification": "The later injectivity, universal lower bound, and explicit equality witness prove all three exact parameters; 1040/2^30 simplifies to 65/2^26.",
+      "reference": "algebraic-02.json:130, Theorem",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed finite-field certificate proves p irreducible.",
+      "justification": "Independent GF(2) arithmetic reproduces U^256 mod p, U^65536 mod p, and both Euclidean divisions. Every irreducible factor must have degree dividing 16, while the gcd excludes every proper divisor degree of 16.",
+      "reference": "algebraic-02.json:130, Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction section proves binary linearity and injectivity of H.",
+      "justification": "Coefficient extraction, affine evaluation, and polynomial evaluation are binary-linear. Values at y=0 and the unit vectors recover all 16 coordinates of z.",
+      "reference": "algebraic-02.json:130, Construction and binary linearity",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The exact-length and dimension section proves n=2^30 and k=1040.",
+      "justification": "There are 2^15 blocks of length 2^15. The message space has binary dimension 65*16, and a kernel polynomial would have 32768 roots despite degree at most 64.",
+      "reference": "algebraic-02.json:130, Exact length and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance lower bound covers every nonzero codeword.",
+      "justification": "Encoder injectivity makes its message polynomial nonzero. Such a polynomial has at most 64 roots; every other block weighs at least 2^14, yielding the target bound.",
+      "reference": "algebraic-02.json:130, Minimum-distance lower bound",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The scaled root polynomial attains the lower bound.",
+      "justification": "B has exactly 64 elements, f_0 has precisely those roots, and fewer than 65535 scalars are forbidden. The least allowed scalar leaves exactly 32704 balanced blocks and no all-one block.",
+      "reference": "algebraic-02.json:130, Attainment",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The structured field and inner-code proof steps accurately summarize proved claims.",
+      "justification": "Their dependencies are satisfied by the irreducibility certificate, injectivity of H, and affine-balance lemma.",
+      "reference": "algebraic-02.json:131-147",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The structured outer-code and length-dimension proof steps are correct.",
+      "justification": "The evaluation root bound and a 64-root witness give the exact outer distance; injective concatenation gives exact binary length and dimension.",
+      "reference": "algebraic-02.json:148-166",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The structured distance-lower and distance-exact steps are correct.",
+      "justification": "The first applies to every nonzero polynomial, and the second supplies a deterministic codeword attaining equality. Their dependency graph is acyclic.",
+      "reference": "algebraic-02.json:167-187",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The structured template-ceiling proof step is correctly scoped.",
+      "justification": "It bounds constructions certified solely by outer support distance times the minimum inner weight; it does not claim a universal bound on all weighted concatenations.",
+      "reference": "algebraic-02.json:188-197",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The JSON rate, research direction, and proved status accurately describe the result.",
+      "justification": "The floating-point rate correctly rounds 1040/2^30, and no conditional mathematical step remains in the claimed construction.",
+      "reference": "algebraic-02.json:199-201",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is provenance metadata rather than a hidden proof dependency.",
+      "justification": "The required mathematical facts are reproduced in the submission; the two cited internal supporting statements were also located and checked.",
+      "reference": "algebraic-02.json:202-225",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class, theorem statement, and title correctly report the construction.",
+      "justification": "The independently verified code is deterministic, binary-linear, and has exact parameters [2^30,1040,535822336]_2, so leaderboard_candidate is honest.",
+      "reference": "algebraic-02.json:226-228",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited submission.",
+      "justification": "Using the campaign\u2019s canonical_hash rule in src/binary_gv_research/campaign.py\u2014SHA-256 of JSON serialized with sorted keys\u2014recomputes exactly to 582cf839d57518572f4a83b04835c41e0a52d3c0c3d9626786f080972f9be897.",
+      "reference": "algebraic-02.json:1-229; campaign.py:31-32",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "algebraic-02",
+  "source_sha256": "582cf839d57518572f4a83b04835c41e0a52d3c0c3d9626786f080972f9be897",
+  "summary": "ACCEPT. The submission proves a symbolically deterministic binary linear code with exact parameters [1073741824,1040,535822336]_2. The field certificate, constituent codes, injectivity, exact length, dimension, universal distance bound, equality witness, rate, explicitness, and baseline classification all pass independent review. No unresolved mathematical obstruction remains.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}
