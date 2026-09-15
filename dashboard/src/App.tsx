@@ -16,16 +16,66 @@ import {
   X,
 } from 'lucide-react';
 import snapshot from '../../data/records.json';
+import campaignSnapshotSeed from '../../research_state/campaign-10-ultra/snapshot.json';
 import contributorInstructions from '../../how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md?raw';
 
 type RecordEntry = (typeof snapshot.records)[number];
 type NotebookTab = 'lemmas' | 'directions' | 'proofs' | 'review';
+type CampaignCandidate = {
+  id: string;
+  title: string;
+  status: string;
+  submission_class: string;
+  dimension: number | null;
+  minimum_distance: number | null;
+  rate: number | null;
+  ceiling_beaten: boolean;
+  accepted_reviews: number;
+  source_path: string;
+};
+type CampaignSnapshot = {
+  updated_at: string;
+  researcher_count: number;
+  counts: Record<string, number>;
+  promising_candidates: CampaignCandidate[];
+  doubly_verified_candidates: CampaignCandidate[];
+};
 
 const N = snapshot.target.blockLength;
 const D = snapshot.target.minimumDistance;
 const gvRate = snapshot.benchmark.rate;
 const literatureRate = snapshot.literatureBaseline.rate;
 const repoUrl = 'https://github.com/kz99/binary-gv-concrete';
+const campaignSnapshotUrl = 'https://raw.githubusercontent.com/kz99/binary-gv-concrete/main/research_state/campaign-10-ultra/snapshot.json';
+
+function useCampaignSnapshot() {
+  const [campaign, setCampaign] = useState<CampaignSnapshot>(campaignSnapshotSeed as CampaignSnapshot);
+  const [live, setLive] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function refresh() {
+      try {
+        const response = await fetch(`${campaignSnapshotUrl}?t=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`campaign snapshot: ${response.status}`);
+        const next = await response.json() as CampaignSnapshot;
+        if (!cancelled && Array.isArray(next.promising_candidates)) {
+          setCampaign(next);
+          setLive(true);
+        }
+      } catch {
+        // Keep the bundled checkpoint when the raw GitHub feed is unavailable.
+      }
+    }
+    refresh();
+    const timer = window.setInterval(refresh, 30_000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, []);
+  return { campaign, live };
+}
 
 function formatInteger(value: number) {
   return new Intl.NumberFormat('en-US').format(value);
@@ -259,12 +309,67 @@ function RecordCard({ entry, isLeader }: { entry: RecordEntry; isLeader: boolean
   );
 }
 
+function ProposedCard({ candidate, rank }: { candidate: CampaignCandidate; rank: number }) {
+  const sourceUrl = `${repoUrl}/blob/main/${candidate.source_path}`;
+  return (
+    <article className="record-card proposed">
+      <div className="rank-cell">
+        <span>P{String(rank).padStart(2, '0')}</span>
+        <small>proposed</small>
+      </div>
+      <div className="record-main">
+        <div className="record-title-row">
+          <div>
+            <p className="construction-family">{candidate.submission_class.replaceAll('_', ' · ')}</p>
+            <h2>{candidate.title}</h2>
+          </div>
+          <span className="proposed-badge"><FlaskConical size={14} /> Under review</span>
+        </div>
+        <div className="rate-line">
+          <span>Proposed rate</span>
+          <strong>{candidate.rate == null ? '—' : formatRate(candidate.rate)}</strong>
+          {candidate.rate != null && <small>{(candidate.rate / gvRate * 100).toFixed(2)}% of GV</small>}
+        </div>
+        {candidate.dimension != null && candidate.minimum_distance != null && (
+          <div className="concrete-parameters">
+            <ParameterPill label="binary length n" value={formatInteger(N)} />
+            <ParameterPill label="dimension k" value={formatInteger(candidate.dimension)} />
+            <ParameterPill label="claimed distance d" value={`≥ ${formatInteger(candidate.minimum_distance)}`} />
+            <ParameterPill label="relative distance" value="7 / 16" />
+          </div>
+        )}
+        <div className="construction-detail proposed-detail">
+          <p>
+            {candidate.ceiling_beaten ? 'Claims to exceed the GS–Hadamard template ceiling. ' : ''}
+            This mathematical proof is awaiting two independent verifier-agent reviews.
+          </p>
+          <a href={sourceUrl} target="_blank" rel="noreferrer">Read submission <ArrowUpRight size={14} /></a>
+        </div>
+        <div className="proposed-audit">
+          <span><FlaskConical size={12} /> {candidate.status}</span>
+          <span>{candidate.accepted_reviews}/2 verifier acceptances</span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function RecordPage() {
+  const { campaign, live } = useCampaignSnapshot();
   const verified = useMemo(
     () => snapshot.records.filter((entry) => entry.status === 'verified').sort((a, b) => b.rate - a.rate),
     [],
   );
   const leader = verified[0];
+  const proposed = useMemo(
+    () => campaign.promising_candidates
+      .filter((candidate) => candidate.rate != null && candidate.dimension != null)
+      .filter((candidate) => !snapshot.records.some((entry) => entry.id === candidate.id))
+      .sort((a, b) => (b.rate ?? -1) - (a.rate ?? -1)),
+    [campaign],
+  );
+  const succeeded = campaign.counts.succeeded ?? 0;
+  const totalResearch = campaign.researcher_count;
   return (
     <main>
       <ParameterBar />
@@ -280,6 +385,9 @@ function RecordPage() {
             <small><MathInline>{'R=k/2^{30}'}</MathInline></small>
           </div>
         </div>
+        <div className="campaign-feed-status" role="status">
+          <span className="feed-dot" /> Live research feed {live ? 'connected' : 'using latest checkpoint'} · {succeeded} jobs completed · {totalResearch} researchers · refreshed every 30 seconds
+        </div>
         <ProgressScale record={leader} />
         <div className="leaderboard-heading">
           <span>Rank</span>
@@ -289,8 +397,20 @@ function RecordPage() {
         <section className="records-list" aria-label="Verified rate leaderboard">
           {verified.map((entry, index) => <RecordCard key={entry.id} entry={entry} isLeader={index === 0} />)}
         </section>
+        {proposed.length > 0 && (
+          <>
+            <div className="leaderboard-heading proposed-heading">
+              <span>Status</span>
+              <span>Proposed constructions and claimed parameters</span>
+              <span>{proposed.length} under review</span>
+            </div>
+            <section className="records-list" aria-label="Proposed constructions awaiting verification">
+              {proposed.map((candidate, index) => <ProposedCard key={candidate.id} candidate={candidate} rank={index + 1} />)}
+            </section>
+          </>
+        )}
         <p className="admission-note">
-          Only results independently accepted by two AI verifier agents appear here. The GV value is displayed solely as a target line and is not a ranked construction.
+          Green cards are verified records. Amber cards are proposed research outputs shown for transparency; they are not ranked or certified until two independent verifier agents accept their proofs. The GV value is displayed solely as a target line.
         </p>
       </div>
     </main>

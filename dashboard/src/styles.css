@@ -113,6 +113,23 @@ button { font: inherit; }
 .audit-strip span { display: flex; align-items: center; gap: 4px; }
 .audit-strip svg { color: var(--green); }
 .admission-note { margin: 24px auto 0; max-width: 700px; color: var(--muted); font-size: 11px; line-height: 1.6; text-align: center; }
+.campaign-feed-status { margin: -14px 0 24px; color: var(--muted); font: 9px var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.feed-dot { display: inline-block; width: 6px; height: 6px; margin-right: 6px; background: #d28a59; border-radius: 50%; vertical-align: 1px; box-shadow: 0 0 0 3px #f5e5da; }
+.proposed-heading { margin-top: 42px; color: #a15b36; }
+.record-card.proposed { border-color: #e4c9b8; background: #fffaf6; }
+.record-card.proposed:hover { border-color: #c98c68; }
+.record-card.proposed .rank-cell { border-color: #ead8cc; }
+.record-card.proposed .rank-cell span { color: #a15b36; }
+.record-card.proposed .rank-cell small { color: #b65f36; }
+.record-card.proposed .record-main { border-left: 3px solid #d4875e; }
+.record-card.proposed .rate-line strong { color: #914627; }
+.proposed-badge { flex: none; height: 27px; padding: 0 9px; display: inline-flex; align-items: center; gap: 5px; color: #9a4f2c; background: #f7e8de; border: 1px solid #e4c1ad; font: 600 9px var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.proposed-detail { align-items: center; }
+.proposed-detail p { margin: 0; color: #725b4e; }
+.proposed-detail a { color: #a15b36; }
+.proposed-audit { margin: 16px -28px -18px; padding: 10px 28px; display: flex; flex-wrap: wrap; gap: 18px; background: #fbefe8; border-top: 1px solid #ead8cc; color: #9a6a53; font: 500 8px var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.proposed-audit span { display: flex; align-items: center; gap: 4px; }
+.proposed-audit svg { color: #b65f36; }
 
 .notebook-header { padding: 58px 0 42px; color: #edf3ef; background: var(--green-dark); }
 .notebook-header .eyebrow { color: #9fc8b4; }
