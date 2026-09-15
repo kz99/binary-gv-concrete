@@ -1,0 +1,264 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": true,
+  "confidence": "high",
+  "construction_markdown": "Use the composite-level Drinfeld modular curve over F_256 from the proof, but replace its 16,512 zero coordinates by a two-level deterministic distance-repair block.\n\nThe original main subcode B_0 has dimension 3,915,352 and distance at least D=469,762,048. Enlarging its one-point divisor by 91 gives a nested code B_91 with 728 additional binary dimensions and distance at least D-5,824. Enlarging once more and retaining two binary directions gives B_92 with two further dimensions and distance at least D-5,888.\n\nFor the first repair layer, use the Hermitian curve Y^8 Z+Y Z^8=X^9 over F_64. A deterministically selected degree-149 place gives an outer [513,122,>=364]_64 AG code. Concatenation with RM(1,5)=[32,6,16]_2 gives [16,416,732,>=5,824]_2; retain a deterministic 730-dimensional subcode. Map B_92/B_0 isomorphically into this code.\n\nFor the second layer, map B_92/B_91 into the explicit [96,2,64]_2 code (u,v) -> (u^32,v^32,(u+v)^32). The graph of these two quotient maps has exact length 1,073,725,312+16,416+96=2^30 and dimension dim(B_92)=3,916,082.",
+  "dimension": 3916082,
+  "distance_audit": [
+    "The main base code B_0 has distance at least 64(8,388,479-1,048,447)=469,762,048.",
+    "Every nonzero word of B_91 has weight at least 64(8,388,479-1,048,538)=469,756,224=D-5,824.",
+    "Every nonzero word of B_92 has weight at least 64(8,388,479-1,048,539)=469,756,160=D-5,888.",
+    "The Hermitian auxiliary code has distance at least 364*16=5,824; taking a 730-dimensional subcode preserves this bound.",
+    "The repeated-simplex code [96,2,64] supplies the additional 64 units needed by the top two-dimensional quotient.",
+    "For b in B_0, the main block alone contributes D. For b in B_91 minus B_0, the main and Hermitian blocks contribute (D-5,824)+5,824. For b in B_92 minus B_91, all three blocks contribute (D-5,888)+5,824+64. These cases cover every nonzero codeword."
+  ],
+  "explicitness_audit": [
+    "The main base ring, reduction prime, three powered level primes, residue fields, modular curve, divisor degrees, and coordinate orderings are explicitly fixed.",
+    "The canonical composite-level Drinfeld modular curve is symbolically recoverable through the cyclic modular polynomial, projective closure, normalization, and good reduction, with reduced Gr\u00f6bner bases and lexicographic tie-breaking at every algebraic step.",
+    "The nested main spaces are selected by deterministic enumeration and greedy exact linear independence; the final two directions are explicitly the F_2-span of h and alpha*h.",
+    "F_64 is F_2[zeta]/(zeta^6+zeta+1), with its polynomial basis and coefficient ordering fixed.",
+    "The degree-149 Hermitian place is the lexicographically first Frobenius orbit of size 149 in a lexicographically specified degree-149 extension of F_64. Hasse-Weil proves that this enumeration terminates.",
+    "Both Reed-Muller encoders use truth tables ordered by binary integers. The Hermitian basis, its 730-dimensional subcode, both quotient maps, the repeated-simplex coordinates, and the final block order are deterministic.",
+    "There is no random sampling, probabilistic existence argument, puncturing, unspecified shortening, or hidden asymptotic constant."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A global function field with chosen infinity, an ideal n factored into prime powers, and a reduction prime coprime to n. Here A=F_2[T], infinity has degree one, the class group is trivial, n=T^4(T^4+T^3+1)^2(T^8+T^4+T^3+T+1), and rho=T^4+T+1 has degree four.",
+      "result": "The exact genus formula for X_0(n), absolute irreducibility in the polynomial-ring degree-one-infinity case, good reduction away from n, and the supersingular rational-point lower bound over the quadratic residue-field extension.",
+      "source": "[Bassa\u2013Beelen\u2013Nguyen, Good families of Drinfeld modular curves](https://doi.org/10.1112/S146115701500025X)",
+      "used_for": "The exact main-curve genus 559,029 and at least 8,388,480 rational points over F_256."
+    },
+    {
+      "hypotheses": "Rank-two Drinfeld modules over F_q[T], a monic level, cyclic isogeny type, and invariant j.",
+      "result": "An algebraic modular-polynomial construction for the prescribed isogeny correspondence.",
+      "source": "[Breuer\u2013R\u00fcck, Drinfeld modular polynomials in higher rank II](https://arxiv.org/abs/1303.4086)",
+      "used_for": "Deterministic symbolic recovery of the composite-level modular curve."
+    },
+    {
+      "hypotheses": "A smooth projective geometrically irreducible curve over a finite field, a divisor G, and an evaluation divisor disjoint from G.",
+      "result": "Riemann-Roch, the Hasse-Weil point bound, and the standard AG evaluation-code dimension and designed-distance bounds.",
+      "source": "[Stichtenoth, Algebraic Function Fields and Codes](https://doi.org/10.1007/978-3-540-76878-4)",
+      "used_for": "All Riemann-Roch dimensions, AG distances, and existence of the degree-149 Hermitian place."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Add the proof as a new file in proofs/ and enter the construction in data/records.json with status under-review; do not mark it verified.",
+    "Obtain two independent verifier acceptances, with particular attention to the composite-level modular-curve recovery and the deterministic degree-149-place convention.",
+    "Run node scripts/validate-data.mjs and build the dashboard before publication."
+  ],
+  "obstructions": [
+    "An uncoupled direct sum would have minimum distance equal to the minimum constituent distance. The quotient-dependent graph construction is essential for adding the two repair weights to the appropriate main-code losses.",
+    "A single-level enlargement by 92 full F_256 directions would require 736 auxiliary dimensions at distance 5,888; the Hermitian constituent does not certify that. The nested 728+2 split is what makes the final two dimensions rigorous.",
+    "Official publication remains blocked until two separate verifier agents record acceptances, even though no mathematical step in this submission is conditional."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Final length and required distance",
+      "value": "n=2^30=1,073,741,824; D=7n/16=469,762,048"
+    },
+    {
+      "derivation": "Level factors 24, 272, and 257; cusp factors 6, 17, and 2.",
+      "quantity": "Drinfeld modular invariants",
+      "value": "epsilon=1,677,696; kappa=204"
+    },
+    {
+      "derivation": "1+epsilon/3-kappa and 5*epsilon.",
+      "quantity": "Main curve",
+      "value": "genus g=559,029; at least 8,388,480 F_256-rational points"
+    },
+    {
+      "derivation": "Reserve Q_0 and evaluate at the next points.",
+      "quantity": "Main evaluation length",
+      "value": "L=8,388,479"
+    },
+    {
+      "derivation": "L-7,340,032.",
+      "quantity": "Base divisor degree",
+      "value": "a_0=1,048,447"
+    },
+    {
+      "derivation": "a_0+1-g.",
+      "quantity": "Base outer dimension",
+      "value": "489,419 over F_256"
+    },
+    {
+      "derivation": "RM(1,7) concatenation.",
+      "quantity": "Main base code B_0",
+      "value": "[1,073,725,312, 3,915,352, >=469,762,048]_2"
+    },
+    {
+      "derivation": "a_91=a_0+91 and a_91+1-g.",
+      "quantity": "First main enlargement",
+      "value": "a_91=1,048,538; dim_F256 V_91=489,510; dim(B_91/B_0)=728"
+    },
+    {
+      "derivation": "64(L-a_91).",
+      "quantity": "B_91 distance",
+      "value": "469,756,224=D-5,824"
+    },
+    {
+      "derivation": "a_92=a_0+92; retain two F_2 directions beyond V_91.",
+      "quantity": "Top main enlargement",
+      "value": "a_92=1,048,539; dim(B_92/B_91)=2; dim B_92=3,916,082"
+    },
+    {
+      "derivation": "64(L-a_92).",
+      "quantity": "B_92 distance",
+      "value": "469,756,160=D-5,888"
+    },
+    {
+      "derivation": "Smooth plane curve of degree nine with 513 rational points.",
+      "quantity": "Hermitian curve",
+      "value": "Y^8 Z+Y Z^8=X^9 over F_64; genus 28; N_1=513"
+    },
+    {
+      "derivation": "deg Q=149>2g-2.",
+      "quantity": "Hermitian outer code",
+      "value": "[513,122,>=364]_64"
+    },
+    {
+      "derivation": "Concatenate with RM(1,5)=[32,6,16]_2 and retain 730 dimensions.",
+      "quantity": "First auxiliary code",
+      "value": "[16,416,730,>=5,824]_2"
+    },
+    {
+      "derivation": "Repeat every coordinate of [3,2,2]_2 thirty-two times.",
+      "quantity": "Top auxiliary code",
+      "value": "[96,2,64]_2"
+    },
+    {
+      "derivation": "1,073,725,312+16,416+96.",
+      "quantity": "Final block length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "dim B_92=3,915,352+728+2.",
+      "quantity": "Final dimension",
+      "value": "3,916,082"
+    },
+    {
+      "derivation": "Exact quotient.",
+      "quantity": "Certified rate",
+      "value": "3,916,082/2^30=1,958,041/536,870,912=0.00364713557064533233642578125"
+    },
+    {
+      "derivation": "15*3,916,082-7*2^23=20,974.",
+      "quantity": "Strict excess above 7/1920",
+      "value": "10,487/8,053,063,680 > 0"
+    },
+    {
+      "derivation": "3,916,082-3,688,448.",
+      "quantity": "Improvement over verified record",
+      "value": "227,634 dimensions"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nThere is a deterministic binary linear code with parameters\n\n[1,073,741,824, 3,916,082, >=469,762,048]_2.\n\nIts rate is 1,958,041/536,870,912, strictly greater than 7/1920.\n\n### 1. The modular-curve base\n\nPut A=F_2[T], with the pole of T as infinity. Define\n\nrho=T^4+T+1,\np_1=T,\np_4=T^4+T^3+1,\np_8=T^8+T^4+T^3+T+1,\n\nand n=p_1^4 p_4^2 p_8. The two quartics have no binary root and have nonzero remainder modulo the unique irreducible quadratic T^2+T+1, so they are irreducible. For p_8, repeated squaring gives T^256 congruent to T and\n\nT^16+T congruent to T^6+T^4+T^3+T^2 modulo p_8.\n\nThe Euclidean remainder chain ends with 1, so Rabin's criterion proves p_8 irreducible. Thus rho is coprime to n.\n\nLet alpha be the residue class of T modulo rho. The trace of alpha^3 from F_16 to F_2 is\n\nalpha^3+alpha^6+alpha^12+alpha^24=1.\n\nConsequently X^2+X+alpha^3 is irreducible over F_16. Fix\n\nK=F_16[beta]/(beta^2+beta+alpha^3)=F_256\n\nwith ordered binary basis\n\n(1,alpha,alpha^2,alpha^3,beta,alpha beta,alpha^2 beta,alpha^3 beta).\n\nLet X be the canonical smooth projective good reduction at rho of the rank-two Drinfeld modular curve X_0(n), followed by extension of constants to K. This is a symbolic definition. A coordinate model is recovered deterministically from the cyclic modular polynomial of [Breuer\u2013R\u00fcck](https://arxiv.org/abs/1303.4086), projective closure, normalization, and good reduction; use reduced Gr\u00f6bner bases and lexicographic tie-breaking throughout.\n\nFor this level,\n\nepsilon(n)=24*272*257=1,677,696,\nkappa(n)=6*17*2=204.\n\nThe rational base field has L-polynomial 1 and class number one. The genus formula of [Bassa\u2013Beelen\u2013Nguyen](https://doi.org/10.1112/S146115701500025X) therefore gives\n\ng=1+epsilon/3-kappa=559,029.\n\nThe exceptional term vanishes because p_1 has odd degree. Their rational-point theorem, with reduction degree four and class-group order e=1, gives over K\n\nN_1(X)>=epsilon*(2^4-1)/(2^2-1)=5 epsilon=8,388,480.\n\nThe same source gives absolute irreducibility and good reduction in this polynomial-ring, degree-one-infinity setting.\n\nRecover the projective model as above, normalize each projective coordinate tuple at its first nonzero coordinate, order K by its displayed binary basis, and order tuples lexicographically. Let Q_0,...,Q_8,388,479 be the first 8,388,480 rational points. Put L=8,388,479 and evaluate at Q_1,...,Q_L.\n\nSet a_0=1,048,447 and G_0=a_0 Q_0. Riemann-Roch gives\n\nell(G_0)>=a_0+1-g=489,419.\n\nEnumerate reduced rational expressions in the fixed function-field generators by degree and then lexicographically. Greedily retain the first 489,419 independent elements of L(G_0); call their K-span V_0. Exact function-field arithmetic decides membership and independence, and Riemann-Roch proves termination.\n\nNow put\n\na_91=a_0+91=1,048,538,\na_92=a_0+92=1,048,539.\n\nSince\n\nell(a_91 Q_0)>=489,510,\n\nextend V_0 deterministically to a K-linear space V_91 of dimension 489,510 inside L(a_91 Q_0). Also\n\nell(a_92 Q_0)>=489,511.\n\nLet h be the first enumerated element of L(a_92 Q_0) outside V_91, and define the F_2-linear space\n\nV_92=V_91 direct-sum span_F2{h,alpha h}.\n\nThe two displayed classes are independent modulo V_91: if (u+v alpha)h lies in V_91 for u,v in F_2 and u+v alpha is nonzero, K-linearity of V_91 would imply h lies in V_91. Hence dim_F2(V_92/V_91)=2.\n\nEncode every K-symbol by the truth table of the corresponding affine Boolean function in seven variables. This is RM(1,7)=[128,8,64]_2. Let B_0, B_91, and B_92 be the binary evaluations of V_0, V_91, and V_92 after this encoder. Evaluation is injective because every divisor degree is less than L. Therefore\n\ndim B_0=8*489,419=3,915,352,\ndim(B_91/B_0)=8*91=728,\ndim(B_92/B_91)=2.\n\nA nonzero function in L(aQ_0) has at most a rational evaluation zeros. Hence\n\nd(B_0)>=64(L-a_0)=469,762,048,\nd(B_91)>=64(L-a_91)=469,756,224,\nd(B_92)>=64(L-a_92)=469,756,160.\n\n### 2. The 16,416-coordinate Hermitian repair\n\nLet E=F_2[zeta]/(zeta^6+zeta+1)=F_64, ordered by the polynomial basis. Rabin's test gives zeta^64=zeta and gcd(Z^6+Z+1,Z^4+Z)=gcd(Z^6+Z+1,Z^8+Z)=1, so the defining polynomial is irreducible.\n\nOver E consider\n\nH: Y^8 Z+Y Z^8=X^9.\n\nIts partial derivatives are X^8, Z^8, and Y^8, so H is a smooth plane curve of degree nine and genus 28. Affinely, y^8+y is the trace E -> F_8: it maps onto F_8 with kernel of size eight. Also x^9 is the norm E -> F_8. Thus every x in E admits exactly eight values of y, giving 512 affine points; there is one point at infinity. Hence H(E) has exactly 513 points.\n\nA degree-149 place exists deterministically. Indeed, 149 is prime and Hasse-Weil gives\n\n#H(F_{64^149}) >= 64^149+1-56*8^149 > 513=#H(E).\n\nEvery point over F_{64^149} not defined over E consequently has Frobenius orbit exactly 149. Define F_{64^149} using the lexicographically first monic irreducible polynomial of degree 149 over E, enumerate normalized projective H-points lexicographically, and let Q be the first orbit of size 149. This fixes Q without randomness.\n\nBecause deg Q=149>2g-2=54,\n\nell(Q)=149+1-28=122.\n\nEvaluate L(Q) at all 513 rational points. Its support is disjoint from Q, evaluation is injective, and every nonzero word has at least 513-149=364 nonzero symbols. This gives an exact [513,122,>=364]_64 code.\n\nEncode E by RM(1,5)=[32,6,16]_2 using the polynomial basis and truth-table order. The resulting binary code has parameters\n\n[16,416,732,>=5,824]_2.\n\nOrder an E-basis of L(Q) by the same deterministic greedy convention, expand it in the displayed binary basis, and retain the first 730 binary basis vectors. Their span S has exact parameters [16,416,730,>=5,824]_2.\n\n### 3. Multilevel weight-propagation lemma\n\nLemma. Let B_0 be contained in B_1 contained in B_2 be binary linear codes with respective distance lower bounds D, D-delta_1, and D-delta_2. Suppose A has dimension dim(B_2/B_0) and distance at least delta_1, while R has dimension dim(B_2/B_1) and distance at least delta_2-delta_1. Fix an isomorphism phi:B_2/B_0 -> A and an isomorphism psi:B_2/B_1 -> R. Then\n\nC={(b,phi(b+B_0),psi(b+B_1)): b in B_2}\n\nhas dimension dim B_2 and distance at least D.\n\nProof. The first component makes the parametrization injective. For nonzero b there are three cases. If b lies in B_0, both auxiliary components vanish and the first has weight at least D. If b lies in B_1 but not B_0, phi is nonzero, so the weight is at least (D-delta_1)+delta_1. If b does not lie in B_1, both quotient images are nonzero, giving at least (D-delta_2)+delta_1+(delta_2-delta_1)=D. This also proves the assertion for every nonzero codeword, not merely generators.\n\n### 4. Assembly\n\nApply the lemma with\n\nB_1=B_91,\nB_2=B_92,\ndelta_1=5,824,\ndelta_2=5,888,\nA=S.\n\nFor R use\n\nR={(u repeated 32 times, v repeated 32 times, (u+v) repeated 32 times):u,v in F_2}.\n\nIts three nonzero words all have weight 64, so R=[96,2,64]_2. Order a basis of B_92/B_0 by first listing the 728 directions from V_91/V_0 and then h,alpha h. Map this basis to the ordered 730-vector basis of S. The last two quotient coordinates give the map to R. Thus both quotient maps are completely fixed.\n\nThe resulting graph code has length\n\n128*8,388,479+16,416+96\n=1,073,725,312+16,416+96\n=1,073,741,824=2^30,\n\nand dimension\n\n3,915,352+728+2=3,916,082.\n\nThe lemma proves minimum distance at least 469,762,048. All constituent encoders, evaluations, quotient maps, and direct products are F_2-linear, so the final code is binary linear.\n\n### 5. Ceiling comparison\n\nThe exact rate is\n\nR=3,916,082/2^30=1,958,041/536,870,912\n =0.00364713557064533233642578125.\n\nMoreover,\n\nR-7/1920=10,487/8,053,063,680>0,\n\nbecause 15*3,916,082-7*2^23=20,974. The escape from the vanilla GS-RM envelope is genuine: the main curve is the alternative composite-level Drinfeld modular family with an exact cusp correction, and the additional 730 dimensions are obtained by multilevel quotient-coupled distance repair rather than parameter tuning inside the one-level GS formula.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "The displayed Rabin and trace certificates establish all finite-field and level-polynomial claims.",
+      "statement": "The main fields, reduction prime, and powered composite level are valid and pairwise coprime.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "Bassa\u2013Beelen\u2013Nguyen genus formula"
+      ],
+      "id": "P2",
+      "proof": "epsilon=24*272*257=1,677,696, kappa=6*17*2=204, and the exceptional terms vanish. Thus g=1+epsilon/3-kappa=559,029.",
+      "statement": "The main modular curve has genus 559,029.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "Bassa\u2013Beelen\u2013Nguyen rational-point theorem"
+      ],
+      "id": "P3",
+      "proof": "The reduction has degree four and A has trivial class group, so the theorem gives at least 5*epsilon=8,388,480 points over F_256.",
+      "statement": "There are enough deterministically enumerable main-curve rational points.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3",
+        "Riemann-Roch"
+      ],
+      "id": "P4",
+      "proof": "Riemann-Roch gives dimensions at least 489,419, 489,510, and 489,511 at divisor levels 0, 91, and 92. Deterministic extensions give quotient dimensions 728 and 2 after binary expansion.",
+      "statement": "The nested main flag B_0 contained in B_91 contained in B_92 has exact dimensions 3,915,352, 3,916,080, and 3,916,082.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "The zero-divisor bound followed by RM(1,7) gives distances D, D-5,824, and D-5,888 at the three levels.",
+      "statement": "The main flag has the required graded distance losses.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Hasse-Weil",
+        "Riemann-Roch"
+      ],
+      "id": "P6",
+      "proof": "The Hermitian curve is smooth of genus 28 and has 513 rational points. Weil gives a degree-149 place. Riemann-Roch gives an exact 122-dimensional outer space and designed distance 364; RM concatenation and subcode selection give [16,416,730,>=5,824]_2.",
+      "statement": "The first deterministic auxiliary repair code exists with the stated exact parameters.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P7",
+      "proof": "Every nonzero pair (u,v) makes exactly two of u, v, and u+v nonzero; repeating each 32 times gives weight 64.",
+      "statement": "The top repair code has parameters [96,2,64]_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P5",
+        "P6",
+        "P7"
+      ],
+      "id": "P8",
+      "proof": "The three quotient-membership cases give weights D, (D-5,824)+5,824, and (D-5,888)+5,824+64. The graph parametrization is injective.",
+      "statement": "The assembled binary code has dimension 3,916,082 and minimum distance at least 469,762,048.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P8"
+      ],
+      "id": "P9",
+      "proof": "The constituent lengths sum to 1,073,741,824, and the exact rate difference from 7/1920 is 10,487/8,053,063,680.",
+      "statement": "The code has exact target length and strictly beats the standard-template ceiling.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.0036471355706453323,
+  "research_direction": "Multilevel Construction X: amplify a deterministic composite-level Drinfeld modular base using a Hermitian AG repair code and a repeated-simplex top layer in exactly the former padding coordinates.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json",
+    "research_state/campaign-10-ultra/status.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0003.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0004.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0007.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0008.json"
+  ],
+  "submission_class": "beyond_ceiling",
+  "theorem_statement": "There is a deterministic, symbolically recoverable binary linear code with parameters [2^30,3,916,082,>=469,762,048]_2. Its exact rate is 1,958,041/536,870,912=0.00364713557064533233642578125, exceeding 7/1920 by 10,487/8,053,063,680.",
+  "title": "Hermitian\u2013Simplex Multilevel Construction X Beyond the GS\u2013Hadamard Ceiling"
+}
