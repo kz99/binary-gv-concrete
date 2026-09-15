@@ -1,0 +1,238 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard code is submitted. The strongest finite conclusion is a complete-cloud obstruction for Ta-Shma amplification.\n\nFor a possible sparse successor, fix explicit base labels `Z:[N_1]\u2192F_2^r` and a search-free map `Path:{0,1}^30\u2192{valid path descriptors}`. If path `q` visits `v_{q,0},\u2026,v_{q,ell_q}`, define its column by `g_q=\u2295_h Z(v_{q,h})`. A qualifying rank-1040 balanced core must prove, simultaneously for every nonzero `x\u2208F_2^1040`,\n\n`|\u03a3_q (-1)^{<x,g_q>}|\u22642^21`.\n\nIt may then append the all-one row to obtain dimension 1041. No such path family or character-sum proof is presently known.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipient: proof-lemma builder. Promote the shared rank-64 theorem: any contracting complete-output Ta-Shma Theorem 4.1 instance whose outer labels span at least 65 dimensions has at least `2^30+2^24` outputs. This exceeds even the blind-puncturing window `2^30+2^21`; hence the balanced core has rank at most 64 and standard all-one augmentation reaches at most 65. Add the `lambda_2=0` Fourier-uniformity closure before verification.",
+      "kind": "idea",
+      "references": [
+        "proof-step:wide-rank64",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json"
+      ],
+      "subject": "Promote the rank-64 Ta-Shma full-cloud ceiling"
+    },
+    {
+      "body_markdown": "Intended recipient: expander proof position. For a complete directed-edge XOR lift certified by `beta=epsilon^2+lambda(1-epsilon^2)`, exact/generic length adjustment forces `beta\u22641/512`. Trace bounds give at most 34,915 vertices, and a 200th Fourier-moment count then gives homogeneous rank at most 899, hence at most 900 after all-one augmentation. This strengthens the existing 210th-moment ceiling for this scalar certificate.",
+      "kind": "objection",
+      "references": [
+        "proof-step:one-edge-moment",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-03.json"
+      ],
+      "subject": "One-edge scalar mixing is capped at dimension 900"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted bottleneck breaker and explicitness integrator. Give exactly `2^30` symbolically indexed paths, possibly with mixed path-length parity, whose XOR labels span 1040 dimensions and satisfy `|\u03a3_q(-1)^{<x,g_q>}|\u22642^21` for every nonzero `x`. Mixed parity is necessary if the accepted one-sided k=1040 code is used as the base: its all-one message maps under every fixed-length walk to either zero or all-one. Thinning or deduplication cannot inherit Ta-Shma's complete-cloud norm proof.",
+      "kind": "question",
+      "references": [
+        "proof-step:fixed-parity",
+        "proof-step:sparse-explicitness",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Exact sparse mixed-parity path theorem needed"
+    }
+  ],
+  "distance_audit": [
+    "The immutable distance is `D=2^29\u22122^20=535,822,336`, and the signed-sum allowance is `T=n\u22122D=2^21`.",
+    "The sufficient two-sided bias is `tau=T/n=1/512=2^-9`; the campaign's `2^-10` is the distance deficit, not the Fourier-bias parameter.",
+    "A `tau`-balanced rank-r core has all nonzero weights in `[D,n\u2212D]`. It excludes the all-one word, so adjoining that word gives a rank-`r+1` code of minimum distance at least `D`.",
+    "No new code or minimum distance is claimed in this obstruction result."
+  ],
+  "explicitness_audit": [
+    "Ta-Shma's complete cloud is deterministically indexed, and its full matrix can be emitted in polynomial time. Its failure here is finite length and certificate strength, not computability.",
+    "The asymptotic `epsilon^{2+o(1)}` rate cannot certify this finite target: its hidden constants are unavailable, and the paper's near-optimal parameter branch fails its stated prerequisite at `epsilon=1/512`.",
+    "A sparse replacement must provide a structural polynomial-time `Path(q)` indexer; canonical exhaustive search, conditional averaging over all completions, and finite lookup are inadmissible.",
+    "The sparse proof must control every nonzero character simultaneously and establish rank. An expectation for each character or the complete-cloud norm bound does not suffice.",
+    "No validator or dashboard build was run because this is an obstruction handoff, not a publication candidate."
+  ],
+  "generator_matrix": {
+    "algorithm": "No candidate matrix is asserted. The required sparse-lift emitter would loop over rows `a<r` and indices `q<2^30`, compute `Path(q)`, simulate its explicit rotations, and output the XOR of `Zbit(v,a)` over visited vertices; it would then emit an all-one row. For a complete-cloud audit, enumerate all start-state/instruction tuples instead of `Path(q)`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "`O(n r [T_Path+ell_max(T_step+T_Z)])` bit operations for the sparse template; the complete cloud has the analogous bound with its raw length `M`.",
+    "runtime_proof": "There are exactly `rn` core entries. Each uses one indexed descriptor, at most `ell_max` explicit steps, and one XOR per visited base entry. If all access times and `ell_max` are `n^{O(1)}` and `r\u2264n`, the full matrix is streamed in `n^{O(1)}` time. This is a conditional emitter lemma; no target-meeting `Path` is supplied."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "An initial biased distribution, an undirected outer `(N_1,D_1,lambda_1)` graph with local inversion, an inner graph on `D_1^s` vertices that is `zeta`-pseudorandom, and `epsilon_0+2 beta+2 lambda_1\u2264lambda_2^2`.",
+      "result": "Theorem 4.1 gives raw size `N_1D_1^sD_2^t` and bias certificate `[lambda_2^s+s lambda_2^(s\u22121)+s^2(lambda_2^(s\u22123)+zeta)]^floor(t/s)`.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "Exact s-wide complete-cloud formula, compatibility condition, and explicit indexing."
+    },
+    {
+      "hypotheses": "The ordinary complete-walk construction with graph eigenvalue bound `lambda`.",
+      "result": "Theorem 3.1 certifies bias at most `(epsilon_0+2 beta+2 lambda)^floor(t/2)` and has support `N_1D^t`.",
+      "source": "[Ta-Shma, Section 3](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "Finite obstruction to the published fallback and to the generic ordinary-walk certificate."
+    },
+    {
+      "hypotheses": "The exact RS-affine construction and its balanced-core decomposition.",
+      "result": "The local corpus independently accepts `[2^30,1040,535822336]_2`, with a 1039-dimensional balanced core, although `data/records.json` still contains only the verified k=31 baseline.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json and its verifier report",
+      "used_for": "Strongest available comparison endpoint and the fixed-path-parity obstruction."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Independently verify `combinatorial-expander-02`, then replace the lemma book's older rank-1041 complete-walk statement by the stronger rank-64 Ta-Shma ceiling and add the `lambda_2=0` closure.",
+    "Persist the generic ordinary-walk case split and the 200th-moment one-edge ceiling as separate reusable lemmas after independent arithmetic review.",
+    "Search only for explicitly indexed sparse, weighted, or mixed-length path families; complete clouds and blind thinning are now noncompetitive.",
+    "For any proposed sparse family, first prove exact length, the simultaneous `2^21` character-sum bound, rank at least 1040, and the stated full-matrix runtime before graph optimization.",
+    "Separately promote the independently accepted k=1040 RS-affine candidate into `data/records.json` in a write-capable publication step; that workflow task is outside this obstruction handoff."
+  ],
+  "obstructions": [
+    "A contracting complete-output Ta-Shma s-wide certificate has balanced rank at most 64 at the target length; standard all-one augmentation reaches at most dimension 65.",
+    "Ta-Shma's generic ordinary-walk certificate cannot support a rank-1040 balanced core anywhere in the blind-adjustment window.",
+    "The natural complete one-edge scalar mixing certificate has homogeneous rank at most 899 and augmented dimension at most 900.",
+    "The accepted one-sided k=1040 code cannot be converted into a rank-1040 balanced core by fixed-length XOR walks: its all-one message becomes either zero or all-one.",
+    "The Section 5 near-optimal parameter prerequisite fails at bias `1/512`; the Section 3 fallback requires at least 64 steps and vastly exceeds the coordinate budget.",
+    "Sparse selection, nonuniform weighting, mixed path parity, and direct one-sided cancellation remain open, but require a new proof rather than inherited complete-cloud estimates."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target.",
+      "quantity": "Block length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)n`.",
+      "quantity": "Required distance",
+      "value": "`D=535,822,336`"
+    },
+    {
+      "derivation": "`n\u22122D`.",
+      "quantity": "Signed-sum allowance",
+      "value": "`T=2^21=2,097,152`"
+    },
+    {
+      "derivation": "`T/n`.",
+      "quantity": "Absolute-bias target",
+      "value": "`tau=2^-9=1/512`"
+    },
+    {
+      "derivation": "Even a perfectly unbiased raw word cannot be blindly punctured farther.",
+      "quantity": "Largest generically rescuable raw length",
+      "value": "`W=n+T=1,075,838,976`"
+    },
+    {
+      "derivation": "Shared exact trace/contraction table plus the tail `65\u00b74^12`.",
+      "quantity": "Ta-Shma raw lower bound at balanced rank 65",
+      "value": "`n+2^24=1,090,519,040`"
+    },
+    {
+      "derivation": "Complete balanced rank at most 64, plus one all-one row.",
+      "quantity": "Ta-Shma direct-route dimension ceiling",
+      "value": "`65`"
+    },
+    {
+      "derivation": "Trace with `lambda\u22641/512` and `mD\u2264W`.",
+      "quantity": "One-edge vertex ceiling",
+      "value": "`m\u226434,915`"
+    },
+    {
+      "derivation": "200th Fourier moment.",
+      "quantity": "One-edge homogeneous/augmented rank ceilings",
+      "value": "`899 / 900`"
+    },
+    {
+      "derivation": "Persisted record versus independently accepted campaign candidate.",
+      "quantity": "Comparison dimensions",
+      "value": "`31 verified; 1040 accepted but not yet persisted; improvement target 1041`"
+    }
+  ],
+  "proof_markdown": "## Scope\n\nThis is a certificate obstruction, not a universal upper bound on expander codes.\n\n## 1. Normalization and all-one augmentation\n\nFor a binary word `c`, put `S(c)=n\u22122 wt(c)`. The target is met whenever `|S(c)|\u2264T=2^21`, equivalently normalized absolute bias at most `tau=1/512`. Such a balanced core `B` has every nonzero weight in `[D,n\u2212D]` and cannot contain `1^n`. Hence `B\u2295<1^n>` has dimension `dim(B)+1` and minimum distance at least `D`. Thus a balanced core of rank 1040 would already produce a k=1041 improvement.\n\nEvery parity-walk column is an XOR of outer labels, so amplification cannot increase their span.\n\nFor an undirected `d`-regular rotation multigraph on `m` vertices, write its normalized adjacency as `P_uv=a_uv/d` with integral symmetric port multiplicities. Then\n\n`tr(P^2)=d^-2 \u03a3_uv a_uv^2 \u2265 m/d`.\n\nIf every nonprincipal eigenvalue has absolute value at most `lambda`, then `tr(P^2)\u22641+(m\u22121)lambda^2`. Therefore\n\n`lambda^2 \u2265 (m\u2212d)/(d(m\u22121))`.  (1)\n\nBlind adjustment of a raw absolute-bias bound `B_0M` gives `B_0M+|n\u2212M|`. Even with `B_0=0`, puncturing requires\n\n`M\u2264W=n+T=2^30+2^21=1,075,838,976`.  (2)\n\n## 2. Complete s-wide amplification has balanced rank at most 64\n\nFor [Ta-Shma's Theorem 4.1](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf), the complete cloud has\n\n`M=N_1D_1^sD_2^t`\n\nand certificate `Q^floor(t/s)`, where\n\n`Q=lambda_2^s+s lambda_2^(s\u22121)+s^2(lambda_2^(s\u22123)+zeta)`\n\nunder `epsilon_0+2 beta+2 lambda_1\u2264lambda_2^2`.\n\nA subunit certificate requires `t\u2265s`, `s\u22654`, and `Q<1`. Indeed, `t<s` makes the exponent zero, while for `s\u22643` a displayed term is at least one. From `Q<1`,\n\n`s^2 lambda_2^(s\u22123)<1`,\n\nso compatibility implies\n\n`lambda_1^2 < a_s := (1/4)s^(\u22128/(s\u22123))`.  (3)\n\nAssume the outer-label span has rank at least 65, hence `N_1\u226565`. For `s=4,\u2026,11`, let\n\n`d_s=(65,64,58,50,42,36,31,27)`.\n\nIf `D_1\u2264d_s\u22121`, (1), minimized at `N_1=65`, gives respectively\n\n`b_s=(1/4096,1/2016,1/456,1/196,3/328,3/224,7/384,3/128)`.\n\nThe exact rational quantities `(4b_s)^(s\u22123)s^8` are\n\n`64, 390625/254016, 1679616/1481544, 1, 4076863488/3707398432, 31381059609/30840979456, 82354300000000/75144747810816, 1406408618241/1099511627776`,\n\nall at least one. Thus `b_s\u2265a_s`, contradicting (3), and `D_1\u2265d_s`. Direct evaluation gives `65d_s^s\u226565^5=1,160,290,625` throughout these cases.\n\nFor `s\u226512`, (3) gives `lambda_1^2<1/4`. If `D_1\u22643`, (1) gives `lambda_1^2\u2265(65\u22123)/(3\u00b764)=31/96>1/4`. Hence `D_1\u22654`, and\n\n`M\u226565\u00b74^12=2^30+2^24=1,090,519,040`.  (4)\n\nThis is also below neither exact length nor the generic window (2), since `2^24>2^21`.\n\nIf `lambda_2=0`, compatibility forces `epsilon_0=beta=lambda_1=0`. The base multiset is then zero-biased; Fourier inversion makes it uniform on its ambient binary space, so rank at least 65 already forces at least `2^65` base entries. Thus zero creates no omitted case.\n\nConsequently the published complete-output certificate has balanced rank at most 64 and reaches at most dimension 65 after standard all-one augmentation.\n\n## 3. Ordinary complete walks also cannot challenge k=1040\n\nTa-Shma Theorem 3.1 gives support `M=m d^t` and certificate\n\n`rho^floor(t/2)`, where `rho=epsilon_0+2 beta+2 lambda\u22652lambda`.\n\nAssume balanced-core rank at least 1040, so `m\u22651040`, and `M\u2264W`. If `d=1`, (1) gives `lambda=1`. Otherwise `d\u22652`, so `t\u226419`.\n\nFor `t=2,3`, exact length gives `d\u22641017`; (1) gives\n\n`lambda^2\u226523/(1017\u00b71039)>1/2^16`,\n\nso `rho>1/128>1/512`. For `4\u2264t\u22649`, length gives `d\u226431`; hence `lambda>1/6`, `rho>1/3`, and with `floor(t/2)\u22644` the certificate is either at least one or greater than `(1/3)^4=1/81`. For `10\u2264t\u226419`, length gives `d\u22643`; then `lambda^2\u22651037/(3\u00b71039)>1/4`, so `rho>1`. The cases `t\u22641` have exponent zero. No case certifies the target.\n\nThe paper's actual fallback is much worse: at `epsilon=1/512` it requires at least 64 steps. Its near-optimal Section 5 branch requires `alpha^3/(2log_2(1/alpha))\u22651/9` with `alpha\u22640.01`, whereas the left side is below `7.53\u00b710^-8`.\n\n## 4. The natural one-edge loophole has rank at most 899\n\nConsider all directed ports of a symmetric `d`-regular graph, raw length `M=md`, and the standard scalar certificate\n\n`beta=epsilon^2+lambda(1\u2212epsilon^2)`.\n\nGeneric adjustment requires `beta M+|n\u2212M|\u2264T`. The right-hand ratio is maximized at `M=n`, so `beta\u2264T/n=1/512`. Thus `lambda\u22641/512` and every nonprincipal translated-label character sum `W_a` satisfies `|W_a|\u2264m/sqrt(512)`.\n\nEquation (1) yields\n\n`d\u2265ceil(262144m/(m+262143))`.\n\nTogether with `md\u2264W`, monotonicity and the exact boundary\n\n`34915\u00b730812\u2264W<34916\u00b730813`\n\ngive `m\u226434915`.\n\nLet `h` be the translated-label span, equal to the edge-label span because `lambda<1` makes the graph connected. Fourier orthogonality at moment 200 gives\n\n`\u03a3_a W_a^200=2^h Z_200`.\n\nCounting tuples using 100 distinct indices twice gives\n\n`Z_200\u2265L=(m)_100\u00b7199!!`.\n\nPut `X=m^200/512^100`. Since\n\n`199!!=100! binom(200,100)/2^100 \u2265 (200/e)^100/201`,\n\nwe obtain\n\n`L/X \u2265 (1/201)[(200/e)\u00b7512(m\u221299)/m^2]^100`.\n\nFor `100\u2264m\u226434915`, the bracket is minimized at `m=34915`; using `e<68/25`, it exceeds `43/40`. Since `(43/40)^10>2`, this gives `L>2X`. On the other hand,\n\n`2^hL\u2264m^200+(2^h\u22121)X`,\n\nso `2^h(L\u2212X)<m^200`. As `L\u2212X>X`,\n\n`2^h<512^100=2^900`,\n\nand therefore `h\u2264899`. The augmented dimension is at most 900.\n\n## 5. Exact sparse-path handoff\n\nThe accepted k=1040 one-sided code contains an all-one codeword. For its corresponding message `x_0`, every base label satisfies `<x_0,Z(v)>=1`. Every fixed-length path therefore gives\n\n`<x_0,g_q>=t+1 mod 2`,\n\nso that direction becomes either zero, losing rank, or all-one, retaining absolute bias one. Starting from its genuine rank-1039 balanced core and augmenting afterward merely returns k=1040.\n\nA competitive expander construction must therefore use a different rank-1040 balanced base or an explicitly indexed sparse family with mixed parity and a fresh simultaneous character-sum proof. Ta-Shma's full-cloud theorem does not survive thinning, deduplication, or nonuniform weighting automatically.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "target-augmentation",
+      "proof": "`S(c)=n\u22122wt(c)`. The bound `|S(c)|\u22642^21` gives weights in `[D,n\u2212D]`; complementation preserves that interval and absolute balance excludes `1^n` from the core.",
+      "statement": "A rank-1040 `1/512`-balanced core would explicitly yield a rank-1041 target code after adjoining all-one.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "rank-trace",
+      "proof": "Every lifted label is an XOR of outer labels. Integral port multiplicities give `tr(P^2)\u2265m/d`, while spectral decomposition gives `tr(P^2)\u22641+(m\u22121)lambda^2`.",
+      "statement": "Parity lifts do not increase span, and regular rotation graphs obey the exact trace lower bound (1).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "rank-trace"
+      ],
+      "id": "wide-rank64",
+      "proof": "Contraction forces (3). The exact `s=4,\u2026,11` table forces the listed degrees; `s\u226512` forces degree at least four. Every rank-at-least-65 complete cloud therefore has at least `2^30+2^24` outputs.",
+      "statement": "Ta-Shma Theorem 4.1 has balanced rank at most 64 at exact length or under blind length adjustment.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "rank-trace"
+      ],
+      "id": "ordinary-no-fit",
+      "proof": "The exact cases `t\u22641`, `t=2,3`, `4\u2264t\u22649`, `10\u2264t\u226419`, and `t\u226520` give respectively exponent zero, insufficient contraction, insufficient contraction, base above one, and excessive length.",
+      "statement": "Ta-Shma Theorem 3.1 cannot certify a rank-1040 balanced core in the generic length window.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "rank-trace"
+      ],
+      "id": "one-edge-moment",
+      "proof": "Length and trace force `m\u226434915`; the 200th Fourier moment and paired-index lower bound give `2^h<2^900`.",
+      "statement": "The standard complete one-edge scalar mixing certificate has homogeneous dimension at most 899 and augmented dimension at most 900.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-augmentation"
+      ],
+      "id": "fixed-parity",
+      "proof": "The all-one message evaluates to one at every base column, so its XOR over every fixed-length path is the constant parity of the number of visited vertices.",
+      "statement": "Fixed-length XOR walks cannot turn the accepted k=1040 one-sided code into a rank-1040 balanced core.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "target-augmentation"
+      ],
+      "id": "sparse-explicitness",
+      "proof": "Enumerating every row and indexed path emits exactly the claimed entries in `n^{O(1)}` time under the stated access bounds; the character inequality gives rank and distance.",
+      "statement": "Any structurally indexed sparse family satisfying the simultaneous character bound has a polynomial-time full-matrix emitter and yields the target after augmentation.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Ta-Shma-style epsilon-balanced codes: exact finite complete-cloud ceilings and the sparse-path frontier.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 40 files present at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 37 files present at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/composition-10/verifier-1-composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/literature-sota-0001/verifier-1-literature-sota-0001.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "At `n=2^30` and absolute-bias target `1/512`, every complete-output instance certified by Ta-Shma's Theorem 4.1 has balanced rank at most 64; after the standard all-one augmentation it has dimension at most 65. The lower bound `2^30+2^24` on any contracting rank-at-least-65 cloud also exceeds the entire blind-puncturing window `2^30+2^21`. Ta-Shma's ordinary complete-walk certificate cannot support a rank-1040 balanced core, and the natural complete one-edge scalar spectral certificate has homogeneous rank at most 899. These are complete-cloud certificate obstructions, not a prohibition on a new explicitly indexed sparse or one-sided path construction.",
+  "title": "Rank-64 ceiling for complete Ta-Shma amplification and an exact sparse-path handoff"
+}

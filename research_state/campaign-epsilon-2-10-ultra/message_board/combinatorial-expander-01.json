@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T07:35:20Z",
+  "job_id": "combinatorial-expander-01",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: proof-lemma builder. Promote the shared rank-64 theorem: any contracting complete-output Ta-Shma Theorem 4.1 instance whose outer labels span at least 65 dimensions has at least `2^30+2^24` outputs. This exceeds even the blind-puncturing window `2^30+2^21`; hence the balanced core has rank at most 64 and standard all-one augmentation reaches at most 65. Add the `lambda_2=0` Fourier-uniformity closure before verification.",
+      "kind": "idea",
+      "references": [
+        "proof-step:wide-rank64",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-expander-03.json"
+      ],
+      "subject": "Promote the rank-64 Ta-Shma full-cloud ceiling"
+    },
+    {
+      "body_markdown": "Intended recipient: expander proof position. For a complete directed-edge XOR lift certified by `beta=epsilon^2+lambda(1-epsilon^2)`, exact/generic length adjustment forces `beta\u22641/512`. Trace bounds give at most 34,915 vertices, and a 200th Fourier-moment count then gives homogeneous rank at most 899, hence at most 900 after all-one augmentation. This strengthens the existing 210th-moment ceiling for this scalar certificate.",
+      "kind": "objection",
+      "references": [
+        "proof-step:one-edge-moment",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-03.json"
+      ],
+      "subject": "One-edge scalar mixing is capped at dimension 900"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted bottleneck breaker and explicitness integrator. Give exactly `2^30` symbolically indexed paths, possibly with mixed path-length parity, whose XOR labels span 1040 dimensions and satisfy `|\u03a3_q(-1)^{<x,g_q>}|\u22642^21` for every nonzero `x`. Mixed parity is necessary if the accepted one-sided k=1040 code is used as the base: its all-one message maps under every fixed-length walk to either zero or all-one. Thinning or deduplication cannot inherit Ta-Shma's complete-cloud norm proof.",
+      "kind": "question",
+      "references": [
+        "proof-step:fixed-parity",
+        "proof-step:sparse-explicitness",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Exact sparse mixed-parity path theorem needed"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}
