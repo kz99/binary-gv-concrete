@@ -1,0 +1,294 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is submitted. The audited multilevel family has 32,768 blocks of length 32,768 and full inner space `B_0=RM(1,15)`. Fix a strict binary-linear flag `B_0 \u228b B_1 \u228b ... \u228b B_s=0`. Put `m_i=dim(B_i)-dim(B_{i+1})`, choose a linear complement section `\u03c3_i:F_2^{m_i}\u2192B_i`, and choose a binary-linear outer constituent `E_i\u2264(F_2^{m_i})^{32768}` of dimension `\u03ba_i`. Encode `(e_i)_i` blockwise by `c_j=\u03a3_i \u03c3_i(e_{i,j})`. The result proves an exact ceiling of 1,040 for the standard first-active-level product certificate, a sharper ceiling of 996 when the repetition line is isolated, and a universal ceiling of 1,054 for arbitrary binary-linear coupling whose block projections have rank at most 16.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For a flag `B_i` with sections `\u03c3_i`, define `\u03c9_i(u)=min_{v\u2208B_{i+1}} wt(\u03c3_i(u)+v)`. If `E_i` is the level-`i` outer code, then first-active-level decoding gives `d(C)\u2265min_i min_{e\u2208E_i\\{0}} \u03a3_j \u03c9_i(e_j)`. Hence `d(C)\u2265min_i \u0394_i \u03bb_i`, where `\u03bb_i=min_{u\u22600}\u03c9_i(u)`. This weighted-shell statement cleanly identifies where ordinary product-distance analysis loses information.",
+      "kind": "idea",
+      "references": [
+        "proof-step:weighted-shell-bound"
+      ],
+      "subject": "Weighted-shell concatenation lemma"
+    },
+    {
+      "body_markdown": "For every full `RM(1,15)` flag under the standard shell-product certificate, `k\u22641040`; isolating `Rep` sharpens this to `975+21=996`. Arbitrary binary coupling among 16-rank blocks is still bounded by `k\u22641054`. Moreover, the shared reciprocal-sum lemma shows that the existing degree-64 RS\u2013RM code has no strict additive supercode under its fixed affine inner encoder.",
+      "kind": "objection",
+      "references": [
+        "proof-step:flag-ceiling",
+        "proof-step:cubic-delsarte",
+        "proof-step:block-rank-plotkin",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json"
+      ],
+      "subject": "RM-block multilevel ceilings"
+    },
+    {
+      "body_markdown": "Can one construct or rule out a deterministic binary `[16384,16,8185]` inner code? Concatenation with the full-length Reed\u2013Solomon code `[65536,73,65464]_{2^16}` would give a binary `[2^30,1168,\u2265535822840]` code. This gateway lies outside the 32,768-block rank-16 obstruction proved here.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json"
+      ],
+      "subject": "Concrete k=1168 inner-code gateway"
+    }
+  ],
+  "distance_audit": [
+    "The target factors exactly as `535822336=32704\u00b716384=16352\u00b732768`.",
+    "For every nonzero generalized-concatenation word, choosing its first active level accounts for all later-level contributions through a coset of `B_{i+1}`; thus the weighted-shell inequality covers every nonzero word.",
+    "Every nonzero affine truth table in `RM(1,15)` has weight 16,384 except the all-one word, which has weight 32,768.",
+    "Ordinary shells therefore require outer block distance at least 32,704 under the product certificate; the isolated repetition shell requires binary outer distance at least 16,352.",
+    "The coupled-code ceiling shortens 65 complete blocks to zero and preserves distance before applying Plotkin; it is an upper bound on actual distance, not merely on a product certificate.",
+    "No new code is claimed, so `minimum_distance` and `dimension` are null."
+  ],
+  "explicitness_audit": [
+    "The flag, quotient dimensions, sections, and outer constituents are universally quantified finite binary-linear objects; no random choice or numerical witness is used.",
+    "The cubic Delsarte polynomial and all four Krawtchouk coefficients are displayed as exact integers.",
+    "The 65-block shortening argument permits arbitrary cross-level and cross-coordinate outer coupling; only the rank-at-most-16 condition on each displayed block projection is assumed.",
+    "The fixed-code additive-maximality corollary uses the explicit field, evaluation set, 64-point witness, and reciprocal value `0x0990` from the cited proved shared submission.",
+    "All 20 durable submissions and all 20 message-board files present at the final enumeration were read. The lemma-book and roadmap directories were empty.",
+    "This is an obstruction rather than a publication candidate. The workspace is read-only, so no proof file or record was written and no validator or dashboard publication was run."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A nonconstant affine Boolean function on 15 variables has a nonzero linear part.",
+      "result": "Its truth table has weight `2^14`; the only heavier nonzero word in `RM(1,15)` is the all-one word.",
+      "source": "`data/records.json`, lemma `rm-affine-balance`; `proofs/rm-1-30-baseline.md`.",
+      "used_for": "Computing every shell weight in a flag of `RM(1,15)`."
+    },
+    {
+      "hypotheses": "Binary distance distributions and binary Krawtchouk polynomials.",
+      "result": "The required Delsarte positivity identity follows from a sum of squared character sums.",
+      "source": "Reproved in `proof-step:cubic-delsarte`; no external numerical bound is invoked.",
+      "used_for": "Bounding a binary `[32768,c,\u226516352]` repetition-level outer code by `c\u226421`."
+    },
+    {
+      "hypotheses": "The explicit degree-at-most-64 evaluation space over `F_{2^16}` and its fixed affine-Hadamard inner encoder.",
+      "result": "A reciprocal-sum interpolation lemma with explicit value `0x0990` rules out every strict binary-additive outer supercode.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json`.",
+      "used_for": "Closing additive extensions that contain the shared dimension-1040 RS\u2013RM code."
+    },
+    {
+      "hypotheses": "The explicit degree-at-most-64 Reed\u2013Solomon outer code and `RM(1,15)` inner code.",
+      "result": "Their concatenation has exact parameters `[2^30,1040,535822336]_2`.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json`.",
+      "used_for": "Showing that the standard product-certificate ceiling 1,040 is attained by an existing under-review construction."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Analyze the remaining dimensions 1041 through 1054 for coupled rank-16 RM-block codes that neither contain the degree-64 RS outer space nor decompose into independent flag constituents.",
+    "Construct or rule out a binary `[16384,16,8185]` code; if it exists, the explicit RS concatenation above gives dimension 1,168.",
+    "Also investigate `[8192,17,4090]`, which with `[131072,65,131008]_{2^17}` gives dimension 1,105, and `[32768,18,16381]`, which gives dimension 1,062.",
+    "Persist the weighted-shell, cubic-LP, and block-rank-shortening lemmas in a writable campaign step, obtain independent review, and run the validator and dashboard build."
+  ],
+  "obstructions": [
+    "Standard independent generalized concatenation through a full `RM(1,15)` flag cannot exceed dimension 1,040 under the first-active-level shell-product certificate.",
+    "Isolating the repetition line is counterproductive: the fifteen ordinary quotient bits contribute at most 975 dimensions and the repetition layer at most 21, totaling 996.",
+    "Every binary-linear code partitioned into 32,768 blocks whose block projections have rank at most 16 satisfies `k\u22641054` at the target, even with arbitrary global coupling.",
+    "The shared dimension-1040 degree-64 RS\u2013RM code cannot be enlarged by a strict additive outer supercode while retaining its coordinatewise affine inner map.",
+    "The universal bound leaves only dimensions 1041\u20131054 for unrelated coupled RM-block spaces. Codes using higher-rank or shorter inner constituents lie outside its scope."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Final length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)2^30`.",
+      "quantity": "Required distance",
+      "value": "`T=535,822,336`"
+    },
+    {
+      "derivation": "`2^15\u00b72^15`.",
+      "quantity": "RM-block decomposition",
+      "value": "32,768 blocks, each of length 32,768"
+    },
+    {
+      "derivation": "Affine balance.",
+      "quantity": "Ordinary shell weight",
+      "value": "`h=16,384`"
+    },
+    {
+      "derivation": "`T/h`.",
+      "quantity": "Required ordinary outer distance",
+      "value": "`\u0394=32,704`"
+    },
+    {
+      "derivation": "Block Singleton after puncturing `\u0394-1` positions.",
+      "quantity": "Dimension per ordinary quotient bit",
+      "value": "At most `32768-32704+1=65`"
+    },
+    {
+      "derivation": "`16\u00b765`.",
+      "quantity": "Standard full-flag ceiling",
+      "value": "`k\u22641,040`"
+    },
+    {
+      "derivation": "`T/32768`.",
+      "quantity": "Repetition-level outer distance",
+      "value": "`16,352`"
+    },
+    {
+      "derivation": "Cubic Delsarte polynomial.",
+      "quantity": "Repetition-level cardinality",
+      "value": "At most `2,467,400<2^22`, hence binary dimension at most 21"
+    },
+    {
+      "derivation": "`15\u00b765+21`.",
+      "quantity": "Isolated-repetition flag ceiling",
+      "value": "`k\u2264996`"
+    },
+    {
+      "derivation": "Delete 65 zero blocks after shortening.",
+      "quantity": "Residual length",
+      "value": "`n'=32703\u00b732768=1,071,611,904`"
+    },
+    {
+      "derivation": "`2T-n'`.",
+      "quantity": "Plotkin excess",
+      "value": "`32,768`"
+    },
+    {
+      "derivation": "`2T/(2T-n')`.",
+      "quantity": "Residual cardinality ceiling",
+      "value": "`32,704<2^15`, hence residual dimension at most 14"
+    },
+    {
+      "derivation": "`65\u00b716+14`.",
+      "quantity": "Arbitrarily coupled rank-16 block ceiling",
+      "value": "`k\u22641,054`"
+    }
+  ],
+  "proof_markdown": "## Theorem and scope\n\nLet `T=535822336`, and partition the final coordinates into `N=32768` blocks of length `L=32768`.\n\n1. Every full `RM(1,15)` generalized concatenation whose distance is certified by the standard first-active-level shell-product bound has dimension at most 1,040. If the repetition line is isolated as its own level, the stronger bound is 996.\n2. Every binary-linear code with this block partition and block-projection ranks at most 16 has dimension at most 1,054, regardless of cross-level coupling.\n3. The shared degree-64 RS\u2013RM code admits no strict additive supercode using the same coordinatewise affine inner map.\n\nThese are scoped obstructions, not an upper bound for arbitrary binary-linear codes.\n\n## 1. Linearity, dimension, and the weighted-shell bound\n\nLet\n\n`B_0 \u228b B_1 \u228b ... \u228b B_s=0`, with `B_0=RM(1,15)`,\n\nand choose complements `B_i=\u03c3_i(F_2^{m_i}) \u2295 B_{i+1}`. Let `E_i\u2264(F_2^{m_i})^N` be binary linear of dimension `\u03ba_i`. The blockwise sum of the sections is binary linear. Uniqueness of the direct-sum decomposition in every block makes the encoder injective, so\n\n`dim C=\u03a3_i \u03ba_i`.\n\nFor a quotient symbol define\n\n`\u03c9_i(u)=min_{v\u2208B_{i+1}} wt(\u03c3_i(u)+v)`, with `\u03c9_i(0)=0`.\n\nFor `e\u2208E_i`, put `W_i(e)=\u03a3_j \u03c9_i(e_j)`. If level `i` is the first active level of a nonzero encoded word, every later contribution in block `j` belongs to `B_{i+1}`. That block therefore has weight at least `\u03c9_i(e_j)`. Hence\n\n`d(C)\u2265min_i min_{e\u2208E_i\\{0}} W_i(e)`.\n\nIf `\u0394_i` is the block distance of `E_i` and `\u03bb_i=min_{u\u22600}\u03c9_i(u)`, this implies the standard product certificate\n\n`d(C)\u2265min_i \u0394_i \u03bb_i`. \n\n## 2. Shells of `RM(1,15)`\n\nA nonzero affine truth table has weight 16,384 unless it is the constant-one word, which has weight 32,768. Therefore every nonempty shell `B_i\\B_{i+1}` has minimum weight 16,384, except the unique possible shell `Rep\\{0}`, where `Rep=<1>` and the weight is 32,768. Indeed, a shell with minimum 32,768 can contain only the all-one word, forcing `B_i=Rep` and `B_{i+1}=0`.\n\nSuppose first that `Rep` is not isolated. Under the standard product certificate, every level must satisfy\n\n`\u0394_i\u00b716384\u2265T`, so `\u0394_i\u226532704`.\n\nPuncturing any `\u0394_i-1` outer block positions is injective on `E_i`. The remaining 65 positions contain at most `65m_i` binary coordinates, whence\n\n`\u03ba_i\u226465m_i`.\n\nSince `\u03a3_i m_i=dim RM(1,15)=16`,\n\n`dim C\u226465\u00b716=1040`.\n\nIf `Rep` is isolated, the other quotient dimensions sum to 15 and contribute at most 975. The repetition-level outer constituent must be a binary code of length 32,768 and distance at least\n\n`T/32768=16352`.\n\nThe next section bounds its dimension by 21, yielding\n\n`dim C\u2264975+21=996`.\n\nThe shared outer `[32768,65,32704]_{2^16}` concatenated with `RM(1,15)` attains the 1,040 ceiling, so the first bound is exact within its stated certificate class.\n\n## 3. A self-contained cubic Delsarte bound\n\nLet `n_0=32768`, `d_0=a=16352`, `t=n_0-2a=64`, and `z=n_0-2x`. Define\n\n`F(x)=(a-x)(tz+n_0)^2`.\n\nFor every integer `x\u2265d_0`, `F(x)\u22640`. With binary Krawtchouk polynomials\n\n`K_0=1`, `K_1=z`, `K_2=(z^2-n_0)/2`,\n\n`K_3=(z^3-(3n_0-2)z)/6`,\n\nthe exact expansion `F=\u03a3_{j=0}^3 f_jK_j` has\n\n`f_0=30064771072`, `f_1=603975680`,\n\n`f_2=3932160`, `f_3=12288`.\n\nAll coefficients are positive.\n\nFor any binary code `A` of size `M`, define its normalized distance distribution\n\n`A_x=M^{-1}|{(u,v)\u2208A^2:d(u,v)=x}|`.\n\nCharacter orthogonality gives, for every `j`,\n\n`\u03a3_x A_xK_j(x)=M^{-1} \u03a3_{wt(y)=j} |\u03a3_{u\u2208A}(-1)^{u\u00b7y}|^2\u22650`.\n\nThus\n\n`\u03a3_x A_xF(x)\u2265f_0M`.\n\nIf the minimum distance is at least `d_0`, all nonzero occurring distances have `F(x)\u22640`, while `A_0=1`. Therefore\n\n`f_0M\u2264F(0)=74181816143052800`,\n\nand consequently\n\n`M\u2264F(0)/f_0=2467400<2^22`.\n\nFor a linear code `M=2^c`, so `c\u226421`.\n\n## 4. Arbitrary coupling: the 1,054 ceiling\n\nLet `C` now be any binary-linear code of length `2^30`, partitioned into 32,768 blocks of length 32,768, and suppose every block projection of `C` has rank at most 16. Fix any 65 blocks and shorten `C` by requiring all of them to be zero. These requirements have total codimension at most `65\u00b716=1040`, so the shortened subcode `C'` has dimension\n\n`s\u2265dim C-1040`.\n\nDelete the 65 zero blocks. Dimension and minimum distance are unchanged, while the residual length is\n\n`n'=32703\u00b732768=1071611904`.\n\nFor a binary code of size `M` and distance at least `T`, summing ordered-pair distances gives\n\n`M(M-1)T\u2264n'M^2/2`,\n\nbecause at each coordinate at most `M^2/2` ordered pairs differ. Since `2T>n'`,\n\n`M\u22642T/(2T-n')=32704<2^15`.\n\nFor the linear residual code `M=2^s`, hence `s\u226414`. Combining this with `s\u2265dim C-1040` proves\n\n`dim C\u22641054`.\n\nThis argument permits arbitrary binary-additive outer spaces, coordinate-dependent inner copies, and global cross-level coupling. It only uses the rank-16 bound on each displayed block.\n\n## 5. The existing 1,040-dimensional code cannot be additively extended\n\nUse the explicit field and evaluation set from the shared construction:\n\n`F=F_2[\u03b1]/(\u03b1^16+\u03b1^5+\u03b1^3+\u03b1^2+1)`,\n\n`A=span{1,\u03b1,...,\u03b1^14}`,\n\nand let `D_0` be evaluation on `A` of all polynomials of degree at most 64. For the affine inner encoder `H`,\n\n`wt(H^A(u))=2^14(32768-N_0(u)+N_1(u))`.\n\nThus the target is exactly `N_0(u)-N_1(u)\u226464`.\n\nThe shared reciprocal-sum lemma proves additive maximality as follows. If `v\u2209D_0`, fix a 64-set `R\u2282A`, interpolate `v` on `R` by a polynomial `h_R` of degree at most 63, and let `G_R=\u220f_{r\u2208R}(X-r)`. The pencil\n\n`u_t=v+ev_A(h_R+tG_R)`, for `t\u2208F`,\n\nhas 64 forced zeros. The target inequality says that its additional zero count is at most its one count. Summing over all `t`, each coordinate outside `R` contributes once to each count, so equality must hold for every `t`. Equality of the corresponding parameter multisets forces\n\n`\u03a3_{x\u2208A\\R} G_R(x)^{-1}=0`.\n\nFor the explicit set\n\n`R=(span{1,\u03b1,...,\u03b1^5}\\{0})\u222a{\u03b1^6}`,\n\nthe exact subspace-polynomial computation in the shared proof gives reciprocal sum `0x0990\u22600`. This contradiction shows that every strict additive outer supercode of `D_0` contains a word below the target. Hence the familiar dimension-1,040 code cannot be enlarged while retaining this fixed affine inner encoder.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "gc-linearity-dimension",
+      "proof": "The chosen complements form a direct-sum decomposition of every inner block. The blockwise encoder is binary linear and injective, so dimensions of the independent outer constituents add.",
+      "statement": "The generalized-concatenation code is binary linear and has dimension `\u03a3_i \u03ba_i`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "gc-linearity-dimension"
+      ],
+      "id": "weighted-shell-bound",
+      "proof": "For the first active level, every later contribution lies in the next inner subcode. Minimizing over that subcode gives the coset weight `\u03c9_i`, and summing over blocks proves the weighted bound.",
+      "statement": "`d(C)\u2265min_i min_{e\u2208E_i\\{0}}\u03a3_j\u03c9_i(e_j)\u2265min_i\u0394_i\u03bb_i`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "weighted-shell-bound",
+        "rm-affine-balance"
+      ],
+      "id": "rm-shell-classification",
+      "proof": "All nonconstant affine words have weight 16,384; the only nonzero affine word of larger weight is the constant-one word. A shell containing only that word must be `Rep\\{0}`.",
+      "statement": "Every flag shell has minimum 16,384 except the isolated repetition shell, whose minimum is 32,768.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "rm-shell-classification"
+      ],
+      "id": "ordinary-level-singleton",
+      "proof": "The product certificate forces outer block distance at least 32,704. Puncturing 32,703 block positions is injective, leaving 65 symbols of `m_i` bits.",
+      "statement": "An ordinary quotient level contributes at most `65m_i` binary dimensions.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "cubic-delsarte",
+      "proof": "The displayed polynomial is nonpositive on every allowed nonzero distance and has four positive Krawtchouk coefficients. Character-sum positivity gives `M\u2264F(0)/f_0=2,467,400`, hence linear dimension at most 21.",
+      "statement": "Every binary linear `[32768,c,\u226516352]` code has `c\u226421`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "ordinary-level-singleton",
+        "cubic-delsarte"
+      ],
+      "id": "flag-ceiling",
+      "proof": "Without an isolated repetition shell, the 16 quotient bits each cost at most 65 dimensions. With it isolated, the other 15 bits contribute at most 975 and the repetition constituent at most 21.",
+      "statement": "The standard full-RM flag ceiling is 1,040; the isolated-repetition ceiling is 996.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "block-rank-plotkin",
+      "proof": "Shortening 65 rank-16 blocks loses at most 1,040 dimensions. The residual code has length 1,071,611,904 and distance at least 535,822,336; Plotkin bounds its size by 32,704, so its binary dimension is at most 14.",
+      "statement": "Every arbitrarily coupled rank-16-block code at the target has dimension at most 1,054.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json"
+      ],
+      "id": "fixed-base-maximality",
+      "proof": "The interpolation-pencil lemma would force every 64-point reciprocal sum to vanish, while the explicit shared set gives `0x0990`.",
+      "statement": "The shared degree-64 RS outer space has no strict additive supercode under its fixed affine inner encoder.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Multilevel concatenation",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/composition-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final enumeration)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final enumeration)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For generalized concatenation through the full inner code `RM(1,15)`, every independent flag construction certified by the standard first-active-level shell-product bound has dimension at most 1,040; isolating the repetition line lowers the ceiling to 996. More generally, every binary-linear code split into 32,768 length-32,768 blocks whose block projections have rank at most 16 has dimension at most 1,054 at the immutable distance. The existing dimension-1,040 degree-64 RS\u2013RM code also has no strict additive outer supercode under its fixed affine inner encoder. No new leaderboard code is produced.",
+  "title": "Multilevel RM-block ceilings: 1,040 standard and 1,054 fully coupled"
+}
