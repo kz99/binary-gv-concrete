@@ -1,0 +1,676 @@
+{
+  "coverage_complete": true,
+  "lemmas": [
+    {
+      "dependencies": [],
+      "id": "target-signed-sum-normalization",
+      "proof_markdown": "For any binary word, each zero contributes $1$ and each one contributes $-1$, so $S(c)=n-2\\operatorname{wt}(c)$. Hence $\\operatorname{wt}(c)\\ge D$ iff $S(c)\\le n-2D=2^{21}$. The two-sided bound $|S(c)|\\le2^{21}$ similarly gives $D\\le\\operatorname{wt}(c)\\le n-D$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "For $n=2^{30}$, $D=2^{29}-2^{20}=535{,}822{,}336$, and $c\\in\\mathbb F_2^n$, let $S(c)=\\sum_{j=1}^n(-1)^{c_j}$. Then $\\operatorname{wt}(c)\\ge D$ if and only if $S(c)\\le2^{21}$, and $|S(c)|\\le2^{21}$ implies $D\\le\\operatorname{wt}(c)\\le n-D$.",
+      "status": "proved",
+      "title": "Target signed-sum normalization"
+    },
+    {
+      "dependencies": [],
+      "id": "explicit-degree-16-field-models",
+      "proof_markdown": "For $p_0$, repeated squaring gives $Z^{2^8}\\equiv Z^8+Z^7+Z^3+Z$ and $Z^{2^{16}}\\equiv Z$. Writing $h=Z^8+Z^7+Z^3$, Euclidean division ends with remainders $Z^2+1$ and $1$, so $\\gcd(p_0,Z^{2^8}-Z)=1$. Rabin's criterion proves irreducibility. The sources give the analogous congruence and gcd certificate for $p_1$. For $p_2$, repeated squaring gives $Z^{2^8}\\equiv Z^{15}+Z^{10}+Z^3$ and $Z^{2^{16}}\\equiv Z$, while the displayed B\u00e9zout identity between $p_2$ and $Z^{2^8}-Z$ equals $1$. Rabin's criterion again applies.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "The polynomials $p_0(Z)=Z^{16}+Z^5+Z^3+Z^2+1$, $p_1(Z)=Z^{16}+Z^5+Z^3+Z+1$, and $p_2(Z)=Z^{16}+Z^9+Z^4+Z^2+1$ are irreducible over $\\mathbb F_2$.",
+      "status": "proved",
+      "title": "Explicit degree-16 field models"
+    },
+    {
+      "dependencies": [
+        "explicit-degree-16-field-models"
+      ],
+      "id": "affine-truth-table-spectrum",
+      "proof_markdown": "Linearity is immediate. Evaluating at $y=0$ recovers $z_0$, and comparing with the values at the unit vectors recovers $z_1,\\ldots,z_{m-1}$, proving injectivity. If the linear part is nonzero, translation by a coordinate on which it is nonzero pairs zeros with ones. The only remaining nonzero case is the constant-one function.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "statement_markdown": "Let $F/\\mathbb F_2$ have basis $1,\\alpha,\\ldots,\\alpha^{m-1}$, and write $z=\\sum_{i=0}^{m-1}z_i\\alpha^i$. The map\n$$H(z)_y=z_0+\\sum_{i=1}^{m-1}z_i y_i,\\qquad y\\in\\mathbb F_2^{m-1},$$\nis an $\\mathbb F_2$-linear injection with image $\\operatorname{RM}(1,m-1)$. Its signed sum is $2^{m-1}$ for $z=0$, $-2^{m-1}$ for $z=1$, and $0$ otherwise.",
+      "status": "proved",
+      "title": "Affine truth-table spectrum"
+    },
+    {
+      "dependencies": [
+        "affine-truth-table-spectrum"
+      ],
+      "id": "affine-inner-concatenation",
+      "proof_markdown": "Both encoders are binary linear and injective, so the concatenation has binary dimension $mK$ and length $N2^{m-1}$. Every nonzero outer word has at least $D_{\\rm out}$ nonzero symbols, and each such symbol produces an inner word of weight at least $2^{m-2}$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json"
+      ],
+      "statement_markdown": "If $Q$ is an $[N,K,D_{\\rm out}]_{2^m}$ linear code and its symbols are encoded by the affine map $H$ of `affine-truth-table-spectrum`, then the concatenated code is a binary $[N2^{m-1},mK,\\ge D_{\\rm out}2^{m-2}]_2$ code.",
+      "status": "proved",
+      "title": "Affine-inner concatenation"
+    },
+    {
+      "dependencies": [
+        "explicit-degree-16-field-models",
+        "affine-truth-table-spectrum"
+      ],
+      "id": "canonical-rs-affine-code",
+      "proof_markdown": "The evaluation map is injective because a nonzero polynomial of degree at most $64$ cannot vanish at all $32768$ points of $A$. Thus the message dimension is $65\\cdot16=1040$, while $|A||Y|=2^{30}$. A nonzero polynomial has at most $64$ roots, so at least $32704$ blocks are nonzero; each weighs at least $2^{14}$.\n\nFor equality, let $U=\\operatorname{span}_{\\mathbb F_2}\\{1,\\alpha,\\ldots,\\alpha^5\\}$ and $L_U(X)=\\prod_{u\\in U}(X-u)$. The subspace-polynomial computation in `composition-10` gives nine generators for $L_U(A)$, all annihilated by the binary functional with mask `0x007b`, while that functional takes value one on $1$. Hence $1\\notin L_U(A)$. The polynomial $L_U$ has exactly the $64$ elements of $U$ as roots and never takes value $1$ elsewhere, so its remaining blocks all have weight $2^{14}$.\n\nA generator matrix is produced by indexing rows by $(j,i)\\in\\{0,\\ldots,64\\}\\times\\{0,\\ldots,15\\}$ and outputting $C(\\alpha^iX^j)$. For each entry, compute $\\alpha^ia^j$ modulo $p_0$, extract its coefficient bits, and evaluate the displayed affine form. A bounded number of degree-16 operations per entry gives $O(n)$ time for the fixed $1040$ rows, matching the $1040n$-bit output size.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "Let $F=\\mathbb F_2[Z]/(Z^{16}+Z^5+Z^3+Z^2+1)$, let $A=\\operatorname{span}_{\\mathbb F_2}\\{1,\\alpha,\\ldots,\\alpha^{14}\\}$, and let $H$ be the affine encoder of `affine-truth-table-spectrum`. Then\n$$C=\\left\\{\\bigl(H(f(a))\\bigr)_{a\\in A}:f\\in F[X],\\ \\deg f\\le64\\right\\}$$\nis a binary linear $[2^{30},1040,535{,}822{,}336]_2$ code, and its complete generator matrix is output by a deterministic $n^{O(1)}$-time algorithm.",
+      "status": "proved",
+      "title": "Canonical dimension-1040 code"
+    },
+    {
+      "dependencies": [
+        "canonical-rs-affine-code"
+      ],
+      "id": "balanced-core-decomposition",
+      "proof_markdown": "For nonconstant $f$, both $f$ and $f-1$ have at most $64$ roots, so $N_0(f),N_1(f)\\le64$. The affine block weights give\n$$\\operatorname{wt}(C(f))=2^{14}(32768-N_0(f)+N_1(f)).$$\nThe coefficient constraint defining $B$ excludes the constant polynomial $1$; every other nonzero constant in $B$ is balanced. Finally, $C(1)=\\mathbf1$ and every message has a unique decomposition into the hyperplane plus either $0$ or $1$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "In `canonical-rs-affine-code`, let $B$ be the image of messages for which the coefficient of $1$ in the constant coefficient of $f$ is zero. Then $\\dim B=1039$, every nonzero $b\\in B$ satisfies\n$$535{,}822{,}336\\le\\operatorname{wt}(b)\\le537{,}919{,}488,$$\nand $C=B\\oplus\\langle\\mathbf1\\rangle$.",
+      "status": "proved",
+      "title": "Canonical balanced core"
+    },
+    {
+      "dependencies": [],
+      "id": "unequal-block-scalar-orbit",
+      "proof_markdown": "Order the $\\ell_j$ decreasingly. Projection of $W$ onto the first $K-1$ coordinates has a nonzero kernel vector $w$. Its active blocks have total length at most $M(L-K+1)/L$. For each output bit, its value on $\\lambda w_j$, as $\\lambda$ ranges over $\\mathbb F_Q^*$, is either identically zero or equals one exactly $Q/2$ times. Averaging the weights of the nonzero scalar orbit and using injectivity gives the inequality. At the target parameters, substituting $K=66$ yields a value below $32704\\cdot16384$ because $32704\\cdot65535-32703\\cdot65536=32832>0$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json"
+      ],
+      "statement_markdown": "Let $W\\le\\mathbb F_Q^L$ be $\\mathbb F_Q$-linear of dimension $K$, and let $\\phi_j:\\mathbb F_Q\\to\\mathbb F_2^{\\ell_j}$ be binary-linear maps such that $\\Phi=(\\phi_1,\\ldots,\\phi_L)$ is injective on $W$. With $M=\\sum_j\\ell_j$,\n$$d(\\Phi(W))\\le\\frac{Q}{2(Q-1)}\\frac{L-K+1}{L}M.$$\nFor $Q=65536$, $L=32768$, and $M\\le2^{30}$, every target-meeting such code has $K\\le65$ and binary dimension at most $1040$.",
+      "status": "proved",
+      "title": "Unequal-block scalar-orbit bound"
+    },
+    {
+      "dependencies": [
+        "affine-inner-concatenation"
+      ],
+      "id": "rs-affine-family-optimum",
+      "proof_markdown": "Exact length gives $N=2^{31-m}$. Distinct-point evaluation requires $N\\le2^m$, hence $m\\ge16$. Product distance gives $(N-K+1)2^{m-2}\\ge(511/1024)N2^{m-1}$, or $K-1\\le N/512=2^{22-m}$. Direct comparison over $m\\ge16$ yields $1040$ at $m=16$, then $561,306,171,100,63,44$ for $m=17,\\ldots,22$, and at most $31$ thereafter.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "For an ordinary Reed\u2013Solomon outer code over $\\mathbb F_{2^m}$ concatenated with $\\operatorname{RM}(1,m-1)$ at exact length $2^{30}$, every product-distance-certified target code has\n$$k\\le m\\left(1+\\left\\lfloor2^{22-m}\\right\\rfloor\\right)\\le1040.$$\nEquality occurs only for $m=16$, outer length $32768$, and outer dimension $65$.",
+      "status": "proved",
+      "title": "Exact RS\u2013affine family optimum"
+    },
+    {
+      "dependencies": [],
+      "id": "odd-polynomial-weil-bound",
+      "proof_markdown": "The smooth projective normalization of $Y^2+Y=P(X)$ has one rational point above infinity and genus $(d-1)/2$. For each $x$, the equation in $Y$ has two solutions exactly when $\\operatorname{Tr}(P(x))=0$. Hence its point count is $q+1+S(P)$. Hasse\u2013Weil gives $|S(P)|\\le2g\\sqrt q=(d-1)\\sqrt q$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json"
+      ],
+      "statement_markdown": "Let $q=2^m$ and let $P\\in\\mathbb F_q[X]$ have positive odd degree $d$. Then\n$$\\left|\\sum_{x\\in\\mathbb F_q}(-1)^{\\operatorname{Tr}_{\\mathbb F_q/\\mathbb F_2}(P(x))}\\right|\\le(d-1)\\sqrt q.$$\n",
+      "status": "proved",
+      "title": "Odd-polynomial additive Weil bound"
+    },
+    {
+      "dependencies": [
+        "odd-polynomial-weil-bound"
+      ],
+      "id": "degree-65-trace-code",
+      "proof_markdown": "Rabin's degree-30 test, using the displayed Frobenius residues at exponents $6,10,15,30$, proves that $T^{30}+T+1$ is irreducible. The parameter space has dimension $1+33\\cdot30=991$. A nonzero kernel word would have signed sum $2^{30}$, contradicting the Weil bound $64\\cdot2^{15}=2^{21}$. The weight identity gives the claimed distance. The exponent-one layer and the external constant give $\\operatorname{RM}(1,30)$; the algebraic degree of the term with exponent $j$ is at most the binary weight of $j$, which is at most six for odd $j\\le65$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json"
+      ],
+      "statement_markdown": "Let $K=\\mathbb F_2[T]/(T^{30}+T+1)$ and\n$$C=\\left\\{\\left(c+\\operatorname{Tr}\\!\\left(\\sum_{j\\in\\{1,3,\\ldots,65\\}}a_jx^j\\right)\\right)_{x\\in K}:c\\in\\mathbb F_2,\\ a_j\\in K\\right\\}.$$\nThen $C$ is a deterministic binary linear $[2^{30},991,\\ge535{,}822{,}336]_2$ code and\n$$\\operatorname{RM}(1,30)\\subset C\\subseteq\\operatorname{RM}(6,30).$$",
+      "status": "proved",
+      "title": "Degree-65 trace-polynomial code"
+    },
+    {
+      "dependencies": [
+        "odd-polynomial-weil-bound"
+      ],
+      "id": "complete-bipartite-trace-walk",
+      "proof_markdown": "The modulus $T^{15}+T+1$ satisfies Rabin's degree-15 criterion by the displayed degree-$3$ and degree-$5$ coprimality certificates. The signed double sum factors into two endpoint sums. For nonzero $P$, both have odd degree at most $9$, so integrality and the Weil bound give magnitude at most $\\lfloor8\\sqrt{32768}\\rfloor=1448$. Their product is at most $2{,}096{,}704$. Linear-only words are balanced, and the constant-only word is all-one. The correlation bound also excludes a nonlinear kernel, while nondegeneracy of the trace pairing excludes a linear kernel.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json"
+      ],
+      "statement_markdown": "Let $F=\\mathbb F_2[T]/(T^{15}+T+1)$ and $P(X)=a_3X^3+a_5X^5+a_7X^7+a_9X^9$. The evaluations\n$$c_{P,u,v,b}(x,y)=b+\\operatorname{Tr}(P(x)+ux+P(y)+vy),\\qquad (x,y)\\in F^2,$$\nform a deterministic binary linear $[2^{30},91,\\ge535{,}822{,}560]_2$ code.",
+      "status": "proved",
+      "title": "Complete-bipartite trace-walk code"
+    },
+    {
+      "dependencies": [
+        "canonical-rs-affine-code",
+        "affine-truth-table-spectrum"
+      ],
+      "id": "cayley-character-certificate",
+      "proof_markdown": "Constants distinguish the inner functional index, and the polynomials $zX$ then distinguish the evaluation point, so the $2^{30}$ connection functionals are distinct and nonzero. The character indexed by $P$ has eigenvalue $2^{15}(N_0(P)-N_1(P))$. The root bound for $P$ and $P-1$ gives magnitude at most $2^{21}$ except for $P=0,1$, which give $\\pm2^{30}$. Injectivity of the code implies that the connection set spans the dual group.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json"
+      ],
+      "statement_markdown": "The code in `canonical-rs-affine-code` is the character code of a connected bipartite Cayley graph on $\\mathbb F_2^{1040}$ with $2^{30}$ distinct nonzero connection elements. Its spectrum consists of $\\pm2^{30}$ and values of magnitude at most $2^{21}$.",
+      "status": "proved",
+      "title": "Cayley-character certificate"
+    },
+    {
+      "dependencies": [
+        "affine-truth-table-spectrum"
+      ],
+      "id": "reciprocal-pencil-criterion",
+      "proof_markdown": "Interpolate $v$ on $S$ by $p_S$ of degree at most $t-1$, and set $u_\\lambda=v+\\operatorname{ev}_A(p_S+\\lambda h_S)$. Each $u_\\lambda$ has the $t$ forced zeros in $S$. At every coordinate outside $S$, its value runs bijectively over $F$ as $\\lambda$ varies. Summing the zero and one counts over all $\\lambda$ therefore gives equality. Since every pencil member satisfies $N_0-N_1\\le t$, equality holds termwise. The multisets of zero-producing and one-producing parameters coincide; equality of their sums yields the reciprocal identity.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "statement_markdown": "Let $F$ have characteristic two, let $A\\subset F$, let $R=\\operatorname{ev}_A(F[X]_{\\le t})$, and let $v\\in F^A\\setminus R$. If every $u\\in v+R$ satisfies $N_0(u)-N_1(u)\\le t$, then for every $t$-element set $S\\subset A$,\n$$\\sum_{a\\in A\\setminus S}\\left(\\prod_{s\\in S}(a-s)\\right)^{-1}=0.$$\n",
+      "status": "proved",
+      "title": "Reciprocal-pencil criterion"
+    },
+    {
+      "dependencies": [
+        "reciprocal-pencil-criterion",
+        "explicit-degree-16-field-models"
+      ],
+      "id": "fixed-inner-additive-maximality",
+      "proof_markdown": "For $R_0=(U\\setminus\\{0\\})\\cup\\{b\\}$, the subspace polynomial is\n$$L_U(X)=X^{64}+\\mathtt{2e0c}X^{32}+\\mathtt{71ee}X^{16}+\\mathtt{d9a4}X^8+\\mathtt{2198}X^4+\\mathtt{c6ca}X^2+\\mathtt{6115}X.$$\nIts fiber decomposition gives\n$$\\sum_{a\\in A\\setminus R_0}G_{R_0}(a)^{-1}=\\mathtt{ac5c}+\\mathtt{073e}+\\mathtt{a2f2}=\\mathtt{0990}\\ne0.$$\nThe alternative fixed set in `combinatorial-08` similarly gives `0xe1f0`. Either value contradicts `reciprocal-pencil-criterion` for every coset outside $R$. Any strict additive supercode contains such a coset and hence a word with $N_0-N_1\\ge65$, whose binary weight is at most $2^{14}(32768-65)=535{,}805{,}952$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "statement_markdown": "Let $F=\\mathbb F_2[\\alpha]/(\\alpha^{16}+\\alpha^5+\\alpha^3+\\alpha^2+1)$, $A=\\operatorname{span}_{\\mathbb F_2}\\{1,\\alpha,\\ldots,\\alpha^{14}\\}$, and $R=\\operatorname{ev}_A(F[X]_{\\le64})$. Under the fixed coordinatewise affine encoder, every $\\mathbb F_2$-linear $D$ satisfying $R\\subseteq D\\subseteq F^A$ and minimum binary distance at least $535{,}822{,}336$ obeys $D=R$.",
+      "status": "proved",
+      "title": "Fixed-inner additive maximality"
+    },
+    {
+      "dependencies": [],
+      "id": "odd-circuit-hyperplane",
+      "proof_markdown": "The equations $\\ell(b)=1$ are inconsistent precisely when a binary combination of them has zero left side and right side one, equivalently when an odd subset of $B$ sums to zero. A minimum-cardinality odd zero-sum subset is minimally dependent: deleting a proper even dependence leaves a smaller odd zero-sum subset, and a proper odd dependence contradicts minimality. It would therefore be an odd circuit.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json"
+      ],
+      "statement_markdown": "Let $B\\subseteq\\mathbb F_2^K\\setminus\\{0\\}$ contain no odd circuit. Then there exists a nonzero linear functional $\\ell$ such that $\\ell(b)=1$ for every $b\\in B$, and the hyperplane $\\ker\\ell$ is disjoint from $B$.",
+      "status": "proved",
+      "title": "Odd-circuit hyperplane expurgation"
+    },
+    {
+      "dependencies": [
+        "odd-circuit-hyperplane",
+        "target-signed-sum-normalization"
+      ],
+      "id": "conditional-average-existence-2971",
+      "proof_markdown": "For $R=D-1$, the one-sided binomial tail $p$ satisfies $2^{2972}p<1083$. Coordinate pairing and the exact tail-to-boundary ratio give every nonprincipal Fourier coefficient of the two-tail indicator magnitude below $q/256$, where $q=2p$. Parity-coset exponential moments bound the expected number of bad odd circuits of sizes $3$ through $255$ by $2^{-27}$; Fourier convolution and Parseval bound the contribution from sizes at least $257$ by $2^{-742}$.\n\nThus the potential $\\Psi(G)=|B(G)|/1084+\\sum_sT_s(G)$ has expectation below $1083/1084+2^{-26}<1$. Selecting at each matrix entry a child with no larger exact completion average produces a matrix with $\\Psi<1$, so $|B(G)|\\le1083$ and there is no bad odd circuit. Apply `odd-circuit-hyperplane` to obtain a $2970$-dimensional subspace avoiding both bad tails; adjoining the all-one word adds one dimension and complements the retained words.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json"
+      ],
+      "statement_markdown": "There exists a binary linear $[2^{30},2971,\\ge535{,}822{,}336]_2$ code obtained from a $2971\\times2^{30}$ matrix whose set of two-tail-bad messages has at most $1083$ elements and contains no odd circuit.",
+      "status": "proved",
+      "title": "Conditional-average existence at dimension 2971"
+    },
+    {
+      "dependencies": [
+        "conditional-average-existence-2971"
+      ],
+      "id": "completion-average-selector-ineligible",
+      "proof_markdown": "For any nonempty finite set $W\\subseteq\\{0,1\\}^M$, apply the same prefix rule to $\\Psi(x)=\\mathbf1[x\\notin W]$. Its initial average is below one, and choosing a child of no larger completion average returns an element of $W$. Thus unrestricted exact completion averages subsume arbitrary exhaustive finite witness search. No structural polynomial-time evaluator is supplied for the dimension-2971 matrix, so the construction does not meet the campaign's $n^{O(1)}$ generator requirement.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "statement_markdown": "Under the requirement that a complete generator matrix be output by a deterministic $n^{O(1)}$-time algorithm and that exhaustive finite witness searches are inadmissible, the unrestricted completion-average selector used in `conditional-average-existence-2971` is not an admissible explicit construction.",
+      "status": "proved",
+      "title": "Ineligibility of unrestricted completion averages"
+    },
+    {
+      "dependencies": [
+        "conditional-average-existence-2971"
+      ],
+      "id": "k2972-potential-obstruction",
+      "proof_markdown": "Exact lower-tail estimates give $\\lambda=2^{2972}q>2090$ and hence $\\mathbb E|B|>2089$. For $s=2089$, the exact number of circuits and the Fourier lower bound give $\\mathbb ET_{2089}>1$. The size term therefore blocks cutoffs at most $2088$, and the circuit term blocks larger cutoffs. Jensen's inequality gives the same conclusion for the natural exponential tilts. This is only a statement about these potentials.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json"
+      ],
+      "statement_markdown": "At preliminary matrix dimension $2972$, every potential\n$$\\frac{|B|}{r+1}+\\sum_{\\substack{s\\le r\\\\s\\text{ odd}}}w_sT_s,\\qquad w_s\\ge1,$$\nand every natural exponential tilt specified in `combinatorial-02` has initial expectation at least one.",
+      "status": "proved",
+      "title": "Obstruction to the tested dimension-2972 potentials"
+    },
+    {
+      "dependencies": [
+        "target-signed-sum-normalization"
+      ],
+      "id": "limited-independence-existence-2955",
+      "proof_markdown": "For each nonzero $u$, expand $S_u^{4096}$. Under $4096$-wise independence, a term has nonzero expectation only when every used index has even multiplicity. Pairing the positions gives $\\mathbb ES_u^{4096}\\le4095!!\\,N^{2048}$. Robbins' bounds give $4095!!<2^{21622}$, so for $K=2954$ the expected union potential is below one. Hence some seed has $|S_u|<2^{21}$ for all nonzero $u$. Adjoining all-one produces the stated dimension. No such seed is explicitly selected by the sources.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json"
+      ],
+      "statement_markdown": "Within the specified $4096$-wise-independent polynomial family of $2^{30}$ columns in $\\mathbb F_2^{2954}$, there exists a seed for which every nonzero character sum has magnitude below $2^{21}$; the resulting balanced core and all-one augmentation have dimensions $2954$ and $2955$, respectively.",
+      "status": "proved",
+      "title": "Limited-independence existence threshold"
+    },
+    {
+      "dependencies": [],
+      "id": "wise-independence-parity-counterexample",
+      "proof_markdown": "After omitting any one output, the missing original variable is recovered from the sum output and the remaining originals, so any $t$ outputs are independent uniform. Summing all $t+1$ outputs cancels every original variable twice.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json"
+      ],
+      "statement_markdown": "For every factorization $rt=30$, there are $2^{30}$ seeds producing random variables $Y_1,\\ldots,Y_{t+1}\\in\\mathbb F_2^r$ that are $t$-wise independent and satisfy $Y_1+\\cdots+Y_{t+1}=0$ identically.",
+      "status": "proved",
+      "title": "Wise independence does not control full parity"
+    },
+    {
+      "dependencies": [
+        "target-signed-sum-normalization"
+      ],
+      "id": "root-killing-ceiling",
+      "proof_markdown": "Character orthogonality leaves only fibers on which $P(x)=0$, giving absolute signed sum at most $64q$ when $P\\ne0$. When $P=0$, the word consists of $q$ repetitions of $Q$, so the offset code needs distance at least $16352$. Distinct root-family functions agree in at most $64$ positions, and Singleton gives binary dimension at most $15\\cdot65=975$. The degree-three Levenshtein bound gives every binary $[32768,k,\\ge16352]$ offset code size at most $2{,}466{,}889<2^{22}$, hence $k\\le21$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json"
+      ],
+      "statement_markdown": "Let $q=2^{15}$, let $\\mathcal P\\subseteq\\mathbb F_q^X$ be binary linear with every nonzero member having at most $64$ zeros, and let $W\\le\\mathbb F_2^X$. If\n$$c_{P,Q}(x,y)=\\operatorname{Tr}(yP(x))+Q(x)$$\nmeets the target for all nonzero $(P,Q)$, then $\\dim\\mathcal P\\le975$, $\\dim W\\le21$, and the resulting code has dimension at most $996$.",
+      "status": "proved",
+      "title": "Independent-offset root-killing ceiling"
+    },
+    {
+      "dependencies": [],
+      "id": "delsarte-polynomial-bound",
+      "proof_markdown": "For the normalized distance distribution $A_i$, character orthogonality gives\n$$\\sum_iA_iK_j(i)=|C|^{-1}\\sum_{|S|=j}\\left|\\sum_{c\\in C}(-1)^{\\sum_{r\\in S}c_r}\\right|^2\\ge0.$$\nTherefore $\\sum_iA_iF(i)\\ge f_0|C|$. The minimum-distance assumption makes every nonzero-distance contribution nonpositive, while $A_0=1$, so the same sum is at most $F(0)$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json"
+      ],
+      "statement_markdown": "Let $C$ be a binary code of minimum distance at least $d$. If $F=\\sum_jf_jK_j$ has $f_0>0$, $f_j\\ge0$ for all $j$, and $F(i)\\le0$ for every integer $i\\ge d$, then\n$$|C|\\le\\frac{F(0)}{f_0}.$$\n",
+      "status": "proved",
+      "title": "Finite Delsarte polynomial bound"
+    },
+    {
+      "dependencies": [],
+      "id": "binary-residual-griesmer",
+      "proof_markdown": "Restrict to the complement of a minimum word $c$. The kernel is exactly $\\langle c\\rangle$: otherwise two nonzero kernel words differing by $c$ would have weights summing to $\\operatorname{wt}(c)$. For a lift with weights $a,b$ on and off the support, the lift and its sum with $c$ give $a+b\\ge d$ and $d-a+b\\ge d$, so $b\\ge\\lceil d/2\\rceil$. Iteration proves the Griesmer sum.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "statement_markdown": "Every binary linear $[n,k,d]_2$ code has a residual $[n-d,k-1,\\ge\\lceil d/2\\rceil]_2$ code on a minimum word. Consequently\n$$n\\ge\\sum_{i=0}^{k-1}\\left\\lceil\\frac d{2^i}\\right\\rceil.$$\n",
+      "status": "proved",
+      "title": "Binary residual and Griesmer bounds"
+    },
+    {
+      "dependencies": [
+        "delsarte-polynomial-bound",
+        "binary-residual-griesmer"
+      ],
+      "id": "finite-inner-code-exclusions",
+      "proof_markdown": "For $(8192,4090)$, the cubic $(y-12)(y+630)(y+632)$ has Krawtchouk coefficients $(5462080,407590,2500,6)$ and yields $116581$. At length $8193$, the cubics $(y-13)(y+585)(y+587)$ and $(y-17)(y+455)(y+457)$ yield $125297$ and $161040$. For length $32768$, parity extension and the cubic $(t-5)(t+5459)(t+5463)$ bound cardinality below $2^{18}$ at distance $16381$. Independently, two residualizations of a hypothetical linear $[32768,18,16381]_2$ code yield a zero-padded $[8196,16,4096]_2$ code, while $(y-4)(y+1640)^2$ bounds its size below $49253$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json"
+      ],
+      "statement_markdown": "The following bounds hold:\n$$A_2(8192,4090)\\le116581,$$\n$$A_2(8193,4090)\\le125297,$$\n$$A_2(8193,4088)\\le161040.$$\nMoreover, no binary code of length $32768$, cardinality $2^{18}$, and distance at least $16381$ exists.",
+      "status": "proved",
+      "title": "Finite inner-code exclusions"
+    },
+    {
+      "dependencies": [
+        "binary-residual-griesmer",
+        "delsarte-polynomial-bound"
+      ],
+      "id": "no-inner-16384-16-8189",
+      "proof_markdown": "For distance $8190$, parity extension first bounds the possible actual minimum. Residualization gives either a $[4098,14,2048]_2$ branch, excluded by the displayed gap cubic, or a forced chain ending in a forbidden $[67,8,32]_2$ code; the published exact value is $N_2(8,32)=68$. For distance $8189$, the analogous branches either reach the same cubic obstruction or a forbidden $[132,9,64]_2$ code; the published exact value is $N_2(9,64)=133$. Larger distances are already covered by these arguments and monotonicity.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "statement_markdown": "No binary linear $[16384,16,d]_2$ code exists for $d\\ge8189$.",
+      "status": "proved",
+      "title": "Rank-16 length-16384 endpoint exclusion"
+    },
+    {
+      "dependencies": [
+        "finite-inner-code-exclusions",
+        "no-inner-16384-16-8189",
+        "binary-residual-griesmer"
+      ],
+      "id": "ordinary-rs-ceiling-1649",
+      "proof_markdown": "Griesmer and field-size constraints reduce every case above $1040$ to inner length $8192$, $16384$, or $32768$. The degree-three spherical/Delsarte bounds eliminate length $8192$, length $32768$, and ranks at least $19$ at length $16384$. The residual value $N_2(9,64)=133$ gives the rank-16 distance ceiling $8188$; parity extension gives ceilings $8188$ and $8184$ for ranks $17$ and $18$. Exact rounding then gives outer dimension at most $97,97,65$, respectively, so the products are $1552,1649,1170$. If the inner code contains all-one, quotienting by complements and applying the Gram-rank bound forces its relevant rank to be at most $15$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-03.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "statement_markdown": "Let a binary linear $[2^s,m,d]_2$ inner code be concatenated with an ordinary Reed\u2013Solomon $[L,K,L-K+1]_{2^m}$ code, where $1\\le m\\le30$ and $L\\le\\min(2^m,2^{30-s})$, and zero-pad to length $2^{30}$. If $d(L-K+1)\\ge535{,}822{,}336$, then $mK\\le1649$. If the inner code contains the all-one word, then $mK\\le1040$.",
+      "status": "proved",
+      "title": "Ordinary RS product ceiling"
+    },
+    {
+      "dependencies": [
+        "ordinary-rs-ceiling-1649"
+      ],
+      "id": "rank17-inner-gateway",
+      "proof_markdown": "Given the inner encoder, identify its $17$-dimensional message space with $\\mathbb F_{2^{17}}$ and concatenate it with the explicit Reed\u2013Solomon code $[65536,97,65440]_{2^{17}}$. Length and dimension multiply, and the product distance is $8188\\cdot65440=535{,}822{,}720$. The required inner code is not constructed in the sources.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "statement_markdown": "If a deterministic polynomial-time generable binary linear $[16384,17,8188]_2$ code exists, then a deterministic binary linear $[2^{30},1649,\\ge535{,}822{,}720]_2$ code exists.",
+      "status": "conditional",
+      "title": "Conditional dimension-1649 gateway"
+    },
+    {
+      "dependencies": [],
+      "id": "weighted-shell-concatenation",
+      "proof_markdown": "The chosen complements give a unique decomposition in each block, so the encoder is linear and injective. In a nonzero codeword, let $i$ be the first active level. Every later contribution to block $j$ lies in $B_{i+1}$, and the block weight is therefore at least the coset weight $\\omega_i(e_j)$. Summing over blocks proves the weighted bound; replacing every nonzero coset weight by $\\lambda_i$ gives the product form.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "statement_markdown": "Let $B_0\\supsetneq\\cdots\\supsetneq B_s=0$ be a binary linear flag with complement sections $\\sigma_i$, and let $E_i$ be binary-linear outer constituents of dimensions $\\kappa_i$. With\n$$\\omega_i(u)=\\min_{v\\in B_{i+1}}\\operatorname{wt}(\\sigma_i(u)+v),$$\nthe generalized concatenation has dimension $\\sum_i\\kappa_i$ and\n$$d(C)\\ge\\min_i\\min_{e\\in E_i\\setminus\\{0\\}}\\sum_j\\omega_i(e_j)\\ge\\min_i\\Delta_i\\lambda_i.$$\n",
+      "status": "proved",
+      "title": "Weighted-shell concatenation"
+    },
+    {
+      "dependencies": [
+        "weighted-shell-concatenation"
+      ],
+      "id": "rm-flag-ceilings",
+      "proof_markdown": "Every nonconstant affine word has weight $16384$, and the only heavier nonzero word is all-one. Thus every ordinary shell requires outer distance at least $32704$ and contributes at most $65m_i$ dimensions by puncturing/Singleton. Summing the $16$ quotient dimensions gives $1040$. If the repetition shell is isolated, the other levels contribute at most $975$; the cubic Delsarte bound at parameters $[32768,c,\\ge16352]_2$ gives $c\\le21$ for the repetition constituent, totaling $996$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "statement_markdown": "Every generalized concatenation through a full $\\operatorname{RM}(1,15)$ flag certified by the first-active-level product bound has dimension at most $1040$. If the repetition line is isolated as a separate level, its dimension is at most $996$.",
+      "status": "proved",
+      "title": "Reed\u2013Muller flag ceilings"
+    },
+    {
+      "dependencies": [
+        "target-signed-sum-normalization"
+      ],
+      "id": "rank16-block-coupling-ceiling",
+      "proof_markdown": "Shorten on any $65$ blocks. Their combined rank is at most $1040$, so the shortened code retains dimension at least $k-1040$. Removing the zero blocks leaves length $32703\\cdot32768=1{,}071{,}611{,}904$ and unchanged distance. Since twice the distance exceeds this length, Plotkin bounds its cardinality by $32704<2^{15}$, hence its binary dimension by $14$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json"
+      ],
+      "statement_markdown": "Let $C\\le\\mathbb F_2^{2^{30}}$ be partitioned into $32768$ blocks of length $32768$, and suppose every block projection of $C$ has rank at most $16$. If $d(C)\\ge535{,}822{,}336$, then $\\dim C\\le1054$.",
+      "status": "proved",
+      "title": "Arbitrarily coupled rank-16 block ceiling"
+    },
+    {
+      "dependencies": [],
+      "id": "elementary-composition-obstructions",
+      "proof_markdown": "For a direct sum, every positive-rank block must have length at least $D$. If one of two blocks has rank at least two, the identity $\\operatorname{wt}(x)+\\operatorname{wt}(y)+\\operatorname{wt}(x+y)\\le2n_i$ forces its length to be at least $3D/2$, incompatible with a second block of length at least $D$. For a nontrivial binary factor, average weight gives relative distance at most $2/3$; tensor distances multiply. For the Plotkin transform, $d=\\min(2d(U),d(V))$, so $V$ would need relative distance $511/512>2/3$ and thus rank at most one.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json"
+      ],
+      "statement_markdown": "At length $2^{30}$ and distance at least $535{,}822{,}336$: (i) every coordinate-interleaved direct sum with at least two positive-rank constituents has total dimension at most $2$; (ii) a tensor product of two binary linear factors of dimension at least two cannot meet the target; and (iii) a one-step Plotkin transform can gain at most one dimension from its second constituent.",
+      "status": "proved",
+      "title": "Elementary composition obstructions"
+    },
+    {
+      "dependencies": [
+        "target-signed-sum-normalization"
+      ],
+      "id": "complete-xor-square-ceiling",
+      "proof_markdown": "Translate the seeds by $d_1$ and write $W_a=\\sum_i(-1)^{a(d_i+d_1)}$. The output sum factors as $W_a^2$, so the target implies $|W_a|\\le1448$. Fourier orthogonality expresses the $174$th moment as the number of zero-XOR ordered $174$-tuples. Counting tuples obtained from $87$ distinct indices, each repeated twice, gives $L=\\binom{32768}{87}174!/2^{87}$. Exact integer estimates yield $L-1448^{174}>2^{1825}$ and numerator $32768^{174}=2^{2610}$, hence $2^k<2^{785}$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json"
+      ],
+      "statement_markdown": "For any ordered multiset of $32768$ elements of a binary vector space, if the character code of all ordered XOR pairs meets the target, then its homogeneous dimension is at most $784$. Adjoining the all-one word gives dimension at most $785$.",
+      "status": "proved",
+      "title": "Complete XOR-square ceiling"
+    },
+    {
+      "dependencies": [],
+      "id": "blind-length-adjustment",
+      "proof_markdown": "Padding preserves distance. Puncturing $L-n$ fixed coordinates loses at most $L-n$ distance; if the resulting lower bound is positive, a kernel word would have raw weight below the certified raw distance, so dimension is preserved. Substitution and rearrangement give the displayed absolute-value form. Whole-symbol shortening and puncturing of an MDS outer code merely replace its parameters by another MDS pair already covered by varying $(N,K)$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-05.json"
+      ],
+      "statement_markdown": "Let a binary $[L,k,\\delta]_2$ code be adjusted to length $n$ by zero padding when $L\\le n$ or fixed puncturing when $L\\ge n$. The generic certificate gives distance at least $D$ exactly when\n$$L-2\\delta+|n-L|\\le n-2D.$$\nIf $D>0$, the puncturing branch preserves dimension.",
+      "status": "proved",
+      "title": "Blind length-adjustment identity"
+    },
+    {
+      "dependencies": [
+        "blind-length-adjustment",
+        "binary-residual-griesmer",
+        "delsarte-polynomial-bound"
+      ],
+      "id": "equal-inner-rs-2972-obstruction",
+      "proof_markdown": "Combining Griesmer with the padding and puncturing inequalities reduces $2\\le m\\le30$ to an exact finite loop. It leaves $57$ inner pairs: $7,35,13,1,1$ for $m=17,18,19,20,21$. Forty-nine attain the Griesmer sum and are excluded by Logacev's strict improvement in the applicable range. The seven rank-17 pairs puncture to the cubic-impossible length-$8192$ case. Residual weight classification, projective Pless moments, and at-most-one-heavy-word arguments exclude the remaining rank-18 and rank-19 defect-one cases.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-05.json"
+      ],
+      "statement_markdown": "For $2\\le m\\le30$, no equal-inner concatenation of a binary $[\\ell,m,d]_2$ code with an ordinary or once-extended Reed\u2013Solomon outer code can be certified to have dimension at least $2972$ and distance at least $535{,}822{,}336$ using product distance followed by zero padding or generic fixed-puncture loss.",
+      "status": "proved",
+      "title": "Equal-inner RS obstruction at dimension 2972"
+    },
+    {
+      "dependencies": [
+        "target-signed-sum-normalization"
+      ],
+      "id": "condenser-character-conversion",
+      "proof_markdown": "A seed with $A_sx=0$ gives an all-zero block; every other seed gives a balanced nonzero linear functional. This proves the exact weight and bias formulas. For a source uniform on $\\{0,x\\}$, every killed seed creates an atom of mass $1/D$ whereas a distribution of min-entropy $d+1$ has atoms of mass at most $1/(2D)$. Thus total variation is at least $z(x)/(2D)$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json"
+      ],
+      "statement_markdown": "Let $A_s:\\mathbb F_2^K\\to\\mathbb F_2^m$, $s\\in[D]$, be binary-linear, and define $c_x(s,u)=\\langle u,A_sx\\rangle$. If $z(x)=|\\{s:A_sx=0\\}|$, then\n$$\\operatorname{wt}(c_x)=2^{m-1}(D-z(x)),\\qquad \\frac1{D2^m}\\sum_{s,u}(-1)^{c_x(s,u)}=\\frac{z(x)}D.$$\nA strong entropy-one lossless condenser of error $\\eta$ satisfies $z(x)/D\\le2\\eta$ for every nonzero $x$.",
+      "status": "proved",
+      "title": "Condenser-to-character conversion"
+    },
+    {
+      "dependencies": [
+        "condenser-character-conversion",
+        "rs-affine-family-optimum"
+      ],
+      "id": "standard-extractor-family-ceilings",
+      "proof_markdown": "The strict Plotkin argument for a $2$-universal family gives at most $qD$ messages, yielding dimensions $30$ and $31$ in the homogeneous and affine conversions. For AGHP powering, bias equals the evaluation-root fraction; exact length reduces the optimization to $(30-a)(2^{a-9}+1)$, maximized at $975$. Univariate affine hashing is exactly the RS\u2013affine optimization and reaches $1040$. Substitution in the GUV seed formula and AM\u2013GM gives seed length at least $33$ before output enumeration.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "At exact length $2^{30}$, the audited standard conversions satisfy: ordinary $2$-universal hashing has dimension at most $31$; direct AGHP polynomial powering has dimension at most $975$; univariate affine polynomial hashing has dimension at most $1040$; and the direct GUV entropy-one specialization requires at least $33$ seed bits.",
+      "status": "proved",
+      "title": "Standard extractor-family ceilings"
+    },
+    {
+      "dependencies": [
+        "target-signed-sum-normalization"
+      ],
+      "id": "complete-walk-no-fit",
+      "proof_markdown": "Every parity-walk label lies in the span of the outer labels, so rank cannot increase. For an undirected $D$-regular rotation multigraph, integral port multiplicities give $\\operatorname{tr}(P^2)\\ge m/D$, whereas the spectral bound gives $\\operatorname{tr}(P^2)\\le1+(m-1)\\lambda^2$.\n\nUsing this inequality, the Ta-Shma compatibility conditions have no contracting case: small widths make the block factor at least one, widths $4$ through $9$ force it above three, and larger widths contradict compatibility. For Cohen\u2013Cohen, contraction forces outer spectral value below $1/40$, hence degree at least $631$ and width at least three, producing at least $1041\\cdot631^3$ rows. For the free-expander schedule, $\\kappa=1$ does not contract, while $\\kappa\\ge2$ forces lift factor at least $2^{32}$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "No complete-output specialization certified by the audited Ta-Shma wide-replacement theorem, Cohen\u2013Cohen Gray-register theorem, or Hsieh\u2013Mohanty\u2013Zhang free-expander schedule has rank at least $1041$, absolute bias at most $1/512$, and at most $2^{30}$ output coordinates.",
+      "status": "proved",
+      "title": "Complete-walk finite no-fit theorem"
+    },
+    {
+      "dependencies": [],
+      "id": "fixed-f256-ag-port-obstruction",
+      "proof_markdown": "The distance certificate requires $L-a\\ge535{,}822{,}336/64=8{,}372{,}224$, and Riemann\u2013Roch eligibility gives $a\\ge g$, so $L\\ge8{,}372{,}224+g$. Hasse\u2013Weil and the required $L+1$ rational points give $L\\le256+32g$. Hence $g\\ge270{,}064$ and $L\\ge8{,}642{,}288$. The exact length condition instead gives $L\\le\\lfloor(2^{30}-16512)/128\\rfloor=8{,}388{,}479$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json"
+      ],
+      "statement_markdown": "No specialization satisfying the hypotheses of the fixed $\\mathbb F_{256}$ quotient-coupled Construction 4.1 can satisfy both $128L+16{,}512\\le2^{30}$ and its certified-distance inequality $64(L-a)\\ge535{,}822{,}336$.",
+      "status": "proved",
+      "title": "Fixed quotient-coupled AG-port obstruction"
+    },
+    {
+      "dependencies": [],
+      "id": "exact-length-cyclic-ceiling",
+      "proof_markdown": "In characteristic two, $X^{2^{30}}-1=(X+1)^{2^{30}}$. A dimension-$k$ cyclic ideal is generated by $(X+1)^{2^{30}-k}$. If $k\\ge4$, it contains $(X+1)^{2^{30}-4}$. Lucas' theorem gives this word weight $2^{\\operatorname{wt}_2(2^{30}-4)}=2^{28}$, below the target.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json"
+      ],
+      "statement_markdown": "Every binary cyclic code of length $2^{30}$ and minimum distance at least $535{,}822{,}336$ has dimension at most $3$.",
+      "status": "proved",
+      "title": "Exact-length cyclic-code ceiling"
+    },
+    {
+      "dependencies": [],
+      "id": "flat-spectrum-difference-set-ceilings",
+      "proof_markdown": "For a relative difference set, coset injectivity gives $a\\ge30$. Counting ordered differences gives $2^{30}(2^{30}-1)=\\lambda2^s(2^a-1)$. Comparing $2$-adic valuations gives $s\\le30$, while Mersenne divisibility gives $a\\mid30$; hence $a=30$ and $a+s\\le60$. For a simple partial difference set, the strongly regular identity bounds the ambient order by $2^{60}+1$ when $\\mu>0$; $\\mu=0$ would require a Cayley component of order $2^{30}+1$, impossible in an elementary abelian $2$-group.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json"
+      ],
+      "statement_markdown": "A relative difference set of size $2^{30}$ in an elementary abelian $2$-group has ambient binary dimension at most $60$. A simple unweighted partial-difference-set Cayley character construction with $2^{30}$ connection elements also has ambient dimension at most $60$.",
+      "status": "proved",
+      "title": "Difference-set ambient-dimension ceilings"
+    },
+    {
+      "dependencies": [],
+      "id": "solomon-stiffler-gateway-obstruction",
+      "proof_markdown": "For $h$ simplex copies with proper subspaces deleted, the parameters satisfy $n=h(2^m-1)-\\sum_i(2^{u_i}-1)$ and $d_0=h2^{m-1}-\\sum_i2^{u_i-1}$. Codimension-intersection bounds eliminate all but four exceptional $(m,h)$ pairs. Exact power-of-two accounting eliminates $(16,7)$, $(17,8)$, $(17,16)$, and $(18,8)$ as detailed in the source.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json"
+      ],
+      "statement_markdown": "The standard whole-subspace $h$-copy Solomon\u2013Stiffler deletion certificate produces none of the inner parameters $[16384,16,\\ge8185]_2$, $[16384,17,\\ge8184]_2$, or $[16384,18,\\ge8184]_2$.",
+      "status": "proved",
+      "title": "Solomon\u2013Stiffler gateway obstruction"
+    },
+    {
+      "dependencies": [
+        "odd-polynomial-weil-bound"
+      ],
+      "id": "fixed-conductor-artin-schreier-ceiling",
+      "proof_markdown": "For reduced principal parts, a pole of odd order $d_P$ contributes at most $(d_P+1)/2$ residue-field coefficients. Thus the binary phase-space dimension is at most $1+15R$. Riemann\u2013Hurwitz gives $2g\\le R-2$, and Hasse\u2013Weil gives signed correlation at most $(R-2)2^{15}$. The target correlation cap $2^{21}$ forces $R\\le66$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json"
+      ],
+      "statement_markdown": "For the fixed-pole reduced Artin\u2013Schreier trace families described in `composition-07`, if distance is certified only through the generic conductor/genus Hasse\u2013Weil bound, then the target forces conductor quantity $R\\le66$ and binary dimension at most $1+15R\\le991$.",
+      "status": "proved",
+      "title": "Fixed-conductor Artin\u2013Schreier ceiling"
+    },
+    {
+      "dependencies": [
+        "delsarte-polynomial-bound"
+      ],
+      "id": "degree-five-lp-insufficiency",
+      "proof_markdown": "The distribution\n$$A_0=1,\\quad A_{16381}=26180051/100,\\quad A_{18725}=34249/100$$\nis nonnegative and totals $2^{18}$. The recurrence $P_{j+1}=tP_j-j(32768-j+1)P_{j-1}$ gives strictly positive Krawtchouk transforms for $j=1,\\ldots,5$, with the exact values listed in `combinatorial-10`. Weak duality therefore prevents a degree-at-most-five dual certificate from giving a smaller cardinality bound.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json"
+      ],
+      "statement_markdown": "No Delsarte certificate using only Krawtchouk degrees at most five can prove $A_2(32768,16381)<2^{18}$.",
+      "status": "proved",
+      "title": "Degree-five direct-LP insufficiency"
+    },
+    {
+      "dependencies": [
+        "finite-inner-code-exclusions"
+      ],
+      "id": "8192-rs-product-cap",
+      "proof_markdown": "Distinct outer evaluation points force $m\\ge17$. Product distance forces $d\\ge\\lceil535{,}822{,}336/131072\\rceil=4088$. Parity extension together with the two length-$8193$ cubic bounds forces $m\\le17$ and excludes $d\\ge4089$ at dimension $17$. Thus $m=17$ and $d=4088$. Since the target equals $4088\\cdot131072$, the outer distance must be $131072$, so $K=1$.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json"
+      ],
+      "statement_markdown": "Let a binary linear $[8192,m,d]_2$ code be concatenated with a generalized Reed\u2013Solomon $[131072,K,131073-K]_{2^m}$ code. If $d(131073-K)\\ge535{,}822{,}336$, then $m=17$, $d=4088$, $K=1$, and the concatenated dimension is $17$.",
+      "status": "proved",
+      "title": "The 8192-by-131072 RS product cap"
+    },
+    {
+      "dependencies": [
+        "canonical-rs-affine-code",
+        "balanced-core-decomposition",
+        "rs-affine-family-optimum",
+        "complete-walk-no-fit",
+        "fixed-conductor-artin-schreier-ceiling"
+      ],
+      "id": "scoped-balanced-code-audit",
+      "proof_markdown": "The exact classical specializations give dimensions $975$ for AGHP powering, $991$ for the augmented trace/BCH construction, and smaller values for the audited Hermitian and norm\u2013trace constructions. The standard RS\u2013affine family is maximized at $1040$. The complete-output wide-replacement and free-expander theorems fail their finite length or contraction requirements. The remaining recent trace-AG and concatenation results either retain unavailable constants or use random constituents. This conclusion is restricted to the constructions and certificates enumerated in the two source audits.",
+      "source_refs": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+      ],
+      "statement_markdown": "Among the classical and 2017\u20132026 balanced-code constructions and finite certificate specializations enumerated in `composition-09` and `literature-sota-0001`, no campaign-admissible code at the immutable target has dimension exceeding $1040$.",
+      "status": "proved",
+      "title": "Scoped balanced-code SOTA audit"
+    }
+  ],
+  "source_jobs": [
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/literature-sota-0001.json"
+  ]
+}
