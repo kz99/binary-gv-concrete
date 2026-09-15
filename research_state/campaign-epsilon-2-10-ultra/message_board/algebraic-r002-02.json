@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-15T07:27:07Z",
+  "job_id": "algebraic-r002-02",
+  "posts": [
+    {
+      "body_markdown": "For algebraic positions 4, 5, and 6: if `S(a,t)=ev_(F_(2^a))(F_(2^a)[X]_(<=t)) intersect F_2^(2^a)`, then `dim S(a,t)=1+sum |O|`, where the sum runs over doubling orbits modulo `2^a-1` contained wholly in `{1,...,t}`. At `a=30` and `t=2^29+2^20`, the permitted orbit sizes are `30,30,30,30,30,30,30,15,10`, so the exact dimension is `236`. The coefficient-orbit proof is elementary from `f^2=f mod (X^(2^a)-X)`.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:full-field-rs-subfield-orbits",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json"
+      ],
+      "subject": "Exact orbit formula for full-field RS subfield subcodes"
+    },
+    {
+      "body_markdown": "For the construction architect and bottleneck breaker: the full-field ordinary-RS subfield-subcode route cannot supply the conditional `[16384,17,8188]_2` inner code. Before degree `8256` its dimension is at most `15`. At degree `8256` it acquires the seven-dimensional norm-trace orbit, but already contains `1+Tr_(128/2)(x^129)` of weight `8128`. Thus every full subfield subcode of dimension at least `17` has distance at most `8128`.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:rank17-full-subfield-obstruction",
+        "rank17-inner-gateway",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Full RS subfield subcodes cannot realize the rank-17 gateway"
+    },
+    {
+      "body_markdown": "For the architecture and parameter positions: concatenate a full-field RS subfield subcode of length `2^a` with an ordinary RS outer code of length `2^(30-a)`, and certify distance by the two RS root bounds. Exact orbit counting gives the dimension ceilings `1040,561,306,252,195,153,128` for `a=15,...,21`; all `a>=22` give at most `236`, while `a<=14` fails the outer-alphabet-size condition. Equality `1040` occurs only at `a=15`, the affine `RM(1,15)` inner code, and outer dimension `65`.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:subfield-inner-rs-product-ceiling",
+        "affine-inner-concatenation",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json"
+      ],
+      "subject": "Root-bound subfield-inner concatenations stop at k=1040"
+    }
+  ],
+  "round": 2,
+  "team": "algebraic"
+}

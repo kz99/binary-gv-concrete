@@ -1,0 +1,237 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard candidate is advanced; the active proved `k=1040` construction dominates the following exact subfield-subcode witness.\n\nLet `F=F_2[alpha]/(alpha^30+alpha+1)`, using the accepted irreducibility certificate in `algebraic-04`. Put\n\n`q=2^30`, `Q=q-1`, `B=q-535822336=537919488=2^29+2^20`.\n\nFor a positive integer `u`, write `[u]_Q` for its representative in `{1,...,Q}` modulo `Q`. Use the nine doubling-orbit representatives\n\n`E={1,513,1025,2049,4097,8193,16385,32769,1049601}`\n\n`={1,1+2^9,...,1+2^15,1+2^10+2^20}`.\n\nTheir orbit sizes under `e -> [2e]_Q` are respectively\n\n`30,30,30,30,30,30,30,15,10`.\n\nFor an orbit representative `e` of size `r`, let `F_(2^r)={beta in F: beta^(2^r)=beta}`. Choose its canonical binary basis by reduced row echelon reduction of the linear map `beta -> beta^(2^r)+beta` in the fixed polynomial basis. For every basis element `beta`, define\n\n`f_(e,beta)(X)=sum_(j=0)^(r-1) beta^(2^j) X^([2^j e]_Q)`.\n\nThe generator rows are the evaluations of `1` and all these polynomials on every `x in F`, with both rows and coordinates in the specified increasing polynomial-basis order. There are\n\n`1+7*30+15+10=236`\n\nrows. This is exactly the full-field binary subfield subcode\n\n`ev_F(F[X]_(degree<=B)) intersect F_2^q`.",
+  "dimension": 236,
+  "discussion_posts": [
+    {
+      "body_markdown": "For algebraic positions 4, 5, and 6: if `S(a,t)=ev_(F_(2^a))(F_(2^a)[X]_(<=t)) intersect F_2^(2^a)`, then `dim S(a,t)=1+sum |O|`, where the sum runs over doubling orbits modulo `2^a-1` contained wholly in `{1,...,t}`. At `a=30` and `t=2^29+2^20`, the permitted orbit sizes are `30,30,30,30,30,30,30,15,10`, so the exact dimension is `236`. The coefficient-orbit proof is elementary from `f^2=f mod (X^(2^a)-X)`.",
+      "kind": "idea",
+      "references": [
+        "proposed-lemma:full-field-rs-subfield-orbits",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json"
+      ],
+      "subject": "Exact orbit formula for full-field RS subfield subcodes"
+    },
+    {
+      "body_markdown": "For the construction architect and bottleneck breaker: the full-field ordinary-RS subfield-subcode route cannot supply the conditional `[16384,17,8188]_2` inner code. Before degree `8256` its dimension is at most `15`. At degree `8256` it acquires the seven-dimensional norm-trace orbit, but already contains `1+Tr_(128/2)(x^129)` of weight `8128`. Thus every full subfield subcode of dimension at least `17` has distance at most `8128`.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:rank17-full-subfield-obstruction",
+        "rank17-inner-gateway",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Full RS subfield subcodes cannot realize the rank-17 gateway"
+    },
+    {
+      "body_markdown": "For the architecture and parameter positions: concatenate a full-field RS subfield subcode of length `2^a` with an ordinary RS outer code of length `2^(30-a)`, and certify distance by the two RS root bounds. Exact orbit counting gives the dimension ceilings `1040,561,306,252,195,153,128` for `a=15,...,21`; all `a>=22` give at most `236`, while `a<=14` fails the outer-alphabet-size condition. Equality `1040` occurs only at `a=15`, the affine `RM(1,15)` inner code, and outer dimension `65`.",
+      "kind": "objection",
+      "references": [
+        "proposed-lemma:subfield-inner-rs-product-ceiling",
+        "affine-inner-concatenation",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json"
+      ],
+      "subject": "Root-bound subfield-inner concatenations stop at k=1040"
+    }
+  ],
+  "distance_audit": [
+    "Every row polynomial satisfies `f^2=f modulo X^q-X`; consequently every evaluated entry lies in `F_2`.",
+    "All listed exponent orbits lie at or below `B=537919488`. Every binary combination is represented by a polynomial of degree at most `B`.",
+    "Disjoint exponent supports and independent subfield coefficient bases show that a nonzero row combination is a nonzero polynomial.",
+    "A nonzero polynomial of degree at most `B<q` has at most `B` roots in `F`, hence its binary evaluation has weight at least `q-B=535822336`.",
+    "For the length-16384 obstruction, the norm map has fibers of size 129, giving signed sum `-128`, weight `8256`, and complementary weight `8128`.",
+    "The `k<=1040` concatenation statement is explicitly scoped to distance certified by the inherited inner root bound and ordinary outer-RS distance."
+  ],
+  "explicitness_audit": [
+    "The field is the fixed accepted quotient by `T^30+T+1`; no irreducible-polynomial search or unspecified isomorphism is used.",
+    "All nine cyclotomic representatives and all orbit sizes are displayed symbolically.",
+    "The degree-15 and degree-10 subfield bases are computed deterministically as canonical nullspace bases of explicit 30-by-30 binary Frobenius matrices.",
+    "Rows, field elements, coordinates, exponent orbits, and basis vectors have fixed orders.",
+    "The complete 236-by-1073741824 matrix is emitted, not accessed through an oracle or finite lookup.",
+    "There is no random sampling, exhaustive witness selection, or conditional-expectation recursion."
+  ],
+  "generator_matrix": {
+    "algorithm": "Use the fixed polynomial basis of `F_2[T]/(T^30+T+1)`. Compute canonical bases of `ker(z -> z^(2^r)+z)` for `r=30,15,10`. Emit the constant row. Then, for each displayed orbit representative `e` and each canonical basis element `beta` of the corresponding subfield, enumerate all `x in F` and emit `sum_j beta^(2^j)x^([2^j e]_(2^30-1))`, which the proof shows is either 0 or 1.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "`O(236*n*(log n)^3+(log n)^4)` bit operations; at the fixed target this is `O(n)` with an explicitly bounded 236-row output.",
+    "runtime_proof": "Let `m=30`. Canonical subfield bases require Gaussian elimination on `m`-dimensional binary maps, costing `O(m^4)`. For one matrix entry, compute `x^e` by at most `m` square-and-multiply stages, obtain the remaining at most `m-1` orbit powers by squaring, and form at most `m` coefficient products. Schoolbook arithmetic modulo the fixed degree-`m` polynomial costs `O(m^2)` bits per field operation, hence `O(m^3)` per emitted entry. There are exactly `236n` entries."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The displayed Rabin repeated-squaring and gcd certificate for `T^30+T+1`.",
+      "result": "`T^30+T+1` is irreducible over `F_2`.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json and its accepting verifier report",
+      "used_for": "The fixed symbolic model of `F_(2^30)`."
+    },
+    {
+      "hypotheses": "A deterministic non-antipodal binary `[16384,17,8188]_2` inner code.",
+      "result": "Such an inner code would concatenate to dimension 1649 and distance 535822720.",
+      "source": "rank17-inner-gateway in the campaign lemma book",
+      "used_for": "Identifying the relevant finite inner-code bottleneck; not used to prove the obstruction."
+    },
+    {
+      "hypotheses": "The explicit degree-64 outer RS and affine-inner construction.",
+      "result": "An independently accepted binary `[2^30,1040,535822336]_2` code exists.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json and verifier report",
+      "used_for": "Leaderboard comparison and the decision not to submit the dominated `k=236` witness."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "The proof-lemma position should persist the orbit-decomposition lemma and its `a=14` and `a=30` specializations in the lemma book/data records.",
+    "The parameter optimizer should incorporate the exact concatenation table so no later architecture reopens this root-bound family.",
+    "The bottleneck breaker should examine generalized-RS multipliers, alternant subfield subcodes, or carefully selected proper subcodes; these are not excluded here and must still meet the explicit `[16384,17,8188]_2` gateway with a universal distance proof."
+  ],
+  "obstructions": [
+    "The direct full-field ordinary-RS subfield subcode certified by the root bound has exact dimension only 236 at the immutable target.",
+    "At length 16384, the full ordinary-RS subfield subcode has dimension at most 15 before its first nonlinear orbit; once that orbit appears, its minimum distance is at most 8128, below 8188.",
+    "Every exact-length ordinary-RS/root-bound concatenation using these full subfield subcodes is capped at dimension 1040, attained only by the already-known affine-inner construction.",
+    "The explicit `k=236` code beats the persisted `k=31` baseline but is dominated by the independently accepted `k=1040` campaign construction, so it is not a leaderboard submission.",
+    "This result does not exclude generalized-RS coordinate multipliers, alternant/Goppa constructions, proper selected subcodes, or proofs exploiting true distance beyond the inherited RS root bound."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`2^30`",
+      "quantity": "target length",
+      "value": "`1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)2^30=2^29-2^20`",
+      "quantity": "required distance",
+      "value": "`535,822,336`"
+    },
+    {
+      "derivation": "`2^30-D=2^29+2^20`",
+      "quantity": "direct RS degree cutoff",
+      "value": "`537,919,488`"
+    },
+    {
+      "derivation": "`1+7*30+15+10`",
+      "quantity": "exact dimension of the direct subfield subcode",
+      "value": "`236`"
+    },
+    {
+      "derivation": "`236/2^30=59/2^28`",
+      "quantity": "direct-code rate",
+      "value": "`2.1979212760925293e-7`"
+    },
+    {
+      "derivation": "First two-one orbit for 14-bit cyclic words",
+      "quantity": "length-16384 nonlinear threshold",
+      "value": "`t=2^13+2^6=8256`"
+    },
+    {
+      "derivation": "`1+14+7`",
+      "quantity": "dimension at the first nonlinear length-16384 layer",
+      "value": "`22`"
+    },
+    {
+      "derivation": "Norm-fiber signed sum `1-129=-128`",
+      "quantity": "weight of the obstructing complement",
+      "value": "`8128`"
+    },
+    {
+      "derivation": "Orbit bounds times `floor(N/512)+1`",
+      "quantity": "concatenation bounds for `a=15,...,21`",
+      "value": "`1040, 561, 306, 252, 195, 153, 128`"
+    },
+    {
+      "derivation": "`16*(32768/512+1)`",
+      "quantity": "unique maximum of the scoped concatenation family",
+      "value": "`1040`"
+    }
+  ],
+  "proof_markdown": "Let `E_a=F_(2^a)` and\n\n`S(a,t)=ev_(E_a)({f in E_a[X]: deg f<=t}) intersect F_2^(2^a)`.\n\n### 1. Cyclotomic-orbit decomposition\n\nEvery function on `E_a` has a unique polynomial representative of degree below `2^a`. If such an `f` is binary-valued, then\n\n`f(X)^2 = f(X) modulo X^(2^a)-X`.\n\nFor positive exponents, squaring sends `e` to `[2e]_(2^a-1)`. Hence its coefficients satisfy\n\n`c_[2e]=c_e^2`.\n\nThe nonzero support is therefore a union of complete doubling orbits contained in `{1,...,t}`. On an orbit of size `r`, all coefficients are determined by one `beta` satisfying `beta^(2^r)=beta`; this contributes exactly `r` binary dimensions. The constant coefficient contributes one dimension. Conversely, the displayed orbit polynomial for every such `beta` is fixed by squaring and is binary-valued. Therefore\n\n`dim S(a,t)=1+sum_(O subset {1,...,t}) |O|`. (1)\n\nMultiplication by two modulo `2^a-1` is cyclic rotation of the `a`-bit representation of an exponent.\n\n### 2. Exact target count\n\nFor `a=30`, the cutoff is `B=2^29+2^20`. Suppose a cyclic bit word has all rotations at most `B`. If it has two ones, rotating either one to position 29 shows that both cyclic gaps between them must be at least 9. Thus, up to rotation, their separation is `s=9,...,15`.\n\nIf the word has at least three ones, after rotating one to position 29 the nearest lower one cannot be at distance 9: its contribution would already be `2^20`, and another positive term would exceed `B`. Hence every cyclic gap is at least 10. Their sum is 30, so the only possibility is three gaps `10,10,10`.\n\nConsequently the nonconstant admissible orbits are: one weight-one orbit of size 30; six size-30 weight-two orbits for separations 9 through 14; one size-15 orbit for separation 15; and the size-10 three-one orbit. Equation (1) gives `1+30+180+15+10=236`.\n\nEvery nonzero polynomial in this subfield subcode has degree at most `B`, hence at most `B` roots. Its binary evaluation has weight at least\n\n`2^30-B=535822336`.\n\nDisjoint orbit supports also prove that the 236 displayed rows are independent.\n\n### 3. The length-16384 gateway obstruction\n\nFor `a=14`, every cyclic word with at least two ones has a cyclic gap at most 7. Rotating the adjacent one to position 13 gives an exponent at least\n\n`2^13+2^6=8256`.\n\nThus `dim S(14,t)<=15` for `t<=8255`. At `t=8256`, the new size-seven orbit is represented by `129=1+2^7`. It contains\n\n`h(x)=Tr_(F_128/F_2)(x^129)`.\n\nFor nonzero `x`, `x^129` is the norm from `F_(2^14)` to `F_(2^7)`, and every nonzero norm value has 129 preimages. Therefore\n\n`sum_x (-1)^h(x)=1+129 sum_(y in F_128^*) (-1)^Tr(y)=1-129=-128`.\n\nHence `wt(h)=8256` and `wt(1+h)=8128`. Every later full subfield subcode contains this word. It follows that no `S(14,t)` has both dimension at least 17 and minimum distance at least 8188.\n\n### 4. Concatenation ceiling\n\nUse `S(a,t)` as an inner code of length `L=2^a` and dimension `r`, and an ordinary `[N,K,N-K+1]_(2^r)` RS outer code with `N=2^(30-a)`. Product certification requires\n\n`(L-t)(N-K+1)>=D`.\n\nBecause `N-K+1<=N`, necessarily\n\n`t<=B_a=floor(513*2^a/1024)`.\n\nFor `a>=10`, `B_a=2^(a-1)+2^(a-10)`. The same cyclic-gap argument shows that for `a<=17`, `r<=a+1`; for `a=18,19,20,21`, respectively, `r<=28,39,51,64`; and for every `22<=a<=30`, `r<=236`. For `a<=14`, the outer feasibility condition `N<=2^r` fails.\n\nIf `t<2^(a-1)`, then `r=1`, which is infeasible except for `a>=29` and yields dimension at most two. Otherwise `L-t<=L/2`, so\n\n`N-K+1 >= ceil(511N/512)`,\n\nand therefore\n\n`K<=floor(N/512)+1`.\n\nFor `a=15,...,21`, multiplying by the preceding bounds on `r` gives\n\n`1040,561,306,252,195,153,128`.\n\nFor `a>=22`, `K<=1` and `rK<=236`. Thus the scoped family has maximum 1040. Equality forces `a=15`, `t=2^14`, `r=16`, and `K=65`: precisely the known `RM(1,15)`-inner RS construction.",
+  "proof_steps": [
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json"
+      ],
+      "id": "SC-FIELD",
+      "proof": "The accepted Rabin certificate in the cited source proves that `T^30+T+1` is irreducible and fixes the polynomial-basis field model.",
+      "statement": "The construction uses a deterministic symbolic field of order `2^30`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "SC-ORBIT",
+      "proof": "The identity `f^2=f mod X^(2^a)-X` forces coefficient Frobenius relations around complete doubling orbits; an orbit of size `r` contributes its fixed field `F_(2^r)`, hence exactly `r` binary dimensions.",
+      "statement": "Full-field ordinary-RS binary subfield subcodes have the exact cyclotomic-orbit dimension formula (1).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SC-ORBIT"
+      ],
+      "id": "SC-COUNT-30",
+      "proof": "The cyclic-gap classification leaves the weight-one orbit, separations 9 through 15, and the unique three-one pattern with gaps 10,10,10. Their sizes total 235.",
+      "statement": "At degree `2^29+2^20`, the exact subfield-subcode dimension is 236.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SC-FIELD",
+        "SC-COUNT-30"
+      ],
+      "id": "SC-DIRECT-DISTANCE",
+      "proof": "Every nonzero representing polynomial has degree at most `537919488<2^30`, so it has at most that many roots; all evaluations are binary.",
+      "statement": "The displayed direct code is binary `[2^30,236,>=535822336]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SC-ORBIT"
+      ],
+      "id": "SC-INNER-14",
+      "proof": "No nonlinear orbit appears below degree 8256. The first orbit is the norm-trace orbit, and its constant translate has weight 8128 by the exact 129-to-one norm-fiber calculation.",
+      "statement": "No full-field ordinary-RS subfield subcode supplies a `[16384,>=17,>=8188]_2` inner code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SC-ORBIT",
+        "SC-COUNT-30"
+      ],
+      "id": "SC-CONCAT-CEILING",
+      "proof": "The product inequality forces `t<=B_a`; orbit counts bound the inner dimension, outer alphabet feasibility removes `a<=14`, and `K<=floor(N/512)+1` gives the displayed finite table.",
+      "statement": "Ordinary-RS/root-bound concatenations using these full subfield subcodes have binary dimension at most 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "SC-FIELD",
+        "SC-COUNT-30"
+      ],
+      "id": "SC-EXPLICIT",
+      "proof": "All rows are fixed orbit polynomials over canonical Frobenius-kernel bases and are evaluated in fixed order. The nested loops emit `236n` entries in `O(n(log n)^3)` bit operations.",
+      "statement": "The complete generator matrix is deterministically output in polynomial time.",
+      "status": "proved"
+    }
+  ],
+  "rate": 2.1979212760925293e-07,
+  "research_direction": "Subfield subcodes and concatenation",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/*.json (all 3 current roadmap files)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 33 current durable submissions)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 36 current files)",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/algebraic-04/verifier-1-algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/reviews/composition-10/verifier-1-composition-10.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For the full-field ordinary Reed\u2013Solomon binary subfield subcode `S(a,t)=ev_(F_(2^a))(F_(2^a)[X]_(<=t)) intersect F_2^(2^a)`, the dimension equals one plus the total sizes of the doubling orbits modulo `2^a-1` contained below `t`. At the immutable target cutoff `a=30`, `t=537919488`, this gives an explicit `[2^30,236,>=535822336]_2` code. At `a=14`, no full `S(14,t)` has both dimension at least 17 and distance at least 8188. Moreover, every exact-length concatenation using such a full subfield subcode as inner code, an ordinary RS outer code, and the inherited root/product distance certificate has dimension at most 1040, with equality only at the already-known `RM(1,15)`-inner parameters.",
+  "title": "Cyclotomic-orbit closure: k=236 direct cap and k=1040 concatenation ceiling"
+}
