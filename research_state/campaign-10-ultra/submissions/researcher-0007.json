@@ -1,0 +1,240 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard construction is claimed.\n\nStart from Bouyukliev\u2019s published binary [68,8,32] code G\u2081 and delete the left-to-right, 1-based coordinates P={1,2,3,9,14}. Equivalently, define J as the row span over F\u2082 of the following self-contained 8\u00d763 matrix:\n\n```text\n000000000000000000000001111111111111111111111111111111111111111\n000001111111111111111110000000000000000000011111111111111111111\n111110000111111111111110000000000111111111100000000001111111111\n001111111000000011111110000011111000111111100000111110001111111\n111110001000111100000110111100011011000111100111001111110000111\n110111110011011100111110001101111100001001101011000010110111001\n011010111111100101011111010110011101010010001001010100010011111\n101001010101101110101011011110101110000110101011011001110101011\n```\n\nThus J={uG:u\u2208F\u2082\u2078}. If an alphabet identification is desired, fix F\u2082\u2085\u2086=F\u2082[a]/(a\u2078+a\u2074+a\u00b3+a+1), use the coefficient basis 1,a,\u2026,a\u2077, and encode the symbol \u03a3u\u1d63a\u02b3 as uG.\n\nThe puncture set is also characterized without hidden choice: it is the lexicographically first five-subset of the 68 coordinates that is not contained in the support of any weight-32 word of G\u2081. The construction itself uses the displayed literal set, so no search or external database is needed to recover it.",
+  "dimension": null,
+  "distance_audit": [
+    "Exact enumeration of all 256 row combinations gives one zero word and minimum nonzero weight 28; hence the constituent is exactly [63,8,28]\u2082.",
+    "The constituent weight enumerator is 1+28z^28+66z^29+50z^30+30z^31+13z^32+20z^36+30z^37+14z^38+2z^39+2z^40.",
+    "MacWilliams evaluation was performed through both the binomial Krawtchouk formula and its three-term recurrence. Both give dual dimension 55, dual distance 3, and identical coefficients in every shell.",
+    "For all 1\u2264i\u226463, A_i(J\u22a5)\u2264C(63,i)/217. Equality occurs only at i=61, where A_61(J\u22a5)=9 and C(63,61)=1953.",
+    "No distance claim is made for a length-2^30 code. The product-distance calculation is explicitly only a certificate bound and is not inverted into an upper bound on actual symbol-sensitive concatenated distance."
+  ],
+  "explicitness_audit": [
+    "The binary generator, coordinate ordering, puncture set, and optional F\u2082\u2085\u2086 identification are literal and deterministic.",
+    "All 256 inner messages and all 63 dual shells are finite symbolically specified computations; no random sampling is used.",
+    "The puncture was independently recomputed from the published G\u2081 matrix, and the spectrum and MacWilliams audit were independently recomputed by separate agents.",
+    "No outer code satisfying the Doron\u2013Mosheiff\u2013Wootters product-distribution condition is asserted.",
+    "No tower, divisor, graph, shortening, repetition, or padding is hidden in this non-leaderboard result.",
+    "The workspace was read-only, so the proof was returned here rather than written into proofs/ or data/records.json."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Coordinates are read left-to-right in the printed binary generator G\u2081.",
+      "result": "The paper prints an [68,8,32]\u2082 generator G\u2081 with weight enumerator 1+187z^32+68z^40.",
+      "source": "I. G. Bouyukliev, [Classification of Griesmer Codes and Dual Transform](https://doi.org/10.1016/j.disc.2008.12.002), Discrete Mathematics 309 (2009), with the author\u2019s [matrix PDF](https://www.moi.math.bas.bg/moiuser/~iliya/pdf_site/D_tr_eng.pdf).",
+      "used_for": "Provenance of the 68-coordinate mother code. The punctured matrix and all claimed parameters were independently checked."
+    },
+    {
+      "hypotheses": "The inner and outer rates are both \u03c1; the inner is \u03c4-nice for \u03c4=1/sqrt(n\u2080); n\u2080\u226564/\u03c1\u2074; and the outer satisfies Equation (11).",
+      "result": "Definition 2.2 gives the exact dual-shell niceness inequality. Theorem 5.1 concludes rate \u03c1\u00b2 and relative distance at least (1-c\u03c1)/2. Claim 5.4 exposes admissible proof choices c\u0303\u22654 ln 2 and c\u226572c\u0303.",
+      "source": "D. Doron, J. Mosheiff, and M. Wootters, [When Do Low-Rate Concatenated Codes Approach the Gilbert\u2013Varshamov Bound?](https://arxiv.org/html/2405.08584v3); [conference version](https://doi.org/10.4230/LIPIcs.APPROX/RANDOM.2024.53).",
+      "used_for": "Definition of niceness and the finite-parameter obstruction to directly applying the published proof at N=2^30."
+    },
+    {
+      "hypotheses": "An explicit low-bias mother code is punctured along a sampled expander random walk.",
+      "result": "The construction reduces randomness to O(n+log m) but still samples a code and proves transfer for local properties.",
+      "source": "A. Putterman and E. Pyne, [Pseudorandom Linear Codes Are List-Decodable to Capacity](https://doi.org/10.4230/LIPIcs.ITCS.2024.90), ITCS 2024.",
+      "used_for": "Explaining why current pseudorandom-puncturing results do not themselves provide a fixed deterministic seed with the global all-shell niceness certificate required here."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Seek a scalable algebraic family whose dual satisfies every DMW shell bound; direct sums of the present constituent fail beginning with four copies.",
+    "Replace the published n\u2080\u226564/\u03c1\u2074 argument with a genuinely finite small-inner analysis tailored to an explicitly enumerated constituent such as J.",
+    "Construct and prove an explicit outer code satisfying DMW Equation (11); the paper only establishes existence by averaging over random outer codes.",
+    "For a record-rate DMW instantiation, reduce the effective distance constant from at least 288 ln 2\u2248199.626 to at most 2.1327407, while also eliminating the unquantified sufficiently-large threshold.",
+    "Investigate BCH-dual or deterministic-puncturing candidates using exact all-shell enumerators rather than only minimum distance, bias, or bounded-local properties.",
+    "When write access is available, place this lemma and proof in proofs/ and add it as a research/proof-tool entry in data/records.json."
+  ],
+  "obstructions": [
+    "Every even-weight binary inner code C fails DMW \u03c4-niceness for every 0<\u03c4<rate(C): the all-one vector lies in C\u22a5, and the i=n shell would require 1\u22642^{-n(rate\u2212\u03c4)}<1. This excludes both the unpunctured G\u2081 and RM(1,7).",
+    "For J, Theorem 5.1 would require n\u2080\u2265ceil(64/(8/63)^4)=246,141, whereas J has n\u2080=63.",
+    "Direct sums do not repair the size failure: J^\u2295t has A_3((J^\u2295t)\u22a5)=109t and fails \u03c4=1/sqrt(63t) niceness for every t\u22654.",
+    "Using only the ordinary minimum-distance product certificate, J forces outer distance at least 2^24; Singleton then caps the binary dimension at 2,130,448, below the current 3,688,448.",
+    "With the constants explicitly admitted by the published DMW proof, target distance forces \u03c1\u22641/(2304 ln 2), which gives at most 421 binary dimensions and requires an inner block longer than 2^30.",
+    "DMW Theorem 5.1 additionally needs an explicit outer satisfying its product-distribution condition. The cited paper proves existence through a random outer code and presents explicit construction as future work.",
+    "Integrality of the niceness inequality forces A_i(C\u22a5)=0 whenever log\u2082 C(n,i)<\u03c1n\u2212sqrt(n). A scalable constant-rate nice family must therefore give a near-GV dual-distance certificate together with bounds in every shell, substantially more than small bias or ordinary minimum distance."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "2^30",
+      "quantity": "Target block length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "(7/16)\u00b72^30",
+      "quantity": "Required target distance",
+      "value": "469,762,048"
+    },
+    {
+      "derivation": "Current verified campaign record",
+      "quantity": "Dimension to beat",
+      "value": "3,688,448; a new record needs at least 3,688,449"
+    },
+    {
+      "derivation": "Published G\u2081 parameters",
+      "quantity": "Mother code",
+      "value": "[68,8,32]\u2082 with enumerator 1+187z^32+68z^40"
+    },
+    {
+      "derivation": "Delete left-to-right coordinates 1,2,3,9,14",
+      "quantity": "Puncture set",
+      "value": "P={1,2,3,9,14}"
+    },
+    {
+      "derivation": "Exact enumeration of the displayed matrix",
+      "quantity": "Deterministic constituent",
+      "value": "J=[63,8,28]\u2082"
+    },
+    {
+      "derivation": "8/63",
+      "quantity": "Inner rate \u03c1",
+      "value": "0.12698412698412698"
+    },
+    {
+      "derivation": "max_i A_i(J\u22a5)/C(63,i)",
+      "quantity": "Exact worst dual-shell density",
+      "value": "1/217, attained only at i=61"
+    },
+    {
+      "derivation": "Solve 2^{-8+63\u03c4}=1/217",
+      "quantity": "Exact niceness threshold",
+      "value": "\u03c4*=(8\u2212log\u2082217)/63\u22480.00378490107231"
+    },
+    {
+      "derivation": "63((8/63)\u2212(1/63))",
+      "quantity": "Convenient stronger exponent",
+      "value": "7, so J is 1/63-nice via A_i(J\u22a5)\u2264C(63,i)/217<C(63,i)/128"
+    },
+    {
+      "derivation": "sqrt(63)<8",
+      "quantity": "Required DMW niceness parameter",
+      "value": "1/sqrt(63)<8/63, and monotonicity proves 1/sqrt(63)-niceness"
+    },
+    {
+      "derivation": "ceil(64/(8/63)^4)=ceil(63^4/64)",
+      "quantity": "Theorem 5.1 inner-length requirement for J's rate",
+      "value": "246,141"
+    },
+    {
+      "derivation": "floor(2^30/63) with 2^30\u22611 mod 63",
+      "quantity": "Available ordinary inner blocks",
+      "value": "17,043,521 blocks plus one zero coordinate"
+    },
+    {
+      "derivation": "469,762,048/28",
+      "quantity": "Outer distance required by the product certificate",
+      "value": "16,777,216=2^24"
+    },
+    {
+      "derivation": "8(17,043,521\u221216,777,216+1)",
+      "quantity": "Product-certificate Singleton cap",
+      "value": "2,130,448 bits; rate 133153/67108864\u22480.00198413431644"
+    },
+    {
+      "derivation": "c\u0303=4 ln 2 and c=72c\u0303",
+      "quantity": "Smallest constants displayed in DMW Claim 5.4",
+      "value": "c=288 ln 2\u2248199.626388001"
+    },
+    {
+      "derivation": "(1\u2212c\u03c1)/2\u22657/16",
+      "quantity": "Published-certificate rate-parameter cap",
+      "value": "\u03c1\u22641/(2304 ln 2)\u22480.000626169722608"
+    },
+    {
+      "derivation": "ceil(64(2304 ln 2)^4)",
+      "quantity": "Published-certificate inner-length lower bound",
+      "value": "416,305,086,453,856>2^30"
+    },
+    {
+      "derivation": "floor(2^30/(2304 ln 2)^2)",
+      "quantity": "Published-certificate binary-dimension cap",
+      "value": "421"
+    },
+    {
+      "derivation": "sqrt(3,688,449/2^30) and 1/(8\u03c1)",
+      "quantity": "Necessary DMW improvement for a record",
+      "value": "\u03c1\u22650.0586100317268 and effective c\u22642.13274069843"
+    }
+  ],
+  "proof_markdown": "### Proposition 1: exact deterministic inner code\n\nLet G be the displayed 8\u00d763 matrix and J={uG:u\u2208F\u2082\u2078}. The mother matrix is the G\u2081 printed by [Bouyukliev](https://doi.org/10.1016/j.disc.2008.12.002), punctured at P={1,2,3,9,14}.\n\nThe following finite symbolic sum computes the enumerator without sampling:\n\n`W_J(z)=\u03a3_{u\u2208F\u2082\u2078} z^{\u03a3_{j=1}^{63} ((\u03a3_{r=1}^{8}u_r G_{rj}) mod 2)}`.\n\nExact XOR evaluation gives\n\n`W_J(z)=1+28z^28+66z^29+50z^30+30z^31+13z^32+20z^36+30z^37+14z^38+2z^39+2z^40`.\n\nAs a second certificate, the 187 weight-32 mother words meet P in 0,1,2,3,4,5 positions with multiplicities 13,30,50,66,28,0; the 68 weight-40 words give 2,2,14,30,20,0. These numbers produce the same polynomial after puncturing. Its constant coefficient is one even though all 256 messages were evaluated, so the kernel of u\u21a6uG is trivial and rank(G)=8. Its least positive exponent is 28. Therefore J is exactly [63,8,28]\u2082.\n\n### Proposition 2: exact DMW niceness threshold\n\nWrite A_w for the coefficients above and B_i=A_i(J\u22a5). Character orthogonality gives the MacWilliams shell formula\n\n`B_i=2^{-8} \u03a3_w A_w K_i(w)`,\n\nwhere\n\n`K_i(w)=\u03a3_j (\u22121)^j C(w,j)C(63\u2212w,i\u2212j)`.\n\nFor direct reconstruction one may instead use\n\n`K_0(w)=1`, `K_1(w)=63\u22122w`,\n\n`(r+1)K_{r+1}(w)=(63\u22122w)K_r(w)\u2212(64\u2212r)K_{r\u22121}(w)`.\n\nExact integer evaluation gives B_1=B_2=0, B_3=109, B_61=9, B_62=B_63=0, \u03a3_iB_i=2^55, and the following grouped maxima. The last column is the maximum of 128B_i/C(63,i) over the indicated shells.\n\n| shells | maximizing i | exact maximum |\n|---|---:|---:|\n| 1\u201310 | 5 | 2944/5673 |\n| 11\u201320 | 13 | 5234347504000/10468434365991 |\n| 21\u201330 | 22 | 163751599871488/327503186589285 |\n| 31\u201340 | 38 | 4213498052290048/8426995787342223 |\n| 41\u201350 | 48 | 20355320083072/40710578089965 |\n| 51\u201360 | 60 | 6784/13237 |\n| 61\u201363 | 61 | 128/217 |\n\nThus the global maximum is 128/217, uniquely at i=61. Equivalently,\n\n`B_i\u2264C(63,i)/217` for every 1\u2264i\u226463.\n\nFor rate \u03c1=8/63, DMW Definition 2.2 asks for\n\n`B_i\u2264C(63,i)\u00b72^{-63(\u03c1\u2212\u03c4)}=C(63,i)\u00b72^{-8+63\u03c4}`.\n\nConsequently the exact least admissible \u03c4 is\n\n`\u03c4*=(8\u2212log\u2082217)/63\u22480.00378490107231`.\n\nIn particular \u03c4=1/63 works because its right side is C(63,i)/128. Niceness is monotone in \u03c4, and\n\n`1/63 < 1/sqrt(63) < 8/63`,\n\nso J satisfies precisely the inner niceness hypothesis \u03c4=1/sqrt(n\u2080) used in [DMW Theorem 5.1](https://arxiv.org/html/2405.08584v3).\n\n### Lemma 3: endpoint obstruction for even-weight inners\n\nLet C be an even-weight binary [n,k] code of rate \u03c1. Then the all-one vector belongs to C\u22a5, so A_n(C\u22a5)\u22651. For every 0<\u03c4<\u03c1, niceness at shell i=n would require\n\n`1\u2264A_n(C\u22a5)\u2264C(n,n)2^{-n(\u03c1\u2212\u03c4)}<1`,\n\na contradiction. Thus puncturing away the endpoint obstruction is necessary for the even-weight G\u2081 and for RM(1,7).\n\n### Lemma 4: fixed-block repetition does not scale niceness\n\nThe dual of J has minimum distance 3 and B_3=109. Hence\n\n`A_3((J^\u2295t)\u22a5)=109t`.\n\nAt rate 8/63 and \u03c4=1/sqrt(63t), the required upper bound is\n\n`R_t=C(63t,3)2^{-8t+sqrt(63t)}`.\n\nAlready at t=4, R_4\u224836.86<436. The failure persists: using C(63t,3)<(63t)^3/6, the upper bound for R_t/t is a constant times `t\u00b22^{-8t+sqrt(63t)}`. For t\u22654, its successive ratio is less than\n\n`(5/4)\u00b2\u00b72^{-8+2}<1`,\n\nbecause sqrt(63(t+1))\u2212sqrt(63t)<2. Therefore R_t/t decreases for t\u22654 and remains below 109. Thus J^\u2295t is not DMW-nice for any t\u22654. In particular, direct sum cannot reach the 246,141-coordinate size hypothesis.\n\n### Lemma 5: ordinary product-distance use is below the record\n\nAt most\n\n`M=floor(2^30/63)=17,043,521`\n\ninner blocks fit, leaving one zero coordinate. If distance is certified solely by `d_binary\u226528d_out`, the target forces\n\n`d_out\u2265ceil(469,762,048/28)=16,777,216`.\n\nSingleton, proved by puncturing d_out\u22121 coordinates injectively, gives at most M\u2212d_out+1=266,306 F\u2082\u2085\u2086 symbols of information, or\n\n`8\u00b7266,306=2,130,448`\n\nbinary dimensions. This is below 3,688,448. This lemma is deliberately scoped to the minimum-distance product certificate: a symbol-value-sensitive proof could exploit the nonconstant inner weights and is not excluded.\n\n### Proposition 6: the published DMW finite certificate cannot fit N=2^30\n\nDMW Theorem 5.1 gives rate \u03c1\u00b2 and relative distance at least `(1\u2212c\u03c1)/2`. Claim 5.4 and its proof explicitly admit constants satisfying\n\n`c\u0303\u22654 ln 2`, `c\u226572c\u0303`.\n\nTaking their smallest displayed choices gives c=288 ln 2. Any direct output of raw length at most N, including one subsequently zero-padded to N, can certify the target only if\n\n`(1\u2212c\u03c1)/2\u22657/16`,\n\nso\n\n`\u03c1\u22641/(8c)=1/(2304 ln 2)`.\n\nIt follows that its integer binary dimension is at most\n\n`floor(N\u03c1\u00b2)\u2264floor(2^30/(2304 ln 2)\u00b2)=421`.\n\nMoreover, the theorem requires\n\n`n\u2080\u226564/\u03c1\u2074\u226564(2304 ln 2)^4`,\n\nwhose integer lower bound is 416,305,086,453,856, larger than the entire target length. Thus even one inner block cannot fit. These are obstructions to a direct finite use of the constants exposed by the published proof, not lower bounds on every possible refinement of the DMW method.\n\nFinally, Theorem 5.1 also assumes an outer code satisfying its Equation (11). The paper establishes existence by averaging over a random outer code and explicitly leaves construction of such an outer code as a goal. Hence the deterministic inner J removes one small randomness issue but does not yield a deterministic target code.\n\nTherefore this is a proved constituent and obstruction result, with no leaderboard submission and no claim to beat 7/1920.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Evaluate the displayed 8-row generator on all 256 messages. The resulting enumerator has a unique zero word and least positive weight 28.",
+      "statement": "The punctured constituent is exactly [63,8,28]\u2082 and is binary linear.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "Apply the MacWilliams identity using both the explicit binomial Krawtchouk sum and its three-term recurrence. Exact shell comparison gives max_i A_i(J\u22a5)/C(63,i)=1/217.",
+      "statement": "Determine the complete dual-shell maximum and the exact niceness threshold.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "DMW Definition 2.2"
+      ],
+      "id": "P3",
+      "proof": "Substitute \u03c1=8/63. Since 2^{-8+63\u03c4}=1/217 at \u03c4=(8\u2212log\u2082217)/63, J is nice for every larger admissible \u03c4, including 1/63 and 1/sqrt(63).",
+      "statement": "J deterministically satisfies the randomized-inner niceness property required by DMW at length 63.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "DMW Definition 2.2"
+      ],
+      "id": "P4",
+      "proof": "For an even-weight code the all-one word is dual; the shell-i=n bound is strictly below one whenever \u03c4<\u03c1. For direct sums of J, the 109t dual words of weight three exceed the required shell bound from t=4 onward.",
+      "statement": "Even-weight constituents and fixed direct-sum scaling cannot supply the required scalable nice family.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P5",
+      "proof": "There are 17,043,521 inner slots and product distance requires outer distance 2^24. Singleton yields at most 266,306 alphabet dimensions, hence 2,130,448 binary dimensions.",
+      "statement": "Ordinary product-distance concatenation with J cannot beat the verified record.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "DMW Theorem 5.1",
+        "DMW Claim 5.4"
+      ],
+      "id": "P6",
+      "proof": "The displayed proof constants force \u03c1\u22641/(2304 ln2). Substitution into rate \u03c1\u00b2 and n\u2080\u226564/\u03c1\u2074 gives respectively dimension at most 421 and n\u2080 at least 416,305,086,453,856>N. The separate explicit-outer hypothesis also remains unmet.",
+      "statement": "The published DMW finite certificate cannot directly instantiate the fixed target.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "The certified [63,8,28] constituent proves that deterministic DMW-nice inner codes exist at small finite length once the even-weight endpoint is punctured. The real bottleneck is scalable all-shell niceness together with a much sharper finite concatenation analysis and an explicit outer code satisfying the DMW product-distribution condition.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json",
+    "research_state/campaign-10-ultra/snapshot.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0001.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0002.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0003.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0005.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0006.json"
+  ],
+  "submission_class": "proof_tool",
+  "theorem_statement": "Let J be the row span of the displayed matrix obtained by deleting coordinates {1,2,3,9,14} from Bouyukliev\u2019s G\u2081. Then J is a deterministic [63,8,28]\u2082 code with exact weight enumerator 1+28z^28+66z^29+50z^30+30z^31+13z^32+20z^36+30z^37+14z^38+2z^39+2z^40. For every 1\u2264i\u226463, A_i(J\u22a5)\u2264C(63,i)/217, with equality only at i=61. Hence its exact DMW niceness threshold is \u03c4*=(8\u2212log\u2082217)/63, and in particular it is 1/sqrt(63)-nice. Nevertheless, direct sums cease to be nice from four copies onward; ordinary product-distance concatenation has binary Singleton cap 2,130,448; and the constants exposed by the published DMW Theorem 5.1 proof force inner length greater than 2^30 and final dimension at most 421 at relative distance 7/16. Thus the constituent is a proved deterministic proof tool, not a target-length construction.",
+  "title": "A deterministic DMW-nice [63,8,28] inner code and finite-length obstruction"
+}

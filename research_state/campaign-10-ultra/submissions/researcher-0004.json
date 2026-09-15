@@ -1,0 +1,267 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "### Outer field and curve\n\nLet `p(X)=X^8+X^4+X^3+X+1` and `K=F_2[theta]/(p)=F_256`. Starting with `F_1=K(x_1)`, define\n\n`F_{i+1}=F_i(z_{i+1})`, `z_{i+1}^16+z_{i+1}=x_i^17`, `x_{i+1}=z_{i+1}/x_i`.\n\nFor the top extension `F_5/F_4`, let `sigma_a(z_5)=z_5+a` for `a in F_16`, and take\n\n`H=F_5^{<sigma_1>}=F_4(y)`, `y=z_5^2+z_5`,\n\nso `y^8+y^4+y^2+y=x_4^17`. This field has exact genus `g=553,601` and exactly `L=8,356,224` rational places.\n\nOrder those places by the Garcia\u2013Stichtenoth classes `A_4,C_4,S^(4)`, then by polynomial-basis residue data and exact local branch data. Select the first\n\n`t=29,191`\n\nplaces in the unramified split class `A_4` as jet places. At such a place `P`, use `u_P=x_1-x_1(P)` as uniformizer and write\n\n`f=f_{P,0}+f_{P,1}u_P+O(u_P^2)`.\n\nThe other `L-t=8,327,033` places receive ordinary evaluations.\n\n### Divisor and message space\n\nLet `P_inf` be the unique place above the pole of `x_1`, and set\n\n`a=1,041,734`, `A=65,466 P_inf`, `K_can=(dx_1)`, `E=K_can-A`.\n\nThen `deg E=a`. The functions `1,x_1,z_2` have distinct sole-pole orders `0,32,768,34,816`, so `ell(A)>=3`. Move `E` by weak approximation to a linearly equivalent divisor `G` whose coefficient at every evaluation place is zero. Riemann\u2013Roch gives\n\n`ell(G)>=a+1-g+ell(A)>=488,137`.\n\nChoose the first `488,137` independent functions in the deterministic height ordering and let their `K`-span be `V`.\n\n### Ordinary inner flag\n\nOver `F_2[beta]/(beta^7+beta+1)`, let `A_15` be the parity extension of the length-127 BCH code with roots `beta^1,...,beta^54`, and let `A_8` be the parity extension of the code with roots `beta^1,...,beta^62`. Then\n\n`A_8=[128,8,>=64]_2` is contained in `A_15=[128,15,>=56]_2`.\n\nFix an isomorphism `K -> A_8` and choose the first two independent quotient representatives `r_1,r_2` of `A_15/A_8`.\n\n### Jet Construction-X flag\n\nUse an independent auxiliary field\n\n`B=F_2[alpha]/(alpha^8+alpha^4+alpha^3+alpha^2+1)`,\n\nwhere `alpha` is primitive. Let `B_119` and `B_111` be the binary length-255 BCH codes with roots respectively `alpha^1,...,alpha^118` and `alpha^1,...,alpha^110`. Extend each by its parity coordinate:\n\n`C_13=ext(B_119)=[256,13,>=120]_2`,\n\n`E_21=ext(B_111)=[256,21,>=112]_2`,\n\nwith `C_13 subset E_21`. Extend the standard basis of `C_13` deterministically to a basis of `E_21`; call the first five quotient representatives `q_1,...,q_5`.\n\nLet `S_7=[7,3,4]_2` be the simplex code obtained by evaluating linear forms on the seven nonzero vectors of `F_2^3`, in binary-integer order. Put\n\n`S_3={(s,s):s in S_7}=[14,3,8]_2`.\n\nPair `q_1,q_2,q_3` with a fixed basis of `S_3`. The resulting graph code\n\n`J_16 subset F_2^{256+14}`\n\nhas parameters `[270,16,>=120]_2`: the zero quotient uses `C_13`, while every nonzero quotient has main weight at least 112 and tail weight 8.\n\nFor the two top directions, pair `q_4,q_5` with\n\n`a_0=(1^7,0^7)=0x007f`, `b_0=(v,v)=0x0387`,\n\nwhere `v` indicates the first three simplex coordinates `001,010,011`. Modulo `S_3`, the three nonzero cosets represented by `a_0,b_0,a_0+b_0` have respective distances `7,6,7`.\n\n### Encoder\n\nThe message is `(f,tau) in V x F_2^2`. At an ordinary place encode `f(P)` in `A_8` and add `tau_1 r_1+tau_2 r_2`.\n\nAt jet place `P_j`, map `(f_{P_j,0},f_{P_j,1}) in K^2` through the fixed bit-basis isomorphism onto `J_16`. Let\n\n`M=[[0,1],[1,1]] in GL(2,2)`.\n\nIf `M^j tau=(e_1,e_2)`, add the 270-bit vector\n\n`e_1(q_4,a_0)+e_2(q_5,b_0)`.\n\nFinally append 30 zero coordinates. Every basis, complement, isomorphism, local parameter, place order, and divisor translate is selected by the stated polynomial-basis, row-reduction, and height-first conventions; there is no random choice.",
+  "dimension": 3905098,
+  "distance_audit": [
+    "For `tau=0`, let `o` be the number of zero ordinary evaluations and `j` the number of jet places where both local coefficients vanish. Divisor degree gives `o+2j<=a`.",
+    "Every nonzero ordinary bottom block has weight at least 64 and every nonzero jet bottom block has weight at least 120. Hence `wt>=64(L-t-o)+120(t-j)>=64(L-a)+56t=469,762,056`.",
+    "For `tau!=0`, every ordinary block lies in a nonzero `A_15/A_8` coset and therefore has weight at least 56.",
+    "At every jet place the main component lies in a nonzero `E_21/C_13` quotient direction and contributes at least 112. The three auxiliary quotient separations are `7,6,7`.",
+    "Since `29,191=3*9,730+1`, cycling the three nonzero labels gives every nonzero top message auxiliary weight at least `20*9,730+6=194,606`. Thus its total weight is at least `56(L-t)+112t+194,606=469,777,846`.",
+    "The certified minimum-distance lower bound is therefore `min(469,762,056,469,777,846)=469,762,056`, eight above the campaign target."
+  ],
+  "explicitness_audit": [
+    "The outer constant field is fixed by a displayed irreducible polynomial and ordered polynomial basis.",
+    "Every tower field, intermediate subgroup, and defining equation is displayed. The exact rational places are classified and deterministically ordered.",
+    "Jet places are the first 29,191 places in a specified split class; their uniformizers are explicitly `x_1-x_1(P)`.",
+    "The divisor translate is the first exact weak-approximation solution in a finite-shell enumeration. The selected Riemann\u2013Roch subspace has exactly 488,137 `K`-dimensions.",
+    "All four cyclic constituents are defined by displayed consecutive root sets over displayed primitive-field presentations. Complements are selected by canonical row reduction.",
+    "The repeated simplex tail, its two quotient vectors, the order-three balancing matrix, coordinate orders, and 30 right-padding coordinates are explicit.",
+    "All searches and enumerations use exact finite-field or divisor arithmetic. No random sampling, probabilistic existence claim, or hidden asymptotic constant occurs."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The first Garcia\u2013Stichtenoth tower is specialized to `q=16` over `F_{q^2}=F_256`.",
+      "result": "The tower equations, rational-place classes, complete splitting, exceptional total ramification, and unique infinite place used in the construction hold.",
+      "source": "[A. Garcia and H. Stichtenoth, A Tower of Artin\u2013Schreier Extensions of Function Fields Attaining the Drinfeld\u2013Vl\u0103du\u0163 Bound, Inventiones Mathematicae 121 (1995), 211\u2013222](https://link.springer.com/article/10.1007/BF01884295).",
+      "used_for": "Tower definition and exact rational-place decomposition."
+    },
+    {
+      "hypotheses": "Apply the full-level genus formula to the first tower with `q=16` at levels four and five.",
+      "result": "`g(F_4)=67,185` and `g(F_5)=1,109,505`.",
+      "source": "[S. Ballet, J. Pieltant, M. Rambaud and J. Sijsling, On Some Bounds for Symmetric Tensor Rank of Multiplication in Finite Fields, Contemporary Mathematics 686 (2017), Proposition 2.1](https://perso.telecom-paristech.fr/rambaud/articles/BPRS.pdf).",
+      "used_for": "Deriving the exact genus `553,601` of the degree-eight intermediate field."
+    },
+    {
+      "hypotheses": "Finite separable global function fields over a perfect finite field.",
+      "result": "Hilbert's different formula, Hurwitz, weak approximation, Riemann\u2013Roch, and divisor-based evaluation bounds apply.",
+      "source": "[H. Stichtenoth, Algebraic Function Fields and Codes, 2nd edition, Springer, 2009](https://link.springer.com/book/10.1007/978-3-540-76878-4).",
+      "used_for": "Genus, divisor moving, message dimension, injectivity, and zero-multiplicity counting."
+    },
+    {
+      "hypotheses": "Binary primitive BCH codes defined by consecutive powers of a primitive root.",
+      "result": "The BCH designed-distance bound and standard parity-extension argument apply.",
+      "source": "[W. C. Huffman and V. Pless, Fundamentals of Error-Correcting Codes, Chapter 5, Cambridge University Press](https://www.cambridge.org/core/books/fundamentals-of-errorcorrecting-codes/BF3AFDFB539C3C023BBD9DCBA4CDA761).",
+      "used_for": "The `[128,8,64]`, `[128,15,56]`, `[256,13,120]`, and `[256,21,112]` constituent bounds."
+    },
+    {
+      "hypotheses": "The function field is provided by an effective finite presentation over a finite field.",
+      "result": "Divisors and Riemann\u2013Roch spaces can be computed deterministically.",
+      "source": "[F. Hess, Computing Riemann\u2013Roch Spaces in Algebraic Function Fields and Related Topics, Journal of Symbolic Computation 33 (2002), 425\u2013445](https://www.sciencedirect.com/science/article/pii/S0747717101905139).",
+      "used_for": "Algorithmic recovery of the divisor translate, `L(G)`, and an encoder."
+    }
+  ],
+  "minimum_distance": 469762056,
+  "next_tasks": [
+    "Write this proof into `proofs/` and add an `under-review` record. The current read-only workspace prevented repository edits.",
+    "Obtain two independent whole-proof verifier acceptances before any `verified` status.",
+    "Run `node scripts/validate-data.mjs` and the dashboard build before publication.",
+    "Compute `ell(65,466 P_inf)` exactly. The proof only uses `ell>=3`; a larger value could improve the dimension.",
+    "Search for a multiplicity-two inner flag with effective slope `(d-64)/(b-128)>0.4129`, or a stronger special-divisor/order-bound argument. Either could close the remaining ceiling gap."
+  ],
+  "obstructions": [
+    "The rate does not cross `7/1920`. The strict integer threshold is dimension `3,914,684`, so this construction remains 9,586 dimensions short.",
+    "The exact rate gap is `7/1920-3,905,098/2^30=71,893/8,053,063,680\u22488.92834e-6`.",
+    "With the present top two bits, crossing by Riemann\u2013Roch alone would require `488,137+1,199=489,336` outer dimensions. Since the current formula is `488,134+ell(65,466P_inf)`, this would require `ell(65,466P_inf)>=1,202`; only three independent functions are presently certified. Equality at three is not proved.",
+    "The 14-coordinate bottom tail is Griesmer-minimal for a `[14,3,8]` code. Within this displayed Construction-X flag, an exact finite coset computation also blocks a third balanced top bit; this is a local obstruction, not a universal impossibility theorem.",
+    "The mechanism genuinely leaves the vanilla one-symbol GS/RM template by using multiplicity-two evaluations and a heterogeneous Construction-X flag, but its proved finite rate still lies below that template's asymptotic envelope."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Binary target",
+      "value": "`n=2^30=1,073,741,824`, `d_*=469,762,048`"
+    },
+    {
+      "derivation": "Exact intermediate-field calculation.",
+      "quantity": "Outer geometry",
+      "value": "`g=553,601`, `L=8,356,224` rational places"
+    },
+    {
+      "derivation": "`2^30-128L`.",
+      "quantity": "Length available beyond ordinary blocks",
+      "value": "`4,145,152` bits"
+    },
+    {
+      "derivation": "Parity-extended BCH Construction X.",
+      "quantity": "Jet inner bottom code",
+      "value": "`J_16=[270,16,>=120]_2`"
+    },
+    {
+      "derivation": "Each jet replaces a 128-bit ordinary block and costs `270-128=142` bits.",
+      "quantity": "Number of jet places",
+      "value": "`t=floor(4,145,152/142)=29,191`"
+    },
+    {
+      "derivation": "`4,145,152-142t`.",
+      "quantity": "Zero padding",
+      "value": "`30` bits"
+    },
+    {
+      "derivation": "`L-d_*/64=1,016,192`, then add `floor((120-64)t/64)=floor(7t/8)=25,542`.",
+      "quantity": "Outer divisor degree",
+      "value": "`a=1,041,734`"
+    },
+    {
+      "derivation": "`2g-2-a`.",
+      "quantity": "Complementary special-divisor degree",
+      "value": "`65,466`"
+    },
+    {
+      "derivation": "Sole-pole orders `0,32,768,34,816`.",
+      "quantity": "Certified speciality",
+      "value": "`ell(65,466P_inf)>=3`"
+    },
+    {
+      "derivation": "`a+1-g+3`.",
+      "quantity": "Selected outer dimension over `F_256`",
+      "value": "`K_out=488,137`"
+    },
+    {
+      "derivation": "Two balanced quotient directions are added globally.",
+      "quantity": "Exact binary dimension",
+      "value": "`k=8*488,137+2=3,905,098`"
+    },
+    {
+      "derivation": "`128(L-t)+270t+30`.",
+      "quantity": "Exact binary length",
+      "value": "`1,073,741,824`"
+    },
+    {
+      "derivation": "`64(L-a)+56t`.",
+      "quantity": "Bottom-layer distance",
+      "value": "`469,762,056`"
+    },
+    {
+      "derivation": "`t=3*9,730+1` and side-coset distances sum to 20 per full cycle.",
+      "quantity": "Top auxiliary contribution",
+      "value": "`194,606`"
+    },
+    {
+      "derivation": "`56(L-t)+112t+194,606`.",
+      "quantity": "Top-layer distance",
+      "value": "`469,777,846`"
+    },
+    {
+      "derivation": "Minimum of the two nonzero-message cases.",
+      "quantity": "Certified minimum distance",
+      "value": "`d_min>=469,762,056`"
+    },
+    {
+      "derivation": "`3,905,098/2^30`, reduced by two.",
+      "quantity": "Certified rate",
+      "value": "`1,952,549/536,870,912\u22480.003636905923485756`"
+    },
+    {
+      "derivation": "`3,905,098-3,688,448`.",
+      "quantity": "Gain over current verified dimension",
+      "value": "`216,650`"
+    },
+    {
+      "derivation": "`ceil((7/1920)2^30)-3,905,098`.",
+      "quantity": "Remaining strict-ceiling gap",
+      "value": "`9,586` binary dimensions"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nThere is a deterministic binary linear code\n\n`C subset F_2^1,073,741,824`\n\nwith dimension `3,905,098` and minimum distance at least `469,762,056`.\n\n### 1. Exact outer function field\n\nFor `p(X)=X^8+X^4+X^3+X+1`, direct reduction gives `X^256=X mod p` and `gcd(p,X^16+X)=1`; Rabin's criterion proves that `p` is irreducible. Every tower equation has derivative one in its newly adjoined variable, so the tower is separable.\n\nThe full-level genus formula gives\n\n`g(F_4)=67,185`, `g(F_5)=1,109,505`.\n\nConsequently\n\n`deg Diff(F_5/F_4)=(2g(F_5)-2)-16(2g(F_4)-2)=69,120`.\n\nFor `c in F_16^*`, the scaling `x_i -> c x_i`, `z_i -> c^2 z_i` preserves the tower and conjugates the fifteen nonidentity translations transitively. Hilbert's different formula therefore assigns each nonidentity translation contribution `69,120/15=4,608`. Since `F_5/H` is the degree-two extension generated by `sigma_1`,\n\n`deg Diff(F_5/H)=4,608`.\n\nHurwitz now gives\n\n`2,219,008=2(2g(H)-2)+4,608`,\n\nhence `g(H)=553,601`.\n\nAt level `F_4`, the exact rational-place classes have sizes\n\n`|A_4|=(256-1)16^3=1,044,480`, `|C_4|=16`, `|S^(4)|=256`.\n\nThe first two classes split completely and the last is totally ramified. Thus\n\n`N_1(H)=8(1,044,480+16)+256=8,356,224=L`.\n\n### 2. The divisor space\n\nThe infinite place is totally ramified. Since `[H:F_1]=32,768`, `x_1` has sole-pole order `32,768`. In the second tower field, `z_2` has pole order 17, and `[H:F_2]=2,048`; hence its pullback has sole-pole order `34,816`. Therefore `1,x_1,z_2` are independent elements of `L(65,466P_inf)` and\n\n`ell(65,466P_inf)>=3`.\n\nLet `K_can=(dx_1)`, `A=65,466P_inf`, and `E=K_can-A`. Since `2g-2=1,107,200`,\n\n`deg E=1,107,200-65,466=1,041,734=a`.\n\nFor every evaluation place `P`, weak approximation supplies a principal translate `G=E+(h)` with `v_P(G)=0`. The prescribed height-first enumeration makes the choice of `h` deterministic. Since `K_can-G` is linearly equivalent to `A`, Riemann\u2013Roch yields\n\n`ell(G)=a+1-g+ell(K_can-G)`\n\n`>=1,041,735-553,601+3=488,137`.\n\nChoose a `K`-linear subspace `V subset L(G)` of exactly that dimension. All its functions are regular at every evaluation place.\n\n### 3. Inner-code parameters\n\nFor length 127, the binary cyclotomic cosets meeting exponents `1,...,54` have total degree 112; adjoining the coset first met at exponent 55 raises the degree to 119 for exponents `1,...,62`. The BCH bound and parity extension therefore give a nested flag\n\n`A_8=[128,8,>=64]_2 subset A_15=[128,15,>=56]_2`.\n\nFor length 255, the unions of binary cyclotomic cosets meeting `1,...,110` and `1,...,118` have sizes 234 and 242. Thus the corresponding cyclic codes have dimensions 21 and 13 and designed distances 111 and 119. Extending by parity makes every weight even, giving\n\n`C_13=[256,13,>=120]_2 subset E_21=[256,21,>=112]_2`.\n\nChoose quotient representatives `q_1,...,q_5` independent modulo `C_13`. Let `S_7` be the `[7,3,4]` simplex code and `S_3={(s,s):s in S_7}`. Pairing `q_1,q_2,q_3` with a basis of `S_3` gives a 16-dimensional graph code `J_16`. If the quotient label is zero, a nonzero graph word lies in `C_13` and has weight at least 120. If the quotient label is nonzero, its 256-coordinate component is a nonzero word of `E_21` and its 14-coordinate component is a nonzero word of `S_3`; its weight is at least `112+8=120`. Hence\n\n`J_16=[270,16,>=120]_2`.\n\nFor the top quotient, let `v` indicate the Fano line `{001,010,011}`. Direct evaluation of the eight simplex words shows that `wt(v+s)` is 3 for seven choices of `s in S_7` and 7 for the remaining choice. With\n\n`a_0=(1^7,0^7)`, `b_0=(v,v)`,\n\nwe obtain\n\n`d(a_0,S_3)=7`, `d(b_0,S_3)=6`, `d(a_0+b_0,S_3)=7`.\n\nIndeed, words in the first and third cosets have the form `(w,1+w)` up to swapping, and hence have constant weight seven; the second coset has weights twice those of `v+S_7`.\n\n### 4. Linearity, length, and dimension\n\nAll evaluation, local-expansion, inner-encoding, quotient-section, and balancing maps are `F_2`-linear, so the image is a binary linear code.\n\nThe exact unpadded length is\n\n`128(L-t)+270t=128L+142t=1,073,741,794`.\n\nAppending 30 zeros gives `n=2^30`.\n\nTo prove injectivity, first suppose the encoded word is zero. A nonzero top message has a nonzero `A_15/A_8` label at every ordinary place, so the top message must be zero. The remaining zero word implies that `f` vanishes at every ordinary place and to order at least two at every jet place. Its certified zero divisor then has degree at least\n\n`(L-t)+2t=L+t=8,385,415>a`,\n\nwhich is impossible for nonzero `f in L(G)`. Thus `f=0`. The dimension is therefore\n\n`8 dim_K(V)+2=8*488,137+2=3,905,098`.\n\n### 5. Distance when the top message is zero\n\nLet `o` count ordinary places where `f(P)=0`, and let `j` count jet places where both local coefficients vanish. Since `G` has coefficient zero at these places,\n\n`(f)+G-Z>=0`, `deg Z>=o+2j`,\n\nso `o+2j<=a` for nonzero `f`.\n\nEvery remaining ordinary block has weight at least 64 and every remaining jet block has weight at least 120. Therefore\n\n`wt>=64(L-t-o)+120(t-j)`\n\n`=64(L-t)+120t-(64o+120j)`\n\n`>=64(L-t)+120t-64a`\n\n`=64(L-a)+56t`\n\n`=468,127,360+1,634,696`\n\n`=469,762,056`.\n\nThe inequality uses `64o+120j<=64(o+2j)`.\n\n### 6. Distance when the top message is nonzero\n\nAt every ordinary place, the word lies in a nonzero coset of `A_8` inside `A_15`, so it has weight at least 56.\n\nAt jet place `P_j`, the two quotient directions are permuted by `M^j`. Since `M` has order three, each nonzero top message encounters the three nonzero labels once per three consecutive jet places. The 256-coordinate main component is always nonzero modulo the bottom graph and contributes at least 112. The auxiliary separations are `7,6,7`.\n\nBecause `t=3*9,730+1`, the total auxiliary contribution for every nonzero top message is at least\n\n`20*9,730+6=194,606`.\n\nHence\n\n`wt>=56(L-t)+112t+194,606`\n\n`=466,313,848+3,269,392+194,606`\n\n`=469,777,846`.\n\nCombining the two cases proves `d_min(C)>=469,762,056`.\n\n### 7. Rate and ceiling comparison\n\nThe exact rate is\n\n`R=3,905,098/1,073,741,824=1,952,549/536,870,912`\n\n`\u22480.003636905923485756`.\n\nThis improves the verified dimension `3,688,448` by `216,650`. However,\n\n`7/1920-R=71,893/8,053,063,680>0`.\n\nThus the construction does not beat the ceiling. Its multiplicity-two evaluations and heterogeneous Construction-X flag genuinely leave the vanilla one-level GS/RM parameter formula, but the proved finite rate remains below `7/1920`.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Rabin's criterion verifies the displayed degree-eight field. The recursive equations are separable, and the fixed-field equation follows from `y=z_5^2+z_5`.",
+      "statement": "The outer field, tower, and intermediate field are deterministic and well-defined.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "Garcia\u2013Stichtenoth tower results",
+        "Hilbert different formula",
+        "Hurwitz"
+      ],
+      "id": "P2",
+      "proof": "The full-step different has degree 69,120. Scaling conjugates all fifteen nonidentity translations, so each contributes 4,608. Hurwitz for `F_5/H` gives genus 553,601. Exact split and ramified classes give 8,356,224 rational places.",
+      "statement": "The intermediate field has exact genus 553,601 and exactly 8,356,224 rational places.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "Weak approximation",
+        "Riemann\u2013Roch"
+      ],
+      "id": "P3",
+      "proof": "The three displayed functions certify `ell(65,466P_inf)>=3`. Moving `K_can-65,466P_inf` off all evaluation places and applying Riemann\u2013Roch gives at least 488,137 independent `K`-messages.",
+      "statement": "There is a deterministic admissible divisor `G` of degree 1,041,734 and an exact 488,137-dimensional selected message space.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "BCH bound"
+      ],
+      "id": "P4",
+      "proof": "Cyclotomic-coset counts give the exact constituent dimensions; parity extension changes the odd designed-distance bounds 63,55,119,111 to even lower bounds 64,56,120,112.",
+      "statement": "The ordinary nested BCH flag has parameters `[128,8,64] subset [128,15,56]`, and the jet main flag has `[256,13,120] subset [256,21,112]`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "The repeated simplex has parameters `[14,3,8]`. The graph construction gives `[270,16,120]`. Direct Fano-line weight calculation gives quotient separations 7,6,7 for the two top directions.",
+      "statement": "The jet Construction-X flag and its two top quotient directions have the claimed weights.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "The encoder is binary linear. Its raw length is 1,073,741,794 and it receives 30 fixed zeros. Injectivity follows from the ordinary quotient when the top message is nonzero and from `L+t>a` when it is zero.",
+      "statement": "The final code has exact length 1,073,741,824 and exact dimension 3,905,098.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "id": "P7",
+      "proof": "For zero top message, `o+2j<=a` and block weights give 469,762,056. For nonzero top message, the order-three quotient cycle gives 469,777,846. The smaller bound is the certified minimum distance.",
+      "statement": "Every nonzero codeword has weight at least 469,762,056.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P6",
+        "P7"
+      ],
+      "id": "P8",
+      "proof": "Exact fraction arithmetic gives the displayed rate, its 216,650-dimension improvement over the verified record, and its positive gap below `7/1920`.",
+      "statement": "This is a new leaderboard candidate but not a beyond-ceiling result.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.003636905923485756,
+  "research_direction": "Multiplicity-two Garcia\u2013Stichtenoth evaluation with a nested-BCH Construction-X inner code and a balanced two-bit generalized-concatenation layer.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0001.json"
+  ],
+  "submission_class": "ceiling_optimization",
+  "theorem_statement": "There exists a deterministic explicit binary linear code `[1,073,741,824,3,905,098,>=469,762,056]_2`. It improves the current verified dimension by 216,650 but remains below rate `7/1920`.",
+  "title": "Two-jet GS Construction X with dimension 3,905,098"
+}

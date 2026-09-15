@@ -10,8 +10,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T00:56:12Z"
   },
   {
     "attempts": 1,
@@ -24,8 +24,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T00:14:36Z"
   },
   {
     "attempts": 1,
@@ -38,8 +38,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T00:55:07Z"
   },
   {
     "attempts": 1,
@@ -52,8 +52,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T01:55:05Z"
   },
   {
     "attempts": 1,
@@ -66,8 +66,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T01:21:54Z"
   },
   {
     "attempts": 1,
@@ -80,8 +80,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T01:15:48Z"
   },
   {
     "attempts": 1,
@@ -94,8 +94,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T01:51:47Z"
   },
   {
     "attempts": 1,
@@ -108,8 +108,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T01:39:50Z"
   },
   {
     "attempts": 1,
@@ -122,8 +122,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T02:10:42Z"
   },
   {
     "attempts": 1,
@@ -136,8 +136,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T02:11:39Z"
   },
   {
     "attempts": 1,
@@ -150,8 +150,8 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "literature",
-    "status": "running",
-    "updated_at": "2026-09-15T00:05:10Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
     "attempts": 0,
@@ -224,7 +224,7 @@
     "updated_at": "2026-09-15T00:02:59Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Optimize the exact finite n=2^30 GS(F_256)+RM(1,7) construction up to its vanilla 7/1920 asymptotic envelope; prove every tower, divisor, floor, and padding choice and quantify the remaining finite-size loss.",
@@ -234,11 +234,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Prove and audit the GS+Hadamard template ceiling over every even extension degree m, then identify the weakest hypothesis whose replacement could permit rate greater than 7/1920.",
@@ -248,11 +248,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "succeeded",
+    "updated_at": "2026-09-15T02:47:52Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Find an explicit binary inner code or structured family that changes the one-level concatenation optimization enough to beat 7/1920, and instantiate it exactly at n=2^30.",
@@ -262,11 +262,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Develop a multilevel or generalized concatenation construction that provably crosses 7/1920 while keeping a human-readable minimum-distance proof.",
@@ -276,11 +276,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Use trace codes, subfield subcodes, or algebraic alphabet reduction to retain more of a GS outer code's dimension than Hadamard concatenation and prove the exact binary parameters.",
@@ -290,11 +290,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Instantiate an epsilon-balanced or expander-amplified explicit construction at epsilon=1/8 and n=2^30, exposing all constants and exact shortening or padding losses.",
@@ -304,11 +304,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Investigate deterministic replacements for random inner codes in low-rate concatenation theorems; produce a symbolic constituent and a proof, not a sampling argument.",
@@ -318,11 +318,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Search alternative explicit AG towers, divisors, or algebraic code operations whose binary reduction escapes the vanilla GS+Hadamard rate formula.",
@@ -332,11 +332,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Combine explicit base codes with expander distance amplification or direct-sum/product operations to cross 7/1920 at exact length, proving the weight propagation lemma.",
@@ -346,11 +346,11 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "created_at": "2026-09-15T00:09:37Z",
     "dependency": null,
     "direction": "Synthesize reusable proved lemmas from the repository into a genuinely beyond-ceiling architecture; attack the strongest missing lemma rather than merely proposing it.",
@@ -360,7 +360,7 @@
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
-    "status": "queued",
-    "updated_at": "2026-09-15T00:09:37Z"
+    "status": "running",
+    "updated_at": "2026-09-15T02:35:15Z"
   }
 ]

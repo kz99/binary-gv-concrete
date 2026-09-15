@@ -1,0 +1,259 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard construction is claimed. The proved result is an obstruction theorem for the standard asymptotic GS\u2013Hadamard certificate. As a scope witness, the deterministic code \\(\\{(c,c):c\\in\\operatorname{RM}(1,29)\\}\\) has parameters \\([2^{30},30,2^{29}]_2\\) and shows that \\(R_{\\mathrm{template}}(m)\\) is not a pointwise finite-length upper bound, even at a GS rational-function-field level.",
+  "dimension": null,
+  "distance_audit": [
+    "Every nonzero word of \\(\\operatorname{RM}(1,m-1)\\) has weight at least \\(2^{m-2}\\): nonconstant affine functions are balanced, while the nonzero constant function has full weight.",
+    "If a nonzero outer word has at least \\(D\\) nonzero symbols, injectivity of the inner map gives at least \\(D\\) disjoint nonzero inner blocks, hence binary weight at least \\(D d_{\\mathrm{in}}\\).",
+    "Zero padding preserves dimension and absolute minimum distance but decreases relative distance; the occupied-length fraction \\(\\lambda\\) is included in the proof.",
+    "For \\(m=8\\), the exact required outer distance is \\(469,762,048/64=7,340,032\\).",
+    "The finite \\(m=30\\) witness has distance \\(2\\cdot2^{28}=2^{29}>469,762,048\\), but dimension only 30.",
+    "Designed outer distance and product distance are lower bounds. Stronger actual-distance or symbol-distribution arguments are outside the ceiling theorem."
+  ],
+  "explicitness_audit": [
+    "The ceiling proof and all finite arithmetic are deterministic and symbolic; no random existence or sampled codewords are used.",
+    "The \\(m=30\\) scope witness is specified directly as a doubled Reed\u2013Muller code and requires no unspecified field representation.",
+    "No special divisor, actual-distance bonus, or additional evaluation place is assumed to exist.",
+    "No repository files were modified; this is an obstruction result rather than a leaderboard submission.",
+    "The BPRS finite-genus bound is applied with \\(q=16=2^4\\), \\(p=2\\), \\(r=4\\), \\(k=4\\), and \\(s=3\\), satisfying its stated hypotheses."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "For a prime power q, the tower is defined over F_{q^2}, and its rational-place/genus ratio tends to q\u22121.",
+      "result": "An explicit Artin\u2013Schreier tower attaining the Drinfeld\u2013Vl\u0103du\u0163 bound.",
+      "source": "[A. Garcia and H. Stichtenoth, Inventiones Mathematicae 121 (1995)](https://doi.org/10.1007/BF01884295).",
+      "used_for": "The asymptotic genus penalty \\(1/(2^{m/2}-1)\\)."
+    },
+    {
+      "hypotheses": "Evaluation places are distinct and disjoint from G, with deg G below the evaluation length; Clifford additionally assumes an effective special divisor.",
+      "result": "AG evaluation dimension and designed-distance formulas, Riemann\u2013Roch \\(\\ell(G)=\\deg G+1-g+i(G)\\), and Clifford's bound \\(\\ell(G)\\le \\deg(G)/2+1\\).",
+      "source": "[H. Stichtenoth, Algebraic Function Fields and Codes, 2nd ed.](https://books.google.com/books/about/Algebraic_Function_Fields_and_Codes.html?id=RfVDAAAAQBAJ), Chapters 1\u20132, especially Theorem 1.6.13.",
+      "used_for": "The bare certificate, its logical scope, and the special-divisor escape window."
+    },
+    {
+      "hypotheses": "The densified GS step has q=p^r\u22654, k\u22651, and 0\u2264s\u2264r.",
+      "result": "Proposition 2.1 gives \\((g_k-1)p^s+1\\le g_{k,s}\\le g_{k+1}/p^{r-s}+1\\).",
+      "source": "[S. Ballet, J. Pieltant, M. Rambaud, and J. Sijsling, Proposition 2.1](https://perso.telecom-paristech.fr/rambaud/articles/BPRS.pdf).",
+      "used_for": "The finite lower bound \\(g_{4,3}\\ge537,473\\), proving that exact-genus sharpening alone cannot cross at the current level."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Compute the exact Weierstrass semigroup of the distinguished place at level \\((4,3)\\) and hence \\(\\ell(1,015,808P_\\infty)\\). A ceiling crossing requires \\(K\\ge489,336\\).",
+    "Seek certified actual-distance gains or additional usable rational places at the same level; even the smallest genus allowed by BPRS leaves an 11,000-dimensional outer deficit under bare Riemann\u2013Roch.",
+    "Audit other finite GS levels using the exact interface \\(L\\le8,388,608\\), \\(D\\ge7,340,032\\), and \\(K\\ge489,336\\).",
+    "Test structured inner codes against \\(\\Phi_m(\\ell,d)=\\frac m\\ell(1-\\gamma_m-\\frac{7\\ell}{16d})_+\\); a fixed-length \\([128,8]\\) replacement cannot improve on distance 64.",
+    "Add the ceiling lemma and finite escape criterion to the research section of data/records.json when write access is available."
+  ],
+  "obstructions": [
+    "The displayed \\(R_{\\mathrm{template}}(m)\\) is an asymptotic certificate envelope, not a finite or universal code-theoretic upper bound.",
+    "There is no globally weakest hypothesis under logical implication: outer-rate, actual-distance, concatenated-distance, inner-code, and alphabet-reduction improvements are independent.",
+    "Holding the \\(m=8\\) inner code and product analysis fixed, crossing requires an outer \\(\\mathbb F_{256}\\) point strictly above \\((R,\\Delta)=(7/120,7/8)\\). No such outer code is proved here.",
+    "The verified finite certificate is 28,280 outer dimensions below the first \\(m=8\\) ceiling crossing.",
+    "At the current \\((4,3)\\) level, improving only the genus estimate cannot suffice: BPRS forces a residual deficit of at least 11,000 outer dimensions.",
+    "At fixed inner length 128, averaging forces every binary \\([128,8,d]\\) code to have \\(d\\le64\\); the RM inner code is already optimal for that length."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target",
+      "quantity": "Binary block length",
+      "value": "1,073,741,824 = 2^30"
+    },
+    {
+      "derivation": "(7/16)\u00b72^30",
+      "quantity": "Required minimum distance",
+      "value": "469,762,048"
+    },
+    {
+      "derivation": "m=8",
+      "quantity": "Optimal template alphabet and inner code",
+      "value": "F_256 and [128,8,64]_2"
+    },
+    {
+      "derivation": "1/(2^(8/2)\u22121)",
+      "quantity": "Asymptotic genus penalty",
+      "value": "1/15"
+    },
+    {
+      "derivation": "(8/128)(1/8\u22121/15)",
+      "quantity": "Template maximum",
+      "value": "7/1920 = 0.0036458333333333333"
+    },
+    {
+      "derivation": "(7/1920)\u00b72^30",
+      "quantity": "Ceiling dimension as a real number",
+      "value": "3,914,683 + 11/15"
+    },
+    {
+      "derivation": "Smallest integer strictly above the real ceiling",
+      "quantity": "General crossing dimension",
+      "value": "3,914,684"
+    },
+    {
+      "derivation": "m=8 dimensions are multiples of 8",
+      "quantity": "First m=8 crossing dimension",
+      "value": "3,914,688 = 8\u00b7489,336"
+    },
+    {
+      "derivation": "2^30/128",
+      "quantity": "Available m=8 outer slots T",
+      "value": "8,388,608"
+    },
+    {
+      "derivation": "469,762,048/64",
+      "quantity": "Required m=8 outer distance",
+      "value": "7,340,032"
+    },
+    {
+      "derivation": "T\u22128,355,840",
+      "quantity": "Baseline outer-slot deficit p",
+      "value": "32,768"
+    },
+    {
+      "derivation": "p+554,753\u22121",
+      "quantity": "Certified aggregate baseline loss",
+      "value": "587,520"
+    },
+    {
+      "derivation": "T/8\u2212489,336",
+      "quantity": "Largest aggregate loss permitting a crossing",
+      "value": "559,240"
+    },
+    {
+      "derivation": "587,520\u2212559,240",
+      "quantity": "Improvement needed over the current certificate",
+      "value": "28,280 outer = 226,240 binary dimensions"
+    },
+    {
+      "derivation": "GS genus formula at q=16,k=4",
+      "quantity": "g_4",
+      "value": "67,185"
+    },
+    {
+      "derivation": "(g_4\u22121)2^3+1",
+      "quantity": "BPRS lower bound on g_(4,3)",
+      "value": "537,473"
+    },
+    {
+      "derivation": "1,015,808+1\u2212537,473",
+      "quantity": "Largest possible bare-RR credit at the fixed level",
+      "value": "478,336"
+    },
+    {
+      "derivation": "489,336\u2212478,336",
+      "quantity": "Minimum non-genus improvement still required",
+      "value": "11,000 outer dimensions"
+    },
+    {
+      "derivation": "Plotkin averaging: 255d\u2264128\u00b7128",
+      "quantity": "Maximum distance of a binary [128,8] inner code",
+      "value": "64"
+    },
+    {
+      "derivation": "Clifford at a/L\u21921/8 and g/L\u21921/15",
+      "quantity": "Possible normalized speciality window at m=8",
+      "value": "0 < limsup i(G)/L \u2264 1/240"
+    }
+  ],
+  "proof_markdown": "### The restricted certificate\n\nLet \\(m\\in2\\mathbb Z_{>0}\\) and put\n\\[\nh=2^{m-1},\\qquad d_0=2^{m-2}=h/2,\\qquad q=2^{m/2},\\qquad \\gamma_m=\\frac1{q-1}.\n\\]\nThe code \\(\\operatorname{RM}(1,m-1)\\) consists of affine functions on \\(\\mathbb F_2^{m-1}\\). It has parameters \\([h,m,d_0]_2\\): every nonconstant affine function is balanced, and the nonzero constant function has weight \\(h\\).\n\nConsider outer AG evaluation codes of length \\(L_j\\), genus \\(g_j\\), and divisor degree \\(a_j<L_j\\). Concatenate symbolwise with this RM code and append zeros to a binary length \\(n_j\\ge hL_j\\). Define\n\\[\n\\lambda_j=\\frac{hL_j}{n_j}\\le1.\n\\]\nThe vanilla certificate credits only\n\\[\nK_j^{\\rm RR}=[a_j+1-g_j]_+,\n\\qquad D_j^{\\rm des}=L_j-a_j,\n\\]\nand uses the product distance \\(d_0D_j^{\\rm des}\\).\n\nThe target distance implies\n\\[\n\\frac h2(L_j-a_j)\\ge\\frac7{16}n_j,\n\\]\nso\n\\[\n\\frac{a_j}{L_j}\\le1-\\frac7{8\\lambda_j}.\n\\tag{1}\n\\]\nConsequently the credited binary rate is bounded by\n\\[\n\\begin{aligned}\nR_j^{\\rm cert}\n&=\\frac{m[a_j+1-g_j]_+}{n_j}\\\\\n&\\le\\frac mh\\left[\n\\lambda_j\\left(1-\\frac{g_j-1}{L_j}\\right)-\\frac78\n\\right]_+.\n\\end{aligned}\n\\tag{2}\n\\]\nFor a GS sequence, \\((g_j-1)/L_j\\to\\gamma_m\\). Since \\(\\lambda_j\\le1\\), (2) yields\n\\[\n\\limsup_jR_j^{\\rm cert}\n\\le\n\\frac m{2^{m-1}}\n\\left(\\frac18-\\frac1{2^{m/2}-1}\\right)_+.\n\\tag{3}\n\\]\nConversely, taking an asymptotically full GS evaluation set, no padding, and \\(a_j=\\lfloor L_j/8\\rfloor\\) approaches the right side whenever it is positive. Thus (3) is the exact envelope of this restricted asymptotic accounting.\n\n### Optimization over every even extension degree\n\nWrite \\(m=2s\\). The parenthesis in (3) is positive precisely when \\(2^s-1>8\\), hence precisely when \\(s\\ge4\\). Therefore the expression is zero for \\(m=2,4,6\\). At \\(m=8\\),\n\\[\nR_{\\rm template}(8)\n=\\frac8{128}\\left(\\frac18-\\frac1{15}\\right)\n=\\frac1{16}\\frac7{120}\n=\\frac7{1920}.\n\\]\nFor even \\(m\\ge10\\),\n\\[\nR_{\\rm template}(m)<\\frac m{2^{m+2}}.\n\\]\nThe comparison sequence decreases along even integers because\n\\[\n\\frac{(m+2)/2^{m+4}}{m/2^{m+2}}=\frac{m+2}{4m}<1.\n\\]\nThus\n\\[\nR_{\\rm template}(m)<\\frac{10}{2^{12}}=\frac5{2048}<\\frac7{1920}.\n\\]\nThis proves that \\(m=8\\) is the unique maximizer.\n\n### Why this is not a finite upper bound\n\nRiemann\u2013Roch actually gives\n\\[\n\\ell(G)=\\deg G+1-g+i(G),\\qquad i(G)=\\ell(K-G)\\ge0.\n\\tag{4}\n\\]\nThus bare RR is a lower dimension guarantee, not an upper bound on the evaluation code. Similarly, \\(L-\\deg G\\) and the concatenation product are only lower bounds on actual distance. Finally, the GS ratio is asymptotic and supplies no pointwise inequality \\((g-1)/L\\ge1/(q-1)\\).\n\nThere is even a finite pointwise counterexample inside the ordinary framework. At \\(m=30\\), take two rational evaluation places on the rational first tower level and \\(G=0\\). The outer code is \\([2,1,2]_{2^{30}}\\). Concatenating with \\(\\operatorname{RM}(1,29)=[2^{29},30,2^{28}]_2\\) gives\n\\[\n[2^{30},30,2^{29}]_2.\n\\]\nBut\n\\[\n2^{30}R_{\\rm template}(30)\n=60\\left(\\frac18-\\frac1{32767}\\right)<\\frac{15}{2}<30.\n\\]\nHence the displayed function is not a finite per-\\(m\\) upper bound. The witness remains far below the global \\(7/1920\\) score.\n\n### Sharp holding-all-else-fixed escape\n\nKeep \\(m=8\\), the \\([128,8,64]\\) inner code, ordinary unpadded concatenation, and product-distance analysis. If an outer family has rate \\(\\rho\\) and relative distance \\(\\Delta\\), then\n\\[\nR_{\\rm bin}=\\frac\\rho{16},\n\\qquad\n\\delta_{\\rm bin}\\ge\\frac\\Delta2.\n\\]\nTherefore this interface crosses the envelope exactly when\n\\[\n\\Delta\\ge\\frac78,\n\\qquad\n\\rho>\\frac7{120}.\n\\tag{5}\n\\]\nThere is no globally weakest hypothesis because improvements to the outer rate, actual distance, concatenated-distance analysis, or inner code are incomparable. Once all other ingredients are fixed, however, (5) is the sharp scalar relaxation.\n\nA particularly local algebraic realization would replace bare RR by an exact special-divisor computation. If \\(a_j/L_j\\to1/8\\), \\(g_j/L_j\\to1/15\\), and \\(i(G_j)/L_j\\to\\sigma\\), then\n\\[\nR_{\\rm bin}\\to\\frac7{1920}+\\frac\\sigma{16}.\n\\]\nThus \\(i(G_j)=o(L_j)\\) cannot cross the envelope, whereas any proved \\(\\sigma>0\\) permits it. Clifford's theorem bounds\n\\[\n\\sigma\\le\\frac1{15}-\\frac1{16}=\frac1{240},\n\\]\nso this route, if realized, lies between \\(7/1920\\) and \\(1/256\\). For even \\(m\\ge10\\), the optimal divisor degree is eventually above \\(2g-2\\), since \\(1/8>2/(2^{m/2}-1)\\); it is then nonspecial. This singles out \\(m=8\\) as the only maximizing degree where speciality can affect the standard asymptotic divisor.\n\nFor comparison, replacing only the inner code by \\([\\ell,8,d]_2\\) while retaining the outer TVZ line gives\n\\[\n\\Phi_8(\\ell,d)=\\frac8\\ell\\left(\\frac{14}{15}-\\frac{7\\ell}{16d}\\right)_+.\n\\]\nDirect algebra shows\n\\[\n\\Phi_8(\\ell,d)>\\frac7{1920}\n\\iff\n(2048-\\ell)d>960\\ell.\n\\tag{6}\n\\]\nAt \\(\\ell=128\\), (6) requires \\(d\\ge65\\). Across all 255 nonzero words of a binary eight-dimensional code, each nonzero generator-matrix column contributes 128 ones, so \\(255d\\le128\\ell\\). Hence \\(d\\le64\\) when \\(\\ell=128\\). Likewise, retaining \\(d=64\\) forces \\(\\ell\\ge128\\). An inner-only escape must therefore alter the joint length-distance tradeoff, not just improve one parameter of RM.\n\n### Exact finite \\(m=8\\) interface\n\nSince\n\\[\n\\frac7{1920}2^{30}=3,914,683+\\frac{11}{15},\n\\]\na general binary code first crosses at dimension \\(3,914,684\\). An \\(m=8\\) concatenated dimension is divisible by eight, so it needs\n\\[\nk\\ge3,914,688,\n\\qquad K_{\\rm out}\\ge489,336.\n\\tag{7}\n\\]\nLet\n\\[\nT=\\frac{2^{30}}{128}=8,388,608.\n\\]\nAn exact finite outer escape is therefore any deterministic \\(\\mathbb F_{256}\\)-linear code satisfying\n\\[\nL\\le T,\n\\qquad D\\ge7,340,032,\n\\qquad K\\ge489,336.\n\\tag{8}\n\\]\nConcatenation and zero padding would then give exact length \\(2^{30}\\), distance at least the target, and dimension at least \\(3,914,688\\).\n\nFor designed distance, write \\(L=T-p\\) and choose \\(a=L-7,340,032\\). With genus bound \\(\\bar g\\) and an additional certified dimension surplus \\(s\\),\n\\[\nK_{\\rm cert}=\frac T8-(p+\\bar g-1)+s.\n\\]\nCondition (7) is equivalent to\n\\[\np+\\bar g-1-s\\le559,240.\n\\tag{9}\n\\]\nThe verified baseline has \\(p=32,768\\), \\(\\bar g=554,753\\), and \\(s=0\\), giving aggregate loss \\(587,520\\). It is therefore short by exactly \\(28,280\\) outer dimensions.\n\nFinally, the densified-tower lower genus bound gives\n\\[\ng_{4,3}\\ge(g_4-1)2^3+1,\n\\qquad g_4=67,185,\n\\]\nso \\(g_{4,3}\\ge537,473\\). Even with this smallest possible genus, bare RR at the fixed \\(L\\) gives at most\n\\[\n1,015,808+1-537,473=478,336,\n\\]\nwhich is 11,000 below (7). Hence exact-genus sharpening alone cannot cross at the current level. No required speciality, distance gain, or extra-place theorem is presently available, so no leaderboard construction follows.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Affine functions on \\(\\mathbb F_2^{m-1}\\) give length \\(2^{m-1}\\), dimension \\(m\\), and minimum weight \\(2^{m-2}\\).",
+      "statement": "Verify the exact RM(1,m\u22121) inner parameters.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "Introduce the occupied fraction \\(\\lambda\\), convert the product-distance requirement into (1), and substitute the bare Riemann\u2013Roch dimension credit to obtain (2) and (3).",
+      "statement": "Derive the padded asymptotic vanilla certificate envelope.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2"
+      ],
+      "id": "P3",
+      "proof": "The positive part vanishes for \\(m\\le6\\); substitution gives \\(7/1920\\) at \\(m=8\\); for \\(m\\ge10\\), dominate by the decreasing sequence \\(m/2^{m+2}\\).",
+      "statement": "Prove that m=8 uniquely maximizes the expression over every positive even m.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2"
+      ],
+      "id": "P4",
+      "proof": "Riemann\u2013Roch contains the nonnegative speciality term, both distance estimates are one-sided, and the tower ratio is asymptotic. The doubled RM(1,29) code supplies an explicit finite counterexample to a pointwise interpretation.",
+      "statement": "Audit the exact logical scope of the ceiling.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2"
+      ],
+      "id": "P5",
+      "proof": "At \\(m=8\\), the inner rate and relative distance are \\(1/16\\) and \\(1/2\\). Thus crossing is equivalent to an outer point with \\(\\Delta\\ge7/8\\) and \\(\\rho>7/120\\).",
+      "statement": "Identify the sharp holding-all-else-fixed outer escape condition.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "Use exact Riemann\u2013Roch and Clifford to show that positive-density speciality is necessary for a speciality-only asymptotic escape and is at most \\(1/240\\).",
+      "statement": "Quantify the special-divisor escape window.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P5"
+      ],
+      "id": "P7",
+      "proof": "Derive equation (6). Plotkin averaging proves \\(255d\\le128\\ell\\), excluding a distance improvement at length 128 and a shortening at distance 64.",
+      "statement": "Audit the nearest inner-code perturbations.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P5"
+      ],
+      "id": "P8",
+      "proof": "Compute the exact integer threshold, divisibility by eight, outer-slot capacity, required outer distance, and aggregate-loss inequality (9).",
+      "statement": "Derive the exact finite m=8 crossing interface.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P8"
+      ],
+      "id": "P9",
+      "proof": "Apply BPRS Proposition 2.1 to obtain \\(g_{4,3}\\ge537,473\\), which caps the fixed-level bare-RR credit at 478,336, 11,000 below the required outer dimension.",
+      "statement": "Prove that genus sharpening alone cannot cross at the current tower level.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "The all-even-degree numerical maximum is rigorously certified, but its scope is narrowed to the asymptotic bare-RR/designed-distance/product-distance proof calculus. Holding the maximizing m=8 interface fixed, the least structural escape is a strict outer improvement above rate 7/120 at relative distance 7/8\u2014most locally via exact special-divisor or actual-distance information.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For every positive even m, the asymptotic one-level Garcia\u2013Stichtenoth plus RM(1,m\u22121) certificate that credits only bare Riemann\u2013Roch dimension, designed outer distance, product concatenation distance, and zero padding has rate envelope \\(R_{\\mathrm{template}}(m)=\\frac{m}{2^{m-1}}(\\frac18-\\frac1{2^{m/2}-1})_+\\). Its unique maximum is \\(7/1920\\) at \\(m=8\\). This is not a pointwise finite or universal upper bound on actual GS-derived codes. With \\(m=8\\), RM(1,7), and ordinary product analysis fixed, an asymptotic crossing is equivalent to an outer \\(\\mathbb F_{256}\\) code with relative distance at least \\(7/8\\) and rate strictly greater than \\(7/120\\); at block length \\(2^{30}\\), it requires \\(L\\le8,388,608\\), \\(D\\ge7,340,032\\), and \\(K\\ge489,336\\). At the current level, exact-genus sharpening alone remains at least 11,000 outer dimensions short.",
+  "title": "GS\u2013Hadamard certificate envelope and the minimal outer escape"
+}

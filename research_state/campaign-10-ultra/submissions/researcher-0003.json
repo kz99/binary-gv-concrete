@@ -1,0 +1,199 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "Work over `F_256 = F_2[\u03b6]/(\u03b6^8+\u03b6^4+\u03b6^3+\u03b6+1)`, with the coefficient-basis ordering. Its unique subfield of order 16 defines the completed Garcia\u2013Stichtenoth tower. Intermediate fields are fixed fields of the lexicographically ordered translation subgroups of `F_16`; splitting places, functions, and Riemann\u2013Roch bases are ordered lexicographically in the induced tower presentation.\n\nMain flag: at GS level `(k,s)=(4,3)`, use `L_1=8,355,840` splitting rational places and the pole `P_\u221e`. Put `a_0=1,015,808`, `a_1=1,037,243`, and `t=a_1-a_0=21,435`. From the genus bound `g\u2264554,753`, deterministically choose `F_256`-subspaces\n\n`U_0 \u2282 L(a_0P_\u221e) \u2282 L(a_1P_\u221e)`,\n\nwith dimensions `461,056` and `482,491`, respectively, by taking the lexicographically first independent functions and extending the first basis. Concatenate their evaluations with `RM(1,7)=[128,8,64]_2`. The complement `U_1/U_0` has `F_256`-dimension `t`.\n\nAuxiliary code: at GS level `(3,2)`, take the first `L_2=209,715` of the guaranteed `261,120` splitting places and divisor `H=38,231Q_\u221e`. Choose the lexicographically first `t=21,435` independent functions in `L(H)`.\n\nConcatenate this auxiliary AG code with the explicit binary code `J=[I_8|P]`, where the twelve-bit rows of `P` are\n\n`101011100011, 110010001111, 100111010101, 101101111000, 010110111100, 001011011110, 000101101111, 111100100101`.\n\nThe 256 row sums of this matrix have weight enumerator `1+130z^8+120z^12+5z^16`; hence `J=[20,8,8]_2`. The auxiliary concatenation has length `4,194,300`; append four zero coordinates.\n\nFor `f=f_0+\u03a3u_iw_i\u2208U_1`, output its main RM-concatenated evaluation followed by the auxiliary encoding of `(u_1,\u2026,u_t)`. All field identifications use the fixed coefficient basis, and all coordinate orders are lexicographic.",
+  "dimension": 3859928,
+  "distance_audit": [
+    "For quotient zero, `f\u2208U_0\\{0}` and the main weight is at least `(8,355,840\u22121,015,808)\u00b764 = 7,340,032\u00b764 = 469,762,048`.",
+    "For quotient nonzero, the main weight is at least `(8,355,840\u22121,037,243)\u00b764 = 7,318,597\u00b764 = 468,390,208`.",
+    "A nonzero auxiliary word has weight at least `(209,715\u221238,231)\u00b78 = 171,484\u00b78 = 1,371,872`.",
+    "Thus the nonzero-quotient case has weight at least `468,390,208+1,371,872=469,762,080`, exceeding the target by 32.",
+    "Both independent internal audits reproduced the tower, inner-code, length, dimension, and two-case distance arithmetic."
+  ],
+  "explicitness_audit": [
+    "The field is given by a specific irreducible polynomial and coefficient basis.",
+    "The completed tower is specified by `z_{i+1}^16+z_{i+1}=x_i^17`, with deterministic intermediate fixed fields.",
+    "Evaluation places are selected from the explicit splitting places in coefficient-lexicographic order.",
+    "The nested Riemann\u2013Roch spaces, complement, and auxiliary message space use deterministic greedy bases in canonical function-field normal forms.",
+    "Both inner encoders are explicit: affine-function evaluation for `RM(1,7)` and the displayed systematic matrix for `J`.",
+    "The only final padding is exactly four zero coordinates; no random or searched constituent is used."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "For `q=p^r\u22654`, use the completed Garcia\u2013Stichtenoth step `F_{k,s}/F_{q^2}`.",
+      "result": "`g_{k,s}\u2264g_{k+1}/p^(r\u2212s)+1` and there are at least `(q^2\u22121)q^(k\u22121)p^s` rational splitting places; formula (3) gives the full-level genera.",
+      "source": "[Ballet\u2013Pieltant\u2013Rambaud\u2013Sijsling, Proposition 2.1 and formula (3)](https://perso.telecom-paristech.fr/rambaud/articles/BPRS.pdf)",
+      "used_for": "The main `(4,3)` and auxiliary `(3,2)` GS parameter certificates."
+    },
+    {
+      "hypotheses": "A divisor `G` is disjoint from `L` distinct rational evaluation places and `deg G<L`.",
+      "result": "Evaluation is injective, dimension is at least `deg G+1\u2212g`, and designed distance is at least `L\u2212deg G`.",
+      "source": "H. Stichtenoth, Algebraic Function Fields and Codes, 2nd ed., Chapter 2.",
+      "used_for": "Both AG evaluation codes."
+    },
+    {
+      "hypotheses": "Binary inner dimension is eight in the ordinary one-level GS/Riemann\u2013Roch calculation.",
+      "result": "The exact minimum-length classification, combined with Griesmer, eliminates every hypothetical inner parameter triple that would exceed `7/1920`.",
+      "source": "[Bouyukliev\u2013Jaffe\u2013Vavrek et al., IEEE Transactions on Information Theory 46 (2000)](https://doi.org/10.1109/18.850690)",
+      "used_for": "The dimension-eight one-level obstruction, not the leaderboard construction."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Submit the proof to two independent campaign verifier agents; this result must remain under-review until both accept it.",
+    "When write access is available, place this certificate in `proofs/`, add an under-review record to `data/records.json`, then run the validator and dashboard build.",
+    "To cross `7/1920` within this Construction-X architecture, seek an explicit auxiliary `[2^22,\u2265226,240,\u22651,809,920]_2` code, corresponding to `t\u226528,280`."
+  ],
+  "obstructions": [
+    "The rate `482,491/134,217,728\u22480.0035948380827903748` is strictly below `7/1920`; crossing requires dimension at least `3,914,684`, another 54,756 dimensions.",
+    "For a one-level inner `[b,m,e]_2`, the GS envelope is `(m/b)(1\u22127b/(16e)\u22121/(2^(m/2)\u22121))_+`. Exact dimension-eight code bounds eliminate all apparent improvements over `[128,8,64]`; thus merely replacing RM by another eight-dimensional inner cannot cross the ceiling.",
+    "The auxiliary construction is a genuine generalized-concatenation mechanism, but its present parameters close only part of the finite gap."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`255\u00b716^3\u00b72^3`",
+      "quantity": "main evaluation length `L_1`",
+      "value": "8,355,840"
+    },
+    {
+      "derivation": "`floor(1,109,505/2+1)`",
+      "quantity": "main genus upper bound",
+      "value": "554,753"
+    },
+    {
+      "derivation": "`1,015,808+1\u2212554,753`",
+      "quantity": "base outer dimension",
+      "value": "461,056"
+    },
+    {
+      "derivation": "Chosen divisor increment",
+      "quantity": "`t`",
+      "value": "21,435"
+    },
+    {
+      "derivation": "`1,015,808+t`",
+      "quantity": "enlarged main divisor degree",
+      "value": "1,037,243"
+    },
+    {
+      "derivation": "`1,037,243+1\u2212554,753`",
+      "quantity": "enlarged outer dimension",
+      "value": "482,491"
+    },
+    {
+      "derivation": "`16^4+16^3\u221216^3/2\u22123\u00b716^2/2\u221216+1`",
+      "quantity": "full-level side genus `g_4`",
+      "value": "67,185"
+    },
+    {
+      "derivation": "`floor(67,185/4+1)`",
+      "quantity": "side genus upper bound",
+      "value": "16,797"
+    },
+    {
+      "derivation": "Selected from `255\u00b716^2\u00b74=261,120` places",
+      "quantity": "side evaluation length `L_2`",
+      "value": "209,715"
+    },
+    {
+      "derivation": "`38,231+1\u221216,797`",
+      "quantity": "side outer dimension",
+      "value": "21,435"
+    },
+    {
+      "derivation": "`209,715\u221238,231`",
+      "quantity": "side outer distance",
+      "value": "171,484"
+    },
+    {
+      "derivation": "`209,715\u00b720` plus four zeros",
+      "quantity": "auxiliary length",
+      "value": "4,194,304"
+    },
+    {
+      "derivation": "`8\u00b7482,491`",
+      "quantity": "final binary dimension",
+      "value": "3,859,928"
+    },
+    {
+      "derivation": "`8,355,840\u00b7128+209,715\u00b720+4`",
+      "quantity": "final binary length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "`3,859,928/2^30`",
+      "quantity": "certified rate",
+      "value": "482,491/134,217,728 = 0.0035948380827903748"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nThere is a deterministic binary linear code with parameters\n\n`[1,073,741,824, 3,859,928, \u2265469,762,048]_2`.\n\n## Tower data\n\nUse the completed GS tower over `F_256` with `q=16`, `p=2`, and `r=4`. Formula (3) gives\n\n`g_5=16^5+16^4\u221216^3\u22122\u00b716^2+1=1,109,505`,\n\nso Proposition 2.1 gives `g_(4,3)\u2264floor(g_5/2+1)=554,753` and at least\n\n`(16^2\u22121)16^3\u00b72^3=8,355,840`\n\nsplitting rational places.\n\nFor the auxiliary level, the even-level formula gives\n\n`g_4=16^4+16^3\u221216^3/2\u22123\u00b716^2/2\u221216+1=67,185`.\n\nHence `g_(3,2)\u2264floor(g_4/4+1)=16,797`, while the number of splitting rational places is at least\n\n`(16^2\u22121)16^2\u00b72^2=261,120`.\n\n## Inner-code lemma\n\nLet `J=[I_8|P]` with the displayed twelve-bit rows. Its rank is eight. Applying the recurrence `S_0={0}`, `S_i=S_(i\u22121)\u222a(S_(i\u22121)+row_i)` and counting weights after the eighth row gives\n\n`W_J(z)=1+130z^8+120z^12+5z^16`.\n\nThis is an exhaustive enumeration of 256 explicitly specified vectors, so `J=[20,8,8]_2`. The other inner code is the affine-function code on `F_2^7`: every nonconstant affine function has weight 64 and the nonzero constant has weight 128. Thus it is `[128,8,64]_2`.\n\n## Main nested codes\n\nSet `a_0=1,015,808` and `a_1=1,037,243`. Riemann\u2013Roch gives\n\n`ell(a_0P_\u221e)\u2265a_0+1\u2212554,753=461,056`,\n\n`ell(a_1P_\u221e)\u2265a_1+1\u2212554,753=482,491`.\n\nChoose deterministic nested subspaces `U_0\u2282U_1` of exactly these dimensions. Their complement has dimension\n\n`t=482,491\u2212461,056=21,435`\n\nover `F_256`. Evaluation is injective because `a_1<L_1`. After RM concatenation, the resulting nested binary codes `A_0\u2282A_1` have dimensions `8\u00b7461,056` and `8\u00b7482,491`, with\n\n`d(A_0)\u226564(L_1\u2212a_0)=469,762,048`,\n\n`d(A_1)\u226564(L_1\u2212a_1)=468,390,208`.\n\n## Auxiliary code\n\nAt level `(3,2)`, select `L_2=209,715` splitting places and put `H=38,231Q_\u221e`. Then\n\n`ell(H)\u226538,231+1\u221216,797=21,435=t`,\n\nand its evaluation code has distance at least\n\n`209,715\u221238,231=171,484`.\n\nTake a deterministic `t`-dimensional subspace and concatenate it with `J`. This gives a binary code `B'` of dimension `8t=171,480`, length `209,715\u00b720=4,194,300`, and distance at least\n\n`171,484\u00b78=1,371,872`.\n\nAppending four zeros gives `B\u2282F_2^(2^22)` with the same dimension and distance.\n\n## Construction-X step\n\nFix the basis complement `U_1=U_0\u2295W` and identify `W` with the auxiliary message space. For `f=f_0+w\u2208U_1`, define\n\n`Enc(f)=(Enc_main(f), Enc_B(w))`.\n\nThis map is binary linear. Its main component is injective, so the final dimension is exactly\n\n`8\u00b7482,491=3,859,928`.\n\nIf `w=0` and `f\u22600`, the word lies in `A_0` and has weight at least `469,762,048`. If `w\u22600`, its main part has weight at least `468,390,208` and its auxiliary part has weight at least `1,371,872`; hence its total weight is at least\n\n`468,390,208+1,371,872=469,762,080`.\n\nThus every nonzero word meets the required distance.\n\nFinally,\n\n`8,355,840\u00b7128 + 209,715\u00b720 + 4`\n\n`=1,069,547,520+4,194,300+4`\n\n`=1,073,741,824=2^30`.\n\nThis proves the theorem.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Apply the completed-tower genus and splitting-place bounds with `(q,p,r)=(16,2,4)`; the displayed integer arithmetic gives the two required levels.",
+      "statement": "The main and auxiliary GS steps have the claimed genus and rational-place bounds.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P2",
+      "proof": "`I_8` proves rank eight; exhaustive XOR enumeration of the 256 row sums gives weights only 0, 8, 12, and 16 with enumerator `1+130z^8+120z^12+5z^16`.",
+      "statement": "The displayed matrix generates an explicit `[20,8,8]_2` code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P3",
+      "proof": "Riemann\u2013Roch supplies dimensions 461,056 and 482,491; deterministic greedy bases produce an exact nested flag. AG evaluation and RM concatenation give the two main distances.",
+      "statement": "There are nested main codes `A_0\u2282A_1` with quotient dimension 171,480 and distances 469,762,048 and 468,390,208.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2"
+      ],
+      "id": "P4",
+      "proof": "The auxiliary divisor gives `[209,715,21,435,\u2265171,484]_(256)`; concatenation with `J` and four zero pads gives `[2^22,171,480,\u22651,371,872]_2`.",
+      "statement": "The auxiliary code has exactly the dimension needed to encode `A_1/A_0`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "The quotient-zero case uses `d(A_0)`; the quotient-nonzero case uses `d(A_1)+d(B)=469,762,080`. Injectivity of the main encoder gives the exact dimension, and the two coordinate portions sum to `2^30`.",
+      "statement": "The Construction-X code has parameters `[2^30,3,859,928,\u2265469,762,048]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "O1",
+      "proof": "Substituting the Griesmer bound into the one-level objective leaves five hypothetical dimension-eight parameter triples; the exact dimension-eight minimum-length classification excludes all five.",
+      "statement": "No dimension-eight binary inner code beats `7/1920` in the ordinary one-level GS calculation.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.0035948380827903748,
+  "research_direction": "Use a nested GS divisor flag and encode its quotient in the former zero-padding coordinates via a second GS code with an explicit `[20,8,8]` binary inner code. This is Construction X rather than one-level parameter tuning, but the proved finite instance remains below the template ceiling.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json",
+    "/Users/kaizheng/.agents/skills/yukon-cli/SKILL.md"
+  ],
+  "submission_class": "ceiling_optimization",
+  "theorem_statement": "There exists a deterministic binary linear code `C\u2282F_2^1,073,741,824` with dimension `3,859,928` and minimum distance at least `469,762,048`.",
+  "title": "Nested GS Construction X with an explicit [20,8,8] side inner code"
+}

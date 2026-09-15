@@ -1,0 +1,296 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard submission survives. The strongest completely finite construction found in the audit is the following noncompetitive near miss.\n\n1. Let `K = F_2[X]/(f_12)`, where `f_12` is the lexicographically first monic irreducible polynomial of degree 12. Let `F_64` be its unique subfield of order 64.\n2. Over `K`, form the Garcia\u2013Stichtenoth fields\n   `F2 = K(x1,z2)`, with `z2^64+z2=x1^65`, and `F3=F2(z3)`, with `z3^64+z3=(z2/x1)^65`.\n3. Let `H={0,1}` act by translations of `z3`, and take the fixed field `E=F3^H`. Then `[E:F2]=32`; this is the densified step `(k,s)=(2,5)`.\n4. Order the standard splitting rational places lexicographically by the fixed polynomial-basis coordinates of their residues. Take the first `L=4,588,640` places and let `G=394,336 P_infinity`.\n5. Evaluate all functions in `L(G)` at these places. Its `K`-dimension is exactly `264,384`, and its designed distance is `4,194,304`.\n6. For the inner code, use Hill's explicit `[78,6,56]_4` quasicyclic code, whose six generator polynomials are listed on [Grassl's exact code page](https://www.codetables.de/BKLC/BKLC.php?k=6&n=78&q=4), followed coordinatewise by the binary simplex map `0->000`, `1->011`, `omega->101`, `omega^2->110`. This gives `[234,12,112]_2`. Identify `K` with its 12-dimensional polynomial-basis binary space.\n7. Concatenate and append 64 zero coordinates.\n\nThe result is a deterministic binary `[1,073,741,824, 3,172,608, >=469,762,048]` code. It is included to close the most plausible finite literature candidate, not as a new record.",
+  "dimension": 3172608,
+  "distance_audit": [
+    "The outer evaluation code has distance at least `L-deg(G)=4,588,640-394,336=4,194,304`.",
+    "Hill's quaternary code has exact distance 56; every nonzero binary simplex image has weight 2, so the inner distance is exactly 112.",
+    "Every nonzero concatenated word therefore has weight at least `4,194,304*112=469,762,048=(7/16)2^30`.",
+    "The concatenated length is `4,588,640*234=2^30-64`; appending 64 zero coordinates preserves dimension and absolute distance.",
+    "For Ta-Shma-style balanced codes, the target is normalized bias `epsilon=1/8`, since weights lie in `[(1-epsilon)/2,(1+epsilon)/2]`. Cohen\u2013Doron\u2013Goldgraber\u2013Manket instead use `[1/2-epsilon,1/2+epsilon]`, so their target parameter is `epsilon=1/16`.",
+    "For a binary TAG word, Cohen et al.'s exact splitting identity makes the target equivalent to `N_{L_f} <= 1+(9/8)2^30 = 1,207,959,553` for every nonzero message."
+  ],
+  "explicitness_audit": [
+    "The near-miss specifies the field canonically, gives all tower equations, fixes the intermediate subgroup, orders the evaluation places, fixes the divisor, cites a fully displayed inner generator, fixes the field-to-bit identification, and specifies the padding.",
+    "A deterministic Riemann\u2013Roch encoder can use the lexicographically first row-reduced basis obtained from relation-reduced monomials; the code itself is basis-independent.",
+    "The published current GS baseline's numerical place and genus bounds are supported by Ballet\u2013Pieltant\u2013Rambaud\u2013Sijsling. Its local proof could nevertheless be certificate-hardened by naming an irreducible polynomial, basis, intermediate subgroup, place order, and Riemann\u2013Roch basis. This is a documentation gap, not a refutation of its verified parameters.",
+    "Ta-Shma, Cohen\u2013Cohen, and Hsieh\u2013Mohanty\u2013Zhang are deterministic asymptotic constructions, but their stated recipes do not supply an exact target graph, finite threshold, and usable parameter tuple at bias `1/8`.",
+    "The norm-trace and Hermitian-tower message spaces in Cohen et al. are literally defined using cutoffs such as `b<O(r/ell)` and `j_i<=O_e(r/ell)`; these do not specify finite codes.",
+    "Grassl/GUAVA entries were treated as exact only when their lower and upper bounds coincide. Open table intervals were not promoted to constructions.",
+    "Randomly selected constituents, including the randomized concatenation mechanisms in DMW24, are inadmissible for this campaign."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "`q=p^r>3`, completed Garcia\u2013Stichtenoth step `(k,s)`, and its stated rational-place and genus bounds.",
+      "result": "`N_{k,s}>=(q^2-1)q^(k-1)p^s` and `(g_k-1)p^s+1 <= g_{k,s} <= g_{k+1}/p^(r-s)+1`.",
+      "source": "[Ballet\u2013Pieltant\u2013Rambaud\u2013Sijsling, Proposition 2.1](https://perso.telecom-paristech.fr/rambaud/articles/BPRS.pdf) and [Garcia\u2013Stichtenoth](https://doi.org/10.1007/BF01884295).",
+      "used_for": "Auditing the verified baseline and supplying the finite outer code in the Hill near miss."
+    },
+    {
+      "hypotheses": "Elementary abelian Artin\u2013Schreier extension with the 64 poles and conductor orders calculated in the proof.",
+      "result": "The degree-32 intermediate genus is exactly `129,953`.",
+      "source": "[Stichtenoth, Algebraic Function Fields and Codes](https://doi.org/10.1007/978-3-540-76878-4) and [Neftin\u2013Zieve, Lemma 4.2](https://neftin.net.technion.ac.il/files/2015/10/many-12-9-13.pdf).",
+      "used_for": "Closing the finite genus interval for the closest known stronger inner code."
+    },
+    {
+      "hypotheses": "Hill's displayed quaternary quasicyclic generator and the binary `[3,2,2]` simplex map.",
+      "result": "An explicit binary `[234,12,112]` inner code.",
+      "source": "[Grassl's `[78,6,56]_4` entry](https://www.codetables.de/BKLC/BKLC.php?k=6&n=78&q=4), citing R. Hill, Caps and Groups, 1976.",
+      "used_for": "Strongest certified inner-code envelope found for `m=12`."
+    },
+    {
+      "hypotheses": "Arbitrary binary linear inner code of dimension 8, plus the standard one-level TVZ/GS product-distance calculation.",
+      "result": "No such inner code gives certified rate strictly above `7/1920`; RM(1,7) attains equality.",
+      "source": "[Bouyukliev\u2013Jaffe\u2013Vavrek](https://doi.org/10.1109/18.850690), [Griesmer](https://doi.org/10.1147/RD.45.0532), and [Grassl's code tables](https://www.codetables.de/citation.php).",
+      "used_for": "Exact extension of the vanilla `m=8` ceiling from RM alone to every dimension-eight binary inner code."
+    },
+    {
+      "hypotheses": "GUAVA 3.21 binary bounds for lengths at most 256.",
+      "result": "No recorded construction with even dimension `10<=m<=40` beats the ceiling; unresolved bounds remain and are not impossibility results.",
+      "source": "[GUAVA bound table](https://github.com/gap-packages/guava/blob/v3.21/tbl/bdtable2.g) and [bound decoder](https://github.com/gap-packages/guava/blob/v3.21/lib/bounds.gi).",
+      "used_for": "Finite stronger-inner SOTA sweep."
+    },
+    {
+      "hypotheses": "The paper's near-quadratic parameter regime and its exact fallback construction, specialized to normalized bias `1/8`.",
+      "result": "The near-quadratic branch's prerequisite fails; the exact fallback already has support `2^50`.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf).",
+      "used_for": "Rejecting an unsupported finite specialization of the asymptotic theorem."
+    },
+    {
+      "hypotheses": "Section 7 parameters specialized to normalized bias `1/8`.",
+      "result": "The construction's inner vertex factor alone exceeds `2^54.9`, before other multiplicative costs.",
+      "source": "[Cohen\u2013Cohen, ECCC TR25-179](https://eccc.weizmann.ac.il/report/2025/179/) and [CCC 2026 proceedings](https://doi.org/10.4230/LIPIcs.CCC.2026.21).",
+      "used_for": "Finite audit of the strongest published improvement to Ta-Shma's exponent."
+    },
+    {
+      "hypotheses": "The displayed free-expander parameters at normalized bias `1/8`.",
+      "result": "The integer parameter `kappa=floor((1/8)sqrt(log log(1/epsilon)))` equals zero, outside the proof's usable regime.",
+      "source": "[Hsieh\u2013Mohanty\u2013Zhang, arXiv:2601.12606v2](https://arxiv.org/html/2601.12606v2).",
+      "used_for": "Showing that the newer simplified asymptotic construction does not instantiate at the campaign bias."
+    },
+    {
+      "hypotheses": "Binary trace codes and the full-version hypotheses of Propositions 5.1\u20135.5.",
+      "result": "Exact zero-count identity and finite point bound, but no target certificate; the formal exact-length Hermitian space has dimension at most `363,800`.",
+      "source": "[Cohen\u2013Doron\u2013Goldgraber\u2013Manket, full version](https://arxiv.org/html/2511.08788) and [ICALP 2026 proceedings](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ICALP.2026.68).",
+      "used_for": "Finite trace/subfield audit and extraction of conditional constants."
+    },
+    {
+      "hypotheses": "Hermitian trace polynomials of restricted degree.",
+      "result": "Vanishing bias with hidden constants, while asymptotically good trace-Hermitian codes remain open.",
+      "source": "[Kopparty\u2013Ta-Shma\u2013Yakirevitch, CCC 2026](https://doi.org/10.4230/LIPIcs.CCC.2026.35) and [author manuscript](https://www.math.toronto.edu/swastik/hermitian-trace-stepanov.pdf).",
+      "used_for": "Checking the concurrent trace-code frontier."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Resolve the open `[256,12,123]_2` parameter. Grassl currently gives `120<=d<=123`. An explicit distance-123 generator combined with GS step `(2,4)` and the certified genus bound `g<=65,505` would give `[2^30, >=3,702,864, >=469,762,092]`, beating the current record by 14,416 but not the ceiling.",
+    "Resolve the five dimension-10 ceiling-capable table endpoints: `[118,10,56]`, `[134,10,64]`, `[150,10,72]`, `[158,10,76]`, and `[162,10,78]`. At present these are only upper-bound possibilities.",
+    "Extend the exact inner-code sweep beyond length 256 for `m>=12`; the current tables leave many Griesmer-feasible pairs, so no global higher-inner obstruction has been proved.",
+    "For trace AG codes, target a proved point-count constant `c<=15/(512 sqrt(2))` at `q=256` together with an explicit binary linear subspace whose nonzero functions are all nice. The accompanying density threshold is `beta>7/1024`, but density alone is insufficient for linearity.",
+    "Repair Cohen et al.'s Corollary 5.2 at finite length by restoring the floor loss and strict inequality, then optimize Proposition 5.1 with verified independence for each concrete pole order.",
+    "Harden the current verified GS encoder certificate by recording a field polynomial, bases, intermediate subgroup, rational-place ordering, and reproducible Riemann\u2013Roch basis."
+  ],
+  "obstructions": [
+    "The exact Hill\u2013GS near miss has dimension `3,172,608`, which is 515,840 below the current verified record and 742,076 below the first ceiling-beating integer dimension.",
+    "For every dimension-eight inner code, average weight, Griesmer, and the complete `n_2(8,d)` classification force the standard product envelope to be at most `7/1920`.",
+    "The strongest known `m=12` inner has envelope `565/157248`, below the ceiling by `83/1572480`; its favorable finite densified step has exact genus `129,953`.",
+    "The higher-dimensional code tables contain unresolved upper-bound intervals. They prove absence of a known construction, not nonexistence.",
+    "Ta-Shma's finite fallback has support `2^50`; Cohen\u2013Cohen's mandatory vertex factor exceeds `2^54.9`; Hsieh\u2013Mohanty\u2013Zhang's displayed target parameter has `kappa=0`.",
+    "For exact-length Hermitian TAG, the formal message space has binary dimension at most `363,800`, and the best optimistic Proposition 5.1 bound is `1,224,769,537`, exceeding the required point threshold by 16,809,984.",
+    "Cohen et al.'s Corollary 5.2 uses `floor(x)>=x` and loses a required strict inequality. A sufficient repaired condition adds `2 beta sqrt(q)/N` and uses `>`; the asymptotic claims are unaffected, but finite use as printed is uncertified.",
+    "No audited result is a universal upper bound on GS-derived, multilevel, trace, expander-amplified, or general explicit binary codes."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Block length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(7/16)n`.",
+      "quantity": "Required distance",
+      "value": "`469,762,048`"
+    },
+    {
+      "derivation": "`floor((7/1920)n)+1`; `(7/1920)n=58,720,256/15`.",
+      "quantity": "First ceiling-beating dimension",
+      "value": "`3,914,684`"
+    },
+    {
+      "derivation": "Repository verified record.",
+      "quantity": "Current dimension",
+      "value": "`3,688,448`"
+    },
+    {
+      "derivation": "Difference between the preceding dimensions.",
+      "quantity": "Dimension needed beyond current",
+      "value": "`226,236`"
+    },
+    {
+      "derivation": "For support length `N<=A k/epsilon^2` at normalized bias `epsilon=1/8`.",
+      "quantity": "Necessary leading constant",
+      "value": "Asymptotically `A<30/7`; at `k=3,914,684`, `A<=4,194,304/978,671`"
+    },
+    {
+      "derivation": "Degree-32 intermediate of the `q=64` GS extension.",
+      "quantity": "Exact intermediate genus",
+      "value": "`g_{2,5}=129,953`"
+    },
+    {
+      "derivation": "`floor(2^30/234)`.",
+      "quantity": "Hill near-miss outer length",
+      "value": "`4,588,640`"
+    },
+    {
+      "derivation": "Chosen so `L-deg(G)=2^22`.",
+      "quantity": "Divisor degree",
+      "value": "`394,336`"
+    },
+    {
+      "derivation": "Riemann\u2013Roch: `deg(G)+1-g`.",
+      "quantity": "Outer dimension",
+      "value": "`264,384` over `F_4096`"
+    },
+    {
+      "derivation": "Hill `[78,6,56]_4` concatenated with binary simplex `[3,2,2]`.",
+      "quantity": "Inner code",
+      "value": "`[234,12,112]_2`"
+    },
+    {
+      "derivation": "`234L=2^30-64`.",
+      "quantity": "Zero padding",
+      "value": "`64` coordinates"
+    },
+    {
+      "derivation": "`12*264,384`.",
+      "quantity": "Near-miss binary dimension",
+      "value": "`3,172,608`"
+    },
+    {
+      "derivation": "`3,172,608/2^30`, reduced by 256.",
+      "quantity": "Near-miss rate",
+      "value": "`12,393/4,194,304 = 0.002954721450805664`"
+    },
+    {
+      "derivation": "Cohen et al. Corollary 4.3 with binary trace.",
+      "quantity": "TAG point threshold",
+      "value": "`N_{L_f}<=1,207,959,553` for every nonzero message"
+    },
+    {
+      "derivation": "Optimizing the sharper proof bound over all permitted powers `m<=2^20`, even granting pole order `t=1`.",
+      "quantity": "Best optimistic Hermitian TAG certificate",
+      "value": "`1,224,769,537` at `m=32,768`, `B=18`"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nAmong the audited exact constructions and primary SOTA sources, no deterministic binary code at length `2^30` is certified with dimension at least `3,688,449`. In particular, none crosses `7/1920`. The closest fully instantiated stronger-inner candidate is the Hill\u2013GS code above, with dimension `3,172,608`.\n\n## 1. Target arithmetic\n\nA strict ceiling crossing requires\n\n`k > (7/1920)2^30 = 58,720,256/15 = 3,914,683 + 11/15`,\n\nso the first possible integer is `k=3,914,684`. For a normalized-bias `1/8` construction whose length is `A k/epsilon^2`, the asymptotic rate is `epsilon^2/A=1/(64A)`; crossing requires `A<30/7`.\n\n## 2. Exact Hill\u2013GS near miss\n\nThe standard splitting set in the `q=64`, `(2,5)` completed tower contains at least\n\n`(64^2-1)*64*2^5 = 8,386,560`\n\nrational places, so the selected `L=4,588,640` places exist.\n\nIt remains to determine the intermediate genus. Put `f=(z2/x1)^65`. On the Hermitian field `F2`, `z2/x1` has exactly 64 simple poles: the point at infinity and the 63 points `(x1,z2)=(0,a)` for `a in F_64^*`. Hence `f` has odd pole order 65 at each.\n\nThe Galois group of `F3/F2` is the additive group of `F_64`. For a subgroup `H` of order two, let `B=H^perp` under `Tr_{64/2}`. Then `dim_2(B)=5`. For every `b in B\\{0}`,\n\n`u_b=Tr_{64/2}(b z3)` satisfies `u_b^2+u_b=b f`.\n\nThus all 31 nontrivial Artin\u2013Schreier characters of the degree-32 quotient have conductor 66 at each of the 64 poles. Since the Hermitian base genus is `g(F2)=64*63/2=2016`, the elementary-abelian genus formula gives\n\n`g(E)=1+32(2016-1)+(1/2)*31*64*66=129,953`.\n\nNow `deg(G)=394,336>2g-2` and `deg(G)<L`. Riemann\u2013Roch and injectivity of evaluation therefore give outer parameters\n\n`[4,588,640, 394,336+1-129,953, >=4,588,640-394,336]_{4096}`\n\n`=[4,588,640,264,384,>=4,194,304]_{4096}`.\n\nHill's quaternary code followed by the simplex map is `[234,12,112]_2`. Concatenation is binary linear and injective, hence has dimension `12*264,384=3,172,608`; every nonzero word has weight at least `112*4,194,304=469,762,048`. Its length is `234*4,588,640=2^30-64`, and zero padding proves the stated exact-length parameters.\n\n## 3. Dimension-eight inner-code ceiling\n\nFor any binary `[ell,8,d]` generator matrix, a nonzero column equals one on exactly 128 of the 255 nonzero messages, while a zero column contributes nothing. Summing the weights of all nonzero codewords gives\n\n`255d <= 128ell`.\n\nThe standard one-level envelope is\n\n`E(8,ell,d)=112/(15ell)-7/(2d)`.\n\nUsing the average-weight inequality,\n\n`E(8,ell,d) <= 1897/(3840ell)`.\n\nConsequently a strict crossing forces `ell<=135`. Combining this with Griesmer leaves exactly\n\n`(ell,d)=(58,28),(62,30),(64,31),(65,32),(66,32),(97,48)`.\n\nThe complete dimension-eight classification gives minimum required lengths `n_2(8,28)=61`, `n_2(8,30)=65`, `n_2(8,31)=67`, `n_2(8,32)=68`, and `n_2(8,48)=99`, excluding every pair. RM(1,7), `[128,8,64]`, attains equality `7/1920`. This closes arbitrary dimension-eight inners only within the standard one-level product/designed-distance accounting.\n\n## 4. Higher-inner table audit\n\nScanning GUAVA 3.21 through length 256 finds no actual ceiling winner. The leading certified entries are:\n\n| `m` | best recorded inner | envelope |\n|---:|---:|---:|\n| 10 | `[198,10,96]` | `865/261888` |\n| 12 | `[234,12,112]` | `565/157248` |\n| 14 | `[192,14,88]` | `245/89408` |\n| 16 | `[195,16,88]` | `9557/4375800` |\n\nThe `m=12` value is closest, missing the ceiling by exactly `83/1572480`. For `m=10`, five table intervals have upper endpoints that would cross, but none supplies a construction. For `m>=12`, additional unresolved entries and lengths above 256 remain, so this is a SOTA statement rather than a nonexistence theorem.\n\n## 5. Modern balanced-code constructions\n\nAt normalized bias `epsilon=1/8`, Ta-Shma's near-quadratic branch requires, for `alpha<=0.01`,\n\n`alpha^3/(2 log_2(1/alpha)) >= 1/log_2(1/epsilon)=1/3`.\n\nThe left side is at most `7.53e-8`; the branch is inapplicable. Its exact Reed\u2013Solomon/Hadamard fallback chooses the first power of two at least `k/epsilon`, namely `2^25`, and consequently has support `2^50`.\n\nFor Cohen\u2013Cohen, the displayed base-2 parameters imply an inner vertex factor\n\n`d^s >= 5^5 * 2^(25 sqrt(log_2(1/epsilon))) > 2^54.9`,\n\nalready larger than the target block length. For Hsieh\u2013Mohanty\u2013Zhang, the displayed target specialization gives `kappa=0`, while the proof divides by or schedules through positive `kappa`. These are failures of the published finite recipes, not of their asymptotic theorems.\n\n## 6. Trace-AG audit\n\nCohen\u2013Doron\u2013Goldgraber\u2013Manket prove the exact identity\n\n`wt(Tr f)/n = 1-(N_{L_f}-1)/(2n)`.\n\nThus the campaign distance requires `N_{L_f}<=1,207,959,553` for every nonzero message. For the exact-length Hermitian member `r=1024`, `q=2^20`, `g=523,776`, exhaustive optimization of their exact Proposition 5.1 over all permitted powers `m` gives the optimistic bound `1,224,769,537` at `m=32,768`, `B=18`, even granting the unrealistically small pole order `t=1`. Therefore that engine does not certify the target.\n\nIndependently, the formal Hermitian space (7.2), maximized at `T=g`, contains exactly 18,190 `F_q`-monomials. Its binary image consequently has dimension at most `20*18,190=363,800`, so this exact family cannot cross even with a perfect distance theorem.\n\nThere is also a finite proof defect in Corollary 5.2: with `A=floor(Nm/(2q))`, its proof uses `A>=Nm/(2q)` and converts a non-strict hypothesis into Proposition 5.1's strict inequality. Restoring `A>=Nm/(2q)-1` yields the sufficient replacement\n\n`beta*mu > 1+2(tau+gamma)beta*d +(2/sqrt(q))(tau(d-1)+sigma*beta)+2beta*sqrt(q)/N`.\n\nThe error is asymptotically negligible but prevents using the corollary verbatim as a finite certificate.\n\nAt `p=2`, `q=256`, the paper's hypothetical strengthened point estimate with `T=2g` would need `c<=15/(512 sqrt(2))` for distance and `beta>7/1024` for rate. Neither is proved, and a beta-density of nice functions does not itself produce a binary linear subspace.\n\n## Conclusion\n\nThe audit proves a limited obstruction and extracts concrete research thresholds. It does not prove a universal ceiling. A successful result must resolve a currently open stronger-inner parameter, obtain genuinely finite trace constants plus a linear nice-function space, or introduce a different alphabet-reduction mechanism.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Direct integer arithmetic gives `(7/1920)2^30=58,720,256/15`, hence strict crossing starts at `3,914,684`.",
+      "statement": "Compute the exact ceiling threshold.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "Hill's displayed quaternary generator concatenated with the constant-weight binary simplex map is injective, has binary dimension 12, and exact distance 112.",
+      "statement": "Certify the `[234,12,112]` inner code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P3",
+      "proof": "Artin\u2013Schreier conductor calculation at 64 poles of order 65 gives `g=1+32(2015)+(31*64*66)/2=129,953`.",
+      "statement": "Determine the densified `(2,5)` genus exactly.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3"
+      ],
+      "id": "P4",
+      "proof": "Riemann\u2013Roch gives outer dimension 264,384 and distance 4,194,304; concatenation and 64 zero pads give the claimed exact binary parameters.",
+      "statement": "Construct and verify the finite Hill\u2013GS near miss.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P5",
+      "proof": "Average weight reduces strict candidates to `ell<=135`; Griesmer leaves six pairs, all excluded by the complete dimension-eight classification.",
+      "statement": "Close every `m=8` inner within the standard product envelope.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P6",
+      "proof": "The GUAVA table was decoded and scanned through length 256; no lower-bound construction has envelope above `7/1920`, while unresolved intervals were retained as open.",
+      "statement": "Audit higher-dimensional inner-code tables without turning upper bounds into constructions.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P7",
+      "proof": "Substitution of `epsilon=1/8` into each paper's displayed finite parameters produces, respectively, a failed prerequisite, support at least `2^50`, a vertex factor above `2^54.9`, or `kappa=0`.",
+      "statement": "Show that the leading balanced-code papers do not instantiate at the target.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P8",
+      "proof": "The exact trace splitting identity gives the required point threshold; Proposition 5.1 optimization and the exact formal-space count both fall short. The floor error is repaired algebraically.",
+      "statement": "Audit the finite trace-AG frontier.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P6"
+      ],
+      "id": "P9",
+      "proof": "Assuming an explicit `[256,12,123]` inner, GS step `(2,4)` with `g<=65,505` gives dimension at least `3,702,864` and distance `469,762,092`. No such inner generator is currently certified.",
+      "statement": "Record the shortest conditional route to a new finite record.",
+      "status": "conditional"
+    },
+    {
+      "dependencies": [
+        "P4",
+        "P5",
+        "P6",
+        "P7",
+        "P8"
+      ],
+      "id": "P10",
+      "proof": "Every audited actual candidate is below the current dimension or lacks an essential finite theorem or constituent. The conclusion is restricted to the audited literature and mechanisms.",
+      "statement": "No audited construction is a leaderboard submission or ceiling crossing.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.002954721450805664,
+  "research_direction": "Resolve finite stronger-inner parameters\u2014especially `[256,12,123]` and the five dimension-10 endpoints\u2014while developing exact trace-AG point-count constants and linear nice-function subspaces.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "literature",
+  "theorem_statement": "No construction in the audited exact-code and 2026 SOTA literature certifies a dimension above the current `3,688,448` at the immutable target, and none crosses `7/1920`. Within the standard one-level TVZ/GS product-distance accounting, every dimension-eight binary inner code has rate at most `7/1920`. The closest fully finite stronger-inner specialization is an explicit Hill\u2013GS `[2^30,3,172,608,>=469,762,048]_2` code; modern balanced-code and trace-AG papers remain unusable at this finite target for the quantified reasons stated below. This is not a universal impossibility theorem.",
+  "title": "Finite-constant SOTA audit: dimension-eight closed, Hill\u2013GS near miss exact, modern asymptotics do not instantiate"
+}

@@ -1,0 +1,259 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": true,
+  "confidence": "high",
+  "construction_markdown": "Let $A=\\mathbb F_2[T]$, with infinity the pole of $T$. Take the level\n\n$\\mathfrak n=(T)^4(T^4+T^3+1)^2(T^8+T^4+T^3+T+1)$\n\nand reduce the rank-two Drinfeld modular curve $X_0(\\mathfrak n)$ at $\\rho=T^4+T+1$. Over the quadratic residue-field extension\n\n$K=\\mathbb F_{16}[\\beta]/(\\beta^2+\\beta+\\alpha^3)=\\mathbb F_{256}$,\n\nwhere $\\alpha^4+\\alpha+1=0$, the reduced curve has exact genus $559,029$ and at least $8,388,480$ rational points.\n\nOrder these points deterministically, reserve the first as $Q_0$, and use the next $L=8,388,479$ as evaluation points. Put $G=1,048,447Q_0$. Riemann\u2013Roch guarantees at least $489,419$ independent functions in $\\mathcal L(G)$; select exactly that many by the deterministic ordered procedure in the proof. The resulting outer code has parameters\n\n$[8,388,479,489,419,\\ge 7,340,032]_{256}$.\n\nConcatenate symbolwise with the explicitly indexed $\\operatorname{RM}(1,7)=[128,8,64]_2$ encoder, obtaining length $1,073,725,312$, dimension $3,915,352$, and distance at least $469,762,048$. Append $16,512$ zero coordinates.",
+  "dimension": 3915352,
+  "distance_audit": [
+    "For every nonzero $f\\in\\mathcal L(G)$, the pole divisor has degree at most $1,048,447$, so its zero divisor has the same degree. Hence at most $1,048,447$ of the $8,388,479$ evaluation places can vanish.",
+    "Because $\\deg G=1,048,447<L=8,388,479$, evaluation is injective.",
+    "Thus every nonzero outer word has weight at least $L-\\deg G=7,340,032$.",
+    "Every nonzero symbol is encoded by an affine Boolean function of weight at least $64$ under $\\operatorname{RM}(1,7)$.",
+    "The concatenated weight is therefore at least $7,340,032\\cdot64=469,762,048$ for every nonzero word.",
+    "Appending $16,512$ fixed zero coordinates preserves minimum distance."
+  ],
+  "explicitness_audit": [
+    "The base ring, infinity place, reduction prime, three level primes, and all exponents are explicitly stated.",
+    "Irreducibility of both quartics and the degree-eight polynomial is certified algebraically in the proof; no factor search is assumed.",
+    "The fields $\\mathbb F_{16}$ and $\\mathbb F_{256}$ have explicit defining polynomials and an ordered binary basis.",
+    "The modular curve is the canonical compactified rank-two Drinfeld moduli curve for cyclic $\\mathfrak n$-isogenies. A deterministic recovery pipeline through the rank-two modular polynomial, normalization, minimal regular model, and good special fiber is specified.",
+    "All Gr\u00f6bner, normalization, projective-coordinate, field-element, and rational-point orderings are fixed lexicographically.",
+    "The outer message space is an exact $489,419$-dimensional subspace selected by deterministic enumeration and greedy linear independence inside $\\mathcal L(G)$.",
+    "The inner encoder, its coordinate order, block order, and the location and number of padded coordinates are explicit.",
+    "No random sampling or unproved computational search occurs."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A global function field $F/\\mathbb F_q$ with full constant field, a chosen infinity place of degree $\\delta$, an ideal $\\mathfrak n=\\prod_i\\mathfrak p_i^{r_i}$, and a reduction prime $P$ coprime to $\\mathfrak n$. The rational-point theorem uses $d=\\deg P$ and the order $e$ of $P$ in the ideal class group.",
+      "result": "Theorem 3.2 gives the exact genus in terms of $\\varepsilon(\\mathfrak n)$, $\\kappa(\\mathfrak n)$, and the $L$-polynomial. Theorem 4.1 gives the stated rational-point lower bound over $F_P^{(2e)}$. Sections 2 and 4 give absolute irreducibility in the polynomial-ring case and good reduction away from the level.",
+      "source": "[Bassa\u2013Beelen\u2013Nguyen, Good families of Drinfeld modular curves](https://doi.org/10.1112/S146115701500025X)",
+      "used_for": "Exact genus $559,029$, at least $8,388,480$ rational points over $\\mathbb F_{256}$, and preservation of genus and geometric irreducibility under good reduction."
+    },
+    {
+      "hypotheses": "$A=\\mathbb F_q[T]$, a monic level $N$, a rank-$r$ Drinfeld module, an isogeny type $H$, and an invariant $J$. For rank two the invariant ring is $A[j]$ and cyclic type $H=A/NA$ gives the usual modular polynomial.",
+      "result": "The algebraic modular polynomial $\\Phi_{J,H}$ has coefficients in the invariant ring and classifies the corresponding isogenies. In rank two this recovers $\\Phi_N(j,X)\\in A[j,X]$ for arbitrary monic, including composite, $N$. No irreducibility assertion from the earlier paper is used here.",
+      "source": "[Breuer\u2013R\u00fcck, Drinfeld modular polynomials in higher rank II](https://arxiv.org/abs/1303.4086)",
+      "used_for": "Deterministic symbolic recovery of an equation for the exact composite-level modular curve."
+    },
+    {
+      "hypotheses": "A smooth projective geometrically irreducible curve over a finite field, a divisor $G$, and an evaluation divisor $D$ disjoint from $G$.",
+      "result": "Riemann\u2013Roch gives $\\ell(G)\\ge\\deg G+1-g$; if $\\deg G<\\deg D$, evaluation is injective and the evaluation code has distance at least $\\deg D-\\deg G$.",
+      "source": "[Stichtenoth, Algebraic Function Fields and Codes](https://doi.org/10.1007/978-3-540-76878-4)",
+      "used_for": "Outer-code dimension, injectivity, and designed-distance bounds."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Add the proof certificate as `proofs/drinfeld-modular-rm.md` and a matching `under-review` record in `data/records.json`.",
+    "Obtain two independent verifier acceptances, emphasizing the composite-level integral-model recovery and all Bassa\u2013Beelen\u2013Nguyen hypotheses.",
+    "Run `node scripts/validate-data.mjs` and the dashboard build before publication."
+  ],
+  "obstructions": [
+    "Raw binary basis expansion cannot replace the RM inner code: since an effective AG code contains constant words, a common coordinate basis would give binary relative distance at most $1/8$.",
+    "Every subcode of $\\operatorname{RM}(1,7)$ of dimension at least two has distance at most $64$, so ordinary RM expurgation does not yield an intermediate higher-distance layer.",
+    "Generic subfield-subcode dimension bounds are zero at the required outer rate, and coordinatewise trace does not preserve distance. These obstructions do not affect the construction proved here.",
+    "No unresolved mathematical obstruction remains; official two-agent verification is still required before the repository may mark the entry verified."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Final length and required distance",
+      "value": "$n=2^{30}=1,073,741,824$; $D=7n/16=469,762,048$"
+    },
+    {
+      "derivation": "Polynomial ring with the pole of $T$ as infinity.",
+      "quantity": "Base data",
+      "value": "$A=\\mathbb F_2[T]$, $q=2$, $\\delta=1$, $P_F(t)=1$, $h(A)=1$"
+    },
+    {
+      "derivation": "Explicit pairwise distinct irreducible polynomials.",
+      "quantity": "Reduction and level",
+      "value": "$\\rho=T^4+T+1$; $\\mathfrak n=T^4(T^4+T^3+1)^2(T^8+T^4+T^3+T+1)$"
+    },
+    {
+      "derivation": "$4\\cdot1+2\\cdot4+1\\cdot8$.",
+      "quantity": "Level degree",
+      "value": "$\\deg\\mathfrak n=20$"
+    },
+    {
+      "derivation": "$24\\cdot272\\cdot257$.",
+      "quantity": "$\\varepsilon(\\mathfrak n)$",
+      "value": "$1,677,696$"
+    },
+    {
+      "derivation": "$6\\cdot17\\cdot2$.",
+      "quantity": "$\\kappa(\\mathfrak n)$",
+      "value": "$204$"
+    },
+    {
+      "derivation": "$1+\\varepsilon/3-\\kappa$.",
+      "quantity": "Exact genus",
+      "value": "$g=559,029$"
+    },
+    {
+      "derivation": "BBN Theorem 4.1: $5\\varepsilon$.",
+      "quantity": "Certified rational points over $\\mathbb F_{256}$",
+      "value": "$N_0=8,388,480$"
+    },
+    {
+      "derivation": "Reserve one rational point for $G$.",
+      "quantity": "Outer length",
+      "value": "$L=N_0-1=8,388,479$"
+    },
+    {
+      "derivation": "$469,762,048/64$.",
+      "quantity": "Required outer distance",
+      "value": "$d_{\\rm out}=7,340,032$"
+    },
+    {
+      "derivation": "$L-d_{\\rm out}$.",
+      "quantity": "Divisor degree",
+      "value": "$a=1,048,447$"
+    },
+    {
+      "derivation": "$a+1-g$.",
+      "quantity": "Selected outer dimension",
+      "value": "$k_{\\rm out}=489,419$ exactly"
+    },
+    {
+      "derivation": "Affine truth tables in seven variables.",
+      "quantity": "Inner code",
+      "value": "$\\operatorname{RM}(1,7)=[128,8,64]_2$"
+    },
+    {
+      "derivation": "$128L$.",
+      "quantity": "Unpadded binary length",
+      "value": "$1,073,725,312$"
+    },
+    {
+      "derivation": "$2^{30}-128L$.",
+      "quantity": "Zero padding",
+      "value": "$16,512$ coordinates"
+    },
+    {
+      "derivation": "$8k_{\\rm out}$.",
+      "quantity": "Final binary dimension",
+      "value": "$3,915,352$"
+    },
+    {
+      "derivation": "$64d_{\\rm out}$.",
+      "quantity": "Certified binary distance",
+      "value": "$469,762,048$"
+    },
+    {
+      "derivation": "$3,915,352/2^{30}$.",
+      "quantity": "Certified exact rate",
+      "value": "$489,419/134,217,728=0.003646455705165863$"
+    },
+    {
+      "derivation": "$3,915,352-3,688,448$.",
+      "quantity": "Improvement over verified record",
+      "value": "$226,904$ dimensions"
+    },
+    {
+      "derivation": "$15(3,915,352)-7(2^{23})=10,024$.",
+      "quantity": "Excess above $7/1920$",
+      "value": "$1,253/2,013,265,920\\approx6.2237183253\\times10^{-7}$"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nThere is a deterministic binary linear code with parameters\n\n$[1,073,741,824,\\ 3,915,352,\\ \\ge469,762,048]_2$.\n\nIts rate is $489,419/134,217,728$, strictly greater than $7/1920$.\n\n### 1. Fields and level\n\nPut $A=\\mathbb F_2[T]$ and choose the pole of $T$ as infinity. Thus $q=2$, $\\delta=1$, the base function field is rational, its $L$-polynomial is $P_F(t)=1$, and the ideal class group of $A$ is trivial.\n\nDefine\n\n$\\rho=T^4+T+1$, $p_1=T$, $p_4=T^4+T^3+1$, and $p_8=T^8+T^4+T^3+T+1$,\n\nand set $\\mathfrak n=p_1^4p_4^2p_8$.\n\nBoth quartics have no root in $\\mathbb F_2$. Modulo the only irreducible quadratic $T^2+T+1$, their respective remainders are $1$ and $T$; hence both are irreducible. For $p_8$, exact repeated squaring gives\n\n$T^{256}\\equiv T\\pmod {p_8}$\n\nand\n\n$T^{16}+T\\equiv T^6+T^4+T^3+T^2\\pmod {p_8}$.\n\nThe Euclidean remainders for the latter polynomial and $p_8$ are\n\n$T^5+T^4+T^2+T+1,\\quad T^2+1,\\quad1$.\n\nRabin's criterion therefore proves that $p_8$ is irreducible. Thus all named primes are distinct and $(\\rho,\\mathfrak n)=1$.\n\nLet $\\alpha$ be the residue class of $T$ modulo $\\rho$ and put\n\n$k_0=\\mathbb F_2[\\alpha]/(\\alpha^4+\\alpha+1)=\\mathbb F_{16}$.\n\nSince\n\n$\\operatorname{Tr}_{k_0/\\mathbb F_2}(\\alpha^3)=\\alpha^3+\\alpha^6+\\alpha^{12}+\\alpha^{24}=1$,\n\nthe Artin\u2013Schreier polynomial $X^2+X+\\alpha^3$ is irreducible over $k_0$. Fix\n\n$K=k_0[\\beta]/(\\beta^2+\\beta+\\alpha^3)=\\mathbb F_{256}$\n\nwith ordered binary basis\n\n$\\mathcal B=(1,\\alpha,\\alpha^2,\\alpha^3,\\beta,\\alpha\\beta,\\alpha^2\\beta,\\alpha^3\\beta)$.\n\n### 2. Modular curve and exact invariants\n\nLet $X_0(\\mathfrak n)$ be the compactified rank-two Drinfeld modular curve parametrizing rank-two $A$-Drinfeld modules together with a cyclic $\\mathfrak n$-isogeny. For mechanical recovery, form the rank-two modular polynomial $\\Phi_{\\mathfrak n}(J,J')$ by the algebraic cyclic-isogeny construction of [Breuer\u2013R\u00fcck](https://arxiv.org/abs/1303.4086), normalize its projective generic curve, and compute its minimal regular proper model over the DVR $A_{(\\rho)}$. The level is the displayed monic polynomial of degree $20$, so this is a finite exact symbolic procedure. At every elimination, normalization, and resolution step use the displayed variable order, graded lexicographic monomial order, monic reduced Gr\u00f6bner bases, and lexicographically first permissible center.\n\nThe good special fiber exists because $\\rho$ is coprime to $\\mathfrak n$. Let $X_\\rho$ denote it and put $X=X_\\rho\\times_{\\mathbb F_{16}}K$. In the polynomial-ring, degree-one-infinity case, [Bassa\u2013Beelen\u2013Nguyen](https://doi.org/10.1112/S146115701500025X) state that the modular curve and every reduction away from the level are absolutely irreducible. Good reduction preserves the generic genus, and extending constants to $K$ preserves genus and geometric irreducibility. Thus $X$ is a smooth projective geometrically irreducible curve over $K$.\n\nFor the factorization of $\\mathfrak n$, Definition 3.1 of that source gives\n\n$\\varepsilon(p_1^4)=2^3(2+1)=24$, $\\kappa(p_1^4)=2^2+2=6$,\n\n$\\varepsilon(p_4^2)=16(16+1)=272$, $\\kappa(p_4^2)=16+1=17$,\n\nand\n\n$\\varepsilon(p_8)=256+1=257$, $\\kappa(p_8)=1+1=2$.\n\nConsequently\n\n$\\varepsilon(\\mathfrak n)=24\\cdot272\\cdot257=1,677,696$\n\nand\n\n$\\kappa(\\mathfrak n)=6\\cdot17\\cdot2=204$.\n\nThere are $s=3$ level primes. Because $p_1$ has odd degree, the exceptional $\\eta$ term in their Theorem 3.2 is zero. Since $q=2$, the term $2^{s-1}(q-2)$ also vanishes. The exact genus is therefore\n\n$g(X)=1+\\frac{1,677,696}{3}-204=559,029$.\n\nThe reduction prime has degree $d=4$ and order $e=1$ in the trivial class group of $A$. The exceptional branch of their Theorem 4.1 is inapplicable because $d$ is even. Over $F_\\rho^{(2e)}=K$, that theorem gives\n\n$\\#X(K)\\ge\\varepsilon(\\mathfrak n)\\frac{(2^1-1)(2^4-1)}{(2^2-1)(2-1)}=5\\varepsilon(\\mathfrak n)=8,388,480$.\n\n### 3. Deterministic outer code\n\nUse the projective embedding produced above. Normalize every projective coordinate tuple at its first nonzero coordinate. Order elements of $K$ by the integer represented by their coefficient vector in $\\mathcal B$, and order normalized tuples lexicographically. Exhaustively enumerate $X(K)$ in that order and call the first $8,388,480$ points\n\n$Q_0,Q_1,\\ldots,Q_{8,388,479}$.\n\nThe point theorem guarantees that this deterministic enumeration terminates. Put\n\n$L=8,388,479$, $D=\\sum_{i=1}^{L}Q_i$, $a=1,048,447$, and $G=aQ_0$.\n\nThe supports of $D$ and $G$ are disjoint, and $\\deg G=a<L=\\deg D$. Riemann\u2013Roch gives\n\n$\\ell(G)\\ge a+1-g=1,048,448-559,029=489,419$.\n\nTo make the claimed dimension exact, enumerate normalized rational expressions in the ordered function-field generators by increasing numerator and denominator degree and then lexicographically by coefficients. Retain expressions lying in $\\mathcal L(G)$ and greedily retain the first one not in the $K$-span of those already chosen. Equality, pole divisors, and linear independence are decided by exact function-field arithmetic. Stop after\n\n$k_0'=489,419$\n\nfunctions. Riemann\u2013Roch proves termination, and the retained functions are independent. Let $V\\subseteq\\mathcal L(G)$ be their span and define\n\n$C_{\\rm out}=\\{(f(Q_1),\\ldots,f(Q_L)):f\\in V\\}\\subseteq K^L$.\n\nBecause $\\deg G<L$, evaluation is injective, so $\\dim_K C_{\\rm out}=489,419$ exactly. For every nonzero $f\\in V$, its zero divisor has degree equal to its pole divisor degree, which is at most $a$. Hence it vanishes at at most $a$ evaluation points, and\n\n$d(C_{\\rm out})\\ge L-a=7,340,032$.\n\n### 4. Binary concatenation\n\nWrite $x\\in K$ uniquely as $x=\\sum_{i=0}^7b_i\\mathcal B_i$, with $b_i\\in\\mathbb F_2$. Define\n\n$\\iota(x)=(b_0+b_1v_1+\\cdots+b_7v_7)_{v\\in\\mathbb F_2^7}$,\n\nwhere $v$ is ordered by its seven-bit integer. This is the standard injective $\\mathbb F_2$-linear encoder into $\\operatorname{RM}(1,7)$. A nonzero constant affine function has weight $128$, while every affine function with nonzero linear part is balanced and has weight $64$. Thus $\\iota$ has parameters $[128,8,64]_2$.\n\nApply $\\iota$ independently to the symbols of $C_{\\rm out}$, in point order and then inner-coordinate order. The resulting binary code has exact dimension\n\n$8\\cdot489,419=3,915,352$,\n\nlength\n\n$128\\cdot8,388,479=1,073,725,312$,\n\nand minimum distance at least\n\n$64\\cdot7,340,032=469,762,048$.\n\nAppend $16,512$ zero coordinates at the end. This gives exact length\n\n$1,073,725,312+16,512=1,073,741,824=2^{30}$\n\nwithout changing dimension or distance. Binary linearity follows from the linearity of $V$, evaluation, $\\iota$, and zero padding.\n\n### 5. Strict ceiling comparison\n\nThe exact certified rate is\n\n$R=\\frac{3,915,352}{2^{30}}=\\frac{489,419}{134,217,728}=0.003646455705165863$.\n\nMoreover,\n\n$R-\\frac7{1920}=\\frac{15(3,915,352)-7(2^{23})}{15\\cdot2^{30}}=\\frac{10,024}{15\\cdot2^{30}}=\\frac{1,253}{2,013,265,920}>0$.\n\nThis is not tuning within the vanilla GS formula. For the certified modular-curve point count $N_0=5\\varepsilon$, the exact genus formula gives\n\n$g=\\frac{N_0}{15}-203$.\n\nThe positive finite correction $203=\\kappa-1$ comes from the exact cusp term of the alternative Drinfeld modular curve. It is absent from the vanilla GS/TVZ designed-distance expression and is precisely what survives padding and crosses $7/1920$.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "The two quartics are irreducible by the degree-four factor test. The displayed Rabin congruences prove the degree-eight polynomial irreducible. The trace calculation proves the quadratic defining $\\mathbb F_{256}/\\mathbb F_{16}$ irreducible.",
+      "statement": "All finite fields, level primes, and the reduction prime are valid and pairwise coprime.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "Bassa\u2013Beelen\u2013Nguyen Theorem 3.2"
+      ],
+      "id": "P2",
+      "proof": "The exact products are $\\varepsilon=24\\cdot272\\cdot257=1,677,696$ and $\\kappa=6\\cdot17\\cdot2=204$. The exceptional genus term is zero, giving $g=1+\\varepsilon/3-\\kappa=559,029$.",
+      "statement": "The reduced modular curve has exact genus $559,029$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "Bassa\u2013Beelen\u2013Nguyen Theorem 4.1"
+      ],
+      "id": "P3",
+      "proof": "The class group is trivial, so $e=1$; the reduction degree is $d=4$. The ordinary branch gives $N_1\\ge5\\varepsilon=8,388,480$ over $\\mathbb F_{256}$.",
+      "statement": "There are at least $8,388,480$ rational evaluation candidates.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3",
+        "Riemann\u2013Roch"
+      ],
+      "id": "P4",
+      "proof": "For $G=1,048,447Q_0$, Riemann\u2013Roch gives $\\ell(G)\\ge489,419$. Deterministic greedy selection therefore produces an exact $489,419$-dimensional subspace.",
+      "statement": "The selected outer message space has exact dimension $489,419$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P4"
+      ],
+      "id": "P5",
+      "proof": "Since $\\deg G<L$, evaluation is injective. A nonzero function has at most $\\deg G$ evaluation zeros, giving distance at least $L-\\deg G=7,340,032$.",
+      "statement": "The outer code has parameters $[8,388,479,489,419,\\ge7,340,032]_{256}$.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P6",
+      "proof": "The affine truth-table encoder is injective and every nonzero nonconstant affine function is balanced; hence it is $[128,8,64]_2$.",
+      "statement": "The inner encoder has the required binary parameters.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P5",
+        "P6"
+      ],
+      "id": "P7",
+      "proof": "Injective concatenation gives dimension $8\\cdot489,419=3,915,352$ and distance at least $64\\cdot7,340,032=469,762,048$.",
+      "statement": "The unpadded concatenated code has the claimed dimension and target distance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P7"
+      ],
+      "id": "P8",
+      "proof": "The raw length is $128\\cdot8,388,479=1,073,725,312$; appending $16,512$ zero coordinates produces $2^{30}$ without changing dimension or distance.",
+      "statement": "The final code has exact target length.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P8"
+      ],
+      "id": "P9",
+      "proof": "The exact difference from $7/1920$ is $1,253/2,013,265,920>0$.",
+      "statement": "The construction strictly beats the vanilla ceiling.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.003646455705165863,
+  "research_direction": "Alternative finite Drinfeld modular curves with exact cusp corrections, followed by deterministic AG evaluation and RM(1,7) concatenation.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "beyond_ceiling",
+  "theorem_statement": "There is a deterministic explicit binary linear code with parameters $[2^{30},3,915,352,\\ge469,762,048]_2$. Its rate is $0.003646455705165863$, exceeding $7/1920$ by exactly $1,253/2,013,265,920$.",
+  "title": "Composite-Level Drinfeld Modular AG Code Beyond the GS\u2013Hadamard Ceiling"
+}

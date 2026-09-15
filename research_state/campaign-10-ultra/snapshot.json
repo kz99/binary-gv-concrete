@@ -1,18 +1,153 @@
 {
   "counts": {
-    "queued": 16
+    "queued": 5,
+    "running": 9,
+    "succeeded": 12
   },
   "doubly_verified_candidates": [],
   "gs_hadamard_template_ceiling": 0.0036458333333333334,
   "model": "gpt-5.6-sol",
-  "promising_candidates": [],
+  "promising_candidates": [
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": true,
+      "dimension": 3916082,
+      "id": "researcher-0009",
+      "minimum_distance": 469762048,
+      "rate": 0.0036471355706453323,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0009.json",
+      "status": "proved",
+      "submission_class": "beyond_ceiling",
+      "title": "Hermitian\u2013Simplex Multilevel Construction X Beyond the GS\u2013Hadamard Ceiling"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": true,
+      "dimension": 3915368,
+      "id": "researcher-0010",
+      "minimum_distance": 469762048,
+      "rate": 0.003646470606327057,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0010.json",
+      "status": "proved",
+      "submission_class": "beyond_ceiling",
+      "title": "All-Point Canonical-Translate Drinfeld Modular Code Beyond 7/1920"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": true,
+      "dimension": 3915352,
+      "id": "researcher-0008",
+      "minimum_distance": 469762048,
+      "rate": 0.003646455705165863,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0008.json",
+      "status": "proved",
+      "submission_class": "beyond_ceiling",
+      "title": "Composite-Level Drinfeld Modular AG Code Beyond the GS\u2013Hadamard Ceiling"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": 3905098,
+      "id": "researcher-0004",
+      "minimum_distance": 469762056,
+      "rate": 0.003636905923485756,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0004.json",
+      "status": "proved",
+      "submission_class": "ceiling_optimization",
+      "title": "Two-jet GS Construction X with dimension 3,905,098"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": 3859928,
+      "id": "researcher-0003",
+      "minimum_distance": 469762048,
+      "rate": 0.0035948380827903748,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0003.json",
+      "status": "proved",
+      "submission_class": "ceiling_optimization",
+      "title": "Nested GS Construction X with an explicit [20,8,8] side inner code"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": 3700792,
+      "id": "researcher-0001",
+      "minimum_distance": 469762048,
+      "rate": 0.003446631133556366,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0001.json",
+      "status": "proved",
+      "submission_class": "ceiling_optimization",
+      "title": "Exact GS degree-eight all-point special-divisor code: dimension 3,700,792"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": 61455,
+      "id": "researcher-0006",
+      "minimum_distance": 469762048,
+      "rate": 5.723442882299423e-05,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0006.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Exact 1/8-balanced trace code and finite amplification barriers"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": null,
+      "id": "researcher-0002",
+      "minimum_distance": 469762048,
+      "rate": null,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0002.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Vanilla GS\u2013Hadamard certificate barrier and minimal escape condition"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": null,
+      "id": "researcher-0005",
+      "minimum_distance": 469762048,
+      "rate": null,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0005.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Frobenius-collapse and Griesmer barriers for GS alphabet reduction"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": null,
+      "id": "researcher-0007",
+      "minimum_distance": 469762048,
+      "rate": null,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0007.json",
+      "status": "proved",
+      "submission_class": "proof_tool",
+      "title": "A deterministic DMW-nice [63,8,28] inner code and finite-length obstruction"
+    },
+    {
+      "accepted_reviews": 0,
+      "ceiling_beaten": false,
+      "dimension": null,
+      "id": "researcher-0012",
+      "minimum_distance": 469762048,
+      "rate": null,
+      "source_path": "research_state/campaign-10-ultra/submissions/researcher-0012.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "GS\u2013Hadamard certificate envelope and the minimal outer escape"
+    }
+  ],
   "reasoning_effort": "ultra",
-  "researcher_count": 10,
+  "researcher_count": 20,
   "schema": "binary-gv-campaign-snapshot-v1",
   "target": {
     "block_length": 1073741824,
     "current_dimension": 3688448,
     "minimum_distance": 469762048
   },
-  "updated_at": "2026-09-15T00:02:59Z"
+  "updated_at": "2026-09-15T02:54:10Z"
 }

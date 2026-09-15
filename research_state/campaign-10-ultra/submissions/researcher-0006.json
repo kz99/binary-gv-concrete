@@ -1,0 +1,195 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "Let\n\n\\[\nF=\\mathbb F_2[\\theta]/(\\theta^{15}+\\theta+1),\\qquad q=|F|=2^{15}.\n\\]\n\nRepresent field elements in the polynomial basis \\(1,\\theta,\\ldots,\\theta^{14}\\), ordered by their corresponding 15-bit integers. Let\n\n\\[\n\\mathcal P=\\{P\\in F[X]:\\deg P\\le4096\\}.\n\\]\n\nFor \\(P\\in\\mathcal P\\), define the binary word\n\n\\[\nc_P(a,b)=\\operatorname{Tr}_{F/\\mathbb F_2}(bP(a)),\\qquad (a,b)\\in F^2,\n\\]\n\nwith coordinates ordered lexicographically by the integer representations of \\((a,b)\\). The code is\n\n\\[\nC=\\{c_P:P\\in\\mathcal P\\}\\subseteq\\mathbb F_2^{F^2}.\n\\]\n\nNo graph, random choice, shortening, puncturing, or padding is used. This is an exact \\(1/8\\)-balanced construction, but its dimension is far below the verified record.",
+  "dimension": 61455,
+  "distance_audit": [
+    "For nonzero P, let r be its number of roots in F. Since deg P\u22644096, r\u22644096.",
+    "For each nonroot a, b\u21a6Tr(bP(a)) is a nonzero F\u2082-linear functional and therefore equals 1 on exactly 2^14 values of b.",
+    "Thus wt(c_P)=(2^15-r)2^14\u2265(2^15-2^12)2^14=7\u00b72^26=469,762,048.",
+    "The lower bound is attained by the product of X-a over the first 4096 field elements, so the minimum distance is exactly 469,762,048.",
+    "Every nonzero weight is at most 2^29, so every nonzero codeword has relative weight in [7/16,1/2]\u2286[7/16,9/16]; hence the code is 1/8-balanced."
+  ],
+  "explicitness_audit": [
+    "The field is fixed by the concrete irreducible polynomial X^15+X+1 and the polynomial basis.",
+    "Rabin's criterion is certified by X^(2^3)\u2261X^8, X^(2^5)\u2261X^4+X^2, X^(2^15)\u2261X modulo X^15+X+1, with the two required gcds equal to 1.",
+    "Messages are all coefficient vectors of degree-at-most-4096 polynomials; the encoder is the displayed trace formula.",
+    "The coordinate ordering is the lexicographic order of the two 15-bit field representations.",
+    "The amplification obstructions concern only the cited published schedules or standard spectral certificates; they are not universal impossibility claims."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The Section 5 conditions \u03b1\u22641/100 and \u03b1\u00b3/(2log\u2082(1/\u03b1))\u22651/log\u2082(1/\u03b5), or the Section 3 constant-\u03b5 fallback.",
+      "result": "The optimized parameters are outside their proved regime at \u03b5=1/8; the fallback has raw walk multiplier greater than 2^264.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "Finite wide-replacement and fallback-walk obstruction."
+    },
+    {
+      "hypotheses": "t=d\u00b2, \u2113=\u03bat^\u03bar, and the finite bound of Lemma 2.12.",
+      "result": "For \u03ba\u22652 the raw multiplier is at least 2^32; for \u03ba=1 the lemma certifies no contraction.",
+      "source": "[Hsieh\u2013Mohanty\u2013Zhang, Explicit Almost-Optimal \u03b5-Balanced Codes via Free Expander Walks](https://arxiv.org/pdf/2601.12606)",
+      "used_for": "Free-expander finite-length obstruction."
+    },
+    {
+      "hypotheses": "Exact size L=|V(G)|d^s c^\u2113 and Theorem 6.2's bound 10(2\u03c9_H)^(\u2113\u22122).",
+      "result": "No parameters compatible with the target's overhead budget make the published finite norm bound at most 1/8.",
+      "source": "[Cohen\u2013Cohen, Wide Replacement Products Meet Gray Codes](https://eccc.weizmann.ac.il/report/2025/179/download)",
+      "used_for": "Gray-code wide-replacement obstruction."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Seek a deterministic parity sampler with total direct-lift overhead at most 274; this is necessary to cross 7/1920 when dimension cannot exceed the base length.",
+    "Develop a code-specific signed spectral estimate that improves on the global one-edge bound \u03b5\u2080\u00b2+\u039b(1\u2212\u03b5\u2080\u00b2).",
+    "Find an exact compatible-size graph family and coordinate-thinning theorem; asymptotic n+o(n) vertex counts are insufficient here.",
+    "Investigate trace or subfield images of AG codes that are not constrained to the Reed\u2013Solomon/simplex tradeoff used by the exact construction above."
+  ],
+  "obstructions": [
+    "The exact trace construction has dimension 61,455, which is 3,626,993 below the current verified dimension.",
+    "A direct padded walk lift retaining dimension needs multiplier at most floor(2^30/3,688,449)=291; crossing 7/1920 tightens this to 274.",
+    "Every zero-padded one-edge lift certified solely by the standard global spectral inequality has dimension at most 3,404,152.",
+    "Ta-Shma's optimized parameter hypothesis fails at \u03b5=1/8 by a factor exceeding 4.4 million; its prescribed fallback has multiplier greater than 2^264.",
+    "The free-walk schedule either exceeds the entire length budget or has a vacuous bias bound.",
+    "The Cohen\u2013Cohen finite norm theorem requires gadget overhead exceeding the record-compatible shortening budget."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "2^15",
+      "quantity": "field size q",
+      "value": "32,768"
+    },
+    {
+      "derivation": "q\u00b2",
+      "quantity": "block length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "15\u00b7(4096+1)",
+      "quantity": "binary dimension",
+      "value": "61,455"
+    },
+    {
+      "derivation": "(q\u22124096)q/2",
+      "quantity": "minimum distance",
+      "value": "469,762,048"
+    },
+    {
+      "derivation": "61,455/2^30",
+      "quantity": "rate",
+      "value": "0.00005723442882299423"
+    },
+    {
+      "derivation": "floor(2^30/3,688,449)",
+      "quantity": "maximum direct-lift multiplier for a new record",
+      "value": "291"
+    },
+    {
+      "derivation": "floor(2^30/3,914,684)",
+      "quantity": "maximum direct-lift multiplier for beating 7/1920",
+      "value": "274"
+    },
+    {
+      "derivation": "finite Hamming/spectral audit, maximum at degree 68",
+      "quantity": "one-edge spectral-class dimension ceiling",
+      "value": "3,404,152"
+    },
+    {
+      "derivation": "\u03ba=2,d=2,r=1 gives \u2113=32",
+      "quantity": "minimum \u03ba\u22652 free-walk multiplier",
+      "value": "2^32"
+    },
+    {
+      "derivation": "Ta-Shma fallback: D>2^12 and t\u226522",
+      "quantity": "fallback multiplier lower bound",
+      "value": ">2^264"
+    }
+  ],
+  "proof_markdown": "### 1. Exact balanced code\n\nThe polynomial \\(f=X^{15}+X+1\\) is irreducible over \\(\\mathbb F_2\\). Indeed, the Rabin test for degree 15 requires the tests belonging to the prime divisors 3 and 5 of 15. Repeated squaring modulo \\(f\\) gives\n\n\\[\nX^{2^3}\\equiv X^8,\\qquad X^{2^5}\\equiv X^4+X^2,\n\\qquad X^{2^{15}}\\equiv X,\n\\]\n\nand\n\n\\[\n\\gcd(f,X^8+X)=\\gcd(f,X^4+X^2+X)=1.\n\\]\n\nThus the displayed quotient is the field \\(F=\\mathbb F_{2^{15}}\\).\n\nThe encoder \\(P\\mapsto c_P\\) is \\(\\mathbb F_2\\)-linear. If \\(c_P=0\\), then for each \\(a\\in F\\),\n\n\\[\n\\operatorname{Tr}(bP(a))=0\\quad\\text{for every }b\\in F.\n\\]\n\nThe trace pairing is nondegenerate, so \\(P(a)=0\\) for every \\(a\\). Since \\(\\deg P<|F|\\), this forces \\(P=0\\). Hence the encoder is injective and\n\n\\[\n\\dim_{\\mathbb F_2}C=15(4096+1)=61,455.\n\\]\n\nFor nonzero \\(P\\), write \\(r=|\\{a:P(a)=0\\}|\\). For each of the \\(q-r\\) nonroots, multiplication by \\(P(a)\\) is a bijection and the absolute trace is a nonzero binary functional. Exactly \\(q/2\\) choices of \\(b\\) therefore contribute a one. Consequently\n\n\\[\n\\operatorname{wt}(c_P)=(q-r)q/2\\ge(q-4096)q/2=7\\cdot2^{26}.\n\\]\n\nA degree-4096 polynomial with 4096 prescribed distinct roots attains equality. This proves exact parameters\n\n\\[\n[2^{30},61,455,469,762,048]_2.\n\\]\n\nMoreover, \\(0\\le r/q\\le1/8\\), and the signed bias of \\(c_P\\) is exactly \\(r/q\\). Thus the code is \\(1/8\\)-balanced.\n\n### 2. Direct-lift length budget\n\nSuppose an amplification map starts from a length-\\(v\\) binary code, retains at most its original dimension, and produces \\(M\\) coordinates per base coordinate. Its raw length is \\(L=vM\\), while its dimension is at most \\(v\\). If \\(L\\le2^{30}\\) and the result is completed by zero padding, dimension at least \\(K=3,688,449\\) requires\n\n\\[\nM\\le\\left\\lfloor\\frac{2^{30}}K\\right\\rfloor=291.\n\\]\n\nFor a \\(B\\)-biased multiset, arbitrary shortening has little more room. If the retained message subspace has dimension \\(k\\), every removed row lies in its orthogonal complement. Fourier expansion of that subspace's indicator shows that the removable fraction is at most\n\n\\[\nB+(1-B)2^{-k}.\n\\]\n\nThus shortening a \\(B\\le1/8\\) raw code to length \\(2^{30}\\) while retaining \\(k\\ge K\\) requires\n\n\\[\nL\\le \\frac{8\\,2^{30}}{7(1-2^{-K})},\n\\qquad M\\le332.\n\\]\n\n### 3. One-edge spectral ceiling\n\nLet a base code of length \\(v\\) be \\(\\varepsilon_0\\)-balanced and let \\(A\\) be the normalized adjacency matrix of an undirected \\(D\\)-regular graph. The XOR over directed edges has bias bounded by\n\n\\[\nB\\le \\varepsilon_0^2+\\Lambda(1-\\varepsilon_0^2),\n\\]\n\nwhere \\(\\Lambda=\\|A|_{\\mathbf1^\\perp}\\|\\). This follows by writing a sign word as \\(x=\\mu\\mathbf1+y\\).\n\nFor a zero-padded target certificate, the raw length is at least \\(7\\cdot2^{30}/8\\) and it is safe to relax the needed bound to \\(B\\le1/8\\). Put\n\n\\[\nv_D=\\left\\lceil\\frac{7\\cdot2^{30}}{8D}\\right\\rceil,\n\\qquad s_D=\\sqrt{\\frac{v_D-D}{D(v_D-1)}}.\n\\]\n\nThe Frobenius identity \\(\\operatorname{tr}(A^2)=v/D\\) gives \\(\\Lambda\\ge s_D\\). Therefore\n\n\\[\n\\varepsilon_0\\le E_D=\n\\sqrt{\\frac{1/8-s_D}{1-s_D}}.\n\\]\n\nApplying the finite Hamming bound to the base code and using\n\n\\[\n\\binom vt\\ge\\frac{2^{v h_2(t/v)}}{v+1}\n\\]\n\ngives\n\n\\[\n\\frac{k}{2^{30}}\\le U_D:=\\frac1D\\left[1-h_2\\left(\\frac{1-E_D}{4}-\\frac1{v_D}\\right)+\\frac{\\log_2(v_D+1)}{v_D}\\right].\n\\]\n\nDegrees \\(D\\le63\\) have \\(s_D>1/8\\); degrees \\(D\\ge292\\) already satisfy \\(k/2^{30}\\le1/D<3,688,448/2^{30}\\). An outward-rounded evaluation of the 228 remaining explicit expressions has its maximum at \\(D=68\\):\n\n\\[\nv_D=13,816,531,\\quad E_D=0.06517341718,\\quad\nU_D<0.003170365.\n\\]\n\nHence this standard padded one-edge spectral class has \\(k\\le3,404,152\\). This does not exclude a code-specific cancellation theorem stronger than the global spectral estimate.\n\n### 4. Published amplification schedules\n\nIn [Ta-Shma's Section 5](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf), the near-optimal branch requires\n\n\\[\n\\alpha\\le0.01,\\qquad\n\\frac{\\alpha^3}{2\\log_2(1/\\alpha)}\\ge\\frac1{\\log_2(1/\\varepsilon)}.\n\\]\n\nAt \\(\\varepsilon=1/8\\), the right side is \\(1/3\\), while the left side is at most \\(7.526\\cdot10^{-8}\\). Even disregarding this failure, \\(s\\ge100\\) and the prescribed \\(D_2>s^{4s}\\) already give \\(D_2>10^{800}>2^{30}\\).\n\nThe paper therefore directs constant \\(\\varepsilon\\) to its ordinary-walk fallback. That fallback has \\(\\lambda<0.04\\), walk length \\(t\\ge22\\), and LPS degree \\(D>4951>2^{12}\\). Its multiplier is consequently greater than \\(2^{264}\\), before counting any base coordinates.\n\nFor the [free-expander schedule](https://arxiv.org/pdf/2601.12606),\n\n\\[\nt=d^2,\\qquad \\ell=\\kappa d^{2\\kappa}r,\n\\qquad L=v d^\\ell.\n\\]\n\nIf \\(\\kappa\\ge2\\), then \\(\\ell\\ge32\\) and \\(d^\\ell\\ge2^{32}>2^{30}\\). If \\(\\kappa=1\\), Lemma 2.12 becomes\n\n\\[\n\\operatorname{bias}\\le\n\\lambda^{-\\ell/\\sqrt d}2^{2\\ell}>1,\n\\]\n\nso only the trivial bias bound remains. Thus its published finite lemma supplies no target-length certificate.\n\nFinally, [Cohen\u2013Cohen](https://eccc.weizmann.ac.il/report/2025/179/download) gives exact output length \\(L=vqc^\\ell\\), where \\(q=d^s\\), and finite norm bound\n\n\\[\nB\\le10(2\\omega_H)^{\\ell-2}.\n\\]\n\nThe shortening budget above forces \\(qc^\\ell\\le332\\). A useful bound needs \\(\\ell\\ge3\\), and a length-at-least-three double-conflict-free word needs \\(s\\ge3\\), hence \\(q\\ge8\\). If \\(c\\ge4\\), then \\(qc^\\ell\\ge512\\). If \\(c\\le2\\), the Frobenius bound gives \\(2\\omega_H>1\\). For \\(c=3\\), the budget forces \\(\\ell=3\\) and \\(q\\le12\\), while\n\n\\[\n\\omega_H^2\\ge\\frac{q-c}{c(q-1)}\\ge\\frac5{21};\n\\]\n\ntherefore the displayed norm bound exceeds \\(20\\sqrt{5/21}>9\\). No case certifies bias \\(1/8\\).\n\nThese are finite obstructions to the stated constructions and proof templates, not to a new sparsified or code-specific expander mechanism.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field",
+      "proof": "Rabin's degree-15 criterion is satisfied by X^15+X+1 using the displayed modular-power and gcd identities.",
+      "statement": "The stated quotient is a deterministic representation of F_(2^15).",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field"
+      ],
+      "id": "linearity-dimension",
+      "proof": "Trace and evaluation are F\u2082-linear. Nondegeneracy of the trace pairing and deg P<|F| prove injectivity, giving 15\u00b74097 dimensions.",
+      "statement": "The trace-evaluation code is binary linear of exact dimension 61,455.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field",
+        "linearity-dimension"
+      ],
+      "id": "distance",
+      "proof": "A nonzero polynomial has at most 4096 roots; every nonroot contributes exactly 2^14 ones. A polynomial with 4096 prescribed roots attains the bound.",
+      "statement": "The code has exact minimum distance 469,762,048 and bias at most 1/8.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "lift-budget",
+      "proof": "A direct M-fold lift has dimension at most its v base coordinates and length vM. Dividing the target length by the record threshold gives M\u2264291; Fourier counting gives M\u2264332 even under arbitrary shortening of a 1/8-biased output.",
+      "statement": "Record-compatible direct amplification has a tiny finite overhead budget.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "lift-budget"
+      ],
+      "id": "one-edge-ceiling",
+      "proof": "Combine the Frobenius lower bound on graph spectral norm, the standard edge-XOR bias estimate, and the finite Hamming bound. Evaluation of D=64,\u2026,291 is maximized at D=68 and yields k\u22643,404,152.",
+      "statement": "The standard padded one-edge spectral amplifier cannot improve the record.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "lift-budget"
+      ],
+      "id": "tashma-audit",
+      "proof": "The optimized \u03b1-hypothesis fails numerically. The prescribed fallback has D>2^12 and t\u226522, hence multiplier >2^264.",
+      "statement": "Ta-Shma's published parameter schedules do not instantiate at this target.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "lift-budget"
+      ],
+      "id": "free-walk-audit",
+      "proof": "For \u03ba\u22652, the minimum schedule already has d^\u2113\u22652^32; \u03ba=1 makes the finite bias expression exceed one.",
+      "statement": "The published free-expander schedule has no fitting contracting parameter.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "lift-budget"
+      ],
+      "id": "cohen-cohen-audit",
+      "proof": "The shortening budget is at most 332. The cases c\u22654, c\u22642, and c=3 all contradict either this budget or the exact finite norm bound.",
+      "statement": "The Cohen\u2013Cohen finite certificate cannot meet the target and record simultaneously.",
+      "status": "proved"
+    }
+  ],
+  "rate": 5.723442882299423e-05,
+  "research_direction": "Exact finite instantiation of a 1/8-balanced trace code, followed by finite overhead audits of ordinary, free-expander, and wide-replacement amplification.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "There is a deterministic 1/8-balanced binary linear code with exact parameters [1,073,741,824, 61,455, 469,762,048]_2. It is not competitive with the current record. Moreover, the standard one-edge spectral certificate has dimension ceiling 3,404,152 under zero padding, while the published Ta-Shma, free-expander-walk, and Cohen\u2013Cohen schedules have no finite parameter choice that simultaneously reaches the target length, target distance, and record dimension.",
+  "title": "Exact 1/8-balanced trace code and finite amplification barriers"
+}

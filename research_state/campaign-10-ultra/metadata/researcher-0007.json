@@ -1,0 +1,28 @@
+{
+  "command": [
+    "codex",
+    "exec",
+    "--model",
+    "gpt-5.6-sol",
+    "--config",
+    "model_reasoning_effort=\"ultra\"",
+    "--disable",
+    "multi_agent",
+    "--ephemeral",
+    "--sandbox",
+    "read-only",
+    "--cd",
+    "/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete",
+    "--output-schema",
+    "/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-10-ultra/agent_logs/20260915T011548Z-7f893d5674-2fce41906f/schema.json",
+    "--output-last-message",
+    "/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-10-ultra/agent_logs/20260915T011548Z-7f893d5674-2fce41906f/response.json"
+  ],
+  "durable_output": "/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-10-ultra/submissions/researcher-0007.json",
+  "invocation_id": "20260915T011548Z-7f893d5674-2fce41906f",
+  "model": "gpt-5.6-sol",
+  "nested_agents_disabled": true,
+  "reasoning_effort": "ultra",
+  "response_path": "/Users/kaizheng/.codex/worktrees/1f44/SSE-auto/binary-gv-concrete/research_state/campaign-10-ultra/agent_logs/20260915T011548Z-7f893d5674-2fce41906f/response.json",
+  "role": "researcher-0007"
+}

@@ -1,0 +1,209 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard construction is claimed. This result formalizes the narrow certificate class consisting of a one-point GS evaluation code over \\(\\mathbb F_{2^m}\\), the inner code \\(\\operatorname{RM}(1,m-1)\\), ordinary symbolwise concatenation, designed outer distance, bare Riemann\u2013Roch dimension credit, product-distance analysis, and zero padding. It proves the advertised asymptotic envelope and gives exact conditions under which a stronger outer tradeoff or inner code would escape it.",
+  "dimension": null,
+  "distance_audit": [
+    "The inner code \\(\\operatorname{RM}(1,m-1)\\) has length \\(2^{m-1}\\), dimension \\(m\\), and minimum distance \\(2^{m-2}\\): every nonconstant affine function is balanced, while the nonzero constant function has full weight.",
+    "For every nonzero outer word, at least \\(D\\) symbols are nonzero. Injectivity of the inner map sends each such symbol to a nonzero inner word of weight at least \\(d\\); disjoint coordinate blocks therefore give weight at least \\(Dd\\).",
+    "With the RM inner code, the relative product bound is \\(\\delta_{\\rm bin}\\ge \\Delta_{\\rm out}/2\\), so the target \\(7/16\\) forces \\(\\Delta_{\\rm out}\\ge7/8\\) in an unpadded construction.",
+    "At fixed length \\(2^{30}\\), the exact required outer distance for \\(m=8\\) is \\(469,762,048/64=7,340,032\\). This uses the final padded length, not merely the unpadded relative distance.",
+    "Designed distance and the concatenation product are lower bounds only. An actual-distance bonus or a symbol-distribution argument is outside the proved barrier.",
+    "For \\(m=30\\), the exact outer-distance requirement is \\(\\lceil7/4\\rceil=2\\); the simplified \\(7L/8\\) expression is not valid there. For even \\(m\\ge32\\), one unpunctured inner block is already longer than \\(2^{30}\\)."
+  ],
+  "explicitness_audit": [
+    "This is a deterministic symbolic ceiling lemma, not a code construction; no random existence or sampled-word argument is used.",
+    "All target, inner-code, padding, dimension, and distance arithmetic is exact.",
+    "No finite GS level satisfying the escape condition is asserted, and no unavailable special divisor is assumed.",
+    "The asymptotic expression is explicitly not presented as a pointwise upper bound on finite GS-derived codes.",
+    "No repository files were changed because this response is an obstruction/proof-tool result rather than a leaderboard submission."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "For a prime power q, the tower is over F_{q^2}; its rational-place-to-genus ratio tends to q\u22121.",
+      "result": "An explicit Artin\u2013Schreier tower attaining the Drinfeld\u2013Vl\u0103du\u0163 bound.",
+      "source": "A. Garcia and H. Stichtenoth, A Tower of Artin\u2013Schreier Extensions of Function Fields Attaining the Drinfeld\u2013Vl\u0103du\u0163 Bound, Invent. Math. 121 (1995), DOI 10.1007/BF01884295.",
+      "used_for": "The asymptotic genus penalty 1/(2^{m/2}\u22121)."
+    },
+    {
+      "hypotheses": "The evaluation places are distinct and disjoint from G, with deg G<L.",
+      "result": "The evaluation code has dimension \u2113(G), designed distance at least L\u2212deg G, and \u2113(G)=deg G+1\u2212g+i(G).",
+      "source": "H. Stichtenoth, Algebraic Function Fields and Codes, 2nd ed., Chapter 2; also stated in proofs/gs-rm-baseline.md.",
+      "used_for": "The bare Riemann\u2013Roch/designed-distance certificate and the audit of its omitted special-divisor term."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Turn the exact finite condition \\(p+\\bar g-1-\\sigma\\le559,240\\) into a level-by-level audit of explicit densified GS levels over \\(\\mathbb F_{256}\\).",
+    "Seek an explicit outer code over \\(\\mathbb F_{256}\\) with \\(D\\ge7,340,032\\) and \\(K\\ge489,336\\) using at most \\(8,388,608\\) symbols.",
+    "Compute exact \\(\\ell(G)\\), order-bound distance, or special-divisor gains at promising GS levels; bare Riemann\u2013Roch cannot rule these out.",
+    "Test deterministic binary inner codes \\([\\ell,m,d]_2\\) against \\(\\frac m\\ell(1-\\gamma_m-\\frac{7\\ell}{16d})>7/1920\\).",
+    "Record the obstruction theorem and finite-loss criterion in the research section of data/records.json when write access is available."
+  ],
+  "obstructions": [
+    "The advertised formula optimizes a lower-bound proof calculus. Riemann\u2013Roch, designed distance, and product distance do not upper-bound the corresponding actual parameters.",
+    "There is no uniquely weakest hypothesis under logical implication: stronger inner tradeoffs, stronger outer tradeoffs, and better concatenated-distance analyses are independent escapes.",
+    "Holding every other ingredient fixed at m=8, the smallest quantitative escape is any strict outer-rate gain over 7/120 at outer relative distance at least 7/8.",
+    "At the concrete verified level, an infinitesimal asymptotic gain is not enough: its certified aggregate genus-plus-padding loss must improve by 28,280 outer dimensions.",
+    "At m=8, merely replacing [128,8,64] by a hypothetical [128,8,65] inner code is impossible by the Plotkin bound; an inner-only escape must change the joint length-distance tradeoff."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "2^30",
+      "quantity": "Target block length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "(7/16)\u00b72^30",
+      "quantity": "Required minimum distance",
+      "value": "469,762,048"
+    },
+    {
+      "derivation": "2^(8/2)",
+      "quantity": "m=8 square-root field parameter q",
+      "value": "16"
+    },
+    {
+      "derivation": "q^2=2^8",
+      "quantity": "m=8 outer alphabet",
+      "value": "F_256"
+    },
+    {
+      "derivation": "[2^(8\u22121),8,2^(8\u22122)]",
+      "quantity": "m=8 inner RM parameters",
+      "value": "[128,8,64]_2"
+    },
+    {
+      "derivation": "1/(2^(8/2)\u22121)",
+      "quantity": "Asymptotic GS genus penalty",
+      "value": "1/15"
+    },
+    {
+      "derivation": "(1/8)\u2212(1/15)",
+      "quantity": "Bare outer RR rate at distance 7/8",
+      "value": "7/120"
+    },
+    {
+      "derivation": "(8/128)\u00b7(7/120)",
+      "quantity": "Vanilla template envelope",
+      "value": "7/1920 = 0.0036458333333333333"
+    },
+    {
+      "derivation": "(7/1920)\u00b72^30",
+      "quantity": "Ceiling dimension as a real number",
+      "value": "3,914,683 + 11/15"
+    },
+    {
+      "derivation": "Smallest integer strictly above the ceiling",
+      "quantity": "General binary dimension needed to cross",
+      "value": "3,914,684"
+    },
+    {
+      "derivation": "m=8 concatenated dimensions are multiples of 8",
+      "quantity": "First m=8 dimension crossing the ceiling",
+      "value": "3,914,688 = 8\u00b7489,336"
+    },
+    {
+      "derivation": "2^30/128",
+      "quantity": "m=8 outer-slot capacity T",
+      "value": "8,388,608"
+    },
+    {
+      "derivation": "469,762,048/64",
+      "quantity": "Required m=8 outer distance",
+      "value": "7,340,032"
+    },
+    {
+      "derivation": "T\u22128,355,840",
+      "quantity": "Verified baseline outer-slot deficit p",
+      "value": "32,768"
+    },
+    {
+      "derivation": "p+g\u0304\u22121=32,768+554,753\u22121",
+      "quantity": "Verified certified aggregate loss",
+      "value": "587,520"
+    },
+    {
+      "derivation": "T/8\u2212489,336",
+      "quantity": "Largest aggregate loss that crosses",
+      "value": "559,240"
+    },
+    {
+      "derivation": "587,520\u2212559,240",
+      "quantity": "Required improvement over the verified outer certificate",
+      "value": "28,280 outer dimensions = 226,240 binary dimensions"
+    }
+  ],
+  "proof_markdown": "### Vanilla GS\u2013Hadamard certificate barrier\n\nLet \\(m\\in2\\mathbb Z_{>0}\\), put\n\\[\nh=2^{m-1},\\qquad d_0=2^{m-2},\\qquad q=2^{m/2},\\qquad \\gamma_m=\\frac1{q-1}.\n\\]\nConsider outer evaluation codes of length \\(L_j\\), genus \\(g_j\\), and divisor degree \\(a_j\\), concatenated with \\(\\operatorname{RM}(1,m-1)=[h,m,d_0]_2\\). Let the concatenated word be zero-padded to length \\(n_j\\ge hL_j\\), and write\n\\[\n\\lambda_j=\\frac{hL_j}{n_j}\\le1.\n\\]\nAssume that distance is certified only through\n\\[\nd_0(L_j-a_j)\\ge\\frac7{16}n_j,\n\\tag{1}\n\\]\nthat \\(\\liminf_j(g_j-1)/L_j\\ge\\gamma_m\\), and that credited outer dimension is only \\([a_j+1-g_j]_+\\). The same conclusion applies to actual dimensions if the specialness \\(i(G_j)=\\ell(K_j-G_j)=o(L_j)\\).\n\nFrom (1) and \\(d_0=h/2\\),\n\\[\n\\frac{\\lambda_j}{2}\\left(1-\\frac{a_j}{L_j}\\right)\\ge\\frac7{16},\n\\qquad\n\\frac{a_j}{L_j}\\le1-\\frac7{8\\lambda_j}.\n\\]\nConsequently the credited binary rate satisfies\n\\[\nR_j^{\\rm cert}\n=\\frac{m[a_j+1-g_j]_+}{n_j}\n\\le\n\\frac m h\\left[\n\\lambda_j\\left(1-\\frac{g_j-1}{L_j}\\right)-\\frac78\n\\right]_+.\n\\]\nBecause \\(\\lambda_j\\le1\\), taking the limsup gives\n\\[\n\\limsup_jR_j^{\\rm cert}\n\\le\n\\frac m{2^{m-1}}\n\\left(\\frac18-\\frac1{2^{m/2}-1}\\right)_+.\n\\tag{2}\n\\]\nThus zero padding cannot improve the envelope. The [Garcia\u2013Stichtenoth tower theorem](https://doi.org/10.1007/BF01884295) supplies the limiting ratio used in (2).\n\n### Optimization over every positive even m\n\nFor \\(m=2,4,6\\), one has \\(1/(2^{m/2}-1)\\ge1/7>1/8\\), so (2) is zero. At \\(m=8\\),\n\\[\nR_{\\rm template}(8)\n=\\frac8{128}\\left(\\frac18-\\frac1{15}\\right)\n=\\frac1{16}\\cdot\\frac7{120}\n=\\frac7{1920}.\n\\]\nFor every even \\(m\\ge10\\),\n\\[\nR_{\\rm template}(m)<\\frac m{2^{m+2}}.\n\\]\nThe latter quantity decreases along even integers because\n\\[\n\\frac{(m+2)/2^{m+4}}{m/2^{m+2}}=\\frac{m+2}{4m}<1.\n\\]\nTherefore\n\\[\nR_{\\rm template}(m)<\\frac{10}{2^{12}}=\frac5{2048}<\\frac7{1920}.\n\\]\nHence \\(m=8\\) is the unique maximizer.\n\n### Scope audit\n\nRiemann\u2013Roch actually gives\n\\[\n\\ell(G)=\\deg G+1-g+i(G),\\qquad i(G)\\ge0,\n\\]\nnot an upper bound \\(\\ell(G)\\le\\deg G+1-g\\). Likewise, \\(L-\\deg G\\) and the concatenation product are only lower bounds on distance. Finally, \\((g-1)/L\\to1/(q-1)\\) is asymptotic rather than a finite pointwise inequality. Thus (2) is an upper bound on what this restricted certificate credits, not on all actual GS-derived codes.\n\n### Minimal aggregate escape\n\nKeep \\(m=8\\), the \\([128,8,64]\\) inner code, ordinary concatenation, no padding, and product-distance certification. An outer code with rate \\(\\rho\\) and relative distance \\(\\Delta\\) gives binary rate \\(\\rho/16\\) and certified relative distance \\(\\Delta/2\\). It crosses the envelope exactly when\n\\[\n\\Delta\\ge\\frac78,\n\\qquad\n\\rho>16\\cdot\\frac7{1920}=\\frac7{120}.\n\\tag{3}\n\\]\nThe bare RR line attains equality in (3). Therefore, holding all other hypotheses fixed, any strict certified outer-rate improvement at this point suffices. This is the smallest quantitative single relaxation, although stronger-inner and better-distance arguments are logically incomparable alternatives.\n\nFor a general unpadded binary inner code \\([\\ell,m,d]_2\\), the same outer line credits\n\\[\n\\Phi_m(\\ell,d)=\n\\frac m\\ell\n\\left(1-\\gamma_m-\\frac{7\\ell}{16d}\\right)_+.\n\\]\nIt escapes precisely when \\(\\Phi_m(\\ell,d)>7/1920\\). At \\(m=8\\), this becomes\n\\[\nd>\\frac{960\\ell}{2048-\\ell}.\n\\tag{4}\n\\]\nThe standard pair \\((\\ell,d)=(128,64)\\) is exactly on the boundary.\n\n### Exact finite m=8 audit\n\nLet\n\\[\nT=\\frac{2^{30}}{128}=2^{23}=8,388,608,\n\\qquad L=T-p.\n\\]\nThe required outer distance is\n\\[\nD=\\frac{469,762,048}{64}=7,340,032=\\frac78T.\n\\]\nChoosing the largest divisor degree permitted by designed distance and using a certified genus upper bound \\(\\bar g\\) gives\n\\[\nK_{\\rm RR}=L-D+1-\\bar g\n=\\frac T8-(p+\\bar g-1).\n\\tag{5}\n\\]\nA general binary code first crosses \\(7/1920\\) at dimension \\(3,914,684\\). Since an \\(m=8\\) concatenated dimension is divisible by eight, it must instead have\n\\[\nk\\ge3,914,688,\n\\qquad K\\ge489,336.\n\\]\nSubstituting into (5), bare RR accounting crosses exactly when\n\\[\np+\\bar g-1\\le559,240.\n\\tag{6}\n\\]\nFor the verified GS baseline,\n\\[\np=32,768,\n\\qquad \\bar g=554,753,\n\\qquad p+\\bar g-1=587,520.\n\\]\nIt is therefore \\(587,520-559,240=28,280\\) certified outer dimensions short of crossing the asymptotic envelope. No theorem in the reviewed records supplies those dimensions, so this audit produces no new leaderboard code.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "Affine functions on F_2^(m\u22121) give length 2^(m\u22121), dimension m, and minimum weight 2^(m\u22122); nonconstant affine functions are balanced.",
+      "statement": "Verify the exact RM(1,m\u22121) inner parameters.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "Introduce the occupied-length fraction \u03bb, convert the product-distance requirement into a bound on deg(G)/L, and substitute the bare Riemann\u2013Roch dimension credit. Maximization over \u03bb\u22641 gives the stated expression.",
+      "statement": "Derive the padded asymptotic vanilla certificate envelope.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2"
+      ],
+      "id": "P3",
+      "proof": "The positive part vanishes for m\u22646; direct substitution gives 7/1920 at m=8; for m\u226510, bound by m/2^(m+2), whose even subsequence is decreasing and already below 7/1920 at m=10.",
+      "statement": "Prove that m=8 is the unique maximizer over all positive even m.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2"
+      ],
+      "id": "P4",
+      "proof": "Riemann\u2013Roch includes the nonnegative specialness term i(G), while designed and product distances are one-sided lower bounds. The tower ratio is asymptotic. Therefore the result bounds only the restricted certificate.",
+      "statement": "Audit the logical scope of the word ceiling.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2"
+      ],
+      "id": "P5",
+      "proof": "At m=8 the inner rate is 1/16 and relative distance is 1/2. Thus target distance requires outer relative distance at least 7/8, and crossing requires outer rate greater than 16\u00b7(7/1920)=7/120.",
+      "statement": "Identify the minimal holding-all-else-fixed outer escape condition.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "At N=2^30 there are T=2^23 inner blocks. Substitution of the exact outer-distance requirement into Riemann\u2013Roch yields K=T/8\u2212(p+g\u0304\u22121). Integer and divisibility arithmetic gives the loss threshold 559,240 and the baseline gap 28,280.",
+      "statement": "Compute the exact finite m=8 crossing threshold.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Treat 7/1920 as the optimum of the asymptotic vanilla RR/designed-distance/product certificate. The quantitatively smallest escape at the maximizing alphabet is an outer F_256 point with relative distance at least 7/8 and rate strictly greater than 7/120; at the current finite level this requires 28,280 additional certified outer dimensions. Stronger inner codes must satisfy the displayed joint length-distance inequality.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For every positive even m, the asymptotic one-level GS plus RM(1,m\u22121) certificate that uses only bare Riemann\u2013Roch dimension, designed outer distance, product concatenation distance, and zero padding has certified rate at relative distance 7/16 at most R_template(m)=(m/2^(m\u22121))(1/8\u22121/(2^(m/2)\u22121))_+. This expression has the unique maximum 7/1920 at m=8. It is not an upper bound on actual GS-derived codes. Holding m=8, RM(1,7), ordinary concatenation, and product-distance analysis fixed, crossing is equivalent in the unpadded asymptotic calculation to certifying an outer F_256 code with relative distance at least 7/8 and rate greater than 7/120.",
+  "title": "Vanilla GS\u2013Hadamard certificate barrier and minimal escape condition"
+}

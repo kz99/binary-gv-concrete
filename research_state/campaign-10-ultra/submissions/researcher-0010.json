@@ -1,0 +1,304 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": true,
+  "confidence": "high",
+  "construction_markdown": "### Curve and field\n\nLet `A=F_2[T]`, with infinity the pole of `T`. Set\n\n`rho=T^4+T+1`, `p_1=T`, `p_4=T^4+T^3+1`, `p_8=T^8+T^4+T^3+T+1`,\n\nand take the composite level\n\n`nfrak=p_1^4 p_4^2 p_8`.\n\nReduce the compactified rank-two Drinfeld modular curve `X_0(nfrak)` at `rho`. Write `alpha=T mod rho` and fix\n\n`K=F_2[alpha,beta]/(alpha^4+alpha+1, beta^2+beta+alpha^3)=F_256`\n\nwith ordered binary basis\n\n`B=(1,alpha,alpha^2,alpha^3,beta,alpha beta,alpha^2 beta,alpha^3 beta)`.\n\nThe reduced curve `X/K` has genus `g=559,029` and at least `8,388,480` rational points.\n\n### All-point canonical translate\n\nOrder `X(K)` deterministically and let `P_0,...,P_{L-1}` be its first `L=8,388,480` points. Set `D_eval=sum P_i`, `d_out=7,340,032`, and `a=L-d_out=1,048,448`.\n\nChoose a canonical divisor `K_X`, put `A_aux=69,608 P_0`, and let `E=K_X-A_aux`. Weak approximation gives a principal translate `G=E+(u)` whose coefficient is zero at every `P_i`. The divisor `G` can be non-effective; this is permitted for functional AG evaluation. Since `K_X-G` is linearly equivalent to `A_aux`, Riemann\u2013Roch gives\n\n`ell(G)=a+1-g+ell(A_aux)>=489,421`.\n\nSelect deterministically an exact `489,421`-dimensional subspace `V` of `L(G)`. Evaluation on all `L` points gives an outer code\n\n`[8,388,480,489,421,>=7,340,032]_256`.\n\n### Binary concatenation\n\nFor `x=sum b_i B_i`, encode `x` as the truth table of the affine Boolean function\n\n`b_0+b_1v_1+...+b_7v_7`, `v in F_2^7`.\n\nThis is `RM(1,7)=[128,8,64]_2`. Coordinatewise concatenation has length `1,073,725,440`, dimension `3,915,368`, and distance at least `469,762,048`. Append exactly `16,384` zero coordinates on the right.",
+  "dimension": 3915368,
+  "distance_audit": [
+    "Every coefficient of `G` at an evaluation point is zero, so every function in `L(G)` is regular there and evaluation is well-defined.",
+    "Evaluation is injective because `deg(G-D_eval)=1,048,448-8,388,480=-7,340,032<0`.",
+    "For nonzero `f in L(G)`, let `Z` be the sum of its zero evaluation positions. Then `(f)+G-Z` is effective, even though `G` itself need not be. Hence `deg Z<=deg G=1,048,448`.",
+    "Every nonzero outer word consequently has weight at least `8,388,480-1,048,448=7,340,032`.",
+    "Every nonzero `RM(1,7)` block has weight at least `64`, so every nonzero concatenated word has weight at least `64*7,340,032=469,762,048`.",
+    "Appending `16,384` fixed zero coordinates preserves dimension and every nonzero weight."
+  ],
+  "explicitness_audit": [
+    "The base ring, infinity place, reduction prime, three level primes, their exponents, and the degree-twenty composite level are displayed.",
+    "Irreducibility of the two quartics and the degree-eight level prime is certified in the proof by exact finite-field calculations.",
+    "Both finite fields have displayed defining polynomials, an ordered binary basis, and a fixed bit ordering.",
+    "The modular curve is recoverable from the cyclic-isogeny modular polynomial. Model enumeration, normalization, good-model selection, and Gr\u00f6bner tie-breaking are deterministic.",
+    "Projective points are normalized at their first nonzero coordinate and ordered lexicographically using the fixed field ordering.",
+    "The canonical divisor, local uniformizers, weak-approximation solution, and Riemann\u2013Roch basis are chosen as the first objects satisfying exact decidable conditions in finite-height enumerations.",
+    "The outer message space has exactly `489,421` selected independent functions; no uncomputed equality for `ell(G)` is assumed.",
+    "The inner coordinate order is the seven-bit integer order. No graph, shortening, or puncturing is used; the only length adjustment is explicitly located right-zero padding.",
+    "Every search is exhaustive and algebraic. There is no random sampling, probabilistic existence argument, or hidden asymptotic constant."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Take the rational function field `F_2(T)`, infinity of degree one, level `nfrak` coprime to a degree-four reduction prime `rho`, and use that `F_2[T]` has trivial ideal class group.",
+      "result": "The exact genus formula gives `g=559,029`; good reduction and absolute irreducibility hold; the ordinary point-count branch gives at least `8,388,480` points over the quadratic residue-field extension `F_256`.",
+      "source": "[Bassa\u2013Beelen\u2013Nguyen, Good families of Drinfeld modular curves](https://doi.org/10.1112/S146115701500025X)",
+      "used_for": "Good reduction, geometric irreducibility, the exact genus, and the certified rational-point count."
+    },
+    {
+      "hypotheses": "A monic level `N` for rank-two Drinfeld modules and cyclic `A/NA`-isogenies.",
+      "result": "The modular polynomial has a finite algebraic construction from torsion and isogeny data.",
+      "source": "[Breuer\u2013R\u00fcck, Drinfeld modular polynomials in higher rank II: Kronecker congruences](https://arxiv.org/abs/1303.4086)",
+      "used_for": "Deterministic symbolic computation of the composite-level modular polynomial."
+    },
+    {
+      "hypotheses": "An arbitrary monic `N in F_q[T]` and rank-two Drinfeld modules joined by an `N`-isogeny.",
+      "result": "The equation `Phi_N(j_0,j_1)=0` defines `X_0(N)` and its function field is `F(j_0,j_1)`.",
+      "source": "[Bassa\u2013Beelen, Explicit equations for Drinfeld modular towers](https://arxiv.org/abs/1110.6076)",
+      "used_for": "Identifying the computed modular-polynomial function field with the required modular curve."
+    },
+    {
+      "hypotheses": "A finite separable function field over a perfect finite field, finitely many distinct places, and an arbitrary divisor disjoint from the evaluation divisor.",
+      "result": "Weak approximation, Riemann\u2013Roch, and the functional AG-code injectivity and designed-distance arguments apply; effectivity of the evaluation divisor parameter `G` is unnecessary.",
+      "source": "[Stichtenoth, Algebraic Function Fields and Codes, second edition](https://doi.org/10.1007/978-3-540-76878-4)",
+      "used_for": "Relocating the divisor, calculating its Riemann\u2013Roch dimension, and proving outer-code distance."
+    },
+    {
+      "hypotheses": "An algebraic function field given by an effective finite presentation over a finite field.",
+      "result": "Divisor arithmetic and Riemann\u2013Roch spaces are deterministically computable.",
+      "source": "[Hess, Computing Riemann\u2013Roch Spaces in Algebraic Function Fields and Related Topics](https://doi.org/10.1006/jsco.2001.0513)",
+      "used_for": "Algorithmic recovery of valuations, `G`, `L(G)`, and an encoder."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Place this certificate in `proofs/all-point-drinfeld-rm.md` and add an `under-review` record. The current workspace is read-only, so no repository file was created.",
+    "Obtain two formal, independent verifier acceptances before marking the record verified.",
+    "Run `node scripts/validate-data.mjs` and build the dashboard before publication.",
+    "Compute or lower-bound `ell(69,608 P_0)` beyond the constant function; each additional certified dimension would add eight binary dimensions."
+  ],
+  "obstructions": [
+    "Weak approximation does not show that `G` is effective. The proof deliberately uses the standard arbitrary-divisor functional AG construction, for which effectivity is unnecessary.",
+    "The modular equation and encoder are symbolically recoverable but extremely large; explicitness here is mathematical rather than computational efficiency.",
+    "No mathematical obstruction remains in the certificate. Formal two-verifier acceptance and publication validation remain procedural requirements."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Binary target",
+      "value": "`n=2^30=1,073,741,824`, `d_target=469,762,048`"
+    },
+    {
+      "derivation": "`4*1+2*4+1*8`.",
+      "quantity": "Level degree",
+      "value": "`deg nfrak=20`"
+    },
+    {
+      "derivation": "`2^3(2+1)`, `16(16+1)`, and `256+1`.",
+      "quantity": "Local epsilon factors",
+      "value": "`24`, `272`, `257`"
+    },
+    {
+      "derivation": "`24*272*257`.",
+      "quantity": "`epsilon(nfrak)`",
+      "value": "`1,677,696`"
+    },
+    {
+      "derivation": "`(4+2)(16+1)(1+1)`.",
+      "quantity": "`kappa(nfrak)`",
+      "value": "`204`"
+    },
+    {
+      "derivation": "`1+epsilon/3-kappa`.",
+      "quantity": "Exact genus",
+      "value": "`g=559,029`"
+    },
+    {
+      "derivation": "Bassa\u2013Beelen\u2013Nguyen Theorem 4.1 gives `5*epsilon`.",
+      "quantity": "Certified rational points",
+      "value": "`L=8,388,480`"
+    },
+    {
+      "derivation": "`469,762,048/64`.",
+      "quantity": "Required outer distance",
+      "value": "`d_out=7,340,032`"
+    },
+    {
+      "derivation": "`L-d_out`.",
+      "quantity": "Outer divisor degree",
+      "value": "`a=1,048,448`"
+    },
+    {
+      "derivation": "`2g-2`.",
+      "quantity": "Canonical degree",
+      "value": "`1,118,056`"
+    },
+    {
+      "derivation": "`2g-2-a`.",
+      "quantity": "Auxiliary effective-divisor degree",
+      "value": "`r=69,608`"
+    },
+    {
+      "derivation": "`A_aux=69,608 P_0` is effective, so constants lie in `L(A_aux)`.",
+      "quantity": "Speciality certificate",
+      "value": "`ell(A_aux)>=1`"
+    },
+    {
+      "derivation": "`a+1-g+ell(A_aux)`.",
+      "quantity": "Certified Riemann\u2013Roch dimension",
+      "value": "`ell(G)>=489,421`"
+    },
+    {
+      "derivation": "Choose exactly the first independent functions.",
+      "quantity": "Outer dimension",
+      "value": "`k_out=489,421`"
+    },
+    {
+      "derivation": "Affine truth tables in seven variables.",
+      "quantity": "Inner code",
+      "value": "`RM(1,7)=[128,8,64]_2`"
+    },
+    {
+      "derivation": "`128*8,388,480`.",
+      "quantity": "Unpadded binary length",
+      "value": "`1,073,725,440`"
+    },
+    {
+      "derivation": "`2^30-1,073,725,440`.",
+      "quantity": "Right-zero padding",
+      "value": "`16,384`"
+    },
+    {
+      "derivation": "`8*489,421`.",
+      "quantity": "Exact binary dimension",
+      "value": "`k=3,915,368`"
+    },
+    {
+      "derivation": "`64*7,340,032`.",
+      "quantity": "Certified binary distance",
+      "value": "`469,762,048`"
+    },
+    {
+      "derivation": "Reduce `3,915,368/2^30` by eight.",
+      "quantity": "Certified rate",
+      "value": "`489,421/134,217,728 = 0.003646470606327056884765625`"
+    },
+    {
+      "derivation": "`15k-7*2^23=10,264`.",
+      "quantity": "Exact excess above `7/1920`",
+      "value": "`1,283/2,013,265,920`, approximately `6.3727299372e-7`"
+    },
+    {
+      "derivation": "`3,915,368-3,688,448`.",
+      "quantity": "Gain over the current verified record",
+      "value": "`226,920` binary dimensions"
+    },
+    {
+      "derivation": "The all-point canonical translate adds two outer dimensions to researcher-0008.",
+      "quantity": "Gain over the prior Drinfeld candidate",
+      "value": "`16` binary dimensions"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nThere is a deterministic, symbolically recoverable binary linear code with parameters\n\n`[1,073,741,824, 3,915,368, >=469,762,048]_2`.\n\nIts rate is `489,421/134,217,728`, which is strictly greater than `7/1920`.\n\n### 1. Finite fields and level primes\n\nLet `A=F_2[T]`, with infinity the pole of `T`. Define\n\n`rho=T^4+T+1`, `p_1=T`, `p_4=T^4+T^3+1`, and `p_8=T^8+T^4+T^3+T+1`.\n\nThe two quartics have no root in `F_2`. Modulo the only irreducible quadratic `T^2+T+1`, their remainders are respectively `1` and `T`; hence they are irreducible. For `p_8`, repeated squaring gives\n\n`T^256 congruent T mod p_8`\n\nand\n\n`T^16+T congruent T^6+T^4+T^3+T^2 mod p_8`.\n\nThe Euclidean remainder sequence for the latter polynomial and `p_8` is\n\n`T^5+T^4+T^2+T+1`, `T^2+1`, `1`.\n\nRabin's degree-eight criterion proves that `p_8` is irreducible. Thus the four named primes are pairwise distinct and `rho` is coprime to\n\n`nfrak=p_1^4 p_4^2 p_8`.\n\nLet `alpha=T mod rho`. Then `k_0=F_2(alpha)=F_16`. Direct reduction using `alpha^4=alpha+1` gives\n\n`Tr_{k_0/F_2}(alpha^3)=alpha^3+alpha^6+alpha^12+alpha^24=1`.\n\nThe Artin\u2013Schreier polynomial `X^2+X+alpha^3` is therefore irreducible. Hence\n\n`K=k_0[beta]/(beta^2+beta+alpha^3)=F_256`\n\nwith ordered basis\n\n`B=(1,alpha,alpha^2,alpha^3,beta,alpha beta,alpha^2 beta,alpha^3 beta)`.\n\n### 2. The modular curve is symbolically recoverable\n\nLet `X_0(nfrak)` be the compactified rank-two Drinfeld modular curve parametrizing cyclic `nfrak`-isogenies. [Breuer\u2013R\u00fcck](https://arxiv.org/abs/1303.4086) give a finite algebraic construction of the modular polynomial from torsion and cyclic-isogeny data. For arbitrary monic level, [Bassa\u2013Beelen](https://arxiv.org/abs/1110.6076) identify the function field of `X_0(N)` with `F(j_0,j_1)` subject to `Phi_N(j_0,j_1)=0`.\n\nCompute `Phi_nfrak` with a fixed variable order, graded-lexicographic monomial order, and monic reduced Gr\u00f6bner bases. Normalize its projective closure. To remove any ambiguity in integral-model selection, enumerate projective `A_(rho)`-models together with generic-fiber isomorphism certificates in coefficient-height and lexicographic order, and select the first smooth proper model. Smoothness and the rational-map identities are decidable by exact polynomial arithmetic. Good reduction at `rho` proves that this enumeration terminates.\n\nLet `X_rho` be the resulting special fiber and set `X=X_rho times_{F_16} K`. This fixes an exact projective model and coordinate order, not merely an isomorphism class.\n\n### 3. Exact genus and point count\n\nFor the three prime-power level factors, the definitions in [Bassa\u2013Beelen\u2013Nguyen](https://doi.org/10.1112/S146115701500025X) give\n\n`epsilon(p_1^4)=24`, `kappa(p_1^4)=6`,\n\n`epsilon(p_4^2)=272`, `kappa(p_4^2)=17`,\n\n`epsilon(p_8)=257`, `kappa(p_8)=2`.\n\nConsequently\n\n`epsilon(nfrak)=24*272*257=1,677,696`\n\nand\n\n`kappa(nfrak)=6*17*2=204`.\n\nThere are three level primes. Because `p_1` has odd degree, the exceptional genus correction `eta` is zero; because `q=2`, the term containing `q-2` also vanishes. Their exact genus formula specializes to\n\n`g(X)=1+1,677,696/3-204=559,029`.\n\nThe base ring `F_2[T]` has trivial ideal class group, so the order of `rho` is `e=1`. Its degree is `d=4`, and the exceptional point-count branch does not apply because `d` is even. Over the quadratic residue-field extension `K`, their point theorem gives\n\n`#X(K)>=epsilon(nfrak)*(2-1)*(2^4-1)/((2^2-1)*(2-1))`\n\n`=5*1,677,696=8,388,480`.\n\nGood reduction and the polynomial-ring, degree-one-infinity hypotheses also give geometric irreducibility.\n\n### 4. Reusable all-point canonical-translate lemma\n\n**Lemma.** Let `Y/k` be a smooth projective geometrically irreducible curve of genus `g`, and let `S` be the sum of `L` distinct rational points. Suppose `0<=a<L` and `r=2g-2-a>=0`. Then there is a degree-`a` divisor `G`, with coefficient zero at every point of `S`, such that\n\n`ell(G)>=a+2-g`.\n\nIf the curve and point order are effective, `G` can be selected deterministically.\n\n**Proof.** Choose a point `Q` in `S`, a canonical divisor `K_Y`, and the effective divisor `A_aux=rQ`. Put `E=K_Y-A_aux`, so `deg E=a`. For each `P` in `S`, write `e_P=v_P(E)` and choose a local uniformizer `t_P`. Weak approximation supplies `u in k(Y)^*` such that\n\n`v_P(u-t_P^(-e_P))>-e_P`\n\nsimultaneously for all `P`. The ultrametric equality gives `v_P(u)=-e_P`. Therefore `G=E+(u)` has coefficient zero at every point of `S` and degree `a`.\n\nMoreover, `K_Y-G` is linearly equivalent to `A_aux`. Riemann\u2013Roch gives\n\n`ell(G)=a+1-g+ell(K_Y-G)=a+1-g+ell(A_aux)`.\n\nSince `A_aux` is effective, the constant function belongs to `L(A_aux)`, so `ell(A_aux)>=1`. This proves the bound.\n\nFor determinism, order rational functions by expression height and coefficient lexicographic order and choose the first `u` satisfying the displayed valuation conditions. Each height shell is finite, the conditions are decidable, and weak approximation proves termination. The same convention selects the canonical differential and local uniformizers. Notice that the lemma does not assert that `G` is effective. End proof.\n\n### 5. Application and outer code\n\nNormalize each projective point at its first nonzero coordinate, order field coordinates using `B`, and order projective tuples lexicographically. Let\n\n`P_0,...,P_{L-1}`, with `L=8,388,480`,\n\nbe the first certified rational points, and set `D_eval=sum P_i`. The point theorem proves that enumeration terminates.\n\nThe required outer distance is\n\n`d_out=469,762,048/64=7,340,032`.\n\nSet\n\n`a=L-d_out=1,048,448`.\n\nBecause `2g-2=1,118,056`, the lemma applies with\n\n`r=2g-2-a=69,608`.\n\nIt produces a divisor `G` disjoint from all evaluation points satisfying\n\n`ell(G)>=a+2-g=1,048,450-559,029=489,421`.\n\nEnumerate the elements of `L(G)` using normal forms in the fixed function-field presentation. Greedily retain the first `489,421` `K`-linearly independent elements and let `V` be their span. Deterministic Riemann\u2013Roch algorithms, such as [Hess's algorithm](https://doi.org/10.1006/jsco.2001.0513), make all membership, valuation, and independence tests exact.\n\nDefine\n\n`C_out={ (f(P_0),...,f(P_{L-1})) : f in V }`.\n\nEvaluation is well-defined because the coefficient of `G` at every `P_i` is zero. It is injective because\n\n`deg(G-D_eval)=a-L=-7,340,032<0`.\n\nThus `dim_K C_out=489,421` exactly.\n\nFor nonzero `f in V`, let `Z` be the sum of the evaluation points at which `f` vanishes. From `f in L(G)` one has `(f)+G>=0`. At each point of `Z`, the coefficient of `G` is zero and `v_P(f)>=1`, so\n\n`(f)+G-Z>=0`.\n\nTaking degrees yields `deg Z<=deg G=a`. Therefore every nonzero outer word has weight at least\n\n`L-a=7,340,032`.\n\nThis proves\n\n`C_out=[8,388,480,489,421,>=7,340,032]_256`.\n\n### 6. Binary concatenation\n\nWrite `x in K` uniquely as `x=sum_{i=0}^7 b_i B_i`, with `b_i in F_2`. Define\n\n`iota(x)=(b_0+b_1v_1+...+b_7v_7)_{v in F_2^7}`,\n\nwhere `v` is ordered by its seven-bit integer. This is an injective binary-linear map onto `RM(1,7)`. A nonzero constant affine function has weight `128`, while every affine function with nonzero linear part is balanced and has weight `64`. Hence the inner code is `[128,8,64]_2`.\n\nCoordinatewise concatenation is binary linear and has\n\n`length=128*8,388,480=1,073,725,440`,\n\n`dimension=8*489,421=3,915,368`,\n\n`distance>=64*7,340,032=469,762,048`.\n\nAppend `16,384` zero coordinates on the right. The final length is exactly `2^30`, while dimension and distance are unchanged.\n\n### 7. Strict ceiling comparison\n\nThe exact rate is\n\n`R=3,915,368/2^30=489,421/134,217,728`\n\n`=0.003646470606327056884765625`.\n\nFurthermore,\n\n`R-7/1920`\n\n`=(15*3,915,368-7*2^23)/(15*2^30)`\n\n`=10,264/(15*2^30)`\n\n`=1,283/2,013,265,920>0`.\n\nThis is not tuning inside the Garcia\u2013Stichtenoth template. Here the certified point count and exact modular-curve genus satisfy\n\n`L=5 epsilon(nfrak)` and `g=L/15-203`.\n\nThe finite `203=kappa-1` cusp correction belongs to the alternative Drinfeld modular family and is absent from the vanilla GS/TVZ accounting. The all-point canonical-translate lemma then recovers two further outer dimensions relative to the earlier one-point instantiation. These mechanisms survive the `128` missing outer positions and force the strict excess above `7/1920`.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "The quartic factor tests, Rabin congruences, Euclidean gcd, and Artin\u2013Schreier trace calculation establish every asserted irreducibility and the explicit `F_256` basis.",
+      "statement": "The fields, level factors, reduction prime, and their coprimality are valid and explicit.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "Breuer\u2013R\u00fcck modular-polynomial construction",
+        "Bassa\u2013Beelen function-field identification",
+        "BBN good reduction"
+      ],
+      "id": "P2",
+      "proof": "The cyclic-isogeny equations compute `Phi_nfrak`; fixed algebraic orderings and exhaustive smooth-model enumeration recover a unique symbolic good model, whose existence follows from good reduction.",
+      "statement": "The exact reduced Drinfeld modular curve is deterministically recoverable.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2",
+        "Bassa\u2013Beelen\u2013Nguyen Theorem 3.2"
+      ],
+      "id": "P3",
+      "proof": "The products are `epsilon=24*272*257=1,677,696` and `kappa=6*17*2=204`; both exceptional terms vanish, yielding `g=559,029`.",
+      "statement": "The curve has exact genus `559,029`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2",
+        "Bassa\u2013Beelen\u2013Nguyen Theorem 4.1"
+      ],
+      "id": "P4",
+      "proof": "The reduction degree is four, the ideal-class order is one, and the ordinary branch yields `5 epsilon=8,388,480` rational points over the explicit quadratic residue extension.",
+      "statement": "At least `8,388,480` deterministically enumerable rational points are available.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Weak approximation",
+        "Riemann\u2013Roch"
+      ],
+      "id": "P5",
+      "proof": "For `E=K_Y-rQ`, weak approximation supplies a principal translate with zero coefficients at every evaluation point. Since the complementary canonical divisor is linearly equivalent to the effective `rQ`, Riemann\u2013Roch gives `ell(G)>=a+2-g`.",
+      "statement": "The all-point canonical-translate lemma holds for arbitrary, possibly non-effective divisors.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "With `a=1,048,448` and `r=69,608`, the lemma gives `ell(G)>=489,421`; deterministic greedy selection fixes an exact subspace of that dimension.",
+      "statement": "An admissible outer message space of exact dimension `489,421` exists.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P6"
+      ],
+      "id": "P7",
+      "proof": "Injectivity follows from `deg(G-D_eval)<0`. For a zero-position divisor `Z`, `(f)+G-Z` is effective, so `deg Z<=deg G` and the outer weight is at least `7,340,032`.",
+      "statement": "The outer code has parameters `[8,388,480,489,421,>=7,340,032]_256`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P8",
+      "proof": "The affine truth-table map is binary linear and injective; every nonzero nonconstant affine Boolean function is balanced.",
+      "statement": "The inner encoder is `RM(1,7)=[128,8,64]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P7",
+        "P8"
+      ],
+      "id": "P9",
+      "proof": "Concatenation multiplies the dimension by eight and the outer weight lower bound by 64. Appending `16,384` zeros gives exact length `2^30`.",
+      "statement": "The final code has exact dimension `3,915,368` and minimum distance at least `469,762,048`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P9"
+      ],
+      "id": "P10",
+      "proof": "Exact cross-multiplication gives numerator `10,264`, reducing the rate excess to `1,283/2,013,265,920>0`.",
+      "statement": "The certified rate strictly exceeds `7/1920`.",
+      "status": "proved"
+    }
+  ],
+  "rate": 0.003646470606327057,
+  "research_direction": "Synthesize the repository's composite-level Drinfeld modular point/genus calculation with its all-point canonical-divisor relocation lemma, and close the missing arbitrary-divisor distance argument rather than assuming an effective divisor.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0001.json",
+    "research_state/campaign-10-ultra/submissions/researcher-0008.json"
+  ],
+  "submission_class": "beyond_ceiling",
+  "theorem_statement": "There exists a deterministic explicit binary linear code with parameters `[2^30,3,915,368,>=469,762,048]_2`. Its rate is `489,421/134,217,728`, exceeding `7/1920` by exactly `1,283/2,013,265,920`.",
+  "title": "All-Point Canonical-Translate Drinfeld Modular Code Beyond 7/1920"
+}

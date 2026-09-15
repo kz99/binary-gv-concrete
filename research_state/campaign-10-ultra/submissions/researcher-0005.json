@@ -1,0 +1,244 @@
+{
+  "block_length": 1073741824,
+  "ceiling_beaten": false,
+  "confidence": "high",
+  "construction_markdown": "Fix \\(K=\\mathbb F_2[u]/(u^8+u^4+u^3+u+1)\\). Order its elements by coefficient vectors in the basis \\(1,u,\\ldots,u^7\\), and let \\(\\theta\\) be the first element satisfying \\(\\theta^{85},\\theta^{51},\\theta^{15}\\ne1\\); then \\(\\theta\\) has order \\(255\\).\n\nUse the recursive Garcia\u2013Stichtenoth tower over \\(K=\\mathbb F_{16^2}\\):\n\\[\nF^{(1)}=K(x_1),\\qquad x_{i+1}^{16}+x_{i+1}=\\frac{x_i^{16}}{x_i^{15}+1}.\n\\]\nAt level eight choose the four completely split fibers above\n\\[\nA=\\{\\theta,\\theta^2,\\theta^3,\\theta^4\\}.\n\\]\nOrder fibers by this displayed order and places inside each fiber lexicographically by their tuples of successive Artin\u2013Schreier roots in the fixed polynomial basis. If \\(E\\) is their evaluation divisor and \\(P_\\infty\\) is the unique pole of \\(x_1\\), define\n\\[\na=603,979,776,\\qquad S_8=C_L(E,aP_\\infty)\\cap\\mathbb F_2^{2^{30}}.\n\\]\nThere is no puncturing, shortening, repetition, or padding in this exact-length construction. The proof shows \\(S_8=\\{0,\\mathbf1\\}\\).\n\nThe audited baseline trace route starts with an arbitrary binary code of length \\(L=8,355,840\\), repeats every coordinate \\(128\\) times, and appends exactly \\(2^{22}=4,194,304\\) zeros.",
+  "dimension": null,
+  "distance_audit": [
+    "For the level-eight subfield code, \\(\\deg E=4\\cdot16^7=2^{30}\\) and \\(a<\\deg E\\), so evaluation is injective.",
+    "Every nonzero \\(f\\in L(aP_\\infty)\\) has at most \\(a\\) zeros among the evaluation places. Hence every nonzero word of the subfield subcode has weight at least \\(2^{30}-a=469,762,048\\).",
+    "The exact calculation gives \\(S_8=\\{0,\\mathbf1\\}\\), so its actual minimum distance is \\(2^{30}\\), stronger than the required distance.",
+    "For the repetition route, final weight is exactly \\(128\\) times raw weight; zero padding changes neither dimension nor weight. Thus the target forces raw distance \\(469,762,048/128=3,670,016\\).",
+    "The fixed-trace-list result concerns product-distance certification: every full-rank local trace encoder has inner distance at most \\(64\\). It does not exclude a proof exploiting correlations between symbol values at different coordinates.",
+    "For the intermediate \\(\\mathbb F_{16}\\)-trace route, the bound \\(2,105,916\\) applies when distance is certified solely as inner minimum distance times \\(\\mathbb F_{16}\\)-symbol distance."
+  ],
+  "explicitness_audit": [
+    "The constant field, polynomial basis, primitive element selection, tower recursion, tower level, split fibers, divisor, and evaluation ordering are symbolically specified.",
+    "The selected elements are outside \\(\\mathbb F_{16}\\): in the cyclic group \\(K^\\times\\), an element \\(\\theta^i\\) lies in \\(\\mathbb F_{16}^\\times\\) exactly when \\(17\\mid i\\).",
+    "No graph, random sampling, search-selected codeword, or asymptotic hidden constant is used.",
+    "The exact level-eight construction uses four complete fibers and requires no length adjustment.",
+    "The baseline obstruction fixes both the 128-fold repetition and the final zero block of length \\(2^{22}\\).",
+    "No repository files were changed because this is a non-leaderboard obstruction result."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "The recursive tower is over \\(\\mathbb F_{q^2}\\), with \\(x_{i+1}^q+x_{i+1}=x_i^q/(x_i^{q-1}+1)\\).",
+      "result": "Places \\(x_1=\\alpha\\) with \\(\\alpha^q+\\alpha\\ne0\\) split completely, while the pole of \\(x_1\\) is totally ramified.",
+      "source": "A. Garcia and H. Stichtenoth, [On the asymptotic behaviour of some towers of function fields over finite fields](https://doi.org/10.1006/jnth.1996.0147), JNT 61 (1996).",
+      "used_for": "Exact split-fiber sizes and the principal-divisor identity used by the Frobenius map."
+    },
+    {
+      "hypotheses": "The distinguished place is the totally ramified pole in the same recursive tower.",
+      "result": "Its Weierstrass semigroups satisfy \\(H_1=\\mathbb N_0\\) and \\(H_m=16H_{m-1}\\cup[c_m,\\infty)\\), where \\(c_m=16^m-16^{\\lfloor(m+1)/2\\rfloor}\\).",
+      "source": "G. R. Pellikaan, H. Stichtenoth, and F. Torres, [Weierstrass semigroups in an asymptotically good tower of function fields](https://doi.org/10.1006/ffta.1998.0217), FFA 4 (1998); accessible recurrence in [Bras-Amor\u00f3s\u2013O\u2019Sullivan](https://arxiv.org/abs/cs/0609161).",
+      "used_for": "Exact Riemann\u2013Roch dimensions at pole degrees \\(a\\) and \\(2a-N\\)."
+    },
+    {
+      "hypotheses": "The code is linear over \\(\\mathbb F_q\\) with parameters \\([n,k,d]_q\\).",
+      "result": "The Griesmer inequality \\(n\\ge\\sum_{i=0}^{k-1}\\lceil d/q^i\\rceil\\).",
+      "source": "J. H. Griesmer, [A bound for error-correcting codes](https://doi.org/10.1147/rd.45.0532), IBM J. Res. Dev. 4 (1960), 532\u2013542.",
+      "used_for": "The direct binary repetition obstruction and the binary and \\(16\\)-ary inner/product bounds."
+    },
+    {
+      "hypotheses": "The densified GS level and one-point divisor are those fixed in the verified baseline proof.",
+      "result": "The baseline supplies \\(L=8,355,840\\) and the certified genus bound \\(g\\le554,753\\).",
+      "source": "Local proof note `proofs/gs-rm-baseline.md`.",
+      "used_for": "The exact baseline trace and repetition arithmetic."
+    }
+  ],
+  "minimum_distance": 469762048,
+  "next_tasks": [
+    "Analyze \\(T=\\operatorname{Tr}_{256/16}(C)\\) with the explicit inner code \\([128,4,68]_2\\) obtained by juxtaposing eight \\([15,4,8]\\) simplex copies and \\(\\operatorname{RM}(1,3)\\). A record needs \\(\\dim_{16}T\\ge922,113\\), while crossing \\(7/1920\\) needs \\(978,671\\).",
+    "Prove or refute \\(d_{16}(T)\\ge6,908,266\\) for a deterministic GS trace subspace. The \\(16\\)-ary Griesmer cap is \\(987,027\\), leaving only \\(8,356\\) dimensions of slack above the ceiling threshold.",
+    "Investigate coordinate-varying multipliers that are evaluations of explicitly bounded-pole functions, so simultaneous Artin\u2013Schreier point counts remain controllable.",
+    "Extend the Frobenius-division lemma to deterministic punctured evaluation sets whose divisor is principal or linearly equivalent to a controlled divisor; the present level-seven/eight theorem covers only unions of complete split fibers.",
+    "Search for special-divisor or actual-distance gains beyond bare Riemann\u2013Roch and product distance; the fixed-trace-list lemma does not exclude those mechanisms."
+  ],
+  "obstructions": [
+    "Among unions of complete split \\(x_1\\)-fibers at one level of the recursive GS tower, exact length \\(2^{30}\\) is possible only at levels seven and eight. The corresponding binary subfield-subcode dimensions are at most \\(73\\) and \\(9\\).",
+    "For the specified four level-eight fibers, the subfield subcode collapses exactly to the repetition code \\([2^{30},1,2^{30}]_2\\).",
+    "Any binary code of raw length \\(8,355,840\\) completed by 128-fold repetition and the fixed zero padding has dimension at most \\(1,015,831\\) if it meets the target distance.",
+    "Every fixed full-rank list of 128 absolute-trace functionals on \\(\\mathbb F_{256}\\) is merely a binary \\([128,8]\\) inner encoder, and Griesmer forces its distance to be at most \\(64\\), attained by \\(\\operatorname{RM}(1,7)\\).",
+    "For \\(\\operatorname{Tr}_{256/16}(C)\\) followed by the natural \\([128,4,64]\\) encoder, a symbol-distance/product proof permits at most \\(526,479\\) dimensions over \\(\\mathbb F_{16}\\), hence at most \\(2,105,916\\) binary dimensions.",
+    "These statements do not rule out punctured non-fiber evaluation sets, special divisors, coordinate-varying low-pole trace multipliers, or a symbol-value-sensitive global weight proof."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "\\(2^{30}\\)",
+      "quantity": "Target block length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "\\((7/16)2^{30}\\)",
+      "quantity": "Required minimum distance",
+      "value": "469,762,048"
+    },
+    {
+      "derivation": "\\(N-D\\)",
+      "quantity": "One-point divisor degree \\(a\\)",
+      "value": "603,979,776"
+    },
+    {
+      "derivation": "\\(2a-N=N/8\\)",
+      "quantity": "Frobenius residual pole degree \\(b\\)",
+      "value": "134,217,728"
+    },
+    {
+      "derivation": "\\(16^6=2^{24}\\)",
+      "quantity": "Level-seven split-fiber size",
+      "value": "16,777,216"
+    },
+    {
+      "derivation": "\\(N/16^6\\)",
+      "quantity": "Level-seven number of full fibers",
+      "value": "64"
+    },
+    {
+      "derivation": "\\(16^7=2^{28}\\)",
+      "quantity": "Level-eight split-fiber size \\(Q\\)",
+      "value": "268,435,456"
+    },
+    {
+      "derivation": "\\(N/Q\\)",
+      "quantity": "Level-eight number of full fibers",
+      "value": "4"
+    },
+    {
+      "derivation": "Semigroup recursion below the conductor",
+      "quantity": "\\(\\ell(bP_\\infty)\\) at levels seven and eight",
+      "value": "9 and 1"
+    },
+    {
+      "derivation": "\\(1+8\\ell(bP_\\infty)\\)",
+      "quantity": "Full-fiber binary dimension caps",
+      "value": "73 at level seven; 9 at level eight"
+    },
+    {
+      "derivation": "Four-root coefficient calculation",
+      "quantity": "Specified level-eight code",
+      "value": "[1,073,741,824, 1, 1,073,741,824]_2"
+    },
+    {
+      "derivation": "\\(128\\cdot8,355,840+2^{22}\\)",
+      "quantity": "Baseline repetition completion length",
+      "value": "1,073,741,824"
+    },
+    {
+      "derivation": "\\(D/128\\)",
+      "quantity": "Required raw binary distance",
+      "value": "3,670,016"
+    },
+    {
+      "derivation": "\\(G_{22}(3,670,016)=7,340,031\\)",
+      "quantity": "Raw repetition dimension cap",
+      "value": "1,015,831"
+    },
+    {
+      "derivation": "\\(G_8(65)=135>128\\)",
+      "quantity": "Maximum distance of a full-rank 128-trace local encoder",
+      "value": "64"
+    },
+    {
+      "derivation": "\\(G^{(16)}_6(7,340,032)=7,829,367\\)",
+      "quantity": "Natural \\(\\mathbb F_{16}\\)-trace/product dimension cap",
+      "value": "526,479 symbols = 2,105,916 bits"
+    },
+    {
+      "derivation": "\\(\\lceil D/68\\rceil\\), followed by the 16-ary Griesmer bound",
+      "quantity": "Open [128,4,68] trace window",
+      "value": "Required symbol distance 6,908,266; dimension cap 987,027"
+    }
+  ],
+  "proof_markdown": "### 1. Trace maps and the local Griesmer barrier\n\nThe absolute-trace pairing \\((a,x)\\mapsto\\operatorname{Tr}_{K/\\mathbb F_2}(ax)\\) is nondegenerate. Consequently every binary linear functional on \\(K\\) has the form \\(x\\mapsto\\operatorname{Tr}(ax)\\), and every fixed list of 128 such functionals is simply a binary linear encoder\n\\[\n\\phi:K\\longrightarrow\\mathbb F_2^{128}.\n\\]\nIf the multipliers span \\(K\\), then \\(\\phi\\) is injective and its image is a binary \\([128,8,d_\\phi]\\) code. The [Griesmer bound](https://doi.org/10.1147/rd.45.0532) gives\n\\[\n128\\ge\\sum_{i=0}^7\\left\\lceil\\frac{d_\\phi}{2^i}\\right\\rceil.\n\\]\nFor \\(d_\\phi=65\\), the right side is\n\\[\n65+33+17+9+5+3+2+1=135,\n\\]\nso \\(d_\\phi\\le64\\). Thus a fixed full-rank multiple-trace list is exactly an ordinary inner code and cannot improve the \\([128,8,64]\\) product factor.\n\n### 2. Direct binary trace followed by repetition\n\nLet \\(T\\le\\mathbb F_2^L\\), where \\(L=8,355,840\\), and form\n\\[\n\\widehat T=\\operatorname{Rep}_{128}(T)\\oplus0^{2^{22}}.\n\\]\nEvery weight is multiplied exactly by \\(128\\), so the target requires\n\\[\nd(T)\\ge d_0=469,762,048/128=3,670,016=7\\cdot2^{19}.\n\\]\nThe first twenty Griesmer terms sum to \\(7(2^{20}-1)=7,340,025\\); the next two are \\(4\\) and \\(2\\). Hence\n\\[\nG_{22}(d_0)=7,340,031.\n\\]\nAll subsequent terms equal one. Therefore, for \\(k\\ge22\\),\n\\[\nL\\ge7,340,031+(k-22),\n\\]\nand consequently\n\\[\nk\\le1,015,831.\n\\]\nThe same conclusion is trivial when \\(k<22\\). This rules out every direct binary trace or subfield code completed by this repetition pattern.\n\nFor comparison, retuning the baseline divisor to \\(\\deg G=L-d_0=4,685,824\\) gives outer dimension at least\n\\[\n4,685,824+1-554,753=4,131,072.\n\\]\nFor any \\(K\\)-dimensional \\(K\\)-linear outer code, its binary trace has dimension at least \\(K\\): choose an information set of \\(K\\) coordinates, prescribe arbitrary trace bits there, choose field elements with those traces, and use surjectivity of the information projection. At binary dimension \\(4,131,072\\), direct Griesmer evaluation gives maximum possible distance \\(2,112,389\\): its first 22 terms sum to \\(4,224,790\\), and adding \\(4,131,050\\) unit terms gives exactly \\(8,355,840\\); increasing the distance by one increases the sum to \\(8,355,841\\). Thus the large trace dimension necessarily destroys the intended raw distance.\n\n### 3. Complete split fibers in the recursive GS tower\n\nBy the [Garcia\u2013Stichtenoth splitting theorem](https://doi.org/10.1006/jnth.1996.0147), each \\(\\alpha\\notin\\mathbb F_{16}\\) gives a completely split fiber of size\n\\[\nQ_m=16^{m-1}\n\\]\nat level \\(m\\), and there are \\(256-16=240\\) available base fibers. A union of complete fibers has length \\(N=2^{30}\\) only if \\(hQ_m=N\\) with \\(h\\le240\\). For \\(m\\le6\\), one needs at least \\(1024\\) fibers; for \\(m\\ge9\\), one fiber already exceeds \\(N\\). Thus only\n\\[\n(m,h)=(7,64)\\quad\\text{or}\\quad(8,4)\n\\]\nare possible.\n\nLet \\(E\\) be any such union and put\n\\[\nw=\\prod_{\\alpha\\in A}(x_1-\\alpha).\n\\]\nComplete splitting and total ramification give the exact principal divisor\n\\[\n(w)=E-NP_\\infty.\n\\]\nLet\n\\[\nU=\\{f\\in L(aP_\\infty):\\operatorname{ev}_E(f)\\in\\mathbb F_2^N\\}.\n\\]\nBecause \\(a<N\\), evaluation identifies \\(U\\) with the binary subfield subcode. For \\(f\\in U\\), the function \\(f^2-f\\) vanishes at every place in \\(E\\). Therefore\n\\[\n\\Psi(f)=\\frac{f^2-f}{w}\\in L((2a-N)P_\\infty)=L(bP_\\infty).\n\\]\nThe map \\(\\Psi\\) is \\(\\mathbb F_2\\)-linear and its kernel consists exactly of the two constant functions \\(0,1\\). Hence\n\\[\n\\dim_{\\mathbb F_2}U\\le1+8\\ell(bP_\\infty).\n\\tag{1}\n\\]\n\nThe exact semigroup recurrence of [Pellikaan\u2013Stichtenoth\u2013Torres](https://doi.org/10.1006/ffta.1998.0217) applies. At level seven, \\(b=8\\cdot16^6\\) remains below every relevant conductor during recursive division, so\n\\[\nH_7\\cap[0,b]=\\{j16^6:0\\le j\\le8\\},\\qquad \\ell(bP_\\infty)=9.\n\\]\nAt level eight, \\(b=16^7/2\\) is below the smallest positive nongap \\(16^7\\), so \\(\\ell(bP_\\infty)=1\\). Substitution in (1) gives the respective dimension caps \\(73\\) and \\(9\\).\n\n### 4. Exact collapse for the specified level-eight fibers\n\nWrite \\(Q=16^7\\). Since \\(a=(9/4)Q\\), the same semigroup recurrence gives\n\\[\nH_8\\cap[0,a]=\\{0,Q,2Q\\}.\n\\]\nAs \\(x_1\\) has pole order \\(Q\\),\n\\[\nL(aP_\\infty)=\\operatorname{span}_K\\{1,x_1,x_1^2\\}.\n\\]\nThus a binary evaluation word comes from\n\\[\np(X)=rX^2+sX+t\n\\]\nwith \\(p(\\alpha)\\in\\mathbb F_2\\) for every \\(\\alpha\\in A\\). The polynomial \\(p^2-p\\) consequently has the four elements of \\(A\\) as roots.\n\nIf \\(r\\ne0\\), degree and leading coefficient force\n\\[\np(X)^2-p(X)=r^2\\prod_{\\alpha\\in A}(X-\\alpha).\n\\]\nThe left side has zero \\(X^3\\)-coefficient. The coefficient on the right is\n\\[\nr^2\\sum_{\\alpha\\in A}\\alpha\n=r^2\\theta(1+\\theta+\\theta^2+\\theta^3)\n=r^2\\theta(\\theta+1)^3\\ne0,\n\\]\na contradiction. Hence \\(r=0\\). Now \\(p^2-p\\) has degree at most two and four distinct roots, so it vanishes identically. Coefficient comparison gives \\(s=0\\) and \\(t\\in\\mathbb F_2\\). Therefore\n\\[\nS_8=\\{0,\\mathbf1\\}=[N,1,N]_2.\n\\]\n\n### 5. Intermediate-field product certificate\n\nLet \\(T=\\operatorname{Tr}_{256/16}(C)\\le\\mathbb F_{16}^{L}\\) have dimension \\(r\\) over \\(\\mathbb F_{16}\\). Encode each symbol by \\(\\operatorname{RM}(1,3)=[8,4,4]_2\\), repeat each binary coordinate sixteen times, and use the same final padding. This is an inner \\([128,4,64]_2\\) encoder. A proof using only symbol distance and inner minimum distance must establish\n\\[\nd_{16}(T)\\ge D/64=7,340,032=7\\cdot16^5.\n\\]\nThe first six terms of the 16-ary Griesmer sum equal\n\\[\n7,340,032+458,752+28,672+1,792+112+7=7,829,367,\n\\]\nand later terms are one. Hence\n\\[\nr\\le L-7,829,367+6=526,479,\n\\]\nso the resulting binary dimension is at most \\(4r=2,105,916\\).\n\nThese conclusions are deliberately scoped: the product arguments do not upper-bound an actual concatenated distance that exploits symbol values globally, and the full-fiber theorem does not cover punctured or non-principal evaluation sets.",
+  "proof_steps": [
+    {
+      "dependencies": [
+        "Griesmer bound"
+      ],
+      "id": "P1",
+      "proof": "Apply the binary Griesmer sum to a full-rank 128-coordinate trace encoder; the sum for distance 65 is 135.",
+      "statement": "Every fixed injective 128-trace local encoder on \\(\\mathbb F_{256}\\) has minimum distance at most 64.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1"
+      ],
+      "id": "P2",
+      "proof": "Repetition multiplies all weights by 128. The exact Griesmer sum at raw distance 3,670,016 yields \\(k\\le1,015,831\\).",
+      "statement": "The direct binary trace-plus-repetition route cannot beat the current record.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "Garcia\u2013Stichtenoth splitting theorem"
+      ],
+      "id": "P3",
+      "proof": "A split fiber at level \\(m\\) has size \\(16^{m-1}\\), only 240 such base fibers are available, and exact integer arithmetic leaves only \\((m,h)=(7,64),(8,4)\\).",
+      "statement": "Classify the exact-length unions of complete split fibers.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3"
+      ],
+      "id": "P4",
+      "proof": "For binary evaluations, \\(f^2-f\\) vanishes on \\(E\\); division by a function with divisor \\(E-NP_\\infty\\) maps into \\(L((2a-N)P_\\infty)\\), with kernel \\(\\mathbb F_2\\).",
+      "statement": "Prove the Frobenius-division dimension lemma.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P4",
+        "Pellikaan\u2013Stichtenoth\u2013Torres semigroup recurrence"
+      ],
+      "id": "P5",
+      "proof": "Exact nongap enumeration gives \\(\\ell((N/8)P_\\infty)=9\\) at level seven and 1 at level eight; insert these in \\(1+8\\ell\\).",
+      "statement": "Derive the full-fiber dimension caps 73 and 9.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P3",
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "At level eight the relevant Riemann\u2013Roch space is \\(\\langle1,x_1,x_1^2\\rangle\\). Comparing the cubic coefficient of \\(p^2-p\\) with the polynomial having the four selected roots eliminates the quadratic term, after which four roots force a binary constant.",
+      "statement": "Show that the specified level-eight subfield subcode is exactly the repetition code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P6"
+      ],
+      "id": "P7",
+      "proof": "The sole nonzero codeword is \\(\\mathbf1\\), of weight \\(N\\); the general AG zero count also gives the required lower bound \\(N-a=D\\).",
+      "statement": "Audit every nonzero word and the exact minimum distance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "16-ary Griesmer bound"
+      ],
+      "id": "P8",
+      "proof": "A product-distance certificate requires symbol distance 7,340,032; the exact 16-ary Griesmer sum caps symbol dimension at 526,479.",
+      "statement": "Rule out the natural \\(\\mathbb F_{16}\\)-trace plus [128,4,64] product certificate.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "The surviving narrow route is an \\(\\mathbb F_{16}\\)-trace code paired with the explicit \\([128,4,68]_2\\) local encoder. Crossing the ceiling requires an \\(\\mathbb F_{16}\\)-linear trace code of length \\(8,355,840\\), dimension at least \\(978,671\\), and symbol distance at least \\(6,908,266\\); Griesmer permits dimension only up to \\(987,027\\). Certifying this window requires a new global trace-weight or simultaneous Artin\u2013Schreier point-count argument. Fixed local trace lists, uniform repetition, ordinary product bounds, and complete split-fiber subfield subcodes cannot supply it.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/gs-rm-baseline.md",
+    "proofs/rs-rm-baseline.md",
+    "data/records.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let \\(N=2^{30}\\), \\(D=7N/16\\), and \\(L=8,355,840\\). In the recursive Garcia\u2013Stichtenoth tower over \\(\\mathbb F_{256}\\), an exact-length one-point binary subfield subcode \\(C_L(E,(9N/16)P_\\infty)\\cap\\mathbb F_2^N\\), with \\(E\\) a union of complete split \\(x_1\\)-fibers, can occur only at levels seven or eight; its dimension is then at most 73 or 9, respectively. For the explicit level-eight fibers above \\(\\theta,\\theta^2,\\theta^3,\\theta^4\\), the code is exactly \\(\\{0,\\mathbf1\\}=[N,1,N]_2\\). Independently, every binary length-\\(L\\) trace/subfield code completed by 128-fold repetition and \\(2^{22}\\) zero coordinates has dimension at most \\(1,015,831\\) if it meets distance \\(D\\). Finally, every fixed full-rank list of 128 absolute-trace functionals on \\(\\mathbb F_{256}\\) is an ordinary \\([128,8]\\) inner code of distance at most 64. These are rigorous barriers for the stated natural alphabet-reduction mechanisms, not universal impossibility results for punctured, coordinate-varying, or globally analyzed trace constructions.",
+  "title": "Frobenius-collapse and Griesmer barriers for GS alphabet reduction"
+}
