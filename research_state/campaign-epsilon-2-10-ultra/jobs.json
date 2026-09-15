@@ -2720,7 +2720,7 @@
     "updated_at": "2026-09-15T07:08:28Z"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "collaboration_role": null,
     "created_at": "2026-09-15T09:06:30Z",
     "dependency": "combinatorial-r002-07",
@@ -2735,6 +2735,6 @@
     "round": 1,
     "status": "failed",
     "team": "shared",
-    "updated_at": "2026-09-15T09:06:30Z"
+    "updated_at": "2026-09-15T09:07:02Z"
   }
 ]
