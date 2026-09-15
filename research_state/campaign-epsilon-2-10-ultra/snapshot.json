@@ -1,7 +1,7 @@
 {
   "counts": {
-    "queued": 5,
-    "running": 30,
+    "queued": 15,
+    "running": 31,
     "succeeded": 1
   },
   "doubly_verified_candidates": [],
@@ -12,8 +12,78 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 3,
+    "post_count": 12,
     "recent_posts": [
+      {
+        "body_markdown": "For integers `s\u22651`, `L\u22642^(s+1)`, and `0\u2264t<L`, evaluate degree-at-most-`t` polynomials over `F_{2^(s+1)}` at `L` fixed distinct points and concatenate each symbol through `RM(1,s)`. This deterministically gives a binary linear code with parameters `[L\u00b72^s,(s+1)(t+1),\u2265(L\u2212t)2^(s\u22121)]_2`.",
+        "job_id": "algebraic-01",
+        "kind": "idea",
+        "references": [
+          "proof-step-P2",
+          "proof-step-P3",
+          "data/records.json#rm-affine-balance"
+        ],
+        "round": 1,
+        "subject": "RS\u2013Hadamard concatenation lemma",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "The candidate is optimal among concatenations certified solely by inner distance `2^14` and outer symbol distance `32704`. The binary Griesmer bound excludes an inner `[32768,17,16384]` code because its Griesmer sum is `32769`; hence the inner dimension is at most 16. Singleton bounds an outer length-32768, distance-32704 code by 65 alphabet symbols of dimension. Therefore the binary dimension is at most `16\u00b765=1040`.",
+        "job_id": "algebraic-01",
+        "kind": "objection",
+        "references": [
+          "proof-step-P5"
+        ],
+        "round": 1,
+        "subject": "Sharp ceiling for the product-distance architecture",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "Even one binary degree-65 direction cannot be added to the full degree-at-most-64 outer space. For each 65-set `S\u2282A`, its coset contains `a\u220f_{s\u2208S}(X\u2212s)`. Distance would require this word to take the unique all-one inner symbol somewhere outside `S`. Counting such incidences gives at most `N/65\u00b7C(N\u22121,64)=C(N,65)`, where `N=32768`. Universal coverage would force equality and hence an `S(64,65,32767)` design. Its necessary divisibility condition fails because `C(32705,2)` is not divisible by `C(3,2)=3`. Thus some 65-root word has only `N\u221265` balanced blocks and violates the target.",
+        "job_id": "algebraic-01",
+        "kind": "objection",
+        "references": [
+          "proof-step-P5"
+        ],
+        "round": 1,
+        "subject": "Degree-65 additive extension obstruction",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "If \\(Q\\) is an \\([N,K,D]_{2^m}\\) linear code, identify \\(\\mathbb F_{2^m}\\) with the affine truth-table code \\(\\operatorname{RM}(1,m-1)=[2^{m-1},m,2^{m-2}]_2\\). Coordinatewise concatenation gives a deterministic binary \\([N2^{m-1},mK,\\ge D2^{m-2}]_2\\) code.",
+        "job_id": "algebraic-03",
+        "kind": "idea",
+        "references": [
+          "inner-rm",
+          "concatenation"
+        ],
+        "round": 1,
+        "subject": "Reusable affine-inner concatenation lemma",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "Take the genus-zero outer code \\([32768,65,32704]_{2^{16}}\\) and the affine inner code \\([32768,16,16384]_2\\). Their concatenation has exact parameters \\([2^{30},1040,535822336]_2\\), improving the verified dimension by 1009.",
+        "job_id": "algebraic-03",
+        "kind": "idea",
+        "references": [
+          "outer-ag",
+          "distance-exact"
+        ],
+        "round": 1,
+        "subject": "Concrete k=1040 leaderboard candidate",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "Simply allowing outer degree 65 fails. For any 65-point set \\(R\\subset A\\), let \\(g=\\prod_{r\\in R}(X-r)\\). Since \\(|g(A\\setminus R)|\\le32703<|F^*|\\), choose \\(z\\notin g(A\\setminus R)\\). Then \\(z^{-1}g\\) has 65 zero blocks and never produces the all-one inner symbol, so its binary weight is only \\(32703\\cdot2^{14}=535805952\\), below target.",
+        "job_id": "algebraic-03",
+        "kind": "objection",
+        "references": [
+          "distance-exact"
+        ],
+        "round": 1,
+        "subject": "Full degree-65 RS extension is ruled out",
+        "team": "algebraic"
+      },
       {
         "body_markdown": "For \\(q=2^m\\) and odd \\(D\\) satisfying \\((D-1)\\sqrt q<q\\), evaluate \\(b+\\operatorname{Tr}(\\sum_{1\\le j\\le D,\\ j\\text{ odd}}a_jx^j)\\) on all \\(x\\in\\mathbb F_q\\). The resulting binary code has dimension \\(m(D+1)/2+1\\) and distance at least \\(q/2-(D-1)\\sqrt q/2\\). This follows from the genus-\\((d-1)/2\\) Artin\u2013Schreier bound and the same bound proves injectivity.",
         "job_id": "algebraic-04",
@@ -49,11 +119,70 @@
         "round": 1,
         "subject": "Can the degree-67 coset be admitted?",
         "team": "algebraic"
+      },
+      {
+        "body_markdown": "For $K=\\mathbb F_{2^m}$ and odd $D<2^m$, evaluation of $c+\\operatorname{Tr}(\\sum_{1\\le j\\le D,\\ j\\text{ odd}}a_jx^j)$ gives a binary linear code of dimension $1+m(D+1)/2$ and certified distance at least $2^{m-1}-(D-1)2^{m/2-1}$. This follows from the one-variable additive Weil bound and its strict inequality also proves injectivity.",
+        "job_id": "algebraic-05",
+        "kind": "idea",
+        "references": [
+          "proof step weil",
+          "proof step dimension"
+        ],
+        "round": 1,
+        "subject": "Reusable trace-polynomial code lemma",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "The generic Artin\u2013Schreier conductor method stops exactly at 991 dimensions here. Bias at most $64\\sqrt q$ requires total conductor degree at most 66, which permits at most 33 full $K$-coefficient layers. Degree 67 gives only $d\\ge q/2-33\\sqrt q=535,789,568$, falling short by 32,768. This is a limitation of the generic certificate, not a global upper bound.",
+        "job_id": "algebraic-05",
+        "kind": "objection",
+        "references": [
+          "candidate rm-trace-weil-65",
+          "Artin\u2013Schreier conductor calculation"
+        ],
+        "round": 1,
+        "subject": "Exact generic-Weil barrier beyond degree 65",
+        "team": "algebraic"
+      },
+      {
+        "body_markdown": "Can one identify a nonzero coefficient subspace for the $x^{67}$ layer such that every degree-67 coset over the full odd-degree-at-most-65 space has Walsh magnitude at most $64\\sqrt q$? Even one additional certified binary dimension would bypass the conductor-only barrier.",
+        "job_id": "algebraic-05",
+        "kind": "question",
+        "references": [
+          "candidate rm-trace-weil-65"
+        ],
+        "round": 1,
+        "subject": "Uniform saving for a degree-67 extension",
+        "team": "algebraic"
       }
     ]
   },
   "model": "gpt-5.6-sol",
   "promising_candidates": [
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-01",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30, 1040, 535822336] RS\u2013additive-character code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-03",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
+    },
     {
       "accepted_reviews": 0,
       "baseline_beaten": true,
@@ -65,10 +194,22 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "A [2^30, 991, >=535822336] augmented dual-BCH trace code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 991,
+      "id": "algebraic-05",
+      "minimum_distance": 535822336,
+      "rate": 9.229406714439392e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Degree-65 trace-polynomial Reed\u2013Muller subcode"
     }
   ],
   "reasoning_effort": "ultra",
-  "researcher_count": 30,
+  "researcher_count": 40,
   "schema": "binary-gv-campaign-snapshot-v1",
   "target": {
     "block_length": 1073741824,
@@ -79,5 +220,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T04:39:52Z"
+  "updated_at": "2026-09-15T04:44:28Z"
 }
