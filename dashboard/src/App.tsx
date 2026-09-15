@@ -39,7 +39,7 @@ type CampaignSnapshot = {
   researcher_count: number;
   counts: Record<string, number>;
   promising_candidates: CampaignCandidate[];
-  doubly_verified_candidates: CampaignCandidate[];
+  verified_candidates: CampaignCandidate[];
   message_board?: {
     post_count: number;
     recent_posts: Array<{
@@ -305,10 +305,7 @@ function RecordCard({ entry, isLeader }: { entry: RecordEntry; isLeader: boolean
         <div className="construction-detail">
           <div>
             <span className="detail-label">Concrete choice</span>
-            <p>
-              Evaluate all affine Boolean functions on <MathInline>{'\\mathbb F_2^{30}'}</MathInline>.
-              This is <MathInline>{'\\operatorname{RM}(1,30)=[2^{30},31,2^{29}]_2'}</MathInline>.
-            </p>
+            <p>{entry.construction}</p>
           </div>
           <a href={proofUrl} target="_blank" rel="noreferrer">
             Read proof <ArrowUpRight size={14} />
@@ -316,8 +313,9 @@ function RecordCard({ entry, isLeader }: { entry: RecordEntry; isLeader: boolean
         </div>
         <div className="audit-strip">
           <span><Check size={13} /> arithmetic</span>
-          <span><Check size={13} /> correctness agent A</span>
-          <span><Check size={13} /> correctness agent B</span>
+          {entry.verification.reviews.map((review) => (
+            <span key={review.agent}><Check size={13} /> {review.agent}</span>
+          ))}
           <span><Check size={13} /> readable proof</span>
         </div>
       </div>
@@ -381,9 +379,10 @@ function RecordPage() {
     () => campaign.promising_candidates
       .filter((candidate) => candidate.rate != null && candidate.dimension != null)
       .filter((candidate) => candidate.polynomial_generator === true)
-      .filter((candidate) => !snapshot.records.some((entry) => entry.id === candidate.id))
+      .filter((candidate) => candidate.accepted_reviews < 1)
+      .filter((candidate) => candidate.dimension! > leader.dimension)
       .sort((a, b) => (b.rate ?? -1) - (a.rate ?? -1)),
-    [campaign],
+    [campaign, leader.dimension],
   );
   const succeeded = campaign.counts.succeeded ?? 0;
   const totalResearch = campaign.researcher_count;

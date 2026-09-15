@@ -16,6 +16,7 @@ def main(argv: list[str] | None = None) -> int:
         ("status", "show durable campaign progress"),
         ("recover-schema-failures", "requeue jobs rejected before execution by a fixed schema defect"),
         ("requeue-interrupted", "requeue jobs left running by a stopped controller"),
+        ("cancel-pending", "cancel every queued or running campaign job"),
         ("genius-checkpoint", "run one requested GENIUS integration checkpoint"),
     ):
         item = sub.add_parser(name, help=help_text)
@@ -48,6 +49,8 @@ def main(argv: list[str] | None = None) -> int:
             payload = campaign.recover_invalid_schema_failures()
         elif args.command == "requeue-interrupted":
             payload = campaign.requeue_interrupted_jobs()
+        elif args.command == "cancel-pending":
+            payload = campaign.cancel_pending_jobs()
         elif args.command == "genius-checkpoint":
             payload = campaign.run_genius_checkpoint()
         else:

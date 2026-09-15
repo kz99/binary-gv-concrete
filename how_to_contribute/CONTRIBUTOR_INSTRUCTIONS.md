@@ -25,8 +25,10 @@ submissions.
 
 ## 2. Benchmarks
 
-The verified starting point is \(\operatorname{RM}(1,30)\): \(k=31\),
-\(d_{\min}=2^{29}\). A new record needs \(k\geq32\).
+The historical starting point is \(\operatorname{RM}(1,30)\): \(k=31\) and
+\(d_{\min}=2^{29}\). The current verified record is the explicit
+Reed–Solomon–affine concatenated code with \(k=1040\). A new record needs
+\(k\geq1041\).
 
 For orientation, the entropy-form binary GV value is
 
@@ -82,9 +84,9 @@ parameter table.
   "id": "your-code-id",
   "name": "Your construction",
   "blockLength": 1073741824,
-  "dimension": 32,
+  "dimension": 1041,
   "minimumDistance": 535822336,
-  "rate": 2.9802322387695312e-8,
+  "rate": 9.695068001747131e-7,
   "status": "under-review",
   "generatorMatrix": {
     "outputsFullMatrixInPolynomialTime": true,

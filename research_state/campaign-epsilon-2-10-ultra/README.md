@@ -29,7 +29,7 @@ PYTHONPATH=src python3 -m binary_gv_research genius-checkpoint configs/campaign-
 
 Every substantive output is committed to the shared repository; researchers
 read it and the message board before their next attempt. The loop continues
-with fresh rounds until a candidate with \(k>31\) receives its independent
+with fresh rounds until a candidate with \(k>1040\) receives its independent
 verifier acceptance.
 
 Launch only when explicitly requested:

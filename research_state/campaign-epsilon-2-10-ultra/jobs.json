@@ -887,16 +887,16 @@
       "combinatorial-expander-06"
     ],
     "direction": "Extractor-based balanced codes with concrete length accounting.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 1,
-    "status": "running",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T08:54:03Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -910,16 +910,16 @@
       "combinatorial-expander-10"
     ],
     "direction": "Derandomized low-bias code constructions and finite losses.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 1,
@@ -1351,16 +1351,16 @@
       "algebraic-r002-06"
     ],
     "direction": "Explicit Fourier-bias calculations.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r002-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "running",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T08:54:03Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1374,16 +1374,16 @@
       "algebraic-r002-10"
     ],
     "direction": "Finite-field lifting and descent.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r002-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 1,
@@ -1396,16 +1396,16 @@
       "algebraic-r002-06"
     ],
     "direction": "Exact parameter optimization of algebraic routes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r002-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "running",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T08:54:03Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 1,
@@ -1582,16 +1582,16 @@
       "combinatorial-r002-10"
     ],
     "direction": "Limited-independence constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r002-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 1,
@@ -1680,16 +1680,16 @@
       "composition-r002-03"
     ],
     "direction": "Direct sums and interleavings.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r002-04",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1702,16 +1702,16 @@
       "composition-r002-03"
     ],
     "direction": "Puncturing, shortening, and padding arithmetic.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r002-05",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1724,16 +1724,16 @@
       "composition-r002-03"
     ],
     "direction": "Code product transformations.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r002-06",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1745,16 +1745,16 @@
       "composition-r002-05"
     ],
     "direction": "Hybrid algebraic-combinatorial constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r002-07",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1767,16 +1767,16 @@
       "composition-r002-06"
     ],
     "direction": "Exact finite-length rounding optimization.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r002-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1790,16 +1790,16 @@
       "composition-r002-10"
     ],
     "direction": "Audit of known explicit constructions at the checkpoint.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r002-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1812,16 +1812,16 @@
       "composition-r002-06"
     ],
     "direction": "Synthesis of reusable lemmas into a higher-k candidate.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r002-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 2,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1830,16 +1830,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Trace and character-sum codes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-01",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1848,16 +1848,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Subfield subcodes and concatenation.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-02",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1866,16 +1866,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Algebraic-geometric evaluation codes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-03",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1888,16 +1888,16 @@
       "algebraic-r003-03"
     ],
     "direction": "BCH and cyclic-code bias bounds.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-04",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1910,16 +1910,16 @@
       "algebraic-r003-03"
     ],
     "direction": "Reed--Muller extensions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-05",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1932,16 +1932,16 @@
       "algebraic-r003-03"
     ],
     "direction": "Tensor and product constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-06",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1953,16 +1953,16 @@
       "algebraic-r003-05"
     ],
     "direction": "Boolean polynomial constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-07",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1975,16 +1975,16 @@
       "algebraic-r003-06"
     ],
     "direction": "Explicit Fourier-bias calculations.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -1998,16 +1998,16 @@
       "algebraic-r003-10"
     ],
     "direction": "Finite-field lifting and descent.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2020,16 +2020,16 @@
       "algebraic-r003-06"
     ],
     "direction": "Exact parameter optimization of algebraic routes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "algebraic-r003-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "algebraic",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2038,16 +2038,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Explicit small-bias generators.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-01",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2056,16 +2056,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Epsilon-balanced code instantiations.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-02",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2074,16 +2074,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Expander-walk codes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-03",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2096,16 +2096,16 @@
       "combinatorial-r003-03"
     ],
     "direction": "Replacement-product constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-04",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2118,16 +2118,16 @@
       "combinatorial-r003-03"
     ],
     "direction": "Extractor-based linear codes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-05",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2140,16 +2140,16 @@
       "combinatorial-r003-03"
     ],
     "direction": "Derandomized sampler constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-06",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2161,16 +2161,16 @@
       "combinatorial-r003-05"
     ],
     "direction": "Cayley graph and character constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-07",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2183,16 +2183,16 @@
       "combinatorial-r003-06"
     ],
     "direction": "Spectral amplification.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2206,16 +2206,16 @@
       "combinatorial-r003-10"
     ],
     "direction": "Limited-independence constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2228,16 +2228,16 @@
       "combinatorial-r003-06"
     ],
     "direction": "Finite constant optimization of combinatorial routes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-r003-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2246,16 +2246,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Ta-Shma-style epsilon-balanced codes and their exact finite instantiation.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-01",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2264,16 +2264,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Ta-Shma bias amplification with every constant exposed.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-02",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2282,16 +2282,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Wide replacement products and Gray-code constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-03",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2304,16 +2304,16 @@
       "combinatorial-expander-r003-03"
     ],
     "direction": "Expander-walk and free-walk balanced codes.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-04",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2326,16 +2326,16 @@
       "combinatorial-expander-r003-03"
     ],
     "direction": "Replacement-product parameter optimization at epsilon=2^-10.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-05",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2348,16 +2348,16 @@
       "combinatorial-expander-r003-03"
     ],
     "direction": "Lossless-expander and sampler-based constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-06",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2369,16 +2369,16 @@
       "combinatorial-expander-r003-05"
     ],
     "direction": "Spectral graph products and explicit bias reduction.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-07",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2391,16 +2391,16 @@
       "combinatorial-expander-r003-06"
     ],
     "direction": "Extractor-based balanced codes with concrete length accounting.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2414,16 +2414,16 @@
       "combinatorial-expander-r003-10"
     ],
     "direction": "Derandomized low-bias code constructions and finite losses.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2436,16 +2436,16 @@
       "combinatorial-expander-r003-06"
     ],
     "direction": "Synthesize the strongest combinatorial-expander record candidate.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "combinatorial-expander-r003-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2454,16 +2454,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Multilevel concatenation.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-01",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2472,16 +2472,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Structured inner-code search with proofs.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-02",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2490,16 +2490,16 @@
     "dependency": null,
     "depends_on": [],
     "direction": "Outer-code and alphabet-reduction tradeoffs.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-03",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2512,16 +2512,16 @@
       "composition-r003-03"
     ],
     "direction": "Direct sums and interleavings.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-04",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2534,16 +2534,16 @@
       "composition-r003-03"
     ],
     "direction": "Puncturing, shortening, and padding arithmetic.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-05",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2556,16 +2556,16 @@
       "composition-r003-03"
     ],
     "direction": "Code product transformations.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-06",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2577,16 +2577,16 @@
       "composition-r003-05"
     ],
     "direction": "Hybrid algebraic-combinatorial constructions.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-07",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2599,16 +2599,16 @@
       "composition-r003-06"
     ],
     "direction": "Exact finite-length rounding optimization.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-08",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "ultra",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2622,16 +2622,16 @@
       "composition-r003-10"
     ],
     "direction": "Audit of known explicit constructions at the checkpoint.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
@@ -2644,80 +2644,80 @@
       "composition-r003-06"
     ],
     "direction": "Synthesis of reusable lemmas into a higher-k candidate.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "composition-r003-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
     "reasoning_effort": "max",
     "role": "researcher",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "composition",
-    "updated_at": "2026-09-15T07:11:38Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
     "created_at": "2026-09-15T07:08:28Z",
     "dependency": null,
     "direction": "Trace, character-sum, subfield-subcode, and algebraic routes maximizing concrete dimension at bias 2^-10.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "roadmap-algebraic-r003",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
     "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "shared",
-    "updated_at": "2026-09-15T07:08:28Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
     "created_at": "2026-09-15T07:08:28Z",
     "dependency": null,
     "direction": "Explicit epsilon-balanced and expander-walk routes with finite constants optimized at epsilon=2^-10.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "roadmap-expander-r003",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
     "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "shared",
-    "updated_at": "2026-09-15T07:08:28Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
     "created_at": "2026-09-15T07:08:28Z",
     "dependency": null,
     "direction": "Structured concatenation, multilevel, and finite parameter-search routes maximizing the certified dimension at the exact target.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "roadmap-composition-r003",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
     "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "shared",
-    "updated_at": "2026-09-15T07:08:28Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 0,
     "created_at": "2026-09-15T07:08:28Z",
     "dependency": null,
     "direction": "Merge the newest reusable proof steps into the shared lemma book.",
-    "error": null,
+    "error": "Cancelled at the user's request.",
     "id": "lemma-writer-r003",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
     "reasoning_effort": "xhigh",
     "role": "lemma_writer",
     "round": 3,
-    "status": "queued",
+    "status": "cancelled",
     "team": "shared",
-    "updated_at": "2026-09-15T07:08:28Z"
+    "updated_at": "2026-09-15T09:31:42Z"
   },
   {
     "attempts": 3,

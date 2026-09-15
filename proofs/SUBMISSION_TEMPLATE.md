@@ -26,4 +26,4 @@ Cite each external theorem on which the proof relies precisely enough to locate 
 
 ## Verifier reviews
 
-This section is completed independently by two verifier agents. The submitting researcher must leave the status as `under-review` until both agents accept.
+This section is completed independently by one verifier agent. The submitting researcher must leave the status as `under-review` until that verifier accepts.

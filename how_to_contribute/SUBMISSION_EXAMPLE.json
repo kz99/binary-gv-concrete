@@ -6,12 +6,18 @@
   "authors": "Contributor names",
   "date": "YYYY-MM-DD",
   "blockLength": 1073741824,
-  "dimension": 32,
+  "dimension": 1041,
   "minimumDistance": 535822336,
-  "rate": 2.9802322387695312e-8,
+  "rate": 9.695068001747131e-7,
   "rateType": "certified_lower_bound",
   "relativeDistance": 0.4990234375,
   "status": "under-review",
+  "generatorMatrix": {
+    "outputsFullMatrixInPolynomialTime": true,
+    "algorithm": "Describe the deterministic full-matrix generator.",
+    "runtimeBound": "O(n^c) for a fixed constant c.",
+    "runtimeProof": "Account for preprocessing and all 1041n emitted entries."
+  },
   "verification": {
     "arithmetic": "pending",
     "proof": "pending",

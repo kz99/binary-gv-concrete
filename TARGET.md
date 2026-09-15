@@ -15,8 +15,10 @@ d_{\min}(C)\geq \left(\frac12-2^{-10}\right)2^{30}
 
 and maximize its dimension \(k=\dim C\).
 
-The current verified baseline is \(\operatorname{RM}(1,30)\), with \(k=31\)
-and \(d_{\min}=2^{29}\). A new concrete record therefore requires \(k\geq32\)
+The historical baseline is \(\operatorname{RM}(1,30)\), with \(k=31\) and
+\(d_{\min}=2^{29}\). The current verified record is the explicit
+Reed–Solomon–affine concatenated code with \(k=1040\) and certified distance
+\(535{,}822{,}336\). A new concrete record therefore requires \(k\geq1041\)
 and a complete proof certificate.
 
 The entropy-form Gilbert--Varshamov reference is

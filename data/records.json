@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15T00:00:00Z",
+  "updatedAt": "2026-09-15T09:36:10Z",
   "target": {
     "alphabet": "binary",
     "linear": true,
@@ -30,6 +30,47 @@
   "records": [
     {
       "rank": 1,
+      "id": "rs-affine-1040",
+      "name": "Reed–Solomon–affine concatenated code",
+      "shortName": "RS(64) ∘ RM(1,15)",
+      "authors": "Binary-GV autonomous research campaign",
+      "date": "2026-09-15",
+      "blockLength": 1073741824,
+      "dimension": 1040,
+      "minimumDistance": 535822336,
+      "rate": 9.685754776000977e-7,
+      "rateType": "exact",
+      "relativeDistance": 0.4990234375,
+      "status": "verified",
+      "generatorMatrix": {
+        "outputsFullMatrixInPolynomialTime": true,
+        "algorithm": "Use rows alpha^i X^j for 0 <= i <= 15 and 0 <= j <= 64, and columns (a,y) in A x F_2^15. Emit entry H(alpha^i a^j)_y using carryless arithmetic modulo T^16+T^5+T^3+T^2+1.",
+        "runtimeBound": "O(1040n)=O(n) fixed-word operations for the concrete instance.",
+        "runtimeProof": "There are exactly 1040n entries. Each uses a bounded number of operations on 16-bit field elements, and the algorithm streams every entry in the prescribed order. The output itself has 1040n bits."
+      },
+      "verification": {
+        "arithmetic": "passed",
+        "proof": "passed",
+        "reviewers": 1,
+        "agents": ["codex-expert-audit"],
+        "writing": "passed",
+        "summary": "An independent theorem-level audit recomputed the field certificate, length, dimension, product distance, rate, and complete generator-matrix runtime.",
+        "reviews": [
+          {
+            "agent": "codex-expert-audit",
+            "decision": "accepted",
+            "correctness": "passed",
+            "writing": "passed",
+            "summary": "Accepted after independent finite-field recomputation and a line-by-line audit of the simpler Reed–Solomon–affine concatenation proof."
+          }
+        ]
+      },
+      "construction": "Concatenate a degree-64 Reed–Solomon evaluation code on 32,768 explicit points of F_(2^16) with the binary [32768,16,16384] affine truth-table code.",
+      "proofPath": "proofs/rs-affine-1040.md",
+      "tags": ["reed-solomon", "concatenated", "symbolic"]
+    },
+    {
+      "rank": 2,
       "id": "rm-1-30-baseline",
       "name": "First-order Reed–Muller code",
       "shortName": "RM(1,30)",
@@ -72,7 +113,7 @@
           }
         ]
       },
-      "construction": "Evaluate every affine Boolean function on \\(\\mathbb F_2^{30}\\), in lexicographic point order.",
+      "construction": "Evaluate every affine Boolean function on F_2^30 in lexicographic point order.",
       "proofPath": "proofs/rm-1-30-baseline.md",
       "tags": ["reed-muller", "near-half-distance", "symbolic"]
     }
@@ -82,16 +123,37 @@
       {
         "id": "rm-affine-balance",
         "title": "Affine balance",
-        "statement": "Every nonconstant affine function \\(f:\\mathbb F_2^m\\to\\mathbb F_2\\) has Hamming weight \\(2^{m-1}\\).",
+        "statement": "\\text{Every nonconstant affine }f:\\mathbb F_2^m\\to\\mathbb F_2\\text{ has Hamming weight }2^{m-1}.",
         "status": "proved",
-        "usedBy": ["rm-1-30-baseline"]
+        "usedBy": ["rm-1-30-baseline", "rs-affine-1040"]
       },
       {
         "id": "epsilon-checkpoint-arithmetic",
         "title": "Near-half checkpoint arithmetic",
-        "statement": "For \\(n=2^{30}\\) and \\(\\varepsilon=2^{-10}\\), \\((1/2-\\varepsilon)n=535{,}822{,}336\\).",
+        "statement": "n=2^{30},\\,\\varepsilon=2^{-10}\\quad\\Longrightarrow\\quad(1/2-\\varepsilon)n=535{,}822{,}336.",
         "status": "proved",
-        "usedBy": ["rm-1-30-baseline"]
+        "usedBy": ["rm-1-30-baseline", "rs-affine-1040"]
+      },
+      {
+        "id": "polynomial-root-bound",
+        "title": "Polynomial root bound",
+        "statement": "0\\ne f\\in F[X],\\,\\deg f\\le r\\quad\\Longrightarrow\\quad|\\{a\\in F:f(a)=0\\}|\\le r.",
+        "status": "proved",
+        "usedBy": ["rs-affine-1040"]
+      },
+      {
+        "id": "affine-inner-code",
+        "title": "Affine truth-table code",
+        "statement": "H:F_2^{m+1}\\to F_2^{2^m},\\quad H(z)_y=z_0+\\sum_{i=1}^m z_i y_i\\quad\\text{ is an }[2^m,m+1,2^{m-1}]_2\\text{ injection}.",
+        "status": "proved",
+        "usedBy": ["rs-affine-1040"]
+      },
+      {
+        "id": "concatenated-distance-product",
+        "title": "Concatenated distance product",
+        "statement": "d_{\\min}(C_{\\mathrm{out}}\\circ C_{\\mathrm{in}})\\ge d_{\\mathrm{out}}d_{\\mathrm{in}}.",
+        "status": "proved",
+        "usedBy": ["rs-affine-1040"]
       }
     ],
     "directions": [
@@ -100,21 +162,21 @@
         "title": "Explicit small-bias codes",
         "summary": "Seek the largest certified dimension from a symbolic construction with bias at most \\(2^{-10}\\) at length \\(2^{30}\\).",
         "priority": "high",
-        "state": "active"
+        "state": "paused"
       },
       {
         "id": "expander-amplification",
         "title": "Expander and walk amplification",
         "summary": "Optimize finite constants in epsilon-balanced constructions to maximize the certified leaderboard dimension.",
         "priority": "high",
-        "state": "active"
+        "state": "paused"
       },
       {
         "id": "algebraic-trace",
         "title": "Algebraic trace constructions",
         "summary": "Use algebraic structure to control all nonzero codeword biases and maximize dimension without random sampling.",
         "priority": "medium",
-        "state": "active"
+        "state": "paused"
       }
     ]
   }

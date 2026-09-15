@@ -19,7 +19,7 @@ from .agents import AgentError, CommandAgentProvider
 
 N = 1_073_741_824
 D = 535_822_336
-CURRENT_K = 31
+CURRENT_K = 1040
 EPSILON_DENOMINATOR = 1_024
 GV_RATE = 0.0000027517241633056023
 RESEARCHER_EFFORTS = ("ultra", "max", "xhigh", "max", "ultra", "xhigh", "max", "ultra", "xhigh", "max")
@@ -313,8 +313,8 @@ The immutable target is an explicit binary linear code C subset F_2^n with
 n=2^30=1,073,741,824 and epsilon=2^-10.  It must satisfy
 d_min(C)>=535,822,336=(1/2-2^-10)n.  The sole operating objective is to
 maximize the rigorously proved dimension k=dim(C), equivalently rate R=k/n,
-at this exact target. The current verified dimension is 31, so a new record needs
-dimension at least 32; the concrete GV-rate reference corresponds to dimension
+at this exact target. The current verified dimension is 1040, so a new record needs
+dimension at least 1041; the concrete GV-rate reference corresponds to dimension
 2,955. Every decision, roadmap, and synthesis must be judged first by whether
 it can yield a larger verified k. Random sampling is not an
 admissible construction.  Every field, code, tower level, divisor, graph,
@@ -632,6 +632,23 @@ class Campaign:
         payload["requeued_interrupted_jobs"] = recovered
         return payload
 
+    def cancel_pending_jobs(self) -> dict[str, Any]:
+        """Cancel every queued or running job while retaining completed artifacts."""
+        self.initialize()
+        jobs = self._read_jobs()
+        cancelled = 0
+        for job in jobs:
+            if job.get("status") in {"queued", "running"}:
+                job["status"] = "cancelled"
+                job["error"] = "Cancelled at the user's request."
+                job["updated_at"] = utc_timestamp()
+                cancelled += 1
+        if cancelled:
+            self._write_jobs(jobs)
+        payload = self.export_snapshot()
+        payload["cancelled_jobs"] = cancelled
+        return payload
+
     def _submission_paths(self) -> list[str]:
         return [str(path.relative_to(self.paths.workspace)) for path in sorted((self.root / "submissions").glob("*.json"))]
 
@@ -716,7 +733,7 @@ integer and verify every cited theorem's hypotheses, exact-length operation,
 dimension claim, and minimum-distance implication.  Try to break the construction
 with edge cases and low-weight words. Check whether its baseline-improvement
 classification is honest. Explicitness is a hard gate: require a concrete
-deterministic algorithm that outputs all k*n generator-matrix entries in n^{O(1)}
+deterministic algorithm that outputs all k*n generator-matrix entries in n^{{O(1)}}
 time and a valid runtime proof. A canonical exhaustive search, conditional-average
 selector, or superpolynomial procedure is inadmissible and must be rejected with
 generator_runtime_passed=false. Reject an unfixable false or inadmissible claim; request revision for
@@ -1041,14 +1058,16 @@ you have examined every durable response and review path.
                 ),
                 "source_path": str(source_path.relative_to(self.paths.workspace)),
             }
-            candidates.append(item)
-            if (
+            is_verified = (
                 source.get("leaderboard_submission") and item["accepted_reviews"] >= int(self.cfg["verifier_count"])
                 and source.get("block_length") == N
                 and isinstance(source.get("dimension"), int)
                 and source.get("minimum_distance", 0) >= D
-            ):
+            )
+            if is_verified:
                 verified.append(item)
+            else:
+                candidates.append(item)
         candidates.sort(key=lambda item: item.get("rate") or -1, reverse=True)
         verified.sort(key=lambda item: item.get("rate") or -1, reverse=True)
         counts: dict[str, int] = {}
@@ -1076,7 +1095,7 @@ you have examined every durable response and review path.
                 "minimum_distance": D,
             },
             "message_board": self._message_board_snapshot(),
-            "promising_candidates": candidates, "doubly_verified_candidates": verified,
+            "promising_candidates": candidates, "verified_candidates": verified,
         }
         (self.root / "snapshot.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
         (self.root / "status.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")

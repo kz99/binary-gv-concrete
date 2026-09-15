@@ -6,10 +6,11 @@ Work only on the canonical target
 n=2^{30},\qquad d_{\min}\geq\left(\frac12-2^{-10}\right)n=535{,}822{,}336.
 \]
 
-Maximize the rigorously proved dimension \(k\). The current verified baseline
-is \(\operatorname{RM}(1,30)\) with \(k=31\); a concrete record needs
-\(k\geq32\). The GV reference is \(k\approx2{,}955\), not a construction
-claim.  Explicit means that the complete \(k\times n\) generator matrix can
+Maximize the rigorously proved dimension \(k\). The historical baseline is
+\(\operatorname{RM}(1,30)\) with \(k=31\); the current verified record is the
+Reed–Solomon–affine code with \(k=1040\), so a new record needs \(k\geq1041\).
+The GV reference is \(k\approx2{,}955\), not a construction claim. Explicit
+means that the complete \(k\times n\) generator matrix can
 be output by a deterministic algorithm in \(n^{O(1)}\) time.  The proof note
 must state the algorithm and prove this bound.  A canonical exhaustive search,
 conditional-expectation recursion, or finite lookup whose running time is

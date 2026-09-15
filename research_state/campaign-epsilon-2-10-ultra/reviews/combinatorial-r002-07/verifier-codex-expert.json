@@ -1,0 +1,68 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the two Frobenius residues and the Euclidean remainder chain for the displayed degree-16 modulus.",
+    "Enumerated the 32,768 evaluation points of A and independently verified the stronger subspace-polynomial certificate: 64 zero values, no value equal to 1, 512 image values, and fibers of size 64.",
+    "Checked the encoder kernel: a degree-at-most-64 polynomial cannot vanish on all 32,768 distinct points.",
+    "Checked every inner-symbol case: zero has weight 0, one has weight 32,768, and every other nonzero symbol has weight 16,384.",
+    "Checked zero, constant-one, other nonzero constants, and all nonconstant outer messages in the distance argument.",
+    "Recomputed 32,704 times 16,384 as 535,822,336 and 1040 divided by 2^30 as 65 divided by 2^26.",
+    "Checked that the row-column formula emits every entry of a 1040 by 2^30 generator matrix without search, sampling, advice, or an oracle."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "generator_runtime_passed": true,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The displayed polynomial defines F_(2^16).",
+      "justification": "Repeated squaring gives T^(2^16)=T modulo p and the displayed Euclidean chain gives gcd(p,T^(2^8)-T)=1. These are exactly the degree-16 Rabin conditions.",
+      "reference": "proofs/rs-affine-1040.md, Construction",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The coordinate set has size 2^30.",
+      "justification": "A and F_2^15 each have 2^15 elements, and no puncturing, repetition, or padding is used.",
+      "reference": "proofs/rs-affine-1040.md, Proof of length and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The binary dimension is 1040.",
+      "justification": "M has 65 coefficients over a 16-dimensional binary field. Evaluation is injective because 32768 exceeds degree 64, and the inner affine map is injective.",
+      "reference": "proofs/rs-affine-1040.md, Proof of length and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero word has weight at least 535,822,336.",
+      "justification": "A nonzero degree-at-most-64 polynomial has at least 32704 nonzero evaluations; every nonzero inner word has weight at least 16384. Their product is exactly the target.",
+      "reference": "proofs/rs-affine-1040.md, Proof of minimum distance",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The complete generator matrix is polynomial-time explicit.",
+      "justification": "The fixed row-column formula uses only degree-16 binary field arithmetic. It streams all 1040n output bits in O(n) fixed-word operations at the concrete parameters.",
+      "reference": "proofs/rs-affine-1040.md, Complete generator-matrix algorithm",
+      "verdict": "valid"
+    },
+    {
+      "claim": "No completed submission proves a larger admissible dimension.",
+      "justification": "The k=2971 claims use superpolynomial conditional selection; every k=1041, k=1054, and k=1649 route in the completed corpus is explicitly conditional or an architecture-specific obstruction, not a generator construction.",
+      "reference": "research_state/campaign-epsilon-2-10-ultra/submissions",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "combinatorial-r002-07",
+  "source_sha256": "f7ba399bd436f627f69d88257e436e49518fab34f734783ea1be24a5f70884bd",
+  "summary": "ACCEPT. The completed campaign contains a deterministic Reed--Solomon--affine concatenated code with certified parameters [2^30,1040,at least 535822336]_2. The field model, exact length, injectivity and dimension, product-distance proof, rate, and full generator-matrix algorithm all survive independent recomputation. The shorter canonical proof removes unnecessary spectral and exact-distance material without weakening the leaderboard claim.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-7
+}

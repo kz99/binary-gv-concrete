@@ -7,9 +7,10 @@ n=2^{30}=1{,}073{,}741{,}824,\qquad
 d_{\min}\geq\left(\frac12-2^{-10}\right)n=535{,}822{,}336.
 \]
 
-The concrete score is the dimension \(k\). The present verified baseline is
-\(\operatorname{RM}(1,30)\), with \(k=31\) and distance \(2^{29}\). The
-entropy-form GV benchmark is \(k\approx2{,}955\) at this blocklength.
+The concrete score is the dimension \(k\). The verified record is the explicit
+Reed–Solomon–affine concatenated code with \(k=1040\); the historical starting
+baseline \(\operatorname{RM}(1,30)\) has \(k=31\). The entropy-form GV
+benchmark is \(k\approx2{,}955\) at this blocklength.
 
 The entire workflow is organized around increasing this concrete leaderboard
 dimension toward GV. General constructions matter only when they yield a
