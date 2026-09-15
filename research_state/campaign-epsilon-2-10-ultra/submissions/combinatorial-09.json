@@ -1,0 +1,249 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is claimed. Consider the explicit field\n\n\\[\nF=\\mathbb F_2[\\alpha]/(\\alpha^{16}+\\alpha^5+\\alpha^3+\\alpha^2+1)\n\\]\n\nand the sets\n\n\\[\nA=\\operatorname{span}_{\\mathbb F_2}\\{1,\\alpha,\\ldots,\\alpha^{14}\\},\\qquad Y=\\mathbb F_2^{15}.\n\\]\n\nFor `z=\u03a3_{i=0}^{15}z_i \u03b1^i`, define the affine-Hadamard block\n\n\\[\nH(z)_y=z_0+\\sum_{i=1}^{15}z_i y_i.\n\\]\n\nLet\n\n\\[\nD_0=\\{(f(a))_{a\\in A}:f\\in F[X],\\ \\deg f\\le64\\}.\n\\]\n\nThen `H^A(D_0)` is the durable `[2^30,1040,535822336]_2` construction. The result audits every binary-additive outer supercode `D` with `D_0\u2286D\u2286F^A`, retaining exactly this coordinatewise inner map.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Let `F` have characteristic two, `A\u2282F`, and `D_m` be evaluation of degree-at-most-`m` polynomials on `A`. If `v\u2209D_m` and every word in `v+D_m` satisfies `N_0-N_1\u2264m`, then for every `m`-set `R\u2282A`, with `G_R(X)=\u220f_{r\u2208R}(X-r)`, one necessarily has `\u03a3_{x\u2208A\\R}G_R(x)^{-1}=0`. Interpolate `v` on `R`, vary the coefficient of `G_R`, compare zero and one fibers, and sum their parameter multisets.",
+      "kind": "idea",
+      "references": [
+        "proof-step:reciprocal-sum-lemma"
+      ],
+      "subject": "Reciprocal-sum extension lemma"
+    },
+    {
+      "body_markdown": "For the shared `F_{2^16}` RS\u2013affine construction, take `U=span{1,\u03b1,\u2026,\u03b1^5}`, `b=\u03b1^6`, and `R=(U\\{0})\u222a{b}`. The subspace-polynomial calculation gives `\u03a3_{x\u2208A\\R}1/G_R(x)=0x0990\u22600`. Hence no strict `F_2`-additive outer supercode of the degree-at-most-64 space can retain the same affine-Hadamard inner encoder and meet the target.",
+      "kind": "objection",
+      "references": [
+        "proof-step:explicit-64-set",
+        "algebraic-08"
+      ],
+      "subject": "The k=1040 fixed-inner code has no additive extension"
+    },
+    {
+      "body_markdown": "`combinatorial-01` selects its generator by comparing exact averages over every completion of each matrix prefix. Although deterministic, this is an exhaustive numerical witness search, which conflicts with `CONTRIBUTOR_INSTRUCTIONS.md` stating that numerical searches are not submissions. Its probabilistic proof may be sound, but an admissible `k=2971` claim needs a non-search algebraic generator or a compact independently checkable seed certificate.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+        "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md:19"
+      ],
+      "subject": "Conditional averaging does not meet the construction rule"
+    }
+  ],
+  "distance_audit": [
+    "For any `u\u2208F^A`, `wt(H^A(u))=2^14(32768-N_0(u)+N_1(u))`. Thus the immutable target is exactly `N_0(u)-N_1(u)\u226464`.",
+    "The base space `D_0` satisfies the target: a nonconstant degree-at-most-64 polynomial has at most 64 zero evaluations, while nonzero constants have no zero evaluations.",
+    "For `v\u2209D_0`, every interpolated coset word `u_t` is nonzero, so the assumed minimum-distance condition applies to every `t\u2208F`.",
+    "The 64 forced zeros give `z_t\u2264o_t`; summing over all `t` gives equal totals, hence `z_t=o_t` for every `t`.",
+    "The resulting necessary reciprocal sum is explicitly `0x0990`, contradicting the required value zero."
+  ],
+  "explicitness_audit": [
+    "Field elements are 16-bit polynomial-basis words; multiplication is reduction modulo bitmask `0x1002d`.",
+    "The evaluation space, inner coordinates, subspace `U`, element `b=0x0040`, and set `R={0x0001,\u2026,0x0040}` are completely fixed.",
+    "The subspace polynomial is reproducible from a six-step recurrence with the displayed `\u03b2_i`; no search or random choice enters the proof.",
+    "Independent direct enumeration of the original 32,704 reciprocal terms returned `0x0990`, matching the symbolic coset calculation.",
+    "The theorem only excludes outer additive extensions containing `D_0` and using the same coordinatewise `H`; it does not exclude unrelated binary extensions or different inner maps.",
+    "No proof or record was persisted because the workspace is read-only; consequently no publication validator or dashboard build was invoked."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "For a monic degree-16 polynomial over `F_2`, verify the full Frobenius congruence and the gcd test corresponding to the sole prime divisor of 16.",
+      "result": "Rabin's criterion proves irreducibility.",
+      "source": "M. O. Rabin, *Probabilistic Algorithms in Finite Fields*, SIAM Journal on Computing 9 (1980), 273\u2013280, https://doi.org/10.1137/0209024.",
+      "used_for": "Certifying the explicit representation of `F_{2^16}`."
+    },
+    {
+      "hypotheses": "A nonconstant affine Boolean function on 15 variables has a nonzero linear part.",
+      "result": "Its truth table is balanced and has weight `2^14`.",
+      "source": "`data/records.json`, lemma `rm-affine-balance`; `proofs/rm-1-30-baseline.md`.",
+      "used_for": "Deriving the exact two-fiber weight identity."
+    },
+    {
+      "hypotheses": "4096-wise-independent columns and the stated 4096th-moment estimate.",
+      "result": "Averaging reaches a conditional dimension-2955 existence threshold but supplies no admissible seed.",
+      "source": "`research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json`.",
+      "used_for": "Separating limited-independence existence from a deterministic non-search construction."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Persist the reciprocal-sum lemma and the fixed-inner obstruction under `proofs/` and `data/records.json`, obtain an independent campaign review, then run the validator and dashboard build.",
+    "Investigate additive outer spaces not containing `D_0`, binary directions outside `H^A(F^A)`, or coordinate-dependent inner maps; these are not covered by the obstruction.",
+    "Pursue the explicit inner-code gateways `[32768,18,16381]_2`, `[16384,16,8185]_2`, and `[8192,17,4090]_2`, which would yield dimensions 1062, 1056, and 1054 respectively.",
+    "Find a compact algebraic seed certificate for the 4096-wise moment construction; exhaustive conditional-average selection remains inadmissible."
+  ],
+  "obstructions": [
+    "No strict binary-additive outer supercode of `D_0` meets the target while retaining the shared affine-Hadamard inner encoder.",
+    "More generally, the universal positive-Fourier-mass/fiber-cap certificate for equal-block polynomial evaluation has maximum dimension 1040, uniquely at field degree 16 and polynomial degree 64. This is a proof-method ceiling, not an actual-code upper bound.",
+    "Exact `t`-wise independence alone does not control long parities; the optimized 4096-wise moment argument still lacks a non-search seed selector.",
+    "The conditional-average `k=2971` proposal is not admissible under the contribution guide's explicit prohibition on numerical searches, despite being deterministically specified.",
+    "The obstruction does not rule out additive spaces not containing `D_0`, different inner encoders, or arbitrary binary codes."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "The displayed Rabin certificate for the degree-16 modulus.",
+      "quantity": "Outer alphabet",
+      "value": "`|F|=2^16=65,536`"
+    },
+    {
+      "derivation": "`A` and `Y` each have binary dimension 15.",
+      "quantity": "Block counts",
+      "value": "`|A|=|Y|=2^15=32,768`"
+    },
+    {
+      "derivation": "`|A||Y|`.",
+      "quantity": "Binary length",
+      "value": "`2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "65 field coefficients, each contributing 16 binary dimensions.",
+      "quantity": "Base-code dimension",
+      "value": "`dim H^A(D_0)=65\u00b716=1,040`"
+    },
+    {
+      "derivation": "Exact affine-block weight formula.",
+      "quantity": "Target fiber inequality",
+      "value": "`N_0-N_1\u226464`"
+    },
+    {
+      "derivation": "`U=span{1,\u03b1,\u2026,\u03b1^5}`, `b=\u03b1^6`.",
+      "quantity": "Violating root set",
+      "value": "`R=(U\\{0})\u222a{b}`, `|R|=64`"
+    },
+    {
+      "derivation": "Six-step subspace-polynomial recurrence.",
+      "quantity": "Key coefficients",
+      "value": "`\u03bb=0x6115`, `\u03bc=0xc6ca`, `B=L(b)=0xe9f1`"
+    },
+    {
+      "derivation": "Field multiplication modulo `0x1002d`.",
+      "quantity": "Numerator certificate",
+      "value": "`B+\u03bbb+\u03bcb\u00b2=0xdc18\u22600`"
+    },
+    {
+      "derivation": "`\u03bbBb=0x1d5c`.",
+      "quantity": "Reciprocal sum",
+      "value": "`0xdc18/0x1d5c=0x0990`"
+    },
+    {
+      "derivation": "Positive Fourier mass and exact length.",
+      "quantity": "Fiber-cap proof-method ceiling",
+      "value": "`k\u22641040`, attained only at `r=16,t=64`"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nLet `D\u2286F^A` be an `F_2`-linear space containing `D_0`. If every nonzero word of `H^A(D)` has weight at least `535,822,336`, then `D=D_0`. Thus the shared dimension-1040 code admits no strict binary-additive outer extension using the same coordinatewise affine-Hadamard encoder.\n\n## 1. Field and base code\n\nPut\n\n\\[\np(Z)=Z^{16}+Z^5+Z^3+Z^2+1.\n\\]\n\nDirect repeated squaring modulo `p` gives\n\n\\[\nZ^{256}\\equiv Z^8+Z^7+Z^3+Z,\\qquad Z^{65536}\\equiv Z.\n\\]\n\nWriting `h=Z^8+Z^7+Z^3`, direct Euclidean division gives\n\n\\[\np=(Z^8+Z^7+Z^6+Z^5+Z^4+Z^2+1)h+(Z^2+1),\n\\]\n\n\\[\nh=(Z^6+Z^5+Z^4+Z^3+Z^2+1)(Z^2+1)+1.\n\\]\n\nHence `gcd(p,Z^256+Z)=1`; Rabin's degree-16 criterion proves that `p` is irreducible.\n\nThe evaluation map defining `D_0` is injective because a nonzero degree-at-most-64 polynomial cannot vanish at all 32,768 points of `A`. Therefore `dim_{F_2}D_0=16\u00b765=1040`.\n\nFor `u\u2208F^A`, let `N_c(u)=|{a:u_a=c}|`. Character orthogonality for the affine block gives weight zero at symbol `0`, weight `2^15` at symbol `1`, and weight `2^14` at every other symbol. Consequently\n\n\\[\n\\operatorname{wt}(H^A(u))=2^{14}(32768-N_0(u)+N_1(u)).\n\\]\n\nSince the target equals `(32768-64)2^14`, it is equivalent to\n\n\\[\nN_0(u)-N_1(u)\\le64. \\tag{1}\n\\]\n\nThis proves the lower bound for `D_0`. It is attained by choosing 64 roots and scaling their product so that none of its remaining values equals 1, as `32704<|F^*|=65535`.\n\n## 2. Reciprocal-sum extension lemma\n\nAssume toward contradiction that `v\u2208D\\D_0`. Fix any 64-set `R\u2282A`. Let `h_R` be the unique polynomial of degree at most 63 satisfying `h_R(r)=v_r` for `r\u2208R`, and put\n\n\\[\nG_R(X)=\\prod_{r\\in R}(X-r).\n\\]\n\nFor every `t\u2208F`, define\n\n\\[\nu_t=v+\\operatorname{ev}_A(h_R+tG_R).\n\\]\n\nThen `u_t\u2208D`, all its coordinates in `R` vanish, and `u_t\u22600`; otherwise `v\u2208D_0`. Let `z_t` and `o_t` count its additional zeros and its ones outside `R`. Applying (1) gives\n\n\\[\n64+z_t-o_t\\le64,\n\\]\n\nso `z_t\u2264o_t`.\n\nFor each fixed `x\u2208A\\R`, the map\n\n\\[\nt\\longmapsto v_x+h_R(x)+tG_R(x)\n\\]\n\nis a bijection of `F`. Therefore, as `t` ranges over `F`, coordinate `x` contributes exactly once to the zero counts and once to the one counts. Hence\n\n\\[\n\\sum_tz_t=|A\\setminus R|=\\sum_to_t.\n\\]\n\nTogether with `z_t\u2264o_t`, this forces `z_t=o_t` for every `t`.\n\nSet\n\n\\[\n\\rho_x=\\frac{v_x+h_R(x)}{G_R(x)}.\n\\]\n\nThe zero-parameter multiset is `{\u03c1_x:x\u2208A\\R}`, while the one-parameter multiset is `{\u03c1_x+G_R(x)^{-1}:x\u2208A\\R}`. Their equality implies equality of their sums, and therefore\n\n\\[\n\\sum_{x\\in A\\setminus R}\\frac1{G_R(x)}=0. \\tag{2}\n\\]\n\nThus (2) is necessary for every 64-set `R`, independently of `v`.\n\n## 3. An explicit violating set\n\nTake\n\n\\[\nU=\\operatorname{span}_{\\mathbb F_2}\\{1,\\alpha,\\ldots,\\alpha^5\\},\n\\qquad b=\\alpha^6,\n\\qquad R=(U\\setminus\\{0\\})\\cup\\{b\\}.\n\\]\n\nLet\n\n\\[\nL(X)=\\prod_{u\\in U}(X-u).\n\\]\n\nA reproducible calculation begins with `L_0(X)=X` and, for `i=0,\u2026,5`, uses\n\n\\[\n\\beta_i=L_i(\\alpha^i),\\qquad L_{i+1}(X)=L_i(X)^2+\\beta_iL_i(X).\n\\]\n\nModulo bitmask `0x1002d`, the six values are\n\n\\[\n(\\beta_0,\\ldots,\\beta_5)=\n(\\mathtt{0001},\\mathtt{0006},\\mathtt{0168},\\mathtt{47be},\\mathtt{b444},\\mathtt{4c35}),\n\\]\n\nand\n\n\\[\nL(X)=X^{64}+\\mathtt{2e0c}X^{32}+\\mathtt{71ee}X^{16}\n+\\mathtt{d9a4}X^8+\\mathtt{2198}X^4\n+\\mathtt{c6ca}X^2+\\mathtt{6115}X.\n\\]\n\nWrite `\u03bb=0x6115`, `\u03bc=0xc6ca`, and `B=L(b)=0xe9f1`. Since\n\n\\[\nG_R(X)=\\frac{L(X)}X(X-b),\n\\]\n\npartition `A\\R` into `0`, the nontrivial elements of `b+U`, and the remaining `U`-cosets. The first two parts contribute\n\n\\[\n\\frac1{\\lambda b},\n\\qquad\n\\frac1B+\\frac{b\\mu}{\\lambda B},\n\\]\n\nusing `\u03a3_{u\u2208U\\{0}}u^{-1}=\u03bc/\u03bb`. On a remaining fiber `L(x)=y`, logarithmic differentiation of `L` gives contribution\n\n\\[\n\\frac{b\\lambda}{y(y+B)}.\n\\]\n\nThe fibers pair under `y\u21a6y+B`, so all these latter contributions cancel in characteristic two. Hence\n\n\\[\n\\sum_{x\\in A\\setminus R}\\frac1{G_R(x)}\n=\n\\frac{B+\\lambda b+\\mu b^2}{\\lambda Bb}.\n\\]\n\nExact field arithmetic gives\n\n\\[\n\\lambda b=\\mathtt{46f8},\\qquad\n\\mu b^2=\\mathtt{7311},\n\\]\n\n\\[\nB+\\lambda b+\\mu b^2=\\mathtt{dc18}\\ne0,\n\\qquad\n\\lambda Bb=\\mathtt{1d5c}.\n\\]\n\nTherefore the reciprocal sum is `0x0990`, contradicting (2). This proves `D=D_0`.\n\n## 4. Broader limited-independence certificate ceiling\n\nLet an `r`-bit inner encoder consist of a spanning multiset `\\mathcal L` of `B` nonzero linear functionals, and define\n\n\\[\nW(z)=\\sum_{\\ell\\in\\mathcal L}(-1)^{\\ell(z)},\n\\qquad P_+=\\sum_{W(z)>0}W(z).\n\\]\n\nBecause all functionals are nonzero, `\u03a3_zW(z)=0`. Fourier inversion at any occurring functional gives `\u03a3_z|W(z)|\u22652^r`; moreover `W(0)=B`. Thus\n\n\\[\nP_+\\ge\\max(B,2^{r-1}).\n\\]\n\nFor a nonconstant degree-at-most-`t` polynomial, each symbol fiber has size at most `t`, so the universal positive-part estimate is\n\n\\[\n\\sum_xW(f(x))\\le tP_+.\n\\]\n\nA proof relying solely on this estimate must demand `tP_+\u22642^21`. Exact length `BN=2^30` and `N\u22642^r` imply `B\u22652^{30-r}`. Hence, for `t\u22651`,\n\n\\[\nk\\le r\\left(\\left\\lfloor\n\\frac{2^{21}}{\\max(2^{30-r},2^{r-1})}\n\\right\\rfloor+1\\right).\n\\]\n\nFor `9\u2264r\u226415` the maximum is 975 at `r=15`; for `16\u2264r\u226422` the values begin `1040,561,306,171,100,63,44`. Thus this proof method has exact maximum 1040 at `r=16,t=64`. This final statement is only a certificate ceiling: special cancellations not captured by `tP_+` remain possible.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-model",
+      "proof": "The displayed Frobenius reductions and Euclidean remainder chain satisfy Rabin's complete degree-16 irreducibility criterion.",
+      "statement": "`p(Z)=Z^16+Z^5+Z^3+Z^2+1` defines `F_{2^16}`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "id": "two-fiber-weight",
+      "proof": "The affine block has weights `0`, `2^15`, and `2^14` on symbols `0`, `1`, and all other symbols respectively.",
+      "statement": "`wt(H^A(u))=2^14(32768-N_0(u)+N_1(u))`; the target is `N_0-N_1\u226464`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "two-fiber-weight"
+      ],
+      "id": "reciprocal-sum-lemma",
+      "proof": "Interpolate an alleged extension vector on any 64-set, vary the coefficient of its root polynomial, and compare the zero- and one-parameter multisets.",
+      "statement": "Every admissible strict extension would force `\u03a3_{x\u2208A\\R}1/G_R(x)=0` for every 64-set `R`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "reciprocal-sum-lemma"
+      ],
+      "id": "explicit-64-set",
+      "proof": "The subspace-polynomial recurrence and coset pairing give the reciprocal sum `0xdc18/0x1d5c=0x0990`.",
+      "statement": "The explicit set `R=(U\\{0})\u222a{\u03b1^6}` violates the necessary reciprocal identity.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "two-fiber-weight",
+        "reciprocal-sum-lemma",
+        "explicit-64-set"
+      ],
+      "id": "fixed-inner-maximality",
+      "proof": "Any strict additive supercode supplies a vector outside `D_0`, contradicting the explicit violating set.",
+      "statement": "No strict `F_2`-additive outer supercode of `D_0` works with the fixed inner encoder `H`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "positive-mass-certificate-ceiling",
+      "proof": "Fourier inversion gives `P_+\u2265max(B,2^{r-1})`; exact length gives `B\u22652^{30-r}`; finite optimization gives 1040.",
+      "statement": "The universal positive-mass/fiber-cap polynomial certificate cannot prove dimension above 1040.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Limited-independence constructions: additive outer extensions and Fourier-fiber certificates",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `D_0\u2282F_{2^16}^{32768}` be the degree-at-most-64 evaluation space underlying the durable dimension-1040 RS\u2013affine code, and retain its coordinatewise affine-Hadamard inner encoder. If an `F_2`-linear outer space `D` contains `D_0` and every nonzero concatenated word has weight at least 535,822,336, then `D=D_0`. Hence this fixed-inner construction has no strict additive outer extension; this does not rule out unrelated binary codes or different inner maps.",
+  "title": "Reciprocal-sum obstruction to additive extensions of the k=1040 RS\u2013affine code"
+}

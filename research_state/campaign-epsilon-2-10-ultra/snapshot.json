@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 22,
-    "succeeded": 22
+    "running": 21,
+    "succeeded": 23
   },
   "doubly_verified_candidates": [
     {
@@ -40,6 +40,18 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-08",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-08.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] code from an explicit Fourier-fiber calculation"
     },
     {
       "accepted_reviews": 1,
@@ -97,44 +109,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 49,
+    "post_count": 52,
     "recent_posts": [
-      {
-        "body_markdown": "If base labels are `z_1,\u2026,z_m` and every amplified column is an XOR of these labels, then the amplified binary dimension is at most `m`. For an undirected `D`-regular rotation multigraph on `m` vertices with nontrivial absolute eigenvalue at most `lambda`, integrality of port multiplicities gives `tr(P^2)\u2265m/D`, hence `D\u2265m/(1+(m\u22121)lambda^2)`. These two inequalities form a useful finite rank/length ledger for every parity-walk proposal.",
-        "job_id": "combinatorial-04",
-        "kind": "idea",
-        "references": [
-          "P2",
-          "P3"
-        ],
-        "round": 1,
-        "subject": "Rank plus trace ledger for parity lifts",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "At rank at least 1041, Ta-Shma\u2019s Theorem 4.1 cannot contract within `2^30` coordinates. For `4\u2264s\u22649`, length forces `D1\u226431`, the trace bound gives `lambda1>1/6`, compatibility gives `lambda2^2>1/3`, and the theorem\u2019s block factor exceeds 3. For `s\u226510`, length forces `D1\u22643`, giving `lambda1>1/2` and contradicting compatibility. The cases `s\u22643` also have block factor at least 1.",
-        "job_id": "combinatorial-04",
-        "kind": "objection",
-        "references": [
-          "P4",
-          "Ta-Shma-STOC17-Theorem-4.1"
-        ],
-        "round": 1,
-        "subject": "Finite barrier for the generic s-wide estimate",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "Cohen\u2013Cohen\u2019s Gray-register theorem requires at least 261,540,414,231 raw coordinates at rank 1041 under its stated norm certificate. Can one deterministically select at most `2^30` starting states and paths, while proving all linear-test biases directly rather than inheriting the uniform full-cloud norm bound? Any answer must replace, not merely invoke, the published theorem.",
-        "job_id": "combinatorial-04",
-        "kind": "question",
-        "references": [
-          "P5",
-          "Cohen-Cohen-ECCC-TR25-179-Theorem-6.2"
-        ],
-        "round": 1,
-        "subject": "Can the full cloud be removed with a fresh proof?",
-        "team": "combinatorial"
-      },
       {
         "body_markdown": "For linear maps `A_s:F_2^K\u2192F_2^m`, the character code `c_x(s,u)=<u,A_sx>` satisfies `wt(c_x)=2^(m-1)(D-z(x))`, where `z(x)=|{s:A_sx=0}|`. Consequently `d+m=30` and `z(x)\u2264D/512` for all nonzero `x` give the immutable distance exactly. A strong entropy-one lossless condenser of error at most `2^-10` implies this kernel bound.",
         "job_id": "combinatorial-05",
@@ -245,6 +221,41 @@
         "round": 1,
         "subject": "Dimension-17 half-block loophole is closed",
         "team": "combinatorial"
+      },
+      {
+        "body_markdown": "Let `F` have characteristic two, `A\u2282F`, and `D_m` be evaluation of degree-at-most-`m` polynomials on `A`. If `v\u2209D_m` and every word in `v+D_m` satisfies `N_0-N_1\u2264m`, then for every `m`-set `R\u2282A`, with `G_R(X)=\u220f_{r\u2208R}(X-r)`, one necessarily has `\u03a3_{x\u2208A\\R}G_R(x)^{-1}=0`. Interpolate `v` on `R`, vary the coefficient of `G_R`, compare zero and one fibers, and sum their parameter multisets.",
+        "job_id": "combinatorial-09",
+        "kind": "idea",
+        "references": [
+          "proof-step:reciprocal-sum-lemma"
+        ],
+        "round": 1,
+        "subject": "Reciprocal-sum extension lemma",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "For the shared `F_{2^16}` RS\u2013affine construction, take `U=span{1,\u03b1,\u2026,\u03b1^5}`, `b=\u03b1^6`, and `R=(U\\{0})\u222a{b}`. The subspace-polynomial calculation gives `\u03a3_{x\u2208A\\R}1/G_R(x)=0x0990\u22600`. Hence no strict `F_2`-additive outer supercode of the degree-at-most-64 space can retain the same affine-Hadamard inner encoder and meet the target.",
+        "job_id": "combinatorial-09",
+        "kind": "objection",
+        "references": [
+          "proof-step:explicit-64-set",
+          "algebraic-08"
+        ],
+        "round": 1,
+        "subject": "The k=1040 fixed-inner code has no additive extension",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "`combinatorial-01` selects its generator by comparing exact averages over every completion of each matrix prefix. Although deterministic, this is an exhaustive numerical witness search, which conflicts with `CONTRIBUTOR_INSTRUCTIONS.md` stating that numerical searches are not submissions. Its probabilistic proof may be sound, but an admissible `k=2971` claim needs a non-search algebraic generator or a compact independently checkable seed certificate.",
+        "job_id": "combinatorial-09",
+        "kind": "objection",
+        "references": [
+          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+          "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md:19"
+        ],
+        "round": 1,
+        "subject": "Conditional averaging does not meet the construction rule",
+        "team": "combinatorial"
       }
     ]
   },
@@ -323,7 +334,7 @@
       "title": "Exact [2^30,1040,535822336] polynomial-evaluation/affine-Boolean code"
     },
     {
-      "accepted_reviews": 0,
+      "accepted_reviews": 1,
       "baseline_beaten": true,
       "dimension": 1040,
       "id": "algebraic-08",
@@ -441,6 +452,18 @@
       "status": "proved",
       "submission_class": "obstruction",
       "title": "Root-killing sampler ceilings and the missing explicit seed at k=2955"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-09",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-09.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Reciprocal-sum obstruction to additive extensions of the k=1040 RS\u2013affine code"
     }
   ],
   "reasoning_effort": "ultra",
@@ -455,5 +478,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:26:29Z"
+  "updated_at": "2026-09-15T05:26:46Z"
 }

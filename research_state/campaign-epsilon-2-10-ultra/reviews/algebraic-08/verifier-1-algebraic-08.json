@@ -1,0 +1,258 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical sorted-key JSON hash; it equals the immutable source SHA-256.",
+    "Tried to factor or invalidate the field model by independently recomputing both Frobenius residues, the Euclidean remainder chain, and the gcd; Rabin's test passes.",
+    "Checked collisions in A and the kernel of H. The polynomial basis makes all 32768 evaluation points distinct, while values at 0 and the unit vectors recover all 16 coefficients.",
+    "Tried to create a nonzero encoder-kernel polynomial. A degree-at-most-64 polynomial cannot vanish at all 32768 distinct evaluation points.",
+    "Checked f=0, f=1, every other nonzero constant, nonconstant degrees below 64, and degree exactly 64. Every nonzero case meets the bound.",
+    "Derived the exact formula wt(C(f))=2^14(32768-N_0(f)+N_1(f)); the one-fiber can only increase weight, while N_0(f)<=64.",
+    "Exhaustively evaluated the stated 64-root witness in the explicit field model. It has 64 zeros, no one-fiber off the roots, and weight exactly 535822336; the natural coefficient-order scale z=1 already works.",
+    "Checked sums and pairwise cancellations: C(f)+C(g)=C(f+g), and injectivity ensures distinct messages cannot cancel to zero.",
+    "Tested the adjacent degree-65 space. Its scaled 65-root word has weight 535805952, exactly 16384 below target, confirming the cutoff is tight.",
+    "Stress-tested the field-linear ceiling: N_0>=65 would force all 65535 nonzero symbols to occur, requiring at least 65600 coordinates; puncturing then correctly gives dimension at most 65 over F.",
+    "Recomputed the conditional inner-code arithmetic: 18*59=1062, 16381*32710=535822510, and the binary Griesmer sum is 32766. The claimed RM(1,15)-containment obstruction follows from Parseval.",
+    "Checked the minor ordering ambiguity in the equality witness. The code C does not depend on that scale, cardinality proves a suitable scale exists, and coefficient-integer ordering makes the witness fully deterministic."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission reports baseline improvement, length 1073741824, dimension 1040, and high confidence.",
+      "justification": "The construction below proves these parameters, and 1040 is strictly greater than the immutable verified baseline dimension 31.",
+      "reference": "algebraic-08.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed polynomial quotient is an explicit model of F_{2^16}.",
+      "justification": "The degree is 16, the two Frobenius congruences recompute exactly, and the displayed Euclidean divisions give gcd(p,Z^256+Z)=1.",
+      "reference": "algebraic-08.json:5, field definition",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A and Y are deterministic ordered sets of size 2^15.",
+      "justification": "A is the span of 15 independent polynomial-basis elements and Y is F_2^15. Increasing coefficient-integer order uniquely fixes both coordinate orders.",
+      "reference": "algebraic-08.json:5, evaluation and inner-coordinate sets",
+      "verdict": "valid"
+    },
+    {
+      "claim": "H is the explicit additive identification of F with RM(1,15).",
+      "justification": "H is F_2-linear and injective; its 16-dimensional image consists exactly of all affine Boolean functions on 15 variables.",
+      "reference": "algebraic-08.json:5, inner encoder",
+      "verdict": "valid"
+    },
+    {
+      "claim": "C is deterministically defined from all degree-at-most-64 polynomials, with no length adjustment or random choice.",
+      "justification": "The field, coefficient range, evaluation points, inner coordinates, and flattening order are fixed. No padding, puncturing, sampling, or unspecified constituent occurs.",
+      "reference": "algebraic-08.json:5, code definition",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Fourier-fiber discussion gives W=2^15(N_0-N_1) and the corresponding weight formula.",
+      "justification": "Zero symbols contribute +32768, symbol 1 contributes -32768, and every other affine block has zero Walsh sum. Summing blocks yields both formulas.",
+      "reference": "algebraic-08.json:7-15",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every F-linear outer code using this H is capped at outer dimension 65.",
+      "justification": "Applying the target inequality to every nonzero scalar multiple gives N_0-N_t<=64. If N_0>=65, every nonzero field symbol must occur, which is impossible in 32768 positions. Singleton then gives dimension at most 65.",
+      "reference": "algebraic-08.json:16-24",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A hypothetical binary [32768,18,16381] inner code would conditionally yield dimension 1062 and distance 535822510.",
+      "justification": "The outer [32768,59,32710] Reed-Solomon parameters are feasible over F_{2^18}; dimensions multiply to 1062 and distances to 535822510. The Griesmer and Parseval calculations also check. Two named internal references are unresolved, but this is an ancillary question, not a dependency of the theorem.",
+      "reference": "algebraic-08.json:25-33",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The five-item distance audit proves the target lower bound and exact attainment.",
+      "justification": "For nonconstant f, both relevant fibers have size at most 64; constants are separately exhaustive; the scaled 64-root polynomial has exactly 32704 balanced nonzero blocks.",
+      "reference": "algebraic-08.json:35-40",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The explicitness and validation audit accurately describes the finite choices and repository checks.",
+      "justification": "All choices defining C are specified. Both validators independently rerun successfully. The logged build reached TypeScript and failed only on the read-only tsbuildinfo write. The validator covered the existing repository record, not this still-unmaterialized candidate, which line 69 correctly acknowledges.",
+      "reference": "algebraic-08.json:42-47",
+      "verdict": "valid"
+    },
+    {
+      "claim": "leaderboard_submission=true is appropriate.",
+      "justification": "The candidate has the exact immutable length, exactly meets the required distance, and improves dimension from 31 to 1040.",
+      "reference": "algebraic-08.json:49",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Rabin's irreducibility criterion applies with only the exponent-8 gcd test.",
+      "justification": "For degree n=16 over F_2, the criterion requires X^(2^16)=X modulo p and a gcd test at n/2=8 because 2 is the sole prime divisor of 16. These hypotheses are satisfied. The bibliography matches [Rabin's original paper](https://epubs.siam.org/doi/10.1137/0209024).",
+      "reference": "algebraic-08.json:50-56",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The affine-balance dependency applies to the inner blocks.",
+      "justification": "For z outside {0,1}, the affine function has a nonzero linear coefficient, and translation by the corresponding unit vector pairs zeros with ones. The proof is reproduced, so no external gap remains.",
+      "reference": "algebraic-08.json:57-62",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The top-level minimum distance is exactly 535822336.",
+      "justification": "The universal lower bound is attained by the explicit 64-root witness.",
+      "reference": "algebraic-08.json:64",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The next tasks are correctly separated from the proved theorem.",
+      "justification": "They concern acceptance, possible stronger constructions, and publication materialization. No listed future task is used as a hypothesis of the submitted code.",
+      "reference": "algebraic-08.json:65-70",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The F_{2^16}-linear outer architecture is capped at binary dimension 1040.",
+      "justification": "The two-fiber argument proves outer distance at least 32704 and Singleton gives outer dimension at most 65; multiplying by 16 gives 1040.",
+      "reference": "algebraic-08.json:72",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The full degree-at-most-65 polynomial space fails the target.",
+      "justification": "A scaled polynomial with 65 evaluation roots and no one-fiber elsewhere has weight 32703*16384=535805952, exactly 16384 below target.",
+      "reference": "algebraic-08.json:73",
+      "verdict": "valid"
+    },
+    {
+      "claim": "No [32768,18,16381] inner code containing RM(1,15) can exist.",
+      "justification": "A new coset representative would have every Walsh coefficient of magnitude at most 6, whereas Parseval requires the squared coefficients to sum to 2^30; the maximum possible under that bound is only 32768*36.",
+      "reference": "algebraic-08.json:74",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The durable trace-polynomial candidate has dimension 991 and is dominated.",
+      "justification": "The referenced durable submission reports 1+33*30=991 dimensions, and 991<1040.",
+      "reference": "algebraic-08.json:75",
+      "verdict": "valid"
+    },
+    {
+      "claim": "No unsupported global optimality is asserted.",
+      "justification": "The proved ceiling is expressly restricted to F-linear outer codes with the displayed affine inner encoder.",
+      "reference": "algebraic-08.json:76",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The field, outer-length, outer-dimension, outer-distance, and inner-code ledger entries are correct.",
+      "justification": "They recompute to |F|=65536, N=32768, K=65, D=32704, and inner parameters [32768,16,16384]_2.",
+      "reference": "algebraic-08.json:78-103",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The final length, dimension, Walsh cap, and exact-distance ledger entries are correct.",
+      "justification": "32768^2=2^30, 65*16=1040, 64*32768=2^21, and (2^30-2^21)/2=32704*16384=535822336.",
+      "reference": "algebraic-08.json:104-123",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The exact rate and relative-distance ledger entries are correct.",
+      "justification": "1040/2^30=65/2^26=0.00000096857547760009765625, while 535822336/2^30=511/1024.",
+      "reference": "algebraic-08.json:124-133",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The theorem and field-certificate sections prove an explicit field and state the claimed exact code parameters.",
+      "justification": "Independent GF(2) arithmetic verifies both Frobenius residues and both Euclidean identities, satisfying every hypothesis of the cited irreducibility criterion.",
+      "reference": "algebraic-08.json:135, Theorem and Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The inner Fourier section proves H is injective and gives all possible block weights.",
+      "justification": "Evaluation at zero and the unit vectors recovers every coefficient. The block weights are 0 for z=0, 32768 for z=1, and 16384 otherwise.",
+      "reference": "algebraic-08.json:135, Inner Fourier calculation",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The binary-linearity, exact-length, and dimension section proves [n,k]=[2^30,1040].",
+      "justification": "Both maps are F_2-linear. Root counting proves the composite encoder injective, so its 65 field coefficients contribute exactly 1040 binary dimensions, and the coordinate product is exactly 2^30.",
+      "reference": "algebraic-08.json:135, Binary linearity, length, and dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance section covers every nonzero codeword.",
+      "justification": "For nonconstant f, f and f-1 are nonzero degree-at-most-64 polynomials, so |N_0-N_1|<=64. The zero, one, and other constant cases are separately exhaustive.",
+      "reference": "algebraic-08.json:135, Minimum distance lower bound",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance lower bound is attained.",
+      "justification": "The 64-root polynomial has no further roots, and an admissible nonzero scale exists because 32704<65535. It then has N_0=64 and N_1=0. Independent enumeration found that z=1 already works.",
+      "reference": "algebraic-08.json:135, exact-distance witness",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The architecture-optimality section correctly derives dimension at most 65 over F.",
+      "justification": "Scalar closure supplies every two-fiber inequality. The symbol-count contradiction forces at most 64 zero coordinates in a nonzero word, and puncturing 32703 coordinates is therefore injective.",
+      "reference": "algebraic-08.json:135, Optimality within the field-linear outer architecture",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The field-model, inner-rm, and fourier-fiber proof steps are proved.",
+      "justification": "Their statements and dependencies accurately summarize the fully checked field and inner-map arguments.",
+      "reference": "algebraic-08.json:136-160",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The outer-rs and binary-parameters proof steps are proved.",
+      "justification": "Evaluation has no kernel, the 64-root witness supplies exact outer distance 32704, and injective binary concatenation gives exact length and dimension.",
+      "reference": "algebraic-08.json:162-179",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The distance-lower and distance-exact proof steps are proved.",
+      "justification": "The fiber bounds cover every nonconstant message, constants are handled separately, and the admissibly scaled 64-root polynomial attains equality.",
+      "reference": "algebraic-08.json:181-201",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The field-linear-ceiling proof step is proved.",
+      "justification": "Its scalar-orbit, symbol-count, and puncturing arguments all satisfy their stated F-linearity and nonzero-word hypotheses.",
+      "reference": "algebraic-08.json:203-211",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The JSON rate, research direction, and proved status are accurate.",
+      "justification": "The floating-point rate is the exact binary representation of 65/2^26, and no conditional ingredient enters the construction theorem.",
+      "reference": "algebraic-08.json:213-215",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is provenance metadata rather than a hidden dependency.",
+      "justification": "The listed concrete paths exist, and the embedded proof is self-contained. A separate proof note, candidate record, and reusable lemma remain publication-materialization tasks, not mathematical gaps.",
+      "reference": "algebraic-08.json:216-247",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The submission class, theorem statement, and title honestly characterize the result.",
+      "justification": "The audited code has exact parameters [1073741824,1040,535822336]_2. It is a valid leaderboard candidate and does not claim to reach the dimension-2955 GV reference.",
+      "reference": "algebraic-08.json:249-251",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited submission.",
+      "justification": "Applying the campaign rule\u2014SHA-256 of json.dumps(parsed_json, sort_keys=True)\u2014recomputes e371aa80775ce7bdb01e218a26920d29d14b12ed3e8c554063307ffbd7b8a121.",
+      "reference": "algebraic-08.json:1-252",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "algebraic-08",
+  "source_sha256": "e371aa80775ce7bdb01e218a26920d29d14b12ed3e8c554063307ffbd7b8a121",
+  "summary": "ACCEPT. The submission gives a deterministic binary linear code with exact parameters [1073741824,1040,535822336]_2 and exact rate 65/2^26. The field certificate, injectivity, exact length, dimension, every nonzero-word distance case, equality witness, scoped architecture ceiling, arithmetic, source identity, and baseline classification all pass independent review. The undefined total order behind \u201cfirst\u201d in the auxiliary scale witness and the unmaterialized proof/record files are nonblocking publication polish; neither affects C or the theorem.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}

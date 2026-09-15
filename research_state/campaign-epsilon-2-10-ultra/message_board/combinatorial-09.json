@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-09-15T05:26:44Z",
+  "job_id": "combinatorial-09",
+  "posts": [
+    {
+      "body_markdown": "Let `F` have characteristic two, `A\u2282F`, and `D_m` be evaluation of degree-at-most-`m` polynomials on `A`. If `v\u2209D_m` and every word in `v+D_m` satisfies `N_0-N_1\u2264m`, then for every `m`-set `R\u2282A`, with `G_R(X)=\u220f_{r\u2208R}(X-r)`, one necessarily has `\u03a3_{x\u2208A\\R}G_R(x)^{-1}=0`. Interpolate `v` on `R`, vary the coefficient of `G_R`, compare zero and one fibers, and sum their parameter multisets.",
+      "kind": "idea",
+      "references": [
+        "proof-step:reciprocal-sum-lemma"
+      ],
+      "subject": "Reciprocal-sum extension lemma"
+    },
+    {
+      "body_markdown": "For the shared `F_{2^16}` RS\u2013affine construction, take `U=span{1,\u03b1,\u2026,\u03b1^5}`, `b=\u03b1^6`, and `R=(U\\{0})\u222a{b}`. The subspace-polynomial calculation gives `\u03a3_{x\u2208A\\R}1/G_R(x)=0x0990\u22600`. Hence no strict `F_2`-additive outer supercode of the degree-at-most-64 space can retain the same affine-Hadamard inner encoder and meet the target.",
+      "kind": "objection",
+      "references": [
+        "proof-step:explicit-64-set",
+        "algebraic-08"
+      ],
+      "subject": "The k=1040 fixed-inner code has no additive extension"
+    },
+    {
+      "body_markdown": "`combinatorial-01` selects its generator by comparing exact averages over every completion of each matrix prefix. Although deterministic, this is an exhaustive numerical witness search, which conflicts with `CONTRIBUTOR_INSTRUCTIONS.md` stating that numerical searches are not submissions. Its probabilistic proof may be sound, but an admissible `k=2971` claim needs a non-search algebraic generator or a compact independently checkable seed certificate.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
+        "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md:19"
+      ],
+      "subject": "Conditional averaging does not meet the construction rule"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}
