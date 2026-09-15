@@ -20,7 +20,7 @@
     "name": { "type": "string", "minLength": 1 },
     "blockLength": { "const": 1073741824 },
     "dimension": { "type": "integer", "minimum": 1 },
-    "minimumDistance": { "type": "integer", "minimum": 469762048 },
+    "minimumDistance": { "type": "integer", "minimum": 535822336 },
     "rate": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
     "rateType": { "enum": ["exact", "certified_lower_bound"] },
     "status": { "enum": ["draft", "under-review", "verified", "rejected"] },

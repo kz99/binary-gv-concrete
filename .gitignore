@@ -9,3 +9,7 @@ research_state/*/agent_logs/
 research_state/*/python-cache/
 research_state/*/runner.json
 research_state/*/campaign.log
+research_state/**/agent_logs/
+research_state/**/python-cache/
+research_state/**/runner.json
+research_state/**/campaign.log

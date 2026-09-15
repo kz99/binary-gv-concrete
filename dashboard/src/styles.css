@@ -77,6 +77,10 @@ button { font: inherit; }
 .record-pin { position: absolute; top: 0; transform: translate(-50%, -100%); padding-bottom: 11px; color: var(--green-dark); white-space: nowrap; }
 .record-pin i { position: absolute; left: 50%; bottom: 0; width: 1px; height: 9px; background: var(--green); }
 .record-pin b { font: 500 9px var(--mono); }
+.record-pin.near-origin { transform: translate(0, -100%); }
+.record-pin.near-origin i { left: 0; }
+.gv-pin { position: absolute; top: -13px; right: 0; height: 34px; transform: translateX(50%); color: #c77b58; }
+.gv-pin i { display: block; height: 34px; border-left: 2px dashed #dca183; }
 .proposed-pin { position: absolute; top: 8px; transform: translateX(-50%); padding-top: 13px; color: #9a4f2c; white-space: nowrap; }
 .proposed-pin i { position: absolute; left: 50%; top: 0; width: 1px; height: 9px; background: #c87952; }
 .proposed-pin b { font: 500 9px var(--mono); }

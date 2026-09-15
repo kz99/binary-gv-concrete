@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 
 from binary_gv_research.agents import CommandAgentProvider
-from binary_gv_research.campaign import CEILING_RATE, load_config
+from binary_gv_research.campaign import D, GV_RATE, load_config
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,13 +11,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class CampaignTests(unittest.TestCase):
     def test_campaign_is_ultra_and_fixed_target(self):
-        config, _ = load_config(ROOT / "configs" / "campaign-10-ultra.yaml")
+        config, _ = load_config(ROOT / "configs" / "campaign-epsilon-2-10-ultra.yaml")
         self.assertEqual(config["campaign"]["reasoning_effort"], "ultra")
-        self.assertEqual(config["campaign"]["researcher_count"], 20)
+        self.assertEqual(config["campaign"]["researcher_count"], 10)
         self.assertEqual(config["campaign"]["block_length"], 2**30)
-        self.assertEqual(config["campaign"]["minimum_distance"], 7 * 2**30 // 16)
+        self.assertEqual(config["campaign"]["minimum_distance"], 2**29 - 2**20)
+        self.assertEqual(D, 2**29 - 2**20)
+        self.assertEqual(config["campaign"]["epsilon_denominator"], 1024)
         self.assertTrue(config["campaign"]["auto_sync_git"])
-        self.assertEqual(CEILING_RATE, 7 / 1920)
+        self.assertGreater(GV_RATE, 0)
 
     def test_agent_command_hard_codes_ultra(self):
         with tempfile.TemporaryDirectory() as directory:

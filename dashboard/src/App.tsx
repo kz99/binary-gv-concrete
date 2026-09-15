@@ -16,7 +16,7 @@ import {
   X,
 } from 'lucide-react';
 import snapshot from '../../data/records.json';
-import campaignSnapshotSeed from '../../research_state/campaign-10-ultra/snapshot.json';
+import campaignSnapshotSeed from '../../research_state/campaign-epsilon-2-10-ultra/snapshot.json';
 import contributorInstructions from '../../how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md?raw';
 
 type RecordEntry = (typeof snapshot.records)[number];
@@ -29,7 +29,7 @@ type CampaignCandidate = {
   dimension: number | null;
   minimum_distance: number | null;
   rate: number | null;
-  ceiling_beaten: boolean;
+  baseline_beaten: boolean;
   accepted_reviews: number;
   source_path: string;
 };
@@ -43,10 +43,9 @@ type CampaignSnapshot = {
 
 const N = snapshot.target.blockLength;
 const D = snapshot.target.minimumDistance;
-const gvRate = snapshot.benchmark.rate;
-const literatureRate = snapshot.literatureBaseline.rate;
+const gvDimension = snapshot.benchmark.equivalentDimension;
 const repoUrl = 'https://github.com/kz99/binary-gv-concrete';
-const campaignSnapshotUrl = 'https://raw.githubusercontent.com/kz99/binary-gv-concrete/main/research_state/campaign-10-ultra/snapshot.json';
+const campaignSnapshotUrl = 'https://raw.githubusercontent.com/kz99/binary-gv-concrete/main/research_state/campaign-epsilon-2-10-ultra/snapshot.json';
 
 function useCampaignSnapshot() {
   const [campaign, setCampaign] = useState<CampaignSnapshot>(campaignSnapshotSeed as CampaignSnapshot);
@@ -87,6 +86,10 @@ function formatRate(value: number) {
 
 function formatScore(entry: RecordEntry) {
   return `${entry.rateType === 'certified_lower_bound' ? '≥ ' : ''}${formatRate(entry.rate)}`;
+}
+
+function formatDimension(value: number) {
+  return formatInteger(Math.round(value));
 }
 
 function getRoute() {
@@ -177,13 +180,13 @@ function ParameterBar() {
       </div>
       <div>
         <span>Required distance</span>
-        <strong><MathInline>{'d_{\\mathrm{min}}\\geq 7n/16'}</MathInline></strong>
+        <strong><MathInline>{'d_{\\mathrm{min}}\\geq (1/2-2^{-10})n'}</MathInline></strong>
         <small>{formatInteger(D)}</small>
       </div>
       <div>
         <span>Score</span>
-        <strong><MathInline>{'R=k/n'}</MathInline></strong>
-        <small>maximize rate</small>
+        <strong><MathInline>{'k'}</MathInline></strong>
+        <small>maximize dimension</small>
       </div>
       <div>
         <span>Admission</span>
@@ -195,53 +198,46 @@ function ParameterBar() {
 }
 
 function ProgressScale({ record, proposed }: { record: RecordEntry; proposed?: CampaignCandidate }) {
-  const share = record.rate / gvRate;
-  const literatureShare = literatureRate / gvRate;
-  const proposedShare = proposed?.rate == null ? null : proposed.rate / gvRate;
+  const recordShare = record.dimension / gvDimension;
+  const proposedShare = proposed?.dimension == null ? null : proposed.dimension / gvDimension;
   return (
     <section className="benchmark-panel">
       <div className="benchmark-copy">
-        <span className="eyebrow">Distance to benchmark</span>
+        <span className="eyebrow">Concrete dimension target</span>
         <p>
-          The verified record reaches <strong>{(share * 100).toFixed(2)}%</strong> of the binary GV rate.
+          The verified record has <strong>k={formatInteger(record.dimension)}</strong>; the GV benchmark is <strong>k≈{formatDimension(gvDimension)}</strong>.
         </p>
       </div>
       <div className="scale-wrap">
         <div className="scale-labels">
-          <span>0</span>
-          <span>GV&nbsp; {formatRate(gvRate)}</span>
+          <span>k = 0</span>
+          <span>GV bound&nbsp; k ≈ {formatDimension(gvDimension)}</span>
         </div>
         <div className="scale-track">
-          <div className="scale-fill" style={{ width: `${share * 100}%` }} />
-          {proposedShare != null && proposedShare > share && (
+          <div className="scale-fill" style={{ width: `${recordShare * 100}%` }} />
+          {proposedShare != null && proposedShare > recordShare && (
             <div
               className="scale-proposed-segment"
-              style={{ left: `${share * 100}%`, width: `${(proposedShare - share) * 100}%` }}
+              style={{ left: `${recordShare * 100}%`, width: `${(proposedShare - recordShare) * 100}%` }}
             />
           )}
-          <span
-            className="literature-pin"
-            style={{ left: `${literatureShare * 100}%` }}
-            title={`${snapshot.literatureBaseline.name}: ${formatRate(literatureRate)}`}
-          >
+          <span className="gv-pin" title={`Gilbert–Varshamov benchmark: k≈${formatDimension(gvDimension)}`}><i /></span>
+          <span className={`record-pin ${recordShare < 0.1 ? 'near-origin' : ''}`} style={{ left: `${recordShare * 100}%` }}>
             <i />
+            <b>record k={formatInteger(record.dimension)}</b>
           </span>
-          <span className="record-pin" style={{ left: `${share * 100}%` }}>
-            <i />
-            <b>record {formatScore(record)}</b>
-          </span>
-          {proposedShare != null && proposedShare > share && (
+          {proposedShare != null && proposedShare > recordShare && (
             <span className="proposed-pin" style={{ left: `${proposedShare * 100}%` }}>
               <i />
-              <b>best proposed {formatRate(proposed?.rate ?? 0)}</b>
+              <b>best proposed k={formatInteger(proposed?.dimension ?? 0)}</b>
             </span>
           )}
         </div>
         <div className="scale-foot">
-          <span><i className="baseline-key" /> Fixed explicit literature baseline</span>
-          {proposedShare != null && proposedShare > share ? (
+          <span><i className="baseline-key" /> Verified explicit construction</span>
+          {proposedShare != null && proposedShare > recordShare ? (
             <span><i className="proposed-key" /> Best proposed claim</span>
-          ) : <span>Existential reference only</span>}
+          ) : <span>Dashed line: existential GV target</span>}
         </div>
       </div>
     </section>
@@ -267,7 +263,7 @@ function ParameterPill({ label, value }: { label: string; value: string }) {
 
 function RecordCard({ entry, isLeader }: { entry: RecordEntry; isLeader: boolean }) {
   const proofUrl = `${repoUrl}/blob/main/${entry.proofPath}`;
-  const isGs = entry.id === 'gs-densified-rm-1-7';
+  const relativeDistance = `${snapshot.target.relativeDistanceNumerator} / ${snapshot.target.relativeDistanceDenominator}`;
   return (
     <article className={isLeader ? 'record-card leader' : 'record-card'}>
       <div className="rank-cell">
@@ -283,31 +279,23 @@ function RecordCard({ entry, isLeader }: { entry: RecordEntry; isLeader: boolean
           <VerificationBadge entry={entry} />
         </div>
         <div className="rate-line">
-          <span>Rate</span>
-          <strong>{formatScore(entry)}</strong>
-          <small>{(entry.rate / gvRate * 100).toFixed(2)}% of GV</small>
+          <span>Dimension</span>
+          <strong>k = {formatInteger(entry.dimension)}</strong>
+          <small>rate {formatScore(entry)}</small>
         </div>
         <div className="concrete-parameters">
           <ParameterPill label="binary length n" value={formatInteger(entry.blockLength)} />
           <ParameterPill label="dimension k" value={formatInteger(entry.dimension)} />
           <ParameterPill label="proved distance d" value={`≥ ${formatInteger(entry.minimumDistance)}`} />
-          <ParameterPill label="relative distance" value="7 / 16" />
+          <ParameterPill label="relative distance" value={relativeDistance} />
         </div>
         <div className="construction-detail">
           <div>
             <span className="detail-label">Concrete choice</span>
-            {isGs ? (
-              <p>
-                Outer: densified GS level <MathInline>{'(q,k,s)=(16,4,3)'}</MathInline> over <MathInline>{'\\mathbb F_{256}'}</MathInline>,
-                <MathInline>{'[8{,}355{,}840,\\geq461{,}056,\\geq7{,}340{,}032]_{256}'}</MathInline>.
-                Inner: <MathInline>{'\\operatorname{RM}(1,7)=[128,8,64]_2'}</MathInline>. Append 4,194,304 zero coordinates.
-              </p>
-            ) : (
-              <p>
-                Outer: <MathInline>{'[32{,}768,4{,}097,28{,}672]_{2^{16}}'}</MathInline> Reed–Solomon.
-                Inner: <MathInline>{'\\operatorname{RM}(1,15)=[32{,}768,16,16{,}384]_2'}</MathInline>. No padding.
-              </p>
-            )}
+            <p>
+              Evaluate all affine Boolean functions on <MathInline>{'\\mathbb F_2^{30}'}</MathInline>.
+              This is <MathInline>{'\\operatorname{RM}(1,30)=[2^{30},31,2^{29}]_2'}</MathInline>.
+            </p>
           </div>
           <a href={proofUrl} target="_blank" rel="noreferrer">
             Read proof <ArrowUpRight size={14} />
@@ -341,21 +329,21 @@ function ProposedCard({ candidate, rank }: { candidate: CampaignCandidate; rank:
           <span className="proposed-badge"><FlaskConical size={14} /> Under review</span>
         </div>
         <div className="rate-line">
-          <span>Proposed rate</span>
-          <strong>{candidate.rate == null ? '—' : formatRate(candidate.rate)}</strong>
-          {candidate.rate != null && <small>{(candidate.rate / gvRate * 100).toFixed(2)}% of GV</small>}
+          <span>Proposed dimension</span>
+          <strong>{candidate.dimension == null ? '—' : `k = ${formatInteger(candidate.dimension)}`}</strong>
+          {candidate.rate != null && <small>rate {formatRate(candidate.rate)}</small>}
         </div>
         {candidate.dimension != null && candidate.minimum_distance != null && (
           <div className="concrete-parameters">
             <ParameterPill label="binary length n" value={formatInteger(N)} />
             <ParameterPill label="dimension k" value={formatInteger(candidate.dimension)} />
             <ParameterPill label="claimed distance d" value={`≥ ${formatInteger(candidate.minimum_distance)}`} />
-            <ParameterPill label="relative distance" value="7 / 16" />
+            <ParameterPill label="relative distance" value={`${snapshot.target.relativeDistanceNumerator} / ${snapshot.target.relativeDistanceDenominator}`} />
           </div>
         )}
         <div className="construction-detail proposed-detail">
           <p>
-            {candidate.ceiling_beaten ? 'Claims to exceed the GS–Hadamard template ceiling. ' : ''}
+            {candidate.baseline_beaten ? 'Claims to improve the current verified baseline. ' : ''}
             This mathematical proof is awaiting two independent verifier-agent reviews.
           </p>
           <a href={sourceUrl} target="_blank" rel="noreferrer">Read submission <ArrowUpRight size={14} /></a>
@@ -392,12 +380,12 @@ function RecordPage() {
         <div className="page-heading">
           <div>
             <span className="eyebrow">Verified explicit constructions</span>
-            <h1>Rate leaderboard</h1>
+            <h1>Dimension leaderboard</h1>
           </div>
           <div className="record-stat">
             <span>Current record</span>
-            <strong>{formatScore(leader)}</strong>
-            <small><MathInline>{'R=k/2^{30}'}</MathInline></small>
+            <strong>k = {formatInteger(leader.dimension)}</strong>
+            <small>rate {formatScore(leader)}</small>
           </div>
         </div>
         <div className="campaign-feed-status" role="status">
@@ -409,7 +397,7 @@ function RecordPage() {
           <span>Construction and certified parameters</span>
           <span>{verified.length} verified results</span>
         </div>
-        <section className="records-list" aria-label="Verified rate leaderboard">
+        <section className="records-list" aria-label="Verified dimension leaderboard">
           {verified.map((entry, index) => <RecordCard key={entry.id} entry={entry} isLeader={index === 0} />)}
         </section>
         {proposed.length > 0 && (
@@ -665,9 +653,9 @@ function ContributePage() {
           </div>
           <div className="contribute-target">
             <span>Strict improvement target</span>
-            <strong><MathInline>{'R>0.0034351348876953125'}</MathInline></strong>
-            <small><MathInline>{'k\\geq 3{,}688{,}449'}</MathInline></small>
-            <i>with <MathInline>{'n=2^{30}'}</MathInline> and <MathInline>{'d_{\\mathrm{min}}\\geq 469{,}762{,}048'}</MathInline></i>
+            <strong><MathInline>{'k\\geq 32'}</MathInline></strong>
+            <small>GV benchmark: <MathInline>{`k\\approx ${formatDimension(gvDimension)}`}</MathInline></small>
+            <i>with <MathInline>{'n=2^{30}'}</MathInline> and <MathInline>{`d_{\\mathrm{min}}\\geq ${formatInteger(D).replaceAll(',', '{,}')}`}</MathInline></i>
           </div>
         </div>
       </section>

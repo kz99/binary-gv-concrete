@@ -2,7 +2,7 @@
 
 ## Theorem
 
-State the exact binary parameters \([2^{30},k,\ge469,762,048]_2\) and the resulting rate \(R=k/2^{30}\).
+State the exact binary parameters \([2^{30},k,\ge535{,}822{,}336]_2\) and the resulting rate \(R=k/2^{30}\).
 
 ## Construction
 
@@ -14,7 +14,7 @@ Prove that the final block length is exactly \(2^{30}\) and that the dimension i
 
 ## Proof of minimum distance
 
-Prove that every nonzero codeword has Hamming weight at least \(469,762,048\).
+Prove that every nonzero codeword has Hamming weight at least \(535{,}822{,}336\).
 
 ## Parameter audit
 
@@ -27,4 +27,3 @@ Cite each external theorem on which the proof relies precisely enough to locate 
 ## Verifier reviews
 
 This section is completed independently by two verifier agents. The submitting researcher must leave the status as `under-review` until both agents accept.
-

@@ -6,11 +6,11 @@
   "authors": "Contributor names",
   "date": "YYYY-MM-DD",
   "blockLength": 1073741824,
-  "dimension": 3688449,
-  "minimumDistance": 469762048,
-  "rate": 0.003435135819017887,
+  "dimension": 32,
+  "minimumDistance": 535822336,
+  "rate": 2.9802322387695312e-8,
   "rateType": "certified_lower_bound",
-  "relativeDistance": 0.4375,
+  "relativeDistance": 0.4990234375,
   "status": "under-review",
   "verification": {
     "arithmetic": "pending",
@@ -25,4 +25,3 @@
   "proofPath": "proofs/your-short-id.md",
   "tags": ["symbolic"]
 }
-

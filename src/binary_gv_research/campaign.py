@@ -18,9 +18,10 @@ from .agents import AgentError, CommandAgentProvider
 
 
 N = 1_073_741_824
-D = 469_762_048
-CURRENT_K = 3_688_448
-CEILING_RATE = 7 / 1920
+D = 535_822_336
+CURRENT_K = 31
+EPSILON_DENOMINATOR = 1_024
+GV_RATE = 0.0000027517241633056023
 
 
 def utc_timestamp() -> str:
@@ -48,7 +49,7 @@ RESEARCH_SCHEMA = {
     "type": "object", "additionalProperties": False,
     "required": [
         "title", "research_direction", "result_status", "submission_class",
-        "leaderboard_submission", "ceiling_beaten", "block_length", "dimension",
+        "leaderboard_submission", "baseline_beaten", "block_length", "dimension",
         "minimum_distance", "rate", "construction_markdown", "theorem_statement",
         "proof_markdown", "proof_steps", "literature_dependencies", "parameter_ledger",
         "explicitness_audit", "distance_audit", "obstructions", "next_tasks",
@@ -59,10 +60,10 @@ RESEARCH_SCHEMA = {
         "research_direction": {"type": "string"},
         "result_status": {"type": "string", "enum": ["proved", "conditional", "conjectural", "refuted"]},
         "submission_class": {"type": "string", "enum": [
-            "ceiling_optimization", "beyond_ceiling", "obstruction", "literature", "proof_tool"
+            "baseline_improvement", "asymptotic_family", "obstruction", "literature", "proof_tool"
         ]},
         "leaderboard_submission": {"type": "boolean"},
-        "ceiling_beaten": {"type": "boolean"},
+        "baseline_beaten": {"type": "boolean"},
         "block_length": {"type": ["integer", "null"]},
         "dimension": {"type": ["integer", "null"], "minimum": 0},
         "minimum_distance": {"type": ["integer", "null"], "minimum": 0},
@@ -114,7 +115,7 @@ VERIFIER_SCHEMA = {
         "source_job_id", "source_sha256", "verdict", "independent_review",
         "arithmetic_passed", "exact_length_passed", "distance_passed",
         "dimension_passed", "explicitness_passed", "readability_passed",
-        "ceiling_classification_passed", "verified_block_length", "verified_dimension",
+        "baseline_classification_passed", "verified_block_length", "verified_dimension",
         "verified_minimum_distance", "verified_rate", "line_audit",
         "counterexample_attempts", "fatal_obstruction", "required_changes", "summary",
     ],
@@ -128,7 +129,7 @@ VERIFIER_SCHEMA = {
         "dimension_passed": {"type": "boolean"},
         "explicitness_passed": {"type": "boolean"},
         "readability_passed": {"type": "boolean"},
-        "ceiling_classification_passed": {"type": "boolean"},
+        "baseline_classification_passed": {"type": "boolean"},
         "verified_block_length": {"type": ["integer", "null"]},
         "verified_dimension": {"type": ["integer", "null"]},
         "verified_minimum_distance": {"type": ["integer", "null"]},
@@ -199,7 +200,7 @@ GENIUS_SCHEMA = {
     "type": "object", "additionalProperties": False,
     "required": [
         "title", "coverage_complete", "examined_paths", "best_verified_candidate",
-        "best_promising_candidate", "ceiling_analysis", "selected_architecture",
+        "best_promising_candidate", "baseline_analysis", "selected_architecture",
         "asymptotic_family", "integrated_theorem", "proof_steps", "fatal_gaps",
         "research_directives", "note_markdown",
     ],
@@ -208,7 +209,7 @@ GENIUS_SCHEMA = {
         "examined_paths": {"type": "array", "items": {"type": "string"}},
         "best_verified_candidate": {"type": ["string", "null"]},
         "best_promising_candidate": {"type": ["string", "null"]},
-        "ceiling_analysis": {"type": "string"}, "selected_architecture": {"type": ["string", "null"]},
+        "baseline_analysis": {"type": "string"}, "selected_architecture": {"type": ["string", "null"]},
         "asymptotic_family": {"type": "string"}, "integrated_theorem": {"type": "string"},
         "proof_steps": {"type": "array", "items": PROOF_STEP},
         "fatal_gaps": {"type": "array", "items": {"type": "string"}},
@@ -219,54 +220,45 @@ GENIUS_SCHEMA = {
 
 
 DIRECTIONS = [
-    "Optimize the exact finite n=2^30 GS(F_256)+RM(1,7) construction up to its vanilla 7/1920 asymptotic envelope; prove every tower, divisor, floor, and padding choice and quantify the remaining finite-size loss.",
-    "Prove and audit the GS+Hadamard template ceiling over every even extension degree m, then identify the weakest hypothesis whose replacement could permit rate greater than 7/1920.",
-    "Find an explicit binary inner code or structured family that changes the one-level concatenation optimization enough to beat 7/1920, and instantiate it exactly at n=2^30.",
-    "Develop a multilevel or generalized concatenation construction that provably crosses 7/1920 while keeping a human-readable minimum-distance proof.",
-    "Use trace codes, subfield subcodes, or algebraic alphabet reduction to retain more of a GS outer code's dimension than Hadamard concatenation and prove the exact binary parameters.",
-    "Develop an explicit asymptotic family at relative distance 1/2-epsilon with rate Omega(epsilon^2), and instantiate the near-half checkpoint epsilon=2^-15 at n=2^30 with all constants and exact shortening or padding losses.",
-    "Investigate deterministic replacements for random inner codes in low-rate concatenation theorems; produce a symbolic constituent and a proof, not a sampling argument.",
-    "Search alternative explicit AG towers, divisors, or algebraic code operations whose binary reduction escapes the vanilla GS+Hadamard rate formula.",
-    "Combine explicit base codes with expander distance amplification or direct-sum/product operations to cross 7/1920 at exact length, proving the weight propagation lemma.",
-    "Synthesize reusable proved lemmas into a genuinely asymptotic family with distance 1/2-epsilon and rate Omega(epsilon^2); instantiate epsilon=2^-15 and attack the strongest missing uniform lemma rather than merely proposing it.",
+    "Audit the exact RM(1,30) baseline and identify deterministic extensions that preserve bias at most 2^-10 while adding dimensions.",
+    "Instantiate explicit small-bias or epsilon-balanced code families at epsilon=2^-10 and length 2^30, exposing every constant, floor, and padding step.",
+    "Study explicit expander-walk and replacement-product constructions aiming for dimension at least 2,955 at bias 2^-10.",
+    "Develop algebraic trace, character-sum, or subfield constructions whose every nonzero word has bias at most 2^-10.",
+    "Find structured concatenation or multilevel constructions with a rigorous near-half-distance proof, not a sampling argument.",
+    "Prove an asymptotic family with distance 1/2-epsilon and rate Omega(epsilon^2), then instantiate epsilon=2^-10 at n=2^30.",
+    "Audit known explicit epsilon-balanced-code results for constants strong enough to give a concrete symbolic certificate at this checkpoint.",
+    "Explore Reed--Muller, BCH, algebraic-geometric, and tensor constructions that beat the 31-dimensional affine baseline at the exact target.",
+    "Develop deterministic derandomizations of low-bias linear codes and prove their finite-length parameter losses.",
+    "Synthesize reusable proved lemmas into an asymptotic family and isolate the narrowest missing uniform lemma when no complete construction survives.",
 ]
 
 
 ROADMAPS = {
-    "roadmap-alphabet-reduction": "Trace, subfield-subcode, algebraic concatenation, and multilevel routes beyond one-level Hadamard.",
-    "roadmap-expander": "Finite epsilon-balanced and expander-amplification routes with explicit constants at epsilon=1/8.",
-    "roadmap-inner-code": "Structured inner-code improvements and deterministic derandomization of low-rate concatenation.",
+    "roadmap-algebraic": "Trace, character-sum, subfield-subcode, and algebraic routes to bias at most 2^-10.",
+    "roadmap-expander": "Explicit epsilon-balanced and expander-walk routes with exact constants at epsilon=2^-10.",
+    "roadmap-asymptotic": "Uniform families with distance 1/2-epsilon and rate Omega(epsilon^2), specialized to the checkpoint.",
 }
 
 
 BASE_SPEC = r"""
 The immutable target is an explicit binary linear code C subset F_2^n with
-n=2^30=1,073,741,824 and d_min(C)>=469,762,048=(7/16)n.  Maximize the
-rigorously proved rate R=dim(C)/n.  The current verified dimension is 3,688,448,
-so a new record needs dimension at least 3,688,449.  Random sampling is not an
+n=2^30=1,073,741,824 and epsilon=2^-10.  It must satisfy
+d_min(C)>=535,822,336=(1/2-2^-10)n.  Maximize the rigorously proved rate
+R=dim(C)/n.  The current verified dimension is 31, so a new record needs
+dimension at least 32; the concrete GV-rate reference corresponds to dimension
+2,955.  Random sampling is not an
 admissible construction.  Every field, code, tower level, divisor, graph,
 ordering, shortening, puncturing, and padding choice must be deterministic and
 symbolically recoverable.  Distance must be proved for every nonzero codeword.
 
 The ultimate objective is an explicit asymptotic family C_epsilon with relative
 distance at least 1/2-epsilon and rate at least c*epsilon^2 for an explicit
-constant c>0 as epsilon tends to zero.  The designated near-half checkpoint is
-epsilon=2^-15=1/32768, whose relative distance is 16383/32768 and whose
-minimum distance at n=2^30 is 536,838,144.  Treat the fixed 7/16 instance as a
-stress test only: a finite certificate does not establish an asymptotic family.
+constant c>0 as epsilon tends to zero.  The designated checkpoint is
+epsilon=2^-10=1/1024, whose relative distance is 511/1024 and whose minimum
+distance at n=2^30 is 535,822,336.  A finite certificate does not establish an
+asymptotic family.
 For every asymptotic claim, state the allowed epsilon range, block-length
 growth, constants, and uniform proof of the distance and rate bounds.
-
-The vanilla one-level Garcia--Stichtenoth plus RM(1,m-1) Hadamard calculation
-has rate envelope
-  (m/2^(m-1)) (1/8 - 1/(2^(m/2)-1))_+
-for even m.  Its unique optimum is m=8 with rate 7/1920 =
-0.0036458333333333333.  This is a ceiling of that standard TVZ/designed-distance
-parameter template, not a universal upper bound on GS-derived codes or explicit
-binary codes.  It is acceptable to improve the finite instantiation up to the
-ceiling, but the primary objective is to cross 7/1920 through a mechanism that
-actually leaves the template.  Never label parameter tuning inside the same
-formula as a beyond-ceiling result.
 """
 
 
@@ -295,7 +287,7 @@ def load_config(config_path: Path | str) -> tuple[dict[str, Any], Paths]:
         raise ValueError("fixed target parameters changed")
     base = path.parent
     workspace = (base / str(value.get("workspace", ".."))).resolve()
-    campaign_dir = (base / str(value.get("campaign_dir", "../research_state/campaign-10-ultra"))).resolve()
+    campaign_dir = (base / str(value.get("campaign_dir", "../research_state/campaign-epsilon-2-10-ultra"))).resolve()
     return value, Paths(path, workspace, campaign_dir)
 
 
@@ -327,12 +319,12 @@ class Campaign:
         if self.jobs_path.exists():
             return self.status()
         jobs: list[dict[str, Any]] = []
-        for index in range(10):
+        for index in range(int(self.cfg["researcher_count"])):
             jobs.append(self._job(f"researcher-{index + 1:04d}", "researcher", DIRECTIONS[index]))
         if self.cfg.get("literature_agent_enabled", True):
             jobs.append(self._job(
                 "literature-sota-0001", "literature",
-                "Audit the exact explicit-code literature baseline and extract finite, citable constants relevant to crossing 7/1920."))
+                "Audit explicit epsilon-balanced-code literature and extract finite constants relevant to epsilon=2^-10 and rate Omega(epsilon^2)."))
         for job_id, focus in ROADMAPS.items():
             jobs.append(self._job(job_id, "roadmap", focus, phase="synthesis"))
         if self.cfg.get("lemma_writer_enabled", True):
@@ -383,8 +375,8 @@ class Campaign:
         if role in {"researcher", "literature"}:
             seat = "state-of-the-art literature analyst" if role == "literature" else "independent construction researcher"
             prompt = f"""You are {job['id']}, an {seat} in the Binary-GV Concrete campaign.
-You run at ultra reasoning.  Read AGENTS.md, TARGET.md, the contribution guide,
-both baseline proofs, and data/records.json before reasoning.
+You run at ultra reasoning. Read AGENTS.md, TARGET.md, the contribution guide,
+the RM baseline proof, and data/records.json before reasoning.
 
 {BASE_SPEC}
 
@@ -397,10 +389,10 @@ binary linearity, exact length, integer dimension, minimum distance, and every
 finite parameter.  Do not use random existence, sampled codewords, hidden
 O-constants, or an unavailable theorem.  Set leaderboard_submission=false when
 any essential step is conditional.  State concise lemmas; put explanations in
-their proofs.  You may report a rigorous obstruction or ceiling lemma when no
+their proofs.  You may report a rigorous obstruction lemma when no
 candidate survives.  Rate must equal dimension/1,073,741,824 exactly up to JSON
-number precision.  ceiling_beaten is true only if the proved rate is strictly
-greater than 7/1920 and the proof identifies the mechanism escaping the template.
+number precision. baseline_beaten is true only if the proved dimension is
+strictly greater than 31 at the immutable near-half-distance target.
 """
             return prompt, RESEARCH_SCHEMA
         if role == "verifier":
@@ -415,8 +407,8 @@ Do not rely on the other reviewer.  Read and audit {source_path.relative_to(self
 The immutable source SHA-256 is {canonical_hash(source)}.  Recompute every
 integer and verify every cited theorem's hypotheses, exact-length operation,
 dimension claim, and minimum-distance implication.  Try to break the construction
-with edge cases and low-weight words.  Check whether its ceiling classification
-is honest.  Reject an unfixable false or inadmissible claim; request revision for
+with edge cases and low-weight words. Check whether its baseline-improvement
+classification is honest. Reject an unfixable false or inadmissible claim; request revision for
 a local gap; accept a correct proof written clearly enough for an ordinary
 mathematical reader.  Do not reject for ceremonial or proof-assistant-level
 formalism.  Set source_job_id and source_sha256 exactly.
@@ -448,7 +440,8 @@ ASSIGNED FOCUS: {job['direction']}
 Read all JSON submissions in {self.root.relative_to(self.paths.workspace)}/submissions
 and all available reviews in {self.root.relative_to(self.paths.workspace)}/reviews.
 Build a concise but complete dependency chain, similar to a Lean theorem graph,
-ending in an exact code at n=2^30 with rate greater than 7/1920.  Mark what is
+ending in an exact code at n=2^30 with distance at least 535,822,336 and an
+improved certified rate. Mark what is
 proved, conditional, refuted, or open; never promote a conjecture.  Cite source
 paths for reused lemmas.  Post useful informal questions, objections, and ideas
 in messages so the other roadmaps and GENIUS can use them.  Set roadmap_id to
@@ -464,11 +457,11 @@ three roadmaps.  Read the repository baselines and literature map too.
 {BASE_SPEC}
 
 Attempt to construct the strongest asymptotic explicit family and its exact
-n=2^30 instantiation by combining only compatible proved components.  Treat
-7/1920 as the vanilla GS+Hadamard template ceiling and make crossing it the main
-architectural goal.  Do not fill gaps by optimism.  Distinguish verified facts,
+n=2^30, epsilon=2^-10 instantiation by combining only compatible proved
+components. Make an explicit rate Omega(epsilon^2) the main architectural goal.
+Do not fill gaps by optimism. Distinguish verified facts,
 conditional components, refutations, and new conjectures.  If a complete
-beyond-ceiling proof is unavailable, identify the narrowest decisive missing
+complete target proof is unavailable, identify the narrowest decisive missing
 lemma and give concrete research directives.  coverage_complete=true only after
 you have examined every durable response and review path.
 """
@@ -636,7 +629,7 @@ you have examined every durable response and review path.
                 "id": source_id, "title": source.get("title"), "status": source.get("result_status"),
                 "submission_class": source.get("submission_class"), "dimension": source.get("dimension"),
                 "minimum_distance": source.get("minimum_distance"), "rate": source.get("rate"),
-                "ceiling_beaten": source.get("ceiling_beaten"),
+                "baseline_beaten": source.get("baseline_beaten"),
                 "accepted_reviews": sum(review.get("verdict") == "accept" for review in reviews),
                 "source_path": str(source_path.relative_to(self.paths.workspace)),
             }
@@ -657,14 +650,21 @@ you have examined every durable response and review path.
             "schema": "binary-gv-campaign-snapshot-v1", "updated_at": utc_timestamp(),
             "model": self.cfg.get("model"), "reasoning_effort": "ultra",
             "researcher_count": sum(job["role"] == "researcher" for job in jobs), "counts": counts,
-            "target": {"block_length": N, "minimum_distance": D, "current_dimension": CURRENT_K},
-            "asymptotic_target": {
-                "relative_distance": self.cfg.get("asymptotic_relative_distance", "1/2-epsilon"),
-                "rate": self.cfg.get("asymptotic_rate_target", "Omega(epsilon^2)"),
-                "checkpoint_epsilon": self.cfg.get("asymptotic_checkpoint_epsilon", "2^-15"),
-                "checkpoint_minimum_distance": self.cfg.get("asymptotic_checkpoint_minimum_distance", 536_838_144),
+            "target": {
+                "block_length": N,
+                "minimum_distance": D,
+                "current_dimension": CURRENT_K,
+                "epsilon": "2^-10",
+                "relative_distance": "511/1024",
+                "gv_rate": GV_RATE,
+                "gv_dimension_threshold": 2_955,
             },
-            "gs_hadamard_template_ceiling": CEILING_RATE,
+            "asymptotic_target": {
+                "relative_distance": "1/2-epsilon",
+                "rate": "Omega(epsilon^2)",
+                "checkpoint_epsilon": "2^-10",
+                "checkpoint_minimum_distance": D,
+            },
             "promising_candidates": candidates, "doubly_verified_candidates": verified,
         }
         (self.root / "snapshot.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
