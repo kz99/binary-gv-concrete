@@ -1,0 +1,196 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No leaderboard code is submitted. I audited deterministic Reed\u2013Solomon concatenations with binary inner codes. Two proposed inner constituents are impossible: `[8192,17,4090]_2` and `[32768,18,16381]_2`. The first is excluded directly by a cubic Delsarte certificate; the second reduces through two residual codes to an impossible `[8196,16,4096]_2` code. The remaining canonical gateway is an explicit `[16384,16,8185]_2` inner code, which was not constructed or ruled out.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For a binary code of length `n`, write `y=n\u22122x`. If `F(x)=sum_i f_i K_i(x)` has `f_0>0`, all `f_i\u22650`, and `F(x)\u22640` at every permitted nonzero distance, then `|C|\u2264F(0)/f_0`. Positivity follows directly from `sum_{u,v}K_i(d(u,v))`, which is a sum of squared character sums. Placing adjacent roots on the parity lattice, as in `(y\u221212)(y+630)(y+632)`, can strengthen the usual continuous cubic certificate.",
+      "kind": "idea",
+      "references": [
+        "proof-step:LP"
+      ],
+      "subject": "Parity-lattice cubic LP lemma"
+    },
+    {
+      "body_markdown": "Two exact inner gateways are globally closed. No binary `(8192,2^17,4090)` code exists. Moreover, two residualizations send any hypothetical `[32768,18,16381]_2` code to a zero-padded `[8196,16,4096]_2` code, while the cubic `F=(y\u22124)(y+1640)^2` bounds its cardinality by `20144128/409<49253`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:B-LP",
+        "proof-step:C-RED",
+        "proof-step:C-LP"
+      ],
+      "subject": "Two inner gateways impossible"
+    },
+    {
+      "body_markdown": "Can one construct or globally rule out a deterministic binary `[16384,16,8185]_2` code? If supplied, concatenation with `[65536,73,65464]_{2^16}` gives `[2^30,1168,\u2265535822840]_2`. Griesmer leaves ten coordinates of slack, and the cubic LP bound remains far above `2^16`, so neither test decides existence.",
+      "kind": "question",
+      "references": [
+        "proof-step:A-OPEN",
+        "research_state/campaign-epsilon-2-10-ultra/message_board/composition-01.json"
+      ],
+      "subject": "Remaining k=1168 gateway"
+    }
+  ],
+  "distance_audit": [
+    "For `(8192,2^17,4090)`, every nonzero distance has even `y=8192\u22122x\u226412`; the cubic is nonpositive on that entire parity lattice.",
+    "Its Krawtchouk coefficients are exactly `(5462080,407590,2500,6)`, all positive, and its cardinality bound is `1989921197/17069\u2248116581.006<131072`.",
+    "Griesmer forces the actual minimum distance of a hypothetical `[32768,18,\u226516381]` code into `{16381,16382}` and that of its first residual into `{8191,8192}`.",
+    "The second residual has dimension 16, distance at least 4096, and length at most 8196; zero-padding preserves dimension and distance.",
+    "For length 8196, `F=(y\u22124)(y+1640)^2` is nonpositive for all distances at least 4096 and has positive coefficients `(16091696,2701066,6552,6)`.",
+    "The corresponding bound `20144128/409\u224849252.147` is strictly below `2^16`.",
+    "The surviving conditional gateway has product distance `8185\u00b765464=535822840`, exceeding the target by 504."
+  ],
+  "explicitness_audit": [
+    "Both obstructions use displayed integer polynomials and exact rational comparisons; no numerical LP solver, sampling, or search witness is used.",
+    "The residual argument covers every possible minimum word and every allowed actual minimum distance.",
+    "The Delsarte positivity identity and the residual/Griesmer argument are reproved in the note, so no unavailable theorem is essential.",
+    "All 21 durable submissions and all 21 message-board files present at the final audit were individually read; the lemma-book and roadmap directories were empty.",
+    "The workspace is read-only. No proof file or records entry could be persisted, and no publication validator or dashboard build was appropriate for this non-submission."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Concentrate structured searches on `[16384,16,8185]_2`, especially nonprojective codes with at least three nonzero weights; cyclic, RM-supercode, Belov-type Griesmer, and projective two-weight subclasses are already obstructed.",
+    "Add the residual-plus-cubic and parity-lattice LP lemmas to `data/records.json` with a concise proof under `proofs/` in a writable session, then run the validator and dashboard build.",
+    "Re-optimize all remaining `(ell,m,d,N)` Reed\u2013Solomon gateways after imposing the two new nonexistence bounds."
+  ],
+  "obstructions": [
+    "No binary code, even nonlinear, has length 8192, cardinality `2^17`, and minimum distance at least 4090.",
+    "No binary linear `[32768,18,16381]_2` code exists.",
+    "Consequently the fixed `[8192,17]` RS-inner route is capped by `d\u22644089`, outer dimension 33, and binary dimension 561 under the product bound.",
+    "The fixed `[32768,18]` RS-inner route is capped by `d\u226416380`, outer dimension 57, and binary dimension 1026 under the product bound.",
+    "The arbitrary `[16384,16,8185]_2` existence question remains open; this report supplies no target code."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`(1/2\u22122^-10)2^30`",
+      "quantity": "Target distance",
+      "value": "`D=535822336=511\u00b72^20`"
+    },
+    {
+      "derivation": "Parity-lattice cubic Delsarte certificate",
+      "quantity": "Length-8192 cardinality bound",
+      "value": "`A_2(8192,4090)\u2264floor(1989921197/17069)=116581`"
+    },
+    {
+      "derivation": "`g_2(18,16383)=32769>32768`",
+      "quantity": "Hypothetical first minimum distance",
+      "value": "`d_0\u2208{16381,16382}`"
+    },
+    {
+      "derivation": "First residual and `g_2(17,8193)=16400`",
+      "quantity": "Residual parameters",
+      "value": "`n_1\u2208{16386,16387}`, `d_1\u2208{8191,8192}`"
+    },
+    {
+      "derivation": "Second residual followed by zero-padding",
+      "quantity": "Terminal hypothetical code",
+      "value": "`[8196,16,\u22654096]_2`"
+    },
+    {
+      "derivation": "Cubic Delsarte certificate",
+      "quantity": "Length-8196 cardinality bound",
+      "value": "`A_2(8196,4096)\u2264floor(20144128/409)=49252`"
+    },
+    {
+      "derivation": "`ceil(D/16380)=32712`",
+      "quantity": "Fixed length-32768, dimension-18 RS route ceiling",
+      "value": "`K\u226457`, binary dimension `\u22641026`"
+    },
+    {
+      "derivation": "`ceil(D/4089)=131040`",
+      "quantity": "Fixed length-8192, dimension-17 RS route ceiling",
+      "value": "`K\u226433`, binary dimension `\u2264561`"
+    },
+    {
+      "derivation": "`65536\u00b716384=2^30`, `16\u00b773=1168`, `8185\u00b765464=D+504`",
+      "quantity": "Remaining conditional gateway",
+      "value": "Inner `[16384,16,8185]_2`, outer `[65536,73,65464]_{2^16}`"
+    }
+  ],
+  "proof_markdown": "## 1. Delsarte lemma\n\nFor a binary code `X` of length `n`, let `K_i` be the binary Krawtchouk polynomials. Character orthogonality gives\n\n`sum_{u,v in X} K_i(d(u,v)) = sum_{|S|=i} |sum_{u in X} (-1)^(sum_{j in S}u_j)|^2 \u2265 0`.\n\nTherefore, if `F=sum_i f_i K_i` has `f_0>0`, all other `f_i\u22650`, and `F(x)\u22640` for every integer `x\u2265d`, then for `M=|X|`,\n\n`f_0 M^2 \u2264 sum_{u,v}F(d(u,v)) \u2264 M F(0)`.\n\nThus `M\u2264F(0)/f_0`.\n\n## 2. Excluding `(8192,2^17,4090)`\n\nPut `n=8192` and `y=n\u22122x`. Use\n\n`F_B(x)=(y\u221212)(y+630)(y+632)`.\n\nFor integer `x\u22654090`, `y\u226412` is even. The adjacent roots `\u2212632,\u2212630` leave no permitted lattice point between them, so `F_B(x)\u22640` throughout the permitted range.\n\nWith\n\n`K_1=y`, `K_2=(y^2\u2212n)/2`, `K_3=(y^3\u2212(3n\u22122)y)/6`,\n\ndirect expansion gives\n\n`F_B=5462080 K_0+407590 K_1+2500 K_2+6 K_3`.\n\nAll coefficients are positive. Moreover,\n\n`F_B(0)=8180\u00b78822\u00b78824=636774783040`,\n\nso\n\n`|X|\u2264F_B(0)/5462080=1989921197/17069\u2248116581.006<131072`.\n\nHence no binary code of size `2^17` has these length and distance parameters.\n\n## 3. Residual lemma and Griesmer bound\n\nLet `C` be binary linear with actual minimum distance `w`, and let `c` be a word of weight `w`. Restrict all codewords to the complement of `supp(c)`. The kernel is exactly `span{c}`: a different kernel word would be supported inside `supp(c)` and, together with its sum with `c`, would force a nonzero word of weight below `w`. Hence the residual dimension is `dim(C)\u22121`.\n\nFor a word outside this kernel, write `a` and `b` for its weights inside and outside `supp(c)`. Both it and its sum with `c` have weight at least `w`, so `a+b\u2265w` and `w\u2212a+b\u2265w`. Thus `b\u2265a` and `b\u2265ceil(w/2)`. The residual distance is therefore at least `ceil(w/2)`.\n\nIterating this lemma proves the binary Griesmer inequality\n\n`n\u2265g_2(k,d)=sum_{i=0}^{k\u22121}ceil(d/2^i)`.\n\n## 4. Excluding `[32768,18,16381]_2`\n\nAssume such a code exists and let its actual minimum distance be `d_0`. Exact Griesmer values are\n\n`g_2(18,16381)=32766`, `g_2(18,16382)=32767`, and `g_2(18,16383)=32769`.\n\nThus `d_0\u2208{16381,16382}`. Its first residual has dimension 17, length 16387 or 16386, and distance at least 8191. Since `g_2(17,8193)=16400`, its actual minimum distance `d_1` belongs to `{8191,8192}`.\n\nResidualizing again gives a binary linear code of dimension 16, distance at least 4096, and length\n\n`32768\u2212d_0\u2212d_1\u2208{8194,8195,8196}`.\n\nAppending zero coordinates would therefore give an `[8196,16,\u22654096]_2` code.\n\nFor `n=8196`, put `y=n\u22122x` and\n\n`F_C(x)=(y\u22124)(y+1640)^2`.\n\nFor every `x\u22654096`, `y\u22644`, hence `F_C(x)\u22640`. Its exact Krawtchouk expansion is\n\n`F_C=16091696 K_0+2701066 K_1+6552 K_2+6 K_3`.\n\nAll coefficients are positive, while\n\n`F_C(0)=8192\u00b79836^2=792550572032`.\n\nThe lemma gives\n\n`|C|\u2264F_C(0)/16091696=20144128/409\u224849252.147<65536`,\n\ncontradicting dimension 16. Therefore `[32768,18,16381]_2` does not exist.\n\n## 5. Composition consequences\n\nFor concatenation of a binary `[ell,m,d]_2` inner code with an `[N,K,N\u2212K+1]_{2^m}` Reed\u2013Solomon code, followed by zero-padding, the binary parameters are `[2^30,mK,\u2265d(N\u2212K+1)]_2` whenever `N ell\u22642^30`.\n\nThe two nonexistence results close the proposed dimensions 1105 and 1062. At their fixed lengths, lowering the inner distances to 4089 and 16380 caps the corresponding product-bound dimensions at 561 and 1026. The unresolved `[16384,16,8185]_2` constituent would instead support outer parameters `[65536,73,65464]` and binary dimension 1168, but its existence remains essential and unproved.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "LP",
+      "proof": "Expand in Krawtchouk polynomials and use the character-square identity for each coefficient. The diagonal contributes `M F(0)` and every off-diagonal term is nonpositive.",
+      "statement": "A polynomial with nonnegative Krawtchouk coefficients and nonpositive values on all allowed nonzero distances gives `|C|\u2264F(0)/f_0`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "LP"
+      ],
+      "id": "B-LP",
+      "proof": "The parity-lattice cubic has coefficients `(5462080,407590,2500,6)` and bound `1989921197/17069<2^17`.",
+      "statement": "No binary `(8192,2^17,4090)` code exists.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "RES",
+      "proof": "Restriction outside a minimum word has kernel equal to that word's span; comparing a word and its sum with the minimum word gives residual distance at least half, rounded up.",
+      "statement": "A binary `[n,k,d]` code has a residual `[n\u2212d,k\u22121,\u2265ceil(d/2)]` code on a minimum word.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RES"
+      ],
+      "id": "C-RED",
+      "proof": "Two exact Griesmer case splits and two residualizations leave dimension 16, distance at least 4096, and length at most 8196.",
+      "statement": "A hypothetical `[32768,18,16381]_2` code yields a zero-padded `[8196,16,4096]_2` code.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "LP",
+        "C-RED"
+      ],
+      "id": "C-LP",
+      "proof": "The cubic has positive coefficients `(16091696,2701066,6552,6)` and gives cardinality at most `floor(20144128/409)=49252<2^16`.",
+      "statement": "No binary linear `[32768,18,16381]_2` code exists.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "B-LP",
+        "C-LP"
+      ],
+      "id": "RS-CONSEQUENCE",
+      "proof": "Substitute the resulting inner-distance ceilings into `d(N\u2212K+1)\u2265D` and solve for the largest integer `K`.",
+      "statement": "The two fixed RS-inner architectures are capped at binary dimensions 561 and 1026, respectively.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "A-OPEN",
+      "proof": "The displayed length, dimension, and product-distance arithmetic is exact, but no deterministic `[16384,16,8185]_2` inner encoder is supplied.",
+      "statement": "If a deterministic `[16384,16,8185]_2` code exists, it yields a target code of dimension 1168.",
+      "status": "conditional"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Structured inner-code search with proofs",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 21 files present at final audit, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 21 files present at final audit, individually read)",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "There is no binary code of length 8192, cardinality 131072, and minimum distance at least 4090. There is also no binary linear `[32768,18,16381]_2` code. Hence the corresponding structured Reed\u2013Solomon inner-code gateways are impossible; `[16384,16,8185]_2` remains open.",
+  "title": "Two exact cubic-LP obstructions for structured inner-code gateways"
+}

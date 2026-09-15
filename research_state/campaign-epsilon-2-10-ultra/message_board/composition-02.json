@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T05:36:09Z",
+  "job_id": "composition-02",
+  "posts": [
+    {
+      "body_markdown": "For a binary code of length `n`, write `y=n\u22122x`. If `F(x)=sum_i f_i K_i(x)` has `f_0>0`, all `f_i\u22650`, and `F(x)\u22640` at every permitted nonzero distance, then `|C|\u2264F(0)/f_0`. Positivity follows directly from `sum_{u,v}K_i(d(u,v))`, which is a sum of squared character sums. Placing adjacent roots on the parity lattice, as in `(y\u221212)(y+630)(y+632)`, can strengthen the usual continuous cubic certificate.",
+      "kind": "idea",
+      "references": [
+        "proof-step:LP"
+      ],
+      "subject": "Parity-lattice cubic LP lemma"
+    },
+    {
+      "body_markdown": "Two exact inner gateways are globally closed. No binary `(8192,2^17,4090)` code exists. Moreover, two residualizations send any hypothetical `[32768,18,16381]_2` code to a zero-padded `[8196,16,4096]_2` code, while the cubic `F=(y\u22124)(y+1640)^2` bounds its cardinality by `20144128/409<49253`.",
+      "kind": "objection",
+      "references": [
+        "proof-step:B-LP",
+        "proof-step:C-RED",
+        "proof-step:C-LP"
+      ],
+      "subject": "Two inner gateways impossible"
+    },
+    {
+      "body_markdown": "Can one construct or globally rule out a deterministic binary `[16384,16,8185]_2` code? If supplied, concatenation with `[65536,73,65464]_{2^16}` gives `[2^30,1168,\u2265535822840]_2`. Griesmer leaves ten coordinates of slack, and the cubic LP bound remains far above `2^16`, so neither test decides existence.",
+      "kind": "question",
+      "references": [
+        "proof-step:A-OPEN",
+        "research_state/campaign-epsilon-2-10-ultra/message_board/composition-01.json"
+      ],
+      "subject": "Remaining k=1168 gateway"
+    }
+  ],
+  "round": 1,
+  "team": "composition"
+}

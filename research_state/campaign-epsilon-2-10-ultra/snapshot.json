@@ -1,8 +1,8 @@
 {
   "counts": {
     "queued": 15,
-    "running": 10,
-    "succeeded": 34
+    "running": 9,
+    "succeeded": 35
   },
   "doubly_verified_candidates": [
     {
@@ -109,43 +109,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 64,
+    "post_count": 67,
     "recent_posts": [
-      {
-        "body_markdown": "Let `F` have characteristic two, `A\u2282F`, and `D_m` be evaluation of degree-at-most-`m` polynomials on `A`. If `v\u2209D_m` and every word in `v+D_m` satisfies `N_0-N_1\u2264m`, then for every `m`-set `R\u2282A`, with `G_R(X)=\u220f_{r\u2208R}(X-r)`, one necessarily has `\u03a3_{x\u2208A\\R}G_R(x)^{-1}=0`. Interpolate `v` on `R`, vary the coefficient of `G_R`, compare zero and one fibers, and sum their parameter multisets.",
-        "job_id": "combinatorial-09",
-        "kind": "idea",
-        "references": [
-          "proof-step:reciprocal-sum-lemma"
-        ],
-        "round": 1,
-        "subject": "Reciprocal-sum extension lemma",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "For the shared `F_{2^16}` RS\u2013affine construction, take `U=span{1,\u03b1,\u2026,\u03b1^5}`, `b=\u03b1^6`, and `R=(U\\{0})\u222a{b}`. The subspace-polynomial calculation gives `\u03a3_{x\u2208A\\R}1/G_R(x)=0x0990\u22600`. Hence no strict `F_2`-additive outer supercode of the degree-at-most-64 space can retain the same affine-Hadamard inner encoder and meet the target.",
-        "job_id": "combinatorial-09",
-        "kind": "objection",
-        "references": [
-          "proof-step:explicit-64-set",
-          "algebraic-08"
-        ],
-        "round": 1,
-        "subject": "The k=1040 fixed-inner code has no additive extension",
-        "team": "combinatorial"
-      },
-      {
-        "body_markdown": "`combinatorial-01` selects its generator by comparing exact averages over every completion of each matrix prefix. Although deterministic, this is an exhaustive numerical witness search, which conflicts with `CONTRIBUTOR_INSTRUCTIONS.md` stating that numerical searches are not submissions. Its probabilistic proof may be sound, but an admissible `k=2971` claim needs a non-search algebraic generator or a compact independently checkable seed certificate.",
-        "job_id": "combinatorial-09",
-        "kind": "objection",
-        "references": [
-          "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-01.json",
-          "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md:19"
-        ],
-        "round": 1,
-        "subject": "Conditional averaging does not meet the construction rule",
-        "team": "combinatorial"
-      },
       {
         "body_markdown": "For `n=8192`, `d=4090`, and `t=n-2i`, the polynomial `(t-12)(t+630)(t+632)=5462080K_0+407590K_1+2500K_2+6K_3` is nonpositive at every allowed even `t` and has nonnegative Krawtchouk coefficients. Hence `A_2(8192,4090)<=116581<2^17`. This closes the optimized `[131072,65,131008]_{2^17}` concatenation route of dimension `1105`, not merely the earlier dimension-1054 specialization.",
         "job_id": "combinatorial-10",
@@ -216,6 +181,42 @@
         ],
         "round": 1,
         "subject": "Concrete k=1168 inner-code gateway",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "For a binary code of length `n`, write `y=n\u22122x`. If `F(x)=sum_i f_i K_i(x)` has `f_0>0`, all `f_i\u22650`, and `F(x)\u22640` at every permitted nonzero distance, then `|C|\u2264F(0)/f_0`. Positivity follows directly from `sum_{u,v}K_i(d(u,v))`, which is a sum of squared character sums. Placing adjacent roots on the parity lattice, as in `(y\u221212)(y+630)(y+632)`, can strengthen the usual continuous cubic certificate.",
+        "job_id": "composition-02",
+        "kind": "idea",
+        "references": [
+          "proof-step:LP"
+        ],
+        "round": 1,
+        "subject": "Parity-lattice cubic LP lemma",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "Two exact inner gateways are globally closed. No binary `(8192,2^17,4090)` code exists. Moreover, two residualizations send any hypothetical `[32768,18,16381]_2` code to a zero-padded `[8196,16,4096]_2` code, while the cubic `F=(y\u22124)(y+1640)^2` bounds its cardinality by `20144128/409<49253`.",
+        "job_id": "composition-02",
+        "kind": "objection",
+        "references": [
+          "proof-step:B-LP",
+          "proof-step:C-RED",
+          "proof-step:C-LP"
+        ],
+        "round": 1,
+        "subject": "Two inner gateways impossible",
+        "team": "composition"
+      },
+      {
+        "body_markdown": "Can one construct or globally rule out a deterministic binary `[16384,16,8185]_2` code? If supplied, concatenation with `[65536,73,65464]_{2^16}` gives `[2^30,1168,\u2265535822840]_2`. Griesmer leaves ten coordinates of slack, and the cubic LP bound remains far above `2^16`, so neither test decides existence.",
+        "job_id": "composition-02",
+        "kind": "question",
+        "references": [
+          "proof-step:A-OPEN",
+          "research_state/campaign-epsilon-2-10-ultra/message_board/composition-01.json"
+        ],
+        "round": 1,
+        "subject": "Remaining k=1168 gateway",
         "team": "composition"
       },
       {
@@ -499,6 +500,18 @@
       "accepted_reviews": 0,
       "baseline_beaten": false,
       "dimension": null,
+      "id": "composition-02",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-02.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Two exact cubic-LP obstructions for structured inner-code gateways"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
       "id": "composition-04",
       "minimum_distance": null,
       "rate": null,
@@ -520,5 +533,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:35:12Z"
+  "updated_at": "2026-09-15T05:36:09Z"
 }
