@@ -1,0 +1,197 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the campaign-canonical SHA-256 as sha256(json.dumps(parsed_json, sort_keys=True)); it exactly matches the supplied immutable digest. The distinct raw-byte digest is only formatting-dependent.",
+    "Independently recomputed all sixteen Frobenius residues and both Euclidean identities; attempts to factor or invalidate p(Z) failed and Rabin's degree-16 criterion applies.",
+    "Tested the inner encoder at 0, 1, every other nonzero symbol class, and for a possible kernel. Its only nonzero weights are 16,384 and 32,768, and it is injective.",
+    "Checked for dependencies among the 1,040 proposed rows. The monomials \u03b1^iX^j form an F_2-basis of P_64, and evaluation followed by H is injective.",
+    "Tested zero, one, other nonzero constants, nonconstant degrees below 64, and degree exactly 64. The root bound covers every nonzero message; occurrences of the symbol 1 only increase weight.",
+    "Recomputed the seven coefficients and nine complementary-basis values of L_U, verified mask 0x007b, and exhaustively evaluated all 32,768 points of A. There are exactly 64 zeros, no value 1, 512 image values, and uniform fibers of size 64.",
+    "Tried enlarging to degree 65. A deterministically scalable 65-root word has weight 535,805,952, which is 16,384 below the target, confirming the degree-64 cutoff.",
+    "Checked the generator edge case a=0,j=0 using the standard X^0(0)=1 convention and verified that the coordinate formula bijects onto indices 1 through 2^30.",
+    "Recomputed both Krawtchouk expansions, their sign intervals and values at zero, every stated Griesmer sum, the forbidden-weight interval, and both residual chains.",
+    "Independently safety-checked the endpoint conclusion using N_2(16,8189)>=8189+4095+2048+1024+512+256+128+N_2(9,64)=16385.",
+    "Searched for hidden sampling, seeds, exhaustive selectors, conditional-expectation construction, puncturing, shortening, or padding in the submitted code; none is used."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The immutable source identity is composition-10 with the supplied digest.",
+      "justification": "The campaign hash convention, sha256(json.dumps(value, sort_keys=True)), recomputes exactly to 4976a03858bb5b3ecd488361791743574e742cb10b0ead3e7433aff9a90a06fd.",
+      "reference": "composition-10.json:1-309; src/binary_gv_research/campaign.py:31-33",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The headline reports n=2^30, k=1040, and a genuine improvement over k=31.",
+      "justification": "The subsequent construction verifies these parameters; 1040 exceeds the baseline by 1009.",
+      "reference": "composition-10.json:2-6,58,91,306-308",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The field, polynomial basis, evaluation set A, inner domain Y, coordinate ordering, and generator rows are deterministic.",
+      "justification": "The irreducible modulus and coefficient orders are fixed. The coordinate formula is bijective, and the 65\u00b716 listed monomials are an F_2-basis of P_64.",
+      "reference": "composition-10.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "p(Z)=Z^16+Z^5+Z^3+Z^2+1 is irreducible over F_2.",
+      "justification": "The Frobenius residues and Euclidean identities recompute exactly. Since 2 is the only prime divisor of 16, the displayed 2^8 gcd condition and 2^16 Frobenius condition are precisely the needed criterion. The citation metadata matches the [Rabin paper](https://epubs.siam.org/doi/10.1137/0209024).",
+      "reference": "composition-10.json:61-64,169 \u00a71,172-176",
+      "verdict": "valid"
+    },
+    {
+      "claim": "H realizes an explicit binary [32768,16,16384] affine Reed-Muller code.",
+      "justification": "H is F_2-linear; evaluations at 0 and the unit vectors recover all coefficients. H(1) is all-one, while every other nonzero symbol has nonzero linear part and is balanced.",
+      "reference": "composition-10.json:41,169 \u00a72,178-185",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Evaluation on A gives an exact [32768,65,32704] code over F_{2^16}.",
+      "justification": "Degree at most 64 evaluation is injective on 32,768 distinct points. The root bound gives distance at least 32,704, and a product over 64 evaluation points attains the outer distance.",
+      "reference": "composition-10.json:40,129-132,169 \u00a73-4,187-194",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The final code is binary linear, has exact length 2^30, and dimension 1040.",
+      "justification": "Both maps are binary-linear and injective. The coordinate count is 32768^2=1,073,741,824 and the message dimension is 65\u00b716=1040.",
+      "reference": "composition-10.json:3,6,139-146,169 \u00a73,196-204",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero codeword has weight at least 535,822,336.",
+      "justification": "A nonzero degree-at-most-64 polynomial has at least 32,704 nonzero evaluations, and each corresponding inner block has weight at least 16,384. Their product is exactly 535,822,336.",
+      "reference": "composition-10.json:38-42,149-151,169 \u00a74,206-214",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The minimum-distance lower bound is attained by the displayed L_U.",
+      "justification": "Independent field arithmetic reproduces every coefficient and image value. The mask annihilates L_U(A) but not 1, so L_U has 64 zero blocks and 32,704 balanced blocks, giving exact weight 535,822,336.",
+      "reference": "composition-10.json:43-45,169 \u00a74,216-224",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The dimension-1039 balanced core and direct-sum decomposition are correct.",
+      "justification": "The coefficient constraint has codimension one and excludes the constant polynomial 1. The exact fiber formula bounds every nonzero core word on both sides, and injectivity gives C=B\u2295<1^n>.",
+      "reference": "composition-10.json:9-15,159-161,169 \u00a76,237-244",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The complete generator matrix is output deterministically in polynomial time.",
+      "justification": "For each fixed row and coordinate, bounded-size field arithmetic computes \u03b1^ia^j and then the affine bit. The algorithm emits all 1040n entries in O(n) fixed-parameter bit operations, with no search or oracle.",
+      "reference": "composition-10.json:48-55,169 \u00a75,227-235",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The cited Griesmer bound applies throughout the endpoint audit.",
+      "justification": "Every residual object is a binary linear code, exactly the stated hypothesis. The formula and bibliography match [Griesmer's paper](https://doi.org/10.1147/rd.45.0532), and all numerical sums were independently recomputed.",
+      "reference": "composition-10.json:67-70,169 \u00a77",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The cited exact small-code endpoints exclude [67,8,32] and [132,9,64].",
+      "justification": "The stated papers have the matching parameters and bibliographic data; the dimension-nine publication record explicitly reports N_2(9,64)=133. See the [dimension-eight paper](https://doi.org/10.1109/TIT.1987.1057363) and [TU/e dimension-nine record](https://research.tue.nl/nl/publications/some-results-on-the-minimum-length-of-binary-linear-codes-of-dime/).",
+      "reference": "composition-10.json:73-82,169 \u00a77",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Delsarte polynomial criterion is invoked with its hypotheses satisfied.",
+      "justification": "Both polynomials have nonnegative Krawtchouk coefficients, positive constant coefficient, and are nonpositive at every allowed nonzero distance. This is the standard bound from [Delsarte's monograph](https://users.wpi.edu/~martin/RESEARCH/philips.pdf). The proof summarizes rather than displays the character-square identity, a nonblocking exposition point.",
+      "reference": "composition-10.json:85-88,169 \u00a77,247-251",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Residualization preserves dimension K-1 and gives distance at least d-floor(w/2) when w<2d.",
+      "justification": "A second kernel vector would split the support into two nonzero words of total weight w<2d. Comparing a lift with its translate by the residualizing word yields the stated distance inequality.",
+      "reference": "composition-10.json:169 \u00a77,247-251",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The first cubic excludes minimum distance at least 8191 for a [16384,16] code.",
+      "justification": "Parity extension gives length 16,385 and distance at least 8,192. The expansion coefficients are exactly (100671488,33579008,16385,3), and F(0)/f_0=49156<2^16.",
+      "reference": "composition-10.json:169 \u00a77",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The gap polynomial excludes [4098,14,2048].",
+      "justification": "Residual Griesmer bounds exclude weights 2,561 through 3,071. On all remaining weights, P is nonpositive; its coefficients are (4191222,1048584,3066,3), and P(0)/f_0\u224815371.295<2^14.",
+      "reference": "composition-10.json:169 \u00a77",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The residual chains prove that no binary [16384,16,d] code exists for d>=8189.",
+      "justification": "Every displayed residual length, dimension, forced distance, and next-distance Griesmer sum recomputes correctly. The terminal impossibilities close all branches. Independently, the N_2(9,64)=133 recurrence already gives the lower length 16,385 at distance 8,189.",
+      "reference": "composition-10.json:18-25,102,169 \u00a77,253-260,307",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The conditional d=8188 gateway arithmetic is correct and is not presented as a construction.",
+      "justification": "ceil(535822336/8188)=65440, so an outer RS dimension is 65537-65440=97. The rank-17 payoff is 17\u00b797=1649 and the distance product is 535,822,720. Its existence remains explicitly conditional.",
+      "reference": "composition-10.json:94,103,164-166,169 \u00a77,262-269",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The completion-average proposal is correctly excluded from the leaderboard construction.",
+      "justification": "The failure-indicator example shows unrestricted completion averages can encode arbitrary exhaustive witness search. Current campaign rules disallow this, and the submitted k=1040 generator does not use it.",
+      "reference": "composition-10.json:28-35,46,104,169 \u00a78,271-276",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The scoped obstruction statements do not masquerade as a global upper bound.",
+      "justification": "The reciprocal-sum obstruction, first-active-level ceiling, and rank-16 projection ceiling are architecture-specific. Independent checking gives the stated 1040 and 1054 caps, while lines 99 and 101 explicitly leave other architectures open.",
+      "reference": "composition-10.json:98-105",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every main parameter-ledger entry is exact.",
+      "justification": "The field, constituent-code, final length, dimension, distance, rate, balanced-core, and gateway calculations all recompute to the displayed integers.",
+      "reference": "composition-10.json:107-167",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof-step statuses and dependencies support the headline theorem.",
+      "justification": "The field, inner, outer, injectivity, distance, equality-witness, and generator-runtime steps are noncircular and proved. Only the hypothetical rank-17 gateway is marked conditional, and it is not used by C.",
+      "reference": "composition-10.json:170-277",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The JSON rate equals k/n exactly at binary64 precision.",
+      "justification": "The parsed value has exact ratio 65/67,108,864, which equals 1040/2^30.",
+      "reference": "composition-10.json:154-156,279",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The result status, submission class, and baseline classification are honest.",
+      "justification": "\u201cproved\u201d records mathematical proof status, while independent acceptance controls verification. The explicit k=1040 code exceeds the verified k=31 baseline, so leaderboard_candidate and baseline_beaten=true are appropriate.",
+      "reference": "composition-10.json:2,58,281,306-308",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Publication artifacts remain pending.",
+      "justification": "The source accurately discloses that no standalone proof or data record was persisted and validation/build were not completed. Those artifacts are required before publication, but their absence does not create a mathematical or explicitness gap in this complete inline submission.",
+      "reference": "composition-10.json:56,93,105",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proposed next tasks remain aligned with improving k.",
+      "justification": "They prioritize the conditional k=1649 gateway, then other finite inner-code forks and structural routes to dimensions above 1040; none is misclassified as part of the submitted code.",
+      "reference": "composition-10.json:92-96",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "composition-10",
+  "source_sha256": "4976a03858bb5b3ecd488361791743574e742cb10b0ead3e7433aff9a90a06fd",
+  "summary": "ACCEPT. The submission gives a deterministic binary linear code with exact parameters [1,073,741,824,1040,535,822,336]_2 and exact rate 65/2^26. The field certificate, generator algorithm, injectivity, all nonzero-word distance cases, explicit equality witness, balanced core, ancillary residual/Delsarte obstruction, arithmetic, source identity, and baseline classification pass independent verification. Persisting the proof/data record and running publication validation remain workflow tasks, not mathematical repairs.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 1040,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.685754776000977e-07
+}
