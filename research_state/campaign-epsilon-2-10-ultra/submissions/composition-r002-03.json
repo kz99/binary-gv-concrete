@@ -1,0 +1,192 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new leaderboard code is submitted. I audit the following strict uniform-repetition variant of AG\u2013affine alphabet reduction.\n\nFor `m\u22652` and `rho\u22651`, put `q=2^m`. Let `X/F_q` be a smooth projective geometrically integral curve, let `D=P_1+...+P_L` consist of distinct rational points, and let `G` be an `F_q`-rational divisor of degree `a<L`, disjoint from `D`. Use the functional AG outer code `C_L(D,G)` of dimension `K=l(G)`. Encode each field symbol using `2^rho` identical copies of the affine encoder\n\n`H_m:F_q\u2192RM(1,m\u22121)=[2^(m\u22121),m,2^(m\u22122)]_2`.\n\nNo padding, shortening, or puncturing is used. Exact target length and product-certified distance force\n\n`L=2^(31\u2212m\u2212rho)`, `a\u2264A=2^(22\u2212m\u2212rho)`.\n\nA finite Castelnuovo\u2013Ihara sieve proves `mK\u22642706` throughout this family. More sharply, every instance with `m\u226510` has `mK\u2264975`, so strict repetition cannot repair any of the `m=10,...,16` AG\u2013affine gateways or improve the accepted dimension-1040 code there. Any repeated-inner improvement must use `m\u22649`. The largest surviving parameter upper bound is `m=3`, `rho=1`, `K\u2264902`, hence conditional dimension at most 2706; no curve or divisor realizing it is supplied.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: composition architecture, parameter, and proof positions. For a functional AG outer code over `F_(2^m)` concatenated with `2^rho` copies of `RM(1,m\u22121)`, exact unpadded length and product distance give `L=2^(31\u2212m\u2212rho)` and `deg G\u2264A=2^(22\u2212m\u2212rho)`. If `r=l(G)\u22121`, removing the fixed part and factoring the complete-series map with degree `delta` gives the necessary condition `L\u2264delta U_q(pi(floor(A/delta),r))`. Exact enumeration proves global binary dimension at most 2706.",
+      "kind": "idea",
+      "references": [
+        "proof-step:REP-PARAMETERS",
+        "proof-step:REP-SERIES-SIEVE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json"
+      ],
+      "subject": "Repeated-inner AG\u2013affine sieve"
+    },
+    {
+      "body_markdown": "Intended recipient: composition architect and integrator. Strict uniform repetition of the affine inner block cannot improve `k=1040` for any alphabet degree `m\u226510`; the exact cap is 975, attained at `m=15,rho=1,K=65`. Therefore duplicating inner coordinates does not rescue the `m=13` birational `g^80_512` gateway\u2014it lowers that alphabet\u2019s cap from 1053 to 546. Only `m\u22649` remains capable of an improvement in this repeated family.",
+      "kind": "objection",
+      "references": [
+        "proof-step:REP-FINITE-TABLE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json"
+      ],
+      "subject": "Inner repetition closes every m\u226510 alphabet"
+    },
+    {
+      "body_markdown": "Intended recipients: algebraic literature and bottleneck positions. The extremal surviving repeated case is over `F_8`: it would require `L=2^27` rational points and a divisor of degree at most `2^18` with `l(G)=902`. The complete series is necessarily birational, has moving degree between 262020 and 262144, and forces genus between 26843544 and 38046213. Can an explicit finite small-field point bound, Frobenius-angle LP certificate, or classification of such near-Castelnuovo series exclude this gateway?",
+      "kind": "question",
+      "references": [
+        "proof-step:REP-Q8-GATEWAY",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json"
+      ],
+      "subject": "Resolve the extremal F8 repeated gateway"
+    }
+  ],
+  "distance_audit": [
+    "The repeated affine inner code has exact parameters `[2^(m\u22121+rho),m,2^(m\u22122+rho)]_2`.",
+    "Exact unpadded length gives `L\u00b72^(m\u22121+rho)=2^30`, hence `L=2^(31\u2212m\u2212rho)`.",
+    "The standard outer AG distance is at least `L\u2212a`; thus product distance is at least `(L\u2212a)2^(m\u22122+rho)`. Requiring this to be at least `511\u00b72^20` is exactly `a\u22642^(22\u2212m\u2212rho)=L/512`.",
+    "For the extremal surviving ledger `(m,rho,L,A,K)=(3,1,2^27,2^18,902)`, a hypothetical final code would have dimension `3\u00b7902=2706`; the distance certificate at `a=A` is `(2^27\u22122^18)\u00b74=535,822,336`.",
+    "No curve, divisor, point ordering, or Riemann\u2013Roch basis realizing a surviving row is supplied, so `minimum_distance`, `dimension`, and `rate` remain null."
+  ],
+  "explicitness_audit": [
+    "The obstruction uses only exact integer loops over the displayed finite ranges; it does not select a generator matrix and does not use randomness, conditional expectation, or exhaustive target-code search.",
+    "The audited family uses distinct rational evaluation points and exact unpadded length. Zero-padded non-power-of-two repetition factors, multiplicity AG codes, weighted inner maps, and non-product distance arguments are outside the theorem.",
+    "A qualifying instance would still have to specify the curve, all evaluation points, divisor, Riemann\u2013Roch basis, field model, and their polynomial-time algorithms. None is supplied.",
+    "The workspace is read-only, so the lemma and posts are returned inline; no record, proof file, validator run, or dashboard build was produced."
+  ],
+  "generator_matrix": {
+    "algorithm": "Conditional template only: given an explicit field model, curve, ordered rational points, divisor, and ordered Riemann\u2013Roch basis `f_1,...,f_K`, index binary rows by `(j,i)` with `1\u2264j\u2264K` and `0\u2264i<m`. Evaluate `alpha^i f_j(P_t)` for every outer point, apply the fixed affine truth-table encoder `H_m`, and emit `2^rho` consecutive copies of that inner block. No unconditional matrix is asserted because no surviving curve/divisor data are supplied.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Conditional `O(kn\u00b7poly(log n))` bit operations, plus polynomial-time curve and Riemann\u2013Roch preprocessing.",
+    "runtime_proof": "There are exactly `kn=mK\u00b7L\u00b72^(m\u22121+rho)` output bits. With polynomial-time field arithmetic, evaluation, and basis construction, each bit is computed using `poly(log n)` work; streaming all entries therefore costs `O(kn\u00b7poly(log n))\u2264n^{O(1)}`. This is only an explicitness-preserving reduction, not a construction claim."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A smooth projective geometrically integral genus-`g` curve over `F_q`.",
+      "result": "The Serre point bound and the finite Ihara bound combine into the exact integer function `U_q(g)` used in the sieve.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json, proof step P2",
+      "used_for": "Bounding rational points on the normalization of the complete-series image."
+    },
+    {
+      "hypotheses": "A nondegenerate integral curve of degree `e` in projective `r`-space.",
+      "result": "Its geometric genus is at most the Castelnuovo number `pi(e,r)`.",
+      "source": "Classical Castelnuovo genus bound, instantiated in research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+      "used_for": "Converting divisor degree and outer dimension into a point-count obstruction."
+    },
+    {
+      "hypotheses": "A functional AG evaluation code `C_L(D,G)` with `deg G<L`.",
+      "result": "Its dimension is `l(G)`, evaluation is injective, and its designed distance is at least `L\u2212deg G`.",
+      "source": "Standard functional AG-code theorem; local specialization in research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+      "used_for": "Outer-code parameters and the product-distance inequality."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Apply stronger explicit small-field point bounds or Frobenius-angle linear programming to the surviving `m\u22649` repetition rows, beginning with the sharply isolated `F_8` birational gateway.",
+    "Composition architecture should discard strict affine-inner repetition for every `m\u226510`; it is capped at 975 and cannot beat the accepted k=1040 endpoint.",
+    "Extend the audit separately to non-power-of-two repetition with zero padding, multiplicity evaluation codes, and nonuniform inner maps; the present theorem deliberately does not cover them.",
+    "In a writable step, persist the repeated-inner sieve as a minimal lemma, independently recompute its integer table, and update the composition roadmap."
+  ],
+  "obstructions": [
+    "Every exact unpadded strict-repetition AG\u2013affine product construction has binary dimension at most 2706, below the concrete GV reference dimension 2955.",
+    "Every such construction with alphabet degree `m\u226510` has dimension at most 975 and therefore cannot improve the accepted k=1040 construction.",
+    "At `m=13`, one repetition lowers the exact sieve cap from the unrepeated conditional `k=1053` gateway to `k\u2264546`; further repetitions do not improve it.",
+    "The only rows not already below k=1040 occur for `m=2,...,9`; they still require enormous point-rich curves and suitable low-degree complete linear series, none of which is constructed.",
+    "This does not obstruct arbitrary AG concatenation, nonuniform or nonlinear alphabet reduction, zero-padded repetition factors, or distance proofs stronger than the ordinary product bound."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Exact length `L\u00b72^(m\u22121+rho)=2^30`.",
+      "quantity": "Outer length",
+      "value": "`L=2^(31\u2212m\u2212rho)`"
+    },
+    {
+      "derivation": "`(L\u2212a)2^(m\u22122+rho)\u2265511\u00b72^20`.",
+      "quantity": "Divisor-degree budget",
+      "value": "`a\u2264A=2^(22\u2212m\u2212rho)=L/512`"
+    },
+    {
+      "derivation": "Maximum over every integer `rho\u22651` allowed by exact length, using the complete-series sieve.",
+      "quantity": "Exact caps for `m=2,...,9`",
+      "value": "`K\u22641213,902,661,479,344,246,175,124`; hence `mK\u22642426,2706,2644,2395,2064,1722,1400,1116`"
+    },
+    {
+      "derivation": "Same exact loop.",
+      "quantity": "Exact caps for `m=10,...,16`",
+      "value": "`K\u226488,65,59,42,33,65,33`; hence `mK\u2264880,715,708,546,462,975,528`"
+    },
+    {
+      "derivation": "Elementary `l(G)\u2264deg G+1` with `rho\u22651`.",
+      "quantity": "Large-alphabet tail",
+      "value": "For `m\u226517`, `mK\u2264289`; for `m\u226522`, `K\u22641`"
+    },
+    {
+      "derivation": "Largest table entry.",
+      "quantity": "Global strict-repetition ceiling",
+      "value": "`k\u22642706`, uniquely in the table at `m=3,rho=1,K=902`"
+    },
+    {
+      "derivation": "At `(m,rho,K)=(3,1,902)`, the finite delta loop.",
+      "quantity": "Extremal geometry",
+      "value": "Only map degree `delta=1` survives; moving degree `262020\u2264a'\u2264262144`; `26843544\u2264g\u226438046213`"
+    }
+  ],
+  "proof_markdown": "### Theorem\n\nFix `m\u22652` and `rho\u22651`. Consider a functional AG code over `F_q`, `q=2^m`, concatenated with `2^rho` identical copies of the affine inner encoder `RM(1,m\u22121)`, with exact unpadded binary length `2^30`. If distance is certified by the standard product bound, then the binary dimension is at most 2706. If `m\u226510`, it is at most 975.\n\n### Parameter reduction\n\nThe repeated inner code has length `2^(m\u22121+rho)`, dimension `m`, and distance `2^(m\u22122+rho)`. Therefore exact length gives\n\n`L=2^(31\u2212m\u2212rho)`.\n\nWriting `a=deg G`, the product certificate is\n\n`(L\u2212a)2^(m\u22122+rho)\u22652^29\u22122^20`.\n\nSubstituting `L` shows this is equivalent to\n\n`a\u2264A:=2^(22\u2212m\u2212rho)=L/512`. `(1)`\n\nIf `22\u2212m\u2212rho<0`, integrality gives `a\u22640`, hence `K=l(G)\u22641`. It remains to consider `1\u2264rho\u226422\u2212m`.\n\n### Complete-linear-series sieve\n\nAssume `K=l(G)\u22653` and put `r=K\u22121`. A nonzero section replaces `G` by a linearly equivalent effective divisor. Remove the fixed part of its complete linear series. The resulting basepoint-free divisor has degree `a'\u2264A`, dimension `r`, and defines a morphism onto a nondegenerate curve in `P^r`.\n\nLet `delta` be the degree onto the normalization of the image and `e` the image degree. Then `a'=delta e`, `e\u2265r`, and rational fibers contain at most `delta` points. Thus\n\n`L\u2264delta\u00b7#Y(F_q)`.\n\nFor `e\u22121=s(r\u22121)+epsilon`, `0\u2264epsilon<r\u22121`, define\n\n`pi(e,r)=s(s\u22121)(r\u22121)/2+s epsilon`.\n\nCastelnuovo gives `g(Y)\u2264pi(e,r)`. Define the exact integer point bound\n\n`U_q(h)=min(q+1+isqrt(4q)h, q+1+(isqrt((8q+1)h^2+4hq(q\u22121))\u2212h)//2)`.\n\nMonotonicity in degree and genus yields the necessary condition\n\n`L\u2264delta U_q(pi(floor(A/delta),r))` `(2)`\n\nfor some\n\n`1\u2264delta\u2264floor(A/r)`. `(3)`\n\n### Exact finite enumeration\n\nFor each `m=2,...,16`, enumerate `rho=1,...,22\u2212m`, `K=3,...,A+1`, and every `delta` in (3), retaining `K` only when (2) holds. All operations are integer additions, multiplications, divisions, and integer square roots. The resulting maxima are:\n\n| `m` | maximizing `rho` | `K` cap | binary `mK` cap |\n|---:|---:|---:|---:|\n|2|1|1213|2426|\n|3|1|902|2706|\n|4|1|661|2644|\n|5|1|479|2395|\n|6|1|344|2064|\n|7|1|246|1722|\n|8|1|175|1400|\n|9|1|124|1116|\n|10|1|88|880|\n|11|1|65|715|\n|12|1|59|708|\n|13|1|42|546|\n|14|1,2,3|33|462|\n|15|1|65|975|\n|16|1|33|528|\n\nFor `m\u226517`, (1) and `K\u2264a+1` give `mK\u2264m(2^(21\u2212m)+1)` while the exponent is nonnegative, whose maximum is 289 at `m=17`; afterward `K\u22641`. Thus the table is globally maximized by 2706, and its `m\u226510` portion is maximized by 975.\n\n### Extremal surviving row\n\nAt `(m,rho,K)=(3,1,902)`, one has\n\n`q=8`, `L=134217728`, `A=262144`, `r=901`.\n\nThe exact loop gives\n\n`max_(delta\u22652) delta U_8(pi(floor(A/delta),901))=66941724<L`,\n\nso the complete-series map must be birational. Moreover,\n\n`U_8(pi(262019,901))=134217652<L`,\n\nwhereas\n\n`U_8(pi(262020,901))=134218679\u2265L`.\n\nHence its moving degree must lie in `[262020,262144]`. Serre's bound gives\n\n`g\u2265ceil((L\u22129)/5)=26843544`,\n\nand Castelnuovo gives\n\n`g\u2264pi(262144,901)=38046213`.\n\nThis is a concrete conditional geometry problem, not an existence or construction claim.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "REP-PARAMETERS",
+      "proof": "The repeated affine inner parameters and direct substitution into length and product-distance identities give `L=2^(31\u2212m\u2212rho)` and `deg G\u22642^(22\u2212m\u2212rho)`.",
+      "statement": "Exact length and product distance determine the outer length and divisor budget.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "REP-PARAMETERS",
+        "Castelnuovo genus bound",
+        "Serre/finite-Ihara point bounds"
+      ],
+      "id": "REP-SERIES-SIEVE",
+      "proof": "Remove the fixed part of the complete linear series, factor its map with degree `delta`, apply Castelnuovo to the image and `U_q` to its normalization, and bound rational fibers by `delta`.",
+      "statement": "Every surviving outer code satisfies `L\u2264delta U_q(pi(floor(A/delta),K\u22121))` for an explicitly bounded integer `delta`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "REP-SERIES-SIEVE"
+      ],
+      "id": "REP-FINITE-TABLE",
+      "proof": "The explicitly displayed finite integer loop produces the table. For `m\u226517`, `l(G)\u2264deg G+1` supplies the stated analytic tail bound.",
+      "statement": "Strict repeated-inner AG\u2013affine product constructions have `k\u22642706`, and those with `m\u226510` have `k\u2264975`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "REP-SERIES-SIEVE",
+        "REP-FINITE-TABLE"
+      ],
+      "id": "REP-Q8-GATEWAY",
+      "proof": "At the unique maximum table row, evaluating every allowed map degree excludes `delta\u22652`; the two adjacent exact `U_8` values force moving degree at least 262020. Serre and Castelnuovo give the genus interval.",
+      "statement": "The dimension-2706 extremal ledger requires the stated birational `F_8` linear series and enormous point set.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Outer-code and alphabet-reduction tradeoffs: uniform repetition of affine inner blocks with functional AG outer codes.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (complete)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/*.json (all three current roadmaps)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 52 current durable submissions audited; directly relevant composition and AG submissions read in full)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 55 current files and every post)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-05.json"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "For every exact-length, unpadded binary code obtained by concatenating a functional AG evaluation code `C_L(D,G)` over `F_(2^m)`, `m\u22652`, with `2^rho` identical copies of `RM(1,m\u22121)`, `rho\u22651`, when distance is certified by the standard product bound, the binary dimension is at most 2706. Every such instance with `m\u226510` has dimension at most 975. Thus strict affine-inner repetition cannot improve the accepted k=1040 construction for any alphabet degree at least 10; any repeated-inner improvement must use `m\u22649`.",
+  "title": "Uniform inner repetition does not rescue AG\u2013affine alphabet reduction"
+}

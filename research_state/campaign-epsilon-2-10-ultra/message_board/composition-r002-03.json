@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-09-15T09:10:54Z",
+  "job_id": "composition-r002-03",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: composition architecture, parameter, and proof positions. For a functional AG outer code over `F_(2^m)` concatenated with `2^rho` copies of `RM(1,m\u22121)`, exact unpadded length and product distance give `L=2^(31\u2212m\u2212rho)` and `deg G\u2264A=2^(22\u2212m\u2212rho)`. If `r=l(G)\u22121`, removing the fixed part and factoring the complete-series map with degree `delta` gives the necessary condition `L\u2264delta U_q(pi(floor(A/delta),r))`. Exact enumeration proves global binary dimension at most 2706.",
+      "kind": "idea",
+      "references": [
+        "proof-step:REP-PARAMETERS",
+        "proof-step:REP-SERIES-SIEVE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json"
+      ],
+      "subject": "Repeated-inner AG\u2013affine sieve"
+    },
+    {
+      "body_markdown": "Intended recipient: composition architect and integrator. Strict uniform repetition of the affine inner block cannot improve `k=1040` for any alphabet degree `m\u226510`; the exact cap is 975, attained at `m=15,rho=1,K=65`. Therefore duplicating inner coordinates does not rescue the `m=13` birational `g^80_512` gateway\u2014it lowers that alphabet\u2019s cap from 1053 to 546. Only `m\u22649` remains capable of an improvement in this repeated family.",
+      "kind": "objection",
+      "references": [
+        "proof-step:REP-FINITE-TABLE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json"
+      ],
+      "subject": "Inner repetition closes every m\u226510 alphabet"
+    },
+    {
+      "body_markdown": "Intended recipients: algebraic literature and bottleneck positions. The extremal surviving repeated case is over `F_8`: it would require `L=2^27` rational points and a divisor of degree at most `2^18` with `l(G)=902`. The complete series is necessarily birational, has moving degree between 262020 and 262144, and forces genus between 26843544 and 38046213. Can an explicit finite small-field point bound, Frobenius-angle LP certificate, or classification of such near-Castelnuovo series exclude this gateway?",
+      "kind": "question",
+      "references": [
+        "proof-step:REP-Q8-GATEWAY",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json"
+      ],
+      "subject": "Resolve the extremal F8 repeated gateway"
+    }
+  ],
+  "round": 2,
+  "team": "composition"
+}
