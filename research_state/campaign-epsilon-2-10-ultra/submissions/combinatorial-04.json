@@ -1,0 +1,232 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "### Audited direct lifts\n\nNo new code is claimed. I audited two deterministic parity-amplification templates:\n\n1. Ta-Shma\u2019s s-wide replacement lift, whose complete output multiset has size `M=N1\u00b7D1^s\u00b7D2^t`.\n2. Cohen\u2013Cohen\u2019s Gray-register wide replacement lift, whose complete output multiset has size `M=m\u00b7d^s\u00b7c^ell`.\n\nIn both templates every output column is an XOR of the original outer labels. Thus amplification cannot increase their binary span. The proof below shows that neither published norm estimate can certify dimension at least 1041 within the immutable length. Arbitrary path thinning, deduplication, or code-aware puncturing would require a new bias proof and is not covered by this obstruction.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "If base labels are `z_1,\u2026,z_m` and every amplified column is an XOR of these labels, then the amplified binary dimension is at most `m`. For an undirected `D`-regular rotation multigraph on `m` vertices with nontrivial absolute eigenvalue at most `lambda`, integrality of port multiplicities gives `tr(P^2)\u2265m/D`, hence `D\u2265m/(1+(m\u22121)lambda^2)`. These two inequalities form a useful finite rank/length ledger for every parity-walk proposal.",
+      "kind": "idea",
+      "references": [
+        "P2",
+        "P3"
+      ],
+      "subject": "Rank plus trace ledger for parity lifts"
+    },
+    {
+      "body_markdown": "At rank at least 1041, Ta-Shma\u2019s Theorem 4.1 cannot contract within `2^30` coordinates. For `4\u2264s\u22649`, length forces `D1\u226431`, the trace bound gives `lambda1>1/6`, compatibility gives `lambda2^2>1/3`, and the theorem\u2019s block factor exceeds 3. For `s\u226510`, length forces `D1\u22643`, giving `lambda1>1/2` and contradicting compatibility. The cases `s\u22643` also have block factor at least 1.",
+      "kind": "objection",
+      "references": [
+        "P4",
+        "Ta-Shma-STOC17-Theorem-4.1"
+      ],
+      "subject": "Finite barrier for the generic s-wide estimate"
+    },
+    {
+      "body_markdown": "Cohen\u2013Cohen\u2019s Gray-register theorem requires at least 261,540,414,231 raw coordinates at rank 1041 under its stated norm certificate. Can one deterministically select at most `2^30` starting states and paths, while proving all linear-test biases directly rather than inheriting the uniform full-cloud norm bound? Any answer must replace, not merely invoke, the published theorem.",
+      "kind": "question",
+      "references": [
+        "P5",
+        "Cohen-Cohen-ECCC-TR25-179-Theorem-6.2"
+      ],
+      "subject": "Can the full cloud be removed with a fresh proof?"
+    }
+  ],
+  "distance_audit": [
+    "For a binary word c of length n, signed bias is `b(c)=1\u22122 wt(c)/n`.",
+    "Absolute bias at most `2^-9` implies relative weight at least `(1\u22122^-9)/2=511/1024`.",
+    "At `n=2^30`, this gives `511\u00b72^20=535,822,336`, exactly the required minimum distance.",
+    "Both audited papers provide absolute-bias or operator-norm certificates, so failure of those bounds is only a certificate obstruction; it does not prove that every underlying walk has poor one-sided distance.",
+    "No minimum-distance claim is made for a new code."
+  ],
+  "explicitness_audit": [
+    "The argument quantifies over all integer graph degrees and all outer labelings; it does not choose a random graph or sampled path set.",
+    "Raw lengths count every starting state and every labelled walk, including multiplicity, exactly as in the cited constructions.",
+    "The trace lemma permits loops and parallel edges represented by an undirected rotation map; port multiplicities remain integral.",
+    "No asymptotic notation, hidden constant, or sufficiently-large hypothesis is used in the finite inequalities.",
+    "Repetition, zero padding, and theorem-only worst-case puncturing are addressed explicitly.",
+    "The shared lemma-book and roadmap directories were present but empty at the final audit; all eight shared message-board files were read."
+  ],
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "An outer `(N1,D1,lambda1)` undirected expander, an inner graph on `D1^s` vertices with parameters `(D2,lambda2)`, the stated pseudorandomness condition, and `epsilon0+2 beta+2 lambda1\u2264lambda2^2`.",
+      "result": "Theorem 4.1 bounds output bias by `[lambda2^s+s lambda2^(s\u22121)+s^2(lambda2^(s\u22123)+zeta)]^floor(t/s)`; the enumerated support has size `N1 D1^s D2^t`.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes, STOC 2017](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "The direct s-wide replacement-product obstruction."
+    },
+    {
+      "hypotheses": "The register word is double-conflict-free on intervals and `2 omega_G+epsilon\u2264(32/20)omega_H^5`.",
+      "result": "Theorem 6.2 gives operator norm at most `10(2 omega_H)^(ell\u22122)`; Definitions 5.2\u20135.3 enumerate `m d^s c^ell` starting-state/path pairs.",
+      "source": "[Cohen and Cohen, Wide Replacement Products Meet Gray Codes, ECCC TR25-179](https://eccc.weizmann.ac.il/report/2025/179/download)",
+      "used_for": "The Gray-register degree and raw-length obstruction."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Seek a signing-specific, one-sided analysis for a deterministic sparse family of replacement paths; a scalar spectral bound cannot bypass the proved barriers.",
+    "Try to eliminate the full `D1^s` or `d^s` starting-cloud factor using an explicitly indexed path design and prove its bias from first principles.",
+    "Any proposed improvement over the durable dimension-1040 candidate must start with at least 1041 spanning outer labels; apply the rank and trace ledger before constructing graphs.",
+    "Request an independent audit of the Cohen\u2013Cohen support enumeration and the finite `d\u2265631` calculation before promoting this obstruction to the durable lemma book."
+  ],
+  "obstructions": [
+    "Parity-sum replacement lifts do not increase binary dimension: rank is bounded by the number of outer labels.",
+    "Ta-Shma Theorem 4.1 supplies no subunit bias certificate at rank at least 1041 and raw support at most `2^30`.",
+    "Cohen\u2013Cohen Theorem 6.2 forces raw support at least `261,540,414,231` when rank is at least 1041.",
+    "Worst-case puncturing based only on a raw absolute-bias bound can delete at most `2^21` rows; both finite barriers remain beyond that window.",
+    "The obstruction does not exclude a new path-specific analysis, a deterministic sparse subfamily, or a nonuniform weighted construction."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Block length n",
+      "value": "1,073,741,824 = 2^30"
+    },
+    {
+      "derivation": "`(1/2\u22122^-10)n=(511/1024)2^30`.",
+      "quantity": "Required distance",
+      "value": "535,822,336 = 511\u00b72^20"
+    },
+    {
+      "derivation": "`(1\u2212tau)/2=1/2\u22122^-10`.",
+      "quantity": "Sufficient absolute-bias threshold tau",
+      "value": "1/512 = 2^-9"
+    },
+    {
+      "derivation": "One more than the durable proved candidate dimension 1040.",
+      "quantity": "Improvement threshold",
+      "value": "k \u2265 1041"
+    },
+    {
+      "derivation": "`tr(P^2)\u2265m/D` and `tr(P^2)\u22641+(m\u22121)lambda^2`.",
+      "quantity": "Regular-graph degree constraint",
+      "value": "D \u2265 m/[1+(m\u22121)lambda^2]"
+    },
+    {
+      "derivation": "`101/(3224)>1/36`.",
+      "quantity": "Ta-Shma outer spectral lower bound for 4\u2264s\u22649",
+      "value": "lambda1 > 1/6"
+    },
+    {
+      "derivation": "Compatibility then gives `lambda2^2>1/3`; direct finite checking gives `s^2\u00b73^(-(s\u22123)/2)\u22653`.",
+      "quantity": "Ta-Shma block factor for 4\u2264s\u22649",
+      "value": "Q > 3"
+    },
+    {
+      "derivation": "The Cohen\u2013Cohen norm bound reaching tau forces `omega_H<1/2`; its compatibility hypothesis then gives `omega_G<1/40`.",
+      "quantity": "Gray-register outer spectral requirement",
+      "value": "omega_G < 1/40"
+    },
+    {
+      "derivation": "`d>1600\u00b71041/(1041+1599)=630.909\u2026`.",
+      "quantity": "Gray-register outer degree",
+      "value": "d \u2265 631"
+    },
+    {
+      "derivation": "`1041\u00b7631^3`, with `631^3=251,239,591`.",
+      "quantity": "Gray-register raw-length lower bound",
+      "value": "261,540,414,231"
+    },
+    {
+      "derivation": "A theorem-only deletion estimate requires `M\u2212n\u2264tau n`.",
+      "quantity": "Largest generically puncturable raw length",
+      "value": "(1+tau)n = 1,075,838,976"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nLet `tau=2^-9`. Neither the complete s-wide construction certified by Ta-Shma\u2019s Theorem 4.1 nor the complete Gray-register construction certified by Cohen\u2013Cohen\u2019s Theorem 6.2 can yield, through its stated norm bound, a `tau`-balanced binary code of rank at least 1041 using at most `2^30` raw coordinates. The conclusion also survives repetition, zero padding, and puncturing justified solely by the raw absolute-bias bound.\n\n## Proof\n\n### 1. Target normalization\n\nFor a binary word `c` of length `n`, put `b(c)=n^-1 sum_i (-1)^(c_i)=1\u22122 wt(c)/n`. Thus `|b(c)|\u2264tau=1/512` implies\n\n`wt(c)/n \u2265 (1\u2212tau)/2 = 511/1024 = 1/2\u22122^-10`.\n\nAt `n=2^30`, the resulting weight is at least `511\u00b72^20=535,822,336`.\n\n### 2. Rank does not amplify\n\nLet the outer labels be `z_1,\u2026,z_m` in a binary vector space. Every parity-walk output label has the form `y_w=sum_j z_(v_j)`. Hence all output labels lie in `span{z_1,\u2026,z_m}`. The associated generator map is binary linear, and its rank is at most `m`. Consequently an amplified code of actual dimension at least 1041 requires at least 1041 outer labels. This statement remains true when output labels repeat.\n\n### 3. Finite trace lemma\n\nLet `P` be the normalized adjacency of an undirected `D`-regular rotation multigraph on `m` vertices. Write `P_uv=a_uv/D`, where the nonnegative integers `a_uv` have row sum `D`. Since `a_uv^2\u2265a_uv`,\n\n`tr(P^2)=sum_(u,v) P_uv^2 \u2265 m/D`.\n\nIf every nonconstant eigenvalue has absolute value at most `lambda`, symmetry gives\n\n`m/D \u2264 1+(m\u22121)lambda^2`,\n\nand therefore\n\n`D \u2265 m/[1+(m\u22121)lambda^2]`.  \n\nThis includes loops and parallel edges counted through their ports.\n\n### 4. Ta-Shma\u2019s s-wide estimate\n\nIn [Theorem 4.1](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf), the complete multiset has size\n\n`M=N1\u00b7D1^s\u00b7D2^t`,\n\nand its certified bias is `Q^floor(t/s)`, where\n\n`Q=lambda2^s+s lambda2^(s\u22121)+s^2(lambda2^(s\u22123)+zeta)`\n\nunder `epsilon0+2 beta+2 lambda1\u2264lambda2^2`. Here all error parameters are nonnegative and `lambda2\u22641`.\n\nRank at least 1041 implies `N1\u22651041`. If `t<s`, the displayed certificate equals 1. We may therefore assume `t\u2265s`.\n\nFor `s\u22643`, take any positive admissible upper bound for `lambda2`; this is allowed even if the true nonconstant eigenvalue is zero. Since `s\u22123\u22640`, the term `s^2 lambda2^(s\u22123)` is at least 1. Thus `Q\u22651`.\n\nSuppose `4\u2264s\u22649` and `M\u22642^30`. Because `N1>2^10`,\n\n`D1^s \u2264 M/N1 < 2^20`,\n\nso `D1\u226431`. The trace lemma gives\n\n`lambda1^2 \u2265 (N1\u2212D1)/[D1(N1\u22121)] \u2265 1010/(31\u00b71040)=101/3224>1/36`.\n\nTherefore `lambda1>1/6`. Compatibility forces `lambda2^2\u22652 lambda1>1/3`. Consequently\n\n`Q \u2265 s^2 lambda2^(s\u22123) > s^2\u00b73^(-(s\u22123)/2) \u2265 3`.\n\nThe final finite inequality holds for `s=4,\u2026,9`; after squaring it is `s^4\u22653^(s\u22121)`, with equality only at `s=9`. Hence the published bound is again not below 1.\n\nFinally, let `s\u226510`. The same length inequality gives `D1^s<2^20`, hence integer `D1\u22643`. The trace lemma now yields\n\n`lambda1^2 \u2265 (N1\u22123)/[3(N1\u22121)] > 1/4`,\n\nbecause `N1\u22651041>9`. Thus `lambda1>1/2`, while compatibility would require `2 lambda1\u2264lambda2^2\u22641`, a contradiction. This exhausts all positive integers `s`.\n\n### 5. Cohen\u2013Cohen\u2019s Gray-register estimate\n\nFor the construction in [Definitions 5.2\u20135.3 and Theorem 6.2](https://eccc.weizmann.ac.il/report/2025/179/download), let `m` be the number of outer labels, `d` the outer degree and register-alphabet size, `s` the number of registers, `c` the inner Cayley degree, and `ell` the register-word length. Enumerating every starting state and every labelled path gives exactly\n\n`M=m\u00b7d^s\u00b7c^ell`.\n\nThe theorem assumes\n\n`2 omega_G+epsilon \u2264 (32/20)omega_H^5 = (8/5)omega_H^5`\n\nand bounds the relevant operator norm by `10(2 omega_H)^(ell\u22122)`. A unit-vector quadratic form, hence the output bias, is bounded by this norm.\n\nFor this expression to be at most `tau<1`, necessarily `ell\u22653` and `omega_H<1/2`. Since `epsilon\u22650`, compatibility then gives\n\n`2 omega_G < (8/5)(1/2)^5=1/20`,\n\nso `omega_G<1/40`. Rank at least 1041 gives `m\u22651041`. The trace lemma therefore implies\n\n`d > 1600m/(m+1599) \u2265 1600\u00b71041/2640 = 630.909\u2026`,\n\nand hence integer `d\u2265631`.\n\nIt remains to bound `s`. A word of length at least three that is double-conflict-free on intervals requires at least three register symbols. Indeed, every length-two interval must contain distinct symbols. Over two symbols the first three positions must therefore be `aba`; the full length-three interval then has only `b` occurring exactly once, so it has no consecutive pair of uniquely occurring symbols. Thus `s\u22653`.\n\nSince `c\u22651`, the raw support satisfies\n\n`M \u2265 1041\u00b7631^3 = 261,540,414,231 > 2^30`.\n\nThis contradicts the length budget.\n\n### 6. Padding and puncturing scope\n\nUniform repetition preserves relative weights and bias, while zero padding creates no additional Hamming weight. Neither supplies a missing distance certificate.\n\nSuppose instead that a raw multiset of length `M>n` has certified absolute bias `B0`, and `M\u2212n` rows are deleted without any information about their signs. The remaining signed sum is certified only by\n\n`B0 M+(M\u2212n)`.\n\nA bound of `tau n` therefore requires, even after dropping the nonnegative term `B0 M`,\n\n`M\u2264(1+tau)n=n+2^21=1,075,838,976`.\n\nBut `1041\u00b72^20=1,091,567,616` already exceeds this window. Consequently the same Ta-Shma degree cases remain valid throughout the generically puncturable range, while the Cohen\u2013Cohen lower bound is much larger still. A specially selected deterministic subset could evade this triangle inequality only through a new all-tests bias proof.\n\nThus the two published direct certificates cannot improve the durable dimension-1040 candidate at the immutable target. This is not a global impossibility theorem for replacement products. \u220e",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "P1",
+      "proof": "For every word, `b=1\u22122 wt/n`. Substituting `|b|\u22642^-9` gives relative weight at least `511/1024`, and multiplication by `2^30` gives `535,822,336`.",
+      "statement": "Absolute Fourier bias `2^-9` suffices for the immutable distance.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P2",
+      "proof": "Every lifted column is a binary sum of outer labels, hence lies in their span. The resulting generator is binary linear and has rank no larger than the number of outer labels.",
+      "statement": "Parity-walk amplification cannot increase binary dimension.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "P3",
+      "proof": "Integral port multiplicities give `tr(P^2)\u2265m/D`; the spectral decomposition gives `tr(P^2)\u22641+(m\u22121)lambda^2`. Rearrangement proves the claimed degree bound.",
+      "statement": "Every undirected regular rotation multigraph satisfies `D\u2265m/[1+(m\u22121)lambda^2]`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P2",
+        "P3"
+      ],
+      "id": "P4",
+      "proof": "Rank forces `N1\u22651041`. For `s\u22643`, the theorem\u2019s block factor is at least one. For `4\u2264s\u22649`, length gives `D1\u226431`, trace gives `lambda1>1/6`, compatibility gives `lambda2^2>1/3`, and the block factor exceeds three. For `s\u226510`, length gives `D1\u22643`, trace gives `lambda1>1/2`, contradicting compatibility.",
+      "statement": "Ta-Shma Theorem 4.1 has no contracting direct instantiation of rank at least 1041 within the length budget.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "id": "P5",
+      "proof": "The norm target forces `ell\u22653` and `omega_H<1/2`; compatibility gives `omega_G<1/40`. Trace and `m\u22651041` force `d\u2265631`. Double-conflict-freeness on intervals forces `s\u22653`, so the exact raw length is at least `1041\u00b7631^3=261,540,414,231`.",
+      "statement": "Cohen\u2013Cohen Theorem 6.2 cannot fit a rank-at-least-1041 direct construction into `2^30` coordinates.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "P4",
+        "P5"
+      ],
+      "id": "P6",
+      "proof": "Deleting `M\u2212n` uncontrolled rows from a raw `B0`-biased multiset yields only the bound `B0M+M\u2212n`; reaching `tau n` requires `M\u2264(1+tau)n`. Both finite obstructions remain above this threshold.",
+      "statement": "Worst-case puncturing based only on the published raw bias bounds does not evade either obstruction.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Replacement-product constructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `tau=2^-9`. No unmodified complete-output instantiation certified by either Ta-Shma\u2019s s-wide Theorem 4.1 or Cohen\u2013Cohen\u2019s Gray-register Theorem 6.2 can produce a `tau`-balanced binary linear code of dimension at least 1041 with raw length at most `2^30`. The first estimate never contracts in the finite feasible range; the second forces raw length at least `261,540,414,231`.",
+  "title": "Finite rank\u2013length barriers for direct wide replacement products"
+}

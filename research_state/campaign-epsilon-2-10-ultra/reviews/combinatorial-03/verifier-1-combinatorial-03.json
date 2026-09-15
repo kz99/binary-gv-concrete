@@ -1,0 +1,229 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Recomputed the target as 2^29-2^20=535,822,336 and the claimed margin as 224.",
+    "Recomputed every Rabin congruence and remainder-one certificate over F_2; all hold, so T^15+T+1 is irreducible.",
+    "Tried Artin\u2013Schreier/trace degeneracy. Every nonlinear endpoint polynomial has positive odd degree below q, so the cited Weil theorem applies and excludes a constant trace function.",
+    "Tried cancellation of the nonlinear leading term by uX or vX; degrees 3, 5, 7, or 9 cannot be cancelled by a linear term.",
+    "Constructed all 75 endpoint generators Tr(a x^e), with e in {1,3,5,7,9} and a ranging over the polynomial basis, and evaluated them on all 32,768 field elements. Their binary rank is 75, independently supporting encoder injectivity and final dimension 91.",
+    "Tested the nonlinear encoder-kernel case: a zero word would have signed sum q^2, contradicting the bound 1448^2.",
+    "Tested P=0 with exactly one of u,v nonzero, both nonzero, and either value of c. A nontrivial endpoint character sum vanishes, so every such word is balanced.",
+    "Tested the constant-only cases: c=0 is zero and c=1 is the all-one word.",
+    "Checked the diagonal x=y, where P(x)+P(y) cancels. The exact double-sum factorization already includes these coordinates and still gives the claimed global bound.",
+    "Exhaustively computed Walsh spectra over every endpoint-linear character for the coefficient-one phases X^3, X^5, X^7, X^9 and all 15 nonempty coefficient-one combinations. The largest tested magnitude was 1,312, below 1,448; no low-weight word appeared.",
+    "Tested the scoped ceiling at r=5: the two proper low-degree preimages cannot cover F^5, and the stipulated factorwise certificate then exceeds the 64q budget.",
+    "Tested the sparse-graph obstruction at the extremal D=2^14, v=2^16; the Frobenius bound gives lambda^2 at least 3/65535, hence lambda>1/512.",
+    "Recomputed the campaign's canonical sorted-key JSON hash and obtained the supplied immutable SHA-256 exactly."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The submission reports a baseline-beating construction with block length 1,073,741,824 and dimension 91.",
+      "justification": "The detailed construction verifies n=2^30 and k=91. Since 91>31 and the distance requirement is met, baseline_beaten=true, confidence=high, and submission_class=baseline_improvement are honest.",
+      "reference": "combinatorial-03.json:2-6,223",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction fixes the field, trace, message coefficients, graph, coordinate set, and ordering deterministically.",
+      "justification": "The modulus T^15+T+1, polynomial basis, six field parameters, binary constant, all pairs (x,y) in F^2, and lexicographic 15-bit coefficient ordering are specified. No random choice or inherited code is present.",
+      "reference": "combinatorial-03.json:5",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed encoder defines a binary linear code.",
+      "justification": "For fixed (x,y), polynomial evaluation is linear in the message coefficients and the absolute trace is F_2-linear. Adding parameter tuples therefore adds their codewords.",
+      "reference": "combinatorial-03.json:5; proof_markdown, Construction, linearity, and length",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The code has exact length 2^30 without a length-changing operation.",
+      "justification": "The coordinate set is exactly F^2, so |F^2|=(2^15)^2=2^30=1,073,741,824. Every edge of K_(32768,32768) occurs once.",
+      "reference": "combinatorial-03.json:3,5,46-51,86-90",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The first discussion post correctly summarizes the construction and its correlation certificate.",
+      "justification": "The signed sum factors into two endpoint sums; the verified endpoint bound 1,448 yields the stated [2^30,91,\u2265535822560]_2 parameters.",
+      "reference": "combinatorial-03.json:8-17",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The r\u22644 ceiling is valid within the expressly scoped factorized generic-Weil template.",
+      "justification": "Odd nonlinear polynomials through degree 2r-1 form an (r-1)-dimensional F-space. Injectivity makes both low-degree preimages proper, so some message has both endpoint degrees at least 2r+1. The upper bound furnished by the stipulated certificate is then at least (2r)^2q; requiring it to be at most 64q forces r\u22644. This is a limitation of that certificate, not a lower bound on actual correlations.",
+      "reference": "combinatorial-03.json:18-26; proof_markdown, Scoped optimality of the template",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The sparse one-edge spectral obstruction is correct.",
+      "justification": "From vD=2^30 and D<v, both factors are powers of two, giving D\u22642^14 and D/v\u22641/4. The normalized nonprincipal eigenvalue satisfies lambda^2\u2265(v-D)/(D(v-1))>3/65536, hence lambda>1/512. Consequently the stated generic spectral upper bound cannot itself certify bias at most 1/512.",
+      "reference": "combinatorial-03.json:27-35",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The signed coordinate sum factors as W=(-1)^c S(P+uX)S(P+vX).",
+      "justification": "Additivity of the trace character separates the independent x- and y-sums exactly.",
+      "reference": "combinatorial-03.json:37-38; proof_markdown, equation (1)",
+      "verdict": "valid"
+    },
+    {
+      "claim": "For P nonzero, both endpoint polynomials satisfy the additive-character Weil hypotheses.",
+      "justification": "Their common leading degree is d in {3,5,7,9}; adding a linear term cannot change it. Thus d<32768 and gcd(d,32768)=1, while psi is nontrivial because Tr(1)=1. These are precisely the hypotheses of [Kowalski, Theorem 3.2](https://people.math.ethz.ch/~kowalski/exponential-sums-elementary.pdf).",
+      "reference": "combinatorial-03.json:39,55-60; proof_markdown, Character-sum bound and factorization",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Each nonlinear endpoint sum has magnitude at most 1,448.",
+      "justification": "The uniform bound is 8sqrt(32768)=1024sqrt(2)=1448.154..., and every sum is an integer because all summands are \u00b11. Therefore its magnitude is at most 1,448.",
+      "reference": "combinatorial-03.json:40,101-105",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonlinear word has weight at least 535,822,560.",
+      "justification": "The product bound is 1448^2=2,096,704. Since wt=(2^30-W)/2 and |W| is bounded by that product, wt\u2265(2^30-2,096,704)/2=535,822,560.",
+      "reference": "combinatorial-03.json:40-41,106-115",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero linear-only word is balanced.",
+      "justification": "If P=0 and one of u,v is nonzero, multiplication by that coefficient permutes F and the corresponding nontrivial additive-character sum is zero. Thus W=0 for either value of c and the weight is 2^29.",
+      "reference": "combinatorial-03.json:42",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The constant and zero cases complete the codeword case split.",
+      "justification": "When P=u=v=0, c=0 gives the zero word and c=1 gives the all-one word. Together with the nonlinear and linear-only cases, this exhausts all parameter tuples.",
+      "reference": "combinatorial-03.json:43",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The distance exceeds the immutable target by 224 without claiming attainment.",
+      "justification": "535,822,560-535,822,336=224. The submission consistently presents 535,822,560 as a certified lower bound and explicitly disclaims equality.",
+      "reference": "combinatorial-03.json:44,68",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The explicitness audit accounts for every finite construction choice and every possible length adjustment.",
+      "justification": "The quotient field, basis ordering, graph, coordinate ordering, coefficient spaces, and absence of padding, puncturing, shortening, sampling, or search are all stated.",
+      "reference": "combinatorial-03.json:46-51",
+      "verdict": "valid"
+    },
+    {
+      "claim": "leaderboard_submission=true is justified against the immutable verified baseline.",
+      "justification": "The verified code has exact target length, certified distance above the target, and dimension 91>31.",
+      "reference": "combinatorial-03.json:53",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The Rabin irreducibility criterion is correctly specialized and applied.",
+      "justification": "For degree 15, the relevant prime divisors are 3 and 5. The required Frobenius identity and both gcd tests recompute correctly. The cited [Rabin paper](https://doi.org/10.1137/0209024) is the appropriate source.",
+      "reference": "combinatorial-03.json:61-66; proof_markdown, Explicit field",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The next-task list does not hide any dependency of the submitted theorem.",
+      "justification": "It separates independent verification, later repository publication, and searches for stronger constructions from the already complete inline proof.",
+      "reference": "combinatorial-03.json:69-72",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed obstructions are correctly scoped.",
+      "justification": "The code improves k=31 but is numerically below the active k=1040 candidate; the 91 ceiling concerns only the stated full-layer factorized-Weil method; the sparse-graph statement concerns only the standard spectral certificate; and the exclusions accurately list methods not covered.",
+      "reference": "combinatorial-03.json:74-79",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The endpoint-size and block-length ledger entries are exact.",
+      "justification": "q=2^15=32,768 and q^2=2^30=1,073,741,824.",
+      "reference": "combinatorial-03.json:80-90",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The dimension and rate ledger entries are exact.",
+      "justification": "The parameter space has dimension 4\u00b715+2\u00b715+1=91, and 91/2^30=0.000000084750354290008544921875.",
+      "reference": "combinatorial-03.json:91-100",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The correlation, distance, and margin ledger entries are exact.",
+      "justification": "floor(8sqrt(32768))=1,448; 1,448^2=2,096,704=2^21-448; the resulting lower bound is 535,822,560; and the target margin is 224.",
+      "reference": "combinatorial-03.json:101-120",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed field certificate proves that the quotient is F_(2^15).",
+      "justification": "Independent GF(2) arithmetic reproduced T^(2^3)=T^8, T^(2^5)=T^4+T^2, and T^(2^15)=T modulo p, and both displayed products leave remainder one. Rabin's criterion therefore proves irreducibility.",
+      "reference": "combinatorial-03.json:122, Explicit field",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof establishes binary linearity and exact length.",
+      "justification": "The encoder is linear in all parameters and has coordinate set exactly F^2. The phrase that evaluation is linear is correctly understood as linearity in polynomial coefficients.",
+      "reference": "combinatorial-03.json:122, Construction, linearity, and length",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof establishes the endpoint and complete-walk correlation bounds.",
+      "justification": "All Weil hypotheses hold, integrality gives 1,448, and exact separation of variables gives the product bound 2,096,704.",
+      "reference": "combinatorial-03.json:122, Character-sum bound and factorization",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof establishes encoder injectivity and dimension 91.",
+      "justification": "A nonlinear kernel word would have signed sum q^2, contradicting the correlation bound. In the remaining case, evaluation at (0,0) gives c=0 and nondegeneracy of the trace pairing gives u=v=0.",
+      "reference": "combinatorial-03.json:122, Dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proof establishes the claimed distance for every nonzero codeword.",
+      "justification": "It applies the absolute correlation bound in the nonlinear case and separately handles all balanced linear words and the all-one word.",
+      "reference": "combinatorial-03.json:122, Minimum distance",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The seven proof-step records accurately summarize the detailed arguments.",
+      "justification": "Their dependencies and conclusions match the independently checked field, linearity, endpoint-bound, factorization, dimension, distance, and scoped-ceiling arguments.",
+      "reference": "combinatorial-03.json:123-185",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The JSON rate, research direction, and proved status accurately describe the result.",
+      "justification": "The binary64 rate equals the dyadic rational 91/2^30 exactly, and no conditional mathematical step remains in the central theorem.",
+      "reference": "combinatorial-03.json:187-189",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path list is provenance rather than an unstated mathematical dependency.",
+      "justification": "All literal listed files exist; the two strings marked empty are historical directory annotations. The inline proof contains every argument needed for verification. Unmaterialized discussion-reference labels are nonblocking citation hygiene.",
+      "reference": "combinatorial-03.json:190-221",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The theorem statement and title accurately report the verified code.",
+      "justification": "They claim a symbolically deterministic binary [2^30,91,\u2265535822560]_2 code, exactly matching the audited result and making no GV-achievement claim.",
+      "reference": "combinatorial-03.json:223-225",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited submission.",
+      "justification": "Applying the campaign's canonical hash\u2014SHA-256 of json.dumps(parsed JSON, sort_keys=True)\u2014recomputes 03c1521f4dc468742c608d80bac7b1620b641812fc5ea2cabf82523c9e7f6547.",
+      "reference": "combinatorial-03.json:1-226",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [],
+  "source_job_id": "combinatorial-03",
+  "source_sha256": "03c1521f4dc468742c608d80bac7b1620b641812fc5ea2cabf82523c9e7f6547",
+  "summary": "ACCEPT. The submission independently verifies as a deterministic binary linear code with parameters [1,073,741,824, 91, \u2265535,822,560]_2 and exact rate 91/2^30. The field certificate, cited theorem hypotheses, injectivity, all nonzero-word cases, exact-length accounting, arithmetic, scoped ancillary claims, source identity, and baseline-improvement classification pass. No mathematical repair is required; standalone proof/lemma persistence and dangling discussion labels are nonblocking publication hygiene.",
+  "verdict": "accept",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 91,
+  "verified_minimum_distance": 535822560,
+  "verified_rate": 8.475035429000854e-08
+}

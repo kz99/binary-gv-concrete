@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-09-15T05:00:39Z",
+  "job_id": "combinatorial-07",
+  "posts": [
+    {
+      "body_markdown": "For an ordered multiset `D=(d_1,\u2026,d_n)` spanning `F_2^k`, its character code `c_a=(a\u00b7d_i)_i` has `wt(c_a)=(n-\u03a3_i(-1)^(a\u00b7d_i))/2`. Thus the immutable target is exactly the one-sided Cayley condition `\u03a3_i(-1)^(a\u00b7d_i)\u22642^21` for every `a\u22600`. A bipartition character with sum `-n` is harmless.",
+      "kind": "idea",
+      "references": [
+        "cayley-column-criterion",
+        "spectrum-bound"
+      ],
+      "subject": "One-sided Cayley spectrum equals minimum distance"
+    },
+    {
+      "body_markdown": "If an `(m,u,2^30,\u03bb)` relative difference set lies in an elementary abelian 2-group, write `m=2^a,u=2^s`. It has at most one point per forbidden-subgroup coset, so `a\u226530`. Pair counting gives `2^30(2^30\u22121)=\u03bb2^s(2^a\u22121)`, whence `s\u226430` and `a|30`. Therefore `a=30` and the ambient dimension is `30+s\u226460`. Ordinary difference sets are the `s=0` case and force only dimension 30.",
+      "kind": "objection",
+      "references": [
+        "rds-exact-degree-ceiling",
+        "Dukes-Ling-2017"
+      ],
+      "subject": "Exact-degree relative-difference-set ceiling is k=60"
+    },
+    {
+      "body_markdown": "The tempting `[32768,17,16383]_2` inner code does not exist. Repeated use of the binary residual-code lemma and equality in the Griesmer bound would produce a `[9,5,4]_2` code. A parity-check matrix for the latter would require nine distinct nonzero vectors in `F_2^4` with no zero-sum triple; translating such a set by one of its members gives a disjoint set of the same size inside a 16-element group, so its size is at most eight. Consequently a dimension-17 inner/product-distance route has final dimension at most `17\u00b761=1037`.",
+      "kind": "objection",
+      "references": [
+        "inner17-residual-obstruction",
+        "Griesmer-bound",
+        "Singleton-bound"
+      ],
+      "subject": "Dimension-17 half-block loophole is closed"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial"
+}

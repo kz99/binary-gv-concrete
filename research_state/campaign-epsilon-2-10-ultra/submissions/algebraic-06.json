@@ -1,0 +1,261 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let `p(Z)=Z^16+Z^5+Z^3+Z^2+1`, let `F=F_2[Z]/(p)`, and put `\u03b1=Z mod p`. Write each `z\u2208F` uniquely as `z=\u03a3_{i=0}^{15}z_i \u03b1^i`.\n\nTake the deterministically ordered evaluation set `A={\u03a3_{i=0}^{14}a_i\u03b1^i:a_i\u2208F_2}`, of size `2^15`. For `y=(y_1,\u2026,y_15)\u2208F_2^15`, define `H(z)_y=z_0+\u03a3_{i=1}^{15}z_i y_i`, with `y` in binary-integer order.\n\nFor every polynomial `f(X)=\u03a3_{j=0}^{64}b_jX^j\u2208F[X]`, define\n\n`c_f=(H(f(a))_y)_{(a,y)\u2208A\u00d7F_2^15}`,\n\nordering first by the binary index of `a` and then by that of `y`. Set `C={c_f:deg f\u226464}`. This is the coordinatewise concatenation of the shortened Reed\u2013Solomon code `[32768,65,32704]_{2^16}` with the affine code `RM(1,15)=[32768,16,16384]_2`. It uses no randomness, padding, puncturing, or unspecified finite choice.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "For binary linear codes `C_i` of dimensions at least two, the average-weight bound gives `d_i/n_i\u22642/3`. Since `d(C_1\u2297C_2)=d_1d_2`, every ordinary tensor product with two nontrivial factors has relative distance at most `4/9<511/1024`. If at most one factor has dimension above one, tensoring preserves that factor's dimension. Thus ordinary binary Kronecker products cannot manufacture a leaderboard improvement.",
+      "kind": "objection",
+      "references": [
+        "proof-step:tensor-collapse"
+      ],
+      "subject": "Ordinary binary tensor products collapse below the target"
+    },
+    {
+      "body_markdown": "The scalar-orbit lemma from algebraic-09 extends from `RM(1,15)` to arbitrary coordinate-dependent binary-linear inner maps `F_{2^16}\u2192F_2^32768`. Averaging all nonzero inner symbols gives at most `16384\u00b765536/65535` weight per supported outer coordinate. Singleton then shows any field-linear outer dimension `K\u226566` has a scalar multiple below the target. Hence the entire equal-block field-linear architecture is capped at `16\u00b765=1040`.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+        "proof-step:scalar-orbit-ceiling"
+      ],
+      "subject": "Scalar-orbit ceiling does not require the RM inner code"
+    },
+    {
+      "body_markdown": "Does there exist a deterministic binary `[16384,16,d\u22658185]` or `[8192,17,d\u22654090]` code with a complete distance proof? The first would give at least `k=1168` using a full-length `F_{2^16}` Reed\u2013Solomon outer code; the second gives `k=1105` using `[131072,65,131008]_{2^17}`. The Griesmer endpoint `[16384,16,8191]` is impossible, but distances `8185,\u2026,8190` remain a precise finite bottleneck.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+        "proof-step:inner-endpoint-obstruction"
+      ],
+      "subject": "Finite inner-code gateways beyond k=1040"
+    }
+  ],
+  "distance_audit": [
+    "A nonzero polynomial of degree at most 64 has at most 64 roots among the 32,768 distinct elements of `A`, so at least 32,704 outer symbols are nonzero.",
+    "For `z\u22600`, `H(z)` has weight 32,768 when `z=1` and weight 16,384 otherwise; hence every nonzero block contributes at least 16,384.",
+    "Therefore every nonzero codeword has weight at least `32704\u00b716384=(2^15-2^6)2^14=2^29-2^20=535822336`.",
+    "The explicitly scaled 64-root polynomial in the proof has exactly 32,704 surviving blocks, all balanced, so the lower bound is attained.",
+    "The target arithmetic is exact: `(1/2-2^-10)2^30=2^29-2^20=535822336`."
+  ],
+  "explicitness_audit": [
+    "The degree-16 field polynomial is accompanied by explicit Frobenius residues and Euclidean identities proving irreducibility.",
+    "Field elements, evaluation points, inner coordinates, polynomial coefficients, and output coordinates all have specified binary-index orderings.",
+    "The outer message space consists of exactly 65 unrestricted coefficients in the displayed polynomial basis.",
+    "The exact-distance witness uses the fixed 64-point subspace `span{1,\u03b1,\u2026,\u03b1^5}` and the least admissible nonzero field scalar.",
+    "The construction has no sampled codewords, hidden searches, floors, padding, puncturing, or inherited unspecified parameters.",
+    "Repository persistence and workflow validation remain pending because this research session is read-only; the mathematical candidate is left under review."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A nonconstant affine Boolean function on `F_2^15`.",
+      "result": "Its truth table has exactly `2^14` ones.",
+      "source": "data/records.json, lemma `rm-affine-balance`, with proof in `proofs/rm-1-30-baseline.md`.",
+      "used_for": "The exact nonconstant inner-block weight."
+    },
+    {
+      "hypotheses": "An `F_{2^m}`-linear outer code concatenated through coordinate-dependent isomorphisms onto `RM(1,m-1)`.",
+      "result": "A Singleton-small-support outer word and averaging its nonzero scalar orbit bound a concatenated word's weight.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json, step `rm-scalar-orbit-bound`.",
+      "used_for": "Seed lemma for the stronger arbitrary-binary-inner scalar-orbit ceiling proved here."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Have an independent verifier recompute the field certificate, encoder rank, and exact-distance witness, then record acceptance or a local repair request.",
+    "Search deterministically for the finite inner-code gateways `[16384,16,8185\u20268190]` and `[8192,17,\u22654090]`; do not infer existence from the Griesmer bound.",
+    "Investigate genuinely `F_2`-additive outer extensions. Under the fixed affine inner map, an outer vector has weight `2^14(32768-N_0+N_1)`, so a strict supercode must control the two fibers at 0 and 1 uniformly.",
+    "In a write-capable campaign step, persist the proof and reusable lemmas under `proofs/` and `data/records.json`, then run the data validator and dashboard build."
+  ],
+  "obstructions": [
+    "If two factors of an ordinary binary tensor product have dimension at least two, its relative distance is at most `4/9`, below `511/1024`; one-dimensional factors cannot increase dimension.",
+    "For 32,768 equal binary blocks of length 32,768 encoding `F_{2^16}`, the scalar-orbit argument rules out every `F_{2^16}`-linear outer dimension `K\u226566`, even with arbitrary coordinate-dependent binary-linear inner maps.",
+    "The full degree-at-most-65 Reed\u2013Solomon extension fails: a polynomial with 65 prescribed roots can be scaled so its remaining 32,703 values avoid the all-one inner symbol, giving weight only `32703\u00b716384=535805952`.",
+    "The tempting `[16384,16,8191]_2` inner constituent does not exist. The general residual argument rules out `[2^r,r+2,2^(r-1)-1]_2` for every `r\u22653`; however, it does not eliminate inner distances 8185 through 8190.",
+    "No obstruction reported here is a global upper bound on arbitrary binary linear codes; non-field-linear weighted concatenations remain open."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "`deg p=16` and the displayed irreducibility certificate.",
+      "quantity": "outer alphabet",
+      "value": "`F=F_{2^16}`, so `|F|=65536`"
+    },
+    {
+      "derivation": "`A` is the span of 15 polynomial-basis elements.",
+      "quantity": "outer length",
+      "value": "`N=2^15=32768`"
+    },
+    {
+      "derivation": "Polynomials have degree at most 64.",
+      "quantity": "outer dimension",
+      "value": "`K=65` over `F`"
+    },
+    {
+      "derivation": "The polynomial root bound gives `N-64`.",
+      "quantity": "outer minimum distance",
+      "value": "`D=32704`"
+    },
+    {
+      "derivation": "Affine truth tables on 15 binary variables.",
+      "quantity": "inner parameters",
+      "value": "`[32768,16,16384]_2`"
+    },
+    {
+      "derivation": "`32768\u00b732768`.",
+      "quantity": "binary block length",
+      "value": "`2^30=1073741824`"
+    },
+    {
+      "derivation": "`65\u00b716`.",
+      "quantity": "binary dimension",
+      "value": "`k=1040`"
+    },
+    {
+      "derivation": "`32704\u00b716384`.",
+      "quantity": "exact binary minimum distance",
+      "value": "`535822336=2^29-2^20`"
+    },
+    {
+      "derivation": "`1040/2^30`, reduced by 16.",
+      "quantity": "exact rate",
+      "value": "`65/67108864=0.00000096857547760009765625`"
+    },
+    {
+      "derivation": "`(2^29-2^20)/2^30`.",
+      "quantity": "relative distance",
+      "value": "`511/1024`"
+    },
+    {
+      "derivation": "`1040-31`.",
+      "quantity": "verified-baseline gain",
+      "value": "`1009` dimensions"
+    }
+  ],
+  "proof_markdown": "# Exact Reed\u2013Solomon\u2013affine product code\n\n## Theorem\n\nThere is a symbolically deterministic binary linear code with exact parameters\n\n`[1073741824,1040,535822336]_2`.\n\nMoreover, 1040 is maximal within the architecture consisting of an arbitrary `F_{2^16}`-linear outer code of length 32768 and coordinate-dependent injective binary-linear inner maps of length 32768.\n\n## Explicit field\n\nLet `p(Z)=Z^16+Z^5+Z^3+Z^2+1`. Repeated squaring modulo `p` gives\n\n`Z^(2^8) \u2261 Z^8+Z^7+Z^3+Z`, and `Z^(2^16) \u2261 Z`.\n\nPut `h=Z^8+Z^7+Z^3`, the residue of `Z^(2^8)+Z`. Direct polynomial division over `F_2` gives\n\n`p=(Z^8+Z^7+Z^6+Z^5+Z^4+Z^2+1)h+(Z^2+1)`,\n\n`h=(Z^6+Z^5+Z^4+Z^3+Z^2+1)(Z^2+1)+1`.\n\nThus `gcd(p,Z^(2^8)+Z)=1`, while `p` divides `Z^(2^16)+Z`. Every irreducible factor of `p` therefore has degree dividing 16, and none has degree dividing 8. Since every proper divisor of 16 divides 8 and `deg p=16`, `p` is irreducible. Hence `F=F_2[Z]/(p)` is the explicitly represented field of order `2^16`.\n\n## Construction, linearity, length, and dimension\n\nLet `\u03b1=Z mod p`, and write `z=\u03a3_{i=0}^{15}z_i\u03b1^i`. Define\n\n`A=span_{F_2}{1,\u03b1,\u2026,\u03b1^14}`\n\nand\n\n`H(z)_y=z_0+\u03a3_{i=1}^{15}z_i y_i`, for `y\u2208F_2^15`.\n\nThe map `H` is binary linear. Its coordinate at `y=0` recovers `z_0`, and comparison with its coordinates at the unit vectors recovers `z_1,\u2026,z_15`; hence it is injective.\n\nFor `f\u2208F[X]` of degree at most 64, set `c_f=(H(f(a)))_{a\u2208A}` and let `C` be the set of all such words. Evaluation and `H` are binary linear, so `C` is binary linear. There are `2^15` blocks, each of length `2^15`, giving exact length `2^30`.\n\nThe message space has dimension 65 over `F`, hence binary dimension 1040. The encoder is injective: if `c_f=0`, injectivity of `H` gives `f(a)=0` for all 32,768 elements of `A`; the polynomial root bound then forces `f=0`. Thus `dim_{F_2}C=1040`.\n\n## Minimum distance\n\nIf `f` is nonzero, it has at most 64 roots in `A`, so at least 32,704 blocks are nonzero. If `z\u2209{0,1}`, the linear part of `H(z)` is nonzero and its truth table is balanced, of weight `2^14`. The symbol `1` gives the all-one block of weight `2^15`. Therefore every nonzero block weighs at least `2^14`, and every nonzero codeword satisfies\n\n`wt(c_f)\u226532704\u00b72^14=2^29-2^20=535822336`.\n\nThis bound is attained deterministically. Let\n\n`B=span_{F_2}{1,\u03b1,\u2026,\u03b1^5}\u2282A`, so `|B|=64`,\n\nand put `g(X)=\u220f_{b\u2208B}(X-b)`. For `a\u2208A\\B`, `g(a)\u22600`. At most 32,704 scalars are forbidden by the equations `\u03bbg(a)=1`, whereas `|F*|=65,535`. Choose the nonzero `\u03bb` of least polynomial-basis binary index outside `{g(a)^(-1):a\u2208A\\B}`. Then `\u03bbg` has exactly the 64 roots in `B`, and every surviving value is neither zero nor one. Hence its 32,704 surviving blocks are all balanced and\n\n`wt(c_{\u03bbg})=32704\u00b72^14=535822336`.\n\nThus the minimum distance is exact.\n\n## Scalar-orbit ceiling for the equal-block field-linear architecture\n\nLet `Q=2^m`, and let `\u03c6:F_Q\u2192F_2^L` be any binary-linear map. Across `F_Q*`, each nonzero output coordinate of `\u03c6` is one on exactly `Q/2` inputs, while a zero coordinate contributes nothing. Consequently\n\n`(1/(Q-1)) \u03a3_{z\u2208F_Q*} wt(\u03c6(z)) \u2264 LQ/(2(Q-1))`.\n\nNow let an `F_Q`-linear outer code have length `N` and dimension `K`, with arbitrary coordinate-dependent maps `\u03c6_j`. Singleton supplies a nonzero outer word supported on at most `N-K+1` coordinates. Averaging all its nonzero scalar multiples therefore shows that some concatenated word has weight at most\n\n`(N-K+1)LQ/(2(Q-1))`.\n\nFor `Q=65536`, `N=L=32768`, and `K=66`, this is\n\n`32703\u00b716384\u00b765536/65535 < 32704\u00b716384`;\n\nthe cross-multiplied gap is `32704\u00b765535-32703\u00b765536=32832>0`. Thus `K\u226566` violates the target, so this entire architecture has binary dimension at most `16\u00b765=1040`. The submitted code attains the ceiling.\n\n## Ordinary tensor-product obstruction\n\nFor a binary `[n,k,d]` linear code, summing weights over all codewords gives\n\n`(2^k-1)d\u2264n2^(k-1)`.\n\nThus if `k\u22652`, `d/n\u22642^(k-1)/(2^k-1)\u22642/3`. For two binary linear codes, the Kronecker product has length `n_1n_2`, dimension `k_1k_2`, and exact distance `d_1d_2`: every nonzero product-code matrix has at least `d_2` nonzero columns, each of weight at least `d_1`, while a tensor of minimum words attains the product. Hence two factors of dimension at least two have relative distance at most `4/9<511/1024`. Additional factors cannot repair this. If only one factor has dimension above one, all other factors are one-dimensional and the total dimension is unchanged.\n\n## Endpoint obstruction for a stronger inner constituent\n\nMore generally, no binary code `[2^r,r+2,2^(r-1)-1]_2` exists for `r\u22653`. The residual proof of the Griesmer inequality gives equality at these parameters and excludes distance `2^(r-1)`. Residualizing at a minimum word gives `[2^(r-1)+1,r+1,2^(r-2)]`; puncturing one coordinate preserves dimension and yields the same hypothetical family with `r` replaced by `r-1`. Iteration gives `[8,5,3]_2`, but its disjoint radius-one Hamming balls would require `2^5(1+8)\u22642^8`, which is false.\n\nTaking `r=14` rules out `[16384,16,8191]_2`, and therefore rules out the tempting hypothetical `k=1936` Reed\u2013Solomon concatenation. It does not rule out distances 8185 through 8190, which remain concrete finite constituent-code questions.\n\nThe construction and all scoped obstructions above are proved, but the campaign entry should remain under review until independently accepted.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-certificate",
+      "proof": "The two Frobenius residues and displayed Euclidean identities show that all irreducible factors of `p` have degree 16; since `deg p=16`, `p` is irreducible.",
+      "statement": "`F_2[Z]/(Z^16+Z^5+Z^3+Z^2+1)` is the explicit field `F_{2^16}`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "inner-affine",
+      "proof": "Coefficient extraction followed by affine truth-table evaluation is injective and binary linear; nonconstant affine words are balanced, while symbol 1 gives the all-one word.",
+      "statement": "The inner image has exact parameters `[32768,16,16384]_2`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "outer-rs",
+      "proof": "Evaluation of degree-at-most-64 polynomials at 32,768 distinct points is injective; the root bound gives distance 32,704, attained by a polynomial with 64 prescribed roots.",
+      "statement": "The outer code has exact parameters `[32768,65,32704]_{2^16}`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-affine",
+        "outer-rs"
+      ],
+      "id": "binary-parameters",
+      "proof": "The composite encoder is binary linear and injective; lengths multiply and 65 field coefficients contribute `65\u00b716` binary dimensions.",
+      "statement": "`C` has length `2^30` and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-affine",
+        "outer-rs",
+        "binary-parameters"
+      ],
+      "id": "distance-lower",
+      "proof": "Every nonzero outer word has at least 32,704 nonzero blocks, each of binary weight at least 16,384.",
+      "statement": "Every nonzero codeword has weight at least 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate",
+        "distance-lower"
+      ],
+      "id": "distance-exact",
+      "proof": "The fixed 64-root polynomial can be scaled by the least of at least 32,831 admissible nonzero scalars so that every surviving value avoids 1; all surviving blocks are then balanced.",
+      "statement": "The minimum distance equals 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json"
+      ],
+      "id": "scalar-orbit-ceiling",
+      "proof": "Average all nonzero inner symbols coordinatewise, apply Singleton to obtain an outer word of support at most `N-K+1`, and then average its nonzero scalar orbit. The resulting numerical upper bound is below the target for `K\u226566`.",
+      "statement": "Every equal-block `F_{2^16}`-linear outer/binary-linear inner architecture of the specified lengths has binary dimension at most 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "tensor-collapse",
+      "proof": "The average-weight bound gives relative distance at most `2/3` for every binary linear factor of dimension at least two, while tensor-product distances multiply exactly.",
+      "statement": "An ordinary binary tensor product with two nontrivial factors has relative distance at most `4/9` and cannot meet the target.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "inner-endpoint-obstruction",
+      "proof": "Griesmer equality, residualization, and one puncture recursively reduce the claimed family to the Hamming-bound-impossible `[8,5,3]_2` code.",
+      "statement": "No binary `[16384,16,8191]_2` code exists.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Tensor and product constructions: exact Reed\u2013Solomon/affine concatenation, scalar-orbit ceilings, and tensor-product obstructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "README.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/combinatorial-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "There exists a symbolically deterministic binary linear code with exact parameters `[2^30,1040,535822336]_2`. Dimension 1040 is also optimal among length-32768 `F_{2^16}`-linear outer codes concatenated through arbitrary coordinate-dependent injective binary-linear inner maps of length 32768.",
+  "title": "Exact [2^30,1040,535822336] RS\u2013affine product code with tensor barriers"
+}

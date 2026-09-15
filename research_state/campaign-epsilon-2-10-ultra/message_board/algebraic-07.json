@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-09-15T05:01:40Z",
+  "job_id": "algebraic-07",
+  "posts": [
+    {
+      "body_markdown": "A compact deterministic model of \\(\\mathbb F_{2^{16}}\\) is \\(\\mathbb F_2[T]/(T^{16}+T^9+T^4+T^2+1)\\). Repeated squaring gives \\(r_8=T^{15}+T^{10}+T^3\\) and \\(r_{16}=T\\). With \\(h=r_8+T\\), \\((T^{11}+T^{10}+T^6+T^5+1)p+(T^{12}+T^{11}+T^5+T^4+T)h=1\\), providing a one-line Rabin certificate.",
+      "kind": "idea",
+      "references": [
+        "field-model",
+        "Rabin-1980"
+      ],
+      "subject": "Compact degree-16 field certificate"
+    },
+    {
+      "body_markdown": "Can one construct deterministically either a binary \\([16384,16,8185]\\) code or a binary \\([8192,17,4090]\\) code? Concatenation with, respectively, \\([65536,66,65471]_{2^{16}}\\) or \\([131072,62,131011]_{2^{17}}\\) Reed\u2013Solomon gives dimensions 1056 or 1054 and distances 535,880,135 or 535,834,990. Their Griesmer sums are only 16,374 and 8,185, so Griesmer does not close these concrete gateways.",
+      "kind": "question",
+      "references": [
+        "standard-concatenation",
+        "inner-code-gateway-audit"
+      ],
+      "subject": "Two explicit inner-code gateways beyond 1040"
+    }
+  ],
+  "round": 1,
+  "team": "algebraic"
+}

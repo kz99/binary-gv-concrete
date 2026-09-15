@@ -2,7 +2,7 @@
   "counts": {
     "queued": 15,
     "running": 23,
-    "succeeded": 15
+    "succeeded": 16
   },
   "doubly_verified_candidates": [
     {
@@ -52,6 +52,18 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "A [2^30, 991, >=535822336] augmented dual-BCH trace code"
+    },
+    {
+      "accepted_reviews": 1,
+      "baseline_beaten": true,
+      "dimension": 91,
+      "id": "combinatorial-03",
+      "minimum_distance": 535822560,
+      "rate": 8.475035429000854e-08,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-03.json",
+      "status": "proved",
+      "submission_class": "baseline_improvement",
+      "title": "A [2^30,91,>=535822560] complete-bipartite trace-walk code"
     }
   ],
   "leaderboard_objective": {
@@ -61,78 +73,8 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 26,
+    "post_count": 37,
     "recent_posts": [
-      {
-        "body_markdown": "For $K=\\mathbb F_{2^m}$ and odd $D<2^m$, evaluation of $c+\\operatorname{Tr}(\\sum_{1\\le j\\le D,\\ j\\text{ odd}}a_jx^j)$ gives a binary linear code of dimension $1+m(D+1)/2$ and certified distance at least $2^{m-1}-(D-1)2^{m/2-1}$. This follows from the one-variable additive Weil bound and its strict inequality also proves injectivity.",
-        "job_id": "algebraic-05",
-        "kind": "idea",
-        "references": [
-          "proof step weil",
-          "proof step dimension"
-        ],
-        "round": 1,
-        "subject": "Reusable trace-polynomial code lemma",
-        "team": "algebraic"
-      },
-      {
-        "body_markdown": "The generic Artin\u2013Schreier conductor method stops exactly at 991 dimensions here. Bias at most $64\\sqrt q$ requires total conductor degree at most 66, which permits at most 33 full $K$-coefficient layers. Degree 67 gives only $d\\ge q/2-33\\sqrt q=535,789,568$, falling short by 32,768. This is a limitation of the generic certificate, not a global upper bound.",
-        "job_id": "algebraic-05",
-        "kind": "objection",
-        "references": [
-          "candidate rm-trace-weil-65",
-          "Artin\u2013Schreier conductor calculation"
-        ],
-        "round": 1,
-        "subject": "Exact generic-Weil barrier beyond degree 65",
-        "team": "algebraic"
-      },
-      {
-        "body_markdown": "Can one identify a nonzero coefficient subspace for the $x^{67}$ layer such that every degree-67 coset over the full odd-degree-at-most-65 space has Walsh magnitude at most $64\\sqrt q$? Even one additional certified binary dimension would bypass the conductor-only barrier.",
-        "job_id": "algebraic-05",
-        "kind": "question",
-        "references": [
-          "candidate rm-trace-weil-65"
-        ],
-        "round": 1,
-        "subject": "Uniform saving for a degree-67 extension",
-        "team": "algebraic"
-      },
-      {
-        "body_markdown": "Let \\(Q=2^m\\). If an \\(\\mathbb F_Q\\)-linear outer code of length \\(N\\) and dimension \\(K\\) is concatenated through coordinate-dependent \\(\\mathbb F_2\\)-isomorphisms onto \\(\\operatorname{RM}(1,m-1)\\), then some nonzero concatenated word has weight at most\n\\[\n(N-K+1)\\frac{Q2^{m-2}}{Q-1}.\n\\]\nIndeed, Singleton supplies an outer word supported on at most \\(N-K+1\\) coordinates, and averaging its nonzero scalar multiples uses the exact average weight \\(Q2^{m-2}/(Q-1)\\) of the nonzero Reed\u2013Muller words.",
-        "job_id": "algebraic-09",
-        "kind": "idea",
-        "references": [
-          "proof-step:rm-scalar-orbit-bound",
-          "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json"
-        ],
-        "round": 1,
-        "subject": "Scalar-orbit bound for affine-inner descent",
-        "team": "algebraic"
-      },
-      {
-        "body_markdown": "For \\(Q=65536\\), \\(N=32768\\), and \\(K=66\\), the scalar-orbit bound is\n\\[\n32703\\cdot16384\\cdot\\frac{65536}{65535}=535814127.874\\ldots<535822336.\n\\]\nThus no \\(\\mathbb F_{2^{16}}\\)-linear outer code of dimension 66 can beat the submitted \\(K=65\\) construction through RM(1,15) symbol descent, even with coordinate-dependent inner isomorphisms.",
-        "job_id": "algebraic-09",
-        "kind": "objection",
-        "references": [
-          "proof-step:rm-scalar-orbit-bound"
-        ],
-        "round": 1,
-        "subject": "The full field-linear architecture is capped at k=1040",
-        "team": "algebraic"
-      },
-      {
-        "body_markdown": "Does there exist an \\(\\mathbb F_2\\)-additive, non-\\(\\mathbb F_{2^{16}}\\)-linear subspace of \\(F^{32768}\\) of binary dimension at least 1041 whose RM(1,15)-descended words all have weight at least 535822336? Such a space evades scalar-orbit averaging; degree-65 restricted-coefficient attempts need a uniform condition forcing every 65-root word to hit the unique all-one inner symbol.",
-        "job_id": "algebraic-09",
-        "kind": "question",
-        "references": [
-          "proof-step:rm-scalar-orbit-bound",
-          "obstruction:additive-outer-loophole"
-        ],
-        "round": 1,
-        "subject": "Can a genuinely additive outer code reach k=1041?",
-        "team": "algebraic"
-      },
       {
         "body_markdown": "For an ordinary Reed\u2013Solomon outer code over \\(\\mathbb F_{2^m}\\) concatenated with \\(\\operatorname{RM}(1,m-1)\\), exact length \\(2^{30}\\) forces \\(N=2^{31-m}\\). Distinct-point feasibility gives \\(m\\ge16\\), while the target distance gives \\(K-1\\le N/512=2^{22-m}\\). Thus \\(k\\le m(1+\\lfloor2^{22-m}\\rfloor)\\), uniquely maximized at \\(m=16,K=65\\), where \\(k=1040\\).",
         "job_id": "algebraic-10",
@@ -204,6 +146,79 @@
         "round": 1,
         "subject": "Sparse one-edge spectral certificate fails",
         "team": "combinatorial"
+      },
+      {
+        "body_markdown": "If base labels are `z_1,\u2026,z_m` and every amplified column is an XOR of these labels, then the amplified binary dimension is at most `m`. For an undirected `D`-regular rotation multigraph on `m` vertices with nontrivial absolute eigenvalue at most `lambda`, integrality of port multiplicities gives `tr(P^2)\u2265m/D`, hence `D\u2265m/(1+(m\u22121)lambda^2)`. These two inequalities form a useful finite rank/length ledger for every parity-walk proposal.",
+        "job_id": "combinatorial-04",
+        "kind": "idea",
+        "references": [
+          "P2",
+          "P3"
+        ],
+        "round": 1,
+        "subject": "Rank plus trace ledger for parity lifts",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "At rank at least 1041, Ta-Shma\u2019s Theorem 4.1 cannot contract within `2^30` coordinates. For `4\u2264s\u22649`, length forces `D1\u226431`, the trace bound gives `lambda1>1/6`, compatibility gives `lambda2^2>1/3`, and the theorem\u2019s block factor exceeds 3. For `s\u226510`, length forces `D1\u22643`, giving `lambda1>1/2` and contradicting compatibility. The cases `s\u22643` also have block factor at least 1.",
+        "job_id": "combinatorial-04",
+        "kind": "objection",
+        "references": [
+          "P4",
+          "Ta-Shma-STOC17-Theorem-4.1"
+        ],
+        "round": 1,
+        "subject": "Finite barrier for the generic s-wide estimate",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "Cohen\u2013Cohen\u2019s Gray-register theorem requires at least 261,540,414,231 raw coordinates at rank 1041 under its stated norm certificate. Can one deterministically select at most `2^30` starting states and paths, while proving all linear-test biases directly rather than inheriting the uniform full-cloud norm bound? Any answer must replace, not merely invoke, the published theorem.",
+        "job_id": "combinatorial-04",
+        "kind": "question",
+        "references": [
+          "P5",
+          "Cohen-Cohen-ECCC-TR25-179-Theorem-6.2"
+        ],
+        "round": 1,
+        "subject": "Can the full cloud be removed with a fresh proof?",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "For an ordered multiset `D=(d_1,\u2026,d_n)` spanning `F_2^k`, its character code `c_a=(a\u00b7d_i)_i` has `wt(c_a)=(n-\u03a3_i(-1)^(a\u00b7d_i))/2`. Thus the immutable target is exactly the one-sided Cayley condition `\u03a3_i(-1)^(a\u00b7d_i)\u22642^21` for every `a\u22600`. A bipartition character with sum `-n` is harmless.",
+        "job_id": "combinatorial-07",
+        "kind": "idea",
+        "references": [
+          "cayley-column-criterion",
+          "spectrum-bound"
+        ],
+        "round": 1,
+        "subject": "One-sided Cayley spectrum equals minimum distance",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "If an `(m,u,2^30,\u03bb)` relative difference set lies in an elementary abelian 2-group, write `m=2^a,u=2^s`. It has at most one point per forbidden-subgroup coset, so `a\u226530`. Pair counting gives `2^30(2^30\u22121)=\u03bb2^s(2^a\u22121)`, whence `s\u226430` and `a|30`. Therefore `a=30` and the ambient dimension is `30+s\u226460`. Ordinary difference sets are the `s=0` case and force only dimension 30.",
+        "job_id": "combinatorial-07",
+        "kind": "objection",
+        "references": [
+          "rds-exact-degree-ceiling",
+          "Dukes-Ling-2017"
+        ],
+        "round": 1,
+        "subject": "Exact-degree relative-difference-set ceiling is k=60",
+        "team": "combinatorial"
+      },
+      {
+        "body_markdown": "The tempting `[32768,17,16383]_2` inner code does not exist. Repeated use of the binary residual-code lemma and equality in the Griesmer bound would produce a `[9,5,4]_2` code. A parity-check matrix for the latter would require nine distinct nonzero vectors in `F_2^4` with no zero-sum triple; translating such a set by one of its members gives a disjoint set of the same size inside a 16-element group, so its size is at most eight. Consequently a dimension-17 inner/product-distance route has final dimension at most `17\u00b761=1037`.",
+        "job_id": "combinatorial-07",
+        "kind": "objection",
+        "references": [
+          "inner17-residual-obstruction",
+          "Griesmer-bound",
+          "Singleton-bound"
+        ],
+        "round": 1,
+        "subject": "Dimension-17 half-block loophole is closed",
+        "team": "combinatorial"
       }
     ]
   },
@@ -246,6 +261,30 @@
       "title": "A [2^30,1040,535822336] binary code from genus-zero AG evaluation and affine concatenation"
     },
     {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-06",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-06.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] RS\u2013affine product code with tensor barriers"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "algebraic-07",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Exact [2^30,1040,535822336] polynomial-evaluation/affine-Boolean code"
+    },
+    {
       "accepted_reviews": 1,
       "baseline_beaten": true,
       "dimension": 1040,
@@ -268,6 +307,18 @@
       "status": "proved",
       "submission_class": "leaderboard_candidate",
       "title": "Exact [2^30,1040,535822336] RS\u2013Reed\u2013Muller concatenation"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "combinatorial-07",
+      "minimum_distance": 535822336,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Cayley-character certificate for an exact [2^30,1040,535822336] code"
     },
     {
       "accepted_reviews": 1,
@@ -294,7 +345,7 @@
       "title": "Degree-65 trace-polynomial Reed\u2013Muller subcode"
     },
     {
-      "accepted_reviews": 0,
+      "accepted_reviews": 1,
       "baseline_beaten": true,
       "dimension": 91,
       "id": "combinatorial-03",
@@ -304,6 +355,18 @@
       "status": "proved",
       "submission_class": "baseline_improvement",
       "title": "A [2^30,91,>=535822560] complete-bipartite trace-walk code"
+    },
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": false,
+      "dimension": null,
+      "id": "combinatorial-04",
+      "minimum_distance": null,
+      "rate": null,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+      "status": "proved",
+      "submission_class": "obstruction",
+      "title": "Finite rank\u2013length barriers for direct wide replacement products"
     }
   ],
   "reasoning_effort": "ultra",
@@ -318,5 +381,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T05:00:18Z"
+  "updated_at": "2026-09-15T05:08:29Z"
 }

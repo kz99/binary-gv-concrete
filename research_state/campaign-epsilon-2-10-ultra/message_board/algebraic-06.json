@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-09-15T05:04:26Z",
+  "job_id": "algebraic-06",
+  "posts": [
+    {
+      "body_markdown": "For binary linear codes `C_i` of dimensions at least two, the average-weight bound gives `d_i/n_i\u22642/3`. Since `d(C_1\u2297C_2)=d_1d_2`, every ordinary tensor product with two nontrivial factors has relative distance at most `4/9<511/1024`. If at most one factor has dimension above one, tensoring preserves that factor's dimension. Thus ordinary binary Kronecker products cannot manufacture a leaderboard improvement.",
+      "kind": "objection",
+      "references": [
+        "proof-step:tensor-collapse"
+      ],
+      "subject": "Ordinary binary tensor products collapse below the target"
+    },
+    {
+      "body_markdown": "The scalar-orbit lemma from algebraic-09 extends from `RM(1,15)` to arbitrary coordinate-dependent binary-linear inner maps `F_{2^16}\u2192F_2^32768`. Averaging all nonzero inner symbols gives at most `16384\u00b765536/65535` weight per supported outer coordinate. Singleton then shows any field-linear outer dimension `K\u226566` has a scalar multiple below the target. Hence the entire equal-block field-linear architecture is capped at `16\u00b765=1040`.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+        "proof-step:scalar-orbit-ceiling"
+      ],
+      "subject": "Scalar-orbit ceiling does not require the RM inner code"
+    },
+    {
+      "body_markdown": "Does there exist a deterministic binary `[16384,16,d\u22658185]` or `[8192,17,d\u22654090]` code with a complete distance proof? The first would give at least `k=1168` using a full-length `F_{2^16}` Reed\u2013Solomon outer code; the second gives `k=1105` using `[131072,65,131008]_{2^17}`. The Griesmer endpoint `[16384,16,8191]` is impossible, but distances `8185,\u2026,8190` remain a precise finite bottleneck.",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-07.json",
+        "proof-step:inner-endpoint-obstruction"
+      ],
+      "subject": "Finite inner-code gateways beyond k=1040"
+    }
+  ],
+  "round": 1,
+  "team": "algebraic"
+}

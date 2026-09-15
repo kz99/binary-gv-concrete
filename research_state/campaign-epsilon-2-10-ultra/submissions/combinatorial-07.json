@@ -1,0 +1,263 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let\n\\[\np(Z)=Z^{16}+Z^5+Z^3+Z^2+1,\n\\qquad F=\\mathbb F_2[Z]/(p),\n\\]\nand put \\(\\alpha=Z\\bmod p\\). Write \\(z\\in F\\) uniquely as \\(z=\\sum_{i=0}^{15}z_i\\alpha^i\\).\n\nDefine\n\\[\nA=\\left\\{\\sum_{i=0}^{14}a_i\\alpha^i:a_i\\in\\mathbb F_2\\right\\},\n\\qquad Y=\\mathbb F_2^{15},\n\\]\neach ordered by binary-integer order. Let \\(M=F[X]_{\\le64}\\), ordered using the basis \\(\\{\\alpha^iX^j:0\\le i\\le15,0\\le j\\le64\\}\\). Thus \\(M\\cong\\mathbb F_2^{1040}\\).\n\nFor \\(y\\in Y\\), define\n\\[\nh_y(z)=z_0+\\sum_{i=1}^{15}z_i y_i.\n\\]\nFor every \\((a,y)\\in A\\times Y\\), define the functional\n\\[\n\\ell_{a,y}(P)=h_y(P(a))\\in\\mathbb F_2.\n\\]\nLet \\(G=M^*\\) and\n\\[\nD=\\{\\ell_{a,y}:(a,y)\\in A\\times Y\\}\\subset G.\n\\]\nThe functionals are pairwise distinct and nonzero. Hence \\(\\Gamma=\\operatorname{Cay}(G,D)\\) is a deterministic simple undirected Cayley graph of degree \\(|D|=2^{30}\\).\n\nIts character code is\n\\[\nC=\\left\\{c_P=(\\ell_{a,y}(P))_{(a,y)\\in A\\times Y}:P\\in M\\right\\},\n\\]\nwith coordinates in the displayed order. No puncturing, shortening, padding, repetition, or random choice occurs.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "For an ordered multiset `D=(d_1,\u2026,d_n)` spanning `F_2^k`, its character code `c_a=(a\u00b7d_i)_i` has `wt(c_a)=(n-\u03a3_i(-1)^(a\u00b7d_i))/2`. Thus the immutable target is exactly the one-sided Cayley condition `\u03a3_i(-1)^(a\u00b7d_i)\u22642^21` for every `a\u22600`. A bipartition character with sum `-n` is harmless.",
+      "kind": "idea",
+      "references": [
+        "cayley-column-criterion",
+        "spectrum-bound"
+      ],
+      "subject": "One-sided Cayley spectrum equals minimum distance"
+    },
+    {
+      "body_markdown": "If an `(m,u,2^30,\u03bb)` relative difference set lies in an elementary abelian 2-group, write `m=2^a,u=2^s`. It has at most one point per forbidden-subgroup coset, so `a\u226530`. Pair counting gives `2^30(2^30\u22121)=\u03bb2^s(2^a\u22121)`, whence `s\u226430` and `a|30`. Therefore `a=30` and the ambient dimension is `30+s\u226460`. Ordinary difference sets are the `s=0` case and force only dimension 30.",
+      "kind": "objection",
+      "references": [
+        "rds-exact-degree-ceiling",
+        "Dukes-Ling-2017"
+      ],
+      "subject": "Exact-degree relative-difference-set ceiling is k=60"
+    },
+    {
+      "body_markdown": "The tempting `[32768,17,16383]_2` inner code does not exist. Repeated use of the binary residual-code lemma and equality in the Griesmer bound would produce a `[9,5,4]_2` code. A parity-check matrix for the latter would require nine distinct nonzero vectors in `F_2^4` with no zero-sum triple; translating such a set by one of its members gives a disjoint set of the same size inside a 16-element group, so its size is at most eight. Consequently a dimension-17 inner/product-distance route has final dimension at most `17\u00b761=1037`.",
+      "kind": "objection",
+      "references": [
+        "inner17-residual-obstruction",
+        "Griesmer-bound",
+        "Singleton-bound"
+      ],
+      "subject": "Dimension-17 half-block loophole is closed"
+    }
+  ],
+  "distance_audit": [
+    "For every `z\u2208F`, `\u03a3_y(-1)^{h_y(z)}` equals `2^15` for `z=0`, `\u22122^15` for `z=1`, and `0` otherwise.",
+    "Consequently the Cayley eigenvalue indexed by `P` is `\u03bb_P=2^15(N_0(P)\u2212N_1(P))`, where `N_b(P)=|{a\u2208A:P(a)=b}|`.",
+    "For nonconstant `P` of degree at most 64, both `N_0(P)` and `N_1(P)` are at most 64. Hence `|\u03bb_P|\u226464\u00b72^15=2^21`.",
+    "The constant polynomial `1` gives eigenvalue `\u22122^30` and the all-one codeword. Every other nonzero constant gives eigenvalue zero and weight `2^29`.",
+    "Thus every nonzero word has weight at least `(2^30\u22122^21)/2=535822336`.",
+    "A deterministic scaled 64-root polynomial has `N_0=64,N_1=0`, attaining eigenvalue `2^21` and proving the stated distance is exact."
+  ],
+  "explicitness_audit": [
+    "Repeated squaring gives `Z^(2^8)\u2261Z^8+Z^7+Z^3+Z` and `Z^(2^16)\u2261Z (mod p)`; the Euclidean remainders for `gcd(p,Z^(2^8)+Z)` end in `Z^2+1,1`. Rabin's criterion therefore certifies irreducibility.",
+    "The field basis, message basis, evaluation subset, outer ordering, inner ordering, and flattened coordinate ordering are all displayed.",
+    "If `\u2113_{a,y}=\u2113_{a',y'}`, testing constant polynomials gives `y=y'`; testing `zX` for every `z\u2208F` then gives `a=a'`. Also `\u2113_{a,y}(1)=1`, so no connection element is zero.",
+    "The exact-distance witness uses the first 64 elements of `A` and the first nonzero scale outside an explicitly defined forbidden set of at most 32704 elements.",
+    "The encoder uses no probabilistic object or hidden finite search."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A monic degree-16 polynomial over `F_2`, with the Frobenius congruence at exponent 16 and the gcd check associated with the sole prime divisor of 16.",
+      "result": "Rabin's criterion proves the displayed polynomial irreducible.",
+      "source": "M. O. Rabin, [Probabilistic Algorithms in Finite Fields](https://doi.org/10.1137/0209024), SIAM Journal on Computing 9 (1980), 273\u2013280.",
+      "used_for": "The explicit representation of `F_(2^16)`."
+    },
+    {
+      "hypotheses": "A nonconstant affine Boolean function on `F_2^15`.",
+      "result": "Its truth table has exactly `2^14` ones and zero signed sum.",
+      "source": "`data/records.json`, lemma `rm-affine-balance`, proved in `proofs/rm-1-30-baseline.md`.",
+      "used_for": "The inner character-sum calculation."
+    },
+    {
+      "hypotheses": "A relative difference set in a finite group with a specified forbidden subgroup.",
+      "result": "The group-ring identity is `RR^(-1)=K\u00b71+\u03bb(G\u2212N)`, and counting coefficients gives `K(K\u22121)=\u03bb(|G|\u2212|N|)`.",
+      "source": "P. J. Dukes and A. C. H. Ling, [Relative difference sets partitioned by cosets](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v24i3p64/pdf/), Electronic Journal of Combinatorics 24(3) (2017), \u00a71.",
+      "used_for": "The exact-degree relative-difference-set obstruction."
+    },
+    {
+      "hypotheses": "Binary linear codes and finite-field linear outer codes.",
+      "result": "The binary Griesmer bound and the q-ary Singleton bound.",
+      "source": "J. H. Griesmer, \u201cA bound for error-correcting codes,\u201d IBM Journal of Research and Development 4 (1960), 532\u2013542; R. C. Singleton, \u201cMaximum distance q-nary codes,\u201d IEEE Transactions on Information Theory 10 (1964), 116\u2013118.",
+      "used_for": "The scoped dimension-17 inner/product-distance obstruction."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Send the Cayley-character certificate for independent acceptance together with the equivalent durable `algebraic-03` construction.",
+    "Persist the relative-difference-set and dimension-17 residual obstructions in the shared lemma book when the workspace is writable.",
+    "To exceed 1040, seek a non-difference-set one-sided Cayley set or an inner architecture of dimension at least 18 not limited by the eliminated dimension-17 product case.",
+    "After persistence, run `node scripts/validate-data.mjs` and the dashboard build."
+  ],
+  "obstructions": [
+    "This construction ties, rather than exceeds, the durable under-review `k=1040` RS\u2013RM candidate; its new contribution is the Cayley spectral certificate and scoped obstruction lemmas.",
+    "Every ordinary difference-set connection set of exact cardinality `2^30` in an elementary abelian 2-group is the degenerate whole-group case and has dimension 30.",
+    "Every classical relative-difference-set connection set of that cardinality has ambient binary dimension at most 60.",
+    "A length-32768, dimension-17 inner code cannot provide a product-distance improvement over 1040: the sole numerically viable distance 16383 is impossible, and distance at most 16382 gives final dimension at most 1037.",
+    "The Cayley graph is bipartite. Its eigenvalue `\u22122^30` must be treated as a second trivial eigenvalue; claiming an absolute bound for every nonprincipal character would be false."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Degree of the explicit irreducible polynomial",
+      "quantity": "field",
+      "value": "|F|=2^16=65536"
+    },
+    {
+      "derivation": "`A` and `Y` each have binary dimension 15",
+      "quantity": "coordinate factors",
+      "value": "|A|=|Y|=2^15=32768"
+    },
+    {
+      "derivation": "`|A||Y|`",
+      "quantity": "block length / Cayley degree",
+      "value": "2^30=1073741824"
+    },
+    {
+      "derivation": "65 unrestricted coefficients in `F`",
+      "quantity": "binary dimension",
+      "value": "65\u00b716=1040"
+    },
+    {
+      "derivation": "Maximum nontrivial root-fiber difference",
+      "quantity": "nontrivial character bound",
+      "value": "64\u00b72^15=2^21=2097152"
+    },
+    {
+      "derivation": "`(2^30\u22122^21)/2`",
+      "quantity": "exact minimum distance",
+      "value": "2^29\u22122^20=535822336"
+    },
+    {
+      "derivation": "`1040/2^30`, reduced by 16",
+      "quantity": "exact rate",
+      "value": "65/67108864 = 0.00000096857547760009765625"
+    },
+    {
+      "derivation": "`2^30(2^30\u22121)=\u03bb2^s(2^a\u22121)` and `2^30\u22642^a`",
+      "quantity": "relative-difference-set ceiling",
+      "value": "a=30, 0\u2264s\u226430, ambient dimension a+s\u226460"
+    },
+    {
+      "derivation": "`ceil(535822336/16382)=32708`, then Singleton",
+      "quantity": "dimension-17 product ceiling",
+      "value": "K_outer\u226461 and 17K_outer\u22641037"
+    }
+  ],
+  "proof_markdown": "# Cayley-character certificate for the exact 1040-dimensional code\n\n## Theorem\n\nThere is a deterministic binary linear code with exact parameters\n\\[\n[2^{30},1040,535{,}822{,}336]_2.\n\\]\nEquivalently, there is a connected bipartite Cayley graph on the elementary abelian group \\(\\mathbb F_2^{1040}\\), of degree \\(2^{30}\\), whose two trivial eigenvalues are \\(\\pm2^{30}\\) and whose other eigenvalues have magnitude at most \\(2^{21}\\).\n\n## Field certificate\n\nFor\n\\[\np(Z)=Z^{16}+Z^5+Z^3+Z^2+1,\n\\]\ndirect repeated squaring modulo \\(p\\) gives\n\\[\nZ^{2^8}\\equiv Z^8+Z^7+Z^3+Z,\n\\qquad Z^{2^{16}}\\equiv Z.\n\\]\nMoreover, the Euclidean algorithm for \\(p\\) and \\(Z^{2^8}+Z=Z^8+Z^7+Z^3\\) ends with the nonzero remainders \\(Z^2+1\\) and \\(1\\). Since 2 is the sole prime divisor of 16, Rabin's criterion proves that \\(p\\) is irreducible. Thus the displayed quotient is the fixed field \\(F\\) of order \\(2^{16}\\).\n\n## Cayley set, length, and dimension\n\nLet \\(M=F[X]_{\\le64}\\). It has binary dimension \\(65\\cdot16=1040\\). Define \\(A,Y,h_y,\\ell_{a,y}\\), and \\(D\\subset M^*\\) as in the construction.\n\nThe functionals in \\(D\\) are distinct. Indeed, if \\(\\ell_{a,y}=\\ell_{a',y'}\\), testing every constant polynomial \\(z\\in F\\) shows that the coefficient vectors \\((1,y)\\) and \\((1,y')\\) define the same functional on \\(F\\), hence \\(y=y'\\). Testing the polynomials \\(zX\\) then gives\n\\[\nh_y(z(a-a'))=0\\quad\\text{for every }z\\in F.\n\\]\nIf \\(a\\ne a'\\), multiplication by \\(a-a'\\) is a bijection of \\(F\\), contradicting that \\(h_y(1)=1\\). Hence \\(a=a'\\). Also \\(\\ell_{a,y}(1)=1\\), so no element of \\(D\\) is zero. Since an elementary abelian group is its own inverse, \\(D=-D\\). Therefore the Cayley graph is simple and undirected, with degree\n\\[\n|D|=|A||Y|=2^{15}2^{15}=2^{30}.\n\\]\n\nThe map \\(P\\mapsto c_P\\) is binary linear. If \\(c_P=0\\), then for each \\(a\\in A\\), the entire affine word \\((h_y(P(a)))_{y\\in Y}\\) is zero. The map \\(z\\mapsto(h_y(z))_y\\) is injective, so \\(P(a)=0\\) for all 32768 points of \\(A\\). Since \\(\\deg P\\le64\\), this forces \\(P=0\\). Thus the encoder is injective and \\(\\dim C=1040\\). Equivalently, \\(D\\) spans \\(M^*\\), so the Cayley graph is connected.\n\n## Character spectrum and distance\n\nFor \\(z\\in F\\), affine balance gives\n\\[\n\\sum_{y\\in Y}(-1)^{h_y(z)}=\n\\begin{cases}\n2^{15},&z=0,\\\\\n-2^{15},&z=1,\\\\\n0,&z\\notin\\{0,1\\}.\n\\end{cases}\n\\]\nThe character of \\(M^*\\) indexed by \\(P\\in M\\) is \\(\\chi_P(\\ell)=(-1)^{\\ell(P)}\\). Its Cayley eigenvalue is therefore\n\\[\n\\lambda_P=\\sum_{a\\in A}\\sum_{y\\in Y}(-1)^{h_y(P(a))}\n=2^{15}\\bigl(N_0(P)-N_1(P)\\bigr).\n\\]\nFor \\(P=0\\), this is \\(2^{30}\\). For \\(P=1\\), it is \\(-2^{30}\\), displaying the bipartition. Any other nonzero constant gives zero. If \\(P\\) is nonconstant, both \\(P\\) and \\(P-1\\) have degree at most 64, so\n\\[\nN_0(P)\\le64,\n\\qquad N_1(P)\\le64,\n\\qquad |\\lambda_P|\\le64\\cdot2^{15}=2^{21}.\n\\]\nSince\n\\[\n\\operatorname{wt}(c_P)=\\frac{2^{30}-\\lambda_P}{2},\n\\]\nevery nonzero word has weight at least\n\\[\n\\frac{2^{30}-2^{21}}2\n=2^{29}-2^{20}\n=535{,}822{,}336.\n\\]\n\nThe bound is attained. Let \\(R\\) be the first 64 elements of \\(A\\) and put\n\\[\ng(X)=\\prod_{r\\in R}(X-r).\n\\]\nFor each \\(a\\in A\\setminus R\\), precisely one scalar \\(\\mu=g(a)^{-1}\\) would make \\(\\mu g(a)=1\\). At most 32704 of the 65535 nonzero scalars are forbidden. Choose the first permissible \\(\\mu\\) in polynomial-basis order. Then \\(P_*=\\mu g\\) has exactly 64 zero evaluations and no evaluation equal to 1. Hence \\(\\lambda_{P_*}=64\\cdot2^{15}=2^{21}\\), and its word has weight exactly 535822336.\n\n## Relative-difference-set obstruction\n\nLet \\(R\\) be an \\((m,u,2^{30},\\lambda)\\) relative difference set in an elementary abelian 2-group, relative to a subgroup of order \\(u\\). Write \\(m=2^a\\) and \\(u=2^s\\). No two elements of \\(R\\) lie in the same forbidden-subgroup coset, so \\(2^{30}\\le2^a\\) and \\(a\\ge30\\). Counting ordered differences gives\n\\[\n2^{30}(2^{30}-1)=\\lambda2^s(2^a-1).\n\\]\nComparing 2-adic valuations gives \\(s\\le30\\); after removing the powers of two, \\(2^a-1\\mid2^{30}-1\\), hence \\(a\\mid30\\). Thus \\(a=30\\) and the ambient group has dimension \\(a+s\\le60\\). The ordinary difference-set case has \\(s=0\\) and dimension 30. Therefore classical difference-set flat spectra cannot approach the 1040-dimensional candidate at the exact degree.\n\n## Dimension-17 product obstruction\n\nThe binary Griesmer bound gives \\(d\\le16383\\) for any \\([32768,17,d]_2\\) code. Equality is impossible. The residual-code lemma says that a word of weight \\(w<2d\\) in an \\([n,k,d]_2\\) code produces an \\([n-w,k-1,\\ge d-\\lfloor w/2\\rfloor]_2\\) residual code. Applying it to a hypothetical \\([32768,17,16383]_2\\) code, and using Griesmer equality at every stage, gives\n\\[\n[16385,16,8192]_2,\n[8193,15,4096]_2,\n\\ldots,\n[9,5,4]_2.\n\\]\nA parity-check matrix for a \\([9,5,4]_2\\) code would have nine distinct nonzero columns in \\(\\mathbb F_2^4\\) with no three summing to zero. If \\(S\\) is such a column set and \\(x\\in S\\), then \\(S\\) and \\(x+S\\) are disjoint, so \\(2|S|\\le16\\), contradicting \\(|S|=9\\). Thus the hypothetical inner code does not exist.\n\nConsequently every dimension-17 inner code has distance at most 16382. A product-distance proof at the target then needs outer distance at least\n\\[\n\\left\\lceil\\frac{535822336}{16382}\\right\\rceil=32708.\n\\]\nSingleton bounds a length-32768 field-linear outer code by dimension 61, giving final binary dimension at most \\(17\\cdot61=1037\\).",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-model",
+      "proof": "The displayed Frobenius residues and Euclidean remainder chain satisfy Rabin's degree-16 criterion.",
+      "statement": "The displayed quotient is `F_(2^16)`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "id": "cayley-set",
+      "proof": "Constant polynomials distinguish the inner index; polynomials `zX` then distinguish the evaluation point. Every functional takes value one on the constant polynomial one.",
+      "statement": "`D` has exactly `2^30` distinct nonzero elements.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "cayley-set"
+      ],
+      "id": "encoder-injective",
+      "proof": "A zero encoded word forces `P(a)=0` at all 32768 evaluation points, impossible for a nonzero polynomial of degree at most 64.",
+      "statement": "The character code is binary linear of dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "data/records.json#rm-affine-balance"
+      ],
+      "id": "block-character",
+      "proof": "The inner function is zero for symbol 0, all-one for symbol 1, and balanced for every other field symbol.",
+      "statement": "The inner signed sum is `2^15`, `\u22122^15`, or `0` according as the symbol is `0`, `1`, or neither.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "block-character"
+      ],
+      "id": "spectrum-bound",
+      "proof": "For nonconstant `P`, each of `P` and `P\u22121` has at most 64 roots in `A`. Constants are checked separately.",
+      "statement": "Apart from the two trivial values `\u00b12^30`, every Cayley eigenvalue has magnitude at most `2^21`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "encoder-injective",
+        "spectrum-bound"
+      ],
+      "id": "minimum-distance",
+      "proof": "Apply `wt(c_P)=(2^30\u2212\u03bb_P)/2` to every nonzero parameter.",
+      "statement": "Every nonzero codeword has weight at least 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "minimum-distance"
+      ],
+      "id": "distance-exact",
+      "proof": "A degree-64 polynomial with 64 fixed roots can be scaled so that every remaining value avoids 1, because 32704 forbidden scales are fewer than 65535.",
+      "statement": "The minimum distance is exactly 535822336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "rds-exact-degree-ceiling",
+      "proof": "Coset injectivity gives `a\u226530`; pair counting, 2-adic valuation, and Mersenne divisibility give `a|30` and `s\u226430`, hence `a=30` and ambient dimension at most 60.",
+      "statement": "A relative difference set of size `2^30` in an elementary abelian 2-group has ambient dimension at most 60.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "inner17-residual-obstruction",
+      "proof": "Griesmer plus repeated residualization would yield a `[9,5,4]_2` code; its parity-check columns would be a 9-element sum-free subset of `F_2^4`, whereas translation proves such a subset has size at most 8. Singleton then gives the 1037 product ceiling.",
+      "statement": "A dimension-17, length-32768 inner/product-distance architecture cannot exceed final dimension 1037.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Cayley graph and character constructions: an explicit one-sided Cayley spectrum and exact-degree difference-set obstructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "schemas/record.schema.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/jobs.json",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/status.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty)",
+    "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v24i3p64/pdf/"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "The explicitly defined connection set `D\u2282F_2^1040` has cardinality `2^30`; its connected bipartite Cayley graph has spectrum `\u00b12^30` together with values of magnitude at most `2^21`, and its binary character code has exact parameters `[2^30,1040,535822336]_2`.",
+  "title": "Cayley-character certificate for an exact [2^30,1040,535822336] code"
+}

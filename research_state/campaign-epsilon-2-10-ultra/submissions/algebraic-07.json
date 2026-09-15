@@ -1,0 +1,225 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let\n\\[\np(T)=T^{16}+T^9+T^4+T^2+1,\n\\qquad F=\\mathbb F_2[T]/(p),\n\\]\nand write \\(\\alpha=T\\bmod p\\). Every \\(z\\in F\\) has unique coordinates \\(z=\\sum_{i=0}^{15}z_i\\alpha^i\\).\n\nFix the evaluation set\n\\[\nA=\\left\\{\\sum_{i=0}^{14}u_i\\alpha^i:u_i\\in\\mathbb F_2\\right\\},\n\\qquad |A|=2^{15},\n\\]\nordered by \\(\\sum_i u_i2^i\\). For \\(z\\in F\\), define its affine Boolean block\n\\[\n\\Phi(z)=\\left(z_0+\\sum_{i=1}^{15}z_iv_i\\right)_{v\\in\\mathbb F_2^{15}},\n\\]\nwith \\(v\\) in binary-integer order.\n\nFor every\n\\[\nf(X)=\\sum_{j=0}^{64}c_jX^j\\in F[X],\n\\]\ndefine\n\\[\nC(f)=\\bigl(\\Phi(f(a))_v\\bigr)_{(a,v)\\in A\\times\\mathbb F_2^{15}},\n\\]\nordered first by \\(a\\), then by \\(v\\). Set \\(C=\\{C(f):\\deg f\\le64\\}\\). No sampling, shortening, puncturing, repetition, or padding occurs.",
+  "dimension": 1040,
+  "discussion_posts": [
+    {
+      "body_markdown": "A compact deterministic model of \\(\\mathbb F_{2^{16}}\\) is \\(\\mathbb F_2[T]/(T^{16}+T^9+T^4+T^2+1)\\). Repeated squaring gives \\(r_8=T^{15}+T^{10}+T^3\\) and \\(r_{16}=T\\). With \\(h=r_8+T\\), \\((T^{11}+T^{10}+T^6+T^5+1)p+(T^{12}+T^{11}+T^5+T^4+T)h=1\\), providing a one-line Rabin certificate.",
+      "kind": "idea",
+      "references": [
+        "field-model",
+        "Rabin-1980"
+      ],
+      "subject": "Compact degree-16 field certificate"
+    },
+    {
+      "body_markdown": "Can one construct deterministically either a binary \\([16384,16,8185]\\) code or a binary \\([8192,17,4090]\\) code? Concatenation with, respectively, \\([65536,66,65471]_{2^{16}}\\) or \\([131072,62,131011]_{2^{17}}\\) Reed\u2013Solomon gives dimensions 1056 or 1054 and distances 535,880,135 or 535,834,990. Their Griesmer sums are only 16,374 and 8,185, so Griesmer does not close these concrete gateways.",
+      "kind": "question",
+      "references": [
+        "standard-concatenation",
+        "inner-code-gateway-audit"
+      ],
+      "subject": "Two explicit inner-code gateways beyond 1040"
+    }
+  ],
+  "distance_audit": [
+    "A nonzero outer polynomial of degree at most 64 has at most 64 roots among the 32,768 evaluation points.",
+    "Every nonzero affine inner block has weight at least 16,384; the sole nonzero constant block has weight 32,768.",
+    "Thus every nonzero concatenated word has weight at least 32,704\u00b716,384=535,822,336.",
+    "A deterministically scaled polynomial with 64 prescribed roots avoids the all-one inner symbol elsewhere, proving that this lower bound is attained exactly."
+  ],
+  "explicitness_audit": [
+    "The field modulus and a complete finite irreducibility certificate are displayed.",
+    "The polynomial basis, evaluation set, message space, outer-block order, and inner-coordinate order are fixed.",
+    "The exact-distance witness uses the first 64 evaluation points and the first admissible nonzero scale in polynomial-basis order.",
+    "There are exactly 65 unrestricted field coefficients and no hidden constituent choices.",
+    "The current data and dashboard-math validators passed; repository persistence and a full dashboard build remain publication steps because this session is read-only."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A monic degree-m polynomial over F_q, with the Frobenius congruence at m and gcd tests for each prime divisor of m.",
+      "result": "Rabin's criterion certifies irreducibility.",
+      "source": "M. O. Rabin, [Probabilistic Algorithms in Finite Fields](https://doi.org/10.1137/0209024), SIAM Journal on Computing 9 (1980), 273\u2013280.",
+      "used_for": "Certifying the explicit field F_{2^16}."
+    },
+    {
+      "hypotheses": "An [N,K,D] code over F_{2^m}, together with the affine truth-table realization RM(1,m-1) of its alphabet.",
+      "result": "Coordinatewise concatenation has binary parameters [N\u00b72^{m-1},mK,\u2265D\u00b72^{m-2}].",
+      "source": "Shared durable submission `research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json`, steps `inner-rm` and `concatenation`.",
+      "used_for": "Cross-checking the construction; the specialization is reproved here."
+    }
+  ],
+  "minimum_distance": 535822336,
+  "next_tasks": [
+    "Persist this proof under `proofs/` and add the candidate and reusable concatenation lemma to `data/records.json` as under review in a write-capable step.",
+    "Record the completed independent mathematical audit and obtain the remaining review required by the repository workflow.",
+    "After persistence, rerun the data validator and full dashboard build.",
+    "Investigate the two explicit inner-code gateways and genuinely additive outer codes not covered by the product-distance ceiling."
+  ],
+  "obstructions": [
+    "For 32,768 equal blocks with a product-distance proof, an inner binary code of length 32,768 and distance at least 16,384 has dimension at most 16 by Griesmer; outer block distance 32,704 then gives at most 65 symbols by Singleton. Thus this architecture is capped at 16\u00b765=1040.",
+    "The full degree-at-most-65 Reed\u2013Solomon extension fails: a scaled polynomial with 65 prescribed roots can avoid the unique all-one inner symbol elsewhere, yielding weight 32,703\u00b716,384=535,805,952.",
+    "The shared incidence/design audit in `algebraic-01` further rules out adding even one fixed-leading-coefficient degree-65 direction to the complete degree-at-most-64 space.",
+    "These are scoped obstructions; they do not rule out unrelated Boolean inner codes or non-field-linear weighted outer codes."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "p has degree 16 and is irreducible by the displayed certificate.",
+      "quantity": "Outer alphabet",
+      "value": "|F|=2^16=65,536"
+    },
+    {
+      "derivation": "A is the span of 15 polynomial-basis elements.",
+      "quantity": "Outer length",
+      "value": "N=2^15=32,768"
+    },
+    {
+      "derivation": "Polynomials have degree at most 64.",
+      "quantity": "Outer parameters",
+      "value": "[32,768,65,32,704] over F"
+    },
+    {
+      "derivation": "Affine truth tables on 15 variables.",
+      "quantity": "Inner parameters",
+      "value": "[32,768,16,16,384]_2"
+    },
+    {
+      "derivation": "2^15\u00b72^15.",
+      "quantity": "Final length",
+      "value": "2^30=1,073,741,824"
+    },
+    {
+      "derivation": "65 field coefficients, each of binary dimension 16.",
+      "quantity": "Final dimension",
+      "value": "65\u00b716=1,040"
+    },
+    {
+      "derivation": "(2^15\u22122^6)2^14.",
+      "quantity": "Exact minimum distance",
+      "value": "2^29\u22122^20=535,822,336"
+    },
+    {
+      "derivation": "1040/2^30, reduced by 16.",
+      "quantity": "Exact rate",
+      "value": "65/67,108,864=0.00000096857547760009765625"
+    },
+    {
+      "derivation": "(2^29\u22122^20)/2^30.",
+      "quantity": "Relative distance",
+      "value": "511/1024"
+    }
+  ],
+  "proof_markdown": "## Theorem\n\nThe displayed construction is a deterministic binary linear code with exact parameters\n\\[\n[1{,}073{,}741{,}824,1040,535{,}822{,}336]_2.\n\\]\nIts campaign status should remain under review until the repository verification workflow is recorded.\n\n## Field certificate\n\nLet \\(r_0=T\\) and \\(r_{i+1}=r_i^2\\bmod p\\). Direct reduction gives\n\\[\nr_8=T^{15}+T^{10}+T^3,\\qquad r_{16}=T.\n\\]\nPut \\(h=r_8+T=T^{15}+T^{10}+T^3+T\\). Direct multiplication in \\(\\mathbb F_2[T]\\) gives\n\\[\n(T^{11}+T^{10}+T^6+T^5+1)p\n +(T^{12}+T^{11}+T^5+T^4+T)h=1.\n\\]\nThus \\(p\\mid T^{2^{16}}+T\\) and \\(\\gcd(p,T^{2^8}+T)=1\\). Since 2 is the only prime divisor of 16, Rabin's criterion proves that \\(p\\) is irreducible. Hence \\(F\\) is the explicitly represented field of order \\(2^{16}\\).\n\n## Inner and outer maps\n\nThe map \\(\\Phi\\) is binary linear and injective: its value at \\(v=0\\) recovers \\(z_0\\), and comparison with its values at the fifteen unit vectors recovers \\(z_1,\\ldots,z_{15}\\). If the linear part is nonzero, the affine function is balanced and has weight \\(2^{14}\\). If the linear part vanishes and \\(z\\ne0\\), then \\(z=1\\), producing the all-one block of weight \\(2^{15}\\).\n\nThe outer message space has dimension 65 over \\(F\\). Evaluation on \\(A\\) is injective because a nonzero polynomial of degree at most 64 cannot vanish at all 32,768 distinct points. It also has at most 64 evaluation roots, so every nonzero outer word has at least 32,704 nonzero symbols.\n\nBoth maps are binary linear and injective. Therefore\n\\[\n\\dim_{\u0007mathbb F_2}C=16\\cdot65=1040,\n\\qquad\n|A|\\,2^{15}=2^{30}.\n\\]\n\n## Minimum distance\n\nEvery nonzero polynomial produces at least 32,704 nonzero blocks, each of weight at least \\(2^{14}\\). Hence\n\\[\n\\operatorname{wt}(C(f))\\ge32704\\cdot2^{14}\n=(2^{15}-2^6)2^{14}\n=2^{29}-2^{20}\n=535{,}822{,}336.\n\\]\nThis covers every nonzero codeword.\n\nFor attainment, let \\(R\\) be the first 64 elements of \\(A\\) and set\n\\[\ng(X)=\\prod_{r\\in R}(X-r).\n\\]\nThe set \\(g(A\\setminus R)\\subset F^*\\) has at most 32,704 elements, whereas \\(|F^*|=65,535\\). Let \\(z\\) be the first nonzero field element outside this image and put \\(f=z^{-1}g\\). Then \\(f\\) vanishes exactly on \\(R\\) and never equals 1 elsewhere. Every remaining symbol therefore has a nonzero linear part under \\(\\Phi\\), so all 32,704 remaining blocks have weight exactly \\(2^{14}\\). This proves\n\\[\nd_{\\min}(C)=535{,}822{,}336.\n\\]\n\n## Scoped ceiling\n\nIf a 32,768-coordinate binary inner code has distance at least 16,384 and dimension 17, its Griesmer sum is 32,769, which is impossible. Thus its dimension is at most 16. A product-distance certificate needs outer block distance at least 32,704; puncturing 32,703 coordinates is injective, so Singleton bounds the outer cardinality by \\((2^{16})^{65}\\). Consequently this equal-block product architecture cannot exceed 1040 binary dimensions, and the construction attains that ceiling.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-model",
+      "proof": "The repeated-squaring residues and displayed B\u00e9zout identity satisfy Rabin's degree-16 criterion.",
+      "statement": "p(T)=T^16+T^9+T^4+T^2+1 is irreducible over F_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "id": "inner-affine",
+      "proof": "Coefficient extraction and affine evaluation are binary linear and injective; nonconstant affine functions are balanced.",
+      "statement": "Phi(F) has exact parameters [32768,16,16384]_2.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model"
+      ],
+      "id": "outer-evaluation",
+      "proof": "A nonzero degree-at-most-64 polynomial has at most 64 roots among 32,768 distinct evaluation points.",
+      "statement": "The outer evaluation code has exact parameters [32768,65,32704] over F_{2^16}.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-affine",
+        "outer-evaluation"
+      ],
+      "id": "binary-parameters",
+      "proof": "The composite encoder is binary linear and injective; lengths multiply and the 65 field coefficients contribute 65\u00b716 dimensions.",
+      "statement": "C has binary length 2^30 and dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-affine",
+        "outer-evaluation",
+        "binary-parameters"
+      ],
+      "id": "distance-lower",
+      "proof": "At least 32,704 blocks are nonzero, and each contributes at least 16,384 ones.",
+      "statement": "Every nonzero codeword has weight at least 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-model",
+        "inner-affine",
+        "distance-lower"
+      ],
+      "id": "distance-exact",
+      "proof": "The deterministic scaled 64-root polynomial avoids the unique all-one inner symbol on every surviving block.",
+      "statement": "The minimum distance equals 535,822,336.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "inner-affine",
+        "outer-evaluation"
+      ],
+      "id": "product-template-ceiling",
+      "proof": "Griesmer caps the inner dimension at 16, while Singleton caps an outer code of distance 32,704 at 65 alphabet symbols.",
+      "statement": "The equal-block product-distance architecture has binary dimension at most 1040.",
+      "status": "proved"
+    }
+  ],
+  "rate": 9.685754776000977e-07,
+  "research_direction": "Boolean polynomial constructions: affine truth tables concatenated with deterministic polynomial evaluation",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "schemas/record.schema.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)",
+    "scripts/validate-data.mjs",
+    "dashboard/package.json",
+    "dashboard/scripts/validate-math.mjs"
+  ],
+  "submission_class": "leaderboard_candidate",
+  "theorem_statement": "The explicitly defined polynomial-evaluation/affine-Boolean concatenation is a deterministic binary linear code with exact parameters [2^30,1040,535822336]_2 and rate 65/2^26.",
+  "title": "Exact [2^30,1040,535822336] polynomial-evaluation/affine-Boolean code"
+}
