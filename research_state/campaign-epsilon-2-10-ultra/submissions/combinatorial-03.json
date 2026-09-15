@@ -1,0 +1,226 @@
+{
+  "baseline_beaten": true,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "Let\n\\[\np(T)=T^{15}+T+1,\n\\qquad F=\\mathbb F_2[T]/(p),\n\\qquad q=|F|=2^{15},\n\\]\nand let \\(\\operatorname{Tr}:F\\to\\mathbb F_2\\) be the absolute trace.\n\nView every \\((x,y)\\in F^2\\) as a one-edge walk from the left to the right side of the complete bipartite graph \\(K_{q,q}\\). For\n\\[\nP(X)=a_3X^3+a_5X^5+a_7X^7+a_9X^9,\n\\]\nwhere \\(a_3,a_5,a_7,a_9,u,v\\in F\\) and \\(c\\in\\mathbb F_2\\), define\n\\[\nC_{P,u,v,c}(x,y)\n =c+\\operatorname{Tr}\\bigl(P(x)+ux+P(y)+vy\\bigr).\n\\]\nThe code consists of all such vectors, ordered by the polynomial-basis binary indices of \\(x\\), then \\(y\\). Thus all \\(q^2=2^{30}\\) edges are used, with no padding, puncturing, shortening, or random choice.",
+  "dimension": 91,
+  "discussion_posts": [
+    {
+      "body_markdown": "Over \\(F=\\mathbb F_{2^{15}}\\), take \\(P=a_3X^3+a_5X^5+a_7X^7+a_9X^9\\) and put \\(c(x,y)=b+\\operatorname{Tr}(P(x)+ux+P(y)+vy)\\). The complete-bipartite edge correlation factors as \\((-1)^bS(P+uX)S(P+vX)\\). Weil and integrality give each factor at most 1448, hence a deterministic \\([2^{30},91,\\ge535822560]_2\\) code.",
+      "kind": "idea",
+      "references": [
+        "complete-walk-factorization",
+        "odd-trace-artin-schreier",
+        "combinatorial-03"
+      ],
+      "subject": "A k=91 complete-bipartite trace walk"
+    },
+    {
+      "body_markdown": "Fix the two-endpoint, full-\\(F\\)-layer template with an \\(r\\)-dimensional shared nonlinear message, independent endpoint-linear layers, and distance certified only by factorization plus \\(|S(Q)|\\le(\\deg Q-1)\\sqrt q\\). Two proper degree-\\((2r-1)\\) preimages cannot cover \\(F^r\\), so some message has both endpoint degrees at least \\(2r+1\\). The generic product certificate is then at least \\((2r)^2q\\); the budget \\(64q\\) forces \\(r\\le4\\), hence \\(k\\le15(r+2)+1=91\\).",
+      "kind": "objection",
+      "references": [
+        "factorized-Weil-ceiling",
+        "complete-walk-factorization"
+      ],
+      "subject": "Scoped 91-dimensional ceiling"
+    },
+    {
+      "body_markdown": "For an ordinary one-edge lift on a simple \\(D\\)-regular graph with \\(vD=2^{30}\\) and \\(D<v\\), powers-of-two arithmetic gives \\(D\\le2^{14}\\) and \\(D/v\\le1/4\\). Frobenius therefore gives \\(\\lambda^2\\ge(v-D)/(D(v-1))>3/65536\\), so \\(\\lambda>1/512\\). Consequently the standard certificate \\(B\\le\\varepsilon_0^2+\\lambda(1-\\varepsilon_0^2)\\) cannot certify the required bias. Code-specific cancellation or a two-encoder bipartite analysis is necessary.",
+      "kind": "objection",
+      "references": [
+        "one-edge-spectral-bound",
+        "frobenius-eigenvalue-bound"
+      ],
+      "subject": "Sparse one-edge spectral certificate fails"
+    }
+  ],
+  "distance_audit": [
+    "For every word, its signed coordinate sum is W=(-1)^c S(P+uX)S(P+vX).",
+    "If P is nonzero, both endpoint polynomials have the same odd degree d in {3,5,7,9}; hence each character sum has magnitude at most (d-1)sqrt(q)<=8sqrt(q).",
+    "Character sums are integers, so each magnitude is at most floor(8sqrt(32768))=1448. Thus |W|<=1448^2=2,096,704.",
+    "Therefore every nonlinear word has weight at least (2^30-2,096,704)/2=535,822,560.",
+    "If P=0 and (u,v) is nonzero, a nontrivial linear-character factor vanishes, giving weight exactly 2^29.",
+    "If P=u=v=0, the only nonzero word is c=1, the all-one word. All nonzero cases are covered.",
+    "The certified distance exceeds the required 535,822,336 by 224; attainment of 535,822,560 is not claimed."
+  ],
+  "explicitness_audit": [
+    "The field is the fixed quotient by T^15+T+1, with a displayed Rabin certificate in the proof.",
+    "Coordinates are all ordered pairs of polynomial-basis field elements, ordered by their 15-bit integer representations.",
+    "The graph is exactly K_{32768,32768}; every edge is used once.",
+    "The message coefficients are exactly a_3,a_5,a_7,a_9,u,v in F and c in F_2.",
+    "There are no searches, sampled objects, floors in the construction, inherited parameters, padding coordinates, punctures, or shortenings."
+  ],
+  "leaderboard_submission": true,
+  "literature_dependencies": [
+    {
+      "hypotheses": "A polynomial f over F_q has degree d<q with gcd(d,q)=1, and psi is a nontrivial additive character.",
+      "result": "The additive-character sum satisfies |sum_x psi(f(x))| <= (d-1)sqrt(q).",
+      "source": "E. Kowalski, [The Riemann Hypothesis for sums in one variable over finite fields, Theorem 3.2](https://people.math.ethz.ch/~kowalski/exponential-sums-elementary.pdf).",
+      "used_for": "Bounding both endpoint Walsh sums for every nonzero shared polynomial."
+    },
+    {
+      "hypotheses": "For a degree-15 polynomial over F_2, verify X^(2^15)=X modulo p and the gcd tests corresponding to the prime divisors 3 and 5 of 15.",
+      "result": "Rabin's criterion proves irreducibility.",
+      "source": "M. O. Rabin, [Probabilistic Algorithms in Finite Fields](https://doi.org/10.1137/0209024), SIAM Journal on Computing 9 (1980).",
+      "used_for": "Certifying the explicit model of F_{2^15}; all modular identities are supplied in the proof."
+    }
+  ],
+  "minimum_distance": 535822560,
+  "next_tasks": [
+    "Send the complete candidate for independent verification; in a write-capable step, persist the proof and factorization lemma, then run the data validator and dashboard build.",
+    "Seek code-specific Walsh cancellation, restricted binary coefficient spaces, or non-factorizing bivariate phases that escape the proved full-layer k=91 ceiling.",
+    "The active proved k=1040 RS\u2013RM candidate dominates this walk construction, so expander work should target dimension at least 1041 rather than merely refining the 224-point distance margin."
+  ],
+  "obstructions": [
+    "The construction beats the verified k=31 baseline but is dominated by the active, not-yet-durable k=1040 RS\u2013RM candidate.",
+    "Within the explicitly defined full-field-layer, two-endpoint template certified only by factorwise generic Weil bounds, dimension 91 is maximal.",
+    "The usual global spectral certificate for an ordinary sparse one-edge lift cannot reach normalized Walsh bias 1/512 at exact length 2^30.",
+    "The ceiling does not cover restricted binary coefficient subspaces, exact Walsh-spectrum arguments, rational functions, non-factorizing bivariate phases, or other code-specific cancellations."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "|F|=2^15",
+      "quantity": "endpoint-set size",
+      "value": "q=32,768"
+    },
+    {
+      "derivation": "all edges of K_{q,q}",
+      "quantity": "block length",
+      "value": "q^2=2^30=1,073,741,824"
+    },
+    {
+      "derivation": "four shared F-coefficients, two independent F-coefficients, one binary constant",
+      "quantity": "dimension",
+      "value": "4*15+2*15+1=91"
+    },
+    {
+      "derivation": "91/2^30",
+      "quantity": "exact rate",
+      "value": "0.000000084750354290008544921875"
+    },
+    {
+      "derivation": "floor(8*sqrt(32768))",
+      "quantity": "endpoint Walsh bound",
+      "value": "1,448"
+    },
+    {
+      "derivation": "1448^2",
+      "quantity": "complete-walk correlation bound",
+      "value": "2,096,704=2^21-448"
+    },
+    {
+      "derivation": "(2^30-1448^2)/2",
+      "quantity": "certified minimum distance",
+      "value": "535,822,560"
+    },
+    {
+      "derivation": "535,822,560-535,822,336",
+      "quantity": "distance margin",
+      "value": "224"
+    }
+  ],
+  "proof_markdown": "# Complete-bipartite trace-walk code\n\n## Theorem\n\nThere is a deterministic binary linear code with parameters\n\\[\n[2^{30},91,\\ge535{,}822{,}560]_2.\n\\]\nIn particular, it exceeds the required distance by 224 and the verified dimension by 60.\n\n## Explicit field\n\nPut \\(p(T)=T^{15}+T+1\\). Repeated squaring modulo \\(p\\) gives\n\\[\nT^{2^3}\\equiv T^8,\n\\qquad T^{2^5}\\equiv T^4+T^2,\n\\qquad T^{2^{15}}\\equiv T.\n\\]\nThe two required coprimality checks have explicit remainder-one certificates:\n\\[\np=(T^7+1)(T^8+T)+1,\n\\]\nand\n\\[\np=(T^{11}+T^9+T^8+T^7+T^4+T^2+T+1)(T^4+T^2+T)+1.\n\\]\nThus \\(p\\) is coprime to \\(T^{2^3}+T\\) and \\(T^{2^5}+T\\). Rabin's degree-15 criterion proves that \\(p\\) is irreducible. Hence\n\\[\nF=\\mathbb F_2[T]/(p)\n\\]\nis a fixed field of size \\(q=2^{15}\\). Write \\(\\theta=T\\bmod p\\), use the polynomial basis \\(1,\\theta,\\ldots,\\theta^{14}\\), and order field elements by their 15-bit coefficient integers.\n\nThe absolute trace is\n\\[\n\\operatorname{Tr}(z)=\\sum_{i=0}^{14}z^{2^i}.\n\\]\nSince \\(\\operatorname{Tr}(1)=1\\), the character \\(\\psi(z)=(-1)^{\\operatorname{Tr}(z)}\\) is nontrivial.\n\n## Construction, linearity, and length\n\nLet\n\\[\nP(X)=a_3X^3+a_5X^5+a_7X^7+a_9X^9,\n\\qquad a_3,a_5,a_7,a_9\\in F.\n\\]\nFor \\(u,v\\in F\\) and \\(c\\in\\mathbb F_2\\), define\n\\[\nw_{P,u,v,c}(x,y)\n=c+\\operatorname{Tr}(P(x)+ux+P(y)+vy),\n\\qquad (x,y)\\in F^2.\n\\]\nLet \\(C\\) be the set of all these vectors.\n\nEquivalently, take the complete bipartite graph with left and right vertex sets both equal to \\(F\\). Label a left endpoint \\(x\\) by \\(\\operatorname{Tr}(P(x)+ux)\\), a right endpoint \\(y\\) by \\(\\operatorname{Tr}(P(y)+vy)\\), and label the edge \\((x,y)\\) by the parity of its endpoint labels plus \\(c\\). Every one-edge walk is used.\n\nTrace and evaluation are binary linear, so \\(C\\) is binary linear. There are\n\\[\n|F|^2=2^{15}2^{15}=2^{30}\n\\]\ncoordinates, with no padding.\n\n## Character-sum bound and factorization\n\nFor \\(Q\\in F[X]\\), write\n\\[\nS(Q)=\\sum_{z\\in F}\\psi(Q(z)).\n\\]\nIf \\(Q\\) has positive odd degree \\(d<q\\), the additive-character Weil bound gives\n\\[\n|S(Q)|\\le(d-1)\\sqrt q.\n\\]\nFor a codeword, direct separation of the two endpoint variables gives\n\\[\n\\sum_{x,y\\in F}(-1)^{w_{P,u,v,c}(x,y)}\n=(-1)^cS(P+uX)S(P+vX). \\tag{1}\n\\]\n\nSuppose \\(P\\ne0\\), and let \\(d\\in\\{3,5,7,9\\}\\) be its degree. Adding \\(uX\\) or \\(vX\\) does not change that top degree. Hence\n\\[\n|S(P+uX)|,|S(P+vX)|\\le8\\sqrt{32768}.\n\\]\nThese character sums are integers, so\n\\[\n|S(P+uX)|,|S(P+vX)|\n\\le\\lfloor8\\sqrt{32768}\\rfloor=1448.\n\\]\nEquation (1) therefore has magnitude at most\n\\[\n1448^2=2{,}096{,}704=2^{21}-448. \\tag{2}\n\\]\n\nIf \\(P=0\\) and \\((u,v)\\ne(0,0)\\), at least one factor in (1) is the sum of a nontrivial linear character over \\(F\\), hence is zero. Such a word is exactly balanced. If \\(P=u=v=0\\), then \\(c=0\\) gives the zero word and \\(c=1\\) gives the all-one word.\n\n## Dimension\n\nThe parameter space has binary dimension\n\\[\n4\\cdot15+15+15+1=91.\n\\]\nThe preceding case analysis proves injectivity. Indeed, if \\(P\\ne0\\), (2) rules out a zero truth table, whose signed sum would be \\(q^2\\). If \\(P=0\\), a zero word has \\(c=0\\) by evaluating at \\((0,0)\\), and then nondegeneracy of the trace pairing forces \\(u=v=0\\). Thus \\(\\dim C=91\\).\n\n## Minimum distance\n\nFor a binary word of length \\(q^2\\) and signed sum \\(W\\), its weight is \\((q^2-W)/2\\). When \\(P\\ne0\\), (2) gives\n\\[\n\\operatorname{wt}(w_{P,u,v,c})\n\\ge\\frac{2^{30}-2{,}096{,}704}{2}\n=535{,}822{,}560.\n\\]\nThe linear-only nonzero words have weight \\(2^{29}\\), and the constant-only nonzero word has weight \\(2^{30}\\). These cases exhaust every nonzero codeword, proving\n\\[\nd_{\\min}(C)\\ge535{,}822{,}560\n>535{,}822{,}336.\n\\]\n\n## Scoped optimality of the template\n\nFix the same field and consider constructions with an \\(r\\)-dimensional shared \\(F\\)-message \\(z\\), two injective \\(F\\)-linear maps \\(Q_1,Q_2\\) into 2-reduced odd polynomials without constant or linear terms, two independent endpoint-linear coefficients, and one global binary constant. Suppose distance is certified only by factorization and the generic bound \\(|S(Q)|\\le(\\deg Q-1)\\sqrt q\\).\n\nFor each endpoint, the nonlinear odd polynomials of degree at most \\(2r-1\\) form an \\((r-1)\\)-dimensional \\(F\\)-space. Their preimages under \\(Q_1\\) and \\(Q_2\\) are therefore two proper subspaces of the \\(r\\)-dimensional message space. Two proper subspaces cannot cover a vector space, so some nonzero \\(z\\) lies in neither. Both endpoint degrees for this message are at least \\(2r+1\\). The numerical product bound supplied by the template is then at least\n\\[\n(2r)^2q.\n\\]\nThe available correlation budget is \\(2^{21}=64q\\), forcing \\(r\\le4\\). Consequently this proof template has\n\\[\nk\\le15r+15+15+1\\le91.\n\\]\nThe submitted construction attains this scoped ceiling at \\(r=4\\). This is only a method obstruction: it does not cover restricted binary coefficient spaces, exact Walsh-spectrum cancellation, rational functions, or non-factorizing bivariate estimates.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "field-certificate",
+      "proof": "The displayed Frobenius residues and two remainder-one identities satisfy Rabin's irreducibility criterion for degree 15.",
+      "statement": "T^15+T+1 is irreducible over F_2, so the chosen quotient is F_{2^15}.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "construction-linearity-length",
+      "proof": "Trace and polynomial evaluation are F_2-linear, and the coordinate set is exactly F^2.",
+      "statement": "C is a deterministic binary linear code of length 2^30.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "field-certificate"
+      ],
+      "id": "endpoint-Weil-bound",
+      "proof": "Every nonzero shared polynomial retains an odd top degree d<=9 after adding either endpoint-linear term; the additive-character Weil bound and integrality give magnitude at most 1448.",
+      "statement": "Each nonlinear endpoint character sum has magnitude at most 1448.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "endpoint-Weil-bound"
+      ],
+      "id": "walk-factorization",
+      "proof": "The double character sum separates into the product of the two endpoint sums, up to the global constant sign.",
+      "statement": "Every nonlinear complete-walk word has signed correlation at most 1448^2=2,096,704.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "walk-factorization"
+      ],
+      "id": "dimension",
+      "proof": "The parameter space has dimension 91. The correlation bound excludes a nonlinear kernel; the trace pairing excludes a linear kernel.",
+      "statement": "The encoder is injective and dim(C)=91.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "walk-factorization",
+        "dimension"
+      ],
+      "id": "distance",
+      "proof": "The weight/correlation identity gives 535,822,560 in the nonlinear case; linear-only words are balanced and the constant-only word is all-one.",
+      "statement": "Every nonzero codeword has weight at least 535,822,560.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "endpoint-Weil-bound"
+      ],
+      "id": "factorized-template-ceiling",
+      "proof": "Two proper low-degree preimages cannot cover the shared F-message space; a message with both endpoint degrees at least 2r+1 makes the generic product certificate exceed 64q unless r<=4.",
+      "statement": "The full-layer two-endpoint factorized-Weil template has dimension at most 91.",
+      "status": "proved"
+    }
+  ],
+  "rate": 8.475035429000854e-08,
+  "research_direction": "Expander-walk codes: complete-bipartite one-edge parity with coupled trace-polynomial endpoint labels",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/README.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "how_to_contribute/SUBMISSION_EXAMPLE.json",
+    "how_to_contribute/VERIFIER_INSTRUCTIONS.md",
+    "proofs/SUBMISSION_TEMPLATE.md",
+    "proofs/rm-1-30-baseline.md",
+    "proofs/quotient-coupled-ag-port-obstruction.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/snapshot.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/ag-quotient-port-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-01.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-03.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-09.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/algebraic-10.json",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/ (empty at final audit)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/ (empty at final audit)",
+    "research_state/archive/target-7-16/campaign-10-ultra/submissions/researcher-0006.json"
+  ],
+  "submission_class": "baseline_improvement",
+  "theorem_statement": "There exists a symbolically deterministic complete-bipartite one-edge trace-walk code with binary parameters [2^30,91,>=535822560]_2.",
+  "title": "A [2^30,91,>=535822560] complete-bipartite trace-walk code"
+}
