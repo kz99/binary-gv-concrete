@@ -1,0 +1,203 @@
+{
+  "arithmetic_passed": true,
+  "baseline_classification_passed": true,
+  "counterexample_attempts": [
+    "Reimplemented GF(2) polynomial arithmetic. All four Frobenius residues, three displayed B\u00e9zout congruences, and Rabin gcd checks recompute correctly.",
+    "Tested the Artin\u2013Schreier exceptional case. A nonzero polynomial of positive odd degree cannot equal R^2+R over the algebraic closure because its pole at infinity has odd order.",
+    "Checked that the trace character is nontrivial despite Tr(1)=0; explicitly, Tr(alpha^29)=1.",
+    "Checked the endpoint d=1, where the character sum is zero, and d=65, where the certified maximum magnitude is 2^21.",
+    "Tried kernel and coefficient-cancellation cases. Evaluation at zero forces c=0, while any nonzero polynomial producing a zero word would contradict |S(P)|<=2^21<2^30.",
+    "Checked both signs of the Walsh sum and the cases P=0,c=0 and P=0,c=1. They give respectively the zero word and the all-one word.",
+    "Broke the generalized discussion lemma using m=2, D=3, K=F4, and a_3=1: Tr(x^3)=0 for every x, so a nonzero parameter tuple gives the zero word and the claimed dimension 5 exceeds length 4.",
+    "Checked the degree-67 boundary: its generic certificate is 535789568, exactly 32768 below the target.",
+    "Checked the Reed\u2013Muller obstruction: RM(2,30) contains x_1x_2 of weight 2^28, far below the target."
+  ],
+  "dimension_passed": true,
+  "distance_passed": true,
+  "exact_length_passed": true,
+  "explicitness_passed": true,
+  "fatal_obstruction": null,
+  "independent_review": true,
+  "line_audit": [
+    {
+      "claim": "The headline construction has length 2^30, dimension 991, and certified distance at least 535822336.",
+      "justification": "The independently checked field certificate, injectivity proof, and character-sum bound establish these parameters.",
+      "reference": "algebraic-05.json:2-6",
+      "verdict": "valid"
+    },
+    {
+      "claim": "For every odd D<2^m, the generalized trace-polynomial code has dimension 1+m(D+1)/2.",
+      "justification": "The hypotheses do not ensure injectivity. For m=2,D=3 and a_3=1 over F4, Tr(x^3) is identically zero; moreover, the asserted dimension is 5 at length 4. The missing condition is (D-1)2^(m/2)<2^m.",
+      "reference": "algebraic-05.json:9-15",
+      "verdict": "false"
+    },
+    {
+      "claim": "The generic Artin\u2013Schreier conductor certificate permits at most 33 full field-coefficient layers at the fixed bias budget.",
+      "justification": "For a reduced family, 2g equals total conductor degree minus 2. Requiring 2g<=64 forces conductor degree at most 66, hence at most 33 reduced odd principal-part layers. Adding the binary constant gives at most 33*30+1=991 dimensions within this method.",
+      "reference": "algebraic-05.json:18-24, 75",
+      "verdict": "valid"
+    },
+    {
+      "claim": "A degree-67 layer requires a nongeneric improvement to retain Walsh magnitude at most 64 sqrt(q).",
+      "justification": "The ordinary bound is 66*2^15=2162688, whereas the allowed magnitude is 64*2^15=2097152. The proposed extension is correctly presented as an open question, not a construction claim.",
+      "reference": "algebraic-05.json:27-32",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The distance audit covers every nonzero parameter case.",
+      "justification": "For P nonzero, its degree is odd and at most 65, giving |S(P)|<=2^21 and weight at least 535822336 for either c. For P=0, the only nonzero word is the all-one word.",
+      "reference": "algebraic-05.json:35-40",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The construction is deterministic and symbolically recoverable.",
+      "justification": "The modulus, polynomial basis, exponent set, coefficient spaces, evaluation set, coordinate order, and external binary constant are fixed. No sampling or length-changing operation occurs.",
+      "reference": "algebraic-05.json:42-48",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The object is a leaderboard candidate beating the dimension-31 baseline.",
+      "justification": "Its verified dimension is 991>31 at the exact required length and distance.",
+      "reference": "algebraic-05.json:51",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The cited additive-character theorem supplies |S(P)|<=(d-1)sqrt(q).",
+      "justification": "[Kowalski, Theorem 3.2](https://people.math.ethz.ch/~kowalski/exponential-sums-elementary.pdf) assumes a nontrivial additive character, d<q, and gcd(d,q)=1. Here the trace character is nontrivial, d<=65<2^30, and d is odd, so every hypothesis holds.",
+      "reference": "algebraic-05.json:52-57",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Rabin's criterion applies to the displayed degree-30 polynomial.",
+      "justification": "The criterion requires the n=30 Frobenius congruence and gcd checks at n/2=15, n/3=10, and n/5=6. These are precisely the checks supplied and independently recomputed. The cited [Rabin paper](https://doi.org/10.1137/0209024) is correctly identified.",
+      "reference": "algebraic-05.json:59-63",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The certified minimum-distance field is 535822336.",
+      "justification": "This equals (2^30-2^21)/2=2^29-2^20=(511/1024)2^30.",
+      "reference": "algebraic-05.json:66",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The listed next tasks distinguish verification and later publication work.",
+      "justification": "Materializing the embedded proof under proofs/ and adding a record are workflow steps, not missing hypotheses in the construction.",
+      "reference": "algebraic-05.json:67-71",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The degree-67 generic certificate misses the target by 32768.",
+      "justification": "2^29-33*2^15=535789568, and 535822336-535789568=32768.",
+      "reference": "algebraic-05.json:73-74",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The full quadratic Reed\u2013Muller layer is inadmissible, while the stated six-layer subspace has dimension 211 and lies in C.",
+      "justification": "RM(2,30) contains x_1x_2 of weight 2^28. The six quadratic exponents 3,5,9,17,33,65, together with exponent 1 and the constant, form a subcode of dimension 1+7*30=211 by the proved injectivity.",
+      "reference": "algebraic-05.json:76",
+      "verdict": "valid"
+    },
+    {
+      "claim": "All parameter-ledger values are correct.",
+      "justification": "The recomputed values are q=1073741824, 33 exponents, k=991, exact rate 991/2^30, Walsh bound 2097152, distance 535822336, relative distance 511/1024, and maximum exponent binary weight 6 at j=63.",
+      "reference": "algebraic-05.json:78-118",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The displayed Frobenius residues and B\u00e9zout congruences are correct.",
+      "justification": "Independent GF(2) arithmetic reproduced r_6, r_10, r_15, and r_30 exactly, and each displayed product has remainder 1 under its stated modulus.",
+      "reference": "algebraic-05.json:120, Field certificate",
+      "verdict": "valid"
+    },
+    {
+      "claim": "T^30+T+1 is irreducible, so K has exactly 2^30 elements.",
+      "justification": "The verified residues satisfy Rabin's checks for all prime divisors 2,3,5 of 30, including T^(2^30)=T modulo p.",
+      "reference": "algebraic-05.json:120, Field certificate conclusion",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The evaluation image is a binary linear code of exact length 2^30.",
+      "justification": "K is a 30-dimensional F2-vector space; every one of its 2^30 elements appears exactly once in the specified coordinate order, and the parameter-to-word map is F2-linear.",
+      "reference": "algebraic-05.json:120, Construction and linearity",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero permitted polynomial defines a geometrically nontrivial Artin\u2013Schreier cover.",
+      "justification": "Its positive odd degree gives an odd-order pole at infinity, excluding an expression R^2+R over the algebraic closure. The affine curve is smooth because the derivative with respect to y is 1.",
+      "reference": "algebraic-05.json:120, Character-sum lemma, first paragraph",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The cover has genus (d-1)/2, one rational point at infinity, and point count q+1+S(P).",
+      "justification": "Standard Artin\u2013Schreier ramification at the unique odd pole gives different exponent d+1 and total ramification. Each affine fiber has two or zero rational points according to the trace, yielding the stated count.",
+      "reference": "algebraic-05.json:120, Character-sum lemma, ramification and point count",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Hasse\u2013Weil yields |S(P)|<=(d-1)sqrt(q).",
+      "justification": "The normalization is smooth, projective, and geometrically connected with genus (d-1)/2, so Hasse\u2013Weil applies. The cited additive-character theorem independently gives the same conclusion.",
+      "reference": "algebraic-05.json:120, Character-sum lemma conclusion",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The evaluation map is injective and dim(C)=991.",
+      "justification": "A kernel tuple has c=0 by evaluation at x=0. If its polynomial part were nonzero, the zero word would force S(P)=2^30, contradicting |S(P)|<=2^21. Distinct monomial degrees make P=0 equivalent to all coefficients being zero.",
+      "reference": "algebraic-05.json:120, Exact dimension",
+      "verdict": "valid"
+    },
+    {
+      "claim": "Every nonzero codeword has weight at least 535822336.",
+      "justification": "The weight identity handles both signs of S(P) and both values of c. The constant-only nonzero case has weight 2^30.",
+      "reference": "algebraic-05.json:120, Minimum distance",
+      "verdict": "valid"
+    },
+    {
+      "claim": "RM(1,30) is contained in C, and C is contained in RM(6,30).",
+      "justification": "Nondegeneracy of the finite-field trace pairing makes the exponent-one layer all linear Boolean functions. Each selected monomial has algebraic degree at most its exponent's binary weight, which is at most six.",
+      "reference": "algebraic-05.json:120, Reed\u2013Muller relation",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The structured proof steps accurately summarize the dependency chain.",
+      "justification": "Field certification supports construction and the character bound; these give injectivity and distance. The RM containment is an ancillary consequence with no circular dependency.",
+      "reference": "algebraic-05.json:121-175",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The JSON rate is the correctly rounded value of 991/2^30.",
+      "justification": "The exact decimal is 0.000000922940671443939208984375, which rounds to 9.229406714439392e-7.",
+      "reference": "algebraic-05.json:177",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The proved status, research direction, theorem statement, title, and leaderboard classification describe the central result accurately.",
+      "justification": "The central trace-polynomial construction is completely proved and has verified parameters [1073741824,991,>=535822336]_2. The false generalized discussion lemma is ancillary and locally repairable.",
+      "reference": "algebraic-05.json:178-179, 195-197",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The source-path inventory introduces no hidden proof dependency.",
+      "justification": "The mathematical construction and proof are contained in proof_markdown plus the two identified standard theorems; the directory-state entries are provenance metadata only.",
+      "reference": "algebraic-05.json:180-194",
+      "verdict": "valid"
+    },
+    {
+      "claim": "The immutable source identity matches the audited submission.",
+      "justification": "SHA-256 of the parsed JSON serialized with sorted keys, following the campaign canonicalization, is exactly 833b99ff09731c5213d1600efc83b0b5088ca6bdd59e45ebbe8de3fd99051548.",
+      "reference": "algebraic-05.json:1-198",
+      "verdict": "valid"
+    }
+  ],
+  "readability_passed": true,
+  "required_changes": [
+    "Revise discussion_posts[0].body_markdown to add the hypothesis (D-1)2^(m/2)<2^m before asserting dimension 1+m(D+1)/2, and propagate the correction to its duplicated message-board post. The fixed m=30,D=65 construction and its parameters require no change."
+  ],
+  "source_job_id": "algebraic-05",
+  "source_sha256": "833b99ff09731c5213d1600efc83b0b5088ca6bdd59e45ebbe8de3fd99051548",
+  "summary": "REVISE. The central deterministic code is valid with certified parameters [1073741824,991,>=535822336]_2, and all core length, dimension, distance, explicitness, arithmetic, theorem-hypothesis, and baseline checks pass. One ancillary reusable lemma is false under its stated general hypotheses; adding the missing strict injectivity condition is a local repair. There is no fatal obstruction.",
+  "verdict": "revise",
+  "verified_block_length": 1073741824,
+  "verified_dimension": 991,
+  "verified_minimum_distance": 535822336,
+  "verified_rate": 9.229406714439392e-07
+}
