@@ -1,0 +1,237 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new code is submitted. The contribution is a deterministic nonexistence certificate for the principal conditional composition gateways, together with a sharpened common-kernel constraint for arbitrary two-fiber maps. In particular, the hypothetical `[8192,16,4092]_2` exceptional-line core is impossible, so it cannot yield the proposed dimension-1041 target code.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "Intended recipients: lemma editor and all construction teams. For a binary `[n,k,\u2265d]_2` code, let `v=2^k`, `h=v/2`, and let `z` be the number of zero generator columns. The excess-weight Cayley matrix has eigenvalues `q_z=h(n-z)-d(v-1)` and `d-h\u03bc(x)`. Nonnegativity of its cubic trace, followed by splitting repeated columns, gives the necessary inequality `q_z^3+(v-1-n+z)d^3+(n-z)(d-h)^3\u22650`. This is a reusable search-free finite obstruction.",
+      "kind": "idea",
+      "references": [
+        "this-result:EXCESS-CAYLEY-CUBIC"
+      ],
+      "subject": "Excess-weight Cayley cubic lemma"
+    },
+    {
+      "body_markdown": "Intended recipient: composition integrator. Exact substitution proves `d_max(8192,16)\u22644087`, `d_max(16384,16)\u22648182`, `d_max(16384,17)\u22648181`, and `d_max(16384,18)\u22648180`. Thus the conditional `[8192,16,4092]`, `[16384,16,8185]`, and `[16384,17,8188]` gateways are nonexistent. Remove the associated conditional dimensions 1041, 1168, and 1649 from the roadmap.",
+      "kind": "objection",
+      "references": [
+        "this-result:CORE-NONEXISTENCE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "subject": "Three conditional inner gateways are impossible"
+    },
+    {
+      "body_markdown": "Intended recipients: next two-fiber bottleneck position and combinatorial integrator. For any 65 seeds `T`, let `Q=\u2229_{s\u2208T}ker B_s` and `q=dim Q`. Besides `q\u226414`, at least `2^q-1` seeds outside `T` satisfy `e_0\u2208B_s(Q)`, and their affine fibers cover every nonzero point of `Q`. At the endpoint `K=1054`, every such `Q` has dimension 14, so at least 16383 of the other 32703 seeds hit `e_0` on `Q`. Double-count these covers across 65-sets to attack the remaining endpoint.",
+      "kind": "idea",
+      "references": [
+        "this-result:TWO-FIBER-COVER",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-05.json"
+      ],
+      "subject": "Common-kernel covering rigidity at K=1054"
+    }
+  ],
+  "distance_audit": [
+    "The trace-cubic argument starts from `\u03b8(a)=wt(aG)-d\u22650` for every nonzero message, so every nonzero codeword is included.",
+    "It proves the stronger core bound `d_max(8192,16)\u22644087`; hence distance 4092 is impossible regardless of projectivity, antipodality, repeated columns, or zero columns.",
+    "At length 16384 it proves ceilings 8182, 8181, and 8180 in dimensions 16, 17, and 18 respectively.",
+    "For an ordinary RS outer code of length 65536, these ceilings force outer dimensions at most 49, 41, and 33, giving binary dimensions 784, 697, and 594.",
+    "The required target remains exactly `D=535822336`; no target-qualified code is asserted in this obstruction submission."
+  ],
+  "explicitness_audit": [
+    "The proof uses only symbolic Fourier diagonalization, a cubic trace identity, Griesmer arithmetic, and four exact integer substitutions.",
+    "No random sampling, canonical search, conditional expectation, finite lookup, or exhaustive code enumeration is used.",
+    "The diagnostic arithmetic can be reproduced with fixed-size integer operations; it is not a hidden construction selector.",
+    "No generator matrix is claimed, so `leaderboard_submission=false` and the generator-matrix fields are not applicable.",
+    "The workspace is read-only, so no proof or record file was persisted and publication validators were not run."
+  ],
+  "generator_matrix": {
+    "algorithm": "Not applicable: this submission proves nonexistence of several proposed inner codes and does not assert a generator matrix.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "Not applicable to an obstruction theorem.",
+    "runtime_proof": "No code or matrix is submitted."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Ordinary RS concatenation with a power-of-two-length binary inner code, product-distance certification, and zero padding to length `2^30`.",
+      "result": "The prior exact sieve reduces every possible improvement over 1040 in this architecture to length-16384 inner dimensions 16, 17, or 18.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+      "used_for": "Combining the new inner-distance ceilings into an ordinary-RS architecture ceiling of 1040."
+    },
+    {
+      "hypotheses": "Existence of an explicit binary `[8192,16,4092]_2` code.",
+      "result": "Such a core would conditionally yield a `[2^30,1041,\u2265535822848]_2` code.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-02.json",
+      "used_for": "Identifying the dimension-1041 composition route refuted here."
+    },
+    {
+      "hypotheses": "Standard-split affine two-fiber maps satisfying `\u0394(x)\u226464`.",
+      "result": "The exact subspace fiber identity and rank-rigidity theorem give `K\u22641054`; at `K=1054`, every map is surjective and every 65-fold common kernel has dimension 14.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-05.json",
+      "used_for": "Deriving the new common-kernel covering consequence."
+    },
+    {
+      "hypotheses": "Binary linear codes of dimension nine and distance 32.",
+      "result": "The paper proves `N_2(9,32)=70` and displays a `[71,10,32]` construction yielding the terminal `[70,9,32]` code.",
+      "source": "[Bouyukliev\u2013Guritman\u2013Vavrek, IEEE Transactions on Information Theory 46 (2000)](https://www.moi.math.bas.bg/moiuser/~iliya/pdf_site/getPDFbgv.pdf)",
+      "used_for": "Confirming that the residual endpoints themselves exist; the unresolved issue was inverse lifting, now bypassed by the cubic obstruction."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Obtain an independent audit of the excess-weight Cayley cubic lemma and its four exact substitutions.",
+    "In a writable session, add the lemma to `data/records.json`, write the proof under `proofs/`, and run the data validator and dashboard build.",
+    "Update the composition roadmap by removing the conditional 1649-, 1168-, and core-based 1041-dimensional routes; combine the new bounds with the existing sieve to record the ordinary-RS ceiling 1040.",
+    "Apply the common-kernel covering lemma to a double count over 65-subsets, first at `K=1054` and then across `1041\u2264K\u22641053`."
+  ],
+  "obstructions": [
+    "No binary linear `[8192,16,4088]_2` code exists; in particular, the proposed `[8192,16,4092]_2` core is impossible.",
+    "No binary linear `[16384,16,8183]_2`, `[16384,17,8182]_2`, or `[16384,18,8181]_2` code exists.",
+    "The conditional non-antipodal `[16384,17,8188]_2` route to dimension 1649 is therefore refuted.",
+    "The conditional `[16384,16,8185]_2` ordinary-RS gateway is refuted.",
+    "Combined with the durable finite sieve, ordinary RS/product-distance composition cannot exceed dimension 1040.",
+    "The arbitrary standard-split two-fiber interval `1041\u2264K\u22641054` remains open, but every 65-fold common kernel obeys the new covering rigidity.",
+    "The irregular mixed-parity path route is not excluded by the present theorem."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable campaign target.",
+      "quantity": "Target parameters",
+      "value": "`n=2^30=1073741824`, `D=2^29-2^20=535822336`, `n-2D=2^21`"
+    },
+    {
+      "derivation": "Fourier diagonalization of the excess-weight Cayley matrix.",
+      "quantity": "General cubic quantities",
+      "value": "`v=2^k`, `h=v/2`, `q_z=h(n-z)-d(v-1)`, `U_z=q_z^3+(v-1-n+z)d^3+(n-z)(d-h)^3`"
+    },
+    {
+      "derivation": "`g_2(16,4088)=8179`, so `z\u226413`; `q_13=102392>32768-4088`; `U_0=-41823326309449728`.",
+      "quantity": "Length-8192 ceiling",
+      "value": "`d_max(8192,16)\u22644087`"
+    },
+    {
+      "derivation": "`g_2(16,8183)=16369`, so `z\u226415`; `q_15=106487>32768-8183`; `U_0=-2674870102917120`.",
+      "quantity": "Length-16384, dimension-16 ceiling",
+      "value": "`d_max(16384,16)\u22648182`"
+    },
+    {
+      "derivation": "`g_2(17,8182)=16368`, so `z\u226416`; `q_16=270326>65536-8182`; `U_0=-734033369735626752`.",
+      "quantity": "Length-16384, dimension-17 ceiling",
+      "value": "`d_max(16384,17)\u22648181`"
+    },
+    {
+      "derivation": "`g_2(18,8181)=16368`, so `z\u226416`; `q_16=794613>131072-8181`; `U_0=-6091077791915704320`.",
+      "quantity": "Length-16384, dimension-18 ceiling",
+      "value": "`d_max(16384,18)\u22648180`"
+    },
+    {
+      "derivation": "Exact ceilings `ceil(D/8182)=65488`, `ceil(D/8181)=65496`, and `ceil(D/8180)=65504`.",
+      "quantity": "Remaining length-16384 ordinary-RS payoffs",
+      "value": "Binary dimensions at most `16\u00b749=784`, `17\u00b741=697`, and `18\u00b733=594`"
+    },
+    {
+      "derivation": "Common-kernel covering lemma with `q=14`.",
+      "quantity": "Two-fiber endpoint incidence",
+      "value": "At `K=1054`, every 65-set has at least `2^14-1=16383` outside seeds hitting `e_0` on its common kernel."
+    }
+  ],
+  "proof_markdown": "## Scope\n\nNo construction is claimed. The result is a finite nonexistence theorem for the inner codes supporting the strongest conditional composition routes.\n\n## 1. Excess-weight Cayley cubic lemma\n\nLet `C` be a binary linear `[n,k,\u2265d]_2` code with full-rank generator matrix. Put `V=F_2^k`, `v=|V|=2^k`, and `h=v/2`. Let `\u03bc(x)` be the multiplicity of column `x\u2208V`, and put `z=\u03bc(0)`.\n\nFor `a\u2208V`, let `w(a)` be the weight of the codeword indexed by `a`. Define\n\n`\u03b8(0)=0`, and `\u03b8(a)=w(a)-d` for `a\u22600`.\n\nAll values of `\u03b8` are nonnegative integers. Form the symmetric Cayley matrix\n\n`A_{u,t}=\u03b8(u+t)`.\n\nEvery entry of `A` is nonnegative, so `tr(A^3)\u22650`.\n\nThe characters of `V` diagonalize `A`. Direct orthogonality gives the eigenvalue\n\n`q_z=h(n-z)-d(v-1)`\n\nat the principal character, and\n\n`d-h\u03bc(x)`\n\nat a nonprincipal character indexed by `x\u22600`. Consequently\n\n`tr(A^3)=q_z^3+\u03a3_{x\u22600}(d-h\u03bc(x))^3`. `(1)`\n\nAssume `h>d` and `n-z\u2264v-1`, as in every application below. For `F(t)=(d-ht)^3` and every integer `t\u22652`,\n\n`F(t-1)+F(1)-F(t)-F(0)=3h^2(t-1)(ht-2d)>0`. `(2)`\n\nThus splitting a repeated nonzero column into multiplicities `t-1` and `1` at an unused nonzero position strictly increases the right side of (1). Repeating this operation shows\n\n`tr(A^3)\u2264U_z:=q_z^3+(v-1-n+z)d^3+(n-z)(d-h)^3`. `(3)`\n\nTherefore every such code must satisfy `U_z\u22650`.\n\nZero columns can be deleted without changing dimension or distance. Hence Griesmer gives\n\n`0\u2264z\u2264n-g_2(k,d)`. `(4)`\n\nFor the finite checks, define `\u03a6(x)=x^3-(x-h)^3`. Then\n\n`U_{z+1}-U_z=\u03a6(d)-\u03a6(q_z)`. `(5)`\n\nThe function satisfies `\u03a6(d)=\u03a6(h-d)` and is strictly increasing above `h/2`. In each row below, the smallest allowed `q_z` exceeds `h-d`, so `U_z` strictly decreases with `z`. It therefore suffices to check `U_0`.\n\n| `n` | `k` | excluded `d` | `g_2(k,d)` | `z_max` | `q_(z_max)` | `h-d` | `U_0` |\n|---:|---:|---:|---:|---:|---:|---:|---:|\n|8192|16|4088|8179|13|102392|28680|\u221241823326309449728|\n|16384|16|8183|16369|15|106487|24585|\u22122674870102917120|\n|16384|17|8182|16368|16|270326|57354|\u2212734033369735626752|\n|16384|18|8181|16368|16|794613|122891|\u22126091077791915704320|\n\nEvery displayed `U_0` is negative, contradicting (3). Hence\n\n`d_max(8192,16)\u22644087`,\n\n`d_max(16384,16)\u22648182`,\n\n`d_max(16384,17)\u22648181`,\n\n`d_max(16384,18)\u22648180`.\n\nThis proof permits arbitrary repeated and zero columns. It therefore supersedes restrictions merely requiring the proposed core to be nonprojective or non-antipodal.\n\n## 2. Composition consequences\n\nThe proposed exceptional-line construction requires an `[8192,16,4092]_2` core, contradicting the first ceiling. Thus its conditional dimension-1041 target code does not exist.\n\nThe prior ordinary-RS sieve leaves only length-16384 inner dimensions 16, 17, and 18 as possible improvements over 1040. The new ceilings require respective outer distances\n\n`ceil(D/8182)=65488`,\n\n`ceil(D/8181)=65496`,\n\n`ceil(D/8180)=65504`.\n\nFor outer length 65536, Singleton gives outer dimensions at most 49, 41, and 33. The corresponding binary dimensions are 784, 697, and 594. Hence none improves 1040, and the previously conditional `[16384,17,8188]_2` dimension-1649 route is impossible.\n\n## 3. Common-kernel covering lemma\n\nRetain the upstream two-fiber notation: `B_s:F_2^K\u2192F_2^16`, `e_0=(1,0,\u2026,0)`, and\n\n`\u0394(x)=\u03a3_s(1_{B_sx=0}-1_{B_sx=e_0})\u226464` for every `x\u22600`.\n\nChoose any 65 seeds `T` and put `Q=\u2229_{s\u2208T}ker B_s`, `q=dim Q`. If `r_s=rank(B_s|Q)`, exact fiber counting gives\n\n`\u03a3_{x\u2208Q}\u0394(x)=\u03a3_{s:e_0\u2209B_s(Q)}2^(q-r_s)`. `(6)`\n\nBecause `\u0394(0)=32768`, the left side is at most\n\n`32768+64(2^q-1)=64\u00b72^q+32704`. `(7)`\n\nThe 65 seeds in `T` contribute `65\u00b72^q`. Let `M` count outside seeds for which `e_0\u2209B_s(Q)`. Every such seed contributes at least one more unit, so\n\n`65\u00b72^q+M\u226464\u00b72^q+32704`.\n\nThus `q\u226414`, `M\u226432704-2^q`, and among the 32703 outside seeds at least\n\n`32703-M\u22652^q-1` `(8)`\n\nsatisfy `e_0\u2208B_s(Q)`. Moreover, for each nonzero `x\u2208Q`, the 65 killed fibers give `z_0(x)\u226565`; the target inequality forces `z_1(x)\u22651`. Hence those outside affine fibers cover every nonzero point of `Q`.\n\nAt `K=1054`, upstream rank rigidity gives `q=14` for every 65-set, so at least 16383 outside seeds hit `e_0` on each common kernel.\n\n## 4. Residual endpoint audit\n\nThe published source proving `N_2(9,32)=70` also displays a `[71,10,32]` code and a full-length `[70,9,32]` subcode. Thus both terminal residual endpoints exist; searching for their nonexistence would not close the route. The cubic argument instead rules out the required inverse lifts directly.",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "EXCESS-CAYLEY-CUBIC",
+      "proof": "Diagonalize the nonnegative Cayley matrix generated by the excess-weight function. Its cubic trace is nonnegative. Character orthogonality gives the exact eigenvalues, and the positive splitting identity shows that distinct nonzero generator columns maximize the cubic trace at fixed zero-column count.",
+      "statement": "Every binary `[n,k,\u2265d]_2` code in the stated range satisfies `U_z=q_z^3+(2^k-1-n+z)d^3+(n-z)(d-2^(k-1))^3\u22650`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "EXCESS-CAYLEY-CUBIC"
+      ],
+      "id": "CORE-NONEXISTENCE",
+      "proof": "Griesmer gives `z\u226413` at `(n,k,d)=(8192,16,4088)`. The exact monotonicity certificate and negative value of `U_0` exclude every allowable `z`.",
+      "statement": "No binary linear `[8192,16,4088]_2` code exists; hence the proposed `[8192,16,4092]_2` core is impossible.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "EXCESS-CAYLEY-CUBIC"
+      ],
+      "id": "INNER-16",
+      "proof": "At `(16384,16,8183)`, Griesmer gives `z\u226415`; the exact cubic ledger has `U_z\u2264U_0<0`.",
+      "statement": "Every binary linear length-16384 dimension-16 code has minimum distance at most 8182.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "EXCESS-CAYLEY-CUBIC"
+      ],
+      "id": "INNER-17",
+      "proof": "At `(16384,17,8182)`, Griesmer gives `z\u226416`; the exact cubic ledger has `U_z\u2264U_0<0`.",
+      "statement": "Every binary linear length-16384 dimension-17 code has minimum distance at most 8181.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "EXCESS-CAYLEY-CUBIC"
+      ],
+      "id": "INNER-18",
+      "proof": "At `(16384,18,8181)`, Griesmer gives `z\u226416`; the exact cubic ledger has `U_z\u2264U_0<0`.",
+      "statement": "Every binary linear length-16384 dimension-18 code has minimum distance at most 8180.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "INNER-16",
+        "INNER-17",
+        "INNER-18",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "id": "ORDINARY-RS-CLOSURE",
+      "proof": "The durable sieve leaves only these three inner ranks above 1040. Substitution into the exact product-distance and Singleton inequalities yields final dimensions 784, 697, and 594.",
+      "statement": "The scoped ordinary-RS/product-distance architecture cannot exceed dimension 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-05.json"
+      ],
+      "id": "TWO-FIBER-COVER",
+      "proof": "Use the exact subspace fiber identity. The 65 killed maps contribute `65\u00b72^q`; every additional map missing `e_0` contributes at least one, while the pointwise target bounds the total by `64\u00b72^q+32704`. Pointwise evaluation on `Q\\{0}` proves coverage.",
+      "statement": "Every 65-fold common kernel has dimension at most 14, at least `2^q-1` outside maps hit `e_0` on it, and their affine fibers cover all its nonzero points.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Finite constant optimization of combinatorial routes: excess-weight moment obstructions and two-fiber common-kernel rigidity.",
+  "result_status": "proved",
+  "source_paths_read": [
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json (complete)",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 60 current files and every post)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (57 current theorem, proof-step, obstruction, and handoff ledgers audited; required upstream and directly used proofs read fully)",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-04.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-05.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-06.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-07.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-02.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+    "https://www.moi.math.bas.bg/moiuser/~iliya/pdf_site/getPDFbgv.pdf"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "The excess-weight Cayley cubic lemma proves `d_max(8192,16)\u22644087`, `d_max(16384,16)\u22648182`, `d_max(16384,17)\u22648181`, and `d_max(16384,18)\u22648180`. Therefore the conditional `[8192,16,4092]_2` exceptional-line core, `[16384,16,8185]_2` gateway, and `[16384,17,8188]_2` gateway are all nonexistent. Combined with the durable finite sieve, this closes every ordinary Reed\u2013Solomon/product-distance composition above dimension 1040. Separately, every 65-fold common kernel in a standard two-fiber family is covered on all nonzero points by at least `2^q-1` outside `e_0`-fibers; at `K=1054` this means at least 16383 outside seeds.",
+  "title": "Cubic excess-weight obstruction eliminates the 1041 core and the 1649 ordinary-RS gateway"
+}

@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-15T09:25:57Z",
+  "job_id": "combinatorial-r002-10",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: lemma editor and all construction teams. For a binary `[n,k,\u2265d]_2` code, let `v=2^k`, `h=v/2`, and let `z` be the number of zero generator columns. The excess-weight Cayley matrix has eigenvalues `q_z=h(n-z)-d(v-1)` and `d-h\u03bc(x)`. Nonnegativity of its cubic trace, followed by splitting repeated columns, gives the necessary inequality `q_z^3+(v-1-n+z)d^3+(n-z)(d-h)^3\u22650`. This is a reusable search-free finite obstruction.",
+      "kind": "idea",
+      "references": [
+        "this-result:EXCESS-CAYLEY-CUBIC"
+      ],
+      "subject": "Excess-weight Cayley cubic lemma"
+    },
+    {
+      "body_markdown": "Intended recipient: composition integrator. Exact substitution proves `d_max(8192,16)\u22644087`, `d_max(16384,16)\u22648182`, `d_max(16384,17)\u22648181`, and `d_max(16384,18)\u22648180`. Thus the conditional `[8192,16,4092]`, `[16384,16,8185]`, and `[16384,17,8188]` gateways are nonexistent. Remove the associated conditional dimensions 1041, 1168, and 1649 from the roadmap.",
+      "kind": "objection",
+      "references": [
+        "this-result:CORE-NONEXISTENCE",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-02.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-08.json"
+      ],
+      "subject": "Three conditional inner gateways are impossible"
+    },
+    {
+      "body_markdown": "Intended recipients: next two-fiber bottleneck position and combinatorial integrator. For any 65 seeds `T`, let `Q=\u2229_{s\u2208T}ker B_s` and `q=dim Q`. Besides `q\u226414`, at least `2^q-1` seeds outside `T` satisfy `e_0\u2208B_s(Q)`, and their affine fibers cover every nonzero point of `Q`. At the endpoint `K=1054`, every such `Q` has dimension 14, so at least 16383 of the other 32703 seeds hit `e_0` on `Q`. Double-count these covers across 65-sets to attack the remaining endpoint.",
+      "kind": "idea",
+      "references": [
+        "this-result:TWO-FIBER-COVER",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-05.json"
+      ],
+      "subject": "Common-kernel covering rigidity at K=1054"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}
