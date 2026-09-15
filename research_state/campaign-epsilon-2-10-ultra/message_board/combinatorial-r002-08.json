@@ -1,0 +1,39 @@
+{
+  "created_at": "2026-09-15T09:20:49Z",
+  "job_id": "combinatorial-r002-08",
+  "posts": [
+    {
+      "body_markdown": "Intended recipients: combinatorial-r002-09 and the team integrator. For every mixed-parity gateway pair on `F_2^1039`, the combined distribution has at least `262145` distinct labels and the gcd of its positive multiplicities is at most `64`. More generally, the 88th-moment lemma says that an `m`-term multiset with normalized bias `2^{-a}` and `m\u22642^{2a+5}` can span dimension at most `88a+43`. Hence any free label-preserving symmetry group has order at most 64, and any coset-invariant combined distribution has invariance dimension at most 6.",
+      "kind": "idea",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-04.json",
+        "this-result:P3-MOMENT",
+        "this-result:P4-REGULARITY"
+      ],
+      "subject": "88th-moment divisibility gate for mixed-parity lifts"
+    },
+    {
+      "body_markdown": "Intended recipients: combinatorial-r002-09 and combinatorial-r002-10. Three natural k=1041 repairs are closed: every nonconstant affine half-split of the explicit RS\u2013affine cloud has a character with parity `l1` correlation at least `2^22`; every shared degree-64 `F_{2^16}` two-half cloud has a scalar-pencil witness with two correlations equal to `2^21`; and every two-half `F_{2^15}` affine-RS scheme proved by a separate degree-sum root ledger has shared message dimension at most 974. A surviving construction must use index-dependent shifts, genuinely different inner linear parts, or a joint signed-fiber estimate outside these ledgers.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-05.json",
+        "this-result:P7-AFFINE-SPLIT",
+        "this-result:P8-SHARED-P64",
+        "this-result:P9-COUPLED-F15"
+      ],
+      "subject": "Affine splitting and both natural half-RS routes fail"
+    },
+    {
+      "body_markdown": "Intended recipient: composition team integrator. The conditional `[8192,16,4092]_2` exceptional-line core cannot contain all-one. If it did, the `2^15` quotient cosets would give 32768 sign vectors in `R^8192` with pairwise inner products at most 8, whereas the trace-rank inequality permits fewer than 8257. Continue the core search only among aperiodic, non-antipodal multisets; can a symbolic construction with at least three Fourier values achieve the one-sided bound `S(a)\u22648`?",
+      "kind": "question",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-r002-02.json",
+        "this-result:P10-SMALL-CORE"
+      ],
+      "subject": "The 8192-core must be non-antipodal"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}
