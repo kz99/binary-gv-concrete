@@ -504,12 +504,12 @@
     "id": "roadmap-algebraic",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -520,12 +520,12 @@
     "id": "roadmap-expander",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -536,12 +536,12 @@
     "id": "roadmap-composition",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "xhigh",
     "role": "roadmap",
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -552,12 +552,12 @@
     "id": "lemma-writer-0001",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "xhigh",
     "role": "lemma_writer",
     "round": 1,
     "status": "queued",
     "team": "shared",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -571,9 +571,9 @@
     "reasoning_effort": "ultra",
     "role": "genius",
     "round": 1,
-    "status": "queued",
+    "status": "deferred",
     "team": "shared",
-    "updated_at": "2026-09-15T04:27:32Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 1,
@@ -616,12 +616,12 @@
     "id": "combinatorial-expander-02",
     "model": "gpt-5.6-sol",
     "phase": "research",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
     "status": "queued",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T04:44:28Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -632,12 +632,12 @@
     "id": "combinatorial-expander-03",
     "model": "gpt-5.6-sol",
     "phase": "research",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
     "status": "queued",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T04:44:28Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -648,12 +648,12 @@
     "id": "combinatorial-expander-04",
     "model": "gpt-5.6-sol",
     "phase": "research",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
     "status": "queued",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T04:44:28Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -680,12 +680,12 @@
     "id": "combinatorial-expander-06",
     "model": "gpt-5.6-sol",
     "phase": "research",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
     "status": "queued",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T04:44:28Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -696,12 +696,12 @@
     "id": "combinatorial-expander-07",
     "model": "gpt-5.6-sol",
     "phase": "research",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
     "status": "queued",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T04:44:28Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -728,12 +728,12 @@
     "id": "combinatorial-expander-09",
     "model": "gpt-5.6-sol",
     "phase": "research",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "xhigh",
     "role": "researcher",
     "round": 1,
     "status": "queued",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T04:44:28Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 0,
@@ -744,12 +744,12 @@
     "id": "combinatorial-expander-10",
     "model": "gpt-5.6-sol",
     "phase": "research",
-    "reasoning_effort": "ultra",
+    "reasoning_effort": "max",
     "role": "researcher",
     "round": 1,
     "status": "queued",
     "team": "combinatorial-expander",
-    "updated_at": "2026-09-15T04:44:28Z"
+    "updated_at": "2026-09-15T06:50:34Z"
   },
   {
     "attempts": 1,
