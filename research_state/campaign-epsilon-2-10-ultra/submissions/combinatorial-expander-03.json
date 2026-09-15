@@ -1,0 +1,231 @@
+{
+  "baseline_beaten": false,
+  "block_length": 1073741824,
+  "confidence": "high",
+  "construction_markdown": "No new code is claimed. The audited constructions are the complete-output parity lifts from Ta-Shma\u2019s s-wide replacement product and Cohen\u2013Cohen\u2019s Gray-register product. Every lifted column is an XOR of base columns, so amplification cannot increase rank. The obstruction is strengthened to balanced-core rank 1040: such a core, together with the all-one word, would already produce a dimension-1041 target code.",
+  "dimension": null,
+  "discussion_posts": [
+    {
+      "body_markdown": "For the construction architect and parameter optimizer: any two-sided `2^-9`-balanced core `B\u2264F_2^(2^30)` of dimension 1040 gives a dimension-1041 target code `B\u2295<1^n>`. Therefore complete-output balanced-code barriers must begin at core rank 1040, not 1041.",
+      "kind": "idea",
+      "references": [
+        "target-signed-sum-normalization",
+        "balanced-core-decomposition",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json"
+      ],
+      "subject": "Leaderboard improvement needs only balanced-core rank 1040"
+    },
+    {
+      "body_markdown": "For the proof-lemma builder: Cohen\u2013Cohen\u2019s hypotheses at rank 1040 force `d\u2265631`, `s\u22653`, `ell\u22653`, and, by applying the trace lemma also to the inner Cayley graph, `c\u22654`. Hence its complete cloud has at least `1040\u00b7631^3\u00b74^3=16,722,507,176,960` outputs, strengthening the existing lower bound by the previously unused `c^ell` factor.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "https://eccc.weizmann.ac.il/report/2025/179/download"
+      ],
+      "subject": "Sharper Gray-register raw-length obstruction"
+    },
+    {
+      "body_markdown": "For the targeted bottleneck breaker: can one symbolically index at most `2^30` Gray-register or wide-replacement paths whose XOR labels span at least 1040 dimensions and satisfy `|\u03a3_p(-1)^{<a,y_p>}|\u22642^21` for every nonzero `a`? Deduplication or thinning cannot inherit the complete-cloud norm bound; a new simultaneous character-sum proof and a polynomial-time full-matrix enumerator are required.",
+      "kind": "question",
+      "references": [
+        "complete-walk-no-fit",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Exact sparse-path theorem needed"
+    }
+  ],
+  "distance_audit": [
+    "For `n=2^30` and `tau=2^-9`, `tau n=2^21` and `(1-tau)n/2=535,822,336`.",
+    "A `tau`-balanced core has every nonzero weight in `[535,822,336,537,919,488]`. Its all-one augmentation has the same minimum-distance lower bound because the new coset consists of complements.",
+    "The obstruction concerns the published absolute-bias certificates. It does not prove that every underlying path multiset fails the weaker one-sided distance condition.",
+    "Deleting `M-n` uncontrolled coordinates from a raw absolute-bias certificate can prove the target only if `M\u2264n+2^21=1,075,838,976`. The strengthened barriers remain outside this window."
+  ],
+  "explicitness_audit": [
+    "No leaderboard generator is submitted.",
+    "The complete-cloud constructions are symbolically enumerable, but their certified finite parameter choices exceed the exact length budget.",
+    "Deduplicating or selecting a sparse subset changes the path distribution and therefore cannot reuse the published operator-norm proof automatically.",
+    "Any sparse replacement must deterministically specify every graph, rotation map, starting state, path, multiplicity, and ordering, and output all generator entries in `n^{O(1)}` time.",
+    "Exhaustive subset selection or conditional-expectation search over path families is inadmissible."
+  ],
+  "generator_matrix": {
+    "algorithm": "No new target matrix is claimed. For the unchanged verified RM(1,30) fallback, enumerate `x\u2208F_2^30` lexicographically and emit the evaluations of `1,x_1,\u2026,x_30`.",
+    "outputs_full_matrix_in_polynomial_time": true,
+    "runtime_bound": "O(n log n) bit operations for the unchanged 31-row baseline.",
+    "runtime_proof": "There are 31n emitted bits. Coordinate lookup is constant time after indexing, and lexicographic column incrementation costs O(log n), giving O(n log n). This baseline algorithm is not a new submission."
+  },
+  "leaderboard_submission": false,
+  "literature_dependencies": [
+    {
+      "hypotheses": "Complete s-wide output, `M=N_1D_1^sD_2^t`, and `epsilon_0+2beta+2lambda_1\u2264lambda_2^2`.",
+      "result": "Theorem 4.1 bounds bias by `[lambda_2^s+s lambda_2^(s-1)+s^2(lambda_2^(s-3)+zeta)]^floor(t/s)`.",
+      "source": "[Ta-Shma, Explicit, Almost Optimal, Epsilon-Balanced Codes](https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf)",
+      "used_for": "Finite Ta-Shma rank-length obstruction."
+    },
+    {
+      "hypotheses": "An undirected outer graph, an inner Cayley graph on `d^s` states, a word double-conflict-free on intervals, and `2omega_G+epsilon\u2264(8/5)omega_H^5`.",
+      "result": "Theorem 6.2 gives norm at most `10(2omega_H)^(ell-2)`; complete enumeration has `M=|V(G)|d^sc^ell`.",
+      "source": "[Cohen\u2013Cohen, Wide Replacement Products Meet Gray Codes](https://eccc.weizmann.ac.il/report/2025/179/download)",
+      "used_for": "Strengthened Gray-register rank-length obstruction."
+    },
+    {
+      "hypotheses": "The proved campaign RS\u2013affine construction and its 1039-dimensional balanced core.",
+      "result": "The campaign\u2019s strongest proved endpoint is dimension 1040, so a competing balanced core of dimension 1040 plus all-one augmentation would yield the first improvement.",
+      "source": "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json",
+      "used_for": "Correct improvement threshold."
+    }
+  ],
+  "minimum_distance": null,
+  "next_tasks": [
+    "Replace the lemma-book statement `complete-walk-no-fit` by the stronger rank-1040 version and record the Gray inner-degree consequence `c\u22654`.",
+    "Have the proof position independently check that the Cohen\u2013Cohen complete multiset retains all starting-state and path multiplicities; the lower bound applies to that distribution, not to its deduplicated support.",
+    "Direct architecture work toward deterministic sparse/non-Cartesian path families with a fresh all-character proof; further optimization of complete clouds cannot improve the 1040-dimensional endpoint."
+  ],
+  "obstructions": [
+    "A 1040-dimensional balanced core is already enough to beat the campaign-proved dimension-1040 code after all-one augmentation, closing an off-by-one scope gap in the prior rank-1041 barrier.",
+    "Ta-Shma\u2019s complete-output Theorem 4.1 has no contracting specialization of balanced-core rank at least 1040 within the exact or generically puncturable length window.",
+    "Cohen\u2013Cohen\u2019s complete Gray-register certificate at rank at least 1040 requires at least 16,722,507,176,960 output coordinates when the inner Cayley degree is included.",
+    "Parity-walk amplification never increases the span of the base labels.",
+    "These are certificate and complete-enumeration obstructions, not impossibility results for deterministic sparse path families or direct one-sided analyses."
+  ],
+  "parameter_ledger": [
+    {
+      "derivation": "Immutable target",
+      "quantity": "length",
+      "value": "`n=2^30=1,073,741,824`"
+    },
+    {
+      "derivation": "`(1/2-2^-10)n`",
+      "quantity": "required distance",
+      "value": "`D=535,822,336`"
+    },
+    {
+      "derivation": "`n-2D`",
+      "quantity": "allowed signed-sum magnitude for a balanced core",
+      "value": "`2^21=2,097,152`"
+    },
+    {
+      "derivation": "`tau=(n-2D)/n`",
+      "quantity": "balanced-code bias",
+      "value": "`tau=2^-9=1/512`"
+    },
+    {
+      "derivation": "A rank-1040 balanced core plus all-one has dimension 1041",
+      "quantity": "complete-cloud improvement threshold",
+      "value": "`h\u22651040`"
+    },
+    {
+      "derivation": "`n+tau n`",
+      "quantity": "largest blindly puncturable raw length",
+      "value": "`1,075,838,976`"
+    },
+    {
+      "derivation": "`(513/512)2^30 / 1040 < 2^20`",
+      "quantity": "Ta-Shma outer-degree budget",
+      "value": "`D_1^s<2^20`"
+    },
+    {
+      "derivation": "`(1040-31)/(31\u00b71039)=1009/32209>1/36`",
+      "quantity": "Ta-Shma spectral lower bound for `4\u2264s\u22649`",
+      "value": "`lambda_1>1/6`"
+    },
+    {
+      "derivation": "`d>1600\u00b71040/(1040+1599)>630`",
+      "quantity": "Gray outer degree",
+      "value": "`d\u2265631`"
+    },
+    {
+      "derivation": "Double-conflict-freeness on intervals for `ell\u22653`",
+      "quantity": "Gray register width",
+      "value": "`s\u22653`"
+    },
+    {
+      "derivation": "The target norm forces `omega_H<1/2`; trace on the `d^s`-vertex inner Cayley graph gives `c>4d^s/(d^s+3)>3`",
+      "quantity": "Gray inner degree",
+      "value": "`c\u22654`"
+    },
+    {
+      "derivation": "`1040\u00b7631^3\u00b74^3`",
+      "quantity": "Gray complete-output lower bound",
+      "value": "`16,722,507,176,960`"
+    }
+  ],
+  "proof_markdown": "## Rank-1040 complete-cloud obstruction\n\nPut `N=2^30`, `tau=2^-9`, and `D=(1-tau)N/2`. A `tau`-balanced binary code `B` has every nonzero weight in `[D,N-D]`. Since `1^N\u2209B`, the code `B\u2295<1^N>` has dimension `dim(B)+1`; its new coset consists of complements and therefore still has minimum distance at least `D`. Thus balanced-core rank 1040 already suffices to produce a dimension-1041 leaderboard improvement.\n\nEvery parity-walk output column is an XOR of base labels. Hence its span is contained in the base-label span. A balanced output of dimension at least 1040 therefore requires at least 1040 outer vertices.\n\nFor an undirected `q`-regular rotation multigraph on `v` vertices with normalized nontrivial eigenvalue magnitude at most `lambda`, integral adjacency multiplicities give\n\n`tr(P^2)\u2265v/q`.\n\nSpectral decomposition gives `tr(P^2)\u22641+(v-1)lambda^2`; consequently\n\n`q\u2265v/[1+(v-1)lambda^2]`.  (1)\n\nFor Ta-Shma\u2019s complete output, `M=N_1D_1^sD_2^t`. Blind puncturing based only on raw absolute bias requires `M\u2264(1+tau)N`. Since `N_1\u22651040`, this implies `D_1^s<2^20`. If `t<s`, the theorem\u2019s exponent is zero. For `s\u22643`, its block factor is at least one. If `4\u2264s\u22649`, then `D_1\u226431`; (1) gives\n\n`lambda_1^2\u22651009/(31\u00b71039)>1/36`.\n\nCompatibility forces `lambda_2^2\u22652lambda_1>1/3`, and the block factor satisfies\n\n`Q\u2265s^2lambda_2^(s-3)>s^2\u00b73^{-(s-3)/2}\u22653`.\n\nIf `s\u226510`, then `D_1\u22643`, and (1) gives `lambda_1^2>(1/4)`. Compatibility would require `lambda_2^2\u22652lambda_1>1`, impossible. Thus the published Ta-Shma estimate never gives a subunit certificate in the relevant rank-length window.\n\nFor Cohen\u2013Cohen, a target norm certificate `10(2omega_H)^(ell-2)\u22641/512` forces `ell\u22653` and `omega_H<1/2`. Its compatibility inequality then implies `omega_G<1/40`. Applying (1) to the outer graph with `v\u22651040` yields\n\n`d>1600v/(v+1599)\u22651600\u00b71040/2639>630`,\n\nso `d\u2265631`. Double-conflict-freeness on intervals forces `s\u22653`: every length-two interval uses distinct symbols, while a three-letter word over only two symbols has only one uniquely occurring symbol.\n\nThe inner Cayley graph has `d^s>9` vertices, degree `c`, and spectral expansion below `1/2`. Applying (1) again gives\n\n`c>4d^s/(d^s+3)>3`,\n\nhence `c\u22654`. Therefore its complete output length is at least\n\n`v d^s c^ell \u22651040\u00b7631^3\u00b74^3=16,722,507,176,960>N`.\n\nAccordingly neither published complete-output certificate can supply a balanced core capable of beating dimension 1040. Sparse or support-aware variants require a new proof. \u220e",
+  "proof_steps": [
+    {
+      "dependencies": [],
+      "id": "CORE-AUGMENT",
+      "proof": "A `tau`-balanced core excludes `1^n`. Every word in its all-one coset is a complement, so its weight remains in `[D,n-D]`.",
+      "statement": "A balanced core of dimension 1040 yields a dimension-1041 target code after all-one augmentation.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "RANK",
+      "proof": "Every output label is an XOR of visited base labels and therefore lies in their linear span.",
+      "statement": "Parity-walk amplification cannot increase binary rank.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [],
+      "id": "TRACE",
+      "proof": "Integral adjacency multiplicities give `tr(P^2)\u2265v/q`; the spectral decomposition gives `tr(P^2)\u22641+(v-1)lambda^2`.",
+      "statement": "An undirected regular multigraph satisfies `q\u2265v/[1+(v-1)lambda^2]`.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RANK",
+        "TRACE"
+      ],
+      "id": "TASHMA-1040",
+      "proof": "At rank 1040, the exact/generic-puncturing length window still gives `D_1^s<2^20`. The cases `s\u22643`, `4\u2264s\u22649`, and `s\u226510` respectively give block factor at least one, block factor above three, and incompatible spectral hypotheses.",
+      "statement": "Ta-Shma Theorem 4.1 has no contracting complete-output specialization capable of a 1040-dimensional balanced core.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "RANK",
+        "TRACE"
+      ],
+      "id": "GRAY-1040",
+      "proof": "The target norm forces `ell\u22653` and `omega_H<1/2`; compatibility and the outer trace bound force `d\u2265631`. Double-conflict-freeness forces `s\u22653`, while the inner trace bound forces `c\u22654`.",
+      "statement": "Cohen\u2013Cohen\u2019s complete Gray-register output has length at least `16,722,507,176,960` at core rank 1040.",
+      "status": "proved"
+    },
+    {
+      "dependencies": [
+        "CORE-AUGMENT",
+        "TASHMA-1040",
+        "GRAY-1040"
+      ],
+      "id": "CONCLUDE",
+      "proof": "Both complete-output certificates fail before producing a balanced core whose all-one augmentation could improve the 1040-dimensional campaign endpoint.",
+      "statement": "The audited complete-cloud wide-replacement routes cannot produce a new leaderboard record.",
+      "status": "proved"
+    }
+  ],
+  "rate": null,
+  "research_direction": "Wide replacement products and Gray-code constructions",
+  "result_status": "proved",
+  "source_paths_read": [
+    "/Users/kaizheng/.agents/skills/yukon-cli/SKILL.md",
+    "AGENTS.md",
+    "TARGET.md",
+    "how_to_contribute/CONTRIBUTOR_INSTRUCTIONS.md",
+    "proofs/rm-1-30-baseline.md",
+    "data/records.json",
+    "research_state/campaign-epsilon-2-10-ultra/README.md",
+    "research_state/campaign-epsilon-2-10-ultra/team-research-graph.md",
+    "research_state/campaign-epsilon-2-10-ultra/lemma_book/lemma-book.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-algebraic.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-composition.json",
+    "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json",
+    "research_state/campaign-epsilon-2-10-ultra/submissions/*.json (all 32 durable files)",
+    "research_state/campaign-epsilon-2-10-ultra/message_board/*.json (all 35 files)",
+    "https://www.cs.tau.ac.il/~amnon/Papers/T.STOC17.pdf",
+    "https://eccc.weizmann.ac.il/report/2025/179/download"
+  ],
+  "submission_class": "obstruction",
+  "theorem_statement": "Let `tau=2^-9`. Neither Ta-Shma\u2019s complete s-wide construction nor Cohen\u2013Cohen\u2019s complete Gray-register construction, using their published norm certificates, can produce a `tau`-balanced binary linear core of dimension at least 1040 at length at most `2^30`, even allowing blind puncturing justified solely by raw absolute bias. Hence their standard complete-output forms cannot beat the dimension-1040 campaign endpoint by adjoining the all-one word.",
+  "title": "Rank-1040 tightening of the wide-replacement and Gray-register barriers"
+}

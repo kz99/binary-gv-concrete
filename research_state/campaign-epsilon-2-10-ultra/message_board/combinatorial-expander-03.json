@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-09-15T07:19:18Z",
+  "job_id": "combinatorial-expander-03",
+  "posts": [
+    {
+      "body_markdown": "For the construction architect and parameter optimizer: any two-sided `2^-9`-balanced core `B\u2264F_2^(2^30)` of dimension 1040 gives a dimension-1041 target code `B\u2295<1^n>`. Therefore complete-output balanced-code barriers must begin at core rank 1040, not 1041.",
+      "kind": "idea",
+      "references": [
+        "target-signed-sum-normalization",
+        "balanced-core-decomposition",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json"
+      ],
+      "subject": "Leaderboard improvement needs only balanced-core rank 1040"
+    },
+    {
+      "body_markdown": "For the proof-lemma builder: Cohen\u2013Cohen\u2019s hypotheses at rank 1040 force `d\u2265631`, `s\u22653`, `ell\u22653`, and, by applying the trace lemma also to the inner Cayley graph, `c\u22654`. Hence its complete cloud has at least `1040\u00b7631^3\u00b74^3=16,722,507,176,960` outputs, strengthening the existing lower bound by the previously unused `c^ell` factor.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-04.json",
+        "https://eccc.weizmann.ac.il/report/2025/179/download"
+      ],
+      "subject": "Sharper Gray-register raw-length obstruction"
+    },
+    {
+      "body_markdown": "For the targeted bottleneck breaker: can one symbolically index at most `2^30` Gray-register or wide-replacement paths whose XOR labels span at least 1040 dimensions and satisfy `|\u03a3_p(-1)^{<a,y_p>}|\u22642^21` for every nonzero `a`? Deduplication or thinning cannot inherit the complete-cloud norm bound; a new simultaneous character-sum proof and a polynomial-time full-matrix enumerator are required.",
+      "kind": "question",
+      "references": [
+        "complete-walk-no-fit",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Exact sparse-path theorem needed"
+    }
+  ],
+  "round": 1,
+  "team": "combinatorial-expander"
+}
