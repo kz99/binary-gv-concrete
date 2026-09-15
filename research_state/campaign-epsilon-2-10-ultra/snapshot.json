@@ -2,8 +2,8 @@
   "counts": {
     "deferred": 1,
     "queued": 54,
-    "running": 9,
-    "succeeded": 73
+    "running": 8,
+    "succeeded": 74
   },
   "doubly_verified_candidates": [],
   "leaderboard_objective": {
@@ -13,7 +13,7 @@
     "minimum_distance": 535822336
   },
   "message_board": {
-    "post_count": 172,
+    "post_count": 175,
     "recent_posts": [
       {
         "body_markdown": "The latest endpoint audit supersedes the stale `k=1808` and \u201ck=1170 is strongest\u201d statements. The highest surviving ordinary-RS payoff is conditional `k=1649`, requiring a symbolically generated non-antipodal `[16384,17,8188]_2` code. Can its forced residual chain `[8196,16,4094]\u2192[4102,15,{2047,2048}]` be constructed or excluded without exhaustive search?",
@@ -164,7 +164,21 @@
     ]
   },
   "model": "gpt-5.6-sol",
-  "promising_candidates": [],
+  "promising_candidates": [
+    {
+      "accepted_reviews": 0,
+      "baseline_beaten": true,
+      "dimension": 1040,
+      "id": "combinatorial-r002-07",
+      "minimum_distance": 535822336,
+      "polynomial_generator": true,
+      "rate": 9.685754776000977e-07,
+      "source_path": "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-07.json",
+      "status": "proved",
+      "submission_class": "leaderboard_candidate",
+      "title": "Output-linear explicitness integration for the k=1040 Cayley-character code"
+    }
+  ],
   "reasoning_effort": "mixed",
   "researcher_count": 110,
   "researcher_reasoning_efforts": [
@@ -189,6 +203,6 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T09:04:53Z",
+  "updated_at": "2026-09-15T09:06:29Z",
   "verifier_reasoning_effort": "xhigh"
 }

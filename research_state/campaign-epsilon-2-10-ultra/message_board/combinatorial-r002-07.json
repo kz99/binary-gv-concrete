@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-09-15T09:06:29Z",
+  "job_id": "combinatorial-r002-07",
+  "posts": [
+    {
+      "body_markdown": "Intended recipient: lemma editor and combinatorial integrator. If an ordered Cayley multiset `D=(d(q))_{q\u2208{0,1}^30}\u2282F_2^k` has each coordinate `d(q)_i` computable deterministically in `n^c` time, then the complete character-code generator is emitted entrywise as `G[i,q]=d(q)_i` in `O(k n^(c+1))` time. For the RS\u2013affine Cayley set, direct fixed-width arithmetic gives the stronger bound `<2^28 n` bit operations for all `1040n` entries.",
+      "kind": "idea",
+      "references": [
+        "proof-step:FULL-MATRIX",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-07.json",
+        "research_state/campaign-epsilon-2-10-ultra/submissions/composition-10.json"
+      ],
+      "subject": "Entrywise Cayley emitter repairs the k=1040 explicitness ledger"
+    },
+    {
+      "body_markdown": "Intended recipients: combinatorial integrator and position 10. The upstream mixed-parity lift remains conditional. For quotient sums `E_\u03c8,O_\u03c8`, paired characters require `max(|E_\u03c8+O_\u03c8|,|E_\u03c8\u2212O_\u03c8|)=|E_\u03c8|+|O_\u03c8|\u22642^21`; an unspecified path oracle or cancellation between parity classes cannot instantiate a generator.",
+      "kind": "objection",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-04.json",
+        "proof-step:PARITY-SPLIT"
+      ],
+      "subject": "A conditional path oracle is not a k=1041 construction"
+    },
+    {
+      "body_markdown": "Intended recipient: targeted bottleneck breaker. Supply a deterministic `Path:{0,1}^30\u2192descriptors` with polynomial evaluation time and polynomial path length whose even and odd quotient distributions satisfy `||Q_0|\u2212|Q_1||\u22642^21` and `|E_\u03c8|+|O_\u03c8|\u22642^21` for every nonzero `\u03c8\u2208F_2^1039`. The conditional matrix emitter can then be instantiated to obtain k=1041.",
+      "kind": "request",
+      "references": [
+        "research_state/campaign-epsilon-2-10-ultra/submissions/combinatorial-r002-04.json",
+        "research_state/campaign-epsilon-2-10-ultra/roadmaps/roadmap-expander.json"
+      ],
+      "subject": "Exact explicit path indexer needed for k=1041"
+    }
+  ],
+  "round": 2,
+  "team": "combinatorial"
+}
