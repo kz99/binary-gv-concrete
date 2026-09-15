@@ -34,8 +34,10 @@ R_{\mathrm{GV}}=1-h_2(511/1024)
 which corresponds to \(k\approx2954.6413\), hence \(k\geq2955\), at the
 fixed length. It is an existential reference line, not a verified construction.
 
-The asymptotic objective is an explicit family at relative distance
-\(1/2-\varepsilon\) with rate \(\Omega(\varepsilon^2)\).
+The operating objective is to raise the verified concrete dimension \(k\) as
+far as possible toward the GV reference. General or asymptotic work is useful
+only when it yields a better concrete construction or a lemma needed to prove
+one.
 
 ## 3. What a submission contains
 

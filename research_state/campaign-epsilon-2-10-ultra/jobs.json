@@ -1,7 +1,7 @@
 [
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Audit the exact RM(1,30) baseline and identify deterministic extensions that preserve bias at most 2^-10 while adding dimensions.",
     "error": null,
@@ -11,11 +11,11 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Instantiate explicit small-bias or epsilon-balanced code families at epsilon=2^-10 and length 2^30, exposing every constant, floor, and padding step.",
     "error": null,
@@ -25,13 +25,13 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Study explicit expander-walk and replacement-product constructions aiming for dimension at least 2,955 at bias 2^-10.",
+    "direction": "Study explicit expander-walk and replacement-product constructions, optimizing their exact certified dimension at bias 2^-10.",
     "error": null,
     "id": "researcher-0003",
     "model": "gpt-5.6-sol",
@@ -39,11 +39,11 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Develop algebraic trace, character-sum, or subfield constructions whose every nonzero word has bias at most 2^-10.",
     "error": null,
@@ -53,11 +53,11 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Find structured concatenation or multilevel constructions with a rigorous near-half-distance proof, not a sampling argument.",
     "error": null,
@@ -67,13 +67,13 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Prove an asymptotic family with distance 1/2-epsilon and rate Omega(epsilon^2), then instantiate epsilon=2^-10 at n=2^30.",
+    "direction": "Search for the largest concrete dimension attainable at the exact target, including finite parameter optimization of known symbolic constructions.",
     "error": null,
     "id": "researcher-0006",
     "model": "gpt-5.6-sol",
@@ -81,11 +81,11 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Audit known explicit epsilon-balanced-code results for constants strong enough to give a concrete symbolic certificate at this checkpoint.",
     "error": null,
@@ -95,11 +95,11 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Explore Reed--Muller, BCH, algebraic-geometric, and tensor constructions that beat the 31-dimensional affine baseline at the exact target.",
     "error": null,
@@ -109,11 +109,11 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Develop deterministic derandomizations of low-bias linear codes and prove their finite-length parameter losses.",
     "error": null,
@@ -123,13 +123,13 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Synthesize reusable proved lemmas into an asymptotic family and isolate the narrowest missing uniform lemma when no complete construction survives.",
+    "direction": "Synthesize reusable proved lemmas into the highest-dimension concrete code possible and isolate the narrowest missing lemma when no improvement survives.",
     "error": null,
     "id": "researcher-0010",
     "model": "gpt-5.6-sol",
@@ -137,13 +137,13 @@
     "reasoning_effort": "ultra",
     "role": "researcher",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Audit explicit epsilon-balanced-code literature and extract finite constants relevant to epsilon=2^-10 and rate Omega(epsilon^2).",
+    "direction": "Audit explicit epsilon-balanced-code literature and extract the strongest finite constants and parameter choices for a larger dimension at epsilon=2^-10.",
     "error": null,
     "id": "literature-sota-0001",
     "model": "gpt-5.6-sol",
@@ -151,13 +151,13 @@
     "reasoning_effort": "ultra",
     "role": "literature",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Trace, character-sum, subfield-subcode, and algebraic routes to bias at most 2^-10.",
+    "direction": "Trace, character-sum, subfield-subcode, and algebraic routes maximizing concrete dimension at bias 2^-10.",
     "error": null,
     "id": "roadmap-algebraic",
     "model": "gpt-5.6-sol",
@@ -165,13 +165,13 @@
     "reasoning_effort": "ultra",
     "role": "roadmap",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Explicit epsilon-balanced and expander-walk routes with exact constants at epsilon=2^-10.",
+    "direction": "Explicit epsilon-balanced and expander-walk routes with finite constants optimized at epsilon=2^-10.",
     "error": null,
     "id": "roadmap-expander",
     "model": "gpt-5.6-sol",
@@ -179,25 +179,25 @@
     "reasoning_effort": "ultra",
     "role": "roadmap",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Uniform families with distance 1/2-epsilon and rate Omega(epsilon^2), specialized to the checkpoint.",
+    "direction": "Structured concatenation, multilevel, and finite parameter-search routes maximizing the certified dimension at the exact target.",
     "error": null,
-    "id": "roadmap-asymptotic",
+    "id": "roadmap-composition",
     "model": "gpt-5.6-sol",
     "phase": "synthesis",
     "reasoning_effort": "ultra",
     "role": "roadmap",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
     "direction": "Edit all reusable proof steps into the shared lemma book.",
     "error": null,
@@ -207,13 +207,13 @@
     "reasoning_effort": "ultra",
     "role": "lemma_writer",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   },
   {
     "attempts": 0,
-    "created_at": "2026-09-15T04:08:35Z",
+    "created_at": "2026-09-15T04:13:22Z",
     "dependency": null,
-    "direction": "Construct the strongest integrated exact and asymptotic family from all campaign evidence.",
+    "direction": "Construct the highest-dimension exact leaderboard candidate from all campaign evidence.",
     "error": null,
     "id": "GENIUS",
     "model": "gpt-5.6-sol",
@@ -221,6 +221,6 @@
     "reasoning_effort": "ultra",
     "role": "genius",
     "status": "queued",
-    "updated_at": "2026-09-15T04:08:35Z"
+    "updated_at": "2026-09-15T04:13:22Z"
   }
 ]

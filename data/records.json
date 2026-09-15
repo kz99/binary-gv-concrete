@@ -92,21 +92,21 @@
       {
         "id": "small-bias",
         "title": "Explicit small-bias codes",
-        "summary": "Seek a symbolic construction with bias at most \\(2^{-10}\\) and dimension on the order of \\(2^{10}\\) at length \\(2^{30}\\).",
+        "summary": "Seek the largest certified dimension from a symbolic construction with bias at most \\(2^{-10}\\) at length \\(2^{30}\\).",
         "priority": "high",
         "state": "active"
       },
       {
         "id": "expander-amplification",
         "title": "Expander and walk amplification",
-        "summary": "Instantiate near-optimal epsilon-balanced constructions with every finite constant exposed.",
+        "summary": "Optimize finite constants in epsilon-balanced constructions to maximize the certified leaderboard dimension.",
         "priority": "high",
         "state": "active"
       },
       {
         "id": "algebraic-trace",
         "title": "Algebraic trace constructions",
-        "summary": "Use algebraic structure to control all nonzero codeword biases without random sampling.",
+        "summary": "Use algebraic structure to control all nonzero codeword biases and maximize dimension without random sampling.",
         "priority": "medium",
         "state": "active"
       }

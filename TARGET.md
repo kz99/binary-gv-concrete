@@ -29,10 +29,11 @@ R_{\mathrm{GV}}=1-h_2(511/1024)
 or \(k_{\mathrm{GV}}=2954.64132225\ldots\) at this blocklength. Thus
 \(k\geq2955\) reaches the real-valued GV-rate reference.
 
-The asymptotic aim is an explicit, symbolically specified family at relative
-distance \(1/2-\varepsilon\) with rate \(\Omega(\varepsilon^2)\). Random
-sampling is not an admissible construction method. Every claimed parameter
-must follow from a human-readable mathematical proof.
+The operating aim is to approach this concrete GV reference by increasing the
+verified dimension \(k\) at the fixed distance. General asymptotic insight is
+useful only insofar as it produces a better concrete code or a necessary lemma.
+Random sampling is not an admissible construction method. Every claimed
+parameter must follow from a human-readable mathematical proof.
 
 The former \(7/16\) campaign is retained only as historical material under
 `archive/target-7-16/`.

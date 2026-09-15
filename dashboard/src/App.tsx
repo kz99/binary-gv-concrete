@@ -646,9 +646,9 @@ function ContributePage() {
         <div className="page-shell contribute-intro-grid">
           <div>
             <span className="eyebrow">Open research problem</span>
-            <h1>Improve the verified rate.</h1>
+            <h1>Improve the verified dimension.</h1>
             <p>
-              Contribute a deterministic, symbolic binary code at the exact target. Every submission carries a mathematical proof and is independently audited by two AI verifier agents before it can enter the record table.
+              Contribute a deterministic, symbolic binary code with the largest provable dimension at the exact target. Every submission carries a mathematical proof and is independently audited by two AI verifier agents before it can enter the record table.
             </p>
           </div>
           <div className="contribute-target">

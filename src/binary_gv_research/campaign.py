@@ -60,7 +60,7 @@ RESEARCH_SCHEMA = {
         "research_direction": {"type": "string"},
         "result_status": {"type": "string", "enum": ["proved", "conditional", "conjectural", "refuted"]},
         "submission_class": {"type": "string", "enum": [
-            "baseline_improvement", "asymptotic_family", "obstruction", "literature", "proof_tool"
+            "leaderboard_candidate", "baseline_improvement", "obstruction", "literature", "proof_tool"
         ]},
         "leaderboard_submission": {"type": "boolean"},
         "baseline_beaten": {"type": "boolean"},
@@ -201,7 +201,7 @@ GENIUS_SCHEMA = {
     "required": [
         "title", "coverage_complete", "examined_paths", "best_verified_candidate",
         "best_promising_candidate", "baseline_analysis", "selected_architecture",
-        "asymptotic_family", "integrated_theorem", "proof_steps", "fatal_gaps",
+        "leaderboard_plan", "integrated_theorem", "proof_steps", "fatal_gaps",
         "research_directives", "note_markdown",
     ],
     "properties": {
@@ -210,7 +210,7 @@ GENIUS_SCHEMA = {
         "best_verified_candidate": {"type": ["string", "null"]},
         "best_promising_candidate": {"type": ["string", "null"]},
         "baseline_analysis": {"type": "string"}, "selected_architecture": {"type": ["string", "null"]},
-        "asymptotic_family": {"type": "string"}, "integrated_theorem": {"type": "string"},
+        "leaderboard_plan": {"type": "string"}, "integrated_theorem": {"type": "string"},
         "proof_steps": {"type": "array", "items": PROOF_STEP},
         "fatal_gaps": {"type": "array", "items": {"type": "string"}},
         "research_directives": {"type": "array", "items": {"type": "string"}},
@@ -222,43 +222,41 @@ GENIUS_SCHEMA = {
 DIRECTIONS = [
     "Audit the exact RM(1,30) baseline and identify deterministic extensions that preserve bias at most 2^-10 while adding dimensions.",
     "Instantiate explicit small-bias or epsilon-balanced code families at epsilon=2^-10 and length 2^30, exposing every constant, floor, and padding step.",
-    "Study explicit expander-walk and replacement-product constructions aiming for dimension at least 2,955 at bias 2^-10.",
+    "Study explicit expander-walk and replacement-product constructions, optimizing their exact certified dimension at bias 2^-10.",
     "Develop algebraic trace, character-sum, or subfield constructions whose every nonzero word has bias at most 2^-10.",
     "Find structured concatenation or multilevel constructions with a rigorous near-half-distance proof, not a sampling argument.",
-    "Prove an asymptotic family with distance 1/2-epsilon and rate Omega(epsilon^2), then instantiate epsilon=2^-10 at n=2^30.",
+    "Search for the largest concrete dimension attainable at the exact target, including finite parameter optimization of known symbolic constructions.",
     "Audit known explicit epsilon-balanced-code results for constants strong enough to give a concrete symbolic certificate at this checkpoint.",
     "Explore Reed--Muller, BCH, algebraic-geometric, and tensor constructions that beat the 31-dimensional affine baseline at the exact target.",
     "Develop deterministic derandomizations of low-bias linear codes and prove their finite-length parameter losses.",
-    "Synthesize reusable proved lemmas into an asymptotic family and isolate the narrowest missing uniform lemma when no complete construction survives.",
+    "Synthesize reusable proved lemmas into the highest-dimension concrete code possible and isolate the narrowest missing lemma when no improvement survives.",
 ]
 
 
 ROADMAPS = {
-    "roadmap-algebraic": "Trace, character-sum, subfield-subcode, and algebraic routes to bias at most 2^-10.",
-    "roadmap-expander": "Explicit epsilon-balanced and expander-walk routes with exact constants at epsilon=2^-10.",
-    "roadmap-asymptotic": "Uniform families with distance 1/2-epsilon and rate Omega(epsilon^2), specialized to the checkpoint.",
+    "roadmap-algebraic": "Trace, character-sum, subfield-subcode, and algebraic routes maximizing concrete dimension at bias 2^-10.",
+    "roadmap-expander": "Explicit epsilon-balanced and expander-walk routes with finite constants optimized at epsilon=2^-10.",
+    "roadmap-composition": "Structured concatenation, multilevel, and finite parameter-search routes maximizing the certified dimension at the exact target.",
 }
 
 
 BASE_SPEC = r"""
 The immutable target is an explicit binary linear code C subset F_2^n with
 n=2^30=1,073,741,824 and epsilon=2^-10.  It must satisfy
-d_min(C)>=535,822,336=(1/2-2^-10)n.  Maximize the rigorously proved rate
-R=dim(C)/n.  The current verified dimension is 31, so a new record needs
+d_min(C)>=535,822,336=(1/2-2^-10)n.  The sole operating objective is to
+maximize the rigorously proved dimension k=dim(C), equivalently rate R=k/n,
+at this exact target. The current verified dimension is 31, so a new record needs
 dimension at least 32; the concrete GV-rate reference corresponds to dimension
-2,955.  Random sampling is not an
+2,955. Every decision, roadmap, and synthesis must be judged first by whether
+it can yield a larger verified k. Random sampling is not an
 admissible construction.  Every field, code, tower level, divisor, graph,
 ordering, shortening, puncturing, and padding choice must be deterministic and
 symbolically recoverable.  Distance must be proved for every nonzero codeword.
 
-The ultimate objective is an explicit asymptotic family C_epsilon with relative
-distance at least 1/2-epsilon and rate at least c*epsilon^2 for an explicit
-constant c>0 as epsilon tends to zero.  The designated checkpoint is
-epsilon=2^-10=1/1024, whose relative distance is 511/1024 and whose minimum
-distance at n=2^30 is 535,822,336.  A finite certificate does not establish an
-asymptotic family.
-For every asymptotic claim, state the allowed epsilon range, block-length
-growth, constants, and uniform proof of the distance and rate bounds.
+Asymptotic insights are useful only when they supply a concrete symbolic code
+or a finite lemma that can improve this leaderboard. Do not spend a campaign
+turn proving a general family unless its exact n=2^30 specialization improves
+the best available certified dimension.
 """
 
 
@@ -324,13 +322,13 @@ class Campaign:
         if self.cfg.get("literature_agent_enabled", True):
             jobs.append(self._job(
                 "literature-sota-0001", "literature",
-                "Audit explicit epsilon-balanced-code literature and extract finite constants relevant to epsilon=2^-10 and rate Omega(epsilon^2)."))
+                "Audit explicit epsilon-balanced-code literature and extract the strongest finite constants and parameter choices for a larger dimension at epsilon=2^-10."))
         for job_id, focus in ROADMAPS.items():
             jobs.append(self._job(job_id, "roadmap", focus, phase="synthesis"))
         if self.cfg.get("lemma_writer_enabled", True):
             jobs.append(self._job("lemma-writer-0001", "lemma_writer", "Edit all reusable proof steps into the shared lemma book.", phase="synthesis"))
         if self.cfg.get("genius_enabled", True):
-            jobs.append(self._job("GENIUS", "genius", "Construct the strongest integrated exact and asymptotic family from all campaign evidence.", phase="genius"))
+            jobs.append(self._job("GENIUS", "genius", "Construct the highest-dimension exact leaderboard candidate from all campaign evidence.", phase="genius"))
         self._write_jobs(jobs)
         return self.status()
 
@@ -456,9 +454,9 @@ three roadmaps.  Read the repository baselines and literature map too.
 
 {BASE_SPEC}
 
-Attempt to construct the strongest asymptotic explicit family and its exact
-n=2^30, epsilon=2^-10 instantiation by combining only compatible proved
-components. Make an explicit rate Omega(epsilon^2) the main architectural goal.
+Attempt to construct the highest-dimension exact code at n=2^30 and
+epsilon=2^-10 by combining only compatible proved components. Maximizing the
+leaderboard dimension is the main architectural goal.
 Do not fill gaps by optimism. Distinguish verified facts,
 conditional components, refutations, and new conjectures.  If a complete
 complete target proof is unavailable, identify the narrowest decisive missing
@@ -659,11 +657,11 @@ you have examined every durable response and review path.
                 "gv_rate": GV_RATE,
                 "gv_dimension_threshold": 2_955,
             },
-            "asymptotic_target": {
-                "relative_distance": "1/2-epsilon",
-                "rate": "Omega(epsilon^2)",
-                "checkpoint_epsilon": "2^-10",
-                "checkpoint_minimum_distance": D,
+            "leaderboard_objective": {
+                "maximize": "certified_dimension",
+                "current_verified_dimension": CURRENT_K,
+                "gv_dimension_reference": 2_955,
+                "minimum_distance": D,
             },
             "promising_candidates": candidates, "doubly_verified_candidates": verified,
         }

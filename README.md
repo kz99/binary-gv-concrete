@@ -11,10 +11,11 @@ The concrete score is the dimension \(k\). The present verified baseline is
 \(\operatorname{RM}(1,30)\), with \(k=31\) and distance \(2^{29}\). The
 entropy-form GV benchmark is \(k\approx2{,}955\) at this blocklength.
 
-The larger goal is an explicit, symbolic family at relative distance
-\(1/2-\varepsilon\) and rate \(\Omega(\varepsilon^2)\). Random sampling is
-not an admissible construction method. Each result needs a readable proof, and
-two independent AI verifiers must accept it before it is ranked.
+The entire workflow is organized around increasing this concrete leaderboard
+dimension toward GV. General constructions matter only when they yield a
+better exact code or strengthen such a proof. Random sampling is not admissible.
+Each result needs a readable proof, and two independent AI verifiers must
+accept it before it is ranked.
 
 The public observatory is at
 [kz99.github.io/binary-gv-concrete-observatory](https://kz99.github.io/binary-gv-concrete-observatory/#/record).

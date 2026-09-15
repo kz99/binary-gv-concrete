@@ -11,9 +11,11 @@ is \(\operatorname{RM}(1,30)\) with \(k=31\); a concrete record needs
 \(k\geq32\). The GV reference is \(k\approx2{,}955\), not a construction
 claim.
 
-The asymptotic objective is an explicit symbolic family of relative distance
-\(1/2-\varepsilon\) and rate \(\Omega(\varepsilon^2)\). Do not use random
-sampling as a construction method.
+The sole operating objective is to improve the verified leaderboard: produce
+the largest possible \(k\) at this fixed length and required distance. General
+or asymptotic ideas are in scope only when they improve, or directly support a
+proof of, a stronger concrete leaderboard candidate. Do not use random sampling
+as a construction method.
 
 ## Runtime and coordination
 

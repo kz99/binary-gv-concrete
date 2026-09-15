@@ -1,14 +1,14 @@
 {
-  "asymptotic_target": {
-    "checkpoint_epsilon": "2^-10",
-    "checkpoint_minimum_distance": 535822336,
-    "rate": "Omega(epsilon^2)",
-    "relative_distance": "1/2-epsilon"
-  },
   "counts": {
     "queued": 16
   },
   "doubly_verified_candidates": [],
+  "leaderboard_objective": {
+    "current_verified_dimension": 31,
+    "gv_dimension_reference": 2955,
+    "maximize": "certified_dimension",
+    "minimum_distance": 535822336
+  },
   "model": "gpt-5.6-sol",
   "promising_candidates": [],
   "reasoning_effort": "ultra",
@@ -23,5 +23,5 @@
     "minimum_distance": 535822336,
     "relative_distance": "511/1024"
   },
-  "updated_at": "2026-09-15T04:08:35Z"
+  "updated_at": "2026-09-15T04:13:22Z"
 }
