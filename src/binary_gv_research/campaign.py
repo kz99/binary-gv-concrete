@@ -295,9 +295,9 @@ TEAM_RESEARCH_GRAPH = (
     ("finite-parameter optimizer", (1, 2, 3)),
     ("proof-lemma builder", (1, 2, 3)),
     ("explicitness engineer", (4, 5)),
-    ("adversarial distance and novelty checker", (4, 5, 6)),
-    ("team integrator", (6, 7, 8)),
-    ("record-submission author", (9,)),
+    ("cross-team lemma and component liaison", (4, 5, 6)),
+    ("team integrator and submission author", (6, 7, 8, 10)),
+    ("targeted bottleneck breaker", (4, 5, 6)),
 )
 
 

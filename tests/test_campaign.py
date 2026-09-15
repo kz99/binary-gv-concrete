@@ -77,7 +77,8 @@ class CampaignTests(unittest.TestCase):
         self.assertEqual(TEAM_RESEARCH_GRAPH[1][1], ())
         self.assertEqual(TEAM_RESEARCH_GRAPH[2][1], ())
         self.assertEqual(TEAM_RESEARCH_GRAPH[3][1], (1, 2, 3))
-        self.assertEqual(TEAM_RESEARCH_GRAPH[-1][1], (9,))
+        self.assertEqual(TEAM_RESEARCH_GRAPH[8][1], (6, 7, 8, 10))
+        self.assertEqual(TEAM_RESEARCH_GRAPH[-1][1], (4, 5, 6))
 
 
 if __name__ == "__main__":
