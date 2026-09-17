@@ -1,0 +1,71 @@
+{
+  "id": "ag-8192-scroll-obstruction",
+  "title": "Close the degree-512 AG gateway over F_8192",
+  "submission_class": "proof_tool",
+  "result_status": "proved",
+  "status": "under-review",
+  "leaderboard_submission": false,
+  "baseline_beaten": false,
+  "block_length": null,
+  "dimension": null,
+  "minimum_distance": null,
+  "proof_path": "proofs/ag-8192-scroll-obstruction.md",
+  "predecessor": "research_state/campaign-epsilon-2-10-ultra/submissions/algebraic-r002-03.json",
+  "resolved_task": "Verify a characteristic-2 and finite-field-descent-safe scroll obstruction at the m=13 gateway.",
+  "theorem_statement": "If X/F_8192 is smooth, projective and geometrically integral with at least 262144 rational points, then every F_8192-rational divisor G of degree at most 512 satisfies l(G)<=80.",
+  "coding_consequence": "A rational-point C_L(D,G) code concatenated with RM(1,12), with exact binary length 2^30 and distance certified by (262144-deg G)*2048 >=535822336, has binary dimension at most13*80=1040.",
+  "limitations": [
+    "No new code or generator matrix is supplied.",
+    "The theorem does not rule out arbitrary outer codes or stronger distance certificates for divisors of degree greater than512."
+  ],
+  "proof_steps": [
+    "Completeness excludes strange birational images in characteristic two by square roots and the product-space dimension bound.",
+    "Kadets Theorem1.4 supplies uniform-position hyperplane sections in projective dimension at least four.",
+    "Castelnuovo and Serre force a base-point-free birational g^80_512 and genus1404..1407.",
+    "Uniform-position Hilbert growth forces the hyperplane section to impose159 conditions on quadrics.",
+    "The arbitrary-field Castelnuovo lemma and linear normality force a degree79 rational normal scroll.",
+    "Adjunction forces ruling degree7; the cone case is impossible. The unique ruling descends overF_8192.",
+    "The resulting degree7 map to P1 bounds rational points by57351, contradicting262144."
+  ],
+  "parameter_ledger": {
+    "field_size": 8192,
+    "evaluation_points": 262144,
+    "divisor_degree_cap": 512,
+    "inner_length": 4096,
+    "inner_dimension": 13,
+    "inner_distance": 2048,
+    "conditional_binary_dimension": 1053,
+    "required_binary_distance": 535822336,
+    "genus_lower_bound": 1404,
+    "castelnuovo_upper_bound": 1407,
+    "genus_bound_if_second_hilbert_value_at_least160": 1402,
+    "scroll_degree": 79,
+    "ruling_degree": 7,
+    "ruling_point_bound": 57351,
+    "proved_outer_dimension_cap": 80,
+    "proved_binary_dimension_cap": 1040
+  },
+  "independent_review": {
+    "decision": "accept",
+    "reviewer_role": "independent verifier agent",
+    "scope": "Mathematical proof tool; not a code or explicitness certificate."
+  },
+  "literature_dependencies": [
+    {
+      "result": "Sectional monodromy Theorem1.4",
+      "source": "https://arxiv.org/abs/1809.07293"
+    },
+    {
+      "result": "Serre rational point bound",
+      "source": "https://www.college-de-france.fr/sites/default/files/media/document/2023-03/1983-1984_serre.pdf"
+    },
+    {
+      "result": "Arbitrary-field Castelnuovo lemma, Theorem6",
+      "source": "https://arxiv.org/abs/1904.12797"
+    },
+    {
+      "result": "Minimal-degree classification, Theorem0.1",
+      "source": "https://arxiv.org/abs/math/0404517"
+    }
+  ]
+}
