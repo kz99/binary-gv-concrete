@@ -73,7 +73,7 @@ Thus, with \(H=\{z\in F^\times:\nu(z)=1\}\),
 S(f)=64+3\sum_{u\in U}\psi(\nu(a+u))
      =6\,|(a+U)\cap H|-128.
 \]
-In this subfamily, 43 or more norm-one points on an affine three-dimensional \(E\)-space would refute (*). Proving a bound for this subfamily alone would not establish (*) for arbitrary degree-65 polynomials.
+The [affine linearized certificate](normtrace-affine-linearized-certificate.md) now proves that these intersections have size at most 40, by complete exact finite computation. Consequently \(S(f)\le112\) in this subfamily. The same certificate covers every affine \(E\)-linearized polynomial \(c+a_0X+a_1X^4+a_2X^{16}+a_3X^{64}\), with a sharp bound of 112. This does not establish (*) for arbitrary degree-65 polynomials.
 
 ## Deterministic full generator
 
