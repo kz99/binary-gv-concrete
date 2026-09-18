@@ -1,0 +1,59 @@
+{
+  "id": "gs-normtrace-research",
+  "title": "Finite GS bounds and an unresolved norm–trace candidate",
+  "submission_class": "research_tool",
+  "status": "under-review",
+  "result_status": "mixed_proved_and_open",
+  "leaderboard_submission": false,
+  "baseline_beaten": false,
+  "block_length": null,
+  "dimension": null,
+  "minimum_distance": null,
+  "proved_results": [
+    {
+      "theorem": "Every degree-two cover Y of y^64+y=x^65 over F4096 with at least 523264 rational points has l(G)<=37 for every divisor of degree<=1024.",
+      "proof_path": "proofs/gs-hermitian-double-cover-bound.md",
+      "coding_consequence": "Binary dimension<=444 for the stated ordinary AG-affine certificate.",
+      "independent_review": "accept"
+    },
+    {
+      "theorem": "The specified F1024 first-GS quadratic intermediate has genus 65953 and 2095200 rational points; its ordinary degree-certified affine concatenations have binary dimension<=1010.",
+      "proof_path": "proofs/gs-f1024-intermediate-bound.md",
+      "independent_review": "accept"
+    },
+    {
+      "theorem": "On the Hermitian curve y^1024+y=x^1025 over F_(2^20), C_L(D,(2^29+2^20)P_infinity) intersect F2^(2^30) has binary dimension exactly 81.",
+      "proof_path": "proofs/hermitian-binary-subfield-dimension-81.md",
+      "independent_review": "accept"
+    },
+    {
+      "theorem": "Every affine F4 three-space in F65536 has at most 40 points of each nonzero norm class. The full affine F4-linearized degree-64 norm-trace subcode has exact binary parameters [1073741824,80,535953408].",
+      "proof_path": "proofs/normtrace-affine-linearized-certificate.md",
+      "proof_method": "Complete exact finite certificate with symmetry coverage proof; independently recomputed with different keys and coset arithmetic.",
+      "verification_scripts": [
+        "scripts/verify-normtrace-flats.cpp",
+        "scripts/verify-normtrace-flat-witness.py"
+      ],
+      "independent_review": "accept; complete certificate independently recomputed and final proof note audited",
+      "leaderboard_submission": false
+    }
+  ],
+  "open_candidate": {
+    "proof_path": "proofs/normtrace-signed-fiber-candidate.md",
+    "field_size": 65536,
+    "trace_subfield_size": 4,
+    "construction": "Evaluate Tr_(F65536/F2)(y*f(x)), deg f<=65, on Tr_(F65536/F4)(y)=Norm_(F65536/F4)(x).",
+    "proved_block_length": 1073741824,
+    "proved_dimension": 1056,
+    "proved_minimum_distance_lower_bound": 534740992,
+    "required_minimum_distance": 535822336,
+    "target_distance_proved": false,
+    "missing_theorem": "For every nonzero degree<=65 polynomial f over F65536, sum over x with f(x) in F4 of (-1)^Tr_(F4/F2)(f(x)*Norm_(F65536/F4)(x)) is at most 128.",
+    "generator_matrix_entries": 1133871366144,
+    "generator_runtime_bound": "O(n^4) deterministic bit operations; no search over codes.",
+    "limitations": "Neither the elementary bound 260 nor checks of structured families establish the required bound 128. No new code record is submitted.",
+    "independent_review": "accept proved parts; target distance incomplete",
+    "partial_distance_result": "All nonzero affine F4-linearized polynomials c+a0*X+a1*X^4+a2*X^16+a3*X^64 satisfy S(f)<=112. General degree<=65 polynomials remain unresolved."
+  },
+  "data_records_changed": false
+}
