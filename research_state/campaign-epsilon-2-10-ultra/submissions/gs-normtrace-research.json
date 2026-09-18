@@ -25,6 +25,17 @@
       "theorem": "On the Hermitian curve y^1024+y=x^1025 over F_(2^20), C_L(D,(2^29+2^20)P_infinity) intersect F2^(2^30) has binary dimension exactly 81.",
       "proof_path": "proofs/hermitian-binary-subfield-dimension-81.md",
       "independent_review": "accept"
+    },
+    {
+      "theorem": "Every affine F4 three-space in F65536 has at most 40 points of each nonzero norm class. The full affine F4-linearized degree-64 norm-trace subcode has exact binary parameters [1073741824,80,535953408].",
+      "proof_path": "proofs/normtrace-affine-linearized-certificate.md",
+      "proof_method": "Complete exact finite certificate with symmetry coverage proof; independently recomputed with different keys and coset arithmetic.",
+      "verification_scripts": [
+        "scripts/verify-normtrace-flats.cpp",
+        "scripts/verify-normtrace-flat-witness.py"
+      ],
+      "independent_review": "accept; complete certificate independently recomputed and final proof note audited",
+      "leaderboard_submission": false
     }
   ],
   "open_candidate": {
@@ -41,7 +52,8 @@
     "generator_matrix_entries": 1133871366144,
     "generator_runtime_bound": "O(n^4) deterministic bit operations; no search over codes.",
     "limitations": "Neither the elementary bound 260 nor checks of structured families establish the required bound 128. No new code record is submitted.",
-    "independent_review": "accept proved parts; target distance incomplete"
+    "independent_review": "accept proved parts; target distance incomplete",
+    "partial_distance_result": "All nonzero affine F4-linearized polynomials c+a0*X+a1*X^4+a2*X^16+a3*X^64 satisfy S(f)<=112. General degree<=65 polynomials remain unresolved."
   },
   "data_records_changed": false
 }
